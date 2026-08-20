@@ -22,13 +22,19 @@ for (const a of listArticles()) {
 </Base>
 
 <style>
-  .term-card { padding: 10px 0; border-bottom: 1px solid var(--line); }
-  .term-card:last-child { border-bottom: none; }
-  .term-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-  .term-name { font-weight: 700; color: var(--ink); }
-  .term-head a { font-size: 13px; color: var(--sub); }
-  .term-expl { margin: 4px 0 0; font-size: 13px; color: var(--sub); line-height: 1.7; }
-  .term-ask-panel { margin-top: 8px; padding: 10px 12px; background: var(--surface-2); border-radius: var(--r-sm); }
+  /* 术语解析行：复用全局 day-row（border/hover 高亮），对齐「文章收藏」 */
+  .term-row { position: relative; flex-wrap: wrap; }
+  .term-main { flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .term-name { font-weight: 700; color: var(--primary); font-family: var(--font-serif); font-size: 15px; }
+  .term-expl { color: var(--sub); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .term-src { font-size: 12px; color: var(--mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; text-decoration: none; }
+  .term-src:hover { color: var(--primary); }
+  .term-actions { display: flex; gap: 6px; margin-left: auto; }
+  .term-ask-panel { flex-basis: 100%; margin-top: 8px; padding: 10px 12px; background: var(--surface-2); border-radius: var(--r-sm); }
+  @media (max-width: 640px) {
+    .term-actions button { min-height: 44px; } /* 触控目标 */
+    .term-src { max-width: 100%; }
+  }
   .term-suggest { display: flex; flex-direction: column; gap: 6px; }
   .term-q { text-align: left; border: 1px solid var(--line); background: var(--surface); color: var(--primary);
     border-radius: var(--r-sm); padding: 6px 10px; font-size: 13px; cursor: pointer; font-family: inherit; }
@@ -73,25 +79,27 @@ for (const a of listArticles()) {
       </div>`;
   }
 
-  // —— 术语解析（0018 改版）：只显示「被收藏的术语」（kind=term），支持追问与删除 ——
+  // —— 术语解析（0018 改版）：只显示「被收藏的术语」（kind=term），UI 对齐「文章收藏」day-row ——
   function termCardHtml(f: Favorite): string {
     const articleId = f.articleId || articleIdByUrl[f.url] || "";
     const href = articleId ? `/read/${articleId}/` : f.url;
     return `
-      <div class="term-card">
-        <div class="term-head">
+      <div class="day-row term-row">
+        <div class="term-main">
           <span class="term-name">「${esc(f.termText || f.title)}」</span>
-          <a href="${esc(href)}">${esc(f.title)}</a>
+          <span class="term-expl" title="${esc(f.termExplanation || "")}">${esc(f.termExplanation || "")}</span>
+        </div>
+        <a class="term-src" href="${esc(href)}" title="${esc(f.title)}">${esc(f.title)} ↗</a>
+        <div class="term-actions">
           <button type="button" class="btn btn--line btn--sm term-ask" data-term="${esc(f.termText || "")}" data-expl="${esc(f.termExplanation || "")}">追问</button>
           <button type="button" class="btn btn--line btn--sm term-del" data-id="${esc(f.id)}" data-url="${esc(f.url)}" data-term="${esc(f.termText || "")}">删除</button>
         </div>
-        <p class="term-expl">${esc(f.termExplanation || "")}</p>
         <div class="term-ask-panel" hidden></div>
       </div>`;
   }
 
   function openAskPanel(btn: HTMLButtonElement): void {
-    const panel = btn.closest<HTMLElement>(".term-card")!.querySelector<HTMLElement>(".term-ask-panel")!;
+    const panel = btn.closest<HTMLElement>(".term-row")!.querySelector<HTMLElement>(".term-ask-panel")!;
     if (!panel.hidden) { panel.hidden = true; return; }
     const term = btn.dataset.term || "";
     const expl = btn.dataset.expl || "";
