@@ -24,7 +24,7 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     <p class="item-summary">{article.source} · {article.date} · <a href={article.url} target="_blank" rel="noopener">查看原文 ↗</a></p>
     <h1 class="reading-title">{article.title}</h1>
     <div class="read-actions">
-      <button type="button" class="read-fav" id="read-fav" data-title={article.title} data-url={article.url}>☆ 收藏本文</button>
+      <button type="button" class="read-fav" id="read-fav" data-title={article.title} data-url={article.url}>👻 收藏本文</button>
       <div class="reader-mode" role="group" aria-label="阅读模式">
         <button type="button" id="mode-original" class="on" aria-pressed="true">原文模式</button>
         <button type="button" id="mode-ai" aria-pressed="false" disabled>AI 标注模式</button>
@@ -104,6 +104,7 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
 
 <script>
   import { api } from "../../lib/api";
+  import { isLocalFavorite, toggleLocalFavorite } from "../../lib/local-favorites";
   import {
     createHighlight, removeHighlight, removeRangeFromHighlight, highlightAt, flattenRanges,
     relocateHighlight, migrateV1ToV2,
@@ -200,25 +201,44 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     else document.documentElement.requestFullscreen();
   });
 
-  // 收藏：初始化检查已收藏状态（刷新不丢失），支持取消收藏（toggle）
+  // 收藏：登录 → 云端；未登录 → 本地 localStorage（都支持 toggle，刷新不丢失）
   const favBtn = document.getElementById("read-fav") as HTMLButtonElement;
-  let favId: string | null = null;
+  let favId: string | null = null; // 云端收藏 id（登录态）
 
   async function refreshFavState() {
     const url = favBtn.dataset.url || "";
-    const list = await api.listFavorites();
-    const fav = (list.ok ? list.data || [] : []).find((f) => f.kind === "article" && f.url === url);
-    favId = fav?.id ?? null;
-    favBtn.textContent = favId ? "😃 已收藏" : "👻 收藏本文";
-    favBtn.classList.toggle("on", Boolean(favId));
+    const me = await api.me();
+    favLoggedIn = Boolean(me.ok && me.data);
+    if (favLoggedIn) {
+      const list = await api.listFavorites();
+      const fav = (list.ok ? list.data || [] : []).find((f) => f.kind === "article" && f.url === url);
+      favId = fav?.id ?? null;
+    } else {
+      favId = null;
+    }
+    const saved = favLoggedIn ? favId : isLocalFavorite(url);
+    favBtn.textContent = saved ? "😃 已收藏" : "👻 收藏本文";
+    favBtn.classList.toggle("on", Boolean(saved));
     favBtn.disabled = false;
   }
+  let favLoggedIn = false;
 
   favBtn.addEventListener("click", async () => {
     if (favBtn.disabled) return;
     favBtn.disabled = true;
     const url = favBtn.dataset.url || "";
     const title = favBtn.dataset.title || "";
+    const me = await api.me();
+    favLoggedIn = Boolean(me.ok && me.data);
+    if (!favLoggedIn) {
+      // 未登录：本地收藏（toggle）
+      const now = toggleLocalFavorite(url, title);
+      favBtn.textContent = now ? "😃 已收藏" : "👻 收藏本文";
+      favBtn.classList.toggle("on", now);
+      toast(now ? "已收藏到本机（登录后可同步到云端）" : "已取消本机收藏");
+      favBtn.disabled = false;
+      return;
+    }
     const favError = (env: { ok: boolean; error?: { code?: string } }) =>
       env.error?.code === "AUTH_REQUIRED" ? "请先登录后再收藏"
         : env.error?.code === "NETWORK" ? "网络错误：请确认后端地址可访问"

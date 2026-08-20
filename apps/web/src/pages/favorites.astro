@@ -62,6 +62,7 @@ for (const a of listArticles()) {
 <script>
   import { api } from "../lib/api";
   import { renderMarkdown } from "../lib/markdown";
+  import { loadLocalFavorites, removeLocalFavorite } from "../lib/local-favorites";
   import type { Favorite } from "@kaogong/contracts";
 
   const esc = (s: unknown): string =>
@@ -168,7 +169,9 @@ for (const a of listArticles()) {
 
   function renderList(): void {
     if (!favorites.length) {
-      list.innerHTML = '<p class="item-summary">还没有收藏，去日报页或阅读页「收藏」添加。</p>';
+      list.innerHTML = localMode
+        ? '<p class="item-summary">还没有本机收藏，去阅读页「👻 收藏本文」添加。</p>'
+        : '<p class="item-summary">还没有收藏，去日报页或阅读页「👻 收藏本文」添加。</p>';
       return;
     }
     if (activeFilter === "term") { renderTerms(); return; }
@@ -180,19 +183,36 @@ for (const a of listArticles()) {
     list.innerHTML = filtered.map(rowHtml).join("");
     list.querySelectorAll("button[data-id]").forEach((btn) => {
       btn.addEventListener("click", async () => {
-        await api.removeFavorite(btn.getAttribute("data-id") || "");
-        await load();
+        const id = btn.getAttribute("data-id") || "";
+        if (localMode) {
+          removeLocalFavorite(id); // 本地收藏 id = url
+          await load();
+        } else {
+          await api.removeFavorite(id);
+          await load();
+        }
       });
     });
   }
 
+  let localMode = false;
+
   async function load(): Promise<void> {
     const env = await api.listFavorites();
     if (!env.ok) {
-      list.innerHTML = '<p class="item-summary">收藏加载失败，请刷新重试。</p>';
+      // 未登录/网络失败：回退到本机收藏（仅文章收藏，登录后自动回到云端列表）
+      const local = loadLocalFavorites();
+      if (local.length) {
+        favorites = local;
+        localMode = true;
+        renderList();
+        return;
+      }
+      list.innerHTML = '<p class="item-summary">收藏加载失败，请刷新重试。未登录时收藏保存在本机。</p>';
       return;
     }
     favorites = env.data ?? [];
+    localMode = false;
     renderList();
   }
 
