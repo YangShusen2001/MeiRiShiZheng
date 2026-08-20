@@ -84,12 +84,12 @@ for (const a of listArticles()) {
     const main = f.kind === "quote" ? (f.quote || f.title) : f.title;
     const sub = f.kind === "quote" ? `—— ${f.title}` : (f.source || "官方来源");
     return `
-      <div class="day-row">
-        <a href="${esc(href)}"${externalAttr} style="flex:1">
+      <div class="day-row fav-row">
+        <a href="${esc(href)}"${externalAttr} class="fav-link" style="flex:1">
           <span class="fav-main">${esc(main)}</span>
           ${sub ? `<span class="fav-sub">${esc(sub)}</span>` : ""}
         </a>
-        <button type="button" class="btn btn--line btn--sm" data-id="${esc(f.id)}">删除</button>
+        <button type="button" class="btn btn--line btn--sm fav-del" data-id="${esc(f.id)}">删除</button>
       </div>`;
   }
 

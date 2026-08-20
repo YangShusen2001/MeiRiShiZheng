@@ -144,6 +144,15 @@ const todaySections = latest
 </Base>
 
 <script>
+  import { staggerReveal } from "../lib/motion";
+
+  // P2：卡片组 stagger（桌面端 + IO once，首屏不重播）；今日速览标签 stagger
+  document.querySelectorAll<HTMLElement>(".article-grid").forEach((grid) => {
+    staggerReveal(grid, ".article-card", { gap: 40 });
+  });
+  const briefEl = document.getElementById("today-brief");
+  if (briefEl) staggerReveal(briefEl, ".tb-tag", { gap: 30 });
+
   // 视图切换：卡片 / 列表（紧凑单行），localStorage 记忆
   const viewToggle = document.getElementById("view-toggle");
   if (viewToggle) {
@@ -176,9 +185,13 @@ const todaySections = latest
         const W = 800, H = 1000;
         canvas.width = W; canvas.height = H;
         const ctx = canvas.getContext("2d")!;
+        // 品牌渐变跟随主题（P1）：从 CSS 变量取色，paper 主题下为深棕金，与 hero 一致
+        const cs = getComputedStyle(document.documentElement);
+        const c0 = cs.getPropertyValue("--primary").trim() || "#1d4ed8";
+        const c1 = cs.getPropertyValue("--primary-deep").trim() || "#122a5c";
         const gradient = ctx.createLinearGradient(0, 0, 0, H);
-        gradient.addColorStop(0, "#1d4ed8");
-        gradient.addColorStop(1, "#122a5c");
+        gradient.addColorStop(0, c0);
+        gradient.addColorStop(1, c1);
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, W, H);
         ctx.textAlign = "center";

@@ -104,7 +104,11 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
 
 <script>
   import { api } from "../../lib/api";
-  import { applyStyle, removeRange, resolveSpanNotes, type Span } from "../../lib/highlights";
+  import {
+    createHighlight, removeHighlight, removeRangeFromHighlight, highlightAt, flattenRanges,
+    relocateHighlight, migrateV1ToV2,
+    type Highlight, type HighlightRange, type LegacyHighlightRecord, type Span,
+  } from "../../lib/highlights";
   import { readerSegmentsToHtml, validAiAnnotations, buildReaderSegments } from "../../lib/reader-annotations";
   import { renderMarkdown } from "../../lib/markdown";
   import type { AiAnnotation, HighlightStyle } from "@kaogong/contracts";
@@ -196,39 +200,62 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     else document.documentElement.requestFullscreen();
   });
 
+  // 收藏：初始化检查已收藏状态（刷新不丢失），支持取消收藏（toggle）
   const favBtn = document.getElementById("read-fav") as HTMLButtonElement;
+  let favId: string | null = null;
+
+  async function refreshFavState() {
+    const url = favBtn.dataset.url || "";
+    const list = await api.listFavorites();
+    const fav = (list.ok ? list.data || [] : []).find((f) => f.kind === "article" && f.url === url);
+    favId = fav?.id ?? null;
+    favBtn.textContent = favId ? "😃 已收藏" : "👻 收藏本文";
+    favBtn.classList.toggle("on", Boolean(favId));
+    favBtn.disabled = false;
+  }
+
   favBtn.addEventListener("click", async () => {
+    if (favBtn.disabled) return;
+    favBtn.disabled = true;
     const url = favBtn.dataset.url || "";
     const title = favBtn.dataset.title || "";
-    const env = await api.addFavorite({ url, title });
-    favBtn.textContent = env.ok ? "★ 已收藏" : "☆ 收藏失败";
-    favBtn.disabled = env.ok;
+    const favError = (env: { ok: boolean; error?: { code?: string } }) =>
+      env.error?.code === "AUTH_REQUIRED" ? "请先登录后再收藏"
+        : env.error?.code === "NETWORK" ? "网络错误：请确认后端地址可访问"
+        : "收藏失败，请重试";
+    if (favId) {
+      const env = await api.removeFavorite(favId);
+      if (env.ok) {
+        favId = null;
+        favBtn.textContent = "👻 收藏本文";
+        favBtn.classList.remove("on");
+        toast("已取消收藏");
+      } else {
+        toast(favError(env));
+      }
+    } else {
+      const env = await api.addFavorite({ url, title });
+      if (env.ok && env.data) {
+        favId = env.data.id;
+        favBtn.textContent = "😃 已收藏";
+        favBtn.classList.add("on");
+        toast("已收藏");
+      } else {
+        toast(favError(env));
+      }
+    }
+    favBtn.disabled = false;
   });
+  void refreshFavState();
 
-  // ===== 划线：本地 localStorage 存储，段落内偏移为源，数据驱动重渲染 =====
-  interface LocalHighlight {
-    paragraphIndex: number;
-    start: number;
-    end: number;
-    styles: HighlightStyle[];
-    note?: string;
-    explanation?: string;
-  }
-  const HIGHLIGHTS_KEY = `kaogong.highlights.v1.${articleId}`;
-  let records: LocalHighlight[] = [];
-  // 保存期间禁用同段重复操作，不再静默丢弃操作。
-  const reconcileBusy: Record<number, boolean> = {};
+  // ===== 划线：对象模型（v2，提案 0019 方案 B）=====
+  // 一个划线 = 一个 Highlight 对象（可跨段）；删除/撤销按对象；quote 锚点防重抓错位。
+  const HIGHLIGHTS_KEY_V2 = `kaogong.highlights.v2.${articleId}`;
+  const HIGHLIGHTS_KEY_V1 = `kaogong.highlights.v1.${articleId}`;
+  let highlights: Highlight[] = [];
 
   function spansFor(index: number): Span[] {
-    const byKey = new Map<string, Span>();
-    for (const r of records.filter((r) => r.paragraphIndex === index)) {
-      const key = `${r.start}:${r.end}`;
-      const prev = byKey.get(key);
-      byKey.set(key, prev
-        ? { start: r.start, end: r.end, styles: [...new Set([...prev.styles, ...r.styles])].sort(), note: prev.note || r.note || undefined, explanation: prev.explanation || r.explanation || undefined }
-        : { start: r.start, end: r.end, styles: [...r.styles].sort(), note: r.note || undefined, explanation: r.explanation || undefined });
-    }
-    return [...byKey.values()].sort((a, b) => a.start - b.start || a.end - b.end);
+    return flattenRanges(highlights).get(index) ?? [];
   }
 
   function renderParagraph(index: number) {
@@ -257,68 +284,82 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
   // 默认 AI 标注模式（仅当文章有可用 AI 标注）
   setAiMode(aiAvailable);
 
-  function loadHighlights() {
-    try {
-      const raw = localStorage.getItem(HIGHLIGHTS_KEY);
-      const parsed: unknown = raw ? JSON.parse(raw) : [];
-      records = Array.isArray(parsed)
-        ? (parsed as LocalHighlight[]).filter((r) =>
-            Number.isInteger(r.paragraphIndex) && r.paragraphIndex >= 0 &&
-            Number.isInteger(r.start) && Number.isInteger(r.end) && r.start >= 0 && r.start < r.end &&
-            Array.isArray(r.styles))
-        : [];
-    } catch {
-      records = [];
-    }
-    renderAll();
-  }
-
   function saveHighlights() {
     try {
-      localStorage.setItem(HIGHLIGHTS_KEY, JSON.stringify(records));
+      localStorage.setItem(HIGHLIGHTS_KEY_V2, JSON.stringify(highlights));
     } catch {
       /* 存储不可用（隐私模式/已满）时静默降级为不持久化 */
     }
   }
 
-  async function reconcileParagraph(
-    index: number,
-    spans: Span[],
-    noteOverrides: Record<string, string> = {},
-    explanationOverrides: Record<string, string> = {},
-  ) {
-    if (reconcileBusy[index]) {
-      toast("正在保存上一项操作");
-      return false;
-    }
-    reconcileBusy[index] = true;
+  function loadHighlights() {
     try {
-      const old = records.filter((r) => r.paragraphIndex === index).map((r) => ({ start: r.start, end: r.end, note: r.note ?? "" }));
-      const noteBySpan = resolveSpanNotes(spans, old, noteOverrides);
-      const explanationEntries = Object.entries(explanationOverrides).map(([key, explanation]) => {
-        const [s, e] = key.split(":").map(Number);
-        return { start: s, end: e, explanation };
-      });
-
-      const next = spans.map((span) => {
-        const explanation = explanationEntries.find((o) => o.start <= span.start && span.end <= o.end)?.explanation ?? span.explanation ?? "";
-        return {
-          paragraphIndex: index,
-          note: noteBySpan[`${span.start}:${span.end}`] ?? "",
-          explanation,
-          styles: span.styles,
-          start: span.start,
-          end: span.end,
-        };
-      });
-      records = records.filter((r) => r.paragraphIndex !== index).concat(next);
-      saveHighlights();
-      renderParagraph(index);
-      return true;
-    } finally {
-      reconcileBusy[index] = false;
+      let list: Highlight[] = [];
+      const rawV2 = localStorage.getItem(HIGHLIGHTS_KEY_V2);
+      if (rawV2 === null) {
+        // 首次进入 v2：尝试 v1 逐段数据迁移（保数据优先，迁移后清理 v1）
+        const rawV1 = localStorage.getItem(HIGHLIGHTS_KEY_V1);
+        if (rawV1) {
+          const v1: unknown = JSON.parse(rawV1);
+          if (Array.isArray(v1)) {
+            list = migrateV1ToV2(v1 as LegacyHighlightRecord[], paraText);
+            localStorage.setItem(HIGHLIGHTS_KEY_V2, JSON.stringify(list));
+            localStorage.removeItem(HIGHLIGHTS_KEY_V1);
+          }
+        }
+      } else {
+        const parsed: unknown = JSON.parse(rawV2);
+        if (Array.isArray(parsed)) list = parsed as Highlight[];
+      }
+      // 校验 + quote 锚点重定位：段落内容更新后按引文重新定位，失效区间剔除
+      highlights = list
+        .filter((h) => typeof h?.id === "string" && Array.isArray(h.ranges) && Array.isArray(h.styles))
+        .map((h) => relocateHighlight(h, paraText))
+        .filter((h): h is Highlight => h !== null);
+    } catch {
+      highlights = [];
     }
+    renderAll();
   }
+
+  // —— 撤销栈：Ctrl+Z（上限 50，逆操作入栈；P3）——
+  type UndoEntry =
+    | { type: "add"; highlight: Highlight }
+    | { type: "remove"; highlight: Highlight }
+    | { type: "remove-range"; highlight: Highlight; range: HighlightRange };
+  const undoStack: UndoEntry[] = [];
+
+  function pushUndo(entry: UndoEntry) {
+    undoStack.push(entry);
+    if (undoStack.length > 50) undoStack.shift();
+  }
+
+  function undoLast() {
+    const entry = undoStack.pop();
+    if (!entry) {
+      toast("没有可撤销的操作");
+      return;
+    }
+    if (entry.type === "add") {
+      highlights = removeHighlight(highlights, entry.highlight.id);
+    } else if (entry.type === "remove") {
+      highlights = [...highlights, entry.highlight];
+    } else {
+      highlights = highlights.map((h) =>
+        h.id === entry.highlight.id ? { ...h, ranges: [...h.ranges, entry.range] } : h,
+      );
+    }
+    saveHighlights();
+    renderAll();
+    toast("已撤销");
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") {
+      e.preventDefault();
+      undoLast();
+    }
+  });
 
   // 选区 → 段落内字符偏移（Range.toString() 统一处理文本节点与元素节点锚定的选区，
   // 避免三击整段 / 从缩进空白处拖选时 startContainer 为元素节点而被丢弃）。
@@ -394,15 +435,11 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     const width = viewport?.width ?? window.innerWidth;
     const height = viewport?.height ?? window.innerHeight;
     const margin = 8;
-    if (width <= 600) {
-      el.style.left = `${leftEdge + margin}px`;
-      el.style.right = `${margin}px`;
-      el.style.top = "auto";
-      el.style.bottom = "calc(8px + env(safe-area-inset-bottom))";
-      return;
-    }
+    // P3：桌面与移动端统一就近弹出（贴选区上/下方，溢出翻边），不再固定底部
     el.style.right = "auto";
     el.style.bottom = "auto";
+    // 面板从触发器方向生长（P0 动效）：显示在选区下方 → origin 朝上；上方 → 朝下
+    el.style.transformOrigin = preferAbove ? "center bottom" : "center top";
     const preferredLeft = rect.left + rect.width / 2 - el.offsetWidth / 2;
     el.style.left = `${Math.max(leftEdge + margin, Math.min(preferredLeft, leftEdge + width - el.offsetWidth - margin))}px`;
     const below = rect.bottom + margin;
@@ -481,14 +518,20 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     return new Promise((resolve) => {
       inviteError.hidden = true;
       inviteInput.value = "";
+      inviteModal.classList.remove("closing");
       inviteModal.hidden = false;
       inviteInput.focus();
       const close = (ok: boolean) => {
-        inviteModal.hidden = true;
-        inviteSubmit.onclick = null;
-        inviteCancel.onclick = null;
-        inviteInput.onkeydown = null;
-        resolve(ok);
+        // 关闭动画：先播 250ms 反向过渡（CSS .invite-modal.closing）再隐藏
+        inviteModal.classList.add("closing");
+        window.setTimeout(() => {
+          inviteModal.hidden = true;
+          inviteModal.classList.remove("closing");
+          inviteSubmit.onclick = null;
+          inviteCancel.onclick = null;
+          inviteInput.onkeydown = null;
+          resolve(ok);
+        }, 250);
       };
       inviteSubmit.onclick = async () => {
         const code = inviteInput.value.trim();
@@ -647,23 +690,28 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     const text = selected.map((o) => o.text).join(" ");
     let saved = true;
     if (act === "green" || act === "underline" || act === "bold") {
-      for (const off of selected) {
-        saved = await reconcileParagraph(off.paragraphIndex, applyStyle(spansFor(off.paragraphIndex), { start: off.start, end: off.end }, act as HighlightStyle));
-        if (!saved) break;
-      }
+      // 对象模型：一次操作 = 一个 Highlight（可跨段），入撤销栈
+      const h = createHighlight(
+        selected.map((o) => ({ paragraphIndex: o.paragraphIndex, start: o.start, end: o.end, text: o.text })),
+        [act as HighlightStyle],
+      );
+      pushUndo({ type: "add", highlight: h });
+      highlights = [...highlights, h];
+      saveHighlights();
+      renderAll();
     } else if (act === "explain") {
       toast("AI 解释生成中…");
       const explanation = await fetchExplanation(text);
       if (explanation) {
-        for (const off of selected) {
-          saved = await reconcileParagraph(
-            off.paragraphIndex,
-            applyStyle(spansFor(off.paragraphIndex), { start: off.start, end: off.end }, "underline"),
-            {},
-            { [`${off.start}:${off.end}`]: explanation },
-          );
-          if (!saved) break;
-        }
+        const h = createHighlight(
+          selected.map((o) => ({ paragraphIndex: o.paragraphIndex, start: o.start, end: o.end, text: o.text })),
+          ["underline"],
+          { explanation },
+        );
+        pushUndo({ type: "add", highlight: h });
+        highlights = [...highlights, h];
+        saveHighlights();
+        renderAll();
       } else {
         saved = false;
         toast("AI 解释失败");
@@ -694,20 +742,50 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     return null;
   }
 
-  // 悬停已标注文字 → 闪烁提示 + 浮出「去除」，点击移除该处标注样式。
-  let removeBtn: HTMLButtonElement | null = null;
-  let removeTarget: { paragraphIndex: number; start: number; end: number } | null = null;
-  let removeTimer = 0;
+  // 悬停/点按已标注文字 → 浮出菜单（删除整条 / 删除本段），删除入撤销栈（P3 对象模型）
+  let hlMenu: HTMLElement | null = null;
+  let menuTarget: { highlight: Highlight; range: HighlightRange } | null = null;
+  let menuTimer = 0;
 
-  function hideRemove() {
-    window.clearTimeout(removeTimer);
-    if (removeBtn) removeBtn.hidden = true;
-    removeTarget = null;
+  function hideMenu() {
+    window.clearTimeout(menuTimer);
+    if (hlMenu) hlMenu.hidden = true;
+    menuTarget = null;
     document.querySelectorAll("mark.hl-flash").forEach((m) => m.classList.remove("hl-flash"));
   }
 
-  function showRemoveFor(mark: HTMLElement) {
-    // 选中文本期间（选择工具栏可能弹出）不显示「去除」，避免两者重叠
+  function buildMenu(): HTMLElement {
+    const el = document.createElement("div");
+    el.className = "hl-menu";
+    el.hidden = true;
+    el.innerHTML = `
+      <button type="button" data-act="remove-all">删除整条</button>
+      <button type="button" data-act="remove-para">删除本段</button>`;
+    el.addEventListener("mouseenter", () => window.clearTimeout(menuTimer));
+    el.addEventListener("click", (e) => {
+      const btn = (e.target as HTMLElement).closest("button");
+      const act = btn?.dataset.act;
+      if (!act || !menuTarget) return;
+      const { highlight: h, range } = menuTarget;
+      hideMenu();
+      if (act === "remove-all") {
+        pushUndo({ type: "remove", highlight: h });
+        highlights = removeHighlight(highlights, h.id);
+      } else {
+        const next = removeRangeFromHighlight(h, range);
+        pushUndo({ type: "remove-range", highlight: h, range });
+        highlights = next ? highlights.map((x) => (x.id === h.id ? next : x)) : removeHighlight(highlights, h.id);
+      }
+      saveHighlights();
+      renderAll();
+      toast("已删除，Ctrl+Z 可撤销");
+    });
+    document.body.appendChild(el);
+    return el;
+  }
+
+  function showMenuFor(mark: HTMLElement) {
+    // 选中文本期间（选择工具栏可能弹出）不显示菜单，避免两者重叠
     const sel = window.getSelection();
     if (sel && !sel.isCollapsed) return;
     const para = mark.closest(".reading-para") as HTMLElement | null;
@@ -715,37 +793,39 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     const index = paraEls.indexOf(para);
     const off = markOffsets(para, mark);
     if (index < 0 || !off) return;
-    if (!removeBtn) {
-      removeBtn = document.createElement("button");
-      removeBtn.type = "button";
-      removeBtn.className = "hl-remove";
-      removeBtn.textContent = "去除";
-      removeBtn.hidden = true;
-      document.body.appendChild(removeBtn);
-      removeBtn.addEventListener("mouseenter", () => window.clearTimeout(removeTimer));
-      removeBtn.addEventListener("click", async () => {
-        if (!removeTarget) return;
-        const { paragraphIndex, start, end } = removeTarget;
-        hideRemove();
-        const saved = await reconcileParagraph(paragraphIndex, removeRange(spansFor(paragraphIndex), { start, end }));
-        if (saved) toast("已去除标注");
-      });
-    }
-    removeTarget = { paragraphIndex: index, start: off.start, end: off.end };
-    removeBtn.hidden = false;
-    placeFloating(removeBtn, mark.getBoundingClientRect(), true);
+    const h = highlightAt(highlights, index, off.start, off.end);
+    if (!h) return;
+    const range = h.ranges.find((r) => r.paragraphIndex === index && r.start === off.start && r.end === off.end)
+      ?? h.ranges.find((r) => r.paragraphIndex === index && r.start <= off.start && off.end <= r.end);
+    if (!range) return;
+    if (!hlMenu) hlMenu = buildMenu();
+    menuTarget = { highlight: h, range };
+    hlMenu.hidden = false;
+    placeFloating(hlMenu, mark.getBoundingClientRect(), true);
     mark.classList.add("hl-flash");
   }
 
   document.addEventListener("mouseover", (e) => {
+    if (window.matchMedia("(hover: none)").matches) return; // 触摸设备用 click 触发
     const mark = (e.target as HTMLElement).closest("mark[data-user-highlight]") as HTMLElement | null;
-    if (mark) showRemoveFor(mark);
+    if (mark) showMenuFor(mark);
   });
   document.addEventListener("mouseout", (e) => {
     const mark = (e.target as HTMLElement).closest("mark[data-user-highlight]") as HTMLElement | null;
     if (mark) {
-      window.clearTimeout(removeTimer);
-      removeTimer = window.setTimeout(hideRemove, 150);
+      window.clearTimeout(menuTimer);
+      menuTimer = window.setTimeout(hideMenu, 150);
+    }
+  });
+  // 移动端：点按已标注文字弹出菜单（再次点按关闭）
+  document.addEventListener("click", (e) => {
+    const mark = (e.target as HTMLElement).closest("mark[data-user-highlight]") as HTMLElement | null;
+    if (mark && window.matchMedia("(hover: none)").matches) {
+      if (hlMenu && !hlMenu.hidden && menuTarget) {
+        hideMenu();
+        return;
+      }
+      showMenuFor(mark);
     }
   });
 

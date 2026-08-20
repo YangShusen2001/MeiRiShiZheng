@@ -35,8 +35,12 @@ try {
     <meta name="description" content={description} />
     <title>{title}</title>
     <script>
-      // 提前应用主题，避免切换时闪白
-      try { document.documentElement.dataset.theme = localStorage.getItem("kaogong.theme") || "green"; } catch (e) {}
+      // 提前应用主题，避免切换时闪白：有记忆用记忆；无记忆跟随系统（深色系统→深色，否则纸感米色）
+      try {
+        const saved = localStorage.getItem("kaogong.theme");
+        const theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "reading");
+        document.documentElement.dataset.theme = theme;
+      } catch (e) {}
     </script>
     {fontCss && <style set:html={fontCss} />}
   </head>
@@ -47,11 +51,12 @@ try {
       </a>
       <div class="top-in">
         <nav class="nav" id="nav">
-          <a href="/">首页</a>
-          <a href="/search/">搜索</a>
-          <a href="/favorites/">收藏</a>
-          <a href="/practice/">每日一练</a>
+          <a href="/" class="nav-tab">首页</a>
+          <a href="/search/" class="nav-tab">搜索</a>
+          <a href="/favorites/" class="nav-tab">收藏</a>
+          <a href="/practice/" class="nav-tab">每日一练</a>
           <a href="/wrong/">错题本</a>
+          <a href="/profile/" class="nav-mobile-only">我的</a>
           <span class="nav-auth" id="kg-auth"><a href="/login/">登录</a></span>
         </nav>
         <button type="button" class="nav-toggle" id="nav-toggle" aria-label="打开菜单" aria-controls="nav" aria-expanded="false">
@@ -64,15 +69,25 @@ try {
     </header>
     <main class="wrap"><slot /></main>
     <footer class="foot">时政小助手 · 内容来自官方原文，请以原文为准</footer>
+    <!-- 底部 Tab 导航（P3）：仅移动端显示；桌面端隐藏 -->
+    <nav class="tabbar" id="tabbar" aria-label="主导航">
+      <a href="/" data-tab="home"><span class="tab-ic">🏠</span><span>首页</span></a>
+      <a href="/search/" data-tab="search"><span class="tab-ic">🔍</span><span>搜索</span></a>
+      <a href="/practice/" data-tab="practice"><span class="tab-ic">✏️</span><span>每日一练</span></a>
+      <a href="/favorites/" data-tab="fav"><span class="tab-ic">⭐</span><span>收藏</span></a>
+      <a href="/profile/" data-tab="me"><span class="tab-ic">👤</span><span>我的</span></a>
+    </nav>
     <script>
       import { api } from "../lib/api";
 
-      // 主题切换：默认 / 阅读 / 护眼（浅色系），localStorage 记忆
-      const THEMES = ["light", "reading", "green"];
-      const THEME_LABELS: Record<string, string> = { light: "默认", reading: "阅读", green: "护眼" };
+      // 主题切换：默认 / 阅读 / 护眼 / 深色（浅色系 + 深色），localStorage 记忆；无记忆跟随系统
+      const THEMES = ["light", "reading", "green", "dark"];
+      const THEME_LABELS: Record<string, string> = { light: "默认", reading: "阅读", green: "护眼", dark: "深色" };
       const themeToggle = document.getElementById("theme-toggle");
       if (themeToggle) {
-        let idx = Math.max(0, THEMES.indexOf(localStorage.getItem("kaogong.theme") ?? "green"));
+        const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const initial = localStorage.getItem("kaogong.theme") ?? (systemDark ? "dark" : "reading");
+        let idx = Math.max(0, THEMES.indexOf(initial));
         const applyTheme = () => {
           const theme = THEMES[idx] ?? "light";
           document.documentElement.dataset.theme = theme;
@@ -135,7 +150,7 @@ try {
         }
       }
 
-      // 下滑收起导航，悬停展开
+      // 下滑收起导航，悬停展开（rAF 节流：滚动一帧只处理一次，避免 layout 抖动）
       const topEl = document.getElementById("top");
       if (topEl) {
         const navToggle = document.getElementById("nav-toggle") as HTMLButtonElement | null;
@@ -144,12 +159,29 @@ try {
           navToggle.setAttribute("aria-expanded", String(open));
           navToggle.setAttribute("aria-label", open ? "关闭菜单" : "打开菜单");
         });
+        let scrollTick = false;
         const onScroll = () => {
-          topEl.classList.toggle("scrolled", window.scrollY > 8);
-          topEl.classList.toggle("collapsed", window.scrollY > 140);
+          if (scrollTick) return;
+          scrollTick = true;
+          requestAnimationFrame(() => {
+            scrollTick = false;
+            topEl.classList.toggle("scrolled", window.scrollY > 8);
+            topEl.classList.toggle("collapsed", window.scrollY > 140);
+          });
         };
         window.addEventListener("scroll", onScroll, { passive: true });
         onScroll();
+      }
+
+      // 底部 Tab 当前页高亮（P3）：精确匹配首页，其余按前缀
+      const tabbar = document.getElementById("tabbar");
+      if (tabbar) {
+        const path = location.pathname.replace(/\/+$/, "") || "/";
+        for (const a of tabbar.querySelectorAll<HTMLAnchorElement>("a")) {
+          const tab = a.dataset.tab;
+          const active = tab === "home" ? path === "/" : path.startsWith(a.getAttribute("href")!.replace(/\/+$/, ""));
+          if (active) a.classList.add("on");
+        }
       }
     </script>
   </body>

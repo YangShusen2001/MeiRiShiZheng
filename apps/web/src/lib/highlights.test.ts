@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { applyStyle, buildSegments, removeRange, removeStyle, resolveSpanNotes, segmentsToHtml, type Span } from "./highlights";
+import {
+  applyStyle, buildSegments, removeRange, removeStyle, resolveSpanNotes, segmentsToHtml, type Span,
+  createHighlight, removeHighlight, removeRangeFromHighlight, highlightAt, flattenRanges,
+  relocateHighlight, migrateV1ToV2, type Highlight, type HighlightRange,
+} from "./highlights";
 import { buildReaderSegments, readerSegmentsToHtml, validAiAnnotations } from "./reader-annotations";
 
 describe("applyStyle", () => {
@@ -227,5 +231,172 @@ describe("resolveSpanNotes", () => {
     const spans: Span[] = [{ start: 4, end: 5, styles: ["green", "yellow"] }];
     const old = [{ start: 4, end: 5, note: "A" }];
     expect(resolveSpanNotes(spans, old, { "4:5": "" })).toEqual({ "4:5": "" });
+  });
+});
+
+/* ===== 对象模型（P3，提案 0019 方案 B）===== */
+
+describe("createHighlight", () => {
+  it("跨段选区生成一个对象：quote 拼接、styles 去重排序、ranges 快照", () => {
+    const h = createHighlight(
+      [
+        { paragraphIndex: 0, start: 1, end: 3, text: "abc" },
+        { paragraphIndex: 2, start: 0, end: 2, text: "de" },
+      ],
+      ["underline", "green", "green"],
+    );
+    expect(h.id.length).toBeGreaterThan(0);
+    expect(h.quote).toBe("abcde");
+    expect(h.styles).toEqual(["green", "underline"]);
+    expect(h.ranges).toEqual([
+      { paragraphIndex: 0, start: 1, end: 3, text: "abc" },
+      { paragraphIndex: 2, start: 0, end: 2, text: "de" },
+    ]);
+    expect(typeof h.createdAt).toBe("number");
+  });
+
+  it("explanation 透传到对象", () => {
+    const h = createHighlight([{ paragraphIndex: 0, start: 0, end: 2, text: "ab" }], ["underline"], { explanation: "E" });
+    expect(h.explanation).toBe("E");
+  });
+});
+
+describe("removeHighlight / removeRangeFromHighlight", () => {
+  const h: Highlight = {
+    id: "h1", quote: "abcde",
+    ranges: [
+      { paragraphIndex: 0, start: 1, end: 3, text: "abc" },
+      { paragraphIndex: 2, start: 0, end: 2, text: "de" },
+    ],
+    styles: ["green"], createdAt: 1,
+  };
+
+  it("按 id 删除整条", () => {
+    expect(removeHighlight([h], "h1")).toEqual([]);
+    expect(removeHighlight([h], "other")).toEqual([h]);
+  });
+
+  it("删除单个 range 后保留其余 range", () => {
+    const next = removeRangeFromHighlight(h, { paragraphIndex: 2, start: 0, end: 2, text: "de" });
+    expect(next).not.toBeNull();
+    expect(next!.ranges).toEqual([{ paragraphIndex: 0, start: 1, end: 3, text: "abc" }]);
+  });
+
+  it("删除最后一个 range 返回 null（调用方应删整条）", () => {
+    const single: Highlight = { ...h, ranges: [{ paragraphIndex: 0, start: 1, end: 3, text: "abc" }] };
+    expect(removeRangeFromHighlight(single, single.ranges[0]!)).toBeNull();
+  });
+});
+
+describe("highlightAt", () => {
+  const h: Highlight = {
+    id: "h1", quote: "abcdef",
+    ranges: [{ paragraphIndex: 0, start: 2, end: 6, text: "cdef" }],
+    styles: ["green"], createdAt: 1,
+  };
+
+  it("精确区间优先命中", () => {
+    expect(highlightAt([h], 0, 2, 6)?.id).toBe("h1");
+  });
+
+  it("子区间宽松命中同一对象", () => {
+    expect(highlightAt([h], 0, 3, 5)?.id).toBe("h1");
+  });
+
+  it("区间外不命中", () => {
+    expect(highlightAt([h], 0, 0, 2)).toBeNull();
+    expect(highlightAt([h], 1, 0, 4)).toBeNull();
+  });
+});
+
+describe("flattenRanges 渲染投影", () => {
+  const paras = ["这是第一段文本", "这是第二段文本"];
+
+  it("跨段对象投影到每段，样式合并", () => {
+    const h = createHighlight(
+      [
+        { paragraphIndex: 0, start: 0, end: 2, text: "这是" },
+        { paragraphIndex: 1, start: 2, end: 4, text: "第二" },
+      ],
+      ["green"],
+    );
+    const map = flattenRanges([h]);
+    expect(map.get(0)).toEqual([{ start: 0, end: 2, styles: ["green"] }]);
+    expect(map.get(1)).toEqual([{ start: 2, end: 4, styles: ["green"] }]);
+  });
+
+  it("同段重叠对象合并样式（相邻合并）", () => {
+    const a = createHighlight([{ paragraphIndex: 0, start: 0, end: 4, text: "这是第一" }], ["green"]);
+    const b = createHighlight([{ paragraphIndex: 0, start: 2, end: 6, text: "第一段文" }], ["underline"]);
+    const map = flattenRanges([a, b]);
+    expect(map.get(0)).toEqual([
+      { start: 0, end: 2, styles: ["green"] },
+      { start: 2, end: 4, styles: ["green", "underline"] },
+      { start: 4, end: 6, styles: ["underline"] },
+    ]);
+  });
+
+  it("段落文本用于渲染切片验证", () => {
+    const h = createHighlight([{ paragraphIndex: 0, start: 0, end: 2, text: "这是" }], ["green"]);
+    const map = flattenRanges([h]);
+    const segments = buildSegments(paras[0]!, map.get(0) ?? []);
+    expect(segments[0]!.text).toBe("这是");
+  });
+});
+
+describe("relocateHighlight quote 锚点", () => {
+  const h: Highlight = {
+    id: "h1", quote: "旧段落文本",
+    ranges: [{ paragraphIndex: 0, start: 0, end: 5, text: "旧段落文本" }],
+    styles: ["green"], createdAt: 1,
+  };
+
+  it("段落文本变化后按引文重新定位（前插内容）", () => {
+    const next = relocateHighlight(h, ["【导语】旧段落文本在这里"]);
+    expect(next).not.toBeNull();
+    expect(next!.ranges[0]!.start).toBe(4); // "【导语】" = 4 字符
+    expect(next!.ranges[0]!.end).toBe(9);
+  });
+
+  it("引文完全找不到时剔除该 range；全部失效返回 null", () => {
+    expect(relocateHighlight(h, ["完全不同的段落"])).toBeNull();
+  });
+
+  it("部分 range 失效时保留其余", () => {
+    const multi: Highlight = {
+      ...h,
+      ranges: [
+        { paragraphIndex: 0, start: 0, end: 5, text: "旧段落" },
+        { paragraphIndex: 1, start: 0, end: 4, text: "第二段完好" },
+      ],
+    };
+    const next = relocateHighlight(multi, ["完全不同的段落", "第二段完好内容"]);
+    expect(next).not.toBeNull();
+    expect(next!.ranges).toEqual([{ paragraphIndex: 1, start: 0, end: 5, text: "第二段完好" }]);
+  });
+});
+
+describe("migrateV1ToV2 v1→v2 迁移", () => {
+  it("逐段记录转为独立对象并带文本快照", () => {
+    const v1 = [
+      { paragraphIndex: 0, start: 0, end: 4, styles: ["green"] as const },
+      { paragraphIndex: 1, start: 2, end: 5, styles: ["underline"] as const, explanation: "E" },
+    ];
+    const v2 = migrateV1ToV2(v1, ["这是第一段", "第二段内容在这里"]);
+    expect(v2).toHaveLength(2);
+    expect(v2[0]!.ranges[0]!.text).toBe("这是第一");
+    expect(v2[0]!.styles).toEqual(["green"]);
+    expect(v2[1]!.explanation).toBe("E");
+    expect(v2[1]!.ranges[0]!.text).toBe("段内容");
+  });
+
+  it("越界区间丢弃（段落文本已变）", () => {
+    const v1 = [{ paragraphIndex: 0, start: 0, end: 99, styles: ["green"] as const }];
+    expect(migrateV1ToV2(v1, ["短"])).toEqual([]);
+  });
+
+  it("note 保留", () => {
+    const v1 = [{ paragraphIndex: 0, start: 0, end: 2, styles: ["green"] as const, note: "N" }];
+    expect(migrateV1ToV2(v1, ["长文本"])[0]!.note).toBe("N");
   });
 });

@@ -194,3 +194,166 @@ export function segmentsToHtml(segments: Segment[]): string {
     })
     .join("");
 }
+
+/* ===== 对象模型（P3，提案 0019 方案 B）：一个划线 = 一个 Highlight 对象，跨段多 ranges =====
+ * 区间纯函数（上方）保留用于渲染投影；对象层在其上。存储 v2：kaogong.highlights.v2.{articleId}。 */
+
+/** 一个高亮区间（段落内偏移 + 文本快照，供 quote 锚点重定位）。 */
+export interface HighlightRange {
+  paragraphIndex: number;
+  start: number;
+  end: number;
+  /** 文本快照：段落内容更新后按此重新定位（quote 锚点） */
+  text: string;
+}
+
+/** 一条划线（对象）：可跨多段，删除/撤销按对象操作。 */
+export interface Highlight {
+  id: string;
+  /** 引文全文（ranges 文本拼接），作为内容更新后的锚点依据 */
+  quote: string;
+  ranges: HighlightRange[];
+  styles: HighlightStyle[];
+  note?: string;
+  explanation?: string;
+  createdAt: number;
+}
+
+/** v1 兼容形状：逐段平铺记录（旧 localStorage 格式） */
+export interface LegacyHighlightRecord {
+  paragraphIndex: number;
+  start: number;
+  end: number;
+  styles: HighlightStyle[];
+  note?: string;
+  explanation?: string;
+}
+
+export function createHighlightId(): string {
+  return `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+}
+
+/** 从选区各段区间创建对象（styles 去重排序；quote = 各段文本拼接）。 */
+export function createHighlight(
+  ranges: { paragraphIndex: number; start: number; end: number; text: string }[],
+  styles: HighlightStyle[],
+  opts: { note?: string; explanation?: string } = {},
+): Highlight {
+  return {
+    id: createHighlightId(),
+    quote: ranges.map((r) => r.text).join(""),
+    ranges: ranges.map((r) => ({ ...r })),
+    styles: [...new Set(styles)].sort(),
+    note: opts.note,
+    explanation: opts.explanation,
+    createdAt: Date.now(),
+  };
+}
+
+/** 按 id 删除对象。 */
+export function removeHighlight(highlights: Highlight[], id: string): Highlight[] {
+  return highlights.filter((h) => h.id !== id);
+}
+
+/** 删除对象内的单个 range；只剩一个 range 时返回 null（调用方应删除整个对象）。 */
+export function removeRangeFromHighlight(h: Highlight, range: HighlightRange): Highlight | null {
+  const rest = h.ranges.filter(
+    (r) => !(r.paragraphIndex === range.paragraphIndex && r.start === range.start && r.end === range.end),
+  );
+  if (rest.length === 0) return null;
+  return { ...h, ranges: rest };
+}
+
+/** 查询覆盖某段落区间的最具体对象（先精确匹配，再宽松包含）。 */
+export function highlightAt(highlights: Highlight[], paragraphIndex: number, start: number, end: number): Highlight | null {
+  return (
+    highlights.find((h) =>
+      h.ranges.some((r) => r.paragraphIndex === paragraphIndex && r.start === start && r.end === end),
+    ) ??
+    highlights.find((h) =>
+      h.ranges.some((r) => r.paragraphIndex === paragraphIndex && r.start <= start && end <= r.end),
+    ) ??
+    null
+  );
+}
+
+/** 渲染投影：Highlight[] → 每段 Span[]（重叠区间切分 + 样式合并，供 buildSegments 使用）。 */
+export function flattenRanges(highlights: Highlight[]): Map<number, Span[]> {
+  const byPara = new Map<number, Span[]>();
+  for (const h of highlights) {
+    for (const r of h.ranges) {
+      const spans = byPara.get(r.paragraphIndex) ?? [];
+      spans.push({ start: r.start, end: r.end, styles: h.styles, note: h.note, explanation: h.explanation });
+      byPara.set(r.paragraphIndex, spans);
+    }
+  }
+  const out = new Map<number, Span[]>();
+  for (const [idx, spans] of byPara) {
+    // 区间切分：所有边界点 → 每小段收集覆盖样式（与 applyStyle 同语义）
+    const boundaries = new Set<number>();
+    for (const s of spans) {
+      boundaries.add(s.start);
+      boundaries.add(s.end);
+    }
+    const sorted = [...boundaries].sort((a, b) => a - b);
+    const result: Span[] = [];
+    for (let i = 0; i < sorted.length - 1; i++) {
+      const a = sorted[i]!;
+      const b = sorted[i + 1]!;
+      if (a === b) continue;
+      const styles = new Set<HighlightStyle>();
+      let note: string | undefined;
+      let explanation: string | undefined;
+      for (const s of spans) {
+        if (s.start <= a && b <= s.end) {
+          for (const st of s.styles) styles.add(st);
+          note = note ?? s.note;
+          explanation = explanation ?? s.explanation;
+        }
+      }
+      if (styles.size) result.push({ start: a, end: b, styles: [...styles].sort(), note, explanation });
+    }
+    const merged = mergeAdjacent(result);
+    if (merged.length) out.set(idx, merged);
+  }
+  return out;
+}
+
+/** quote 锚点重定位：段落文本变化后按 range.text 重新定位；找不到的 range 剔除，全部失效返回 null。 */
+export function relocateHighlight(h: Highlight, paragraphs: string[]): Highlight | null {
+  const ranges: HighlightRange[] = [];
+  for (const r of h.ranges) {
+    const para = paragraphs[r.paragraphIndex] ?? "";
+    const hit = para.indexOf(r.text);
+    if (hit >= 0) {
+      ranges.push({ ...r, start: hit, end: hit + r.text.length });
+    }
+    // 段落文本已变且找不到引文 → 该 range 失效（宁可丢弃不错位）
+  }
+  if (ranges.length === 0) return null;
+  return { ...h, ranges, quote: ranges.map((r) => r.text).join("") };
+}
+
+/** v1 → v2 迁移：每条旧记录转为一个独立对象（保数据优先，不做跨段猜测合并）。 */
+export function migrateV1ToV2(records: LegacyHighlightRecord[], paragraphs: string[]): Highlight[] {
+  const out: Highlight[] = [];
+  for (const r of records) {
+    const para = paragraphs[r.paragraphIndex] ?? "";
+    // 越界/非法区间视为段落已变，丢弃（防错位）
+    if (!Number.isInteger(r.start) || !Number.isInteger(r.end) || r.start < 0 || r.start >= r.end || r.end > para.length) {
+      continue;
+    }
+    const text = para.slice(r.start, r.end);
+    if (!text) continue;
+    out.push({
+      id: createHighlightId(),
+      quote: text,
+      ranges: [{ paragraphIndex: r.paragraphIndex, start: r.start, end: r.end, text }],
+      styles: [...new Set(r.styles)].sort(),
+      note: r.note || undefined,
+      explanation: r.explanation || undefined,
+      createdAt: Date.now(),
+    });
+  }
+  return out;
+}

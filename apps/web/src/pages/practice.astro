@@ -57,6 +57,7 @@ const [latest, ...history] = sets;
 <script>
   import { api } from "../lib/api";
   import type { WrongQuestionInput } from "@kaogong/contracts";
+  import { springPop, countUp } from "../lib/motion";
 
   // 每个题集（最新 + 历史）独立作答与交卷
   document.querySelectorAll<HTMLElement>(".practice-set").forEach((set) => {
@@ -78,9 +79,17 @@ const [latest, ...history] = sets;
     async function submit() {
       const env = await api.submitPractice({ date, correct, total: questions.length, wrong });
       if (progress) {
-        progress.textContent = env.ok
-          ? `交卷完成 · 答对 ${correct}/${questions.length}`
-          : "交卷失败，记录未保存";
+        if (env.ok) {
+          // P2 delight：交卷完成（稀有场景）→ spring 弹出 + 答对数数字滚动
+          progress.innerHTML = `交卷完成 · 答对 <b class="p-score">0</b>/${questions.length}`;
+          const score = progress.querySelector<HTMLElement>(".p-score");
+          if (score) {
+            springPop(progress);
+            countUp(score, correct);
+          }
+        } else {
+          progress.textContent = "交卷失败，记录未保存";
+        }
       }
     }
 
