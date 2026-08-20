@@ -23,6 +23,7 @@ const MIGRATIONS = [
   "0015_abandoned_thunderball",
   "0016_majestic_layla_miller",
   "0017_vengeful_shatterstar",
+  "0018_term_favorites",
 ] as const;
 
 const snapshotSchema = z.object({
@@ -249,8 +250,8 @@ describe("migration reliability", () => {
     `).run(`device:${sharedUuid}`);
 
     expect(sqlite.prepare("SELECT * FROM favorites ORDER BY id").all()).toEqual([
-      { id: "favorite-device", owner_id: `device:${anonymousUuid}`, url: "/device", title: "Device Favorite", source: "source-device", note: "note-device", kind: "article", quote: "", created_at: 21 },
-      { id: "favorite-user", owner_id: `user:${sharedUuid}`, url: "/user", title: "User Favorite", source: "source-user", note: "note-user", kind: "article", quote: "", created_at: 20 },
+      { id: "favorite-device", owner_id: `device:${anonymousUuid}`, url: "/device", title: "Device Favorite", source: "source-device", note: "note-device", kind: "article", quote: "", term_text: "", term_explanation: "", article_id: "", created_at: 21 },
+      { id: "favorite-user", owner_id: `user:${sharedUuid}`, url: "/user", title: "User Favorite", source: "source-user", note: "note-user", kind: "article", quote: "", term_text: "", term_explanation: "", article_id: "", created_at: 20 },
     ]);
     expect(sqlite.prepare("SELECT * FROM highlights ORDER BY id").all()).toEqual([
       { id: "highlight-device", owner_id: `device:${anonymousUuid}`, article_id: "article-device", text: "device text", note: "device note", styles: '["underline"]', paragraph_index: 5, start_offset: 6, end_offset: 12, created_at: 31 },

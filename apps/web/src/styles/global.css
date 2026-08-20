@@ -770,6 +770,14 @@ mark.hl-bold { font-weight: 700; }
   box-shadow: inset 0 -2px var(--primary);
 }
 .ai-term[data-explanation] { cursor: help; outline-offset: 3px; }
+/* 术语收藏（0018）：整个术语可点击；收藏后金色高亮 + 👻/😃 状态 */
+[data-term-text] { cursor: pointer; }
+.ai-term.term-faved {
+  background: var(--accent-soft);
+  box-shadow: inset 0 -2px var(--accent);
+  border-radius: 3px;
+}
+.term-fav-badge { font-size: 0.72em; margin-left: 2px; font-style: normal; }
 
 /* 带注释/解释的片段：右上角 🔍 小图标标识 */
 [data-explanation] {

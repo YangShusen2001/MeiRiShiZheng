@@ -1,6 +1,7 @@
 import { describe, expect, it, beforeEach } from "vitest";
 import {
   loadLocalFavorites, isLocalFavorite, toggleLocalFavorite, removeLocalFavorite,
+  isLocalTermFavorite, toggleLocalTermFavorite,
 } from "./local-favorites";
 
 // vitest node 环境无 localStorage：轻量 mock
@@ -50,5 +51,32 @@ describe("local favorites（未登录收藏）", () => {
     expect(loadLocalFavorites()).toEqual([]);
     store.set("kaogong.localFavs", JSON.stringify([{ title: "无url" }, "str", null]));
     expect(loadLocalFavorites()).toEqual([]);
+  });
+
+  it("术语收藏与文章收藏同 url 互不干扰", () => {
+    toggleLocalFavorite("https://x.com/a", "文章A");
+    const termNow = toggleLocalTermFavorite("https://x.com/a", "文章A", "新质生产力", "释义", "aid123");
+    expect(termNow).toBe(true);
+    expect(isLocalTermFavorite("https://x.com/a", "新质生产力")).toBe(true);
+    expect(isLocalFavorite("https://x.com/a")).toBe(true); // 文章收藏仍在
+    expect(loadLocalFavorites()).toHaveLength(2);
+  });
+
+  it("术语 toggle 取消只删该术语", () => {
+    toggleLocalTermFavorite("https://x.com/b", "文章B", "术语一", "释义1", "aid1");
+    toggleLocalTermFavorite("https://x.com/b", "文章B", "术语二", "释义2", "aid1");
+    const now = toggleLocalTermFavorite("https://x.com/b", "文章B", "术语一", "释义1", "aid1");
+    expect(now).toBe(false);
+    expect(isLocalTermFavorite("https://x.com/b", "术语一")).toBe(false);
+    expect(isLocalTermFavorite("https://x.com/b", "术语二")).toBe(true);
+    expect(loadLocalFavorites()).toHaveLength(1);
+  });
+
+  it("术语收藏带释义与来源文章 id", () => {
+    toggleLocalTermFavorite("https://x.com/c", "文章C", "术语三", "AI 释义内容", "article-xyz");
+    const item = loadLocalFavorites().find((f) => f.kind === "term");
+    expect(item).toMatchObject({
+      kind: "term", termText: "术语三", termExplanation: "AI 释义内容", articleId: "article-xyz", id: "https://x.com/c",
+    });
   });
 });

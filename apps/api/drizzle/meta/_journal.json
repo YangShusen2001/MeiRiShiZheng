@@ -127,6 +127,13 @@
       "when": 1786904091007,
       "tag": "0017_vengeful_shatterstar",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "6",
+      "when": 1787235150233,
+      "tag": "0018_term_favorites",
+      "breakpoints": true
     }
   ]
 }

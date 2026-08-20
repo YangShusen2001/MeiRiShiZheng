@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 chcp 65001 >nul
 setlocal
 cd /d "%~dp0pipeline"
@@ -16,8 +16,8 @@ if not defined DEEPSEEK_API_KEY (
   echo.
 )
 if not defined PUBLIC_API_BASE (
-  echo [INFO] PUBLIC_API_BASE not set, defaulting to https://api.example.com (改 .env.local)
-  set "PUBLIC_API_BASE=https://api.example.com"
+  echo [INFO] PUBLIC_API_BASE not set, defaulting to https://api.meirishizheng.cn (鏀?.env.local)
+  set "PUBLIC_API_BASE=https://api.meirishizheng.cn"
 )
 
 if not exist ".venv\Scripts\python.exe" (

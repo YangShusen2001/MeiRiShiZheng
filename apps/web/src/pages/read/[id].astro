@@ -104,7 +104,7 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
 
 <script>
   import { api } from "../../lib/api";
-  import { isLocalFavorite, toggleLocalFavorite } from "../../lib/local-favorites";
+  import { isLocalFavorite, toggleLocalFavorite, loadLocalFavorites, isLocalTermFavorite, toggleLocalTermFavorite } from "../../lib/local-favorites";
   import {
     createHighlight, removeHighlight, removeRangeFromHighlight, highlightAt, flattenRanges,
     relocateHighlight, migrateV1ToV2,
@@ -205,6 +205,93 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
   const favBtn = document.getElementById("read-fav") as HTMLButtonElement;
   let favId: string | null = null; // 云端收藏 id（登录态）
 
+  // —— 术语收藏（0018）：正文 AI 术语整个可点击收藏（👻/😃 + 金色高亮）——
+  const termFavs = new Set<string>();          // 已收藏术语文本（文章内唯一）
+  const termFavIds = new Map<string, string>(); // 登录态：术语文本 → 云端收藏 id
+  const articleUrl = favBtn.dataset.url || "";
+  const articleTitle = favBtn.dataset.title || "";
+
+  function applyTermFavMarks() {
+    paraEls.forEach((para) => {
+      para.querySelectorAll<HTMLElement>("[data-term-text]").forEach((el) => {
+        const t = el.dataset.termText || "";
+        const faved = termFavs.has(t);
+        el.classList.toggle("term-faved", faved);
+        let badge = el.querySelector<HTMLElement>(".term-fav-badge");
+        if (!badge) {
+          badge = document.createElement("span");
+          badge.className = "term-fav-badge";
+          badge.setAttribute("aria-hidden", "true");
+          el.appendChild(badge);
+        }
+        badge.textContent = faved ? "😃" : "👻";
+      });
+    });
+  }
+
+  async function loadTermFavState() {
+    termFavs.clear();
+    termFavIds.clear();
+    if (favLoggedIn) {
+      const list = await api.listFavorites();
+      for (const f of list.ok ? list.data || [] : []) {
+        if (f.kind === "term" && f.url === articleUrl && f.termText) {
+          termFavs.add(f.termText);
+          termFavIds.set(f.termText, f.id);
+        }
+      }
+    } else {
+      for (const f of loadLocalFavorites()) {
+        if (f.kind === "term" && f.url === articleUrl && f.termText) termFavs.add(f.termText);
+      }
+    }
+    applyTermFavMarks();
+  }
+
+  async function toggleTermFavorite(termText: string, explanation: string) {
+    if (termFavs.has(termText)) {
+      // 取消
+      if (favLoggedIn) {
+        const id = termFavIds.get(termText);
+        if (id) {
+          const env = await api.removeFavorite(id);
+          if (!env.ok) { toast("取消术语收藏失败"); return; }
+          termFavIds.delete(termText);
+        }
+      } else {
+        toggleLocalTermFavorite(articleUrl, articleTitle, termText, explanation, articleId);
+      }
+      termFavs.delete(termText);
+      toast("已取消术语收藏");
+    } else {
+      // 收藏
+      if (favLoggedIn) {
+        const env = await api.addFavorite({
+          url: articleUrl, title: articleTitle, kind: "term",
+          termText, termExplanation: explanation, articleId,
+        });
+        if (!env.ok || !env.data) { toast("术语收藏失败"); return; }
+        termFavIds.set(termText, env.data.id);
+        toast("已收藏术语");
+      } else {
+        toggleLocalTermFavorite(articleUrl, articleTitle, termText, explanation, articleId);
+        toast("已收藏到本机");
+      }
+      termFavs.add(termText);
+    }
+    applyTermFavMarks();
+  }
+
+  document.addEventListener("click", (e) => {
+    const termEl = (e.target as HTMLElement).closest<HTMLElement>("[data-term-text]");
+    if (!termEl) return;
+    // 与划线菜单（mark[data-user-highlight]）不重叠；避免双击重复触发
+    if (e.detail > 1) return;
+    const t = termEl.dataset.termText || "";
+    const expl = termEl.dataset.termExpl || "";
+    if (t) void toggleTermFavorite(t, expl);
+  });
+
   async function refreshFavState() {
     const url = favBtn.dataset.url || "";
     const me = await api.me();
@@ -220,6 +307,7 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     favBtn.textContent = saved ? "😃 已收藏" : "👻 收藏本文";
     favBtn.classList.toggle("on", Boolean(saved));
     favBtn.disabled = false;
+    void loadTermFavState();
   }
   let favLoggedIn = false;
 
@@ -288,6 +376,7 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
 
   function renderAll() {
     paraEls.forEach((_, i) => renderParagraph(i));
+    applyTermFavMarks();
   }
 
   function setAiMode(enabled: boolean) {

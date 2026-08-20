@@ -14,7 +14,7 @@ export const apiErrorSchema = z.object({
 export type ApiError = z.infer<typeof apiErrorSchema>;
 
 // —— 收藏 ——
-export const favoriteKindSchema = z.enum(["article", "quote"]);
+export const favoriteKindSchema = z.enum(["article", "quote", "term"]);
 export type FavoriteKind = z.infer<typeof favoriteKindSchema>;
 
 export const favoriteSchema = z.object({
@@ -23,10 +23,16 @@ export const favoriteSchema = z.object({
   title: z.string(),
   source: z.string(),
   note: z.string(),
-  /** 收藏类型：article=整篇文章，quote=金句（存选中文本）。 */
+  /** 收藏类型：article=整篇文章，quote=金句（存选中文本），term=AI 术语（存术语+释义）。 */
   kind: favoriteKindSchema,
-  /** 金句文本，仅 kind=quote 使用；article 恒为空串。 */
+  /** 金句文本，仅 kind=quote 使用；其余恒为空串。 */
   quote: z.string(),
+  /** 术语文本，仅 kind=term 使用；其余恒为空串。 */
+  termText: z.string(),
+  /** 术语 AI 释义，仅 kind=term 使用。 */
+  termExplanation: z.string(),
+  /** 来源文章阅读页 id（kind=term 跳转用；无剪藏时为空串）。 */
+  articleId: z.string(),
   createdAt: z.number(), // unix 毫秒
 });
 export type Favorite = z.infer<typeof favoriteSchema>;
@@ -38,6 +44,9 @@ export const favoriteCreateSchema = z.object({
   note: z.string().optional(),
   kind: favoriteKindSchema.default("article"),
   quote: z.string().max(1000).default(""),
+  termText: z.string().max(200).default(""),
+  termExplanation: z.string().max(2000).default(""),
+  articleId: z.string().max(40).default(""),
 });
 export type FavoriteCreate = z.input<typeof favoriteCreateSchema>;
 

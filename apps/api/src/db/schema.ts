@@ -12,6 +12,9 @@ export const favorites = sqliteTable("favorites", {
   note: text("note").notNull().default(""),
   kind: text("kind").notNull().default("article"),
   quote: text("quote").notNull().default(""),
+  termText: text("term_text").notNull().default(""),       // 术语收藏：术语文本
+  termExplanation: text("term_explanation").notNull().default(""), // 术语收藏：AI 释义
+  articleId: text("article_id").notNull().default(""),     // 术语收藏：来源文章阅读页 id
   createdAt: integer("created_at").notNull(), // unix 毫秒
 });
 

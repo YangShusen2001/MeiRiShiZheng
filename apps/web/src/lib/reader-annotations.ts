@@ -86,6 +86,11 @@ export function readerSegmentsToHtml(segments: ReaderSegment[]): string {
       attributes.push('tabindex="0"', `data-explanation="${escapeHtml(term.explanation)}"`);
       attributes.push(`aria-label="${escapeHtml(`${term.text}：${term.explanation}`)}"`);
     }
+    // 术语收藏（0018）：整个术语可点击收藏，携带术语文本/释义供阅读页交互
+    if (segment.aiAnnotations.some((annotation) => annotation.type === "term")) {
+      attributes.push(`data-term-text="${escapeHtml(term?.text ?? "")}"`);
+      if (term?.explanation) attributes.push(`data-term-expl="${escapeHtml(term.explanation)}"`);
+    }
     const tag = segment.userStyles.length ? "mark" : "span";
     return `<${tag} ${attributes.join(" ")}>${text}</${tag}>`;
   }).join("");

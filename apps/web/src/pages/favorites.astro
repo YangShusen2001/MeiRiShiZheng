@@ -4,26 +4,8 @@ import { listArticles } from "../lib/content";
 
 // url → article id 映射：收藏点击跳转到阅读页，而非原文外链。
 const articleIdByUrl: Record<string, string> = {};
-// 术语解析索引：收藏文章的 AI term 标注（text + 释义 + 来源文章），构建时从内容 JSON 提取。
-interface TermEntry {
-  text: string;
-  explanation: string;
-  articleTitle: string;
-  articleUrl: string;
-  articleId: string;
-}
-const termsByUrl: Record<string, TermEntry[]> = {};
 for (const a of listArticles()) {
   articleIdByUrl[a.url] = a.id;
-  const terms = (a.aiAnnotations ?? []).filter((ann) => ann.type === "term" && ann.explanation);
-  if (!terms.length) continue;
-  termsByUrl[a.url] = terms.map((t) => ({
-    text: t.text,
-    explanation: t.explanation ?? "",
-    articleTitle: a.title,
-    articleUrl: a.url,
-    articleId: a.id,
-  }));
 }
 ---
 <Base title="我的收藏 · 时政小助手">
@@ -37,7 +19,6 @@ for (const a of listArticles()) {
     <div id="fav-list"><p class="item-summary">加载中…</p></div>
   </section>
   <script type="application/json" id="article-id-map" set:html={JSON.stringify(articleIdByUrl).replace(/</g, "\\u003c")}></script>
-  <script type="application/json" id="terms-map" set:html={JSON.stringify(termsByUrl).replace(/</g, "\\u003c")}></script>
 </Base>
 
 <style>
@@ -62,7 +43,7 @@ for (const a of listArticles()) {
 <script>
   import { api } from "../lib/api";
   import { renderMarkdown } from "../lib/markdown";
-  import { loadLocalFavorites, removeLocalFavorite } from "../lib/local-favorites";
+  import { loadLocalFavorites, removeLocalFavorite, removeLocalTermFavorite } from "../lib/local-favorites";
   import type { Favorite } from "@kaogong/contracts";
 
   const esc = (s: unknown): string =>
@@ -72,8 +53,6 @@ for (const a of listArticles()) {
     });
   const list = document.getElementById("fav-list")!;
   const articleIdByUrl = JSON.parse(document.getElementById("article-id-map")?.textContent ?? "{}") as Record<string, string>;
-  interface TermEntry { text: string; explanation: string; articleTitle: string; articleUrl: string; articleId: string; }
-  const termsByUrl = JSON.parse(document.getElementById("terms-map")?.textContent ?? "{}") as Record<string, TermEntry[]>;
 
   let activeFilter: "term" | "article" | "quote" = "term";
   let favorites: Favorite[] = [];
@@ -94,16 +73,19 @@ for (const a of listArticles()) {
       </div>`;
   }
 
-  // —— 术语解析：收藏文章里的 AI 术语 + 追问 ——
-  function termCardHtml(t: TermEntry): string {
+  // —— 术语解析（0018 改版）：只显示「被收藏的术语」（kind=term），支持追问与删除 ——
+  function termCardHtml(f: Favorite): string {
+    const articleId = f.articleId || articleIdByUrl[f.url] || "";
+    const href = articleId ? `/read/${articleId}/` : f.url;
     return `
       <div class="term-card">
         <div class="term-head">
-          <span class="term-name">「${esc(t.text)}」</span>
-          <a href="/read/${esc(t.articleId)}/">${esc(t.articleTitle)}</a>
-          <button type="button" class="btn btn--line btn--sm term-ask" data-term="${esc(t.text)}" data-expl="${esc(t.explanation)}">追问</button>
+          <span class="term-name">「${esc(f.termText || f.title)}」</span>
+          <a href="${esc(href)}">${esc(f.title)}</a>
+          <button type="button" class="btn btn--line btn--sm term-ask" data-term="${esc(f.termText || "")}" data-expl="${esc(f.termExplanation || "")}">追问</button>
+          <button type="button" class="btn btn--line btn--sm term-del" data-id="${esc(f.id)}" data-url="${esc(f.url)}" data-term="${esc(f.termText || "")}">删除</button>
         </div>
-        <p class="term-expl">${esc(t.explanation)}</p>
+        <p class="term-expl">${esc(f.termExplanation || "")}</p>
         <div class="term-ask-panel" hidden></div>
       </div>`;
   }
@@ -154,16 +136,27 @@ for (const a of listArticles()) {
   }
 
   function renderTerms(): void {
-    const entries = favorites
-      .filter((f) => f.kind === "article" && (termsByUrl[f.url] ?? []).length > 0)
-      .flatMap((f) => (termsByUrl[f.url] ?? []).map((t) => t));
+    const entries = favorites.filter((f) => f.kind === "term");
     if (!entries.length) {
-      list.innerHTML = '<p class="item-summary">收藏的文章还没有术语解析（文章需含 AI 术语标注）。</p>';
+      list.innerHTML = '<p class="item-summary">还没有收藏术语——阅读页点正文中的 AI 术语即可收藏（👻→😃）。</p>';
       return;
     }
     list.innerHTML = entries.map(termCardHtml).join("");
     list.querySelectorAll<HTMLButtonElement>(".term-ask").forEach((btn) => {
       btn.addEventListener("click", () => openAskPanel(btn));
+    });
+    list.querySelectorAll<HTMLButtonElement>(".term-del").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const id = btn.getAttribute("data-id") || "";
+        const url = btn.getAttribute("data-url") || "";
+        const term = btn.getAttribute("data-term") || "";
+        if (localMode) {
+          removeLocalTermFavorite(url, term); // 本地：只删该术语
+        } else {
+          await api.removeFavorite(id);
+        }
+        await load();
+      });
     });
   }
 

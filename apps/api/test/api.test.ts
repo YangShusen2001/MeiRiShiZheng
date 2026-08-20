@@ -101,6 +101,47 @@ describe("favorites", () => {
     const list = await app.request("/api/favorites", { headers: headers() });
     expect((await readJson<Favorite[]>(list)).data).toHaveLength(2);
   });
+
+  it("术语收藏：kind=term 存术语文本+释义+来源文章，同术语幂等", async () => {
+    const app = makeApp();
+    const body = {
+      url: "https://x.com/term-article", title: "术语文章", kind: "term",
+      termText: "新质生产力", termExplanation: "以创新为主导的生产力形态。", articleId: "abc123def0",
+    };
+    const first = await app.request("/api/favorites", json("POST", body));
+    expect(first.status).toBe(201);
+    const created = (await readJson<Favorite>(first)).data;
+    expect(created.kind).toBe("term");
+    expect(created.termText).toBe("新质生产力");
+    expect(created.termExplanation).toContain("创新");
+    expect(created.articleId).toBe("abc123def0");
+
+    const again = await app.request("/api/favorites", json("POST", body));
+    expect(again.status).toBe(200);
+    expect((await readJson<Favorite>(again)).data.id).toBe(created.id);
+
+    // 同文章不同术语独立
+    const other = await app.request("/api/favorites", json("POST", { ...body, termText: "第二个术语" }));
+    expect(other.status).toBe(201);
+
+    const list = await app.request("/api/favorites", { headers: headers() });
+    const data = (await readJson<Favorite[]>(list)).data;
+    expect(data.filter((f) => f.kind === "term")).toHaveLength(2);
+  });
+
+  it("术语收藏与文章收藏同 url 各自独立", async () => {
+    const app = makeApp();
+    const article = await app.request("/api/favorites", json("POST", { url: "https://x.com/mix", title: "文章" }));
+    expect(article.status).toBe(201);
+    const term = await app.request("/api/favorites", json("POST", {
+      url: "https://x.com/mix", title: "文章", kind: "term", termText: "术语A",
+    }));
+    expect(term.status).toBe(201);
+    const list = await app.request("/api/favorites", { headers: headers() });
+    const data = (await readJson<Favorite[]>(list)).data;
+    expect(data).toHaveLength(2);
+    expect(data.map((f) => f.kind).sort()).toEqual(["article", "term"]);
+  });
 });
 
 describe("highlights", () => {
