@@ -208,7 +208,9 @@ for (const a of listArticles()) {
         renderList();
         return;
       }
-      list.innerHTML = '<p class="item-summary">收藏加载失败，请刷新重试。未登录时收藏保存在本机。</p>';
+      list.innerHTML = env.error?.code === "AUTH_REQUIRED"
+        ? '<p class="item-summary">未登录，收藏保存在本机。还没有本机收藏，去阅读页「👻 收藏本文」添加。</p>'
+        : '<p class="item-summary">收藏加载失败，请刷新重试。未登录时收藏保存在本机。</p>';
       return;
     }
     favorites = env.data ?? [];
