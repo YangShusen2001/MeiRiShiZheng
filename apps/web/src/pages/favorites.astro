@@ -24,12 +24,13 @@ for (const a of listArticles()) {
 <style>
   /* 术语解析行：复用全局 day-row（border/hover 高亮），对齐「文章收藏」 */
   .term-row { position: relative; flex-wrap: wrap; }
-  .term-main { flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .term-main { flex: 1 1 240px; min-width: 240px; display: flex; flex-direction: column; gap: 2px; }
   .term-name { font-weight: 700; color: var(--primary); font-family: var(--font-serif); font-size: 15px; }
   .term-expl { color: var(--sub); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .term-side { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; margin-left: auto; }
   .term-src { font-size: 12px; color: var(--mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; text-decoration: none; }
   .term-src:hover { color: var(--primary); }
-  .term-actions { display: flex; gap: 6px; margin-left: auto; }
+  .term-actions { display: flex; gap: 6px; }
   .term-ask-panel { flex-basis: 100%; margin-top: 8px; padding: 10px 12px; background: var(--surface-2); border-radius: var(--r-sm); }
   @media (max-width: 640px) {
     .term-actions button { min-height: 44px; } /* 触控目标 */
@@ -89,10 +90,12 @@ for (const a of listArticles()) {
           <span class="term-name">「${esc(f.termText || f.title)}」</span>
           <span class="term-expl" title="${esc(f.termExplanation || "")}">${esc(f.termExplanation || "")}</span>
         </div>
-        <a class="term-src" href="${esc(href)}" title="${esc(f.title)}">${esc(f.title)} ↗</a>
-        <div class="term-actions">
-          <button type="button" class="btn btn--line btn--sm term-ask" data-term="${esc(f.termText || "")}" data-expl="${esc(f.termExplanation || "")}">追问</button>
-          <button type="button" class="btn btn--line btn--sm term-del" data-id="${esc(f.id)}" data-url="${esc(f.url)}" data-term="${esc(f.termText || "")}">删除</button>
+        <div class="term-side">
+          <a class="term-src" href="${esc(href)}" title="${esc(f.title)}">${esc(f.title)} ↗</a>
+          <div class="term-actions">
+            <button type="button" class="btn btn--line btn--sm term-ask" data-term="${esc(f.termText || "")}" data-expl="${esc(f.termExplanation || "")}">追问</button>
+            <button type="button" class="btn btn--line btn--sm term-del" data-id="${esc(f.id)}" data-url="${esc(f.url)}" data-term="${esc(f.termText || "")}">删除</button>
+          </div>
         </div>
         <div class="term-ask-panel" hidden></div>
       </div>`;
