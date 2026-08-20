@@ -779,18 +779,11 @@ mark.hl-bold { font-weight: 700; }
 }
 .term-fav-badge { font-size: 0.72em; margin-left: 2px; font-style: normal; }
 
-/* 带注释/解释的片段：右上角 🔍 小图标标识 */
+/* 带注释/解释的片段：悬停出释义 tooltip（不再显示 ⭐ 角标，2026-08-20 去掉） */
 [data-explanation] {
   position: relative;
   cursor: help;
   outline-offset: 3px;
-}
-[data-explanation]::after {
-  content: "⭐";
-  font-size: 0.6em;
-  vertical-align: super;
-  margin-left: 1px;
-  pointer-events: none;
 }
 
 /* 共享 tooltip（JS 渲染，支持 Markdown） */
