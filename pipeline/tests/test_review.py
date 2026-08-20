@@ -136,3 +136,126 @@ def test_fetch_reports_quality_status(client, tmp_path, monkeypatch):
     assert body["aiKeyConfigured"] is False
     assert body["quality"]["qualityStatus"] == "degraded"
     assert body["quality"]["aiError"] == 1
+
+
+# ===== 0018 审核台：条目视图 / 重试 / 排除 / 报告解释 / 审计 =====
+
+def _write_day(tmp_path, date_str, items):
+    day = tmp_path / date_str
+    day.mkdir(parents=True, exist_ok=True)
+    (day / "digest.json").write_text(
+        json.dumps({"date": date_str, "sections": [{"title": "s", "items": items}]}, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    return day
+
+
+def _write_report_file(tmp_path, date_str, payload):
+    reports = tmp_path / "_reports"
+    reports.mkdir(parents=True, exist_ok=True)
+    (reports / f"{date_str}.json").write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+
+
+def test_items_view_aggregates_clip_and_ai_status(client, tmp_path, monkeypatch):
+    monkeypatch.setattr(server, "CONTENT", tmp_path)
+    date = "2026-08-15"
+    url = "https://example.com/a1"
+    aid = server._article_id(url)
+    day = _write_day(tmp_path, date, [{"title": "甲", "sourceUrl": url}])
+    (day / f"article-{aid}.json").write_text(json.dumps({
+        "id": aid, "status": "ok", "aiStatus": "error", "aiError": "ai_api:timeout",
+    }, ensure_ascii=False), encoding="utf-8")
+    _write_report_file(tmp_path, date, {"date": date, "clipDetails": [
+        {"id": aid, "title": "甲", "status": "clip_error", "reason": "fetch_failed:ConnectError:boom"},
+    ]})
+    r = client.get(f"/api/items/{date}")
+    assert r.status_code == 200
+    item = r.json()["items"][0]
+    assert item["clipStatus"] == "clip_error"
+    assert item["clipError"] == "fetch_failed:ConnectError:boom"
+    assert item["aiStatus"] == "error"
+    assert item["actions"] == ["retry"]
+
+
+def test_exclude_and_restore_item(client, tmp_path, monkeypatch):
+    monkeypatch.setattr(server, "CONTENT", tmp_path)
+    monkeypatch.setattr(server, "AUDIT_LOG", tmp_path / "_reports" / "audit.jsonl")
+    date = "2026-08-15"
+    url = "https://example.com/a2"
+    aid = server._article_id(url)
+    _write_day(tmp_path, date, [{"title": "乙", "sourceUrl": url}])
+    _write_report_file(tmp_path, date, {"date": date})
+    r = client.post(f"/api/items/{date}/{aid}/exclude", json={"reason": "视频稿"})
+    assert r.status_code == 200
+    digest = json.loads((tmp_path / date / "digest.json").read_text(encoding="utf-8"))
+    assert len(digest["sections"][0]["items"]) == 0  # 发布即生效
+    report = json.loads((tmp_path / "_reports" / f"{date}.json").read_text(encoding="utf-8"))
+    assert report["excluded"][0]["reason"] == "视频稿"
+    # 恢复：原样插回
+    r = client.post(f"/api/items/{date}/{aid}/restore")
+    assert r.status_code == 200
+    digest = json.loads((tmp_path / date / "digest.json").read_text(encoding="utf-8"))
+    assert len(digest["sections"][0]["items"]) == 1
+    report = json.loads((tmp_path / "_reports" / f"{date}.json").read_text(encoding="utf-8"))
+    assert report["excluded"] == []
+
+
+def test_retry_failed_reclips_and_analyzes(client, tmp_path, monkeypatch):
+    monkeypatch.setattr(server, "CONTENT", tmp_path)
+    date = "2026-08-15"
+    url = "https://example.com/a3"
+    aid = server._article_id(url)
+    _write_day(tmp_path, date, [{"title": "丙", "sourceUrl": url}])
+    _write_report_file(tmp_path, date, {"date": date, "clipDetails": [
+        {"id": aid, "status": "clip_error", "reason": "fetch_failed:ConnectError:x"},
+    ]})
+    monkeypatch.setattr(server, "clip_article", lambda url, title, date, client=None, allow_single=False: {
+        "id": aid, "status": "ok", "title": title, "paragraphs": ["第一段", "第二段"], "keySentences": [],
+    })
+    monkeypatch.setattr(server, "analyze_article", lambda clip, cfg: {**clip, "aiStatus": "ok"})
+    r = client.post(f"/api/items/{date}/retry-failed")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["total"] == 1
+    assert body["results"][0]["clipStatus"] == "ok"
+    assert (tmp_path / date / f"article-{aid}.json").exists()
+
+
+def test_report_explain_and_note_acknowledges_volume(client, tmp_path, monkeypatch):
+    monkeypatch.setattr(server, "CONTENT", tmp_path)
+    date = "2026-08-15"
+    _write_day(tmp_path, date, [{"title": "丁", "sourceUrl": "https://example.com/a4"}])
+    _write_report_file(tmp_path, "2026-08-10", {"date": "2026-08-10", "candidates": 20, "articles": 20, "qualityStatus": "ok"})
+    _write_report_file(tmp_path, "2026-08-12", {"date": "2026-08-12", "candidates": 20, "articles": 20, "qualityStatus": "ok"})
+    _write_report_file(tmp_path, date, {
+        "date": date, "candidates": 5, "articles": 5, "sourcesOk": 1,
+        "qualityStatus": "failed",
+        "volumeErrors": [{"metric": "candidates", "error": "below_half_baseline"}],
+    })
+    r = client.get(f"/api/reports/{date}")
+    assert r.status_code == 200
+    errors = r.json()["errors"]
+    assert errors and errors[0]["explain"]  # 人类可读解释
+    r = client.post(f"/api/reports/{date}/note", json={"text": "当天源产出少"})
+    assert r.status_code == 200
+    body = r.json()
+    assert body["notes"] == ["当天源产出少"]
+    report = json.loads((tmp_path / "_reports" / f"{date}.json").read_text(encoding="utf-8"))
+    assert report["volumeErrors"] == []  # 标注后不再拦截
+    assert len(report["volumeErrorsAcknowledged"]) > 0  # 保留记录
+
+
+def test_audit_written_and_history_served(client, tmp_path, monkeypatch):
+    monkeypatch.setattr(server, "CONTENT", tmp_path)
+    monkeypatch.setattr(server, "AUDIT_LOG", tmp_path / "_reports" / "audit.jsonl")
+    date = "2026-08-15"
+    url = "https://example.com/a5"
+    aid = server._article_id(url)
+    _write_day(tmp_path, date, [{"title": "戊", "sourceUrl": url}])
+    _write_report_file(tmp_path, date, {"date": date})
+    client.post(f"/api/items/{date}/{aid}/exclude", json={"reason": "r"})
+    lines = (tmp_path / "_reports" / "audit.jsonl").read_text(encoding="utf-8").splitlines()
+    assert any("exclude" in line for line in lines)
+    h = client.get(f"/api/items/{date}/{aid}/history")
+    assert h.status_code == 200
+    assert len(h.json()["history"]) >= 1

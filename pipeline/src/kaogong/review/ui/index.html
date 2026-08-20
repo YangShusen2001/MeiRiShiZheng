@@ -19,6 +19,34 @@
   .art.on .num { color: rgba(255,255,255,.7); }
   .art .t { flex: 1; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .empty { color: var(--tblr-muted); text-align: center; padding: 60px 0; }
+  /* 0018：条目状态徽标 / 筛选器 / 状态面板 */
+  .item-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .filter-btn { min-height: 32px; padding: 0 12px; border: 1px solid var(--tblr-border-color); border-radius: 999px; background: transparent; color: var(--tblr-muted); font-family: inherit; font-size: 12px; cursor: pointer; }
+  .filter-btn.on { background: var(--tblr-primary); border-color: var(--tblr-primary); color: #fff; }
+  .badge-mini { flex: none; font-size: 11px; padding: 1px 7px; border-radius: 999px; color: #fff; }
+  .badge-ok { background: #1f7a56; }
+  .badge-clip-error { background: #b3201c; }
+  .badge-ai-error { background: #d97706; }
+  .badge-excluded { background: #8a93a4; }
+  .badge-unknown { background: #c3c9d4; }
+  .art.failed-row { background: #fdf0ef; }
+  .art.failed-row.on { background: var(--tblr-primary); }
+  .item-status { margin-bottom: 14px; padding: 10px 12px; border: 1px solid var(--tblr-border-color); border-radius: 8px; font-size: 13px; }
+  .item-status .st-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; flex-wrap: wrap; }
+  .item-status .st-label { font-weight: 600; min-width: 64px; color: var(--tblr-muted); }
+  .item-status .st-act { display: inline-flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+  .item-status .st-act button { min-height: 32px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--tblr-border-color); background: transparent; font-family: inherit; font-size: 12px; cursor: pointer; }
+  .item-status .st-act button.primary { background: var(--tblr-primary); border-color: var(--tblr-primary); color: #fff; }
+  .item-status .st-act button.danger { color: #b3201c; border-color: #b3201c; }
+  .item-status .st-hist { margin-top: 8px; font-size: 12px; color: var(--tblr-muted); max-height: 120px; overflow: auto; }
+  /* 质量报告面板 */
+  #report-panel { margin-top: 12px; font-size: 13px; }
+  #report-panel .rep-err { padding: 8px 10px; border: 1px solid var(--tblr-border-color); border-radius: 8px; margin-bottom: 8px; }
+  #report-panel .rep-err b { color: var(--tblr-danger); }
+  #report-panel .rep-explain { color: var(--tblr-muted); margin-top: 4px; line-height: 1.6; }
+  #report-panel .rep-act { color: var(--tblr-primary); margin-top: 4px; }
+  #report-notes { display: flex; gap: 6px; margin-top: 10px; }
+  #report-notes input { flex: 1; border: 1px solid var(--tblr-border-color); border-radius: 6px; padding: 6px 10px; font-family: inherit; font-size: 13px; }
   .preview { margin-top: 16px; border-top: 1px dashed var(--tblr-border-color); padding-top: 14px; }
   .preview h3 { font-size: 14px; margin: 0 0 8px; color: var(--tblr-muted); }
   .preview summary { cursor: pointer; font-size: 14px; color: var(--tblr-muted); user-select: none; }
@@ -150,14 +178,29 @@
     <div class="page-body">
       <div class="container-xl">
         <div id="log" style="margin-bottom:16px"></div>
+        <div id="report-panel" style="display:none;margin-bottom:16px;background:var(--tblr-bg-surface);border:1px solid var(--tblr-border-color);border-radius:8px;padding:14px"></div>
         <div class="row g-3">
           <div class="col-12 col-md-4 col-lg-3">
-            <div class="card"><div class="card-body" id="aside"></div></div>
+            <div class="card"><div class="card-body">
+              <div class="item-filters" id="item-filters">
+                <button type="button" class="filter-btn on" data-filter="all">全部</button>
+                <button type="button" class="filter-btn" data-filter="failed">仅失败</button>
+                <button type="button" class="filter-btn" data-filter="clip">剪藏失败</button>
+                <button type="button" class="filter-btn" data-filter="ai">AI 失败</button>
+                <button type="button" class="filter-btn" data-filter="excluded">已排除</button>
+              </div>
+              <div style="display:flex;gap:6px;margin-bottom:10px">
+                <button type="button" class="btn btn--sm btn--line" id="retry-failed" style="flex:1">🔁 批量重试失败</button>
+                <button type="button" class="btn btn--sm btn--line" id="report-btn" style="flex:1">📋 质量报告</button>
+              </div>
+              <div id="aside"></div>
+            </div></div>
           </div>
           <div class="col-12 col-md-8 col-lg-9">
             <div class="card"><div class="card-body">
               <div class="empty">选择左侧文章进行编辑</div>
               <div id="edit-form" style="display:none">
+                <div class="item-status" id="item-status" hidden></div>
                 <label class="form-label">标题<input id="f-title" class="form-control"></label>
                 <label class="form-label">摘要<textarea id="f-summary" class="form-control"></textarea></label>
                 <div class="row mt-3">
@@ -186,6 +229,8 @@
 const $ = (id) => document.getElementById(id);
 let digest = null;            // 当前日报 JSON
 let selected = null;          // {si, ii} 选中的文章
+let items = [];               // 0018：/api/items 统一视图
+let itemByUrl = {};           // sourceUrl -> item 视图（不用手写 MD5，避免不一致）
 const clipMap = {};           // url -> article id
 
 async function j(url, opts) {
@@ -210,6 +255,12 @@ async function loadDates() {
 async function loadDigest(date) {
   if (!date) return;
   digest = await j(`/api/digest/${date}`);
+  // 0018：并行拉统一条目视图（剪藏/AI 状态 + 建议动作 + 排除标记）
+  const view = await j(`/api/items/${date}`);
+  items = view.ok ? view.items || [] : [];
+  // 按 sourceUrl 映射（不手写 MD5：后端 id 只用于 API 调用，视图匹配用 URL 最可靠）
+  itemByUrl = {};
+  for (const it of items) if (it.sourceUrl) itemByUrl[it.sourceUrl] = it;
   buildClipMap();
   renderAside();
   selected = null;
@@ -230,27 +281,76 @@ function buildClipMap() {
   }
 }
 
+// —— 0018：条目状态（徽标 / 筛选 / 操作）——
+const STATUS_LABEL = { ok: "正常", clip_error: "剪藏失败", ai_error: "AI失败", excluded: "已排除", unknown: "未剪藏" };
+
+function statusOf(it) {
+  if (!it) return "unknown";  // 容错：视图缺失时不崩溃
+  if (it.excluded) return "excluded";
+  if (it.clipStatus === "clip_error") return "clip_error";
+  if (it.aiStatus === "error") return "ai_error";
+  if (it.clipStatus === "ok" && it.aiStatus === "ok") return "ok";
+  return "unknown";
+}
+
+function itemMatchesFilter(it, filter) {
+  const st = statusOf(it);
+  if (filter === "all") return true;
+  if (filter === "failed") return st === "clip_error" || st === "ai_error";
+  if (filter === "clip") return st === "clip_error";
+  if (filter === "ai") return st === "ai_error";
+  if (filter === "excluded") return st === "excluded";
+  return true;
+}
+
+let itemFilter = "all";
+$("item-filters").addEventListener("click", (e) => {
+  const btn = e.target.closest("button[data-filter]");
+  if (!btn) return;
+  itemFilter = btn.dataset.filter;
+  document.querySelectorAll("#item-filters .filter-btn").forEach((b) => b.classList.toggle("on", b === btn));
+  renderAside();
+});
+
 function renderAside() {
   const aside = $("aside");
   aside.innerHTML = "";
   let n = 0;
+  let shown = 0;
   digest.sections.forEach((s, si) => {
+    const rows = [];
+    s.items.forEach((it, ii) => {
+      const view = itemByUrl[it.sourceUrl || ""];
+      const st = statusOf(view);
+      if (!itemMatchesFilter(view, itemFilter)) return;
+      n++;
+      shown++;
+      const row = document.createElement("div");
+      row.className = "art" + (selected && selected.si === si && selected.ii === ii ? " on" : "")
+        + (st === "clip_error" || st === "ai_error" ? " failed-row" : "");
+      const badge = STATUS_LABEL[st] || st;
+      row.innerHTML = `<span class="num">${String(n).padStart(2,"0")}</span><span class="badge-mini badge-${st}">${badge}</span><span class="t"></span>`;
+      row.querySelector(".t").textContent = it.title;
+      row.title = view ? (view.clipError || view.aiError || view.excludeReason || "") : "";
+      row.onclick = () => select(si, ii, row);
+      rows.push(row);
+    });
+    if (!rows.length) return;
     const h = document.createElement("div");
     h.className = "sec-title";
     h.textContent = s.title;
     aside.appendChild(h);
-    s.items.forEach((it, ii) => {
-      n++;
-      const row = document.createElement("div");
-      row.className = "art" + (selected && selected.si === si && selected.ii === ii ? " on" : "");
-      row.innerHTML = `<span class="num">${String(n).padStart(2,"0")}</span><span class="t"></span>`;
-      row.querySelector(".t").textContent = it.title;
-      row.onclick = () => select(si, ii, row);
-      aside.appendChild(row);
-    });
+    rows.forEach((r) => aside.appendChild(r));
   });
+  if (!shown) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = "当前筛选下无条目";
+    aside.appendChild(empty);
+  }
 }
 
+// 与后端 _article_id 对齐：MD5(sourceUrl)[:10]（已废弃——视图匹配改用 sourceUrl，见 itemByUrl）
 function select(si, ii, row) {
   selected = { si, ii };
   document.querySelectorAll(".art").forEach((a) => a.classList.remove("on"));
@@ -261,8 +361,127 @@ function select(si, ii, row) {
   $("f-title").value = it.title;
   $("f-summary").value = it.summary || "";
   $("f-del").checked = false;
+  renderItemStatus(it.sourceUrl || "");
   loadPreview(it.sourceUrl);
 }
+
+// —— 0018：右侧状态面板（剪藏/AI 状态 + 重试/排除/强制收录 + 历史）——
+async function renderItemStatus(sourceUrl) {
+  const box = $("item-status");
+  if (!box) return;
+  const view = itemByUrl[sourceUrl || ""];
+  if (!view) { box.innerHTML = ""; box.hidden = true; return; }
+  const id = view.id || "";
+  box.hidden = false;
+  const clipText = view.excluded ? "已排除" : view.clipStatus === "clip_error" ? "❌ 剪藏失败" : view.clipStatus === "ok" ? "✅ 已剪藏" : "—";
+  const aiText = view.excluded ? "—" : view.aiStatus === "error" ? "⚠️ AI 失败" : view.aiStatus === "ok" ? "✅ AI 成功" : "—";
+  const acts = (view.actions || []).map((a) => {
+    if (a === "retry") return `<button type="button" class="primary" data-act="retry">🔁 重试</button>`;
+    if (a === "force-include") return `<button type="button" class="primary" data-act="force-include">📌 强制收录</button>`;
+    if (a === "exclude") return `<button type="button" class="danger" data-act="exclude">🗑 排除</button>`;
+    if (a === "restore") return `<button type="button" data-act="restore">↩ 恢复</button>`;
+    return "";
+  }).join("");
+  box.innerHTML = `
+    <div class="st-row"><span class="st-label">剪藏</span><span>${clipText}</span></div>
+    <div class="st-row"><span class="st-label">AI</span><span>${aiText}</span></div>
+    ${view.clipError ? `<div class="st-row" style="color:var(--tblr-danger)">${esc(view.clipError)}</div>` : ""}
+    ${view.aiError ? `<div class="st-row" style="color:var(--tblr-muted)">${esc(String(view.aiError).split(" ")[0])}</div>` : ""}
+    ${view.excludeReason ? `<div class="st-row" style="color:var(--tblr-muted)">排除原因：${esc(view.excludeReason)}</div>` : ""}
+    <div class="st-act">${acts}</div>
+    <div class="st-hist" id="st-hist"></div>`;
+  box.querySelectorAll("button[data-act]").forEach((btn) => {
+    btn.addEventListener("click", () => runItemAction(btn.dataset.act, id));
+  });
+  // 操作历史（Phase C）
+  try {
+    const h = await j(`/api/items/${$("date").value}/${id}/history`);
+    const hist = h.ok ? h.history || [] : [];
+    if (hist.length) {
+      $("st-hist").innerHTML = "操作历史：" + hist.map((e) => `${esc(e.ts.slice(11, 19))} ${esc(e.action)}`).join(" · ");
+    }
+  } catch { /* 忽略 */ }
+}
+
+async function runItemAction(act, id) {
+  const date = $("date").value;
+  let r;
+  try {
+    if (act === "retry") r = await j(`/api/items/${date}/${id}/retry`, { method: "POST" });
+    else if (act === "force-include") r = await j(`/api/items/${date}/${id}/force-include`, { method: "POST" });
+    else if (act === "exclude") r = await j(`/api/items/${date}/${id}/exclude`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ reason: "审核台人工排除" }) });
+    else if (act === "restore") r = await j(`/api/items/${date}/${id}/restore`, { method: "POST" });
+  } catch (e) {
+    log("操作失败：" + e);
+    return;
+  }
+  if (!r.ok && r.detail) { log("❌ " + r.detail); return; }
+  log("✅ 操作完成" + (r.quality ? "\n\n" + qualityLine({ quality: r.quality }) : ""));
+  await loadDigest(date);
+  // 恢复选中（exclude/restore 后条目位置变化）
+  if (act === "exclude" || act === "restore") {
+    document.querySelector(".empty").style.display = "block";
+    $("edit-form").style.display = "none";
+  }
+}
+
+$("retry-failed").onclick = async () => {
+  const date = $("date").value;
+  if (!date) return;
+  $("retry-failed").disabled = true;
+  log("批量重试失败条目中…");
+  try {
+    const r = await j(`/api/items/${date}/retry-failed`, { method: "POST" });
+    const done = (r.results || []).filter((x) => x.clipStatus === "ok").length;
+    const fail = (r.results || []).filter((x) => x.clipStatus === "clip_error" || x.aiStatus === "error").length;
+    log(`批量重试完成：共 ${r.total || 0} 条，成功 ${done} 条，仍失败 ${fail} 条\n\n` + qualityLine(r));
+    await loadDigest(date);
+  } catch (e) {
+    log("批量重试请求失败：" + e);
+  }
+  $("retry-failed").disabled = false;
+};
+
+// —— 0018：质量报告面板（门禁错误解释 + 建议动作 + 标注已知原因）——
+$("report-btn").onclick = async () => {
+  const date = $("date").value;
+  if (!date) return;
+  const r = await j(`/api/reports/${date}`);
+  if (!r.ok) { log(r.detail || "无质量报告"); return; }
+  const errs = (r.errors || []).map((e) => `
+    <div class="rep-err">
+      <b>[${e.kind}] ${esc(e.error || "")}</b>${e.metric ? ` <span style="color:var(--tblr-muted)">(${esc(e.metric)}${e.baseline ? "，基线 " + e.baseline : ""}${e.window ? "，样本 " + e.window + " 次" : ""})</span>` : ""}
+      ${e.explain ? `<div class="rep-explain">${esc(e.explain)}</div>` : ""}
+      ${e.action ? `<div class="rep-act">建议：${esc(e.action)}</div>` : ""}
+    </div>`).join("");
+  const notes = (r.notes || []).map((n) => `<div style="color:var(--tblr-green)">✓ ${esc(n)}</div>`).join("");
+  const panel = $("report-panel");
+  panel.innerHTML = `
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+      <span>门禁：<b>${r.quality?.qualityStatus || "-"}</b></span>
+      <span style="color:var(--tblr-muted)">候选 ${r.quality?.candidates || 0} / 文章 ${r.quality?.articles || 0} / AI失败 ${r.quality?.aiError || 0}</span>
+    </div>
+    ${errs || '<p style="color:var(--tblr-muted)">无门禁错误</p>'}
+    ${notes}
+    <div id="report-notes">
+      <input placeholder="标注已知原因（如：当天源产出少），标注后数量门禁放行" />
+      <button type="button" class="btn btn--sm btn--line" id="report-note-save">标注</button>
+    </div>`;
+  $("report-note-save").onclick = async () => {
+    const input = panel.querySelector("#report-notes input");
+    const text = (input.value || "").trim();
+    if (!text) return;
+    const saved = await j(`/api/reports/${date}/note`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text }) });
+    if (saved.ok) {
+      log("✅ 已标注，数量门禁已放行（degraded）\n\n" + qualityLine(saved));
+      $("report-btn").click();
+    } else {
+      log("❌ " + (saved.detail || "标注失败"));
+    }
+  };
+  panel.style.display = "block";
+  panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 const AI_TYPE_LABEL = { viewpoint: "观点", exam_point: "考点", term: "术语" };
 
@@ -344,7 +563,7 @@ $("save").onclick = async () => {
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ date: $("date").value, digest }),
   });
-  renderAside();
+  await loadDigest($("date").value);
   $("edit-form").style.display = "none";
   document.querySelector(".empty").style.display = "block";
   selected = null;
@@ -521,11 +740,31 @@ $("cfg-save").onclick = async () => {
 // —— 数据统计 ——
 async function loadStats() {
   const { data } = await j("/api/stats");
-  const rows = (data || []).slice().reverse().map((r) => {
+  const all = (data || []).slice();
+  // 0018：趋势折线（候选/文章/门禁状态），一眼看出 below_half_baseline 类波动
+  let svg = "";
+  if (all.length >= 2) {
+    const W = 460, H = 110, P = 8;
+    const max = Math.max(1, ...all.map((d) => Math.max(d.candidates || 0, d.articles || 0)));
+    const x = (i) => P + (i / (all.length - 1)) * (W - P * 2);
+    const y = (v) => H - P - (v / max) * (H - P * 2);
+    const line = (key, color) => {
+      const pts = all.map((d, i) => `${x(i).toFixed(1)},${y(d[key] || 0).toFixed(1)}`).join(" ");
+      return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linejoin="round"/>`;
+    };
+    const dots = all.map((d, i) => {
+      const c = d.qualityStatus === "ok" ? "#1f7a56" : d.qualityStatus === "degraded" ? "#d97706" : "#b3201c";
+      return `<circle cx="${x(i).toFixed(1)}" cy="${y(d.articles || 0).toFixed(1)}" r="2.5" fill="${c}"/>`;
+    }).join("");
+    svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;margin:8px 0">${line("candidates", "#1d4ed8")}${line("articles", "#1f7a56")}${dots}</svg>
+      <div style="font-size:12px;color:var(--tblr-muted)">蓝=候选 绿=文章 点色=门禁（绿ok/橙degraded/红failed）</div>`;
+  }
+  const rows = all.slice().reverse().map((r) => {
     const badge = r.qualityStatus === "ok" ? "bg-success" : r.qualityStatus === "degraded" ? "bg-warning" : "bg-danger";
     return `<tr><td>${r.date}</td><td>${r.candidates}</td><td>${r.articles}</td><td>${r.aiOk}</td><td>${r.aiError}</td><td><span class="badge ${badge}">${r.qualityStatus || "-"}</span></td></tr>`;
   }).join("");
-  $("stats-body").innerHTML = `<table class="table table-sm table-vcenter"><thead><tr><th>日期</th><th>候选</th><th>文章</th><th>AI成功</th><th>AI失败</th><th>门禁</th></tr></thead><tbody>${rows || '<tr><td colspan="6">暂无报告</td></tr>'}</tbody></table>`;
+  $("stats-body").innerHTML = svg
+    + `<table class="table table-sm table-vcenter"><thead><tr><th>日期</th><th>候选</th><th>文章</th><th>AI成功</th><th>AI失败</th><th>门禁</th></tr></thead><tbody>${rows || '<tr><td colspan="6">暂无报告</td></tr>'}</tbody></table>`;
 }
 lazyOnHover("drop-stats", loadStats);
 

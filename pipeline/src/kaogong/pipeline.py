@@ -378,7 +378,12 @@ def quality_gate(target: dt.date, content_dir: Path) -> dict:
     volume_error_list = volume_errors(target, report_path.parent, report)
     report["schemaErrors"] = schema_error_list[:50]
     report["semanticErrors"] = semantic_error_list[:50]
-    report["volumeErrors"] = volume_error_list[:50]
+    # 0018：人工标注已知原因（notes 非空）后，数量类错误降级为 degraded 而非 failed，保留记录供追溯
+    if report.get("notes") and volume_error_list:
+        report["volumeErrorsAcknowledged"] = volume_error_list[:50]
+        report["volumeErrors"] = []
+    else:
+        report["volumeErrors"] = volume_error_list[:50]
     if schema_error_list or semantic_error_list or volume_error_list or report.get("sourcesOk", 0) == 0 or report.get("candidates", 0) == 0:
         report["qualityStatus"] = "failed"
     elif report.get("sourceErrors") or report.get("aiError", 0) or report.get("locationErrors", 0):

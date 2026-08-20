@@ -110,6 +110,18 @@ def artifact_semantic_errors(artifact: Artifact) -> list[dict[str, str]]:
     ]
 
 
+# 0018：数量门禁基线取「最近 N 次 ok/degraded 报告的中位数」，避免单日波动误报
+VOLUME_BASELINE_WINDOW = 5
+
+
+def _median(values: list[int]) -> float:
+    ordered = sorted(values)
+    mid = len(ordered) // 2
+    if len(ordered) % 2 == 1:
+        return float(ordered[mid])
+    return (ordered[mid - 1] + ordered[mid]) / 2.0
+
+
 def volume_errors(target: dt.date, report_dir: Path, current: Mapping[str, object]) -> list[dict[str, str]]:
     errors: list[dict[str, str]] = []
     prior_reports: list[tuple[dt.date, Mapping[str, object]]] = []
@@ -122,12 +134,22 @@ def volume_errors(target: dt.date, report_dir: Path, current: Mapping[str, objec
         if report_date < target and report.get("qualityStatus") in {"ok", "degraded"}:
             prior_reports.append((report_date, report))
     prior_reports.sort(reverse=True, key=lambda entry: entry[0])
+    recent = prior_reports[:VOLUME_BASELINE_WINDOW]
     for metric in ("candidates", "articles"):
-        baseline = next(
-            (int(report[metric]) for _, report in prior_reports if isinstance(report.get(metric), int) and int(report[metric]) > 0),
-            None,
-        )
+        values = [
+            int(report[metric])
+            for _, report in recent
+            if isinstance(report.get(metric), int) and int(report[metric]) > 0
+        ]
+        if not values:
+            continue
+        baseline = _median(values)
         current_value = current.get(metric)
-        if baseline is not None and isinstance(current_value, int) and current_value * 2 < baseline:
-            errors.append({"metric": metric, "error": "below_half_baseline"})
+        if isinstance(current_value, int) and current_value * 2 < baseline:
+            errors.append({
+                "metric": metric,
+                "error": "below_half_baseline",
+                "baseline": baseline,
+                "window": len(values),
+            })
     return errors[:MAX_QUALITY_ERRORS]

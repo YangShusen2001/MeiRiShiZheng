@@ -174,8 +174,12 @@ def _fetch_retry(url: str, client: httpx.Client | None, tries: int = 3) -> str:
     raise RuntimeError("fetch failed")
 
 
-def clip_article(url: str, title: str, date: str, *, client: httpx.Client | None = None) -> dict:
-    """抓取并剪藏一篇原文，返回 ClippedArticle 形状的 dict。"""
+def clip_article(url: str, title: str, date: str, *, client: httpx.Client | None = None, allow_single: bool = False) -> dict:
+    """抓取并剪藏一篇原文，返回 ClippedArticle 形状的 dict。
+
+    allow_single=True（强制收录，0018）：正文只有 1 段也收录（用于 gd 短讯等边界情况）。
+    失败分类（0018）：error 以类别前缀开头——fetch_failed / video_no_text / too_short / parse_error。
+    """
     cid = hashlib.md5(url.encode("utf-8")).hexdigest()[:10]
     clip: dict = {
         "id": cid,
@@ -190,13 +194,21 @@ def clip_article(url: str, title: str, date: str, *, client: httpx.Client | None
         "keySentences": [],
     }
     try:
-        text = _fetch_retry(url, client)
+        try:
+            text = _fetch_retry(url, client)
+        except Exception as exc:
+            clip["error"] = f"fetch_failed:{type(exc).__name__}:{str(exc)[:100]}"
+            return clip
         paras, method = extract_paragraphs(text)
-        if len(paras) < 2:
-            raise ValueError("正文提取过短（%d 段）" % len(paras))
+        if len(paras) == 0:
+            clip["error"] = "video_no_text:页面无可提取正文（可能为视频/图集稿）"
+            return clip
+        if len(paras) < 2 and not allow_single:
+            clip["error"] = "too_short:正文提取过短（%d 段）" % len(paras)
+            return clip
         clip["title"] = extract_title(text, title)
         clip["status"] = "ok"
         clip["paragraphs"] = paras
     except Exception as e:
-        clip["error"] = str(e)[:200]
+        clip["error"] = f"parse_error:{str(e)[:200]}"
     return clip

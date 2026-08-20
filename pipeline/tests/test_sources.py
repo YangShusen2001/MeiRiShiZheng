@@ -232,4 +232,8 @@ def test_load_sources_prefers_config_over_defaults():
 def test_load_noise_title_from_config():
     cfg = {"noiseTitle": ["推广", "广告"]}
     assert load_noise_title(cfg) == ("推广", "广告")
-    assert load_noise_title({}) == ("C视觉", "每日一图", "每日一景", "影像数据库")
+    # 0018：默认值含 scol 视频栏目关键词（候选阶段过滤视频稿）
+    assert load_noise_title({}) == (
+        "C视觉", "每日一图", "每日一景", "影像数据库",
+        "理响巴蜀", "政策翻译机", "空天侦探社", "食情局", "成工之恋", "川观解盘",
+    )

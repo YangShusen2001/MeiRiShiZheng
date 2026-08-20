@@ -27,9 +27,12 @@ from pydantic import BaseModel
 from ..config import load_site_config, save_site_config
 from ..fonts import LOGO_TEXT, NAV_TEXT, load_config, save_config, safe_stem, subset_to_woff2
 from ..pipeline import backfill_summaries, build_content, clip_content, practice_content, quality_gate, summary_content
-from ..reanalyze import reanalyze_content
+from ..reanalyze import reanalyze_content, refresh_report_stats
 from ..review_agent import apply_decisions, review_date
 from ..sources import load_noise_title, load_sources, source_to_dict
+from ..clip import clip_article
+from ..article_ai import analyze_article
+from ..deepseek import load_config as load_ai_config
 
 ROOT = Path(__file__).resolve().parents[4]  # 仓库根（pipeline/src/kaogong/review/ 上溯 4 层）
 CONTENT = ROOT / "content"
@@ -126,6 +129,369 @@ def _report_summary(target: dt.date) -> dict:
     }
 
 
+# ===== 0018 审核台：条目状态 / 重试 / 排除 / 强制收录 / 报告解释 / 审计 =====
+
+AUDIT_LOG = CONTENT / "_reports" / "audit.jsonl"
+
+# 门禁错误的人类可读解释（Phase B）
+VOLUME_ERROR_EXPLAIN = {
+    "below_half_baseline": "数量不足近期基线的一半（基线=最近 5 次 ok/degraded 报告的中位数）。可能当天源产出确实少，"
+                           "或某源列表页解析变化。可查看趋势图对比，或在报告里标注已知原因后放行。",
+}
+
+
+def _audit(target: dt.date, action: str, item_id: str = "", detail: dict | None = None) -> None:
+    """操作审计（Phase C）：追加 JSONL，供条目操作历史展示。"""
+    try:
+        entry = {
+            "ts": dt.datetime.now(BEIJING).isoformat(timespec="seconds"),
+            "date": target.isoformat(),
+            "action": action,
+            "itemId": item_id,
+            "detail": detail or {},
+        }
+        AUDIT_LOG.parent.mkdir(parents=True, exist_ok=True)
+        with AUDIT_LOG.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    except OSError:
+        pass  # 审计失败不阻断操作
+
+
+def _load_report(target: dt.date) -> dict:
+    p = CONTENT / "_reports" / f"{target.isoformat()}.json"
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+
+
+def _write_report(target: dt.date, report: dict) -> None:
+    p = CONTENT / "_reports" / f"{target.isoformat()}.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _load_digest(target: dt.date) -> dict:
+    p = CONTENT / target.isoformat() / "digest.json"
+    if not p.exists():
+        raise HTTPException(404, "该日期无日报")
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
+def _write_digest(target: dt.date, digest: dict) -> None:
+    (CONTENT / target.isoformat() / "digest.json").write_text(
+        json.dumps(digest, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+
+def _find_item(digest: dict, item_id: str) -> tuple[int, int, dict] | None:
+    """按条目 id（MD5(sourceUrl)[:10]）定位 digest 条目，返回 (sectionIndex, itemIndex, item)。"""
+    for si, sec in enumerate(digest.get("sections", [])):
+        for ii, it in enumerate(sec.get("items", [])):
+            if _article_id(it.get("sourceUrl") or "") == item_id:
+                return si, ii, it
+    return None
+
+
+def _load_article_file(day: Path, aid: str) -> dict | None:
+    p = day / f"article-{aid}.json"
+    if not p.exists():
+        return None
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+
+
+def _suggest_actions(clip: dict | None, article: dict | None, excluded: bool) -> list[str]:
+    """错误分类 → 建议动作（Phase B）：retry / exclude / force-include / restore。"""
+    if excluded:
+        return ["restore"]
+    if clip and clip.get("status") != "ok":
+        reason = str(clip.get("reason") or clip.get("error") or "")
+        if reason.startswith("fetch_failed"):
+            return ["retry"]
+        if reason.startswith("video_no_text"):
+            return ["exclude"]
+        if reason.startswith("too_short"):
+            return ["force-include", "exclude"]
+        return ["retry", "exclude"]
+    if article and article.get("aiStatus") != "ok":
+        return ["retry"]
+    return []
+
+
+def _retry_one(target: dt.date, item_id: str, allow_single: bool = False) -> dict:
+    """重试单条：ai_error 只重分析；clip_error 重新剪藏 + AI；allow_single=强制收录。"""
+    digest = _load_digest(target)
+    found = _find_item(digest, item_id)
+    if not found:
+        raise HTTPException(404, "无该条目")
+    _, _, it = found
+    url = it.get("sourceUrl") or ""
+    aid = _article_id(url)
+    day = CONTENT / target.isoformat()
+    title = it.get("title", "")
+    ai_cfg = load_ai_config()
+    article_path = day / f"article-{aid}.json"
+    existing = _load_article_file(day, aid)
+
+    # 已有剪藏（ai_error 场景）：只重跑 AI
+    if existing and existing.get("status") == "ok" and not allow_single:
+        updated = analyze_article(existing, ai_cfg)
+        article_path.write_text(json.dumps(updated, ensure_ascii=False, indent=2), encoding="utf-8")
+        _update_report_clip(target, aid, "ok", "")
+        _audit(target, "retry-ai", aid, {"title": title, "aiStatus": updated.get("aiStatus")})
+        return {
+            "id": aid, "ok": True, "clipStatus": "ok", "aiStatus": updated.get("aiStatus"),
+            "actions": _suggest_actions({"status": "ok"}, updated, False),
+        }
+
+    # 重新剪藏（clip_error / 强制收录）
+    client = httpx.Client(timeout=30, follow_redirects=True)
+    try:
+        clip = clip_article(url, title, target.isoformat(), client=client, allow_single=allow_single)
+    finally:
+        client.close()
+    if clip.get("status") == "ok":
+        article = analyze_article(clip, ai_cfg)
+        article_path.write_text(json.dumps(article, ensure_ascii=False, indent=2), encoding="utf-8")
+        _update_report_clip(target, aid, "ok", "")
+        _audit(target, "force-include" if allow_single else "retry-clip", aid, {"title": title, "aiStatus": article.get("aiStatus")})
+        return {"id": aid, "ok": True, "clipStatus": "ok", "aiStatus": article.get("aiStatus"), "actions": []}
+    error = str(clip.get("error", "clip_error"))[:120]
+    _update_report_clip(target, aid, "clip_error", error)
+    _audit(target, "retry-clip", aid, {"title": title, "error": error})
+    return {"id": aid, "ok": True, "clipStatus": "clip_error", "clipError": error, "actions": _suggest_actions(clip, None, False)}
+
+
+def _update_report_clip(target: dt.date, aid: str, status: str, reason: str) -> None:
+    """重试后刷新报告：替换 clipDetails 中该条目，AI 统计按 article 文件实际状态重算。"""
+    report = _load_report(target)
+    details = [d for d in report.get("clipDetails", []) if d.get("id") != aid]
+    details.append({"id": aid, "title": "", "status": status, "reason": reason[:120]})
+    report["clipDetails"] = details
+    _write_report(target, report)
+    refresh_report_stats(target, CONTENT)
+
+
+@app.get("/api/items/{date}")
+def api_items(date: str) -> dict:
+    """统一条目视图（Phase A）：digest 条目 + 剪藏/AI 状态 + 建议动作 + 排除标记。"""
+    target = _parse_target(date)
+    digest = _load_digest(target)
+    report = _load_report(target)
+    clip_by_id = {c.get("id"): c for c in report.get("clipDetails", [])}
+    excluded = {e.get("id"): e for e in report.get("excluded", [])}
+    day = CONTENT / target.isoformat()
+    items: list[dict] = []
+    for si, sec in enumerate(digest.get("sections", [])):
+        for ii, it in enumerate(sec.get("items", [])):
+            aid = _article_id(it.get("sourceUrl") or "")
+            clip = clip_by_id.get(aid)
+            article = _load_article_file(day, aid) if aid else None
+            is_excluded = aid in excluded
+            clip_status = None
+            clip_error = None
+            if clip:
+                clip_status = clip.get("status")
+                clip_error = clip.get("reason") if clip_status != "ok" else None
+            items.append({
+                "id": aid,
+                "sectionIndex": si,
+                "itemIndex": ii,
+                "title": it.get("title", ""),
+                "sourceUrl": it.get("sourceUrl", ""),
+                "clipStatus": clip_status,
+                "clipError": clip_error,
+                "aiStatus": (article or {}).get("aiStatus"),
+                "aiError": (article or {}).get("aiError"),
+                "excluded": is_excluded,
+                "excludeReason": excluded.get(aid, {}).get("reason", ""),
+                "actions": _suggest_actions(clip, article, is_excluded),
+            })
+    return {"ok": True, "date": target.isoformat(), "items": items, "quality": _report_summary(target)}
+
+
+@app.post("/api/items/{date}/{id}/retry")
+def api_item_retry(date: str, id: str) -> dict:
+    """单条重试：clip_error 重剪藏+AI；ai_error 重分析。随后重算质量门禁。"""
+    target = _parse_target(date)
+    try:
+        result = _retry_one(target, id)
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(500, f"重试失败：{exc}") from exc
+    quality_gate(target, CONTENT)
+    return {**result, "quality": _report_summary(target)}
+
+
+@app.post("/api/items/{date}/{id}/force-include")
+def api_item_force_include(date: str, id: str) -> dict:
+    """强制收录：clip 门槛放行（单段正文也收录，如 gd 短讯）。"""
+    target = _parse_target(date)
+    try:
+        result = _retry_one(target, id, allow_single=True)
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(500, f"强制收录失败：{exc}") from exc
+    quality_gate(target, CONTENT)
+    return {**result, "quality": _report_summary(target)}
+
+
+class ExcludeBody(BaseModel):
+    reason: str = "人工排除"
+
+
+@app.post("/api/items/{date}/{id}/exclude")
+def api_item_exclude(date: str, id: str, body: ExcludeBody) -> dict:
+    """排除条目：从 digest 移除（发布即生效），原条目备份在 report.excluded 可恢复。"""
+    target = _parse_target(date)
+    digest = _load_digest(target)
+    found = _find_item(digest, id)
+    if not found:
+        raise HTTPException(404, "无该条目（可能已被排除）")
+    si, ii, it = found
+    report = _load_report(target)
+    excluded = report.get("excluded", [])
+    if not any(e.get("id") == id for e in excluded):
+        excluded.append({
+            "id": id,
+            "title": it.get("title", ""),
+            "reason": body.reason or "人工排除",
+            "at": dt.datetime.now(BEIJING).isoformat(timespec="seconds"),
+            "si": si,
+            "ii": ii,
+            "item": it,
+        })
+    report["excluded"] = excluded
+    _write_report(target, report)
+    digest["sections"][si]["items"].pop(ii)
+    _write_digest(target, digest)
+    _audit(target, "exclude", id, {"title": it.get("title", ""), "reason": body.reason})
+    return {"ok": True, "id": id}
+
+
+@app.post("/api/items/{date}/{id}/restore")
+def api_item_restore(date: str, id: str) -> dict:
+    """恢复被排除的条目：按原 section/index 插回 digest。"""
+    target = _parse_target(date)
+    report = _load_report(target)
+    excluded = report.get("excluded", [])
+    entry = next((e for e in excluded if e.get("id") == id), None)
+    if not entry:
+        raise HTTPException(404, "该条目未被排除")
+    digest = _load_digest(target)
+    sections = digest.get("sections", [])
+    si = min(int(entry.get("si", 0)), max(0, len(sections) - 1)) if sections else 0
+    items = sections[si]["items"] if sections else []
+    ii = min(int(entry.get("ii", len(items))), len(items))
+    items.insert(ii, entry.get("item") or {})
+    report["excluded"] = [e for e in excluded if e.get("id") != id]
+    _write_report(target, report)
+    _write_digest(target, digest)
+    _audit(target, "restore", id, {"title": entry.get("title", "")})
+    return {"ok": True, "id": id}
+
+
+class RetryFailedBody(BaseModel):
+    date: str = ""
+
+
+@app.post("/api/items/{date}/retry-failed")
+def api_retry_failed(date: str) -> dict:
+    """批量重试全部失败条目（GitHub Actions「rerun failed」语义）。"""
+    target = _parse_target(date)
+    view = api_items(target.isoformat())
+    failed = [
+        it for it in view["items"]
+        if not it["excluded"] and (it["clipStatus"] == "clip_error" or it["aiStatus"] == "error")
+    ]
+    results: list[dict] = []
+    for it in failed:
+        try:
+            results.append(_retry_one(target, it["id"]))
+        except Exception as exc:  # 单条失败不阻断批量
+            results.append({"id": it["id"], "ok": False, "error": str(exc)[:100]})
+    quality_gate(target, CONTENT)
+    _audit(target, "retry-failed", "", {"total": len(failed)})
+    return {"ok": True, "total": len(failed), "results": results, "quality": _report_summary(target)}
+
+
+@app.get("/api/reports/{date}")
+def api_report(date: str) -> dict:
+    """报告详情（Phase B）：门禁逐条错误的人类可读解释 + 建议动作 + 失败条目 + 已标注原因。"""
+    target = _parse_target(date)
+    report = _load_report(target)
+    if not report:
+        raise HTTPException(404, "该日期无质量报告")
+    errors: list[dict] = []
+    for e in report.get("volumeErrors", []):
+        errors.append({
+            "kind": "volume", "metric": e.get("metric"), "error": e.get("error"),
+            "baseline": e.get("baseline"), "window": e.get("window"),
+            "explain": VOLUME_ERROR_EXPLAIN.get(e.get("error", ""), ""),
+            "action": "核对来源产出或标注已知原因后放行",
+        })
+    for e in report.get("schemaErrors", []):
+        errors.append({"kind": "schema", "file": e.get("file"), "error": e.get("error"),
+                       "explain": "产物不符合 JSON Schema，需重新抓取或修复数据。", "action": "重新抓取"})
+    for e in report.get("semanticErrors", []):
+        errors.append({"kind": "semantic", "file": e.get("file"), "error": e.get("error"),
+                       "explain": "语义校验未通过（摘要长度/标注定位等），需补跑 AI。", "action": "补跑 AI"})
+    for e in report.get("sourceErrors", []):
+        errors.append({"kind": "source", "source": e.get("source"), "error": e.get("error"),
+                       "explain": "来源抓取失败，该源当天无候选。", "action": "检查该源列表页"})
+    acknowledged = report.get("volumeErrorsAcknowledged", [])
+    return {
+        "ok": True,
+        "date": target.isoformat(),
+        "quality": _report_summary(target),
+        "errors": errors,
+        "acknowledgedVolumeErrors": acknowledged,
+        "notes": report.get("notes", []),
+    }
+
+
+class NoteBody(BaseModel):
+    text: str
+
+
+@app.post("/api/reports/{date}/note")
+def api_report_note(date: str, body: NoteBody) -> dict:
+    """标注已知原因（如「当天源产出少」）：标注后 volume 错误降级为 degraded，不再拦截发布。"""
+    target = _parse_target(date)
+    report = _load_report(target)
+    if not report:
+        raise HTTPException(404, "该日期无质量报告")
+    text = (body.text or "").strip()
+    if not text:
+        raise HTTPException(400, "标注内容不能为空")
+    notes = report.get("notes", [])
+    if text not in notes:
+        notes.append(text)
+    report["notes"] = notes
+    _write_report(target, report)
+    quality_gate(target, CONTENT)  # notes 存在 → volume 错误降级
+    _audit(target, "note", "", {"text": text})
+    return {"ok": True, "notes": notes, "quality": _report_summary(target)}
+
+
+@app.get("/api/items/{date}/{id}/history")
+def api_item_history(date: str, id: str) -> dict:
+    """条目操作历史（Phase C）：从 audit.jsonl 过滤。"""
+    target = _parse_target(date)
+    rows: list[dict] = []
+    if AUDIT_LOG.exists():
+        for line in AUDIT_LOG.read_text(encoding="utf-8").splitlines():
+            try:
+                entry = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if entry.get("date") == target.isoformat() and entry.get("itemId") == id:
+                rows.append(entry)
+    return {"ok": True, "history": rows[-50:]}
+
+
 @app.post("/api/fetch")
 def api_fetch(body: FetchBody) -> dict:
     """抓取当日来源 → 组装日报 → 剪藏原文 → AI 分析 → 每日一练 → 质量门禁。
@@ -140,6 +506,7 @@ def api_fetch(body: FetchBody) -> dict:
     practice_content(target, CONTENT)
     summary_content(target, CONTENT)
     quality_gate(target, CONTENT)
+    _audit(target, "fetch", "", {"clips": n_clips})
     summary = _report_summary(target)
     return {
         "ok": True,
@@ -168,6 +535,7 @@ def api_reanalyze(body: ReanalyzeBody) -> dict:
         raise HTTPException(400, "未配置 DEEPSEEK_API_KEY：force 补跑需要调用 AI")
     rewritten = reanalyze_content(target, CONTENT, force_ai=body.force)
     quality_gate(target, CONTENT)
+    _audit(target, "reanalyze", "", {"rewritten": rewritten, "force": body.force})
     return {
         "ok": True,
         "date": target.isoformat(),
@@ -411,6 +779,8 @@ def _publish_worker() -> None:
         )
         _publish_state["log"] = log
         _publish_state.update({"done": True, "ok": ok})
+        if ok:
+            _audit(beijing_today(), "publish", "", {"project": "kaogong-web"})
     except Exception as exc:  # pragma: no cover - 兜底
         _publish_state.update({"done": True, "ok": False, "log": f"发布异常：{exc}"})
     finally:
@@ -610,6 +980,7 @@ def api_review_agent_apply(body: ReviewAgentBody) -> dict:
 
     _review_state["diff"] = changes
     _review_state["applied"] = True
+    _audit(target, "review-apply", "", {"changes": len(changes), "rerun": rerun})
     return {
         "ok": True, "changes": changes, "appliedCount": len(changes),
         "rerun": rerun, "rerunWritten": rerun_written,
@@ -630,4 +1001,5 @@ def api_review_agent_rollback(body: ReviewAgentBody) -> dict:
             restored.append(original.name)
     _review_state["applied"] = False
     _review_state["diff"] = None
+    _audit(target, "review-rollback", "", {"restored": restored})
     return {"ok": True, "restored": restored}

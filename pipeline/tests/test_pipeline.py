@@ -257,10 +257,11 @@ def test_quality_gate_revalidates_successful_ai_article_semantics(tmp_path):
 
 
 @pytest.mark.parametrize(("current", "expected"), [(5, "ok"), (4, "failed")])
-def test_quality_gate_enforces_half_of_latest_nonfailed_volume_baseline(tmp_path, current, expected):
-    # Given: newer future/failed/zero reports exist around the newest valid earlier baseline of ten.
+def test_quality_gate_enforces_half_of_volume_median_baseline(tmp_path, current, expected):
+    # Given: 5-window median baseline of ten (values 10/20/10); outliers and failed reports excluded.
     target = dt.date(2026, 8, 14)
     _write_digest(tmp_path, target)
+    _write_report(tmp_path, dt.date(2026, 8, 9), candidates=10, articles=10, qualityStatus="ok")
     _write_report(tmp_path, dt.date(2026, 8, 10), candidates=20, articles=20, qualityStatus="ok")
     _write_report(tmp_path, dt.date(2026, 8, 11), candidates=0, articles=0, qualityStatus="ok")
     _write_report(tmp_path, dt.date(2026, 8, 12), candidates=100, articles=100, qualityStatus="failed")
