@@ -769,6 +769,10 @@ def _latest_failed_report() -> dict | None:
 def _run(cmd: list[str], cwd: Path) -> tuple[bool, str]:
     env = dict(os.environ)
     env["PUBLIC_API_BASE"] = PUBLIC_API_BASE
+    # 2026-08-20：剥离 CF API token/account，强制 wrangler 走 OAuth 登录态——
+    # .env.local 的 token 对部分 Cloudflare API 返回 7403（account 无效），OAuth 已验证可用。
+    env.pop("CLOUDFLARE_API_TOKEN", None)
+    env.pop("CLOUDFLARE_ACCOUNT_ID", None)
     # 强制 UTF-8 + 容错解码：pnpm/astro 输出 UTF-8，中文 Windows 默认 GBK 会解码失败导致 stdout=None
     r = subprocess.run(
         cmd, cwd=str(cwd), env=env, capture_output=True, text=True,
@@ -785,6 +789,15 @@ _publish_state: dict = {"running": False, "step": "", "log": "", "done": False, 
 def _publish_worker() -> None:
     pnpm = "pnpm.cmd" if os.name == "nt" else "pnpm"
     try:
+        # 0) 先部署 Worker（API）——2026-08-20 新增：避免只更新前端导致线上 API 与前端不同步
+        # （术语收藏等新契约必须 Worker 同步部署，否则线上 400）
+        _publish_state["step"] = "部署 Worker"
+        _publish_state["log"] = "正在部署 Worker（apps/api，wrangler deploy）…"
+        ok, log = _run([pnpm, "exec", "wrangler", "deploy"], ROOT / "apps" / "api")
+        _publish_state["log"] = log
+        if not ok:
+            _publish_state.update({"done": True, "ok": False})
+            return
         _publish_state["step"] = "构建"
         _publish_state["log"] = "正在构建静态站（astro build，约 1~3 分钟）…"
         ok, log = _run([pnpm, "build"], WEB)
@@ -801,7 +814,7 @@ def _publish_worker() -> None:
         _publish_state["log"] = log
         _publish_state.update({"done": True, "ok": ok})
         if ok:
-            _audit(beijing_today(), "publish", "", {"project": "kaogong-web"})
+            _audit(beijing_today(), "publish", "", {"project": "kaogong-web", "worker": True})
     except Exception as exc:  # pragma: no cover - 兜底
         _publish_state.update({"done": True, "ok": False, "log": f"发布异常：{exc}"})
     finally:
