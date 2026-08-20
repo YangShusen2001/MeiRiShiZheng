@@ -22,12 +22,12 @@ for (const a of listArticles()) {
 </Base>
 
 <style>
-  /* 术语解析行：复用全局 day-row（border/hover 高亮），对齐「文章收藏」 */
+  /* 术语解析行：流式连排（术语/释义 → 来源 → 追问 → 删除），不做左右两端分板块 */
   .term-row { position: relative; flex-wrap: wrap; }
-  .term-main { flex: 1 1 240px; min-width: 240px; display: flex; flex-direction: column; gap: 2px; }
+  .term-main { flex: 0 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
   .term-name { font-weight: 700; color: var(--primary); font-family: var(--font-serif); font-size: 15px; }
-  .term-expl { color: var(--sub); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .term-side { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; margin-left: auto; }
+  .term-expl { color: var(--sub); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 320px; }
+  .term-side { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
   .term-src { font-size: 12px; color: var(--mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; text-decoration: none; }
   .term-src:hover { color: var(--primary); }
   .term-actions { display: flex; gap: 6px; }
