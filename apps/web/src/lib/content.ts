@@ -3,18 +3,20 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import type { ClippedArticle, DailyDigest, PracticeSet, TodaySummary } from "@kaogong/contracts";
+import type { CardDeck, ClippedArticle, DailyDigest, PracticeSet, ReviewCard, TodaySummary } from "@kaogong/contracts";
 
 export type {
   AiAnnotation,
   AiAnnotationType,
   AiStatus,
+  CardDeck,
   ClippedArticle,
   DailyDigest,
   DigestItem,
   DigestSection,
   PracticeSet,
   Question,
+  ReviewCard,
   TodaySummary,
 } from "@kaogong/contracts";
 
@@ -139,4 +141,14 @@ export function listArticles(): ClippedArticle[] {
     }
   }
   return out;
+}
+
+/** 列出所有考点卡片（content/cards/*.json，按文件名排序后拼接）。 */
+export function listCards(): ReviewCard[] {
+  const cardsDir = join(CONTENT_DIR, "cards");
+  if (!existsSync(cardsDir)) return [];
+  return readdirSync(cardsDir)
+    .filter((f) => f.endsWith(".json"))
+    .sort()
+    .flatMap((f) => loadJson<CardDeck>(join(cardsDir, f))?.cards ?? []);
 }

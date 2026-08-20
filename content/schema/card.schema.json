@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kaogong.local/schema/card.schema.json",
+  "title": "CardDeck",
+  "description": "一组考点卡片（策展静态内容 → apps/web 消费，不分用户）。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["policy", "cards"],
+  "properties": {
+    "policy": { "type": "string", "minLength": 1, "description": "卡组所属政策/文件，如「十五五规划建议」" },
+    "cards": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/card" }
+    }
+  },
+  "$defs": {
+    "card": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "question", "answer", "tags"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "description": "全局唯一卡片 id" },
+        "question": { "type": "string", "minLength": 1, "description": "正面问题（主动回忆）" },
+        "answer": { "type": "string", "minLength": 1, "description": "反面答案" },
+        "tags": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 },
+          "description": "标签，如 定位/目标/数字"
+        }
+      }
+    }
+  }
+}

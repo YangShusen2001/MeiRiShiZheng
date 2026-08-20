@@ -235,3 +235,36 @@ export const adminInviteCodeSchema = z.object({
   createdAt: z.number(),
 });
 export type AdminInviteCode = z.infer<typeof adminInviteCodeSchema>;
+
+// —— 考点卡片复习（间隔重复）——
+/** 4 档自评 → ts-fsrs Rating：again=1, hard=2, good=3, easy=4。 */
+export const reviewRatingSchema = z.enum(["again", "hard", "good", "easy"]);
+export type ReviewRating = z.infer<typeof reviewRatingSchema>;
+
+/** 单张卡的复习状态（GET /api/review/state 返回）。 */
+export const reviewCardStateSchema = z.object({
+  cardId: z.string(),
+  /** 下次到期时间，unix 毫秒。 */
+  dueAt: z.number(),
+  reviewCount: z.number().int().min(0),
+  lastReviewAt: z.number().nullable(),
+});
+export type ReviewCardState = z.infer<typeof reviewCardStateSchema>;
+
+export const reviewStateResponseSchema = z.object({
+  cards: z.array(reviewCardStateSchema),
+});
+export type ReviewStateResponse = z.infer<typeof reviewStateResponseSchema>;
+
+/** 提交一张卡的自评。 */
+export const reviewGradeSchema = z.object({
+  cardId: z.string().min(1).max(64),
+  rating: reviewRatingSchema,
+});
+export type ReviewGrade = z.input<typeof reviewGradeSchema>;
+
+export const reviewGradeResponseSchema = z.object({
+  dueAt: z.number(),
+  reviewCount: z.number().int().min(0),
+});
+export type ReviewGradeResponse = z.infer<typeof reviewGradeResponseSchema>;

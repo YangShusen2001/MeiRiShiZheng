@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import fs from "node:fs";
 import path from "node:path";
+import { listCards } from "../lib/content";
 
 interface Props {
   title: string;
@@ -26,6 +27,9 @@ try {
       + `.nav a,.nav-auth a{font-family:"UserNavFont",var(--font) !important;}`;
   }
 } catch { /* 无配置则用默认字体 */ }
+
+// 考点卡片：构建时读 content/cards，注入到客户端供复习遮罩使用
+const reviewCardsJson = JSON.stringify(listCards());
 ---
 <!doctype html>
 <html lang="zh-CN">
@@ -45,6 +49,7 @@ try {
     {fontCss && <style set:html={fontCss} />}
   </head>
   <body>
+    <script type="application/json" id="review-cards-data">{reviewCardsJson}</script>
     <header class="top" id="top">
       <a class="logo" href="/" aria-label="每日时政">
         <span class="logo-text">每日时政</span>
@@ -56,6 +61,7 @@ try {
           <a href="/favorites/" class="nav-tab">收藏</a>
           <a href="/practice/" class="nav-tab">每日一练</a>
           <a href="/wrong/">错题本</a>
+          <button type="button" class="nav-tab nav-btn" id="review-entry">复习</button>
           <a href="/profile/" class="nav-mobile-only">我的</a>
           <span class="nav-auth" id="kg-auth"><a href="/login/">登录</a></span>
         </nav>
@@ -79,6 +85,7 @@ try {
     </nav>
     <script>
       import { api } from "../lib/api";
+      import { initReview } from "../lib/review";
 
       // 主题切换：默认 / 阅读 / 护眼 / 深色（浅色系 + 深色），localStorage 记忆；无记忆跟随系统
       const THEMES = ["light", "reading", "green", "dark"];
@@ -181,6 +188,16 @@ try {
           const tab = a.dataset.tab;
           const active = tab === "home" ? path === "/" : path.startsWith(a.getAttribute("href")!.replace(/\/+$/, ""));
           if (active) a.classList.add("on");
+        }
+      }
+
+      // 考点卡片复习：读构建时注入的卡片数据，挂载复习遮罩（软闸门）
+      const reviewCardsData = document.getElementById("review-cards-data");
+      if (reviewCardsData?.textContent) {
+        try {
+          initReview(JSON.parse(reviewCardsData.textContent), api);
+        } catch (err) {
+          console.error("[kaogong] 复习卡片初始化失败", err);
         }
       }
     </script>

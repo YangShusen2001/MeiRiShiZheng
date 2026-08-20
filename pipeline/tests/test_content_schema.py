@@ -30,6 +30,7 @@ def test_published_content_matches_schema():
         "article": _validator("article.schema.json"),
         "practice": _validator("practice.schema.json"),
         "summary": _validator("summary.schema.json"),
+        "card": _validator("card.schema.json"),
     }
     published = sorted(
         path

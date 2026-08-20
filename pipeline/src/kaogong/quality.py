@@ -50,6 +50,9 @@ class Artifact:
 
 
 def classify_artifact(path: Path) -> str | None:
+    # 考点卡片：content/cards/ 下的卡组 JSON（策展静态内容，非管道产出）
+    if path.parent.name == "cards" and path.suffix == ".json":
+        return "card"
     match path.name:
         case "digest.json":
             return "digest"
@@ -101,6 +104,9 @@ def artifact_semantic_errors(artifact: Artifact) -> list[dict[str, str]]:
                 errors.append("practice_total_mismatch")
         case "summary":
             # summary.json（今日速览）的语义已由 summary.schema.json 校验覆盖，无额外语义规则
+            pass
+        case "card":
+            # 考点卡片：语义（一问一答、原子、非空）已由 card.schema.json 校验覆盖，无额外语义规则
             pass
         case _:
             raise AssertionError(f"unexpected artifact kind: {artifact.kind}")

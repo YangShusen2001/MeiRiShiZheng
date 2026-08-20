@@ -77,6 +77,25 @@ export const wrongQuestions = sqliteTable(
   }),
 );
 
+// 考点卡片复习状态：每个归属每张卡一条（复合主键），调度状态序列化在 fsrs_state 里
+export const reviewCards = sqliteTable(
+  "review_cards",
+  {
+    ownerId: text("owner_id").notNull(),
+    cardId: text("card_id").notNull(),
+    // ts-fsrs Card 序列化 JSON（due/last_review 为 unix 毫秒）
+    fsrsState: text("fsrs_state").notNull(),
+    dueAt: integer("due_at").notNull(), // 下次到期 unix 毫秒（冗余，便于查询）
+    reviewCount: integer("review_count").notNull().default(0),
+    lastReviewAt: integer("last_review_at"), // unix 毫秒，可为 null
+    createdAt: integer("created_at").notNull(), // unix 毫秒
+  },
+  (t) => ({
+    pk: primaryKey({ columns: [t.ownerId, t.cardId] }),
+    ownerDue: index("review_cards_owner_due_idx").on(t.ownerId, t.dueAt),
+  }),
+);
+
 // 用户：用户名 + PBKDF2 哈希密码（永不存明文）+ 个人资料
 export const users = sqliteTable("users", {
   id: text("id").primaryKey(),

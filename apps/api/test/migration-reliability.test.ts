@@ -24,6 +24,7 @@ const MIGRATIONS = [
   "0016_majestic_layla_miller",
   "0017_vengeful_shatterstar",
   "0018_term_favorites",
+  "0019_kind_wolverine",
 ] as const;
 
 const snapshotSchema = z.object({

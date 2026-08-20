@@ -121,3 +121,22 @@ export interface TodaySummary {
   summary: string;
   keywords: string[];
 }
+
+/** 一张考点卡片（策展静态内容，一问一答，对应 content/cards/*.json）。 */
+export interface ReviewCard {
+  /** 全局唯一卡片 id。 */
+  id: string;
+  /** 正面问题（主动回忆）。 */
+  question: string;
+  /** 反面答案。 */
+  answer: string;
+  /** 标签，如 定位/目标/数字。 */
+  tags: string[];
+}
+
+/** 一组考点卡片。 */
+export interface CardDeck {
+  /** 卡组所属政策/文件，如「十五五规划建议」。 */
+  policy: string;
+  cards: ReviewCard[];
+}

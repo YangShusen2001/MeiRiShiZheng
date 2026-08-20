@@ -134,6 +134,13 @@
       "when": 1787235150233,
       "tag": "0018_term_favorites",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "6",
+      "when": 1787243986984,
+      "tag": "0019_kind_wolverine",
+      "breakpoints": true
     }
   ]
 }

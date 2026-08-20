@@ -13,6 +13,9 @@ import type {
   PracticeSubmit,
   Profile,
   ProfileUpdate,
+  ReviewGrade,
+  ReviewGradeResponse,
+  ReviewStateResponse,
   Subscription,
   SubscriptionResponse,
   TermAskRequest,
@@ -77,6 +80,9 @@ export function createApi(base: string, deviceId: () => string) {
     getSubscription: () => request<SubscriptionResponse>("/api/subscription"),
     updateSubscription: (body: Subscription) =>
       request<SubscriptionResponse>("/api/subscription", { method: "POST", body: JSON.stringify(body) }),
+    getReviewState: () => request<ReviewStateResponse>("/api/review/state"),
+    gradeReview: (body: ReviewGrade) =>
+      request<ReviewGradeResponse>("/api/review/grade", { method: "POST", body: JSON.stringify(body) }),
   };
 }
 
