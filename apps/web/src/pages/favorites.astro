@@ -207,7 +207,19 @@ for (const a of listArticles()) {
       // 未登录/网络失败：回退到本机收藏（仅文章收藏，登录后自动回到云端列表）
       const local = loadLocalFavorites();
       if (local.length) {
-        favorites = local;
+        favorites = local.map((f) => ({
+          id: f.id,
+          url: f.url,
+          title: f.title,
+          source: "",
+          note: "",
+          kind: f.kind,
+          quote: "",
+          termText: f.termText ?? "",
+          termExplanation: f.termExplanation ?? "",
+          articleId: f.articleId ?? "",
+          createdAt: f.createdAt,
+        }));
         localMode = true;
         renderList();
         return;

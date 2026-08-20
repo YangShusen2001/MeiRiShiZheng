@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   applyStyle, buildSegments, removeRange, removeStyle, resolveSpanNotes, segmentsToHtml, type Span,
   createHighlight, removeHighlight, removeRangeFromHighlight, highlightAt, flattenRanges,
-  relocateHighlight, migrateV1ToV2, type Highlight, type HighlightRange,
+  relocateHighlight, migrateV1ToV2, type Highlight, type HighlightRange, type LegacyHighlightRecord,
 } from "./highlights";
 import { buildReaderSegments, readerSegmentsToHtml, validAiAnnotations } from "./reader-annotations";
 
@@ -378,9 +378,9 @@ describe("relocateHighlight quote 锚点", () => {
 
 describe("migrateV1ToV2 v1→v2 迁移", () => {
   it("逐段记录转为独立对象并带文本快照", () => {
-    const v1 = [
-      { paragraphIndex: 0, start: 0, end: 4, styles: ["green"] as const },
-      { paragraphIndex: 1, start: 2, end: 5, styles: ["underline"] as const, explanation: "E" },
+    const v1: LegacyHighlightRecord[] = [
+      { paragraphIndex: 0, start: 0, end: 4, styles: ["green"] },
+      { paragraphIndex: 1, start: 2, end: 5, styles: ["underline"], explanation: "E" },
     ];
     const v2 = migrateV1ToV2(v1, ["这是第一段", "第二段内容在这里"]);
     expect(v2).toHaveLength(2);
@@ -391,12 +391,12 @@ describe("migrateV1ToV2 v1→v2 迁移", () => {
   });
 
   it("越界区间丢弃（段落文本已变）", () => {
-    const v1 = [{ paragraphIndex: 0, start: 0, end: 99, styles: ["green"] as const }];
+    const v1: LegacyHighlightRecord[] = [{ paragraphIndex: 0, start: 0, end: 99, styles: ["green"] }];
     expect(migrateV1ToV2(v1, ["短"])).toEqual([]);
   });
 
   it("note 保留", () => {
-    const v1 = [{ paragraphIndex: 0, start: 0, end: 2, styles: ["green"] as const, note: "N" }];
+    const v1: LegacyHighlightRecord[] = [{ paragraphIndex: 0, start: 0, end: 2, styles: ["green"], note: "N" }];
     expect(migrateV1ToV2(v1, ["长文本"])[0]!.note).toBe("N");
   });
 });
