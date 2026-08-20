@@ -142,6 +142,20 @@ describe("favorites", () => {
     expect(data).toHaveLength(2);
     expect(data.map((f) => f.kind).sort()).toEqual(["article", "term"]);
   });
+
+  it("?url= 过滤只返回该文章的收藏（收藏速度优化）", async () => {
+    const app = makeApp();
+    await app.request("/api/favorites", json("POST", { url: "https://x.com/a", title: "A" }));
+    await app.request("/api/favorites", json("POST", { url: "https://x.com/b", title: "B" }));
+    await app.request("/api/favorites", json("POST", { url: "https://x.com/a", title: "A", kind: "term", termText: "术语" }));
+    const res = await app.request("/api/favorites?url=https%3A%2F%2Fx.com%2Fa", { headers: headers() });
+    const data = (await readJson<Favorite[]>(res)).data;
+    expect(data).toHaveLength(2);
+    expect(data.every((f) => f.url === "https://x.com/a")).toBe(true);
+    // 不传 url 仍返回全部
+    const all = await app.request("/api/favorites", { headers: headers() });
+    expect((await readJson<Favorite[]>(all)).data).toHaveLength(3);
+  });
 });
 
 describe("highlights", () => {

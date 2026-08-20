@@ -49,7 +49,8 @@ export function createApi(base: string, deviceId: () => string) {
   }
 
   return {
-    listFavorites: () => request<Favorite[]>("/api/favorites"),
+    listFavorites: (url?: string) =>
+      request<Favorite[]>(url ? `/api/favorites?url=${encodeURIComponent(url)}` : "/api/favorites"),
     addFavorite: (body: FavoriteCreate) =>
       request<Favorite>("/api/favorites", { method: "POST", body: JSON.stringify(body) }),
     removeFavorite: (id: string) => request<null>(`/api/favorites/${id}`, { method: "DELETE" }),

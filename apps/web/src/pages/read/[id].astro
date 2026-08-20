@@ -230,22 +230,15 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
   }
 
   async function loadTermFavState() {
-    termFavs.clear();
-    termFavIds.clear();
-    if (favLoggedIn) {
-      const list = await api.listFavorites();
-      for (const f of list.ok ? list.data || [] : []) {
-        if (f.kind === "term" && f.url === articleUrl && f.termText) {
-          termFavs.add(f.termText);
-          termFavIds.set(f.termText, f.id);
-        }
-      }
-    } else {
+    // 已由 refreshFavState 合并加载（一次 ?url= 请求）；本函数仅兜底本地模式刷新
+    if (!favLoggedIn) {
+      termFavs.clear();
+      termFavIds.clear();
       for (const f of loadLocalFavorites()) {
         if (f.kind === "term" && f.url === articleUrl && f.termText) termFavs.add(f.termText);
       }
+      applyTermFavMarks();
     }
-    applyTermFavMarks();
   }
 
   async function toggleTermFavorite(termText: string, explanation: string) {
@@ -296,18 +289,31 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     const url = favBtn.dataset.url || "";
     const me = await api.me();
     favLoggedIn = Boolean(me.ok && me.data);
+    // 收藏速度优化（2026-08-20）：一次 ?url= 请求拿该文章全部收藏状态
+    // （文章 favId + 术语 termFavs/termFavIds），替代此前两次全量 listFavorites
+    termFavs.clear();
+    termFavIds.clear();
+    favId = null;
     if (favLoggedIn) {
-      const list = await api.listFavorites();
-      const fav = (list.ok ? list.data || [] : []).find((f) => f.kind === "article" && f.url === url);
-      favId = fav?.id ?? null;
+      const list = await api.listFavorites(url);
+      for (const f of list.ok ? list.data || [] : []) {
+        if (f.kind === "article") favId = f.id;
+        else if (f.kind === "term" && f.termText) {
+          termFavs.add(f.termText);
+          termFavIds.set(f.termText, f.id);
+        }
+      }
     } else {
-      favId = null;
+      for (const f of loadLocalFavorites()) {
+        if (f.kind === "article" && f.url === url) favId = f.id ?? null;
+        else if (f.kind === "term" && f.url === url && f.termText) termFavs.add(f.termText);
+      }
     }
     const saved = favLoggedIn ? favId : isLocalFavorite(url);
     favBtn.textContent = saved ? "😃 已收藏" : "👻 收藏本文";
     favBtn.classList.toggle("on", Boolean(saved));
     favBtn.disabled = false;
-    void loadTermFavState();
+    applyTermFavMarks();
   }
   let favLoggedIn = false;
 
@@ -316,8 +322,7 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     favBtn.disabled = true;
     const url = favBtn.dataset.url || "";
     const title = favBtn.dataset.title || "";
-    const me = await api.me();
-    favLoggedIn = Boolean(me.ok && me.data);
+    // 收藏速度优化：不再每次点击查登录态（页面加载时已缓存 favLoggedIn）
     if (!favLoggedIn) {
       // 未登录：本地收藏（toggle）
       const now = toggleLocalFavorite(url, title);

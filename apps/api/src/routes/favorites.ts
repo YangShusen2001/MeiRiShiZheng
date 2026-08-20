@@ -28,8 +28,13 @@ export function favoritesRoutes(db: DB, config: AppConfig) {
   r.get("/", async (c) => {
     const owner = await resolveOwnerId(c, db);
     if (!owner) return fail(c, 400, "IDENTITY_REQUIRED", "缺少身份标识");
+    // ?url= 过滤（收藏速度优化 2026-08-20）：阅读页只需该文章的收藏状态，
+    // 避免每篇文章全量拉取收藏列表；不传 url 时返回全部（收藏页用）。
+    const url = c.req.query("url");
+    const conds = [eq(favorites.ownerId, owner)];
+    if (url) conds.push(eq(favorites.url, url));
     const rows = await db.select().from(favorites)
-      .where(eq(favorites.ownerId, owner))
+      .where(and(...conds))
       .orderBy(desc(favorites.createdAt)).all();
     return c.json({ ok: true, data: rows.map(toFavorite) });
   });
