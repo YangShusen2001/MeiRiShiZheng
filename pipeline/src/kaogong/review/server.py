@@ -38,12 +38,20 @@ UI = Path(__file__).resolve().parent / "ui" / "index.html"
 FONT_UPLOAD_DIR = WEB / "public" / "fonts" / "uploads"
 FONT_CONFIG = WEB / "src" / "font-config.json"
 
+def _env_clean(name: str, default: str = "") -> str:
+    """读环境变量并去掉 Windows CRLF 残留的 \\r（.env.local 常为 CRLF，bat 的 for /f 会把 \\r 带进值里）。"""
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    return value.rstrip("\r") or default
+
+
 # 生产 Worker 地址：默认同 wrangler.toml [vars].PUBLIC_API_URL，可用环境变量覆盖。
 # 构建静态站时这个值会被烤进前端（apps/web/src/lib/api.ts 的 PUBLIC_API_BASE）。
-PUBLIC_API_BASE = os.environ.get("PUBLIC_API_BASE", "https://api.example.com")
+PUBLIC_API_BASE = _env_clean("PUBLIC_API_BASE", "https://api.example.com")
 
 # 邀请码管理：生产 Worker 的 admin 接口需要 JOB_SECRET（x-job-secret 头）鉴权。
-JOB_SECRET = os.environ.get("JOB_SECRET", "")
+JOB_SECRET = _env_clean("JOB_SECRET")
 INVITE_ADMIN_URL = PUBLIC_API_BASE.rstrip("/") + "/api/invite/admin/invite-codes"
 
 # Windows 无系统时区库时回退到固定 +08:00（不引入 tzdata 也能正确取北京日期）
@@ -53,6 +61,13 @@ except Exception:  # pragma: no cover - Windows without tzdata
     BEIJING = dt.timezone(dt.timedelta(hours=8))
 
 app = FastAPI(title="每日时政 · 本地审核")
+
+# 兼容 CRLF 的 .env.local：启动时统一去掉环境变量尾部的 \r（bat 的 for /f 会带进来），
+# 覆盖所有下游读取（DeepSeek key、Cloudflare 凭证、JOB_SECRET、PUBLIC_API_BASE 等）。
+for _env_key in list(os.environ.keys()):
+    _env_value = os.environ[_env_key]
+    if isinstance(_env_value, str) and _env_value.endswith("\r"):
+        os.environ[_env_key] = _env_value.rstrip("\r")
 
 
 @app.exception_handler(Exception)
@@ -68,7 +83,7 @@ def beijing_today(now: dt.datetime | None = None) -> dt.date:
 
 
 def _has_ai_key() -> bool:
-    return bool((os.environ.get("DEEPSEEK_API_KEY") or "").strip())
+    return bool(_env_clean("DEEPSEEK_API_KEY").strip())
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -420,7 +435,7 @@ def api_publish() -> dict:
                    f"AI 失败 {failed.get('aiError', 0)}\n"
                    f"请先在审核界面「抓取」或「补跑 AI」处理，或在 content/_reports 确认该期无需发布。",
         }
-    missing = [k for k in ("CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID") if not os.environ.get(k)]
+    missing = [k for k in ("CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID") if not _env_clean(k)]
     if missing:
         return {
             "ok": False,
@@ -510,7 +525,7 @@ def _review_worker(target: dt.date) -> None:
     try:
         _review_state["step"] = "判质量"
         _review_state["log"] = "正在逐条判定文章质量（只判不改）…"
-        cfg = {"deepseek_api_key": (os.environ.get("DEEPSEEK_API_KEY") or "").strip()}
+        cfg = {"deepseek_api_key": _env_clean("DEEPSEEK_API_KEY")}
         decisions = review_date(target, CONTENT, cfg)
         counts: dict[str, int] = {}
         for decision in decisions:

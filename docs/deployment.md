@@ -136,25 +136,8 @@ cd apps/web && PUBLIC_API_BASE=http://127.0.0.1:8787 npx astro dev
 
 打开 `http://localhost:4321`。
 
-## 7. （可选）自动化每日更新
+## 7. 每日更新（本地一键）
 
-`.github/workflows/daily.yml` 已实现每日自动"抓取 → 生成 content/ → 部署"，需往 GitHub Secrets 加：
-
-- `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID`（wrangler 部署用）
-- `DEEPSEEK_API_KEY`（AI 每日一练出题用，不配则跳过出题）
-- `PUBLIC_API_BASE`（Worker 域名，烤进静态站；不配会 fail-fast 中止构建）
-- `PUBLIC_API_URL`（Worker 对外 API 地址；接入 newsletter provider 前也必须在 Worker 环境中配置）
-
-每日任务会先提交新内容，再执行 `pnpm release:check`，只有门禁通过才构建和部署 Pages。任务运行期间如果 `main` 有其他提交，机器人会基于最新 `origin/main` rebase 后再推送；发生真实内容冲突时任务明确失败，禁止强推覆盖人工修改。部署动作使用 `cloudflare/wrangler-action@v4`，将实际 deployment URL 写入 job summary 和 `PUBLIC_SITE_URL`，供后续只读 smoke 使用。
-
-### 排查顺序
-
-1. `gh run list --workflow daily.yml --limit 5` 查看最近运行。
-2. `gh run view <run-id> --log-failed` 查看第一个失败步骤。
-3. 如果失败在“提交当日内容”，先处理 Git 并发或内容冲突；此时 Cloudflare 部署尚未执行。
-4. 如果失败在“生产发布阻塞门禁”，查看 `docs/release-readiness.json`；不得绕过或伪造 close evidence。
-5. 如果失败在“构建前端”，本地运行 `pnpm --filter @kaogong/web build`。
-6. 如果失败在“部署到 Cloudflare Pages”，检查 GitHub Secrets 和 `npx wrangler@4 pages deployment list --project-name kaogong-web`。
-7. 如果失败在“部署后只读冒烟”，从 job summary 获取 `PUBLIC_SITE_URL`，复现 `pnpm test:smoke`；不要把失败脚本重试描述为线上通过。
+每日内容更新走本地审核服务（无 GitHub Actions）：`启动审核.bat` → 「抓取」→ 「AI 审核」→ 「发布到 CF」。
 
 生产部署 blocker 关闭必须同时满足：所需配置存在、全部 D1 迁移已应用、Worker 和 Pages 均有部署记录、同站点自定义域生效、线上 GET smoke 通过，并完成一次不泄露敏感信息的验证码事务邮件验证。

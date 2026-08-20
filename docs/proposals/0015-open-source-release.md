@@ -63,7 +63,7 @@
 | `CONTRIBUTING.md` | 开发流程、Agent 协作规则（引用 `AGENTS.md`）、测试要求 |
 | `CODE_OF_CONDUCT.md` | 贡献者行为准则（标准模板） |
 | `SECURITY.md` | 安全漏洞披露方式 |
-| `.github/` | issue / PR 模板；`ci.yml` 已存在（保留，作为开源 CI 徽章）；`daily.yml` 泛化保留（内容更新示例） |
+| `.github/` | 已移除（2026-08 起纯本地审核，不再使用 GitHub Actions） |
 
 ### 3.3 GitHub 仓库设置
 

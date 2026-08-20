@@ -30,7 +30,6 @@
 - `docs/agents`: Agent 角色、权限和 Handoff 规则。
 - `docs/tasks`: 可执行任务及依赖关系。
 - `docs/adr`: 架构决策记录。
-- `.github/workflows`: CI、每日内容更新和部署流程。
 
 ## Non-negotiable Boundaries
 

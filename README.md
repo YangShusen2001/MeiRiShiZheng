@@ -139,7 +139,6 @@ content/
   2026-08-17/        示例内容日（真实内容由管道生成，不进仓库）
 pipeline/            Python 内容管道 + 审核 Agent + 审核台
 docs/                product / architecture / agents / adr / deployment
-.github/workflows/   CI 门禁 + 每日内容更新示例
 ```
 
 ## 内容质量门禁
