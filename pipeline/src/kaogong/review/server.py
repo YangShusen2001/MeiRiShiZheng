@@ -11,6 +11,7 @@ import hashlib
 import httpx
 import json
 import os
+import re
 import shutil
 import socket
 import subprocess
@@ -51,7 +52,27 @@ def _env_clean(name: str, default: str = "") -> str:
 
 # 生产 Worker 地址：默认同 wrangler.toml [vars].PUBLIC_API_URL，可用环境变量覆盖。
 # 构建静态站时这个值会被烤进前端（apps/web/src/lib/api.ts 的 PUBLIC_API_BASE）。
-PUBLIC_API_BASE = _env_clean("PUBLIC_API_BASE", "https://api.example.com")
+# 修复（2026-08-20）：不再用 api.example.com 兜底——环境变量缺失时读 wrangler.toml，
+# 避免发布构建把假地址烤进前端导致线上登录全网络错误。
+def _default_api_base() -> str:
+    try:
+        toml_path = ROOT / "apps" / "api" / "wrangler.toml"
+        text = ""
+        for enc in ("utf-8", "utf-8-sig", "utf-16"):
+            try:
+                text = toml_path.read_text(encoding=enc)
+                break
+            except (UnicodeDecodeError, OSError):
+                continue
+        match = re.search(r'PUBLIC_API_URL\s*=\s*"([^"]+)"', text)
+        if match and match.group(1).startswith("https://"):
+            return match.group(1)
+    except OSError:
+        pass
+    return "https://api.meirishizheng.cn"
+
+
+PUBLIC_API_BASE = _env_clean("PUBLIC_API_BASE", _default_api_base())
 
 # 邀请码管理：生产 Worker 的 admin 接口需要 JOB_SECRET（x-job-secret 头）鉴权。
 JOB_SECRET = _env_clean("JOB_SECRET")

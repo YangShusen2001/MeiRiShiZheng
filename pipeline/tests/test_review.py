@@ -34,6 +34,14 @@ def test_parse_target_defaults_to_beijing_today(monkeypatch):
     assert server._parse_target("") == dt.date(2026, 8, 17)
 
 
+def test_default_api_base_is_real_worker_url(monkeypatch):
+    """发布修复（2026-08-20）：环境变量缺失时兜底必须是真实 Worker 地址，杜绝 api.example.com。"""
+    monkeypatch.delenv("PUBLIC_API_BASE", raising=False)
+    base = server._default_api_base()
+    assert base.startswith("https://")
+    assert "example.com" not in base
+
+
 def test_reanalyze_default_cleans_without_ai_key(client, tmp_path, monkeypatch):
     # 默认补跑只清洗正文/重定位标注，不调用 AI，无 key 也允许
     monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
