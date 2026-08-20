@@ -14,7 +14,9 @@ type NewsletterDiagnostic =
   | { readonly event: "newsletter.delivery.cancelled"; readonly issueId: string }
   | { readonly event: "newsletter.batch.completed"; readonly processed: number; readonly sent: number };
 
-type AiDiagnostic = { readonly event: "ai.explain.failed"; readonly errorType: string };
+type AiDiagnostic =
+  | { readonly event: "ai.explain.failed"; readonly errorType: string }
+  | { readonly event: "ai.termask.failed"; readonly errorType: string };
 
 export type DiagnosticEvent = AuthDiagnostic | NewsletterDiagnostic | AiDiagnostic;
 

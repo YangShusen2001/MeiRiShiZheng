@@ -15,6 +15,8 @@ import type {
   ProfileUpdate,
   Subscription,
   SubscriptionResponse,
+  TermAskRequest,
+  TermAskResponse,
   WrongQuestion,
 } from "@kaogong/contracts";
 import { getDeviceId } from "./device";
@@ -57,6 +59,8 @@ export function createApi(base: string, deviceId: () => string) {
     deleteWrongQuestion: (id: string) => request<null>(`/api/practice/wrong/${id}`, { method: "DELETE" }),
     explain: (text: string) =>
       request<ExplainResponse>("/api/explain", { method: "POST", body: JSON.stringify({ text }) }),
+    termAsk: (body: TermAskRequest) =>
+      request<TermAskResponse>("/api/explain/term/ask", { method: "POST", body: JSON.stringify(body) }),
     activateInvite: (code: string) =>
       request<InviteStatus>("/api/invite/activate", { method: "POST", body: JSON.stringify({ code }) }),
     inviteStatus: () => request<InviteStatus>("/api/invite/status"),

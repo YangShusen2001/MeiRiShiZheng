@@ -4,23 +4,64 @@ import { listArticles } from "../lib/content";
 
 // url → article id 映射：收藏点击跳转到阅读页，而非原文外链。
 const articleIdByUrl: Record<string, string> = {};
-for (const a of listArticles()) articleIdByUrl[a.url] = a.id;
+// 术语解析索引：收藏文章的 AI term 标注（text + 释义 + 来源文章），构建时从内容 JSON 提取。
+interface TermEntry {
+  text: string;
+  explanation: string;
+  articleTitle: string;
+  articleUrl: string;
+  articleId: string;
+}
+const termsByUrl: Record<string, TermEntry[]> = {};
+for (const a of listArticles()) {
+  articleIdByUrl[a.url] = a.id;
+  const terms = (a.aiAnnotations ?? []).filter((ann) => ann.type === "term" && ann.explanation);
+  if (!terms.length) continue;
+  termsByUrl[a.url] = terms.map((t) => ({
+    text: t.text,
+    explanation: t.explanation ?? "",
+    articleTitle: a.title,
+    articleUrl: a.url,
+    articleId: a.id,
+  }));
+}
 ---
 <Base title="我的收藏 · 时政小助手">
   <section class="card">
     <h2>我的收藏</h2>
     <div class="fav-filters" id="fav-filters">
-      <button type="button" class="fav-filter on" data-filter="all">全部</button>
+      <button type="button" class="fav-filter on" data-filter="term">术语解析</button>
       <button type="button" class="fav-filter" data-filter="article">文章收藏</button>
       <button type="button" class="fav-filter" data-filter="quote">金句收藏</button>
     </div>
     <div id="fav-list"><p class="item-summary">加载中…</p></div>
   </section>
   <script type="application/json" id="article-id-map" set:html={JSON.stringify(articleIdByUrl).replace(/</g, "\\u003c")}></script>
+  <script type="application/json" id="terms-map" set:html={JSON.stringify(termsByUrl).replace(/</g, "\\u003c")}></script>
 </Base>
+
+<style>
+  .term-card { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .term-card:last-child { border-bottom: none; }
+  .term-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .term-name { font-weight: 700; color: var(--ink); }
+  .term-head a { font-size: 13px; color: var(--sub); }
+  .term-expl { margin: 4px 0 0; font-size: 13px; color: var(--sub); line-height: 1.7; }
+  .term-ask-panel { margin-top: 8px; padding: 10px 12px; background: var(--surface-2); border-radius: var(--r-sm); }
+  .term-suggest { display: flex; flex-direction: column; gap: 6px; }
+  .term-q { text-align: left; border: 1px solid var(--line); background: var(--surface); color: var(--primary);
+    border-radius: var(--r-sm); padding: 6px 10px; font-size: 13px; cursor: pointer; font-family: inherit; }
+  .term-q:hover { border-color: var(--primary); }
+  .term-input-row { display: flex; gap: 8px; margin-top: 8px; }
+  .term-input { flex: 1; border: 1px solid var(--line); border-radius: var(--r-sm); padding: 7px 10px;
+    font-family: inherit; font-size: 13px; background: var(--surface); color: var(--ink); }
+  .term-input:focus { outline: 2px solid var(--primary); border-color: transparent; }
+  .term-answer { margin-top: 8px; font-size: 14px; line-height: 1.8; color: var(--ink); }
+</style>
 
 <script>
   import { api } from "../lib/api";
+  import { renderMarkdown } from "../lib/markdown";
   import type { Favorite } from "@kaogong/contracts";
 
   const esc = (s: unknown): string =>
@@ -30,8 +71,10 @@ for (const a of listArticles()) articleIdByUrl[a.url] = a.id;
     });
   const list = document.getElementById("fav-list")!;
   const articleIdByUrl = JSON.parse(document.getElementById("article-id-map")?.textContent ?? "{}") as Record<string, string>;
+  interface TermEntry { text: string; explanation: string; articleTitle: string; articleUrl: string; articleId: string; }
+  const termsByUrl = JSON.parse(document.getElementById("terms-map")?.textContent ?? "{}") as Record<string, TermEntry[]>;
 
-  let activeFilter: "all" | "article" | "quote" = "all";
+  let activeFilter: "term" | "article" | "quote" = "term";
   let favorites: Favorite[] = [];
 
   function rowHtml(f: Favorite): string {
@@ -50,12 +93,86 @@ for (const a of listArticles()) articleIdByUrl[a.url] = a.id;
       </div>`;
   }
 
-  function renderList() {
+  // —— 术语解析：收藏文章里的 AI 术语 + 追问 ——
+  function termCardHtml(t: TermEntry): string {
+    return `
+      <div class="term-card">
+        <div class="term-head">
+          <span class="term-name">「${esc(t.text)}」</span>
+          <a href="/read/${esc(t.articleId)}/">${esc(t.articleTitle)}</a>
+          <button type="button" class="btn btn--line btn--sm term-ask" data-term="${esc(t.text)}" data-expl="${esc(t.explanation)}">追问</button>
+        </div>
+        <p class="term-expl">${esc(t.explanation)}</p>
+        <div class="term-ask-panel" hidden></div>
+      </div>`;
+  }
+
+  function openAskPanel(btn: HTMLButtonElement): void {
+    const panel = btn.closest<HTMLElement>(".term-card")!.querySelector<HTMLElement>(".term-ask-panel")!;
+    if (!panel.hidden) { panel.hidden = true; return; }
+    const term = btn.dataset.term || "";
+    const expl = btn.dataset.expl || "";
+    panel.hidden = false;
+    panel.innerHTML = '<p class="item-summary">生成建议问题中…</p>';
+
+    void api.termAsk({ term, explanation: expl }).then((env) => {
+      if (!env.ok || !env.data) {
+        panel.innerHTML = `<p class="item-summary">${esc(env.error?.message ?? "生成失败")}（<a href="/login/">登录</a>或填写邀请码后可追问）</p>`;
+        return;
+      }
+      const suggestions = env.data.suggestions ?? [];
+      panel.innerHTML = `
+        <div class="term-suggest">
+          ${suggestions.length
+            ? suggestions.map((s, i) => `<button type="button" class="term-q" data-q="${esc(s)}">${i + 1}. ${esc(s)}</button>`).join("")
+            : '<p class="item-summary">暂未生成建议问题，可直接输入。</p>'}
+        </div>
+        <div class="term-input-row">
+          <input type="text" class="term-input" placeholder="输入你的追问…（如：为什么要设置六张网，而不是七张网？）" />
+          <button type="button" class="btn btn--solid btn--sm term-go">提问</button>
+        </div>
+        <div class="term-answer"></div>`;
+
+      const answerEl = panel.querySelector<HTMLElement>(".term-answer")!;
+      const doAsk = (q: string): void => {
+        answerEl.innerHTML = '<p class="item-summary">AI 思考中…</p>';
+        void api.termAsk({ term, explanation: expl, question: q }).then((env2) => {
+          if (env2.ok && env2.data?.answer) answerEl.innerHTML = renderMarkdown(env2.data.answer);
+          else answerEl.innerHTML = `<p class="item-summary">${esc(env2.error?.message ?? "追问失败")}</p>`;
+        });
+      };
+      panel.querySelectorAll<HTMLButtonElement>(".term-q").forEach((b) => {
+        b.addEventListener("click", () => doAsk(b.dataset.q || ""));
+      });
+      panel.querySelector<HTMLButtonElement>(".term-go")!.addEventListener("click", () => {
+        const input = panel.querySelector<HTMLInputElement>(".term-input")!;
+        const q = input.value.trim();
+        if (q) doAsk(q);
+      });
+    });
+  }
+
+  function renderTerms(): void {
+    const entries = favorites
+      .filter((f) => f.kind === "article" && (termsByUrl[f.url] ?? []).length > 0)
+      .flatMap((f) => (termsByUrl[f.url] ?? []).map((t) => t));
+    if (!entries.length) {
+      list.innerHTML = '<p class="item-summary">收藏的文章还没有术语解析（文章需含 AI 术语标注）。</p>';
+      return;
+    }
+    list.innerHTML = entries.map(termCardHtml).join("");
+    list.querySelectorAll<HTMLButtonElement>(".term-ask").forEach((btn) => {
+      btn.addEventListener("click", () => openAskPanel(btn));
+    });
+  }
+
+  function renderList(): void {
     if (!favorites.length) {
       list.innerHTML = '<p class="item-summary">还没有收藏，去日报页或阅读页「收藏」添加。</p>';
       return;
     }
-    const filtered = favorites.filter((f) => activeFilter === "all" || f.kind === activeFilter);
+    if (activeFilter === "term") { renderTerms(); return; }
+    const filtered = favorites.filter((f) => f.kind === activeFilter);
     if (!filtered.length) {
       list.innerHTML = '<p class="item-summary">该分类暂无收藏。</p>';
       return;
@@ -69,7 +186,7 @@ for (const a of listArticles()) articleIdByUrl[a.url] = a.id;
     });
   }
 
-  async function load() {
+  async function load(): Promise<void> {
     const env = await api.listFavorites();
     if (!env.ok) {
       list.innerHTML = '<p class="item-summary">收藏加载失败，请刷新重试。</p>';
@@ -81,7 +198,7 @@ for (const a of listArticles()) articleIdByUrl[a.url] = a.id;
 
   document.querySelectorAll<HTMLElement>(".fav-filter").forEach((tab) => {
     tab.addEventListener("click", () => {
-      activeFilter = (tab.dataset.filter as "all" | "article" | "quote") ?? "all";
+      activeFilter = (tab.dataset.filter as "term" | "article" | "quote") ?? "term";
       document.querySelectorAll(".fav-filter").forEach((t) => t.classList.toggle("on", t === tab));
       renderList();
     });

@@ -32,6 +32,36 @@ describe("applyStyle", () => {
   });
 });
 
+describe("note/explanation 保留（防 AI 解析/释义断层）", () => {
+  it("applyStyle 叠加样式时不丢已有 explanation", () => {
+    let spans = applyStyle([], { start: 0, end: 6 }, "underline");
+    spans = [{ ...spans[0]!, explanation: "E" }];
+    const next = applyStyle(spans, { start: 2, end: 4 }, "green");
+    expect(next.map((s) => s.explanation ?? "")).toEqual(["E", "E", "E"]);
+  });
+
+  it("removeRange 保留两侧剩余区间的 explanation", () => {
+    const spans: Span[] = [{ start: 0, end: 6, styles: ["underline"], explanation: "E" }];
+    const next = removeRange(spans, { start: 2, end: 4 });
+    expect(next.map((s) => s.explanation ?? "")).toEqual(["E", "E"]);
+  });
+
+  it("removeStyle 保留同区间的 explanation", () => {
+    const spans: Span[] = [{ start: 0, end: 6, styles: ["green", "underline"], explanation: "E" }];
+    const next = removeStyle(spans, { start: 0, end: 6 }, "underline");
+    expect(next).toEqual([{ start: 0, end: 6, styles: ["green"], explanation: "E" }]);
+  });
+
+  it("相邻同样式区间合并时保留 explanation", () => {
+    const spans: Span[] = [
+      { start: 0, end: 2, styles: ["green"], explanation: "E1" },
+      { start: 2, end: 4, styles: ["green"] },
+    ];
+    const next = applyStyle(spans, { start: 4, end: 5 }, "green");
+    expect(next).toEqual([{ start: 0, end: 5, styles: ["green"], explanation: "E1" }]);
+  });
+});
+
 describe("AI 与用户标注合并渲染", () => {
   const termExplanation = "这一政策术语强调跨部门协同配置资源，以制度衔接提升公共治理的整体效能。";
   const annotations = [
@@ -82,6 +112,16 @@ describe("AI 与用户标注合并渲染", () => {
     expect(html).toContain('data-user-highlight="true"');
     expect(html).toContain('data-explanation="治理能力指统筹各方…"');
     expect(html).toContain('tabindex="0"');
+  });
+
+  it("用户 AI 解析优先于术语释义，不被静态释义覆盖", () => {
+    const html = readerSegmentsToHtml(buildReaderSegments(
+      "治理能力现代化建设",
+      [{ start: 4, end: 8, styles: ["underline"], explanation: "用户解析内容" }],
+      [{ id: "t1", paragraphIndex: 0, start: 4, end: 8, text: "现代化建", type: "term" as const, explanation: termExplanation }],
+    ));
+    expect(html).toContain('data-explanation="用户解析内容"');
+    expect(html).not.toContain(`data-explanation="${termExplanation}"`);
   });
 
   it("丢弃越界或与原文不一致的 AI 标注", () => {

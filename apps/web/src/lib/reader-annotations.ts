@@ -81,7 +81,8 @@ export function readerSegmentsToHtml(segments: ReaderSegment[]): string {
         attributes.push('tabindex="0"', `data-explanation="${escapeHtml(segment.explanation)}"`);
       }
     }
-    if (term?.explanation) {
+    // 用户 AI 解析优先于静态术语释义（避免覆盖）；术语仍保留 aria-label 描述。
+    if (term?.explanation && !segment.explanation) {
       attributes.push('tabindex="0"', `data-explanation="${escapeHtml(term.explanation)}"`);
       attributes.push(`aria-label="${escapeHtml(`${term.text}：${term.explanation}`)}"`);
     }

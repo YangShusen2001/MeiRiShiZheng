@@ -126,3 +126,39 @@ describe("explain 权限门禁", () => {
     expect(res.status).toBe(200);
   });
 });
+
+describe("术语追问 /api/explain/term/ask", () => {
+  it("未激活邀请码返回 403 INVITE_REQUIRED", async () => {
+    const app = makeInviteApp();
+    const res = await app.request("/api/explain/term/ask", json("POST", { term: "六张网" }));
+    expect(res.status).toBe(403);
+  });
+
+  it("激活邀请码后可生成 3 个建议问题", async () => {
+    const app = makeInviteApp();
+    vi.stubGlobal("fetch", vi.fn(async () => new Response(
+      JSON.stringify({ choices: [{ message: { content: '{"suggestions":["为什么要设置六张网，而不是七张网？","六张网分别指哪些？","六张网如何服务广东高质量发展？"]}' } }] }),
+      { headers: { "content-type": "application/json" } },
+    )));
+    const code = await generateCode(app);
+    await app.request("/api/invite/activate", json("POST", { code }));
+
+    const res = await app.request("/api/explain/term/ask", json("POST", { term: "六张网", explanation: "广东基础设施体系" }));
+    expect(res.status).toBe(200);
+    expect((await readJson<{ suggestions: string[] }>(res)).data.suggestions).toHaveLength(3);
+  });
+
+  it("携带 question 时返回 Markdown 回答", async () => {
+    const app = makeInviteApp();
+    vi.stubGlobal("fetch", vi.fn(async () => new Response(
+      JSON.stringify({ choices: [{ message: { content: "## 为什么是六张网\n\n六张网是广东交通、水利、能源等基础设施网络的统称。" } }] }),
+      { headers: { "content-type": "application/json" } },
+    )));
+    const code = await generateCode(app);
+    await app.request("/api/invite/activate", json("POST", { code }));
+
+    const res = await app.request("/api/explain/term/ask", json("POST", { term: "六张网", question: "为什么是六张网而不是七张网？" }));
+    expect(res.status).toBe(200);
+    expect((await readJson<{ answer: string }>(res)).data.answer).toContain("六张网");
+  });
+});

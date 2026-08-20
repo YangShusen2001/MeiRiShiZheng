@@ -140,6 +140,23 @@ export const explainResponseSchema = z.object({
 });
 export type ExplainResponse = z.infer<typeof explainResponseSchema>;
 
+// —— 术语追问（收藏页「术语解析」）——
+export const termAskRequestSchema = z.object({
+  term: z.string().trim().min(1).max(100),
+  explanation: z.string().max(1000).optional().default(""),
+  /** 用户自定义追问；缺省时只生成建议问题。 */
+  question: z.string().trim().max(500).optional(),
+});
+export type TermAskRequest = z.input<typeof termAskRequestSchema>;
+
+export const termAskResponseSchema = z.object({
+  /** 按考点生成的建议问题（无 question 时返回，最多 3 条）。 */
+  suggestions: z.array(z.string().min(1)).max(3).default([]),
+  /** 用户追问的回答（Markdown）。 */
+  answer: z.string().optional(),
+});
+export type TermAskResponse = z.infer<typeof termAskResponseSchema>;
+
 // —— QQ 邮箱验证码鉴权 ——
 export const qqEmailSchema = z.string().trim().toLowerCase()
   .regex(/^[1-9][0-9]{4,10}@qq\.com$/, "请输入有效的 QQ 邮箱");

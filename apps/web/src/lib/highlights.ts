@@ -25,7 +25,7 @@ function sameStyles(a: HighlightStyle[], b: HighlightStyle[]): boolean {
   return a.length === b.length && a.every((s, i) => s === b[i]);
 }
 
-/** 合并相邻且样式完全相同的区间，并按 start 升序排序。 */
+/** 合并相邻且样式完全相同的区间，并按 start 升序排序。保留 note/explanation。 */
 function mergeAdjacent(spans: Span[]): Span[] {
   const sorted = [...spans].sort((a, b) => a.start - b.start || a.end - b.end);
   const out: Span[] = [];
@@ -34,14 +34,16 @@ function mergeAdjacent(spans: Span[]): Span[] {
     const last = out[out.length - 1];
     if (last && last.end === s.start && sameStyles(last.styles, s.styles)) {
       last.end = s.end;
+      last.note = last.note || s.note;
+      last.explanation = last.explanation || s.explanation;
     } else {
-      out.push({ start: s.start, end: s.end, styles: [...s.styles] });
+      out.push({ start: s.start, end: s.end, styles: [...s.styles], note: s.note, explanation: s.explanation });
     }
   }
   return out;
 }
 
-/** 在区间上应用一种样式，与既有区间求并集，返回规范化（非重叠）区间集。 */
+/** 在区间上应用一种样式，与既有区间求并集，返回规范化（非重叠）区间集。保留被覆盖区间的 note/explanation。 */
 export function applyStyle(spans: Span[], range: { start: number; end: number }, style: HighlightStyle): Span[] {
   if (range.start >= range.end) return spans;
   const combined = [...spans, { start: range.start, end: range.end, styles: [style] }];
@@ -59,12 +61,15 @@ export function applyStyle(spans: Span[], range: { start: number; end: number },
     for (const s of combined) {
       if (s.start <= a && b <= s.end) for (const st of s.styles) styles.add(st);
     }
-    if (styles.size > 0) result.push({ start: a, end: b, styles: normalizeStyles(styles) });
+    if (styles.size > 0) {
+      const covering = spans.find((s) => s.start <= a && b <= s.end);
+      result.push({ start: a, end: b, styles: normalizeStyles(styles), note: covering?.note, explanation: covering?.explanation });
+    }
   }
   return mergeAdjacent(result);
 }
 
-/** 移除区间内的全部样式，保留两侧未被覆盖的部分。 */
+/** 移除区间内的全部样式，保留两侧未被覆盖的部分。保留 note/explanation。 */
 export function removeRange(spans: Span[], range: { start: number; end: number }): Span[] {
   if (range.start >= range.end) return spans;
   const result: Span[] = [];
@@ -73,14 +78,14 @@ export function removeRange(spans: Span[], range: { start: number; end: number }
       result.push(s);
       continue;
     }
-    if (s.start < range.start) result.push({ start: s.start, end: range.start, styles: [...s.styles] });
-    if (s.end > range.end) result.push({ start: range.end, end: s.end, styles: [...s.styles] });
+    if (s.start < range.start) result.push({ start: s.start, end: range.start, styles: [...s.styles], note: s.note, explanation: s.explanation });
+    if (s.end > range.end) result.push({ start: range.end, end: s.end, styles: [...s.styles], note: s.note, explanation: s.explanation });
     // 与 range 重叠的部分被丢弃
   }
   return mergeAdjacent(result);
 }
 
-/** 仅移除区间内的一种样式，保留同区间的其他样式。 */
+/** 仅移除区间内的一种样式，保留同区间的其他样式。保留 note/explanation。 */
 export function removeStyle(
   spans: Span[],
   range: { start: number; end: number },
@@ -104,7 +109,10 @@ export function removeStyle(
       }
     }
     if (range.start <= start && end <= range.end) styles.delete(style);
-    if (styles.size) result.push({ start, end, styles: normalizeStyles(styles) });
+    if (styles.size) {
+      const covering = spans.find((s) => s.start <= start && end <= s.end);
+      result.push({ start, end, styles: normalizeStyles(styles), note: covering?.note, explanation: covering?.explanation });
+    }
   }
   return mergeAdjacent(result);
 }

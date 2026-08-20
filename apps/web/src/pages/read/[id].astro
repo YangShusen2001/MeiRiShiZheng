@@ -301,7 +301,7 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
       });
 
       const next = spans.map((span) => {
-        const explanation = explanationEntries.find((o) => o.start <= span.start && span.end <= o.end)?.explanation ?? "";
+        const explanation = explanationEntries.find((o) => o.start <= span.start && span.end <= o.end)?.explanation ?? span.explanation ?? "";
         return {
           paragraphIndex: index,
           note: noteBySpan[`${span.start}:${span.end}`] ?? "",
