@@ -1,0 +1,141 @@
+{
+  "id": "13ab4777ff",
+  "date": "2026-08-22",
+  "title": "江苏省人民政府 要闻关注 信长星刘小涛会见中国长安汽车集团董事长朱华荣",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/8/22/art_84322_11819469.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-22T22:20:46+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "8月20日，省委书记信长星、省长刘小涛在南京会见中国长安汽车集团董事长朱华荣。",
+    "信长星、刘小涛对朱华荣一行表示欢迎。信长星说，当前，江苏正在深入学习贯彻习近平总书记重要讲话精神，加快建设具有全球影响力的产业科技创新中心、具有国际竞争力的先进制造业基地。我们愿与长安汽车集团一道，加强产业链创新链合作，强化人工智能赋能，促进汽车产业高端化、智能化、绿色化升级，为构建现代化产业体系、推动高质量发展注入新动能。",
+    "朱华荣表示，江苏具备完善的产业链供应链，与长安汽车集团合作基础良好。我们将发挥自身优势，持续深化与江苏的合作，推出更多优质产品和服务，更好满足市场需求，实现互利共赢。",
+    "省和南京市领导周红波、陈忠伟、李忠军，长安汽车集团副总经理邓威参加有关活动。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-22T22:20:47+00:00",
+  "sourceTextHash": "f029753fcc926e7571b6091a5af888094ae6f626923ce81eb145932f261ca62c",
+  "aiStatus": "ok",
+  "aiSummary": "8月20日，江苏省委书记信长星、省长刘小涛在南京会见中国长安汽车集团董事长朱华荣，双方就加强产业链创新链合作、推动汽车产业高端化智能化绿色化升级等议题进行交流，旨在深化合作、互利共赢。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-49-85-viewpoint",
+      "paragraphIndex": 1,
+      "start": 49,
+      "end": 85,
+      "text": "加快建设具有全球影响力的产业科技创新中心、具有国际竞争力的先进制造业基地",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-99-138-viewpoint",
+      "paragraphIndex": 1,
+      "start": 99,
+      "end": 138,
+      "text": "加强产业链创新链合作，强化人工智能赋能，促进汽车产业高端化、智能化、绿色化升级",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-44-82-viewpoint",
+      "paragraphIndex": 2,
+      "start": 44,
+      "end": 82,
+      "text": "持续深化与江苏的合作，推出更多优质产品和服务，更好满足市场需求，实现互利共赢",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-61-69-term",
+      "paragraphIndex": 1,
+      "start": 61,
+      "end": 69,
+      "text": "产业科技创新中心",
+      "type": "term",
+      "explanation": "指以科技创新为核心驱动力，集聚创新资源，推动产业升级的区域性平台。"
+    },
+    {
+      "id": "ai-1-78-85-term",
+      "paragraphIndex": 1,
+      "start": 78,
+      "end": 85,
+      "text": "先进制造业基地",
+      "type": "term"
+    },
+    {
+      "id": "ai-1-101-109-term",
+      "paragraphIndex": 1,
+      "start": 101,
+      "end": 109,
+      "text": "产业链创新链合作",
+      "type": "term"
+    },
+    {
+      "id": "ai-1-125-138-term",
+      "paragraphIndex": 1,
+      "start": 125,
+      "end": 138,
+      "text": "高端化、智能化、绿色化升级",
+      "type": "term"
+    },
+    {
+      "id": "ai-1-142-149-term",
+      "paragraphIndex": 1,
+      "start": 142,
+      "end": 149,
+      "text": "现代化产业体系",
+      "type": "term"
+    },
+    {
+      "id": "ai-0-0-5-exam_point",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 5,
+      "text": "8月20日",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-6-38-exam_point",
+      "paragraphIndex": 0,
+      "start": 6,
+      "end": 38,
+      "text": "省委书记信长星、省长刘小涛在南京会见中国长安汽车集团董事长朱华荣",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-30-48-exam_point",
+      "paragraphIndex": 1,
+      "start": 30,
+      "end": 48,
+      "text": "深入学习贯彻习近平总书记重要讲话精神",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-140-157-exam_point",
+      "paragraphIndex": 1,
+      "start": 140,
+      "end": 157,
+      "text": "构建现代化产业体系、推动高质量发展",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-10-19-exam_point",
+      "paragraphIndex": 2,
+      "start": 10,
+      "end": 19,
+      "text": "完善的产业链供应链",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-0-18-exam_point",
+      "paragraphIndex": 3,
+      "start": 0,
+      "end": 18,
+      "text": "省和南京市领导周红波、陈忠伟、李忠军",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

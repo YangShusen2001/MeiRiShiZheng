@@ -1,0 +1,99 @@
+{
+  "id": "605a436b34",
+  "date": "2026-08-22",
+  "title": "千亿基金集结四川，“耐心资本”如何落地？丨C视频",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202608/83309386.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-22T22:20:06+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "四川在线记者 彭瑀珩 史晓露&nbsp; 摄影 李强",
+    "8月22日，四川省政府产业投资引导基金生态大会启幕！两年蓄力，四川落地76支省级引导基金、总规模突破1200亿元。今日再“放大招”：西部首个省市县三级基金联盟揭牌、20条新政同步落地。“耐心资本”如何扎根硬科技？我们对话创投机构、政府基金、未来产业三大关键主体，听听来自现场的声音。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-22T22:20:07+00:00",
+  "sourceTextHash": "684198b4fa6970e7ef621851e8e60d417e4327d02a71bd979ae2758347184d68",
+  "aiStatus": "ok",
+  "aiSummary": "四川省政府产业投资引导基金生态大会于8月22日召开，宣布76支省级引导基金落地，总规模超1200亿元，并揭牌西部首个省市县三级基金联盟，推出20条新政，聚焦耐心资本支持硬科技发展。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-6-25-viewpoint",
+      "paragraphIndex": 1,
+      "start": 6,
+      "end": 25,
+      "text": "四川省政府产业投资引导基金生态大会启幕",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-26-56-viewpoint",
+      "paragraphIndex": 1,
+      "start": 26,
+      "end": 56,
+      "text": "两年蓄力，四川落地76支省级引导基金、总规模突破1200亿元",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-66-81-viewpoint",
+      "paragraphIndex": 1,
+      "start": 66,
+      "end": 81,
+      "text": "西部首个省市县三级基金联盟揭牌",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-82-91-viewpoint",
+      "paragraphIndex": 1,
+      "start": 82,
+      "end": 91,
+      "text": "20条新政同步落地",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-35-44-exam_point",
+      "paragraphIndex": 1,
+      "start": 35,
+      "end": 44,
+      "text": "76支省级引导基金",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-45-56-exam_point",
+      "paragraphIndex": 1,
+      "start": 45,
+      "end": 56,
+      "text": "总规模突破1200亿元",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-70-79-exam_point",
+      "paragraphIndex": 1,
+      "start": 70,
+      "end": 79,
+      "text": "省市县三级基金联盟",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-82-87-exam_point",
+      "paragraphIndex": 1,
+      "start": 82,
+      "end": 87,
+      "text": "20条新政",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-93-97-term",
+      "paragraphIndex": 1,
+      "start": 93,
+      "end": 97,
+      "text": "耐心资本",
+      "type": "term",
+      "explanation": "指注重长期投资、不追求短期回报的资本，通常投向科技创新等周期长、风险高的领域。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

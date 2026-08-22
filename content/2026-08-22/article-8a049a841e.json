@@ -1,0 +1,103 @@
+{
+  "id": "8a049a841e",
+  "date": "2026-08-22",
+  "title": "2026四川省政府产业投资引导基金生态大会在蓉举行 成立四川省政府投资基金联盟",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202608/83309384.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-22T22:20:15+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "8月22日，以&ldquo;引资本活水&middot;导产业振兴&rdquo;为主题的2026四川省政府产业投资引导基金生态大会在成都举行。省委常委、常务副省长董卫民出席会议并致辞。",
+    "董卫民指出，四川肩负经济大省挑大梁重任，推进科技创新与产业创新深度融合，是高质量发展必由之路，也蕴含巨大投资机遇。壮大耐心资本，是转化科教优势、培育新兴产业的关键。",
+    "董卫民表示，四川将深入贯彻党中央、国务院决策部署，进一步解放思想、改革创新，坚持有效市场和有为政府相结合，围绕&ldquo;募、投、管、退&rdquo;全链条持续发力，营造一流基金生态。全力打造更加开放包容的投资政策环境，促进基金机构活力迸发。全力打造更加高效顺畅的项目对接平台，促进资本产业双向奔赴。全力打造更加协同完备的投后赋能体系，促进被投企业行稳致远。",
+    "目前，四川省级政府引导基金体系已批准设立76支基金，目标总规模超1200亿元，撬动社会资本逾3000亿元。截至7月底，累计投资项目316个，投资金额360.8亿元。",
+    "会上，发布了四川省政府投资基金高质量发展相关政策，成立四川省政府投资基金联盟，国内头部创投机构发起&ldquo;投资四川&rdquo;倡议、开展圆桌对话，专家代表作主题报告。",
+    "省直有关部门、部分中央在川单位、各市（州）政府相关负责人，以及国家级基金、金融机构、上市公司、行业协会、高校、科研院所代表等200余人参会。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-22T22:20:17+00:00",
+  "sourceTextHash": "df2baaada20ebc868adb10eea37b8564e437546709771321424eb91a34d21220",
+  "aiStatus": "ok",
+  "aiSummary": "2026四川省政府产业投资引导基金生态大会在成都举行，强调壮大耐心资本，打造一流基金生态，并成立四川省政府投资基金联盟，以促进资本与产业深度融合，推动高质量发展。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-20-46-viewpoint",
+      "paragraphIndex": 1,
+      "start": 20,
+      "end": 46,
+      "text": "推进科技创新与产业创新深度融合，是高质量发展必由之路",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-57-81-viewpoint",
+      "paragraphIndex": 1,
+      "start": 57,
+      "end": 81,
+      "text": "壮大耐心资本，是转化科教优势、培育新兴产业的关键",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-38-52-viewpoint",
+      "paragraphIndex": 2,
+      "start": 38,
+      "end": 52,
+      "text": "坚持有效市场和有为政府相结合",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-20-25-exam_point",
+      "paragraphIndex": 3,
+      "start": 20,
+      "end": 25,
+      "text": "76支基金",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-32-38-exam_point",
+      "paragraphIndex": 3,
+      "start": 32,
+      "end": 38,
+      "text": "1200亿元",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-46-52-exam_point",
+      "paragraphIndex": 3,
+      "start": 46,
+      "end": 52,
+      "text": "3000亿元",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-65-69-exam_point",
+      "paragraphIndex": 3,
+      "start": 65,
+      "end": 69,
+      "text": "316个",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-74-81-exam_point",
+      "paragraphIndex": 3,
+      "start": 74,
+      "end": 81,
+      "text": "360.8亿元",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-27-38-term",
+      "paragraphIndex": 4,
+      "start": 27,
+      "end": 38,
+      "text": "四川省政府投资基金联盟",
+      "type": "term",
+      "explanation": "由四川省内相关机构组成的联盟，旨在促进政府投资基金协同发展，优化基金生态。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 2
+  }
+}

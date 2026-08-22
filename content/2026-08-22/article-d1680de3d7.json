@@ -1,0 +1,128 @@
+{
+  "id": "d1680de3d7",
+  "date": "2026-08-22",
+  "title": "防御台风“紫檀”，广东省水文局发布需重点关注河流名单",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202608/22/139996_54993695.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-08-22T22:19:51+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "受今年第19号台风“紫檀”和南海热带扰动外围环流带来的降雨影响，预计8月22日至24日，粤东沿海、韩江上游、东江中下游、珠三角以及粤西沿海等中南部区域内中小河流将出现2—5米的涨水过程，部分站点可能接近或超过警戒水位。",
+    "当前，广东省水文局全天候关注台风和雨水情动态发展，加密监测和会商频次，及时滚动发布预报预警和风险提示，全力做好防御工作。",
+    "粤东沿海：龙江（揭阳普宁、惠来），榕江（揭阳揭西、普宁），练江（汕头潮阳），罗溪（揭阳惠来），鳌江、乌坎河、螺河（汕尾陆丰）；",
+    "韩江流域：琴江（梅州五华、兴宁），五华河（河源龙川、梅州五华），丰良河（梅州丰顺）；",
+    "东江流域：石马河（深圳龙华、东莞塘厦），淡水河（深圳龙岗、惠州惠东惠阳）；",
+    "粤西沿海：潭江（江门恩平、开平、台山），漠阳江上游（阳江阳春），鉴江上游及罗江（茂名信宜、高州、化州），龙门河、英利河（湛江雷州），迈陈河（湛江徐闻），高桥河（湛江廉江）。",
+    "水文专家提醒，台风“紫檀”和南海热带扰动对广东影响时间较长，后期降雨量级和落区存在不确定性，需重点关注中南部强降雨可能带来的中小河流洪水、山洪和城乡积涝等灾害；强降雨期间，广大群众可关注“广东水文”官方微信公众号，点击进入“掌上水情”系统订阅各市水文站点，自动接收实时雨水情和洪水预警信息。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-22T22:19:53+00:00",
+  "sourceTextHash": "ecc8a0ba32943777ace567983b20b514478b9c9fd6ed7aa3ac5f7d4dfc65f317",
+  "aiStatus": "ok",
+  "aiSummary": "受台风“紫檀”和南海热带扰动影响，广东中南部中小河流预计涨水2至5米，部分站点或超警戒。省水文局加密监测预警，并列出粤东、韩江、东江、粤西沿海需重点关注的河流名单，提醒防范洪水及次生灾害。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-0-31-viewpoint",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 31,
+      "text": "受今年第19号台风“紫檀”和南海热带扰动外围环流带来的降雨影响",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-93-108-viewpoint",
+      "paragraphIndex": 0,
+      "start": 93,
+      "end": 108,
+      "text": "部分站点可能接近或超过警戒水位",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-3-24-viewpoint",
+      "paragraphIndex": 1,
+      "start": 3,
+      "end": 24,
+      "text": "广东省水文局全天候关注台风和雨水情动态发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-6-46-79-viewpoint",
+      "paragraphIndex": 6,
+      "start": 46,
+      "end": 79,
+      "text": "需重点关注中南部强降雨可能带来的中小河流洪水、山洪和城乡积涝等灾害",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-83-92-exam_point",
+      "paragraphIndex": 0,
+      "start": 83,
+      "end": 92,
+      "text": "2—5米的涨水过程",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-34-43-exam_point",
+      "paragraphIndex": 0,
+      "start": 34,
+      "end": 43,
+      "text": "8月22日至24日",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-44-69-exam_point",
+      "paragraphIndex": 0,
+      "start": 44,
+      "end": 69,
+      "text": "粤东沿海、韩江上游、东江中下游、珠三角以及粤西沿海",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-25-34-exam_point",
+      "paragraphIndex": 1,
+      "start": 25,
+      "end": 34,
+      "text": "加密监测和会商频次",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-62-76-exam_point",
+      "paragraphIndex": 6,
+      "start": 62,
+      "end": 76,
+      "text": "中小河流洪水、山洪和城乡积涝",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-111-119-exam_point",
+      "paragraphIndex": 6,
+      "start": 111,
+      "end": 119,
+      "text": "“掌上水情”系统",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-7-13-term",
+      "paragraphIndex": 0,
+      "start": 7,
+      "end": 13,
+      "text": "台风“紫檀”",
+      "type": "term",
+      "explanation": "指2024年第19号台风，其外围环流与热带扰动共同影响广东，带来强降雨。"
+    },
+    {
+      "id": "ai-0-14-20-term",
+      "paragraphIndex": 0,
+      "start": 14,
+      "end": 20,
+      "text": "南海热带扰动",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

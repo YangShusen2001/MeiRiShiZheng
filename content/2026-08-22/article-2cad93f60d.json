@@ -1,0 +1,107 @@
+{
+  "id": "2cad93f60d",
+  "date": "2026-08-22",
+  "title": "史上最强厄尔尼诺正在形成！有啥影响？丨阴晴布丁×民生情报站",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202608/83309341.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-22T22:20:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "据国家气候中心消息，当前，赤道中东太平洋海表温度持续升高，预计将于11月至12月前后达到峰值，形成一次超强厄尔尼诺事件，大概率成为历史最强事件。",
+    "什么是超强厄尔尼诺？对我国有啥影响？何时影响最大？看视频了解最新情况→"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-22T22:20:36+00:00",
+  "sourceTextHash": "a5f2db8baf0b9a6ff22dae2d96d8363e0f8d01ea858d456b7d3d94a276b4afd2",
+  "aiStatus": "ok",
+  "aiSummary": "国家气候中心预计赤道中东太平洋海表温度持续升高，将于11月至12月形成超强厄尔尼诺事件，可能成为历史最强。该事件对我国气候影响显著，需关注其峰值时间和影响范围。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-0-9-viewpoint",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 9,
+      "text": "据国家气候中心消息",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-10-28-viewpoint",
+      "paragraphIndex": 0,
+      "start": 10,
+      "end": 28,
+      "text": "当前，赤道中东太平洋海表温度持续升高",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-29-46-viewpoint",
+      "paragraphIndex": 0,
+      "start": 29,
+      "end": 46,
+      "text": "预计将于11月至12月前后达到峰值",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-47-59-viewpoint",
+      "paragraphIndex": 0,
+      "start": 47,
+      "end": 59,
+      "text": "形成一次超强厄尔尼诺事件",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-60-71-viewpoint",
+      "paragraphIndex": 0,
+      "start": 60,
+      "end": 71,
+      "text": "大概率成为历史最强事件",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-13-28-exam_point",
+      "paragraphIndex": 0,
+      "start": 13,
+      "end": 28,
+      "text": "赤道中东太平洋海表温度持续升高",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-33-46-exam_point",
+      "paragraphIndex": 0,
+      "start": 33,
+      "end": 46,
+      "text": "11月至12月前后达到峰值",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-51-59-exam_point",
+      "paragraphIndex": 0,
+      "start": 51,
+      "end": 59,
+      "text": "超强厄尔尼诺事件",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-65-71-exam_point",
+      "paragraphIndex": 0,
+      "start": 65,
+      "end": 71,
+      "text": "历史最强事件",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-53-57-term",
+      "paragraphIndex": 0,
+      "start": 53,
+      "end": 57,
+      "text": "厄尔尼诺",
+      "type": "term",
+      "explanation": "赤道中东太平洋海表温度异常升高的气候现象，影响全球天气模式。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}
