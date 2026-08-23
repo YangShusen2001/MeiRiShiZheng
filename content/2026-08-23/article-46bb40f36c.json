@@ -1,0 +1,150 @@
+{
+  "id": "46bb40f36c",
+  "date": "2026-08-23",
+  "title": "泸州以派驻机构集中办公为抓手，构建一体化管理机制，提升监督质效丨市州观察",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202608/83309575.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-23T22:20:09+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "李菊&nbsp;川观新闻泸州观察&nbsp;郭荞璐",
+    "日前，合江县纪委监委收到一条案件线索&mdash;&mdash;在泸州市合江县锁口水利工程库区，部分管理人员利用职务便利，将本该用于清理漂浮物、守护水域清洁的专项资金套取、瓜分。",
+    "面对案情疑难复杂、人员分散的现实难题，合江县纪委监委迅速启动协同联动机制，由第一纪检监察室牵头，统筹驻县财政局、驻县农业农村局等力量协同攻坚，快速固定证据、查实违纪事实。这起藏在水波之下的案件最终无所遁形。",
+    "案件的高效查办，正是泸州市推进县（区）派驻机构集中办公、构建一体化管理机制带来监督质效提升的缩影。",
+    "为破解&ldquo;派驻监督容易出现方向不明、重点模糊等情况&rdquo;的难题，泸州市以推动县级纪委监委派驻机构集中办公为抓手，依据省纪委监委相关意见主动创新，紧扣&ldquo;人员集聚、力量集中、资源集束&rdquo;目标，紧盯短板凝聚合力，通过优化机制、整合力量，推动派驻纪检监察工作质效稳步提升。",
+    "人要集聚，联动机制还需不断强化。纳溪区纪委监委将9个纪检监察室、10个派驻机构、13个乡镇（街道）纪（工）委整合为8个&ldquo;室组地&rdquo;融合联动工作组，每个工作组分别监督联系5至9家单位和乡镇（街道），由委机关协管领导任组长，综合运用一体化监督、一体化办案、一体化考核等方式，释放监督执纪叠加效应。",
+    "力要集中，信息壁垒也要逐步打破。合江县纪委监委指导派驻机构会同驻在部门建立&ldquo;业务监管+行政执法+纪检监察&rdquo;数据信息共享机制，探索将监督模型嵌入&ldquo;智慧农经&rdquo;等业务平台，构建5个数据监督模型。过去翻阅凭证靠人工&ldquo;大海捞针&rdquo;，如今异常数据自动锁定，发现问题更加精准高效。",
+    "资源集聚的底气，还来自全链条培养。叙永县纪委监委同步实施&ldquo;青蓝计划&rdquo;与&ldquo;导师帮带&rdquo;机制，由经验丰富的骨干与年轻干部&ldquo;一对一&rdquo;结对，全流程带教线索初核、谈话突破、报告撰写等环节，通过&ldquo;知识传授+实战模拟+导师护航&rdquo;培养链，将办案现场变为实训课堂，加速本领从&ldquo;储备&rdquo;向&ldquo;输出&rdquo;转化。",
+    "持续深化集中办公&ldquo;后半篇文章&rdquo;，泸州县域改革红利充分释放，群众受益面不断扩大。自推行集中办公以来，泸州全市县级纪委监委共立案5385人，挽回经济损失7.53亿元。",
+    "&ldquo;从分散驻点到集中办公，不是简单地把人聚到一起，而是通过理顺关系，重塑基层监督协作格局。&rdquo;泸州市纪委监委有关负责人表示，下一步，泸州将进一步完善提级监督、交叉监督等机制，推动基层监督与基层治理相贯通，让派驻监督&ldquo;探头&rdquo;越擦越亮。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-23T22:20:10+00:00",
+  "sourceTextHash": "bc073d82923efc45f8d088b9e6a448a5e3ccbbca28f1419a26e2f9864036f85e",
+  "aiStatus": "ok",
+  "aiSummary": "泸州市以派驻机构集中办公为抓手，构建一体化管理机制，通过人员集聚、力量集中、资源集束，提升监督质效，已立案5385人，挽回经济损失7.53亿元。",
+  "aiAnnotations": [
+    {
+      "id": "ai-3-0-49-viewpoint",
+      "paragraphIndex": 3,
+      "start": 0,
+      "end": 49,
+      "text": "案件的高效查办，正是泸州市推进县（区）派驻机构集中办公、构建一体化管理机制带来监督质效提升的缩影。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-8-51-93-viewpoint",
+      "paragraphIndex": 8,
+      "start": 51,
+      "end": 93,
+      "text": "自推行集中办公以来，泸州全市县级纪委监委共立案5385人，挽回经济损失7.53亿元。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-9-7-50-viewpoint",
+      "paragraphIndex": 9,
+      "start": 7,
+      "end": 50,
+      "text": "从分散驻点到集中办公，不是简单地把人聚到一起，而是通过理顺关系，重塑基层监督协作格局。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-53-61-term",
+      "paragraphIndex": 4,
+      "start": 53,
+      "end": 61,
+      "text": "派驻机构集中办公",
+      "type": "term",
+      "explanation": "指将原本分散在各单位的派驻纪检监察组集中到纪委监委机关统一办公，以整合力量、强化管理。"
+    },
+    {
+      "id": "ai-5-66-69-term",
+      "paragraphIndex": 5,
+      "start": 66,
+      "end": 69,
+      "text": "室组地",
+      "type": "term",
+      "explanation": "指纪检监察机关内部监督检查室、派驻纪检监察组与地方纪委的联动协作模式。"
+    },
+    {
+      "id": "ai-6-111-117-term",
+      "paragraphIndex": 6,
+      "start": 111,
+      "end": 117,
+      "text": "数据监督模型",
+      "type": "term",
+      "explanation": "利用大数据技术构建的用于自动识别异常数据、辅助发现违纪违法线索的算法或规则体系。"
+    },
+    {
+      "id": "ai-7-35-39-term",
+      "paragraphIndex": 7,
+      "start": 35,
+      "end": 39,
+      "text": "青蓝计划",
+      "type": "term",
+      "explanation": "一种以老带新、师徒结对培养年轻干部的机制，取“青出于蓝”之意。"
+    },
+    {
+      "id": "ai-4-90-104-exam_point",
+      "paragraphIndex": 4,
+      "start": 90,
+      "end": 104,
+      "text": "人员集聚、力量集中、资源集束",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-125-142-exam_point",
+      "paragraphIndex": 5,
+      "start": 125,
+      "end": 142,
+      "text": "一体化监督、一体化办案、一体化考核",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-44-58-exam_point",
+      "paragraphIndex": 6,
+      "start": 44,
+      "end": 58,
+      "text": "业务监管+行政执法+纪检监察",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-7-133-147-exam_point",
+      "paragraphIndex": 7,
+      "start": 133,
+      "end": 147,
+      "text": "知识传授+实战模拟+导师护航",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-9-84-93-exam_point",
+      "paragraphIndex": 9,
+      "start": 84,
+      "end": 93,
+      "text": "提级监督、交叉监督",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-30-36-exam_point",
+      "paragraphIndex": 2,
+      "start": 30,
+      "end": 36,
+      "text": "协同联动机制",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-83-88-exam_point",
+      "paragraphIndex": 1,
+      "start": 83,
+      "end": 88,
+      "text": "套取、瓜分",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

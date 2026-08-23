@@ -1,0 +1,151 @@
+{
+  "id": "fe047fa76b",
+  "date": "2026-08-23",
+  "title": "以守护作答：绘就人与自然和谐共生的时代图景",
+  "source": "news.cn",
+  "url": "https://www.news.cn/politics/20260823/03c0df98688043068ec440345c80b0f7/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-23T22:20:03+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;■行至蜀道，看千年古柏何以长青",
+    "&emsp;&emsp;四川省广元市剑阁县拥有存世时间最长、面积最大、数量最多的人工行道古树群——翠云廊。翠云廊剑阁段现存古柏7778株，最高树龄达2300年。",
+    "&emsp;&emsp;如今，当地爱柏、护柏氛围浓厚，通过制度护航、科技助力、深化宣传，对濒危衰弱古树实施复壮救护，建设古树保护示范小区，多措并举更好保护古树名木，努力实现人与自然和谐共生。",
+    "&emsp;&emsp;守护古柏，更是守护一段绵延不绝的文化根脉。这份古今相传、敬畏自然的用心坚守，终将顺着蜀道山林代代相传、生生不息。",
+    "&emsp;&emsp;■给江水“洗澡”为红树“疗伤”广西冯家江获重生",
+    "&emsp;&emsp;走进广西北海滨海国家湿地公园，到处是生机勃勃的景象。但谁能想到，8年前，这片绿色却因污染和违规养殖而急剧萎缩。",
+    "&emsp;&emsp;冯家江是广西北海市主城区最大内陆潮汐河流。2018年，北海市启动“北海市滨海国家湿地公园（冯家江流域）水环境治理工程”，以解决冯家江流域长期存在的水质恶化、红树林退化及生物多样性下降等问题。",
+    "&emsp;&emsp;■云南弥勒：把山林资源变成村民致富资产",
+    "&emsp;&emsp;暑期以来，云南省弥勒市西三镇可邑村，山林清凉景致搭配浓郁民族风情，吸引各地游客前来打卡，成为避暑休闲的热门目的地。",
+    "&emsp;&emsp;拥有370余年历史的可邑村，森林覆盖率超80%。依托得天独厚的生态禀赋与厚重的民族文化底蕴，村落先后获评“全国生态文化村”“全国森林旅游示范村”等荣誉。",
+    "&emsp;&emsp;当地深耕“生态+文旅”融合发展道路，让生态资源优势转化为产业发展优势。2025年，该村旅游收入达850余万元。",
+    "&emsp;&emsp;统筹：李杰、李佳琳、王冰笛"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-23T22:20:04+00:00",
+  "sourceTextHash": "3c82ab52c130c36b5c030471db4cb3754b4f7c2319fdc288aa368dc15cbccb36",
+  "aiStatus": "ok",
+  "aiSummary": "本文通过四川翠云廊古柏保护、广西北海冯家江生态修复、云南弥勒可邑村生态文旅融合三个案例，展现中国各地践行人与自然和谐共生理念，以制度、科技、产业等方式守护生态并推动绿色发展。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-29-43-viewpoint",
+      "paragraphIndex": 2,
+      "start": 29,
+      "end": 43,
+      "text": "制度护航、科技助力、深化宣传",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-12-32-viewpoint",
+      "paragraphIndex": 3,
+      "start": 12,
+      "end": 32,
+      "text": "守护古柏，更是守护一段绵延不绝的文化根脉",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-6-72-106-viewpoint",
+      "paragraphIndex": 6,
+      "start": 72,
+      "end": 106,
+      "text": "以解决冯家江流域长期存在的水质恶化、红树林退化及生物多样性下降等问题",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-10-30-46-viewpoint",
+      "paragraphIndex": 10,
+      "start": 30,
+      "end": 46,
+      "text": "让生态资源优势转化为产业发展优势",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-53-57-term",
+      "paragraphIndex": 2,
+      "start": 53,
+      "end": 57,
+      "text": "复壮救护",
+      "type": "term",
+      "explanation": "对衰弱或濒危古树采取科学措施恢复其生长活力，是古树保护中的专业手段。"
+    },
+    {
+      "id": "ai-6-63-70-term",
+      "paragraphIndex": 6,
+      "start": 63,
+      "end": 70,
+      "text": "水环境治理工程",
+      "type": "term",
+      "explanation": "针对河流、湿地等水体污染和生态退化问题实施的系统性修复项目，旨在改善水质和恢复生态功能。"
+    },
+    {
+      "id": "ai-9-65-72-term",
+      "paragraphIndex": 9,
+      "start": 65,
+      "end": 72,
+      "text": "全国生态文化村",
+      "type": "term",
+      "explanation": "由国家相关部门评选的，在生态保护和文化传承方面具有示范作用的行政村荣誉。"
+    },
+    {
+      "id": "ai-1-63-67-exam_point",
+      "paragraphIndex": 1,
+      "start": 63,
+      "end": 67,
+      "text": "7778",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-74-79-exam_point",
+      "paragraphIndex": 1,
+      "start": 74,
+      "end": 79,
+      "text": "2300年",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-44-47-exam_point",
+      "paragraphIndex": 5,
+      "start": 44,
+      "end": 47,
+      "text": "8年前",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-33-38-exam_point",
+      "paragraphIndex": 6,
+      "start": 33,
+      "end": 38,
+      "text": "2018年",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-9-14-19-exam_point",
+      "paragraphIndex": 9,
+      "start": 14,
+      "end": 19,
+      "text": "370余年",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-9-32-35-exam_point",
+      "paragraphIndex": 9,
+      "start": 32,
+      "end": 35,
+      "text": "80%",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-10-60-66-exam_point",
+      "paragraphIndex": 10,
+      "start": 60,
+      "end": 66,
+      "text": "850余万元",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

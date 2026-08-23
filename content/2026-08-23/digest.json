@@ -1,0 +1,90 @@
+{
+  "date": "2026-08-23",
+  "title": "每日日报 · 2026-08-23（周日）",
+  "sections": [
+    {
+      "id": "essay",
+      "title": "申论精读",
+      "items": [
+        {
+          "title": "壹时评：从“保生存”到“促生活”，用绣花功夫做实社会救助",
+          "date": "08-23",
+          "sourceUrl": "http://opinion.people.com.cn/n1/2026/0823/c223228-40784539.html"
+        },
+        {
+          "title": "以守护作答：绘就人与自然和谐共生的时代图景",
+          "date": "08-23",
+          "sourceUrl": "https://www.news.cn/politics/20260823/03c0df98688043068ec440345c80b0f7/c.html"
+        }
+      ]
+    },
+    {
+      "id": "sichuan",
+      "title": "四川要闻动态",
+      "items": [
+        {
+          "title": "泸州以派驻机构集中办公为抓手，构建一体化管理机制，提升监督质效丨市州观察",
+          "date": "08-23",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83309575.html"
+        },
+        {
+          "title": "长江之上，泸州航运的三重进阶丨市州观察",
+          "date": "08-23",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83309574.html"
+        },
+        {
+          "title": "“三伏天”明天结束，四川未来三天开启“雨雨雨”模式",
+          "date": "08-23",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83309556.html"
+        },
+        {
+          "title": "国铁集团进一步回应“旅客买票占座放零食”：车票处置权属于购票人而非同行人，旅客有特殊需求可购买多于实际乘车人数的车票",
+          "date": "08-23",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83309555.html"
+        },
+        {
+          "title": "成都的“福气”丨唐探",
+          "date": "08-23",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83309552.html"
+        },
+        {
+          "title": "“川妹带川货”走进广元，“巾帼优品”集市等您来逛吃",
+          "date": "08-23",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83309545.html"
+        }
+      ]
+    },
+    {
+      "id": "jiangsu",
+      "title": "江苏要闻动态",
+      "items": [
+        {
+          "title": "上半年营收利润双增长，利润增速比全国“高出一截” 开局之年看江苏国企“进”与“变”",
+          "date": "08-23",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/8/23/art_84322_11819546.html"
+        },
+        {
+          "title": "前7月江苏对东盟进出口同比增36.4%",
+          "date": "08-23",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/8/23/art_84322_11819547.html"
+        },
+        {
+          "title": "我省出台12项金融举措赋能城市更新",
+          "date": "08-23",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/8/23/art_84322_11819554.html"
+        }
+      ]
+    },
+    {
+      "id": "south-review",
+      "title": "南方时评（南方网·广东申论素材）",
+      "items": [
+        {
+          "title": "头条",
+          "date": "08-23",
+          "sourceUrl": "https://opinion.southcn.com/node_87fa4020d8"
+        }
+      ]
+    }
+  ]
+}

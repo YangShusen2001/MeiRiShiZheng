@@ -1,0 +1,108 @@
+{
+  "id": "98747be27e",
+  "date": "2026-08-23",
+  "title": "&ldquo;川妹带川货&rdquo;走进广元，&ldquo;巾帼优品&rdquo;集市等您来逛吃",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202608/83309545.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-23T22:20:58+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "8月23日，2026年四川省&ldquo;川妹带川货&rdquo;走进广元暨女儿节秋季商品交易会正在广元市举办，交易会遴选的200余家优质企业，集中展示展销了青川木耳、剑门豆腐干等优质&ldquo;广元造&rdquo;产品和各类特色非遗美食、地方好物，让广大市民游客在女儿节浓厚的节日氛围中，畅享购物乐趣，共品&ldquo;广元味道&rdquo;。",
+    "据悉，&ldquo;川妹带川货&rdquo;是省妇联开展乡村振兴巾帼行动的重要工作载体。本次活动旨在搭建全省电商交流、产品展示、资源对接平台，激发妇女创新创业活力，促进产业产品、主播达人、电商企业等深度融合，进一步扩大&ldquo;川妹带川货&rdquo;品牌影响力，助力川货出川、产业提质，让更多&ldquo;四川造&rdquo;巾帼优品走进千家万户。",
+    "21日的启动仪式上，剑阁县代表&ldquo;广元造・广元优品&rdquo;作了新品推介，四川省村播联盟电商代表赵海伶进行了发言。主办方为2026年四川省&ldquo;川妹带川货&rdquo;电商直播大比武获奖主播颁奖。当天下午，来自全省的28名优秀女主播身着传统汉服，在多个社交平台展开线上带货PK。直播过程中，她们化身&ldquo;巾帼优品&rdquo;推荐官，凭借专业能力为家乡特色产品代言，助力&ldquo;土特产&rdquo;走向&ldquo;大市场&rdquo;，尽显新时代电商女性的别样风采。",
+    "在线下，本次&ldquo;川妹带川货&rdquo;活动还呈现了&ldquo;巾帼优品&rdquo;集市，集中展示32家来自全省女性企业、专业合作社及&ldquo;妇&rdquo;字号基地的特色农副产品，不仅有资中茶叶、自贡冷吃兔、邻水溏心皮蛋、中子月饼、江油肥肠等地道农副产品，还有乐至蜀绣、麻柳刺绣、北川羌绣等非遗手工艺品和文创产品。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-23T22:21:00+00:00",
+  "sourceTextHash": "35ae558e2456ec912508cd4c6a5af5313a2db1ac7dc4edb1d522c42ce989c600",
+  "aiStatus": "ok",
+  "aiSummary": "2026年四川省“川妹带川货”走进广元暨女儿节秋季商品交易会举办，通过展销、直播带货和集市等形式，展示广元及全省特色产品，助力乡村振兴和巾帼创业，扩大品牌影响力。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-48-81-viewpoint",
+      "paragraphIndex": 1,
+      "start": 48,
+      "end": 81,
+      "text": "旨在搭建全省电商交流、产品展示、资源对接平台，激发妇女创新创业活力",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-114-149-viewpoint",
+      "paragraphIndex": 2,
+      "start": 114,
+      "end": 149,
+      "text": "来自全省的28名优秀女主播身着传统汉服，在多个社交平台展开线上带货PK",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-79-89-exam_point",
+      "paragraphIndex": 0,
+      "start": 79,
+      "end": 89,
+      "text": "青川木耳、剑门豆腐干",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-28-36-exam_point",
+      "paragraphIndex": 1,
+      "start": 28,
+      "end": 36,
+      "text": "乡村振兴巾帼行动",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-136-140-exam_point",
+      "paragraphIndex": 1,
+      "start": 136,
+      "end": 140,
+      "text": "川货出川",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-95-102-exam_point",
+      "paragraphIndex": 2,
+      "start": 95,
+      "end": 102,
+      "text": "电商直播大比武",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-104-121-exam_point",
+      "paragraphIndex": 3,
+      "start": 104,
+      "end": 121,
+      "text": "资中茶叶、自贡冷吃兔、邻水溏心皮蛋",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-141-155-exam_point",
+      "paragraphIndex": 3,
+      "start": 141,
+      "end": 155,
+      "text": "乐至蜀绣、麻柳刺绣、北川羌绣",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-32-36-term",
+      "paragraphIndex": 1,
+      "start": 32,
+      "end": 36,
+      "text": "巾帼行动",
+      "type": "term"
+    },
+    {
+      "id": "ai-2-47-51-term",
+      "paragraphIndex": 2,
+      "start": 47,
+      "end": 51,
+      "text": "村播联盟",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 5
+  }
+}
