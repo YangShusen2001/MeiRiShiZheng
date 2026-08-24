@@ -1,0 +1,24 @@
+{
+  "date": "2026-08-24",
+  "sourcesOk": 15,
+  "sourceErrors": [],
+  "candidates": 16,
+  "articles": 13,
+  "aiOk": 11,
+  "aiError": 2,
+  "aiFailures": [
+    {
+      "articleId": "0ce4681c64",
+      "reason": "ai_semantic:summary_length"
+    },
+    {
+      "articleId": "740b242eee",
+      "reason": "ai_semantic:summary_length"
+    }
+  ],
+  "locationErrors": 14,
+  "schemaErrors": [],
+  "semanticErrors": [],
+  "volumeErrors": [],
+  "qualityStatus": "degraded"
+}

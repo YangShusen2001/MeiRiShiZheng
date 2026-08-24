@@ -1,0 +1,119 @@
+{
+  "id": "25943af76c",
+  "date": "2026-08-24",
+  "title": "2026世界人形机器人运动会赛况",
+  "source": "半月谈",
+  "url": "http://www.banyuetan.org/jrt/detail/20260824/1000200033134991787535411634335294_1.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-24T22:25:09+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "8月23日，“天工队”机器人在400米（大型组）决赛中，它的成绩是38秒15。",
+    "8月23日，第二届世界人形机器人运动会在北京国家速滑馆“冰丝带”继续举行。",
+    "8月23日，“天工队”机器人（前）在400米（大型组）决赛中，它的成绩是38秒15。",
+    "8月23日，“追风仔仔队”机器人（右）、惊鸿动力队机器人（中）和荣耀双驰战队机器人在400米（大型组）决赛中。",
+    "8月23日，荣耀双驰战队机器人在1500决赛第3组比赛中。最终，荣耀双驰战队以2分36秒73的成绩完赛，获得第五名。",
+    "8月23日，香港大学SMASH战队机器人（右）在乒乓球小组赛中回球。最终，香港大学SMASH战队2比1战胜上海交通大学/上海创智学院联合战队，成功晋级。",
+    "8月23日，北京航空航天大学-北京人形智能凌峰队机器人（右）和冰城铁甲队机器人在自由搏击40KG级1/16决赛中。最终，冰城铁甲队获胜。",
+    "8月23日，驰稳队队员刘海宝（左）在灵巧手专项赛镊子夹豆比赛前测试机器人。",
+    "8月23日，天卓队机器人在1500米决赛中。最终，天卓队以2分21秒64的成绩完赛，获得第一名。",
+    "8月23日，天骄队机器人在跳远决赛中。最终，天骄队以7米97的成绩完赛，获得第一名。",
+    "8月23日，灵心巧手队机器人在灵巧手专项赛电动工具装配比赛中，它最终获得冠军。",
+    "8月23日，复旦大学若客战队人形机器人在乒乓球比赛中。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-24T22:25:11+00:00",
+  "sourceTextHash": "c46310fd45c2b31ac14be2948a42858c85c1dacc88612715ab5c8450abde5c46",
+  "aiStatus": "ok",
+  "aiSummary": "8月23日，第二届世界人形机器人运动会在北京“冰丝带”举行，天工队、天卓队、天骄队等参赛，涵盖400米、1500米、跳远、乒乓球、自由搏击及灵巧手专项赛，展现机器人运动能力与技术进步。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-6-19-viewpoint",
+      "paragraphIndex": 1,
+      "start": 6,
+      "end": 19,
+      "text": "第二届世界人形机器人运动会",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-20-32-term",
+      "paragraphIndex": 1,
+      "start": 20,
+      "end": 32,
+      "text": "北京国家速滑馆“冰丝带”",
+      "type": "term",
+      "explanation": "北京国家速滑馆的别称，2022年冬奥会速滑比赛场地，现用于举办大型赛事。"
+    },
+    {
+      "id": "ai-0-33-38-exam_point",
+      "paragraphIndex": 0,
+      "start": 33,
+      "end": 38,
+      "text": "38秒15",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-39-46-exam_point",
+      "paragraphIndex": 4,
+      "start": 39,
+      "end": 46,
+      "text": "2分36秒73",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-8-29-36-exam_point",
+      "paragraphIndex": 8,
+      "start": 29,
+      "end": 36,
+      "text": "2分21秒64",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-9-26-30-exam_point",
+      "paragraphIndex": 9,
+      "start": 26,
+      "end": 30,
+      "text": "7米97",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-48-51-exam_point",
+      "paragraphIndex": 5,
+      "start": 48,
+      "end": 51,
+      "text": "2比1",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-7-10-viewpoint",
+      "paragraphIndex": 2,
+      "start": 7,
+      "end": 10,
+      "text": "天工队",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-10-15-21-term",
+      "paragraphIndex": 10,
+      "start": 15,
+      "end": 21,
+      "text": "灵巧手专项赛",
+      "type": "term",
+      "explanation": "人形机器人竞赛中考察手部精细操作能力的专项比赛，如镊子夹豆、工具装配等。"
+    },
+    {
+      "id": "ai-6-40-49-term",
+      "paragraphIndex": 6,
+      "start": 40,
+      "end": 49,
+      "text": "自由搏击40KG级",
+      "type": "term",
+      "explanation": "人形机器人对抗赛中的重量级别，40KG级指机器人重量在40公斤以下。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 2
+  }
+}

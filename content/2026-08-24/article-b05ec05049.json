@@ -1,0 +1,116 @@
+{
+  "id": "b05ec05049",
+  "date": "2026-08-24",
+  "title": "策马逐风 德格首届格萨尔王杯赛马激情开赛",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202608/83310249.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-24T22:24:19+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "2026年8月24日，甘孜州德格县马尼干戈镇曲西村格萨尔赛马场内，“岭·格萨尔王杯”赛马活动赛事热度持续攀升。当日下午，11公里竞速赛马赛事激情开赛，参赛骑手策马扬鞭、驰骋草场，展开速度与耐力的激烈角逐。看台上群众与游客齐聚一堂，助威呐喊声回荡在草原上空。",
+    "据悉，这是德格县首届“岭·格萨尔王杯”赛马活动，举办时间为8月22日至26日。本次盛会活动亮点不断升级，次日将继续上演精彩赛马对决，同时推出高水平民族马术特技展演。此次活动以赛马为媒、以文化为魂，生动展现德格独具特色的民俗风情，进一步激活文旅融合发展动能，丰富当地群众的精神文化生活。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-24T22:24:20+00:00",
+  "sourceTextHash": "77995617cef523e7e8ceabbde9add852e56842ee21cac5e9c66b47d325c6f006",
+  "aiStatus": "ok",
+  "aiSummary": "2026年8月24日，甘孜州德格县举办首届“岭·格萨尔王杯”赛马活动，11公里竞速赛激情开赛，活动将持续至26日，并推出马术特技展演，以赛马为媒展现民俗风情，激活文旅融合动能。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-0-10-exam_point",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 10,
+      "text": "2026年8月24日",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-11-31-term",
+      "paragraphIndex": 0,
+      "start": 11,
+      "end": 31,
+      "text": "甘孜州德格县马尼干戈镇曲西村格萨尔赛马场",
+      "type": "term",
+      "explanation": "位于四川省甘孜州德格县马尼干戈镇曲西村的赛马场地，用于举办格萨尔王杯等赛马活动。"
+    },
+    {
+      "id": "ai-0-60-74-viewpoint",
+      "paragraphIndex": 0,
+      "start": 60,
+      "end": 74,
+      "text": "11公里竞速赛马赛事激情开赛",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-89-101-viewpoint",
+      "paragraphIndex": 0,
+      "start": 89,
+      "end": 101,
+      "text": "展开速度与耐力的激烈角逐",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-102-114-viewpoint",
+      "paragraphIndex": 0,
+      "start": 102,
+      "end": 114,
+      "text": "看台上群众与游客齐聚一堂",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-5-23-exam_point",
+      "paragraphIndex": 1,
+      "start": 5,
+      "end": 23,
+      "text": "德格县首届“岭·格萨尔王杯”赛马活动",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-24-38-exam_point",
+      "paragraphIndex": 1,
+      "start": 24,
+      "end": 38,
+      "text": "举办时间为8月22日至26日",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-70-81-exam_point",
+      "paragraphIndex": 1,
+      "start": 70,
+      "end": 81,
+      "text": "高水平民族马术特技展演",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-86-97-viewpoint",
+      "paragraphIndex": 1,
+      "start": 86,
+      "end": 97,
+      "text": "以赛马为媒、以文化为魂",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-117-127-exam_point",
+      "paragraphIndex": 1,
+      "start": 117,
+      "end": 127,
+      "text": "激活文旅融合发展动能",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-13-18-term",
+      "paragraphIndex": 1,
+      "start": 13,
+      "end": 18,
+      "text": "格萨尔王杯",
+      "type": "term",
+      "explanation": "以藏族英雄格萨尔王命名的赛马赛事，旨在传承民族文化，促进文旅融合。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}
