@@ -1,0 +1,109 @@
+{
+  "id": "a0ddea5790",
+  "date": "2026-08-25",
+  "title": "广东2026年第二次高中学考成绩9月2日可查",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202608/25/139996_54994701.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-08-25T22:25:36+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "8月24日，广东省教育考试院宣布，广东省2026年第二次普通高中学业水平合格性考试评卷工作已全部完成。考生可于9月2日上午10时起查询成绩，届时可通过广东省教育考试院官微小程序、百度智能小程序和支付宝小程序三种渠道查询。",
+    "根据安排，成绩证书下载打印通道将于9月24日上午10时开放。考生对本人成绩有疑问的，须在9月4日17时前携带准考证向所在中学或当地县（市、区）招生办公室提出书面复查申请，逾期将不再受理。",
+    "此次高中学考成绩将以“等级”和“分数”形式呈现，等级成绩由高到低分为A、B、C、D、E五个等级，其中A至D等级为合格，E等级为不合格。高中学考成绩是高校招生录取、普通高中毕业和同等学力认定的重要依据之一。",
+    "高中学考成绩与高考录取直接挂钩，建议考生和家长及时查询并妥善保管电子版成绩单，避免影响后续升学手续办理。",
+    "省教育考试院特别提醒，外省户籍考生在广东省高中阶段学校读书期间取得的高中学考成绩需转出广东省的，不再进行审核和出具“成绩证明书”，考生可向有关省学业水平考试管理部门提供我省成绩证书（含电子版）进行验证。如遗忘查询密码，可通过广东省普通高考/学考报名系统凭手机短信验证码找回，或到原报名点进行密码重置。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-25T22:25:37+00:00",
+  "sourceTextHash": "93a6008475c58aac4057d66bb4351c0b6c0b840126e21a779ed7ca0e0cb1128d",
+  "aiStatus": "ok",
+  "aiSummary": "广东省2026年第二次高中学考成绩将于9月2日可查，考生可通过三种渠道查询，成绩以等级和分数呈现，A至D为合格，成绩与高考录取挂钩，外省户籍考生成绩转出有新规定。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-51-69-viewpoint",
+      "paragraphIndex": 0,
+      "start": 51,
+      "end": 69,
+      "text": "考生可于9月2日上午10时起查询成绩",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-85-92-viewpoint",
+      "paragraphIndex": 1,
+      "start": 85,
+      "end": 92,
+      "text": "逾期将不再受理",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-67-101-viewpoint",
+      "paragraphIndex": 2,
+      "start": 67,
+      "end": 101,
+      "text": "高中学考成绩是高校招生录取、普通高中毕业和同等学力认定的重要依据之一",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-0-15-viewpoint",
+      "paragraphIndex": 3,
+      "start": 0,
+      "end": 15,
+      "text": "高中学考成绩与高考录取直接挂钩",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-55-64-exam_point",
+      "paragraphIndex": 0,
+      "start": 55,
+      "end": 64,
+      "text": "9月2日上午10时",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-83-103-exam_point",
+      "paragraphIndex": 0,
+      "start": 83,
+      "end": 103,
+      "text": "官微小程序、百度智能小程序和支付宝小程序",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-44-52-exam_point",
+      "paragraphIndex": 1,
+      "start": 44,
+      "end": 52,
+      "text": "9月4日17时前",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-34-47-exam_point",
+      "paragraphIndex": 2,
+      "start": 34,
+      "end": 47,
+      "text": "A、B、C、D、E五个等级",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-50-58-exam_point",
+      "paragraphIndex": 2,
+      "start": 50,
+      "end": 58,
+      "text": "A至D等级为合格",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-48-64-exam_point",
+      "paragraphIndex": 4,
+      "start": 48,
+      "end": 64,
+      "text": "不再进行审核和出具“成绩证明书”",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

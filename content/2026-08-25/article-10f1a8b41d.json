@@ -1,0 +1,165 @@
+{
+  "id": "10f1a8b41d",
+  "date": "2026-08-25",
+  "title": "35名台湾同胞走进凉山 想把大凉山蝶变故事带回台湾",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202608/83310877.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-25T22:25:59+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "近日，35名台湾同胞走进凉山州多地开启为期五天的深度参访之旅，沉浸式感受凉山州生态环境、民族风情及发展故事。",
+    "在西昌市，台湾同胞们深入了解当地民营企业深耕中医药领域、传承创新中医文化、推动中医药产业提质增效的发展故事。凉山州民族文化博物馆内，悠久的彝族文字、珍贵的馆藏文物讲述凉山千年的人文底蕴，熠熠生辉的“彝海结盟”历史、薪火相传的革命精神，让在场台湾同胞深受触动。从建昌古城、邛海泸山风景区、大石板古村落，到凉山州脱贫攻坚陈列馆，大家沉浸式感受凉山在传承传统文化、加强生态环境保护、巩固拓展脱贫攻坚成果、深化文旅产业融合发展等方面取得的成果。",
+    "台胞廖先生表示：“沿途的人文风景非常壮观，让我感受到祖国的强大。”台胞吴先生对于凉山的发展建设成就、人民幸福生活很有感触，“祝福大陆越来越好。”",
+    "在宁南县五星级蚕桑现代农业园区、茧丝绸工业集中发展区，35名台湾同胞详细了解当地依托特色桑蚕打造的富民产业发展路径及助农增收成果。来到气势恢弘的白鹤滩水电站大坝，台湾同胞沉浸感受祖国大陆强大的基建与科技实力。",
+    "台胞马女士表示，此次搭乘动车走进大凉山，一路风光壮阔、万象更新，“希望有更多台湾同胞来近距离感受这种震撼。”",
+    "在冕宁县，台资企业元升集团深耕油橄榄特色产业多年。在企业的示范带动下，当地农户积极投身这一产业，如今当地油橄榄种植规模已达2.5万亩，油橄榄产业已然成长为冕宁大地上熠熠生辉的现代农业特色名片。参访团实地走访种植基地，细细观摩企业迭代创新的橄榄油系列产品，真切见证台企扎根大陆沃土，乘着优良营商环境的东风，依托当地丰厚产业资源实现跨越式发展的鲜活故事。",
+    "台湾同胞在冕宁县，了解当地台资企业深耕发展特色油橄榄产业故事。",
+    "“今天亲眼看到了这一切，深切感受到大陆开放包容的营商环境与对台企的支持。真心期盼大陆愈发繁荣美好。”台胞吴女士说道。",
+    "此行尾声，台湾同胞纷纷表示收获满满、感触颇深，通过亲身感受凉山的跨越式发展，也深深体会到四川的发展活力。他们愿把这次凉山之行的所见所闻带回台湾，向更多台湾同胞讲述四川的发展故事。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-25T22:26:00+00:00",
+  "sourceTextHash": "97e0f432b164a7b0899e1d6517b2ebdff249cf09cb10e00e9596b8476f4809f5",
+  "aiStatus": "ok",
+  "aiSummary": "35名台湾同胞近日赴凉山州参访，感受当地生态、文化与发展成就，体验台企扎根大陆的成果，愿将所见所闻带回台湾，讲述四川发展故事。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-3-30-viewpoint",
+      "paragraphIndex": 0,
+      "start": 3,
+      "end": 30,
+      "text": "35名台湾同胞走进凉山州多地开启为期五天的深度参访之旅",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-117-128-viewpoint",
+      "paragraphIndex": 1,
+      "start": 117,
+      "end": 128,
+      "text": "让在场台湾同胞深受触动",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-21-31-viewpoint",
+      "paragraphIndex": 2,
+      "start": 21,
+      "end": 31,
+      "text": "让我感受到祖国的强大",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-33-52-viewpoint",
+      "paragraphIndex": 4,
+      "start": 33,
+      "end": 52,
+      "text": "希望有更多台湾同胞来近距离感受这种震撼",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-7-12-35-viewpoint",
+      "paragraphIndex": 7,
+      "start": 12,
+      "end": 35,
+      "text": "深切感受到大陆开放包容的营商环境与对台企的支持",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-99-103-term",
+      "paragraphIndex": 1,
+      "start": 99,
+      "end": 103,
+      "text": "彝海结盟",
+      "type": "term",
+      "explanation": "指1935年红军长征途中刘伯承与彝族首领小叶丹歃血结盟的历史事件，体现民族团结精神。"
+    },
+    {
+      "id": "ai-1-39-44-term",
+      "paragraphIndex": 1,
+      "start": 39,
+      "end": 44,
+      "text": "中医药产业",
+      "type": "term",
+      "explanation": "指以中医药理论为指导，涵盖种植、研发、生产、服务等环节的产业体系。"
+    },
+    {
+      "id": "ai-3-7-15-term",
+      "paragraphIndex": 3,
+      "start": 7,
+      "end": 15,
+      "text": "蚕桑现代农业园区",
+      "type": "term",
+      "explanation": "指以蚕桑种植和加工为核心的现代农业园区，推动特色产业发展和助农增收。"
+    },
+    {
+      "id": "ai-5-67-72-term",
+      "paragraphIndex": 5,
+      "start": 67,
+      "end": 72,
+      "text": "油橄榄产业",
+      "type": "term",
+      "explanation": "指以油橄榄种植和橄榄油加工为主的特色农业产业，带动当地经济发展。"
+    },
+    {
+      "id": "ai-1-188-198-exam_point",
+      "paragraphIndex": 1,
+      "start": 188,
+      "end": 198,
+      "text": "巩固拓展脱贫攻坚成果",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-199-209-exam_point",
+      "paragraphIndex": 1,
+      "start": 199,
+      "end": 209,
+      "text": "深化文旅产业融合发展",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-72-78-exam_point",
+      "paragraphIndex": 3,
+      "start": 72,
+      "end": 78,
+      "text": "白鹤滩水电站",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-144-148-exam_point",
+      "paragraphIndex": 5,
+      "start": 144,
+      "end": 148,
+      "text": "营商环境",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-5-9-exam_point",
+      "paragraphIndex": 5,
+      "start": 5,
+      "end": 9,
+      "text": "台资企业",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-8-32-37-exam_point",
+      "paragraphIndex": 8,
+      "start": 32,
+      "end": 37,
+      "text": "跨越式发展",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-8-44-51-exam_point",
+      "paragraphIndex": 8,
+      "start": 44,
+      "end": 51,
+      "text": "四川的发展活力",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

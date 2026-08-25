@@ -1,0 +1,91 @@
+{
+  "id": "e1da197e0b",
+  "date": "2026-08-25",
+  "title": "习近平同约旦国王阿卜杜拉二世会谈",
+  "source": "半月谈",
+  "url": "http://www.banyuetan.org/jrt/detail/20260825/1000200033134991787621906736395115_1.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-25T22:27:11+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "8月24日下午，国家主席习近平在北京人民大会堂同来华进行国事访问的约旦国王阿卜杜拉二世举行会谈。",
+    "8月24日下午，国家主席习近平在北京人民大会堂同来华进行国事访问的约旦国王阿卜杜拉二世举行会谈。这是会谈前，习近平在人民大会堂北大厅为阿卜杜拉二世举行欢迎仪式。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-25T22:27:17+00:00",
+  "sourceTextHash": "05d32b7663cdefc5e48234ffe9ede176c93848946b4e509fb614167389a64680",
+  "aiStatus": "ok",
+  "aiSummary": "8月24日，习近平主席在北京人民大会堂同约旦国王阿卜杜拉二世举行会谈，并为其举行欢迎仪式，双方就双边关系及共同关心的问题交换意见。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-8-47-viewpoint",
+      "paragraphIndex": 0,
+      "start": 8,
+      "end": 47,
+      "text": "国家主席习近平在北京人民大会堂同来华进行国事访问的约旦国王阿卜杜拉二世举行会谈",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-28-32-term",
+      "paragraphIndex": 0,
+      "start": 28,
+      "end": 32,
+      "text": "国事访问",
+      "type": "term",
+      "explanation": "指国家元首应另一国元首邀请进行的正式访问，通常涉及高级别政治会谈和礼仪活动。"
+    },
+    {
+      "id": "ai-1-54-79-viewpoint",
+      "paragraphIndex": 1,
+      "start": 54,
+      "end": 79,
+      "text": "习近平在人民大会堂北大厅为阿卜杜拉二世举行欢迎仪式",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-0-7-exam_point",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 7,
+      "text": "8月24日下午",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-16-23-exam_point",
+      "paragraphIndex": 0,
+      "start": 16,
+      "end": 23,
+      "text": "北京人民大会堂",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-12-15-exam_point",
+      "paragraphIndex": 0,
+      "start": 12,
+      "end": 15,
+      "text": "习近平",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-33-43-exam_point",
+      "paragraphIndex": 0,
+      "start": 33,
+      "end": 43,
+      "text": "约旦国王阿卜杜拉二世",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-75-79-exam_point",
+      "paragraphIndex": 1,
+      "start": 75,
+      "end": 79,
+      "text": "欢迎仪式",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

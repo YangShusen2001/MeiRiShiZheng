@@ -1,0 +1,109 @@
+{
+  "id": "c5bff83cfd",
+  "date": "2026-08-25",
+  "title": "江苏省人民政府 要闻关注 刘小涛主持召开第八期政企恳谈会 提升海洋开发能力 加快打造蓝色引擎",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/8/25/art_84322_11820160.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-25T22:26:41+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "8月24日，省长刘小涛主持召开今年第八期政企恳谈会，深入学习贯彻习近平总书记关于推动海洋经济高质量发展重要论述和对江苏工作重要讲话精神，围绕加强海洋生态保护、高效开发利用海洋、构建现代海洋产业体系听取相关企业和科创平台意见建议。",
+    "会上，中天钢铁、扬子江船业、海力风电、世航智能、商汤科技、岚泽能源、盐城港集团、深蓝渔业、澳新生物等企业及中船集团七〇二所负责人，先后围绕高端制造、港航物流、船舶海工、智慧装备、绿色能源、渔业医药等领域交流发言。大家表示，江苏沿海区域条件优越，江海联动、向海图强禀赋厚实，将进一步强化创新驱动，用足用好优势资源，以海洋新兴产业和未来产业不断壮大加快发展海洋新质生产力。省有关部门单位和设区市认真听取意见建议并回应企业诉求，表示要加强规划引领和政策支持，统筹好海洋资源开发和保护，合力打造沿海蓝色增长极。",
+    "会议指出，要科学谋划实施全省海洋经济高质量发展规划，细化出台系列配套政策措施，分类施策推进企业梯度培育、创新平台建设、重大项目招引，加大关键装备与核心技术攻关力度，加强金融、人才和资源要素保障，持续深化海洋经济专题研究，不断提升海洋保护和开发能力、释放产业增长动能，更好激发海洋经济主力军作用，推动海洋强省建设迈上新台阶。",
+    "副省长马士光，省政府秘书长赵建军，省有关部门单位和部分设区市负责同志参加。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-25T22:26:44+00:00",
+  "sourceTextHash": "6ae1af5604d5ad02ccfac9fc5f39d08673ff8b6f15eeadb8c4866f96f6acec95",
+  "aiStatus": "ok",
+  "aiSummary": "江苏省省长刘小涛主持召开第八期政企恳谈会，围绕海洋生态保护、开发利用及现代海洋产业体系建设，听取企业意见，强调提升海洋开发能力，打造蓝色增长极，推动海洋强省建设。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-26-67-viewpoint",
+      "paragraphIndex": 0,
+      "start": 26,
+      "end": 67,
+      "text": "深入学习贯彻习近平总书记关于推动海洋经济高质量发展重要论述和对江苏工作重要讲话精神",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-68-113-viewpoint",
+      "paragraphIndex": 0,
+      "start": 68,
+      "end": 113,
+      "text": "围绕加强海洋生态保护、高效开发利用海洋、构建现代海洋产业体系听取相关企业和科创平台意见建议",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-111-135-viewpoint",
+      "paragraphIndex": 1,
+      "start": 111,
+      "end": 135,
+      "text": "江苏沿海区域条件优越，江海联动、向海图强禀赋厚实",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-156-183-exam_point",
+      "paragraphIndex": 1,
+      "start": 156,
+      "end": 183,
+      "text": "以海洋新兴产业和未来产业不断壮大加快发展海洋新质生产力",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-226-238-exam_point",
+      "paragraphIndex": 1,
+      "start": 226,
+      "end": 238,
+      "text": "统筹好海洋资源开发和保护",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-6-25-exam_point",
+      "paragraphIndex": 2,
+      "start": 6,
+      "end": 25,
+      "text": "科学谋划实施全省海洋经济高质量发展规划",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-39-65-exam_point",
+      "paragraphIndex": 2,
+      "start": 39,
+      "end": 65,
+      "text": "分类施策推进企业梯度培育、创新平台建设、重大项目招引",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-66-81-exam_point",
+      "paragraphIndex": 2,
+      "start": 66,
+      "end": 81,
+      "text": "加大关键装备与核心技术攻关力度",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-82-96-exam_point",
+      "paragraphIndex": 2,
+      "start": 82,
+      "end": 96,
+      "text": "加强金融、人才和资源要素保障",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-149-155-term",
+      "paragraphIndex": 2,
+      "start": 149,
+      "end": 155,
+      "text": "海洋强省建设",
+      "type": "term",
+      "explanation": "指通过发展海洋经济、保护海洋生态、提升海洋科技等，将省份建设为海洋经济发达、生态良好的强省。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

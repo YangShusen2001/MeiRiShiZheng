@@ -1,0 +1,116 @@
+{
+  "id": "e950a5a09b",
+  "date": "2026-08-25",
+  "title": "江苏省人民政府 要闻关注 省政府与圆通速递签署战略合作协议 刘小涛会见喻渭蛟",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/8/25/art_84322_11820161.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-25T22:26:48+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "8月24日，省政府与圆通速递有限公司签署战略合作协议。省长刘小涛会见圆通速递董事局主席喻渭蛟一行，并见证共同签约。",
+    "双方表示，将携手构建多层次产业供应链服务体系，完善多港联动、多式联运机制，加强国际卡班、口岸通关合作，开展智慧物流、智慧社区试点，探索协同出海新模式，持续推动物流降本提质增效，为江苏扩大高水平对外开放、加快产业转型升级提供坚实支撑。",
+    "副省长马士光，南京市市长李忠军，省政府秘书长赵建军参加。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-25T22:26:48+00:00",
+  "sourceTextHash": "884bff3d006ab0567752e407d1c256eabe7087fa4f1dd129fedce247137203b0",
+  "aiStatus": "ok",
+  "aiSummary": "8月24日，江苏省政府与圆通速递签署战略合作协议，省长刘小涛会见圆通董事局主席喻渭蛟并见证签约。双方将共建多层次产业供应链，完善多式联运，加强国际物流合作，推动降本增效，助力江苏高水平开放与产业升级。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-6-26-viewpoint",
+      "paragraphIndex": 0,
+      "start": 6,
+      "end": 26,
+      "text": "省政府与圆通速递有限公司签署战略合作协议",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-6-22-viewpoint",
+      "paragraphIndex": 1,
+      "start": 6,
+      "end": 22,
+      "text": "携手构建多层次产业供应链服务体系",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-75-87-viewpoint",
+      "paragraphIndex": 1,
+      "start": 75,
+      "end": 87,
+      "text": "持续推动物流降本提质增效",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-88-115-viewpoint",
+      "paragraphIndex": 1,
+      "start": 88,
+      "end": 115,
+      "text": "为江苏扩大高水平对外开放、加快产业转型升级提供坚实支撑",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-0-5-exam_point",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 5,
+      "text": "8月24日",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-6-26-exam_point",
+      "paragraphIndex": 0,
+      "start": 6,
+      "end": 26,
+      "text": "省政府与圆通速递有限公司签署战略合作协议",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-27-48-exam_point",
+      "paragraphIndex": 0,
+      "start": 27,
+      "end": 48,
+      "text": "省长刘小涛会见圆通速递董事局主席喻渭蛟一行",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-23-36-exam_point",
+      "paragraphIndex": 1,
+      "start": 23,
+      "end": 36,
+      "text": "完善多港联动、多式联运机制",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-51-64-exam_point",
+      "paragraphIndex": 1,
+      "start": 51,
+      "end": 64,
+      "text": "开展智慧物流、智慧社区试点",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-65-74-exam_point",
+      "paragraphIndex": 1,
+      "start": 65,
+      "end": 74,
+      "text": "探索协同出海新模式",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-79-87-term",
+      "paragraphIndex": 1,
+      "start": 79,
+      "end": 87,
+      "text": "物流降本提质增效",
+      "type": "term",
+      "explanation": "指通过优化物流流程、技术应用和管理创新，降低物流成本，提高物流效率和服务质量。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

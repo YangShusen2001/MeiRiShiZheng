@@ -1,0 +1,149 @@
+{
+  "id": "b9f10f679f",
+  "date": "2026-08-25",
+  "title": "新华视点丨从帐篷到钟楼 城市处处皆可读",
+  "source": "news.cn",
+  "url": "https://www.news.cn/politics/20260825/3318e32ba0104c9a8729d679b38bdd14/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-25T22:25:17+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;近年来，各地实体书店不断探索创新，阅读场景不断拓展，书店逐渐成为集文化体验、社交休闲、城市记忆于一体的城市文化空间，为全民阅读注入更多活力。",
+    "&emsp;&emsp;西安钟楼书店有70多年的历史，这座融合中西风格的建筑承载着几代西安人的文化记忆。钟楼书店面积近4000平方米，藏书20万册。生活美学、文学艺术、少儿阅读、文教社科，每一层都有自己的主题和气质。",
+    "&emsp;&emsp;轻饮吧台、文创市集、艺术展览、非遗手作——这些年轻人喜欢的元素，与书香气息巧妙结合起来。",
+    "&emsp;&emsp;书店四楼陈列着市民捐赠的旧书、老连环画、几十年前的购书发票。一本本泛黄的书页里，藏着一座城市的阅读记忆。",
+    "&emsp;&emsp;钟楼书店的发展，是一座城市文化记忆的缩影，也是实体书店蝶变的一扇窗。如果你来到西安，不妨在这里停一停，选一本书，让自己慢下来。",
+    "&emsp;&emsp;在全民阅读氛围日益浓厚、年轻人需求愈发多元的当下，越来越多的书店正打破传统边界，演化出崭新的面貌。在河南省郑州市中原区合物660文创园，一间名为“野狗商店”的独立书店颇为引人注目。",
+    "&emsp;&emsp;这家策展型艺术书店创办于2018年，店内融合选书阅读、主题展览、城市文创周边等内容，打造本土内容品牌 “壹页郑州”，邀约本地创作者以插画讲述城市故事，并衍生出系列城市文创产品。",
+    "&emsp;&emsp;书店持续开展各类社群活动，先后推出 “城市打气计划”“漂流换书计划”“郑州散步计划” 等主题项目，今年又发起 “放学后俱乐部”，聚焦人们工作之余的闲暇时光，打造松弛的精神休憩空间。",
+    "&emsp;&emsp;近年来，山西新华书店吕梁门店稳步升级改造，打造“书店+咖啡”“书店+文创”“书店+研学”等多元业态，设置红色书房、读书休闲区等功能区域，常年开展读书分享、研学体验等活动，既坚守全民阅读主阵地，又成为兼具阅读与体验的城市文化新地标，彰显三晋书香魅力。",
+    "&emsp;&emsp;近日，在重庆，100多个特色帐篷组成“帐篷阅读节”，让阅读走进户外、贴近自然、融入生活。活动涵盖围炉分享、亲子绘本剧场、文创手作工坊、帐篷夜读、音乐会等内容。",
+    "&emsp;&emsp;活动把阅读变成一场户外生活体验，是一场集图书交易、文化展示、阅读推广于一体的文化盛宴。",
+    "&emsp;&emsp;统筹：李杰 李佳琳 王冰笛",
+    "&emsp;&emsp;记者：吴鸿波 王前慧 杨静 原勋 麻明磊 赵小帅"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-25T22:25:18+00:00",
+  "sourceTextHash": "e81d4bea38f123afc3cb3dc8025b8374f54602f2cda6af61469608dff7033dff",
+  "aiStatus": "ok",
+  "aiSummary": "各地实体书店创新转型，从西安钟楼书店到郑州野狗商店，再到山西吕梁门店和重庆帐篷阅读节，阅读场景不断拓展，书店成为集文化、社交、记忆于一体的城市空间，为全民阅读注入活力。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-38-69-viewpoint",
+      "paragraphIndex": 0,
+      "start": 38,
+      "end": 69,
+      "text": "书店逐渐成为集文化体验、社交休闲、城市记忆于一体的城市文化空间",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-12-45-viewpoint",
+      "paragraphIndex": 4,
+      "start": 12,
+      "end": 45,
+      "text": "钟楼书店的发展，是一座城市文化记忆的缩影，也是实体书店蝶变的一扇窗",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-5-37-60-viewpoint",
+      "paragraphIndex": 5,
+      "start": 37,
+      "end": 60,
+      "text": "越来越多的书店正打破传统边界，演化出崭新的面貌",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-8-97-126-viewpoint",
+      "paragraphIndex": 8,
+      "start": 97,
+      "end": 126,
+      "text": "既坚守全民阅读主阵地，又成为兼具阅读与体验的城市文化新地标",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-71-75-term",
+      "paragraphIndex": 0,
+      "start": 71,
+      "end": 75,
+      "text": "全民阅读",
+      "type": "term"
+    },
+    {
+      "id": "ai-5-85-89-term",
+      "paragraphIndex": 5,
+      "start": 85,
+      "end": 89,
+      "text": "野狗商店",
+      "type": "term"
+    },
+    {
+      "id": "ai-9-31-36-term",
+      "paragraphIndex": 9,
+      "start": 31,
+      "end": 36,
+      "text": "帐篷阅读节",
+      "type": "term"
+    },
+    {
+      "id": "ai-1-67-73-exam_point",
+      "paragraphIndex": 1,
+      "start": 67,
+      "end": 73,
+      "text": "藏书20万册",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-12-31-exam_point",
+      "paragraphIndex": 2,
+      "start": 12,
+      "end": 31,
+      "text": "轻饮吧台、文创市集、艺术展览、非遗手作",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-64-68-exam_point",
+      "paragraphIndex": 6,
+      "start": 64,
+      "end": 68,
+      "text": "壹页郑州",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-7-31-37-exam_point",
+      "paragraphIndex": 7,
+      "start": 31,
+      "end": 37,
+      "text": "城市打气计划",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-8-36-41-exam_point",
+      "paragraphIndex": 8,
+      "start": 36,
+      "end": 41,
+      "text": "书店+咖啡",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-9-19-28-exam_point",
+      "paragraphIndex": 9,
+      "start": 19,
+      "end": 28,
+      "text": "100多个特色帐篷",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-10-32-46-exam_point",
+      "paragraphIndex": 10,
+      "start": 32,
+      "end": 46,
+      "text": "图书交易、文化展示、阅读推广",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

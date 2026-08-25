@@ -1,0 +1,117 @@
+{
+  "id": "9a39730d7f",
+  "date": "2026-08-25",
+  "title": "雅化集团上半年净利润12.16亿元，同比增长超795%",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202608/83310871.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-25T22:26:21+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "8月25日，雅化集团披露半年报，2026年上半年，公司实现营业收入67.09亿元，同比增长96.02%；归属于上市公司股东的净利润12.16亿元，同比增长795.48%。",
+    "雅化集团表示，报告期内，锂盐市场价格上行，同时公司锂盐产品销量较上年同期增长，从而主营业务收入显著提升，锂业务实现营业收入49.28亿元，同比增长179.36%；公司民爆业务实现营业收入15.64亿元，同比增长6.72%。",
+    "雅化集团主营业务包括锂业务和民爆业务两大板块，锂业务包括锂矿采选和锂盐产品生产，民爆业务又分为民爆生产、&nbsp;爆破及矿服业务，同时还涉足危化运输业务。",
+    "其中，&nbsp;锂业务方面，雅化集团目前拥有津巴布韦卡玛蒂维锂矿和四川李家沟锂矿两个锂矿山，另有两个锂盐产品生产基地。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-25T22:26:22+00:00",
+  "sourceTextHash": "e51267f33a1ff706db42ba617434160034c5dc12db452c3aef9f1e6262f9ec03",
+  "aiStatus": "ok",
+  "aiSummary": "雅化集团2026年上半年净利润12.16亿元，同比增长795.48%，主要因锂盐价格上行及销量增长，锂业务收入大幅提升，民爆业务稳步增长，公司业务涵盖锂和民爆两大板块。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-52-84-viewpoint",
+      "paragraphIndex": 0,
+      "start": 52,
+      "end": 84,
+      "text": "归属于上市公司股东的净利润12.16亿元，同比增长795.48%",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-12-38-viewpoint",
+      "paragraphIndex": 1,
+      "start": 12,
+      "end": 38,
+      "text": "锂盐市场价格上行，同时公司锂盐产品销量较上年同期增长",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-52-80-viewpoint",
+      "paragraphIndex": 1,
+      "start": 52,
+      "end": 80,
+      "text": "锂业务实现营业收入49.28亿元，同比增长179.36%",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-4-22-viewpoint",
+      "paragraphIndex": 2,
+      "start": 4,
+      "end": 22,
+      "text": "主营业务包括锂业务和民爆业务两大板块",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-29-51-exam_point",
+      "paragraphIndex": 0,
+      "start": 29,
+      "end": 51,
+      "text": "营业收入67.09亿元，同比增长96.02%",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-62-84-exam_point",
+      "paragraphIndex": 0,
+      "start": 62,
+      "end": 84,
+      "text": "净利润12.16亿元，同比增长795.48%",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-52-80-exam_point",
+      "paragraphIndex": 1,
+      "start": 52,
+      "end": 80,
+      "text": "锂业务实现营业收入49.28亿元，同比增长179.36%",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-83-110-exam_point",
+      "paragraphIndex": 1,
+      "start": 83,
+      "end": 110,
+      "text": "民爆业务实现营业收入15.64亿元，同比增长6.72%",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-28-39-exam_point",
+      "paragraphIndex": 2,
+      "start": 28,
+      "end": 39,
+      "text": "锂矿采选和锂盐产品生产",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-23-41-exam_point",
+      "paragraphIndex": 3,
+      "start": 23,
+      "end": 41,
+      "text": "津巴布韦卡玛蒂维锂矿和四川李家沟锂矿",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-51-55-term",
+      "paragraphIndex": 3,
+      "start": 51,
+      "end": 55,
+      "text": "锂盐产品",
+      "type": "term",
+      "explanation": "锂的化合物，如碳酸锂、氢氧化锂，是锂电池等新能源产业的关键原料。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}
