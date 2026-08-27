@@ -1,0 +1,23 @@
+{
+  "id": "012e3253a4",
+  "date": "2026-08-27",
+  "title": "直击德格&ldquo;岭&middot;格萨尔王杯&rdquo;赛马巅峰对决",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202608/83311660.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-27T02:56:19+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "8月26日，甘孜州德格县马尼干戈镇曲西村格萨尔赛马场热闹非凡，第一届&ldquo;岭&middot;格萨尔王杯&rdquo;赛马活动迎来收官巅峰对决，五场重磅冠军争夺战轮番上演，尽显草原竞技魅力。",
+    "本次赛事赛程丰富、看点十足，涵盖12圈、13圈高难度竞速走马赛，以及改良马2000米、5000米和康巴本地马3000米速度赛多个项目。赛场上，骑手与骏马默契协作、驰骋赛场，全力比拼速度与耐力，马蹄奔腾、尘土飞扬，场面热血震撼。台下观众热情高涨，呐喊助威声此起彼伏，生动展现出康巴儿女的豪迈骁勇与德格浓郁独特的草原民俗风情。",
+    "作为第三届&ldquo;岭&middot;格萨尔王&rdquo;音乐季的重磅配套活动，本次赛马盛会以赛马为载体、文化为内核，让传统民俗焕发新时代生机，有效激活本地文旅融合动能，为德格草原文旅发展注入全新活力。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-27T02:56:21+00:00",
+  "sourceTextHash": "03e9ccba8c1d473809afdd18dd4d63dcd51e09adb07a2b6bb8632429aaee989c",
+  "aiStatus": "error",
+  "aiAnnotations": [],
+  "aiError": "ai_provider:request_failed"
+}

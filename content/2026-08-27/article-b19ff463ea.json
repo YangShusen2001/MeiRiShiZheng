@@ -1,0 +1,24 @@
+{
+  "id": "b19ff463ea",
+  "date": "2026-08-27",
+  "title": "运-20出动！西部战区空军派运-20运送战区指导组赶赴灾区",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202608/83311628.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-27T02:56:22+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "8月27日早上8时许，西部战区空军某机场引擎轰鸣，一架运-20振翅起飞，战区指导组乘机赴西藏日喀则吉隆灾区现场指导救灾。",
+    "前一日，获悉灾情后，该战区空军立即启动抢险救灾应急预案，组织包括运-20在内的多型飞机做好出动准备。预先号令一到，该战区空军某部迅速行动，遴选多个过硬机组，围绕航线规划、高原天气、备降机场等展开研究，充分预想预防各类风险， 备足特情处置预案。",
+    "针对高高原起降对装备性能要求高的特点，机务人员全面检查飞机，调试相关参数，并组织运-20的构型转换，加装物资固定装置、医疗救护设施等，做好人员前送、物资投送、伤员转运等多手准备。",
+    "“我们时刻准备着！坚决完成党和人民赋予的使命任务。” 驾驶运-20的张机长介绍，凌晨5点过，他们就赶到外场展开准备，确保安全顺利。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-27T02:56:24+00:00",
+  "sourceTextHash": "0e6e3b3ca03c17e49e0e02f8d6cb31936a2b9e74a8c44e42bdcc82eca82c77f2",
+  "aiStatus": "error",
+  "aiAnnotations": [],
+  "aiError": "ai_provider:request_failed"
+}
