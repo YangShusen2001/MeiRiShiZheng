@@ -1,0 +1,72 @@
+{
+  "date": "2026-08-28",
+  "sourcesOk": 15,
+  "sourceErrors": [],
+  "candidates": 16,
+  "articles": 14,
+  "aiOk": 0,
+  "aiError": 14,
+  "aiFailures": [
+    {
+      "articleId": "e70bd9fe96",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "3d3650d946",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "f30fda62b6",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "1f850afdad",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "e7c4495b5c",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "326d9870fc",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "9090d6ca32",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "c6a284f97a",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "3606a8c24e",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "46e8728a87",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "57420c8229",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "5f79985fa1",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "3b379b9736",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "9ae7073426",
+      "reason": "ai_provider:request_failed"
+    }
+  ],
+  "locationErrors": 0,
+  "schemaErrors": [],
+  "semanticErrors": [],
+  "volumeErrors": [],
+  "qualityStatus": "degraded"
+}

@@ -1,0 +1,116 @@
+{
+  "date": "2026-08-28",
+  "title": "每日日报 · 2026-08-28（周五）",
+  "sections": [
+    {
+      "id": "essay",
+      "title": "申论精读",
+      "items": [
+        {
+          "title": "灾害因何发生？救援进展如何——直击西藏吉隆泥石流灾害四大关切",
+          "date": "08-28",
+          "sourceUrl": "https://www.news.cn/politics/20260828/3223c142e4c54bb8ac5251780a1b6c54/c.html"
+        }
+      ]
+    },
+    {
+      "id": "guangdong",
+      "title": "广东要闻动态",
+      "items": [
+        {
+          "title": "“粤家军”天团闪耀“超级周”！解码广东具身智能军团如何铸就“六边形”战力",
+          "date": "08-28",
+          "sourceUrl": "https://news.dayoo.com/guangdong/202608/28/139996_54997041.htm"
+        },
+        {
+          "title": "珠联璧合 相向而行！粤港澳大湾区产学研创新协同深入推进",
+          "date": "08-28",
+          "sourceUrl": "https://news.dayoo.com/guangdong/202608/28/139996_54997035.htm"
+        },
+        {
+          "title": "广东将探索部分中职学校升格建设高职学校",
+          "date": "08-28",
+          "sourceUrl": "https://news.dayoo.com/guangdong/202608/28/139996_54997059.htm"
+        }
+      ]
+    },
+    {
+      "id": "sichuan",
+      "title": "四川要闻动态",
+      "items": [
+        {
+          "title": "唐荣、张玉帆任达州市人民政府副市长",
+          "date": "08-28",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83312373.html"
+        },
+        {
+          "title": "成都紧急驰援！多路救援力量奔赴西藏日喀则灾区",
+          "date": "08-28",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83312363.html"
+        },
+        {
+          "title": "四川省纪委监委公开通报四起查处诬告陷害行为典型案例",
+          "date": "08-28",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83312349.html"
+        },
+        {
+          "title": "“空中丝路”上新，成都开通首条直达非洲全货机航线，首航出港货物约100吨",
+          "date": "08-28",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83312318.html"
+        },
+        {
+          "title": "竞速新能源 “四川造”捷达M6首台车下线",
+          "date": "08-28",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83312272.html"
+        },
+        {
+          "title": "眼睛该做次“体检”啦 守住孩子近视防控“黄金窗口期”丨开学季健康说①",
+          "date": "08-28",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83312247.html"
+        }
+      ]
+    },
+    {
+      "id": "jiangsu",
+      "title": "江苏要闻动态",
+      "items": [
+        {
+          "title": "省领导赴淮安调研就业工作",
+          "date": "08-28",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/8/28/art_84322_11821639.html"
+        },
+        {
+          "title": "江苏网络强省建设工作推进会在宁召开",
+          "date": "08-28",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/8/28/art_84322_11821635.html"
+        },
+        {
+          "title": "第二届江苏专利奖名单公布，10位创新人才获发明人奖 79个项目超九成落地，撬动千亿增量",
+          "date": "08-28",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/8/28/art_84322_11821644.html"
+        },
+        {
+          "title": "我省部署推进农家书屋改革提升",
+          "date": "08-28",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/8/28/art_84322_11821645.html"
+        }
+      ]
+    },
+    {
+      "id": "today-talk",
+      "title": "今日谈（半月谈·申论素材）",
+      "items": [
+        {
+          "title": "当前中国经济怎么看丨“优”：看中国经济发展成色",
+          "date": "08-28",
+          "sourceUrl": "http://www.banyuetan.org/jrt/detail/20260828/1000200033134991787880611060454869_1.html"
+        },
+        {
+          "title": "中国抗战主题纪念馆成为暑期热门目的地",
+          "date": "08-28",
+          "sourceUrl": "http://www.banyuetan.org/jrt/detail/20260828/1000200033134991787880707651398028_1.html"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "3606a8c24e",
+  "date": "2026-08-28",
+  "title": "眼睛该做次&ldquo;体检&rdquo;啦 守住孩子近视防控&ldquo;黄金窗口期&rdquo;丨开学季健康说①",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202608/83312247.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-28T05:58:29+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "新学期来临，孩子们即将开启全新的学习旅程。在孩子的开学清单上，不少家长忙着置办新书包、新文具，却容易忽略一项重要任务&mdash;&mdash;给孩子做视力检查。开学前开展视力检查，既能守护孩子眼部健康，也为他们今后的学习生活筑牢健康基础。",
+    "8月28日，川观新闻特邀成都市妇女儿童中心医院眼科医生霍剑，科普家庭、学校双向联动的近视防控方法，提醒大家重视开学前视力筛查，及时纠正不良用眼习惯，守住近视防控&ldquo;黄金窗口期&rdquo;。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-28T05:58:30+00:00",
+  "sourceTextHash": "7d1c57438283bb13c4cd59ed13e886dc54a4f634f3a8be4944c8c647cdd92976",
+  "aiStatus": "error",
+  "aiAnnotations": [],
+  "aiError": "ai_provider:request_failed"
+}
