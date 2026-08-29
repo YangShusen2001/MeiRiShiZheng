@@ -5,7 +5,7 @@
   "source": "中国政府网",
   "url": "http://www.jiangsu.gov.cn/art/2026/8/29/art_84322_11822171.html",
   "pubDate": "",
-  "fetchedAt": "2026-08-29T03:32:25+00:00",
+  "fetchedAt": "2026-08-29T23:54:11+00:00",
   "status": "ok",
   "paragraphs": [
     "8月26日至27日，省长刘小涛在连云港市、盐城市和南通市调研港口建设、海洋产业培育和沿海经济带发展。他强调，要深入学习贯彻习近平总书记关于推动海洋经济高质量发展重要论述和对江苏工作重要讲话精神，按照省委要求，坚持经略海洋、向海图强，统筹保护和开发，推进港产城深度融合，加快构建现代化海洋产业体系，着力推动海洋经济高质量发展。",
@@ -16,7 +16,7 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-08-29T03:32:26+00:00",
+  "aiGeneratedAt": "2026-08-29T23:54:12+00:00",
   "sourceTextHash": "eea4521e1920bec9bfa06b34cf44039a07df24499470ea5253db5c0ab113bc2f",
   "aiStatus": "error",
   "aiAnnotations": [],

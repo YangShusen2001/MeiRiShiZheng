@@ -5,7 +5,7 @@
   "source": "中国政府网",
   "url": "http://www.jiangsu.gov.cn/art/2026/8/29/art_84322_11822176.html",
   "pubDate": "",
-  "fetchedAt": "2026-08-29T03:32:24+00:00",
+  "fetchedAt": "2026-08-29T23:54:10+00:00",
   "status": "ok",
   "paragraphs": [
     "8月28日，省十四届人大常委会第二十四次会议召开。省委书记、省人大常委会主任信长星主持会议。",
@@ -19,7 +19,7 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-08-29T03:32:25+00:00",
+  "aiGeneratedAt": "2026-08-29T23:54:10+00:00",
   "sourceTextHash": "048c744b740a3f3b8610dcb475673789de8fab2a08ad170ada198e76a9c9aa69",
   "aiStatus": "error",
   "aiAnnotations": [],

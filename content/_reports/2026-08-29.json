@@ -2,11 +2,15 @@
   "date": "2026-08-29",
   "sourcesOk": 15,
   "sourceErrors": [],
-  "candidates": 13,
-  "articles": 13,
+  "candidates": 17,
+  "articles": 16,
   "aiOk": 0,
-  "aiError": 13,
+  "aiError": 16,
   "aiFailures": [
+    {
+      "articleId": "c759acb88b",
+      "reason": "ai_provider:request_failed"
+    },
     {
       "articleId": "d1bbe5d5a0",
       "reason": "ai_provider:request_failed"
@@ -20,19 +24,27 @@
       "reason": "ai_provider:request_failed"
     },
     {
-      "articleId": "93540dd24d",
+      "articleId": "0f7f4bf636",
       "reason": "ai_provider:request_failed"
     },
     {
-      "articleId": "9b51c6627a",
+      "articleId": "3659708ebc",
       "reason": "ai_provider:request_failed"
     },
     {
-      "articleId": "22d87f27b1",
+      "articleId": "f58ea5a4bf",
       "reason": "ai_provider:request_failed"
     },
     {
-      "articleId": "49de9f016e",
+      "articleId": "6b78633396",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "7b6e6a456c",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "28dbbb6f12",
       "reason": "ai_provider:request_failed"
     },
     {

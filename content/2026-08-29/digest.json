@@ -7,6 +7,11 @@
       "title": "申论精读",
       "items": [
         {
+          "title": "乡土资源“活”起来 乡村发展“火”起来",
+          "date": "08-29",
+          "sourceUrl": "https://www.news.cn/local/20260829/56338b30d2d84dbb9b8f517be6ba73a1/c.html"
+        },
+        {
           "title": "再难，也要挺进——直击西藏吉隆口岸泥石流灾害救援",
           "date": "08-29",
           "sourceUrl": "https://www.news.cn/politics/20260829/7191d9ad3e474e5e8f7826863406c47c/c.html"
@@ -34,24 +39,34 @@
       "title": "四川要闻动态",
       "items": [
         {
-          "title": "快速摆脱“假期综合征” 这份调适方法请收好｜开学季健康说②",
+          "title": "开学倒计时 四川多地全力筑牢开学保障防线",
           "date": "08-29",
-          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83312931.html"
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83313194.html"
         },
         {
-          "title": "“成都造”游戏闪耀科隆展，力克全球3A大作斩获“最具史诗感”奖项",
+          "title": "重工风骨 烟火山河 德阳旌阳区摄影家协会作品线上展丨C视觉·在线影展（34）",
           "date": "08-29",
-          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83312926.html"
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83313168.html"
         },
         {
-          "title": "C视觉“视·周刊”（163期）",
+          "title": "金价大跌！四川消费者“几家欢喜几家愁”",
           "date": "08-29",
-          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83312912.html"
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83313156.html"
         },
         {
-          "title": "以土矛盾加剧，共同盟友美国“劝架”丨周观天下",
+          "title": "AI赋能电商，如何从“用上”到“用好”？",
           "date": "08-29",
-          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83312910.html"
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83313131.html"
+        },
+        {
+          "title": "隆昌土陶“换肤”记丨县域新气象",
+          "date": "08-29",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83313112.html"
+        },
+        {
+          "title": "川渝高竹新区：全力建设重庆智能网联新能源汽车之都重要配套基地丨起步奋进“十五五”广安专场新闻发布会",
+          "date": "08-29",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202608/83313111.html"
         }
       ]
     },
@@ -88,6 +103,17 @@
           "title": "进一步扩内需优供给，江苏“30条”新政突出务实管用、有针对性和可操作性 增动力激活力，关键在“提”字",
           "date": "08-29",
           "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/8/29/art_84322_11822192.html"
+        }
+      ]
+    },
+    {
+      "id": "south-review",
+      "title": "南方时评（南方网·广东申论素材）",
+      "items": [
+        {
+          "title": "头条",
+          "date": "08-29",
+          "sourceUrl": "https://opinion.southcn.com/node_87fa4020d8"
         }
       ]
     }

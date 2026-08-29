@@ -5,7 +5,7 @@
   "source": "news.dayoo.com",
   "url": "https://news.dayoo.com/guangdong/202608/29/139996_54997452.htm",
   "pubDate": "",
-  "fetchedAt": "2026-08-29T03:32:11+00:00",
+  "fetchedAt": "2026-08-29T23:53:53+00:00",
   "status": "ok",
   "paragraphs": [
     "昨日，广东省文化和旅游厅在广州举行2026广东金秋文旅消费季暨文旅产业招商推介会新闻发布会。记者从会上获悉，广东将于9月11日全面启动2026广东金秋文旅消费季暨文旅产业招商推介会、广东国际旅游产业博览会、粤港澳大湾区老字号（文化）博览会等多项活动，把促消费与扩投资贯通起来、双向发力，以更精彩、更实惠、更有诚意的文旅活动，进一步释放文旅消费潜力、激发产业投资活力。",
@@ -19,7 +19,7 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-08-29T03:32:12+00:00",
+  "aiGeneratedAt": "2026-08-29T23:53:54+00:00",
   "sourceTextHash": "78de46fe0660d524a307977c998776799385702815d639aaabcafe83f579e4ad",
   "aiStatus": "error",
   "aiAnnotations": [],

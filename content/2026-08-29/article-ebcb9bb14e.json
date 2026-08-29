@@ -5,7 +5,7 @@
   "source": "news.dayoo.com",
   "url": "https://news.dayoo.com/guangdong/202608/29/139996_54997438.htm",
   "pubDate": "",
-  "fetchedAt": "2026-08-29T03:32:09+00:00",
+  "fetchedAt": "2026-08-29T23:53:50+00:00",
   "status": "ok",
   "paragraphs": [
     "8月26日至28日，省委副书记、省长孟凡利率广东省代表团访问印度尼西亚，其间会见印尼经济统筹部长艾尔朗加，双方就进一步深化贸易、投资合作进行深入交流，在新能源、数字经济、人工智能、农业渔业、低空经济、产业园区、旅游等方面探讨更多合作，携手推动共赢发展迈上新台阶。",
@@ -16,7 +16,7 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-08-29T03:32:10+00:00",
+  "aiGeneratedAt": "2026-08-29T23:53:52+00:00",
   "sourceTextHash": "c4c931a384fd581c4ae8decb7dd0559b7643af3704003b875556ecbbb8beb286",
   "aiStatus": "error",
   "aiAnnotations": [],

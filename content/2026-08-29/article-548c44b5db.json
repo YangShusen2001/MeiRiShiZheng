@@ -5,7 +5,7 @@
   "source": "中国政府网",
   "url": "http://www.jiangsu.gov.cn/art/2026/8/29/art_84322_11822192.html",
   "pubDate": "",
-  "fetchedAt": "2026-08-29T03:32:29+00:00",
+  "fetchedAt": "2026-08-29T23:54:15+00:00",
   "status": "ok",
   "paragraphs": [
     "8月28日下午，省政府召开新闻发布会，对《关于紧抓当前提质增效推动经济持续向新向优向好发展的若干政策措施》进行解读。",
@@ -40,7 +40,7 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-08-29T03:32:30+00:00",
+  "aiGeneratedAt": "2026-08-29T23:54:15+00:00",
   "sourceTextHash": "9d4f4822ab4edda23570e3a6919f933680a84403fa96ac56fe7dc4d4441fd503",
   "aiStatus": "error",
   "aiAnnotations": [],

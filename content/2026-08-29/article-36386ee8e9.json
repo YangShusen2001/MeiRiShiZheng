@@ -5,7 +5,7 @@
   "source": "中国政府网",
   "url": "http://www.jiangsu.gov.cn/art/2026/8/29/art_84322_11822172.html",
   "pubDate": "",
-  "fetchedAt": "2026-08-29T03:32:22+00:00",
+  "fetchedAt": "2026-08-29T23:54:09+00:00",
   "status": "ok",
   "paragraphs": [
     "8月28日，省委理论学习中心组召开学习会，深入学习贯彻习近平总书记对江苏工作重要讲话精神，交流专题调研成果。省委书记信长星主持会议并讲话。",
@@ -16,7 +16,7 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-08-29T03:32:23+00:00",
+  "aiGeneratedAt": "2026-08-29T23:54:09+00:00",
   "sourceTextHash": "385d752454f88813cb2bb09527378ce73d3e966b23c9d2fb1f36b30ae9d8338b",
   "aiStatus": "error",
   "aiAnnotations": [],

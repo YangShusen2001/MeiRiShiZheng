@@ -5,7 +5,7 @@
   "source": "news.cn",
   "url": "https://www.news.cn/politics/20260829/7191d9ad3e474e5e8f7826863406c47c/c.html",
   "pubDate": "",
-  "fetchedAt": "2026-08-29T03:32:07+00:00",
+  "fetchedAt": "2026-08-29T23:53:49+00:00",
   "status": "ok",
   "paragraphs": [
     "新华社西藏吉隆8月28日电 题：再难，也要挺进——直击西藏吉隆口岸泥石流灾害救援",
@@ -41,7 +41,7 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-08-29T03:32:08+00:00",
+  "aiGeneratedAt": "2026-08-29T23:53:50+00:00",
   "sourceTextHash": "35cd6cce6c65348f90e441f6da50917244da13653982989bc2cc8e4dc83b4197",
   "aiStatus": "error",
   "aiAnnotations": [],
