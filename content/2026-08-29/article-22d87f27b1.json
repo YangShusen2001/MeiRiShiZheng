@@ -1,0 +1,25 @@
+{
+  "id": "22d87f27b1",
+  "date": "2026-08-29",
+  "title": "C视觉“视·周刊”（163期）",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202608/83312912.html",
+  "pubDate": "",
+  "fetchedAt": "2026-08-29T03:32:18+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "2023年5月26日，C视觉影像数据库《视·周刊》首期亮相。我们以每周精选影像，记录奋进四川的铿锵步伐，捕捉市井人间的温暖微光，凝固时光长河中的美好瞬间。",
+    "2026年8月29日，第163期C视觉《视·周刊》如约而至。这一周，秋意悄然而至，按下快门，把此刻的斑斓光影妥帖收好。",
+    "今天这期C视觉“视·周刊”你喜欢吗？有任何建议或意见，欢迎给我们留言。",
+    "C视觉签约摄影师郝飞&nbsp;陈昱升&nbsp;杜森&nbsp;夏国良&nbsp;蒋涛&nbsp;黄万芬&nbsp;赵远平&nbsp;吴聃&nbsp;华小峰",
+    "执行&nbsp;︱卢春阳&nbsp;郑晓飞&nbsp;&nbsp;范华"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-08-29T03:32:19+00:00",
+  "sourceTextHash": "1ac3edffa01ebbaf7d0382c3ce4c0b096d3e4e71c516fd4b922dc34826493927",
+  "aiStatus": "error",
+  "aiAnnotations": [],
+  "aiError": "ai_provider:request_failed"
+}
