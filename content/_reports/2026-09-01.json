@@ -1,0 +1,112 @@
+{
+  "date": "2026-09-01",
+  "sourcesOk": 15,
+  "sourceErrors": [],
+  "candidates": 25,
+  "articles": 24,
+  "aiOk": 0,
+  "aiError": 24,
+  "aiFailures": [
+    {
+      "articleId": "cca9e9ab89",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "7e08ed5c34",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "35470b9535",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "ecb52ddb1e",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "f595311144",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "ac1f4939a8",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "9dc59723ee",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "c0e3420bdd",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "0e18795683",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "bdbcd0188c",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "098543f3af",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "0b9a60b2a9",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "9d8b3763ad",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "a243fdaa6b",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "c0450f34bb",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "856cdd1e34",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "e963c4841c",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "37ba7ef7e6",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "3f45938ad9",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "50e9249575",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "911a31a23d",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "ecac37e3b6",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "aa5e0215d3",
+      "reason": "ai_provider:request_failed"
+    },
+    {
+      "articleId": "0083cfcb47",
+      "reason": "ai_provider:request_failed"
+    }
+  ],
+  "locationErrors": 0,
+  "schemaErrors": [],
+  "semanticErrors": [],
+  "volumeErrors": [],
+  "qualityStatus": "degraded"
+}

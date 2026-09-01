@@ -1,0 +1,22 @@
+{
+  "id": "ac1f4939a8",
+  "date": "2026-09-01",
+  "title": "新华视点丨暴雨过后，河南受灾地区秋粮咋样了？",
+  "source": "news.cn",
+  "url": "https://www.news.cn/20260901/7d3eb15aaddd41afa2094e09ce6bdebf/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-01T23:49:52+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;受台风“白海豚”影响，8月上中旬，河南出现强降水过程，暴雨过后，记者走访漯河、周口、平顶山多地，实地探访灾后农业生产恢复情况。",
+    "&emsp;&emsp;记者：尚昆仑 姜亮 韩朝阳 马意翀 郝源 孔维钾"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-01T23:49:53+00:00",
+  "sourceTextHash": "1d189444c8f1888a7d84c91525060a4c23ffdce1c2a6498d6ccf377472b54914",
+  "aiStatus": "error",
+  "aiAnnotations": [],
+  "aiError": "ai_provider:request_failed"
+}

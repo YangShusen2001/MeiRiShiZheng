@@ -1,0 +1,23 @@
+{
+  "id": "bdbcd0188c",
+  "date": "2026-09-01",
+  "title": "广东将防汛Ⅳ级应急响应调整为防风Ⅳ级应急响应",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202609/01/139996_54998518.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-01T23:49:59+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "记者9月1日获悉，鉴于台风“沙德尔”减弱后的残余涡旋再次加强为台风（热带风暴级），9月1日白天移入南海东北部海面，自西向东影响我省海域。根据《广东省防汛防旱防风防冻应急预案》和省防总有关规定，广东省防汛防旱防风总指挥部决定于9月1日9时将防汛Ⅳ级应急响应调整为防风Ⅳ级应急响应。",
+    "各有关地区和部门要克服松懈麻痹思想，加强风险研判，继续加强海上防风安全管理和陆上防汛各项措施，严格落实防台风“六个百分百”要求，在风险没有解除前严禁擅自冒险返回，坚决做到“不安全、不出海”。",
+    "文/广州日报新花城记者：叶作林 &nbsp;通讯员：粤应宣"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-01T23:50:00+00:00",
+  "sourceTextHash": "8e8b5461b59ee26696598290905c1e15227d32ae47839f4527f75668fea1f88c",
+  "aiStatus": "error",
+  "aiAnnotations": [],
+  "aiError": "ai_provider:request_failed"
+}
