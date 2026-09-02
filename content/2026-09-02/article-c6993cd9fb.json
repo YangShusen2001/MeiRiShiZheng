@@ -1,0 +1,150 @@
+{
+  "id": "c6993cd9fb",
+  "date": "2026-09-02",
+  "title": "动力电池研发方向是啥？未来有啥突破点？4位产业大佬这样说丨聚焦2026世界动力电池大会",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83315450.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-02T23:55:31+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月2日晚，2026世界动力电池大会高端对话在宜宾举行。宁德时代新能源科技股份有限公司副总裁孟祥峰、东风汽车集团有限公司副总工程师史建鹏、亿航智能设备有限公司CTO冯帅、小鹏集团具身技术委员会主席顾捷等4位来自动力电池、整车、低空、具身智能等领域的嘉宾，围绕动力电池技术突破、应用场景拓展等展开讨论。现场，他们都聊了些啥？",
+    "从&ldquo;能用&rdquo;到&ldquo;好用&rdquo;再到&ldquo;耐用&rdquo;，场景定制成研发新方向",
+    "&ldquo;经过多年发展，动力电池已完成从&lsquo;能用&rsquo;到&lsquo;好用&rsquo;的跨越，现在正向&lsquo;耐用&rsquo;迈进。&rdquo;孟祥峰说，当前电池的能量密度、续航里程和充电设施均已大幅提升，但要让新能源汽车像燃油车一样耐用，还需要攻克电池寿命这个难题。",
+    "耐用，不仅意味着更长的使用寿命，更意味着在极端环境下的稳定输出。史建鹏说，在冰雪低温条件下，电池的能量密度和续航大打折扣，如何保证在复杂气候条件下保持性能，是行业必须破解的另一个难题。",
+    "随着应用场景不断延伸，电池研发正走向&ldquo;定制化&rdquo;。冯帅说，飞行汽车对电机响应速度的要求超过地面车辆，且为保障安全往往配置多组电池，这既要求单体能量密度大幅跃升，又对整包重量和散热设计提出更高要求。在具身智能领域，机器人运动场景千变万化，瞬时放电倍率要求极高，且安全标准比汽车更为苛刻。&ldquo;电池在机器人&lsquo;身体&rsquo;里的布置、热管理和抗冲击能力，都是全新的课题。&rdquo;顾捷说。",
+    "四位嘉宾一致认为，未来技术创新不再是一条单一赛道，而是面向多元场景的&ldquo;分叉树&rdquo;，专用化、精细化的研发方向将成为未来趋势。",
+    "技术突破之外，应用场景的多元化正催生巨大红利。孟祥峰观察到，储能、低空飞行、具身智能等领域正迎来爆发，电动化想象空间不断打开。史建鹏笑言：&ldquo;今天我们对话的地点就在一艘电动船上，未来更多产业将拥抱电动化。&rdquo;",
+    "史建鹏提出了两大突破点：一是电池安全性，需从材料体系进行突破；二是充电速度，需依靠充足的电网基础设施支撑。&ldquo;这两个底座打得牢，应用才能拓展得更远。&rdquo;",
+    "除了找到突破方向，还要进行融合创新。&ldquo;随着动力电池的发展，涌现出更多的新场景、新领域，对行业发展提出了新要求。&rdquo;顾捷说，创新成果要工程化落地，需要上下游企业联合研发、协同攻关，保证的技术、产品高质量落地。",
+    "冯帅以低空经济举例，当飞行汽车进入大批量运营阶段，需要新能源汽车领域动力电池积累技术进行研发，同时，飞行汽车积累的数据也会反哺电池厂商、新能源汽车。",
+    "多元场景带来广阔的发展机遇，但各领域的工况、性能、安全需求差异也让产业面临新的挑战。与会嘉宾提到，希望通过打通产业链协同创新，让动力电池驶向更广阔的应用领域。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-02T23:55:33+00:00",
+  "sourceTextHash": "52aec97a0ca361d278e9458e0ba4ed21b2da32a06d862314144ca9ad64265cef",
+  "aiStatus": "ok",
+  "aiSummary": "2026世界动力电池大会高端对话上，四位产业专家指出动力电池正从“能用”迈向“耐用”，研发趋向场景定制化，未来需突破安全与充电瓶颈，并强调产业链协同创新以拓展应用领域。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-53-63-viewpoint",
+      "paragraphIndex": 1,
+      "start": 53,
+      "end": 63,
+      "text": "场景定制成研发新方向",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-121-150-viewpoint",
+      "paragraphIndex": 2,
+      "start": 121,
+      "end": 150,
+      "text": "要让新能源汽车像燃油车一样耐用，还需要攻克电池寿命这个难题",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-61-91-viewpoint",
+      "paragraphIndex": 3,
+      "start": 61,
+      "end": 91,
+      "text": "如何保证在复杂气候条件下保持性能，是行业必须破解的另一个难题",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-5-52-71-viewpoint",
+      "paragraphIndex": 5,
+      "start": 52,
+      "end": 71,
+      "text": "专用化、精细化的研发方向将成为未来趋势",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-99-103-exam_point",
+      "paragraphIndex": 2,
+      "start": 99,
+      "end": 103,
+      "text": "能量密度",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-104-108-exam_point",
+      "paragraphIndex": 2,
+      "start": 104,
+      "end": 108,
+      "text": "续航里程",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-38-44-exam_point",
+      "paragraphIndex": 3,
+      "start": 38,
+      "end": 44,
+      "text": "冰雪低温条件",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-25-28-exam_point",
+      "paragraphIndex": 4,
+      "start": 25,
+      "end": 28,
+      "text": "定制化",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-129-135-term",
+      "paragraphIndex": 4,
+      "start": 129,
+      "end": 135,
+      "text": "瞬时放电倍率",
+      "type": "term",
+      "explanation": "指电池在极短时间内释放电流的能力，反映其功率性能，对高动态负载场景至关重要。"
+    },
+    {
+      "id": "ai-7-14-19-exam_point",
+      "paragraphIndex": 7,
+      "start": 14,
+      "end": 19,
+      "text": "电池安全性",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-7-33-37-exam_point",
+      "paragraphIndex": 7,
+      "start": 33,
+      "end": 37,
+      "text": "充电速度",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-8-13-17-viewpoint",
+      "paragraphIndex": 8,
+      "start": 13,
+      "end": 17,
+      "text": "融合创新",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-9-3-7-term",
+      "paragraphIndex": 9,
+      "start": 3,
+      "end": 7,
+      "text": "低空经济",
+      "type": "term",
+      "explanation": "以低空空域飞行活动为核心的经济形态，涉及飞行汽车、无人机等产业，依赖动力电池技术支撑。"
+    },
+    {
+      "id": "ai-10-55-62-term",
+      "paragraphIndex": 10,
+      "start": 55,
+      "end": 62,
+      "text": "产业链协同创新",
+      "type": "term",
+      "explanation": "指产业链上下游企业联合研发、协同攻关，以推动技术成果工程化落地，提升整体竞争力。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

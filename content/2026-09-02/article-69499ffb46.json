@@ -1,0 +1,59 @@
+{
+  "id": "69499ffb46",
+  "date": "2026-09-02",
+  "title": "习近平出席“上海合作组织+”会议并发表重要讲话&nbsp;&nbsp;广东省人民政府门户网站",
+  "source": "广东省人民政府网",
+  "url": "https://www.gd.gov.cn/gdywdt/xwdt/content/post_4949965.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-02T23:55:16+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "当地时间9月1日下午，国家主席习近平在比什凯克出席“上海合作组织+”会议并发表题为《共同倡导平等有序的世界多极化 实现更加公正合理的全球治理》的重要讲话。图片来源：新华网",
+    "当地时间9月1日下午，国家主席习近平在比什凯克出席“上海合作组织+”会议并发表题为《共同倡导平等有序的世界多极化 实现更加公正合理的全球治理》的重要讲话。会议开始前，习近平出席扎帕罗夫为与会代表团团长举行的欢迎宴会并集体合影。图片来源：新华网"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-02T23:55:18+00:00",
+  "sourceTextHash": "8fcbfbcc24ac80e561fda5214dc6b13376e8a054beb5a9b57072d0a4be058b3e",
+  "aiStatus": "ok",
+  "aiSummary": "国家主席习近平在比什凯克出席“上海合作组织+”会议，发表题为《共同倡导平等有序的世界多极化 实现更加公正合理的全球治理》的重要讲话，并出席欢迎宴会及集体合影。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-11-76-viewpoint",
+      "paragraphIndex": 0,
+      "start": 11,
+      "end": 76,
+      "text": "国家主席习近平在比什凯克出席“上海合作组织+”会议并发表题为《共同倡导平等有序的世界多极化 实现更加公正合理的全球治理》的重要讲话",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-77-112-viewpoint",
+      "paragraphIndex": 1,
+      "start": 77,
+      "end": 112,
+      "text": "会议开始前，习近平出席扎帕罗夫为与会代表团团长举行的欢迎宴会并集体合影",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-42-70-exam_point",
+      "paragraphIndex": 0,
+      "start": 42,
+      "end": 70,
+      "text": "共同倡导平等有序的世界多极化 实现更加公正合理的全球治理",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-26-33-term",
+      "paragraphIndex": 0,
+      "start": 26,
+      "end": 33,
+      "text": "上海合作组织+",
+      "type": "term",
+      "explanation": "指上海合作组织与观察员国、对话伙伴等扩展成员共同参与的多边会议形式。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

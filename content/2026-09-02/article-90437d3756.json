@@ -1,0 +1,87 @@
+{
+  "id": "90437d3756",
+  "date": "2026-09-02",
+  "title": "台风“沙德尔”或将登陆广东，省水利厅发布山洪灾害风险预警",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202609/02/139996_54999199.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-02T23:54:38+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "广东省水利厅2026年9月2日18时发布山洪灾害风险预警。",
+    "根据广东省山洪灾害监测预报预警平台和综合分析研判，预计未来24小时：",
+    "梅州大埔县、丰顺县，潮州潮安区、饶平县，局地发生山洪灾害可能性很大（红色预警）。",
+    "梅州梅江区、梅县区，揭阳揭西县、普宁市，局地发生山洪灾害可能性大（橙色预警）。",
+    "汕头潮阳区，梅州五华县、兴宁市，汕尾陆河县，揭阳揭东区，局地发生山洪灾害可能性较大（黄色预警）。",
+    "河源龙川县、东源县，梅州平远县、蕉岭县，潮州湘桥区，揭阳惠来县，局地可能发生山洪灾害（蓝色预警）。",
+    "省水利厅提醒，请各地密切关注天气预报及雨水情变化，结合实际加强研判，做好实时监测、防汛预警和转移避险等防范工作。相关地区公众留意预报预警信息，增强灾害防范避险意识，尽量避免前往山丘区沟溪、河滩地等低洼区域，确保自身生命财产安全。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-02T23:54:39+00:00",
+  "sourceTextHash": "0c0f2dad80a6e1b836ed7f1dafa494ec61068b2c2929382e8db5a3a15ce022c6",
+  "aiStatus": "ok",
+  "aiSummary": "广东省水利厅发布山洪灾害风险预警，受台风“沙德尔”影响，预计未来24小时梅州、潮州等地局地发生山洪灾害可能性很大，提醒各地加强防范，公众注意避险。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-0-28-viewpoint",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 28,
+      "text": "广东省水利厅2026年9月2日18时发布山洪灾害风险预警",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-0-24-viewpoint",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 24,
+      "text": "根据广东省山洪灾害监测预报预警平台和综合分析研判",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-20-39-exam_point",
+      "paragraphIndex": 2,
+      "start": 20,
+      "end": 39,
+      "text": "局地发生山洪灾害可能性很大（红色预警）",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-20-38-exam_point",
+      "paragraphIndex": 3,
+      "start": 20,
+      "end": 38,
+      "text": "局地发生山洪灾害可能性大（橙色预警）",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-28-47-exam_point",
+      "paragraphIndex": 4,
+      "start": 28,
+      "end": 47,
+      "text": "局地发生山洪灾害可能性较大（黄色预警）",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-32-48-exam_point",
+      "paragraphIndex": 5,
+      "start": 32,
+      "end": 48,
+      "text": "局地可能发生山洪灾害（蓝色预警）",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-7-24-viewpoint",
+      "paragraphIndex": 6,
+      "start": 7,
+      "end": 24,
+      "text": "请各地密切关注天气预报及雨水情变化",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

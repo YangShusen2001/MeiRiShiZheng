@@ -1,0 +1,124 @@
+{
+  "id": "99765feab7",
+  "date": "2026-09-02",
+  "title": "胡云在广元调研时强调：更好统筹发展和安全 持续增进民生福祉",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83315433.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-02T23:55:42+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月1日至2日，副省长胡云在广元调研时强调，要深入贯彻党中央、国务院决策部署和省委、省政府工作要求，树立和践行正确政绩观，更好统筹发展和安全，持续增进民生福祉，奋力推动高质量发展取得新成效。",
+    "胡云先后前往广元市昭化区、利州区，实地调研防汛抗旱、困难老年人家庭适老化改造、“天府银龄行动”项目实施、文物古迹保护和历史文化传承创新等工作，与当地干部、群众等深入交流，听取意见建议。",
+    "胡云强调，要树牢底线思维、极限思维，压紧压实防汛抗旱全链条工作责任，坚决用好避险转移“关键一招”，加强洪水防范应对和水资源调度，提升水旱灾害综合防御处置能力。要全面落实河湖长制，常态开展水库大坝、泄洪道等重点部位隐患排查整治，运用测雨雷达等技术开展监测预警，进一步完善群众应急处置预案。要扎实推进适老化改造，摸排收集老年人实际需求，针对性提供产品和服务，确保民生实事真正办好、群众真正得到实惠。要深入实施“天府银龄行动”，积极发挥退休干部、老教师等作用，做好产业升级、资产盘活等工作，精准提供服务保障，助力乡村全面振兴。要持续加大文物古迹保护和开发利用，深挖历史文化内涵，打造特色文旅产品，推动文化和旅游深度融合发展。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-02T23:55:43+00:00",
+  "sourceTextHash": "ff756dca152836420fcf2c942aa1154c492c26f64faa4f82e4c0a1994f34cffd",
+  "aiStatus": "ok",
+  "aiSummary": "9月1日至2日，副省长胡云在广元调研，强调贯彻中央和省委部署，统筹发展与安全，增进民生福祉。他实地考察防汛抗旱、适老化改造、天府银龄行动及文物保护，要求压实责任、排查隐患、精准服务，推动高质量发展。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-61-79-viewpoint",
+      "paragraphIndex": 0,
+      "start": 61,
+      "end": 79,
+      "text": "更好统筹发展和安全，持续增进民生福祉",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-50-60-viewpoint",
+      "paragraphIndex": 0,
+      "start": 50,
+      "end": 60,
+      "text": "树立和践行正确政绩观",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-17-70-viewpoint",
+      "paragraphIndex": 1,
+      "start": 17,
+      "end": 70,
+      "text": "实地调研防汛抗旱、困难老年人家庭适老化改造、“天府银龄行动”项目实施、文物古迹保护和历史文化传承创新等工作",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-6-17-viewpoint",
+      "paragraphIndex": 2,
+      "start": 6,
+      "end": 17,
+      "text": "树牢底线思维、极限思维",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-18-33-exam_point",
+      "paragraphIndex": 2,
+      "start": 18,
+      "end": 33,
+      "text": "压紧压实防汛抗旱全链条工作责任",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-34-48-exam_point",
+      "paragraphIndex": 2,
+      "start": 34,
+      "end": 48,
+      "text": "坚决用好避险转移“关键一招”",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-80-88-exam_point",
+      "paragraphIndex": 2,
+      "start": 80,
+      "end": 88,
+      "text": "全面落实河湖长制",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-113-128-exam_point",
+      "paragraphIndex": 2,
+      "start": 113,
+      "end": 128,
+      "text": "运用测雨雷达等技术开展监测预警",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-144-153-exam_point",
+      "paragraphIndex": 2,
+      "start": 144,
+      "end": 153,
+      "text": "扎实推进适老化改造",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-198-210-exam_point",
+      "paragraphIndex": 2,
+      "start": 198,
+      "end": 210,
+      "text": "深入实施“天府银龄行动”",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-261-276-exam_point",
+      "paragraphIndex": 2,
+      "start": 261,
+      "end": 276,
+      "text": "持续加大文物古迹保护和开发利用",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-84-88-term",
+      "paragraphIndex": 2,
+      "start": 84,
+      "end": 88,
+      "text": "河湖长制",
+      "type": "term",
+      "explanation": "由各级党政负责人担任河湖长，负责组织领导相应河湖管理和保护工作的制度。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "id": "2b1f4fdae7",
+  "date": "2026-09-02",
+  "title": "习近平抵达开罗对埃及进行国事访问&nbsp;&nbsp;广东省人民政府门户网站",
+  "source": "广东省人民政府网",
+  "url": "https://www.gd.gov.cn/gdywdt/xwdt/content/post_4949960.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-02T23:55:02+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "当地时间9月1日晚，国家主席习近平乘专机抵达开罗，应埃及总统塞西邀请，对埃及进行国事访问。这是习近平和夫人彭丽媛步出舱门。图片来源：新华网",
+    "当地时间9月1日晚，国家主席习近平乘专机抵达开罗，应埃及总统塞西邀请，对埃及进行国事访问。",
+    "当地时间9月1日晚，国家主席习近平乘专机抵达开罗，应埃及总统塞西邀请，对埃及进行国事访问。习近平和夫人彭丽媛抵达开罗国际机场时，塞西总统夫妇到场热情迎接。图片来源：新华网",
+    "习近平和夫人彭丽媛抵达开罗国际机场时，塞西总统夫妇到场热情迎接。礼兵分列红地毯两侧致敬，埃及青少年挥舞中埃两国国旗，热烈欢迎习近平夫妇到访。",
+    "习近平发表书面讲话，代表中国政府和中国人民，向埃及政府和埃及人民致以诚挚问候和良好祝愿。",
+    "习近平指出，中国和埃及同为文明古国，传统友谊绵延千年、历久弥坚。建交70年来，无论国际和地区形势如何变化，两国始终和衷共济、合作共赢。近年来，我同塞西总统一道，引领中埃全面战略伙伴关系实现跨越式发展。两国政治互信牢固，互利合作成果丰硕，多边协作密切有力，成为发展中国家友好相处、团结协作的典范。这次访问期间，我将同塞西总统就中埃关系、两国全方位合作以及共同关心的国际和地区问题深入交换意见，共同擘画中埃全面战略伙伴关系发展蓝图，书写中埃友好的历史新篇。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-02T23:55:04+00:00",
+  "sourceTextHash": "cd4b144363dff65b25dae26e5366e9ac03b852a19287800c35c590d68052c526",
+  "aiStatus": "ok",
+  "aiSummary": "国家主席习近平抵达开罗，对埃及进行国事访问，受到塞西总统夫妇热情迎接。习近平发表书面讲话，强调中埃传统友谊，并计划与塞西总统深入交换意见，共同规划两国关系发展蓝图。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-10-44-viewpoint",
+      "paragraphIndex": 0,
+      "start": 10,
+      "end": 44,
+      "text": "国家主席习近平乘专机抵达开罗，应埃及总统塞西邀请，对埃及进行国事访问",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-19-31-viewpoint",
+      "paragraphIndex": 3,
+      "start": 19,
+      "end": 31,
+      "text": "塞西总统夫妇到场热情迎接",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-10-43-viewpoint",
+      "paragraphIndex": 4,
+      "start": 10,
+      "end": 43,
+      "text": "代表中国政府和中国人民，向埃及政府和埃及人民致以诚挚问候和良好祝愿",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-5-6-31-viewpoint",
+      "paragraphIndex": 5,
+      "start": 6,
+      "end": 31,
+      "text": "中国和埃及同为文明古国，传统友谊绵延千年、历久弥坚",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-5-195-213-viewpoint",
+      "paragraphIndex": 5,
+      "start": 195,
+      "end": 213,
+      "text": "共同擘画中埃全面战略伙伴关系发展蓝图",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-0-9-exam_point",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 9,
+      "text": "当地时间9月1日晚",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-25-34-exam_point",
+      "paragraphIndex": 1,
+      "start": 25,
+      "end": 34,
+      "text": "应埃及总统塞西邀请",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-40-44-exam_point",
+      "paragraphIndex": 1,
+      "start": 40,
+      "end": 44,
+      "text": "国事访问",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-11-17-exam_point",
+      "paragraphIndex": 3,
+      "start": 11,
+      "end": 17,
+      "text": "开罗国际机场",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-32-38-exam_point",
+      "paragraphIndex": 5,
+      "start": 32,
+      "end": 38,
+      "text": "建交70年来",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-129-146-exam_point",
+      "paragraphIndex": 5,
+      "start": 129,
+      "end": 146,
+      "text": "发展中国家友好相处、团结协作的典范",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 2
+  }
+}

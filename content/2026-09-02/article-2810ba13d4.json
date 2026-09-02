@@ -1,0 +1,148 @@
+{
+  "id": "2810ba13d4",
+  "date": "2026-09-02",
+  "title": "新华视点丨数智赋能山东融合发展新图景",
+  "source": "news.cn",
+  "url": "https://www.news.cn/local/20260902/c3aca547263e420091e947a0119cb5f1/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-02T23:54:16+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;近年来，山东立足本土发展优势，深耕人工智能赋能应用，以数智技术激活发展潜能，不断绘就齐鲁大地融合发展新图景。",
+    "&emsp;&emsp;在山东寿光，传统农耕图景正被数字技术重新勾勒。走进寿光市现代农业高新技术试验示范基地，一只机器狗正穿行在彩椒植株间，执行日常巡检任务。",
+    "&emsp;&emsp;在山东高密，智能灌溉系统已成了玉米田间管理的“标配”。农户只需轻点手机，系统便可按土壤实际需求精准供水供肥。",
+    "&emsp;&emsp;深耕智慧赋能，聚力绿色转型。作为北方重要枢纽港口，山东港口烟台港依托人工智能技术，以数智化赋能江海联运，助力绿色港口高质量建设。",
+    "&emsp;&emsp;传统安检效率有限，长时间高强度作业还容易出现漏判、误判。AI判图系统落地以后，弥补了人工作业的短板，让安检工作更标准、更智能。",
+    "&emsp;&emsp;作为全球候鸟迁徙的关键驿站，黄河三角洲国家级自然保护区依托“天空地海”一体化智慧监测体系，以AI技术赋能生态管护。",
+    "&emsp;&emsp;从人工野外奔波到大屏全域感知，AI技术大幅提升巡护、火情预警、生态监测效率，补齐了单一监测手段的短板。",
+    "&emsp;&emsp;统筹：李杰 李佳琳 王冰笛"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-02T23:54:17+00:00",
+  "sourceTextHash": "4e17b2d55937be65537a71eb7940467909377cf7dfb8cd4317d3fe4d1464c5b1",
+  "aiStatus": "ok",
+  "aiSummary": "山东依托本土优势，以数智技术赋能农业、港口、生态等领域，推动融合发展。寿光机器狗巡检、高密智能灌溉、烟台港AI判图、黄河三角洲智慧监测等实践，展现齐鲁大地数智融合新图景。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-16-49-viewpoint",
+      "paragraphIndex": 0,
+      "start": 16,
+      "end": 49,
+      "text": "山东立足本土发展优势，深耕人工智能赋能应用，以数智技术激活发展潜能",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-18-34-viewpoint",
+      "paragraphIndex": 1,
+      "start": 18,
+      "end": 34,
+      "text": "传统农耕图景正被数字技术重新勾勒",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-12-25-viewpoint",
+      "paragraphIndex": 3,
+      "start": 12,
+      "end": 25,
+      "text": "深耕智慧赋能，聚力绿色转型",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-5-26-68-viewpoint",
+      "paragraphIndex": 5,
+      "start": 26,
+      "end": 68,
+      "text": "黄河三角洲国家级自然保护区依托“天空地海”一体化智慧监测体系，以AI技术赋能生态管护",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-39-43-term",
+      "paragraphIndex": 0,
+      "start": 39,
+      "end": 43,
+      "text": "数智技术",
+      "type": "term",
+      "explanation": "指数字技术与智能技术的融合，包括人工智能、大数据、物联网等，用于赋能各行业转型升级。"
+    },
+    {
+      "id": "ai-2-18-24-term",
+      "paragraphIndex": 2,
+      "start": 18,
+      "end": 24,
+      "text": "智能灌溉系统",
+      "type": "term",
+      "explanation": "基于传感器和自动控制技术，根据土壤湿度等数据精准供水供肥的农业管理系统。"
+    },
+    {
+      "id": "ai-4-40-46-term",
+      "paragraphIndex": 4,
+      "start": 40,
+      "end": 46,
+      "text": "AI判图系统",
+      "type": "term",
+      "explanation": "利用人工智能图像识别技术自动分析安检图像，辅助识别违禁品，提高安检效率与准确性。"
+    },
+    {
+      "id": "ai-1-57-60-term",
+      "paragraphIndex": 1,
+      "start": 57,
+      "end": 60,
+      "text": "机器狗",
+      "type": "term",
+      "explanation": "一种仿生机器人，可在复杂环境中执行巡检、监测等任务，此处用于农业巡检。"
+    },
+    {
+      "id": "ai-0-29-37-exam_point",
+      "paragraphIndex": 0,
+      "start": 29,
+      "end": 37,
+      "text": "人工智能赋能应用",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-37-54-exam_point",
+      "paragraphIndex": 1,
+      "start": 37,
+      "end": 54,
+      "text": "寿光市现代农业高新技术试验示范基地",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-15-17-exam_point",
+      "paragraphIndex": 2,
+      "start": 15,
+      "end": 17,
+      "text": "高密",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-37-44-exam_point",
+      "paragraphIndex": 3,
+      "start": 37,
+      "end": 44,
+      "text": "山东港口烟台港",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-41-56-exam_point",
+      "paragraphIndex": 5,
+      "start": 41,
+      "end": 56,
+      "text": "“天空地海”一体化智慧监测体系",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-27-49-exam_point",
+      "paragraphIndex": 6,
+      "start": 27,
+      "end": 49,
+      "text": "AI技术大幅提升巡护、火情预警、生态监测效率",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

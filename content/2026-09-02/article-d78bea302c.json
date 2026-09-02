@@ -1,0 +1,134 @@
+{
+  "id": "d78bea302c",
+  "date": "2026-09-02",
+  "title": "2026年新一轮新型政策性金融工具在川落地",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83315448.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-02T23:55:37+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月2日，国家开发银行四川省分行投放全省首单暨开行系统首笔2026年新一轮新型政策性金融工具2.45亿元，用于支持中创新航动力电池及储能电池自贡基地项目。",
+    "该项目位于自贡高新技术产业开发区，建成后有望带动当地新能源产业聚链成势，助力四川打造世界级动力电池产业集群。",
+    "此次投放的新型政策性金融工具是国家为支持重大战略、补充重点项目资本金而创设的金融工具，由国家开发银行、中国农业发展银行、中国进出口银行三家政策性银行通过发行金融债券筹资设立专项基金，支持科技创新、扩大消费、绿色低碳、基础设施等领域。",
+    "国家发展改革委数据显示，2025年首批5000亿元新型政策性金融工具共支持2300多个项目，撬动项目总投资超7万亿元。",
+    "今年新一轮新型政策性金融工具规模为8000亿元，较上年扩容3000亿元，且在年初即宣布设立，释放出稳增长、扩投资的明确信号。有机构估测本轮新型政策性金融工具未来或撬动8万亿至11万亿元项目投资。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-02T23:55:38+00:00",
+  "sourceTextHash": "d78f952eae49920fac9bc5f5fa32889b0c5a3cc779755ce57957f592f32e59da",
+  "aiStatus": "ok",
+  "aiSummary": "国家开发银行四川省分行投放全省首单2026年新型政策性金融工具，支持自贡电池项目，该工具由三家政策性银行筹资设立，规模扩容至8000亿元，旨在稳增长扩投资并撬动巨额项目投资。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-5-52-viewpoint",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 52,
+      "text": "国家开发银行四川省分行投放全省首单暨开行系统首笔2026年新一轮新型政策性金融工具2.45亿元",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-36-53-viewpoint",
+      "paragraphIndex": 1,
+      "start": 36,
+      "end": 53,
+      "text": "助力四川打造世界级动力电池产业集群",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-15-42-viewpoint",
+      "paragraphIndex": 2,
+      "start": 15,
+      "end": 42,
+      "text": "国家为支持重大战略、补充重点项目资本金而创设的金融工具",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-12-58-viewpoint",
+      "paragraphIndex": 3,
+      "start": 12,
+      "end": 58,
+      "text": "2025年首批5000亿元新型政策性金融工具共支持2300多个项目，撬动项目总投资超7万亿元",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-46-61-viewpoint",
+      "paragraphIndex": 4,
+      "start": 46,
+      "end": 61,
+      "text": "释放出稳增长、扩投资的明确信号",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-29-46-exam_point",
+      "paragraphIndex": 0,
+      "start": 29,
+      "end": 46,
+      "text": "2026年新一轮新型政策性金融工具",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-46-52-exam_point",
+      "paragraphIndex": 0,
+      "start": 46,
+      "end": 52,
+      "text": "2.45亿元",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-5-16-exam_point",
+      "paragraphIndex": 1,
+      "start": 5,
+      "end": 16,
+      "text": "自贡高新技术产业开发区",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-44-67-exam_point",
+      "paragraphIndex": 2,
+      "start": 44,
+      "end": 67,
+      "text": "国家开发银行、中国农业发展银行、中国进出口银行",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-76-90-exam_point",
+      "paragraphIndex": 2,
+      "start": 76,
+      "end": 90,
+      "text": "发行金融债券筹资设立专项基金",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-19-25-exam_point",
+      "paragraphIndex": 3,
+      "start": 19,
+      "end": 25,
+      "text": "5000亿元",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-17-23-exam_point",
+      "paragraphIndex": 4,
+      "start": 17,
+      "end": 23,
+      "text": "8000亿元",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-5-14-term",
+      "paragraphIndex": 2,
+      "start": 5,
+      "end": 14,
+      "text": "新型政策性金融工具",
+      "type": "term",
+      "explanation": "指国家为支持重大战略和补充重点项目资本金，由政策性银行通过发行金融债券筹资设立的专项基金工具。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

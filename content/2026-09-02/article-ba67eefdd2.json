@@ -1,0 +1,114 @@
+{
+  "id": "ba67eefdd2",
+  "date": "2026-09-02",
+  "title": "复活的台风“沙德尔”或于3日下午到4日白天在汕头到惠州一带沿海登陆",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202609/02/139996_54998997.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-02T23:54:46+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "据@广东天气 消息，9月2日08时，今年第18号台风“沙德尔”中心位于距离广东省汕尾市东偏南方向约195公里的海面上，也就是北纬21.9度、东经117.0度，外围最大风力8级（18米/秒，热带风暴），中心最低气压992百帕。预计，“沙德尔”强度变化不大，2日白天在南海东北部缓慢回旋，夜间逐渐转向西偏南方向移动，3日白天起自东向西沿着广东省海岸线移动，有可能于3日下午到4日白天在汕头到惠州一带沿海登陆（热带风暴级，8级），且不排除多次登陆的可能性。",
+    "8月19日11时，台风“沙德尔”在西北太平洋上生成，先后登陆浙江台州和温州，深入内陆，于30日17时在广西境内停止编号；",
+    "8月31日，“沙德尔”在海南岛东部近海海面重新加强为热带低压；",
+    "9月1日凌晨，“沙德尔”继续恢复元气，加强为热带风暴级，成功找回编号（2026年第18号台风），并向东偏北方向移动，逐渐移入南海东北部海面。",
+    "9月2日，粤东市县有大到暴雨局部大暴雨；河源、梅州有中到大雨局部暴雨；粤西市县晴到多云，局部有阵雨；其余市县多云，有（雷）阵雨局部大雨。受弱冷空气影响，粤北气温有所下降。最高气温：粤北和粤东市县26～29℃，其余大部市县30～33℃。",
+    "台风个头越大就越强？不在台风登陆地就一定安全吗？中国天气网特别梳理了关于台风的十大认知误区，带你一起了解台风还有哪些出人意料的真相，防御提前做足！",
+    "来源：广州日报综合自广东天气、广州天气、中国天气网"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-02T23:54:47+00:00",
+  "sourceTextHash": "ae7373a97973ee5a219add68a52ab59b5aa13a6a936627c2e448fb7597f000eb",
+  "aiStatus": "ok",
+  "aiSummary": "台风“沙德尔”在南海东北部回旋后可能于3日下午到4日白天在汕头到惠州沿海登陆，强度为热带风暴级，不排除多次登陆可能。粤东等地有大到暴雨，需防范。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-176-201-viewpoint",
+      "paragraphIndex": 0,
+      "start": 176,
+      "end": 201,
+      "text": "有可能于3日下午到4日白天在汕头到惠州一带沿海登陆",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-213-224-viewpoint",
+      "paragraphIndex": 0,
+      "start": 213,
+      "end": 224,
+      "text": "不排除多次登陆的可能性",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-120-126-viewpoint",
+      "paragraphIndex": 0,
+      "start": 120,
+      "end": 126,
+      "text": "强度变化不大",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-202-207-exam_point",
+      "paragraphIndex": 0,
+      "start": 202,
+      "end": 207,
+      "text": "热带风暴级",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-62-78-exam_point",
+      "paragraphIndex": 0,
+      "start": 62,
+      "end": 78,
+      "text": "北纬21.9度、东经117.0度",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-100-111-exam_point",
+      "paragraphIndex": 0,
+      "start": 100,
+      "end": 111,
+      "text": "中心最低气压992百帕",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-79-87-exam_point",
+      "paragraphIndex": 0,
+      "start": 79,
+      "end": 87,
+      "text": "外围最大风力8级",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-55-59-term",
+      "paragraphIndex": 1,
+      "start": 55,
+      "end": 59,
+      "text": "停止编号",
+      "type": "term",
+      "explanation": "指台风减弱至不再满足编号条件，气象部门停止对其跟踪和发布信息。"
+    },
+    {
+      "id": "ai-2-26-30-term",
+      "paragraphIndex": 2,
+      "start": 26,
+      "end": 30,
+      "text": "热带低压",
+      "type": "term",
+      "explanation": "热带气旋的一种，中心附近最大风力为6-7级，是台风强度等级中的较低级别。"
+    },
+    {
+      "id": "ai-3-22-27-term",
+      "paragraphIndex": 3,
+      "start": 22,
+      "end": 27,
+      "text": "热带风暴级",
+      "type": "term",
+      "explanation": "热带气旋强度等级之一，中心附近最大风力为8-9级，属于台风中的较弱级别。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}
