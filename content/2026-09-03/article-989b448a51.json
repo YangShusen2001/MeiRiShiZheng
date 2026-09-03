@@ -1,0 +1,93 @@
+{
+  "id": "989b448a51",
+  "date": "2026-09-03",
+  "title": "台风“沙德尔”横穿广东梅州 多条河流洪水预警生效",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202609/03/139996_54999584.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-03T23:48:11+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "记者从广东梅州市气象台了解到，今年第18号台风“沙德尔”中心3日11时前后进入广东梅州境内。受其影响，3日8时至14时，梅州东部出现大雨到暴雨，梅县区和大埔县出现局部大暴雨。预计至3日20时前后台风本体移出梅州。",
+    "截至3日14时，梅州境内韩江三河坝（三）站、梅潭河大埔站、金丰溪（漳溪河）上黄沙站洪水蓝色预警信号及梅潭河百侯站洪水黄色预警信号持续生效，2个水文（位）站出现超警戒水位。当前，各水库水位均在汛限水位以下。",
+    "广东省水文局梅州水文分局持续发布韩江洪水蓝色预警，预计梅州大埔县的韩江三河坝（三）站将在4日0时前后出现43.0米的水位，超过警戒水位1.0米。提醒沿河大埔县三河镇、大麻镇、高陂镇、银江镇，丰顺县潭江镇、小胜镇、留隍镇及相关村密切关注雨水情变化和水情预警信息；加强沿河地带巡查，停止韩江与防汛无关的水上活动；请沿河镇、村及时组织做好洪水避险工作；注意防御城乡积涝、山洪和泥石流、山体滑坡等地质灾害。",
+    "当前，梅州市防汛防旱防风指挥部维持防汛Ⅲ级应急响应。",
+    "气象部门预报，3日白天到4日，梅州市有暴雨局部大暴雨过程。应急部门提醒，市民非必要不外出，远离河道、低洼地带、边坡及危旧房屋，防范强降雨可能引发的洪涝、地质灾害等次生灾害。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-03T23:48:11+00:00",
+  "sourceTextHash": "50fd6275f07aa4072a15844e2eba1e7d4ba3c9043b4795ba5e0f66c0b415091a",
+  "aiStatus": "ok",
+  "aiSummary": "台风“沙德尔”进入广东梅州，带来强降雨，多条河流洪水预警生效，韩江部分站点超警戒水位，梅州维持防汛Ⅲ级应急响应，提醒防范次生灾害。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-15-45-viewpoint",
+      "paragraphIndex": 0,
+      "start": 15,
+      "end": 45,
+      "text": "今年第18号台风“沙德尔”中心3日11时前后进入广东梅州境内",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-41-68-viewpoint",
+      "paragraphIndex": 1,
+      "start": 41,
+      "end": 68,
+      "text": "洪水蓝色预警信号及梅潭河百侯站洪水黄色预警信号持续生效",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-25-71-exam_point",
+      "paragraphIndex": 2,
+      "start": 25,
+      "end": 71,
+      "text": "预计梅州大埔县的韩江三河坝（三）站将在4日0时前后出现43.0米的水位，超过警戒水位1.0米",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-173-198-exam_point",
+      "paragraphIndex": 2,
+      "start": 173,
+      "end": 198,
+      "text": "注意防御城乡积涝、山洪和泥石流、山体滑坡等地质灾害",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-3-25-exam_point",
+      "paragraphIndex": 3,
+      "start": 3,
+      "end": 25,
+      "text": "梅州市防汛防旱防风指挥部维持防汛Ⅲ级应急响应",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-15-28-exam_point",
+      "paragraphIndex": 4,
+      "start": 15,
+      "end": 28,
+      "text": "梅州市有暴雨局部大暴雨过程",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-36-62-viewpoint",
+      "paragraphIndex": 4,
+      "start": 36,
+      "end": 62,
+      "text": "市民非必要不外出，远离河道、低洼地带、边坡及危旧房屋",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-63-67-term",
+      "paragraphIndex": 2,
+      "start": 63,
+      "end": 67,
+      "text": "警戒水位",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 2
+  }
+}

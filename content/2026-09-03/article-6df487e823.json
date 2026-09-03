@@ -1,0 +1,119 @@
+{
+  "id": "6df487e823",
+  "date": "2026-09-03",
+  "title": "受台风持续影响，广东部分列车停运、晚点",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202609/03/139996_54999507.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-03T23:47:58+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "据中央气象台消息，今年第18号台风“沙德尔”的中心已于9月3日上午6时30分前后在福建省漳州市漳浦古雷沿海第三次登陆。为确保旅客列车运行安全，国铁广州局继续动态调整旅客列车开行方案。",
+    "9月3日至4日，甬广高铁、杭深铁路、京九铁路部分列车停运；部分列车将出现不同程度晚点。",
+    "铁路部门将持续根据台风影响范围和降雨情况，动态调整列车运行方案。列车开行、停运信息以12306网站（12306手机 APP）、车站公告为准。请旅客实时关注以上官方渠道公告，第一时间掌握列车开行信息，合理安排出行。",
+    "已购买相关停运列车车票的旅客，将会收到停运短信。12306网站将在原车票乘车日之后5日内自动为您办理车票退票手续，自列车停运信息公布时起至车票乘车日期后30日以内办理退票手续，不收退票费。",
+    "温馨提示：系统自动退票仅支持停运列车车票的自动退票。如果您购买了联程车票（含多段行程车票），请您务必在联程车票开车前，通过12306网站或车站窗口将停运车次与联程车票一并手动办理退票，以避免联程车票超过开车时间无法办理退票，或单独办理退票被核收退票费。",
+    "文/广州日报新花城记者：黄庆 通讯员：资明兴、谢志安、肖永慧"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-03T23:47:59+00:00",
+  "sourceTextHash": "101050395a321912f4cc09136e0c75f075721572992565d8f3a5e921dc79afdb",
+  "aiStatus": "ok",
+  "aiSummary": "受台风“沙德尔”影响，广东部分列车停运或晚点。铁路部门动态调整方案，旅客可通过12306查询。停运车票可自动退票，联程车票需手动办理，以免产生费用。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-71-90-viewpoint",
+      "paragraphIndex": 0,
+      "start": 71,
+      "end": 90,
+      "text": "国铁广州局继续动态调整旅客列车开行方案",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-29-42-viewpoint",
+      "paragraphIndex": 1,
+      "start": 29,
+      "end": 42,
+      "text": "部分列车将出现不同程度晚点",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-32-69-viewpoint",
+      "paragraphIndex": 2,
+      "start": 32,
+      "end": 69,
+      "text": "列车开行、停运信息以12306网站（12306手机 APP）、车站公告为准",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-88-93-viewpoint",
+      "paragraphIndex": 3,
+      "start": 88,
+      "end": 93,
+      "text": "不收退票费",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-15-22-term",
+      "paragraphIndex": 0,
+      "start": 15,
+      "end": 22,
+      "text": "台风“沙德尔”",
+      "type": "term",
+      "explanation": "今年第18号台风，于9月3日在福建漳浦沿海登陆，影响广东地区列车运行。"
+    },
+    {
+      "id": "ai-1-8-12-term",
+      "paragraphIndex": 1,
+      "start": 8,
+      "end": 12,
+      "text": "甬广高铁",
+      "type": "term"
+    },
+    {
+      "id": "ai-0-1-6-exam_point",
+      "paragraphIndex": 0,
+      "start": 1,
+      "end": 6,
+      "text": "中央气象台",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-56-58-exam_point",
+      "paragraphIndex": 0,
+      "start": 56,
+      "end": 58,
+      "text": "登陆",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-26-28-exam_point",
+      "paragraphIndex": 1,
+      "start": 26,
+      "end": 28,
+      "text": "停运",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-21-25-exam_point",
+      "paragraphIndex": 2,
+      "start": 21,
+      "end": 25,
+      "text": "动态调整",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-120-125-exam_point",
+      "paragraphIndex": 4,
+      "start": 120,
+      "end": 125,
+      "text": "核收退票费",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 3
+  }
+}

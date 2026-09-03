@@ -1,0 +1,101 @@
+{
+  "id": "18ecc75820",
+  "date": "2026-09-03",
+  "title": "当动力电池学会“看人下菜”，会带来哪些新变化？丨聚焦2026世界动力电池大会·C视频",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83316112.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-03T23:48:41+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月3日，2026世界动力电池大会在宜宾启幕，吸引国内外200余家企业参展。",
+    "超5万平方米的展馆内，设有动力电池及材料产业链、国际展区、储能、具身智能、低空经济、新能源汽车等多个主题展区，集中展示了动力电池、储能等领域的前沿科技与创新产品。",
+    "现场逛展，一个明显的变化，就是动力电池学会了“看人下菜”，可以适配多元化场景的差异需求。这些变化将给生产生活带来哪些影响？我们走进会场一探究竟。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-03T23:48:43+00:00",
+  "sourceTextHash": "05a9bbcf04dbb8db2d1dc2cd3295512b3a7330f8ec7e467c4b21e290c1efdb02",
+  "aiStatus": "ok",
+  "aiSummary": "2026世界动力电池大会在宜宾开幕，200余家企业参展，展区覆盖动力电池、储能、具身智能等前沿领域。动力电池适配多元化场景需求，成为展会亮点，将深刻影响生产生活。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-5-22-viewpoint",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 22,
+      "text": "2026世界动力电池大会在宜宾启幕",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-23-37-viewpoint",
+      "paragraphIndex": 0,
+      "start": 23,
+      "end": 37,
+      "text": "吸引国内外200余家企业参展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-11-54-exam_point",
+      "paragraphIndex": 1,
+      "start": 11,
+      "end": 54,
+      "text": "设有动力电池及材料产业链、国际展区、储能、具身智能、低空经济、新能源汽车等多个主题展区",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-55-80-viewpoint",
+      "paragraphIndex": 1,
+      "start": 55,
+      "end": 80,
+      "text": "集中展示了动力电池、储能等领域的前沿科技与创新产品",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-15-28-viewpoint",
+      "paragraphIndex": 2,
+      "start": 15,
+      "end": 28,
+      "text": "动力电池学会了“看人下菜”",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-31-43-exam_point",
+      "paragraphIndex": 2,
+      "start": 31,
+      "end": 43,
+      "text": "适配多元化场景的差异需求",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-44-60-exam_point",
+      "paragraphIndex": 2,
+      "start": 44,
+      "end": 60,
+      "text": "这些变化将给生产生活带来哪些影响",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-32-36-term",
+      "paragraphIndex": 1,
+      "start": 32,
+      "end": 36,
+      "text": "具身智能",
+      "type": "term",
+      "explanation": "指具备感知、决策和行动能力的人工智能系统，可与环境交互并执行复杂任务。"
+    },
+    {
+      "id": "ai-1-37-41-term",
+      "paragraphIndex": 1,
+      "start": 37,
+      "end": 41,
+      "text": "低空经济",
+      "type": "term",
+      "explanation": "以低空空域飞行活动为核心，涵盖无人机、电动垂直起降飞行器等产业的经济形态。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

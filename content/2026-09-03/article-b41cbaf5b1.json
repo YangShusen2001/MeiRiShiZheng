@@ -1,0 +1,58 @@
+{
+  "id": "b41cbaf5b1",
+  "date": "2026-09-03",
+  "title": "习近平结束出席2026年上海合作组织峰会和对吉尔吉斯斯坦、埃及的国事访问回到北京",
+  "source": "qstheory.cn",
+  "url": "https://www.qstheory.cn/20260903/9948803909194e7484c2d6a93080d0d7/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-03T23:47:09+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;新华社北京9月3日电 9月3日上午，国家主席习近平圆满结束出席2026年上海合作组织峰会和对吉尔吉斯斯坦、埃及的国事访问后回到北京。",
+    "&emsp;&emsp;习近平主席夫人彭丽媛，中共中央政治局常委、中央办公厅主任蔡奇，中共中央政治局委员、外交部部长王毅等陪同人员同机返回。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-03T23:47:09+00:00",
+  "sourceTextHash": "e5b787d713b8fd797aa3143aa54017b687eb7ccb0281e2bae059628398a25b61",
+  "aiStatus": "ok",
+  "aiSummary": "国家主席习近平圆满结束出席2026年上海合作组织峰会及对吉尔吉斯斯坦、埃及的国事访问，于9月3日上午回到北京，夫人彭丽媛等陪同人员同机返回。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-37-77-viewpoint",
+      "paragraphIndex": 0,
+      "start": 37,
+      "end": 77,
+      "text": "圆满结束出席2026年上海合作组织峰会和对吉尔吉斯斯坦、埃及的国事访问后回到北京",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-30-37-term",
+      "paragraphIndex": 0,
+      "start": 30,
+      "end": 37,
+      "text": "国家主席习近平",
+      "type": "term"
+    },
+    {
+      "id": "ai-1-23-42-viewpoint",
+      "paragraphIndex": 1,
+      "start": 23,
+      "end": 42,
+      "text": "中共中央政治局常委、中央办公厅主任蔡奇",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-43-60-viewpoint",
+      "paragraphIndex": 1,
+      "start": 43,
+      "end": 60,
+      "text": "中共中央政治局委员、外交部部长王毅",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "id": "9c06e141bb",
+  "date": "2026-09-03",
+  "title": "江苏省人民政府 要闻关注 信长星在凤凰出版传媒集团和省文投集团调研时强调 牢牢把握正确导向 激发创新创造活力 更好地以文化赋能经济社会发展",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/3/art_84322_11824562.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-03T23:48:52+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月2日，省委书记信长星到江苏凤凰出版传媒集团、江苏省文化投资管理集团调研。他强调，要深入学习贯彻习近平文化思想，增强文化自信，坚守主责主业，激发创新创造活力，更好地以文化赋能经济社会发展，在文化强省建设中展现新担当新作为。",
+    "信长星首先来到凤凰出版传媒集团，详细了解企业发展历程、党的创新理论读物发行和内容生产、国际传播等情况。他指出，要坚持正确政治方向、价值取向和出版导向，深化党的创新理论宣传阐释，植根中华优秀传统文化，立足中国式现代化江苏新实践，推出更多优秀作品。要强化数智赋能，把数字阅读和传统阅读结合起来，营造沉浸式阅读空间，持续推动全民阅读、建设书香社会。在听取近年来重点图书出版情况介绍时，信长星说，好作品源于创作者的潜心创作、精心打磨，也离不开出版工作者的匠心托举。要陪伴和引导创作者笃定恒心、精益求精，拿出更多叫得响、传得开、留得住的精品佳作。信长星还察看了古籍保护传承情况，要求进一步做好保护修复、整理研究、出版利用等工作，让书写在古籍里的文字活起来，为文化传承发展提供支撑。",
+    "在省文投集团，信长星仔细了解企业改革发展和原创剧目创作演出、影视作品制作生产、文旅项目投资运营等情况。他指出，要坚持把社会效益放在首位、社会效益和经济效益相统一，扎实做好以文化人、以文惠民、以文兴业的文章，培育新型文化业态，优化文化产品和服务供给，推动文化事业与文化产业协同发展。要树立大历史观、大时代观，将中华优秀传统文化作为文艺创作的重要源泉，深入挖掘江苏丰厚的历史文化资源，以更多内涵深厚、艺术表现力强的作品，不断满足人民群众精神文化需求。在参观“紫金奖”文化创意设计大赛作品展时，信长星要求搭建开放平台，充分激发年轻人的创新热情、创意灵感，营造创意设计、成果转化、产业培育的良好生态，打造有影响力的文化品牌，为高质量发展注入新动能。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-03T23:48:53+00:00",
+  "sourceTextHash": "1266457e14e00974be8bc3cae021f98a7519308958623b6b5a4ac364229e0659",
+  "aiStatus": "ok",
+  "aiSummary": "9月2日，江苏省委书记信长星在凤凰出版传媒集团和省文投集团调研，强调贯彻习近平文化思想，坚持正确导向，激发创新活力，以文化赋能经济社会发展，推动文化强省建设。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-43-56-viewpoint",
+      "paragraphIndex": 0,
+      "start": 43,
+      "end": 56,
+      "text": "深入学习贯彻习近平文化思想",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-57-63-viewpoint",
+      "paragraphIndex": 0,
+      "start": 57,
+      "end": 63,
+      "text": "增强文化自信",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-80-94-viewpoint",
+      "paragraphIndex": 0,
+      "start": 80,
+      "end": 94,
+      "text": "更好地以文化赋能经济社会发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-56-74-viewpoint",
+      "paragraphIndex": 1,
+      "start": 56,
+      "end": 74,
+      "text": "坚持正确政治方向、价值取向和出版导向",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-56-80-viewpoint",
+      "paragraphIndex": 2,
+      "start": 56,
+      "end": 80,
+      "text": "坚持把社会效益放在首位、社会效益和经济效益相统一",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-96-102-exam_point",
+      "paragraphIndex": 0,
+      "start": 96,
+      "end": 102,
+      "text": "文化强省建设",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-27-37-exam_point",
+      "paragraphIndex": 1,
+      "start": 27,
+      "end": 37,
+      "text": "党的创新理论读物发行",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-125-129-exam_point",
+      "paragraphIndex": 1,
+      "start": 125,
+      "end": 129,
+      "text": "数智赋能",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-159-163-exam_point",
+      "paragraphIndex": 1,
+      "start": 159,
+      "end": 163,
+      "text": "全民阅读",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-275-281-exam_point",
+      "paragraphIndex": 1,
+      "start": 275,
+      "end": 281,
+      "text": "古籍保护传承",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-68-80-exam_point",
+      "paragraphIndex": 2,
+      "start": 68,
+      "end": 80,
+      "text": "社会效益和经济效益相统一",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-105-111-exam_point",
+      "paragraphIndex": 2,
+      "start": 105,
+      "end": 111,
+      "text": "新型文化业态",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-227-230-term",
+      "paragraphIndex": 2,
+      "start": 227,
+      "end": 230,
+      "text": "紫金奖",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

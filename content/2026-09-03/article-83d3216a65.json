@@ -1,0 +1,112 @@
+{
+  "id": "83d3216a65",
+  "date": "2026-09-03",
+  "title": "习近平和彭丽媛同埃及总统塞西夫妇共同参观大埃及博物馆",
+  "source": "qstheory.cn",
+  "url": "https://www.qstheory.cn/20260903/3f5105fa7a344dc4adea9fd02955cff4/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-03T23:47:15+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;当地时间9月2日下午，国家主席习近平和夫人彭丽媛在埃及总统塞西和夫人依缇萨尔陪同下参观大埃及博物馆。新华社记者 谢环驰 摄",
+    "&emsp;&emsp;新华社开罗9月2日电（记者邓玉山 韩梁）当地时间9月2日下午，国家主席习近平和夫人彭丽媛在埃及总统塞西和夫人依缇萨尔陪同下参观大埃及博物馆。",
+    "&emsp;&emsp;吉萨高原上，绵延千年的金字塔群同气势恢弘的大埃及博物馆遥相辉映。",
+    "&emsp;&emsp;习近平和彭丽媛抵达博物馆时，塞西夫妇热情迎接。两国元首夫妇一同步入展厅，在拉美西斯二世雕像前合影，听取对博物馆和古埃及历史的介绍。两国元首夫妇乘扶梯上行，饶有兴致地欣赏精美雄浑的石刻造像、铭文柱石、神庙尖顶，然后在观景台前凭窗远眺金字塔群。两国元首步入图坦卡蒙展厅，观赏法老王座、黄金面具、皇家战车等珍贵馆藏。",
+    "&emsp;&emsp;习近平指出，中国和埃及同为文明古国和世界遗产大国，两大文明跨越时空持久双向奔赴，不断书写两国人民世代友好篇章。双方要弘扬平等、互鉴、对话、包容的文明观，践行全球文明倡议，共同推动不同文明包容共存、交流互鉴，为推动构建人类命运共同体汇聚更多文明力量。",
+    "&emsp;&emsp;塞西感谢习近平主席在大埃及博物馆去年开馆时致信祝贺，表示古埃及文明和中华文明都拥有的“包容并蓄、多元共生”的特质，同习近平主席提出的全球文明倡议理念高度契合。埃方愿同中方密切人文交流，推动文明互鉴，让世界更加和谐包容。",
+    "&emsp;&emsp;蔡奇、王毅等参加上述活动。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-03T23:47:16+00:00",
+  "sourceTextHash": "aebda3ef4db04ff26cd04bf84a003bc01981e598eba8b149b2c0064ffef68c1a",
+  "aiStatus": "ok",
+  "aiSummary": "当地时间9月2日下午，国家主席习近平和夫人彭丽媛在埃及总统塞西夫妇陪同下参观大埃及博物馆，强调中埃文明交流互鉴，践行全球文明倡议，推动构建人类命运共同体。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-43-81-viewpoint",
+      "paragraphIndex": 1,
+      "start": 43,
+      "end": 81,
+      "text": "国家主席习近平和夫人彭丽媛在埃及总统塞西和夫人依缇萨尔陪同下参观大埃及博物馆",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-18-36-viewpoint",
+      "paragraphIndex": 4,
+      "start": 18,
+      "end": 36,
+      "text": "中国和埃及同为文明古国和世界遗产大国",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-67-87-viewpoint",
+      "paragraphIndex": 4,
+      "start": 67,
+      "end": 87,
+      "text": "双方要弘扬平等、互鉴、对话、包容的文明观",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-5-91-110-viewpoint",
+      "paragraphIndex": 5,
+      "start": 91,
+      "end": 110,
+      "text": "埃方愿同中方密切人文交流，推动文明互鉴",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-88-96-exam_point",
+      "paragraphIndex": 4,
+      "start": 88,
+      "end": 96,
+      "text": "践行全球文明倡议",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-116-127-exam_point",
+      "paragraphIndex": 4,
+      "start": 116,
+      "end": 127,
+      "text": "推动构建人类命运共同体",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-55-64-exam_point",
+      "paragraphIndex": 5,
+      "start": 55,
+      "end": 64,
+      "text": "包容并蓄、多元共生",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-49-57-exam_point",
+      "paragraphIndex": 3,
+      "start": 49,
+      "end": 57,
+      "text": "拉美西斯二世雕像",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-138-144-exam_point",
+      "paragraphIndex": 3,
+      "start": 138,
+      "end": 144,
+      "text": "图坦卡蒙展厅",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-12-16-term",
+      "paragraphIndex": 2,
+      "start": 12,
+      "end": 16,
+      "text": "吉萨高原",
+      "type": "term",
+      "explanation": "位于埃及开罗附近的高原，以金字塔群闻名，是古埃及文明的重要遗址。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

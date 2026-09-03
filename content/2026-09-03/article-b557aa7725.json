@@ -1,0 +1,111 @@
+{
+  "id": "b557aa7725",
+  "date": "2026-09-03",
+  "title": "习近平和彭丽媛同埃及总统塞西夫妇共同参观大埃及博物馆&nbsp;&nbsp;广东省人民政府门户网站",
+  "source": "广东省人民政府网",
+  "url": "https://www.gd.gov.cn/gdywdt/xwdt/content/post_4950557.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-03T23:48:31+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "当地时间9月2日下午，国家主席习近平和夫人彭丽媛在埃及总统塞西和夫人依缇萨尔陪同下参观大埃及博物馆。图片来源：新华网",
+    "当地时间9月2日下午，国家主席习近平和夫人彭丽媛在埃及总统塞西和夫人依缇萨尔陪同下参观大埃及博物馆。",
+    "吉萨高原上，绵延千年的金字塔群同气势恢弘的大埃及博物馆遥相辉映。",
+    "习近平和彭丽媛抵达博物馆时，塞西夫妇热情迎接。两国元首夫妇一同步入展厅，在拉美西斯二世雕像前合影，听取对博物馆和古埃及历史的介绍。两国元首夫妇乘扶梯上行，饶有兴致地欣赏精美雄浑的石刻造像、铭文柱石、神庙尖顶，然后在观景台前凭窗远眺金字塔群。两国元首步入图坦卡蒙展厅，观赏法老王座、黄金面具、皇家战车等珍贵馆藏。",
+    "习近平指出，中国和埃及同为文明古国和世界遗产大国，两大文明跨越时空持久双向奔赴，不断书写两国人民世代友好篇章。双方要弘扬平等、互鉴、对话、包容的文明观，践行全球文明倡议，共同推动不同文明包容共存、交流互鉴，为推动构建人类命运共同体汇聚更多文明力量。",
+    "塞西感谢习近平主席在大埃及博物馆去年开馆时致信祝贺，表示古埃及文明和中华文明都拥有的“包容并蓄、多元共生”的特质，同习近平主席提出的全球文明倡议理念高度契合。埃方愿同中方密切人文交流，推动文明互鉴，让世界更加和谐包容。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-03T23:48:33+00:00",
+  "sourceTextHash": "8457433547d1f5880c51469eb662f6880d9a7703fb522d2c11b3c9cdb485c991",
+  "aiStatus": "ok",
+  "aiSummary": "当地时间9月2日，习近平主席与夫人彭丽媛在埃及总统塞西夫妇陪同下参观大埃及博物馆，强调中埃文明交流互鉴，践行全球文明倡议，推动构建人类命运共同体。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-0-50-viewpoint",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 50,
+      "text": "当地时间9月2日下午，国家主席习近平和夫人彭丽媛在埃及总统塞西和夫人依缇萨尔陪同下参观大埃及博物馆。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-6-55-viewpoint",
+      "paragraphIndex": 4,
+      "start": 6,
+      "end": 55,
+      "text": "中国和埃及同为文明古国和世界遗产大国，两大文明跨越时空持久双向奔赴，不断书写两国人民世代友好篇章。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-55-124-viewpoint",
+      "paragraphIndex": 4,
+      "start": 55,
+      "end": 124,
+      "text": "双方要弘扬平等、互鉴、对话、包容的文明观，践行全球文明倡议，共同推动不同文明包容共存、交流互鉴，为推动构建人类命运共同体汇聚更多文明力量。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-5-28-79-viewpoint",
+      "paragraphIndex": 5,
+      "start": 28,
+      "end": 79,
+      "text": "古埃及文明和中华文明都拥有的“包容并蓄、多元共生”的特质，同习近平主席提出的全球文明倡议理念高度契合。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-78-84-exam_point",
+      "paragraphIndex": 4,
+      "start": 78,
+      "end": 84,
+      "text": "全球文明倡议",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-108-115-exam_point",
+      "paragraphIndex": 4,
+      "start": 108,
+      "end": 115,
+      "text": "人类命运共同体",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-37-43-exam_point",
+      "paragraphIndex": 3,
+      "start": 37,
+      "end": 43,
+      "text": "拉美西斯二世",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-126-130-exam_point",
+      "paragraphIndex": 3,
+      "start": 126,
+      "end": 130,
+      "text": "图坦卡蒙",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-0-4-exam_point",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 4,
+      "text": "吉萨高原",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-43-52-term",
+      "paragraphIndex": 5,
+      "start": 43,
+      "end": 52,
+      "text": "包容并蓄、多元共生",
+      "type": "term",
+      "explanation": "指文明具有包容性和多样性，能够和谐共存、相互促进，是中华文明和古埃及文明的共同特质。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

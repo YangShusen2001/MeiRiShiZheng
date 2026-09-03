@@ -1,0 +1,109 @@
+{
+  "id": "b928e169ab",
+  "date": "2026-09-03",
+  "title": "大会上的&ldquo;新面孔&rdquo;，要用机器人造机器人的电池丨聚焦2026世界动力电池大会",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83316109.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-03T23:48:45+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "一台重载人形机器人正在宁德时代生产线上搬运物料箱，而为它提供&ldquo;动力心脏&rdquo;的，正是它&ldquo;上岗&rdquo;的这家动力电池龙头企业。",
+    "机器人&ldquo;造&rdquo;机器人的电池&mdash;&mdash;在9月3日举行的2026世界动力电池大会全体大会上，银河通用创始人兼CTO、具身智能大模型北京市重点实验室主任王鹤在台上展示了这一幕。",
+    "世界动力电池大会办到第5年，电池厂商、整车企业在主题演讲环节常常露面，像银河通用这样的人形机器人企业，还是&ldquo;新面孔&rdquo;。",
+    "说稀奇也不稀奇。用王鹤的话来说，动力电池是人形机器人的核心约束。一定程度上，动力电池的技术水平，决定了人形机器人硬件性能与商业化规模的&ldquo;天花板&rdquo;有多高。",
+    "比如，电池容量，决定着机器人的续航能力与持续作业时间；再比如，瞬时峰值放电能力，决定机器人跑跳、避障、抗倾覆等动态性能。",
+    "今年8月，国内首个具身大模型领域省部级重点实验室在北京揭牌，便是由银河通用牵头，联合北京大学、宁德时代共建。从两家企业的合作不难看出，包括人形机器人在内的人工智能和动力电池&ldquo;跨界牵手&rdquo;，极具想象力。",
+    "人工智能也不单是动力电池的应用方。工业和信息化部装备工业发展中心主任瞿国春用&ldquo;全方位&rdquo;来形容人工智能对动力电池产业链的重塑度。",
+    "它是电池补能的&ldquo;服务员&rdquo;。岚图汽车科技股份有限公司董事长卢放分享，他们率先把补能场景从&ldquo;人找桩&rdquo;升级为&ldquo;桩找车&rdquo;，智能充电机器人自动完成取枪、插枪、充电、拔枪全流程，实现&ldquo;无需下车、即停即充&rdquo;。",
+    "它还是电池研发的&ldquo;领航员&rdquo;。深势科技创始人兼CEO孙伟杰在会上发布了固态电解质智能研发大装置。3名全职研发人员，在短短两个月时间内，借助AI固态电解质&ldquo;专家&rdquo;，发现了6款新型固态电解质材料，其中两款实现公斤级放大，交付头部企业开展软包电芯测评。",
+    "&ldquo;站在固态电解质行业研发的&lsquo;巨人&rsquo;肩膀上，人工智能能够快速整理内化文献知识，突破人类经验束缚，还能基于自动化合成工站、测试工站等实现实验流程智能化。&rdquo;孙伟杰说。",
+    "实际上，王鹤并不是出现在世界动力电池大会的第一张&ldquo;新面孔&rdquo;。去年，四川傲势科技有限公司的负责人也参与了全体大会圆桌对话环节，代表的是低空经济的新力量。",
+    "巧的是，当提到当下最火热的全固态电池会率先落地的领域时，无人机、机器人总在答案之中。",
+    "与新能源汽车共成长的动力电池，已不止能&ldquo;上车&rdquo;。当动力电池应用场景从汽车行业向低空经济、人形机器人、电动船舶、工程机械等领域加速拓展，世界动力电池大会上的&ldquo;新面孔&rdquo;，还会越来越多。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-03T23:48:47+00:00",
+  "sourceTextHash": "3df902ee6fe8eb3c15e959df179976ad57625daaac04c1b96a0cf24945819009",
+  "aiStatus": "ok",
+  "aiSummary": "2026世界动力电池大会上，人形机器人企业等新面孔亮相，展示机器人造机器人电池。动力电池是人形机器人核心约束，人工智能全方位重塑产业链，既是补能服务员也是研发领航员，应用场景正从汽车向多领域拓展。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-0-24-viewpoint",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 24,
+      "text": "一台重载人形机器人正在宁德时代生产线上搬运物料箱",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-6-58-74-viewpoint",
+      "paragraphIndex": 6,
+      "start": 58,
+      "end": 74,
+      "text": "人工智能对动力电池产业链的重塑度",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-12-37-78-viewpoint",
+      "paragraphIndex": 12,
+      "start": 37,
+      "end": 78,
+      "text": "动力电池应用场景从汽车行业向低空经济、人形机器人、电动船舶、工程机械等领域加速拓展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-46-58-exam_point",
+      "paragraphIndex": 1,
+      "start": 46,
+      "end": 58,
+      "text": "2026世界动力电池大会",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-16-31-exam_point",
+      "paragraphIndex": 3,
+      "start": 16,
+      "end": 31,
+      "text": "动力电池是人形机器人的核心约束",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-3-26-exam_point",
+      "paragraphIndex": 4,
+      "start": 3,
+      "end": 26,
+      "text": "电池容量，决定着机器人的续航能力与持续作业时间",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-5-29-exam_point",
+      "paragraphIndex": 5,
+      "start": 5,
+      "end": 29,
+      "text": "国内首个具身大模型领域省部级重点实验室在北京揭牌",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-7-93-118-exam_point",
+      "paragraphIndex": 7,
+      "start": 93,
+      "end": 118,
+      "text": "智能充电机器人自动完成取枪、插枪、充电、拔枪全流程",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-8-46-58-exam_point",
+      "paragraphIndex": 8,
+      "start": 46,
+      "end": 58,
+      "text": "固态电解质智能研发大装置",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 3
+  }
+}

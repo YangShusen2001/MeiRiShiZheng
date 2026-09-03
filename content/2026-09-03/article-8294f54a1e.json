@@ -1,0 +1,184 @@
+{
+  "id": "8294f54a1e",
+  "date": "2026-09-03",
+  "title": "新华视点丨开学第一课：科创启智 铸魂育人护成长",
+  "source": "education.news.cn",
+  "url": "https://education.news.cn/20260903/9bf9abcfc07c4a1591dda425be4cd078/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-03T23:47:37+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;■江苏建湖：走进机器人4S店 上好开学第一课",
+    "&emsp;&emsp;为了让学生接触前沿科技，打好学习基础，新学期开启，江苏建湖组织学生走进机器人4S店，开展科创研学活动，用沉浸式的实景课堂，给孩子们送上了一堂特别的开学第一课。",
+    "&emsp;&emsp;把课堂搬到科技一线，让书本知识对接现实场景，让抽象的人工智能知识变得看得见、摸得着。",
+    "&emsp;&emsp;■浙江杭州：一张“航天任务卡” 开启新生科技启蒙第一课",
+    "&emsp;&emsp;开学季到来，浙江各学校迎新形式推陈出新。在杭州市余杭区瓶窑第二小学汲英校区，每一位新生入校便领取了一张“航天任务卡”，开启探索之旅。",
+    "&emsp;&emsp;据了解，杭州市余杭区瓶窑第二小学已举办了六年航空航天特色开学迎新活动。",
+    "&emsp;&emsp;■江苏淮安：AI走进开学课堂",
+    "&emsp;&emsp;开学之际，淮安市白鹭湖小学的孩子们，在老师的引导下借助AI工具观测云层，对比人工测温与智能测温的数据差异，亲历“AI感知—数据处理—结果输出”的完整探究链。",
+    "&emsp;&emsp;根据江苏省教育厅部署，今年秋季学期起，江苏所有中小学将全面开设人工智能通识课，引导孩子们在真实情境中体会“从生活走向科学，用AI赋能探究”的学习理念。",
+    "&emsp;&emsp;■江苏南京：“生态文明第一课” 聚焦长江江豚保护",
+    "&emsp;&emsp;新学期到来，南京市鼓楼实验中学的学生们走上“江豚保护号”游轮。生态环保志愿者和专业巡护人员向学生们介绍江豚识别、行为观察、数据记录等标准化科学观测方法。",
+    "&emsp;&emsp;作为南京市生态文明教育的特色品牌，“生态文明第一课”多年来坚持立足南京本土自然资源，把江河湖海、山林湿地转化为鲜活的教育课堂。",
+    "&emsp;&emsp;■红色铸魂 四川多地“开学第一课”出新出彩",
+    "&emsp;&emsp;开学季，四川长宁、仁寿等地中小学围绕红色传承、安全教育两大主题，开展形式多样的“开学第一课”。",
+    "&emsp;&emsp;宜宾市长宁县梅硐红军小学组织同学们走进中共川南特委会议会址，在国防装备观摩、“重走运粮路”接力等沉浸式体验中感悟长征精神的深刻内涵。眉山市仁寿师范附属小学以手绘英雄等形式，让学生在笔尖与讲述中汲取榜样力量。",
+    "&emsp;&emsp;■开学第一课 河南开封多维度守护学生安全健康",
+    "&emsp;&emsp;金秋开学季，河南省开封市各校以“安全与健康”为核心，精心开设特色“开学第一课”。",
+    "&emsp;&emsp;青春期遇上毕业季，心理调适尤为重要。开封市第三十三中学专门请来心理咨询专家，用专业的心理学技巧，教孩子们如何缓解焦虑、稳住心态、调控情绪、转化压力。",
+    "&emsp;&emsp;统筹：李杰 李佳琳 王冰笛",
+    "&emsp;&emsp;记者：毛俊 王怿文 刘铭翔 陈思 夏鹏 杨华 杨静"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-03T23:47:38+00:00",
+  "sourceTextHash": "b54f73ee3c3f0d47a14735d5219e50822298fc1386501a2e1c0312211efebb3d",
+  "aiStatus": "ok",
+  "aiSummary": "全国多地中小学以科创、生态、红色教育、安全健康等主题开展形式多样的开学第一课，通过沉浸式体验与实践活动，引导学生从生活走向科学，用AI赋能探究，同时注重精神传承与身心成长，为新学期注入活力。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-37-62-viewpoint",
+      "paragraphIndex": 1,
+      "start": 37,
+      "end": 62,
+      "text": "江苏建湖组织学生走进机器人4S店，开展科创研学活动",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-12-33-viewpoint",
+      "paragraphIndex": 2,
+      "start": 12,
+      "end": 33,
+      "text": "把课堂搬到科技一线，让书本知识对接现实场景",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-8-31-50-viewpoint",
+      "paragraphIndex": 8,
+      "start": 31,
+      "end": 50,
+      "text": "江苏所有中小学将全面开设人工智能通识课",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-11-54-74-viewpoint",
+      "paragraphIndex": 11,
+      "start": 54,
+      "end": 74,
+      "text": "把江河湖海、山林湿地转化为鲜活的教育课堂",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-14-66-77-viewpoint",
+      "paragraphIndex": 14,
+      "start": 66,
+      "end": 77,
+      "text": "感悟长征精神的深刻内涵",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-56-60-term",
+      "paragraphIndex": 1,
+      "start": 56,
+      "end": 60,
+      "text": "科创研学",
+      "type": "term",
+      "explanation": "组织学生到科技企业或科研场所进行参观、体验和学习，以激发科学兴趣、培养创新能力的教育活动。"
+    },
+    {
+      "id": "ai-4-64-69-term",
+      "paragraphIndex": 4,
+      "start": 64,
+      "end": 69,
+      "text": "航天任务卡",
+      "type": "term",
+      "explanation": "学校为新生设计的以航天探索为主题的任务卡片，用于引导学生在活动中学习航天知识。"
+    },
+    {
+      "id": "ai-8-43-50-term",
+      "paragraphIndex": 8,
+      "start": 43,
+      "end": 50,
+      "text": "人工智能通识课",
+      "type": "term",
+      "explanation": "面向全体学生开设的普及人工智能基础知识和应用的课程，旨在提升全民AI素养。"
+    },
+    {
+      "id": "ai-10-34-39-term",
+      "paragraphIndex": 10,
+      "start": 34,
+      "end": 39,
+      "text": "江豚保护号",
+      "type": "term"
+    },
+    {
+      "id": "ai-14-68-72-term",
+      "paragraphIndex": 14,
+      "start": 68,
+      "end": 72,
+      "text": "长征精神",
+      "type": "term",
+      "explanation": "中国共产党领导红军在长征中体现出的坚定信念、艰苦奋斗、不怕牺牲等精神品质。"
+    },
+    {
+      "id": "ai-1-64-72-exam_point",
+      "paragraphIndex": 1,
+      "start": 64,
+      "end": 72,
+      "text": "沉浸式的实景课堂",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-38-44-exam_point",
+      "paragraphIndex": 2,
+      "start": 38,
+      "end": 44,
+      "text": "人工智能知识",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-7-68-82-exam_point",
+      "paragraphIndex": 7,
+      "start": 68,
+      "end": 82,
+      "text": "AI感知—数据处理—结果输出",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-8-65-80-exam_point",
+      "paragraphIndex": 8,
+      "start": 65,
+      "end": 80,
+      "text": "从生活走向科学，用AI赋能探究",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-10-78-87-exam_point",
+      "paragraphIndex": 10,
+      "start": 78,
+      "end": 87,
+      "text": "标准化科学观测方法",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-13-30-39-exam_point",
+      "paragraphIndex": 13,
+      "start": 30,
+      "end": 39,
+      "text": "红色传承、安全教育",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-17-66-85-exam_point",
+      "paragraphIndex": 17,
+      "start": 66,
+      "end": 85,
+      "text": "缓解焦虑、稳住心态、调控情绪、转化压力",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "id": "3840246476",
+  "date": "2026-09-03",
+  "title": "韩江发生2026年第1号洪水",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202609/03/139996_54999583.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-03T23:48:19+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "受降雨影响，广东韩江高陂水利枢纽（广东梅州）9月3日18时入库流量涨至4850立方米每秒，依据主要江河洪水编号规定，此次洪水编号为“韩江2026年第1号洪水”。",
+    "水利部滚动会商，紧盯韩江汛情发展态势，加强雨水情监测预报预警，提前针对广东、福建启动洪水防御Ⅳ级应急响应，派出2个工作组（专家组）赴一线指导工作，督促地方落实落细洪水防御各项措施，提前转移危险区群众，全力确保人民群众生命安全。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-03T23:48:20+00:00",
+  "sourceTextHash": "2b08989b33057443c188408828ee25350ed55cd027a348c34a289902bae6ace8",
+  "aiStatus": "ok",
+  "aiSummary": "受降雨影响，广东韩江高陂水利枢纽入库流量超标准，形成2026年第1号洪水。水利部启动洪水防御Ⅳ级应急响应，派出工作组指导，督促地方落实防御措施并转移群众，确保生命安全。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-0-5-viewpoint",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 5,
+      "text": "受降雨影响",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-29-44-exam_point",
+      "paragraphIndex": 0,
+      "start": 29,
+      "end": 44,
+      "text": "入库流量涨至4850立方米每秒",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-66-78-term",
+      "paragraphIndex": 0,
+      "start": 66,
+      "end": 78,
+      "text": "韩江2026年第1号洪水",
+      "type": "term",
+      "explanation": "依据主要江河洪水编号规定，对韩江达到编号标准的洪水进行的命名，用于防汛管理和信息发布。"
+    },
+    {
+      "id": "ai-1-0-7-viewpoint",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 7,
+      "text": "水利部滚动会商",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-42-52-term",
+      "paragraphIndex": 1,
+      "start": 42,
+      "end": 52,
+      "text": "洪水防御Ⅳ级应急响应",
+      "type": "term",
+      "explanation": "水利部针对洪水灾害设定的最低级别应急响应，用于启动防御措施和资源调配。"
+    },
+    {
+      "id": "ai-1-53-72-exam_point",
+      "paragraphIndex": 1,
+      "start": 53,
+      "end": 72,
+      "text": "派出2个工作组（专家组）赴一线指导工作",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-90-99-viewpoint",
+      "paragraphIndex": 1,
+      "start": 90,
+      "end": 99,
+      "text": "提前转移危险区群众",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-100-112-viewpoint",
+      "paragraphIndex": 1,
+      "start": 100,
+      "end": 112,
+      "text": "全力确保人民群众生命安全",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

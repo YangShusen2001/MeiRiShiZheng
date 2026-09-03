@@ -1,0 +1,22 @@
+{
+  "id": "c83639e386",
+  "date": "2026-09-03",
+  "title": "新华图讯｜习近平圆满结束对埃及的国事访问",
+  "source": "qstheory.cn",
+  "url": "https://www.qstheory.cn/20260903/6bfb2390244e4e9d878360c1b370e73f/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-03T23:47:22+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;当地时间9月2日晚，国家主席习近平结束对埃及的国事访问。",
+    "&emsp;&emsp;离开开罗时，埃及总统塞西夫妇到机场送行。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-03T23:47:23+00:00",
+  "sourceTextHash": "16a35c82c2be9c91219dd1459eb2abb94fbeadaba5f7d63d15b399dff5d86eb4",
+  "aiStatus": "error",
+  "aiAnnotations": [],
+  "aiError": "ai_semantic:summary_length"
+}
