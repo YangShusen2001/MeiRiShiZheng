@@ -1,0 +1,84 @@
+{
+  "id": "ecffab456d",
+  "date": "2026-09-04",
+  "title": "新华视点丨警惕租车“连环套”背后的恶势力犯罪",
+  "source": "news.cn",
+  "url": "https://www.news.cn/legal/20260904/1bcb561c5bc74eb18b6bb4dff38816f9/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-04T23:43:53+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;为期一年的深化扫黑除恶专项斗争正在全国范围内持续推进。8月底，全国部分法院集中宣判12件涉黑恶案件，天津市蓟州区人民法院宣判的李某某恶势力组织案就是其中之一。",
+    "&emsp;&emsp;该团伙以租车为幌子，将被害人引诱进“连环套”层层盘剥，并通过软硬暴力实施敲诈勒索……天津政法机关坚持“打早打小、露头就打”的方针，对黑恶势力依法惩治，不断增强人民群众的获得感、幸福感、安全感。",
+    "&emsp;&emsp;记者：冯家顺、李帅、黄江林"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-04T23:43:54+00:00",
+  "sourceTextHash": "d13041f08194714b62df728b2321149cb418dbaee0ac41e93d255aa6140af982",
+  "aiStatus": "ok",
+  "aiSummary": "全国深化扫黑除恶专项斗争持续推进，天津政法机关依法惩治以租车为幌子实施敲诈勒索的恶势力组织，坚持打早打小，增强群众安全感。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-12-38-viewpoint",
+      "paragraphIndex": 0,
+      "start": 12,
+      "end": 38,
+      "text": "为期一年的深化扫黑除恶专项斗争正在全国范围内持续推进",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-54-76-viewpoint",
+      "paragraphIndex": 1,
+      "start": 54,
+      "end": 76,
+      "text": "天津政法机关坚持“打早打小、露头就打”的方针",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-77-86-viewpoint",
+      "paragraphIndex": 1,
+      "start": 77,
+      "end": 86,
+      "text": "对黑恶势力依法惩治",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-62-84-exam_point",
+      "paragraphIndex": 0,
+      "start": 62,
+      "end": 84,
+      "text": "天津市蓟州区人民法院宣判的李某某恶势力组织案",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-15-21-exam_point",
+      "paragraphIndex": 1,
+      "start": 15,
+      "end": 21,
+      "text": "以租车为幌子",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-42-52-exam_point",
+      "paragraphIndex": 1,
+      "start": 42,
+      "end": 52,
+      "text": "软硬暴力实施敲诈勒索",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-63-72-term",
+      "paragraphIndex": 1,
+      "start": 63,
+      "end": 72,
+      "text": "打早打小、露头就打",
+      "type": "term",
+      "explanation": "扫黑除恶中强调对黑恶势力及早发现、及早打击，防止其坐大成势的工作方针。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

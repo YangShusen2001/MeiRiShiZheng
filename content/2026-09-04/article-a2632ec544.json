@@ -1,0 +1,147 @@
+{
+  "id": "a2632ec544",
+  "date": "2026-09-04",
+  "title": "感受“硬核”魅力 央省媒体走进中国（绵阳）科技城",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83316786.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-04T23:44:40+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "四川在线记者&nbsp;石国栋&nbsp;川观新闻绵阳观察&nbsp;付江",
+    "9月4日，来自人民日报社、光明日报社等四十余家中央及省级媒体的代表，先后走进九洲集团、长虹精密河边智能体工业园、中国（绵阳）科技城创新馆等地，实地调研绵阳科技创新、产业转型与城市发展等情况。",
+    "嘉宾在长虹“双创”智能制造工业园展厅参观。郭超英 摄",
+    "在九洲集团创新展示中心，媒体代表团详细了解了其在产业布局、技术创新及未来规划等情况。",
+    "九洲集团始建于1958年，经过60余年的发展，目前已成为专注于电子信息产业的大型高科技企业集团。",
+    "不少媒体代表感慨，在这里，看到了绵阳既有国之重器的深厚底蕴，又迸发出澎湃的创新活力。",
+    "在长虹精密河边智能体工业园，省外媒体代表深感震撼。谈及长虹，媒体代表起初都以为它只是家电企业，但深入了解后才发现，长虹的产业链和科技实力已经十分雄厚。",
+    "“长虹千亿级规模的背后，是对科技创新多年的深耕与坚守。”宁夏日报社全媒体理论评论频道总监刘加隆也有着相似的感受。他说，过去只知长虹生产电视，而今了解到其还涉足航空能源、放射医学治疗等高端领域，长虹在科技创新上的投入已实现质的飞跃。",
+    "在中国（绵阳）科技城创新馆，多媒体等展陈手段全面回顾了绵阳创新发展历程和科技城建设成就，呈现了绵阳在电子信息、先进材料、装备制造、生物医药等领域的创新成果。",
+    "“这次深入调研之后，我对绵阳的印象主要是两个字：硬核。”大众日报评论员李岳岳向记者分享。她说，在参观当中，她看到不少新技术的落地应用，这种创新力已经深入到经济社会发展的方方面面了。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-04T23:44:41+00:00",
+  "sourceTextHash": "1bd76dd73e2eb256899eb0bce086e7c54072f0cc51ca34e6e4fa595443f0e854",
+  "aiStatus": "ok",
+  "aiSummary": "四十余家央省媒体走进绵阳科技城，调研九洲集团、长虹工业园及创新馆，感受其电子信息等领域的创新活力与产业转型成就，媒体代表称绵阳科技创新“硬核”，深入经济社会发展各层面。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-71-94-viewpoint",
+      "paragraphIndex": 1,
+      "start": 71,
+      "end": 94,
+      "text": "实地调研绵阳科技创新、产业转型与城市发展等情况",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-5-13-41-viewpoint",
+      "paragraphIndex": 5,
+      "start": 13,
+      "end": 41,
+      "text": "看到了绵阳既有国之重器的深厚底蕴，又迸发出澎湃的创新活力",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-7-1-26-viewpoint",
+      "paragraphIndex": 7,
+      "start": 1,
+      "end": 26,
+      "text": "长虹千亿级规模的背后，是对科技创新多年的深耕与坚守",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-9-67-89-viewpoint",
+      "paragraphIndex": 9,
+      "start": 67,
+      "end": 89,
+      "text": "这种创新力已经深入到经济社会发展的方方面面了",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-38-42-exam_point",
+      "paragraphIndex": 1,
+      "start": 38,
+      "end": 42,
+      "text": "九洲集团",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-43-55-exam_point",
+      "paragraphIndex": 1,
+      "start": 43,
+      "end": 55,
+      "text": "长虹精密河边智能体工业园",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-56-68-exam_point",
+      "paragraphIndex": 1,
+      "start": 56,
+      "end": 68,
+      "text": "中国（绵阳）科技城创新馆",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-31-37-exam_point",
+      "paragraphIndex": 4,
+      "start": 31,
+      "end": 37,
+      "text": "电子信息产业",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-7-79-90-exam_point",
+      "paragraphIndex": 7,
+      "start": 79,
+      "end": 90,
+      "text": "航空能源、放射医学治疗",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-8-50-69-exam_point",
+      "paragraphIndex": 8,
+      "start": 50,
+      "end": 69,
+      "text": "电子信息、先进材料、装备制造、生物医药",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-8-14-22-exam_point",
+      "paragraphIndex": 8,
+      "start": 14,
+      "end": 22,
+      "text": "多媒体等展陈手段",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-40-47-term",
+      "paragraphIndex": 4,
+      "start": 40,
+      "end": 47,
+      "text": "高科技企业集团",
+      "type": "term"
+    },
+    {
+      "id": "ai-7-110-114-term",
+      "paragraphIndex": 7,
+      "start": 110,
+      "end": 114,
+      "text": "质的飞跃",
+      "type": "term"
+    },
+    {
+      "id": "ai-9-24-26-term",
+      "paragraphIndex": 9,
+      "start": 24,
+      "end": 26,
+      "text": "硬核",
+      "type": "term",
+      "explanation": "形容实力强大、技术扎实或内容有深度，此处指绵阳科技实力雄厚。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

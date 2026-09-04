@@ -1,0 +1,161 @@
+{
+  "id": "c92f0342e0",
+  "date": "2026-09-04",
+  "title": "“香港周2026@成都”在蓉启幕 李家超视频致辞",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83316826.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-04T23:44:28+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月4日晚，由香港特区政府康乐及文化事务署主办，四川省委宣传部、四川省港澳办、四川省文旅厅、成都市委宣传部、成都市港澳办、成都市文广旅局支持的“香港周2026@成都”在四川省文化艺术中心举行开幕式，川港两地嘉宾齐聚一堂，共赴文化盛宴。香港特别行政区行政长官李家超视频致辞，四川省政协副主席欧阳泽华出席开幕式并致辞。",
+    "本次活动为期17天，将推出舞蹈、音乐、戏剧、展览、电影、青年交流等逾60场多元活动，全方位展现香港创意文化，深化川港人文相知与务实合作。",
+    "李家超在视频致辞中表示，成都文化底蕴深厚，从古蜀文明到川剧变脸尽显独特的传统美学。“香港周”落地成都，以文化为桥，以艺术会友。蓉港两地优势互补，香港将继续发挥“超级联系人”和“超级增值人”作用，推动川港合作结出累累硕果。当传统古韵与现代创意在“香港周”的舞台交融，川港人民的心越来越近，川港两地情谊永固。",
+    "欧阳泽华表示，川港一家亲、山海手足情。自2018年川港建立政府间合作机制以来，两地合作持续走深走实。香港是四川重要外资来源地与对外合作桥梁。两地文博展演、青年交流往来密切，三星堆亮相香江、彩灯点亮维港，文化纽带不断拉紧。期待借本次活动，增进两地民众相互了解，为川港友谊与互利合作注入新动能。",
+    "香港特区文化体育及旅游局局长罗淑佩介绍，“香港周2026@成都”荟萃舞蹈、中西乐、非遗展览、电影展映、户外音乐会及川港学界合作项目，展现香港多元创意，见证两地艺术家深厚情谊。热忱邀请川港民众互访往来，感受彼此城市魅力。",
+    "开幕式后，本次活动重磅展演节目——香港舞蹈团舞剧《武道》精彩上演。该剧目以李小龙的武术哲学为创作灵感，将传统武术精神与现代舞蹈艺术相融，拉开本次系列活动大幕。“香港周2026@成都”将持续开展多场高水平文艺展演与交流活动，推动巴蜀文化与香港多元文化碰撞交融，助力成渝地区双城经济圈与粤港澳大湾区深化人文互动。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-04T23:44:31+00:00",
+  "sourceTextHash": "0db5e3bfdac4d77a7453df1df5b2fba72358ece3543b19b510825311aaa87d15",
+  "aiStatus": "ok",
+  "aiSummary": "“香港周2026@成都”于9月4日在蓉开幕，李家超视频致辞，活动为期17天，推出逾60场多元文化活动，旨在深化川港人文交流与务实合作，推动两地文化交融与共同发展。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-6-23-viewpoint",
+      "paragraphIndex": 0,
+      "start": 6,
+      "end": 23,
+      "text": "由香港特区政府康乐及文化事务署主办",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-99-116-viewpoint",
+      "paragraphIndex": 0,
+      "start": 99,
+      "end": 116,
+      "text": "川港两地嘉宾齐聚一堂，共赴文化盛宴",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-42-67-viewpoint",
+      "paragraphIndex": 1,
+      "start": 42,
+      "end": 67,
+      "text": "全方位展现香港创意文化，深化川港人文相知与务实合作",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-72-96-viewpoint",
+      "paragraphIndex": 2,
+      "start": 72,
+      "end": 96,
+      "text": "香港将继续发挥“超级联系人”和“超级增值人”作用",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-7-18-viewpoint",
+      "paragraphIndex": 3,
+      "start": 7,
+      "end": 18,
+      "text": "川港一家亲、山海手足情",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-0-5-exam_point",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 5,
+      "text": "9月4日晚",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-84-93-exam_point",
+      "paragraphIndex": 0,
+      "start": 84,
+      "end": 93,
+      "text": "四川省文化艺术中心",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-128-131-exam_point",
+      "paragraphIndex": 0,
+      "start": 128,
+      "end": 131,
+      "text": "李家超",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-6-9-exam_point",
+      "paragraphIndex": 1,
+      "start": 6,
+      "end": 9,
+      "text": "17天",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-33-37-exam_point",
+      "paragraphIndex": 1,
+      "start": 33,
+      "end": 37,
+      "text": "逾60场",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-20-25-exam_point",
+      "paragraphIndex": 3,
+      "start": 20,
+      "end": 25,
+      "text": "2018年",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-24-28-exam_point",
+      "paragraphIndex": 5,
+      "start": 24,
+      "end": 28,
+      "text": "《武道》",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-37-40-exam_point",
+      "paragraphIndex": 5,
+      "start": 37,
+      "end": 40,
+      "text": "李小龙",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-72-75-term",
+      "paragraphIndex": 0,
+      "start": 72,
+      "end": 75,
+      "text": "香港周",
+      "type": "term",
+      "explanation": "香港特区政府主办的文化交流活动品牌，旨在推广香港文化艺术，促进与内地城市的人文合作。"
+    },
+    {
+      "id": "ai-2-80-85-term",
+      "paragraphIndex": 2,
+      "start": 80,
+      "end": 85,
+      "text": "超级联系人",
+      "type": "term",
+      "explanation": "指香港发挥国际枢纽作用，连接内地与全球市场，促进经贸和文化交流的桥梁角色。"
+    },
+    {
+      "id": "ai-3-86-89-term",
+      "paragraphIndex": 3,
+      "start": 86,
+      "end": 89,
+      "text": "三星堆",
+      "type": "term",
+      "explanation": "四川广汉古蜀文化遗址，出土大量青铜器等文物，是中华文明重要象征。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

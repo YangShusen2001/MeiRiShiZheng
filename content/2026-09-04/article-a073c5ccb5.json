@@ -1,0 +1,115 @@
+{
+  "id": "a073c5ccb5",
+  "date": "2026-09-04",
+  "title": "粤BA全明星赛东西区全明星阵容揭晓！",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202609/04/139996_55000010.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-04T23:44:23+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "2026年广东省城市篮球联赛全明星赛暨粤港澳篮球邀请赛将于2026年9月12日至13日在东莞长安体育公园体育馆举办。",
+    "根据微信公众号官方平台票数统计，21支球队参选球员票选排名第一的入选全明星赛大名单。并按照前后场位置择优递补东区1人，西区2人，最终东、西两区各12名球员入选全明星赛参赛阵容。",
+    "粤BA全明星赛门票现已开启预约！ 关注官方公众号【广东篮球‑粤BA】，点击主页菜单栏「粤BA购票」进入官方票务系统，选择对应场次即可预约观赛。这个九月，相约东莞长安，共赴粤港澳三地篮球盛宴！"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-04T23:44:24+00:00",
+  "sourceTextHash": "e7d9182eedc799ec8ba7829d29a172ef812fef62821bc7c0f2e40efd70d136e2",
+  "aiStatus": "ok",
+  "aiSummary": "2026年广东省城市篮球联赛全明星赛暨粤港澳篮球邀请赛将于9月12日至13日在东莞长安举行，东西区各12名球员入选，门票预约已开启。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-0-58-viewpoint",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 58,
+      "text": "2026年广东省城市篮球联赛全明星赛暨粤港澳篮球邀请赛将于2026年9月12日至13日在东莞长安体育公园体育馆举办。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-16-42-viewpoint",
+      "paragraphIndex": 1,
+      "start": 16,
+      "end": 42,
+      "text": "21支球队参选球员票选排名第一的入选全明星赛大名单。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-64-88-viewpoint",
+      "paragraphIndex": 1,
+      "start": 64,
+      "end": 88,
+      "text": "最终东、西两区各12名球员入选全明星赛参赛阵容。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-0-16-viewpoint",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 16,
+      "text": "粤BA全明星赛门票现已开启预约！",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-29-43-exam_point",
+      "paragraphIndex": 0,
+      "start": 29,
+      "end": 43,
+      "text": "2026年9月12日至13日",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-44-55-exam_point",
+      "paragraphIndex": 0,
+      "start": 44,
+      "end": 55,
+      "text": "东莞长安体育公园体育馆",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-16-21-exam_point",
+      "paragraphIndex": 1,
+      "start": 16,
+      "end": 21,
+      "text": "21支球队",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-66-75-exam_point",
+      "paragraphIndex": 1,
+      "start": 66,
+      "end": 75,
+      "text": "东、西两区各12名",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-19-34-exam_point",
+      "paragraphIndex": 2,
+      "start": 19,
+      "end": 34,
+      "text": "官方公众号【广东篮球‑粤BA】",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-42-49-exam_point",
+      "paragraphIndex": 2,
+      "start": 42,
+      "end": 49,
+      "text": "「粤BA购票」",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-19-27-term",
+      "paragraphIndex": 0,
+      "start": 19,
+      "end": 27,
+      "text": "粤港澳篮球邀请赛",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

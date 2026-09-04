@@ -1,0 +1,149 @@
+{
+  "id": "228503c6aa",
+  "date": "2026-09-04",
+  "title": "江苏省人民政府 要闻关注 江苏产学研合作对接大会11日开幕 将发布7000多项科技成果和企业需求",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/4/art_84322_11825055.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-04T23:45:31+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月3日，省科技厅举行新闻发布会介绍，2026江苏产学研合作对接大会定于9月11日开幕，将集中发布7000多项前沿科技成果和企业创新需求，组织4000多家企业与专家教授、技术经理人、金融机构等现场对接洽谈。",
+    "2023年以来，江苏连续3年举办产学研合作对接大会，累计发布高校院所科技成果8000余项、企业技术需求7000余项。由省科技厅主办、省新质生产力促进中心承办的2026江苏产学研合作对接大会，包含主题大会、对接洽谈、专场活动、技术路演、专家江苏行等系列活动。现已邀请到国内外知名高校院所100多家、高层次专家140多名，其中省内外高校院所领导70多名，两院院士近60名；集中亮相的科技成果中，近三年的标志性成果有近300项，涉及人工智能、量子科技、生物医药、集成电路、星箭链及空天一体、脑机接口、深海、新能源等领域；在促进高质量对接方面，突出“AI+技术交易”，打造集前沿科技成果发布推介、供需对接、交流洽谈于一体的技术交易大厅，设立科技成果超市以及科创新品首发首秀场景，邀请新锐企业集中发布前沿科技产品。",
+    "针对“前沿技术与产业需求、科创产业与金融资本、优质项目与新兴赛道、跨区域协同创新”四大对接重点，大会将举办中国科学院科技成果转化“融合点”行动、前沿科技成果发布与新技术应用场景对接、长三角智库机构圆桌会、“双高协同”暨科技金融对接、江苏与粤港澳大湾区创新合作对接、海洋产业科技成果转化对接、“创业江苏”科技创业大赛颁奖等7个专场活动。",
+    "作为大会的重要组成部分，20多场专家江苏行活动将于9月13日起举办。170多位专家将奔赴500多家企业实地考察，帮助解决生产实践中的技术难题，促进高校院所的“硬成果”和科技企业的“真需求”对接。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-04T23:45:31+00:00",
+  "sourceTextHash": "f66e15a4919fb4ae96d174aec28441080d6b4ed813d9160668bdf8f33785110e",
+  "aiStatus": "ok",
+  "aiSummary": "2026江苏产学研合作对接大会将于9月11日开幕，集中发布7000多项科技成果和企业需求，组织4000多家企业对接，并举办多场专场活动及专家江苏行，促进产学研深度融合。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-19-43-viewpoint",
+      "paragraphIndex": 0,
+      "start": 19,
+      "end": 43,
+      "text": "2026江苏产学研合作对接大会定于9月11日开幕",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-45-68-viewpoint",
+      "paragraphIndex": 0,
+      "start": 45,
+      "end": 68,
+      "text": "集中发布7000多项前沿科技成果和企业创新需求",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-0-25-viewpoint",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 25,
+      "text": "2023年以来，江苏连续3年举办产学研合作对接大会",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-268-279-viewpoint",
+      "paragraphIndex": 1,
+      "start": 268,
+      "end": 279,
+      "text": "突出“AI+技术交易”",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-41-47-viewpoint",
+      "paragraphIndex": 2,
+      "start": 41,
+      "end": 47,
+      "text": "四大对接重点",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-0-4-exam_point",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 4,
+      "text": "9月3日",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-5-9-exam_point",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 9,
+      "text": "省科技厅",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-71-79-exam_point",
+      "paragraphIndex": 0,
+      "start": 71,
+      "end": 79,
+      "text": "4000多家企业",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-26-44-exam_point",
+      "paragraphIndex": 1,
+      "start": 26,
+      "end": 44,
+      "text": "累计发布高校院所科技成果8000余项",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-175-183-exam_point",
+      "paragraphIndex": 1,
+      "start": 175,
+      "end": 183,
+      "text": "两院院士近60名",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-213-232-exam_point",
+      "paragraphIndex": 1,
+      "start": 213,
+      "end": 232,
+      "text": "人工智能、量子科技、生物医药、集成电路",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-160-166-exam_point",
+      "paragraphIndex": 2,
+      "start": 160,
+      "end": 166,
+      "text": "7个专场活动",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-12-23-exam_point",
+      "paragraphIndex": 3,
+      "start": 12,
+      "end": 23,
+      "text": "20多场专家江苏行活动",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-67-72-term",
+      "paragraphIndex": 1,
+      "start": 67,
+      "end": 72,
+      "text": "新质生产力",
+      "type": "term",
+      "explanation": "以创新为主导，摆脱传统增长路径，具有高科技、高效能、高质量特征的先进生产力质态。"
+    },
+    {
+      "id": "ai-2-103-107-term",
+      "paragraphIndex": 2,
+      "start": 103,
+      "end": 107,
+      "text": "双高协同",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

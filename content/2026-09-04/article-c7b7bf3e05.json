@@ -1,0 +1,91 @@
+{
+  "id": "c7b7bf3e05",
+  "date": "2026-09-04",
+  "title": "习近平致中央广播电视总台《小喇叭》节目开播70周年的贺信",
+  "source": "qstheory.cn",
+  "url": "https://www.qstheory.cn/20260904/af5daad1c8a94979ab368821f6b6b3f9/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-04T23:43:48+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "习近平致中央广播电视总台《小喇叭》节目开播70周年的贺信",
+    "&emsp;&emsp;值此中央广播电视总台《小喇叭》节目开播70周年之际，我谨表示祝贺！",
+    "&emsp;&emsp;70年来，《小喇叭》节目坚持“给孩子们讲好故事”，陪伴了一代代少年儿童健康成长。新起点上，希望你们和广大少儿文艺工作者落实立德树人根本任务，紧扣时代发展脉搏，深耕少儿文化沃土，用心用情创作更多传播真善美、受到孩子们喜爱的优秀作品，为培养德智体美劳全面发展的社会主义建设者和接班人作出更大贡献。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-04T23:43:49+00:00",
+  "sourceTextHash": "9e6514ef3b282c2cc04d44a34da4d689cf8c170394cdd3b7c752f4c4b6f0fff3",
+  "aiStatus": "ok",
+  "aiSummary": "习近平祝贺《小喇叭》节目开播70周年，肯定其陪伴少年儿童成长，希望落实立德树人，创作更多优秀作品，培养全面发展的社会主义建设者和接班人。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-12-45-viewpoint",
+      "paragraphIndex": 1,
+      "start": 12,
+      "end": 45,
+      "text": "值此中央广播电视总台《小喇叭》节目开播70周年之际，我谨表示祝贺！",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-12-52-viewpoint",
+      "paragraphIndex": 2,
+      "start": 12,
+      "end": 52,
+      "text": "70年来，《小喇叭》节目坚持“给孩子们讲好故事”，陪伴了一代代少年儿童健康成长。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-71-81-exam_point",
+      "paragraphIndex": 2,
+      "start": 71,
+      "end": 81,
+      "text": "落实立德树人根本任务",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-82-90-exam_point",
+      "paragraphIndex": 2,
+      "start": 82,
+      "end": 90,
+      "text": "紧扣时代发展脉搏",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-91-99-exam_point",
+      "paragraphIndex": 2,
+      "start": 91,
+      "end": 99,
+      "text": "深耕少儿文化沃土",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-100-126-exam_point",
+      "paragraphIndex": 2,
+      "start": 100,
+      "end": 126,
+      "text": "用心用情创作更多传播真善美、受到孩子们喜爱的优秀作品",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-128-151-exam_point",
+      "paragraphIndex": 2,
+      "start": 128,
+      "end": 151,
+      "text": "培养德智体美劳全面发展的社会主义建设者和接班人",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-73-77-term",
+      "paragraphIndex": 2,
+      "start": 73,
+      "end": 77,
+      "text": "立德树人",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

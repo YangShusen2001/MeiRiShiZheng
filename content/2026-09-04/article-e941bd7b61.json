@@ -1,0 +1,123 @@
+{
+  "id": "e941bd7b61",
+  "date": "2026-09-04",
+  "title": "江苏省人民政府 要闻关注 省人大常委会督办筑牢老年群体反诈防护屏障重点处理代表建议",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/4/art_84322_11825051.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-04T23:45:25+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月3日，筑牢老年群体反诈防护屏障重点处理代表建议督办会在南京召开。省人大常委会副主任周广智、副省长胡彬郴出席会议并讲话。",
+    "周广智对省政府及有关部门办理代表建议工作给予充分肯定。他强调，要坚持问题导向，进一步强化监管，依托省级大数据资源，运用信息化手段，加大对保健品推销、养老投资等方面的审核力度。要坚持群策群力，进一步优化机制，推进联合执法机制常态化，构建“预防—发现—处置”全链条维权机制，充分发挥基层群众自治优势，形成群防群治格局。要坚持久久为功，进一步深化宣传，做到宣传对象精准化、方式接地气、内容有温度，筑牢老年群体思想反诈防线。",
+    "胡彬郴强调，要充分吸收人大代表及各方面意见建议，进一步完善政策制度、优化工作举措，积极回应群众关切和期待。坚持办好件更要办好事，下功夫深入研究新情况、解决新问题，拿出更多可感可及成果，写好代表建议办理“后半篇文章”。坚持重打击更要重防范，落实全链条部门责任，形成反诈防护整体合力。坚持抓当前更要抓长远，做到“办结一件、解决一类、促进一片”。省各有关部门要密切配合，一体推进打、防、管、控、建、治，不断推动工作实现新提升、取得新突破。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-04T23:45:26+00:00",
+  "sourceTextHash": "9b171026d5423670d25d3c86af94e1bc79b59af4f5742ae80d13c950d18ce1eb",
+  "aiStatus": "ok",
+  "aiSummary": "9月3日，江苏省人大常委会在南京召开督办会，推进老年群体反诈防护建议办理。省人大常委会副主任周广智强调强化监管、优化机制、深化宣传，副省长胡彬郴要求完善政策、重防范、抓长远，形成反诈合力。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-31-46-viewpoint",
+      "paragraphIndex": 1,
+      "start": 31,
+      "end": 46,
+      "text": "要坚持问题导向，进一步强化监管",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-87-102-viewpoint",
+      "paragraphIndex": 1,
+      "start": 87,
+      "end": 102,
+      "text": "要坚持群策群力，进一步优化机制",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-157-172-viewpoint",
+      "paragraphIndex": 1,
+      "start": 157,
+      "end": 172,
+      "text": "要坚持久久为功，进一步深化宣传",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-108-118-viewpoint",
+      "paragraphIndex": 2,
+      "start": 108,
+      "end": 118,
+      "text": "坚持重打击更要重防范",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-140-150-viewpoint",
+      "paragraphIndex": 2,
+      "start": 140,
+      "end": 150,
+      "text": "坚持抓当前更要抓长远",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-68-73-exam_point",
+      "paragraphIndex": 1,
+      "start": 68,
+      "end": 73,
+      "text": "保健品推销",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-74-78-exam_point",
+      "paragraphIndex": 1,
+      "start": 74,
+      "end": 78,
+      "text": "养老投资",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-105-111-exam_point",
+      "paragraphIndex": 1,
+      "start": 105,
+      "end": 111,
+      "text": "联合执法机制",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-118-126-exam_point",
+      "paragraphIndex": 1,
+      "start": 118,
+      "end": 126,
+      "text": "预防—发现—处置",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-101-106-exam_point",
+      "paragraphIndex": 2,
+      "start": 101,
+      "end": 106,
+      "text": "后半篇文章",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-186-197-exam_point",
+      "paragraphIndex": 2,
+      "start": 186,
+      "end": 197,
+      "text": "打、防、管、控、建、治",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-150-154-term",
+      "paragraphIndex": 1,
+      "start": 150,
+      "end": 154,
+      "text": "群防群治",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

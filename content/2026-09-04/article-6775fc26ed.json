@@ -1,0 +1,85 @@
+{
+  "id": "6775fc26ed",
+  "date": "2026-09-04",
+  "title": "成都都江堰：旅途相逢 “变脸”遇友丨C视觉·每日一图(2026年9月4日)",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83316792.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-04T23:44:34+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "“C视觉·每日一图”，汇聚摄影师佳作，定格奋进四川的磅礴气象与点滴温暖的感人瞬间，汇聚前行力量。",
+    "长按海报识别二维码，一起加入C视觉大家庭，分享你的精彩影像！",
+    "2023年4月23日， C视觉影像数据库正式上线。数据库秉承“共建、共创、共享”的发展理念，以记录四川为使命，与全球影像创作者同行，致力打造四川影像作品资源最丰富、主题分类最齐全、数据管理最先进的影像数字化服务平台。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-04T23:44:36+00:00",
+  "sourceTextHash": "b53ade2985df34000eabd7dce2c1fcf669b4cf8becde4a82a5a52e858eb846c4",
+  "aiStatus": "ok",
+  "aiSummary": "C视觉每日一图展示成都都江堰旅途中的川剧变脸与友相遇，定格四川奋进气象与温暖瞬间，汇聚前行力量，并邀请影像创作者加入共享平台。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-19-40-viewpoint",
+      "paragraphIndex": 0,
+      "start": 19,
+      "end": 40,
+      "text": "定格奋进四川的磅礴气象与点滴温暖的感人瞬间",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-41-47-viewpoint",
+      "paragraphIndex": 0,
+      "start": 41,
+      "end": 47,
+      "text": "汇聚前行力量",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-46-54-viewpoint",
+      "paragraphIndex": 2,
+      "start": 46,
+      "end": 54,
+      "text": "以记录四川为使命",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-1-9-term",
+      "paragraphIndex": 0,
+      "start": 1,
+      "end": 9,
+      "text": "C视觉·每日一图",
+      "type": "term",
+      "explanation": "C视觉平台推出的每日图片栏目，展示摄影师作品，传递四川风貌与人文故事。"
+    },
+    {
+      "id": "ai-2-31-39-exam_point",
+      "paragraphIndex": 2,
+      "start": 31,
+      "end": 39,
+      "text": "共建、共创、共享",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-98-107-exam_point",
+      "paragraphIndex": 2,
+      "start": 98,
+      "end": 107,
+      "text": "影像数字化服务平台",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-12-20-term",
+      "paragraphIndex": 2,
+      "start": 12,
+      "end": 20,
+      "text": "C视觉影像数据库",
+      "type": "term",
+      "explanation": "C视觉平台建立的影像数据库，用于存储和管理四川主题的影像作品。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

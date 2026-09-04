@@ -1,0 +1,116 @@
+{
+  "id": "af4fd1c8fb",
+  "date": "2026-09-04",
+  "title": "江苏省人民政府 要闻关注 刘小涛主持召开省政府党组（扩大）会议",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/4/art_84322_11825052.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-04T23:45:13+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月2日，省政府党组（扩大）会议召开，深入学习贯彻习近平总书记重要讲话重要指示和重要文章精神，认真落实中央党的建设工作领导小组会议部署，按照省委要求，研究政府系统贯彻落实工作。省政府党组书记、省长刘小涛主持会议。",
+    "会议指出，习近平总书记对西藏日喀则市吉隆县遭受泥石流灾害作出重要指示，主持召开中央政治局会议研究部署抢险救援工作，充分彰显了对人民生命安全的高度重视和深切牵挂。要坚持人民至上、生命至上，树牢底线思维、极限思维，完善地质灾害防治体系，抓好水利工程建设和安全管理，深化安全生产“六化”建设，深入推进“人工智能+”应急管理，抓牢防汛防台风各项工作，全力守护人民群众生命财产安全。",
+    "会议强调，要深入学习贯彻习近平总书记关于树立和践行正确政绩观学习教育的重要指示精神，聚焦立党为公、为民造福、科学决策、真抓实干，经常性开展政绩观教育，把正确政绩观落实到政府工作全方位、各领域。坚持不懈强化党的创新理论武装，深学细悟习近平党建思想和习近平总书记对江苏工作重要讲话精神，筑牢正确政绩观思想根基。持续纠治政绩观偏差问题，健全常态化问题发现、研判、处置机制，完善省政府党组“1+N”工作清单制度，清单化、节点化、责任化推进问题整改。加强政绩观行为的管理监督，深化促改促治促建，健全政绩考核体系，真正实现以制度管人、管事、管长远。不断巩固拓展学习教育成果，深入研究新情况、解决新问题，推动经济持续向新向优向好发展，努力创造经得起实践、人民、历史检验的实绩。要认真学习领会习近平总书记在《求是》杂志发表的重要文章《坚持落实管党治党政治责任》，坚决扛起全面从严治党主体责任，以更高标准更实举措推进全面从严治党，为推动高质量发展提供坚强保障。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-04T23:45:13+00:00",
+  "sourceTextHash": "14ba01c2ccf5b6df6dc507696aeba951f9d76c17b9b06f8d5f383c295d51ac29",
+  "aiStatus": "ok",
+  "aiSummary": "9月2日，江苏省政府党组（扩大）会议召开，学习贯彻习近平总书记重要指示，部署防灾减灾、政绩观教育及全面从严治党等工作，省长刘小涛主持。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-19-46-viewpoint",
+      "paragraphIndex": 0,
+      "start": 19,
+      "end": 46,
+      "text": "深入学习贯彻习近平总书记重要讲话重要指示和重要文章精神",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-81-92-viewpoint",
+      "paragraphIndex": 1,
+      "start": 81,
+      "end": 92,
+      "text": "坚持人民至上、生命至上",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-20-30-viewpoint",
+      "paragraphIndex": 2,
+      "start": 20,
+      "end": 30,
+      "text": "树立和践行正确政绩观",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-373-387-viewpoint",
+      "paragraphIndex": 2,
+      "start": 373,
+      "end": 387,
+      "text": "坚决扛起全面从严治党主体责任",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-105-115-exam_point",
+      "paragraphIndex": 1,
+      "start": 105,
+      "end": 115,
+      "text": "完善地质灾害防治体系",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-130-142-exam_point",
+      "paragraphIndex": 1,
+      "start": 130,
+      "end": 142,
+      "text": "深化安全生产“六化”建设",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-147-158-exam_point",
+      "paragraphIndex": 1,
+      "start": 147,
+      "end": 158,
+      "text": "“人工智能+”应急管理",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-165-182-exam_point",
+      "paragraphIndex": 2,
+      "start": 165,
+      "end": 182,
+      "text": "健全常态化问题发现、研判、处置机制",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-183-201-exam_point",
+      "paragraphIndex": 2,
+      "start": 183,
+      "end": 201,
+      "text": "完善省政府党组“1+N”工作清单制度",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-242-250-exam_point",
+      "paragraphIndex": 2,
+      "start": 242,
+      "end": 250,
+      "text": "健全政绩考核体系",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-358-372-term",
+      "paragraphIndex": 2,
+      "start": 358,
+      "end": 372,
+      "text": "《坚持落实管党治党政治责任》",
+      "type": "term",
+      "explanation": "习近平总书记发表的重要文章，强调落实管党治党政治责任，推动全面从严治党。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}
