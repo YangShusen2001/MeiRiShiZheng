@@ -1,0 +1,96 @@
+{
+  "id": "6707f876fc",
+  "date": "2026-09-05",
+  "title": "视频画报 | 风雨同舟启新程——习近平主席的开罗时间",
+  "source": "qstheory.cn",
+  "url": "https://www.qstheory.cn/20260905/a9fee7e371224732af11f7c43b6971e0/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-05T23:34:14+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;9月3日上午，国家主席习近平圆满结束出席2026年上海合作组织峰会和对吉尔吉斯斯坦、埃及的国事访问后回到北京。",
+    "&emsp;&emsp;在埃及访问期间，习近平主席同埃及总统塞西就中埃关系、全方位合作以及共同关心的国际和地区问题深入交换意见，共同擘画中埃全面战略伙伴关系发展蓝图。",
+    "&emsp;&emsp;“交得其道，千里同好。”塞西总统夫妇亲赴机场迎送、陪同参观大埃及博物馆；青少年挥舞中埃两国国旗，礼兵、马队列队致敬……高规格礼遇彰显中埃友谊的历久弥坚。",
+    "&emsp;&emsp;今年是中埃建交70周年。在同塞西总统的会谈中，习近平主席指出，70年风雨兼程，培育并见证了中埃两国关系“平等互信、友好互鉴、和衷共济、合作共赢”的鲜明特征。“面对变乱交织的国际和地区形势，两国要相互支持、深化合作，不断推进中埃命运共同体建设。”",
+    "&emsp;&emsp;在大埃及博物馆，习近平主席指出，中国和埃及同为文明古国和世界遗产大国，两大文明跨越时空持久双向奔赴，不断书写两国人民世代友好篇章。",
+    "&emsp;&emsp;风雨同舟七十载，踔厉奋发新征程。在元首外交的战略引领下，两国人民必将继续携手书写中埃友好的历史新篇。（视频：周欣、淡然、孙浩；记者：谢环驰、申宏、殷博古、姚大伟、董修竹）"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-05T23:34:28+00:00",
+  "sourceTextHash": "7ff951918b5e8ecc217635645fa04170bd129f1f24834f6850936140a95e75c4",
+  "aiStatus": "ok",
+  "aiSummary": "习近平主席结束上合峰会及对吉尔吉斯斯坦、埃及的国事访问回京。访埃期间，与塞西总统会谈，庆祝建交70周年，强调深化全面战略伙伴关系，推动命运共同体建设，并参观大埃及博物馆，彰显中埃友谊。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-19-66-viewpoint",
+      "paragraphIndex": 0,
+      "start": 19,
+      "end": 66,
+      "text": "国家主席习近平圆满结束出席2026年上海合作组织峰会和对吉尔吉斯斯坦、埃及的国事访问后回到北京",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-64-82-viewpoint",
+      "paragraphIndex": 1,
+      "start": 64,
+      "end": 82,
+      "text": "共同擘画中埃全面战略伙伴关系发展蓝图",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-12-23-exam_point",
+      "paragraphIndex": 3,
+      "start": 12,
+      "end": 23,
+      "text": "今年是中埃建交70周年",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-64-83-exam_point",
+      "paragraphIndex": 3,
+      "start": 64,
+      "end": 83,
+      "text": "平等互信、友好互鉴、和衷共济、合作共赢",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-119-132-exam_point",
+      "paragraphIndex": 3,
+      "start": 119,
+      "end": 132,
+      "text": "不断推进中埃命运共同体建设",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-28-46-exam_point",
+      "paragraphIndex": 4,
+      "start": 28,
+      "end": 46,
+      "text": "中国和埃及同为文明古国和世界遗产大国",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-37-43-term",
+      "paragraphIndex": 0,
+      "start": 37,
+      "end": 43,
+      "text": "上海合作组织",
+      "type": "term",
+      "explanation": "上海合作组织是2001年成立的国际组织，成员国包括中国、俄罗斯等，致力于安全、经济等合作。"
+    },
+    {
+      "id": "ai-1-70-78-term",
+      "paragraphIndex": 1,
+      "start": 70,
+      "end": 78,
+      "text": "全面战略伙伴关系",
+      "type": "term",
+      "explanation": "全面战略伙伴关系是国家间高水平的合作关系，涵盖政治、经济、文化等多领域深度合作。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

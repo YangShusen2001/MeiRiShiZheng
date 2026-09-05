@@ -1,0 +1,84 @@
+{
+  "id": "71ca019911",
+  "date": "2026-09-05",
+  "title": "江苏省人民政府 要闻关注 我省举行“慈善一日捐”活动 信长星刘小涛张义珍带头捐款",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/5/art_84322_11825689.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-05T23:35:48+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "在第十一个“中华慈善日”到来之际，9月4日，我省举行“慈善一日捐”活动。省委书记信长星、省长刘小涛、省政协主席张义珍带头捐款，为慈善事业献上爱心。全国人大外事委员会主任委员娄勤俭委托他人捐款。",
+    "在省委办公厅四楼会议室、省人大常委会会议厅、省政府办公厅八楼会议室、省政协机关一楼大厅，省领导将捐款投入捐款箱，机关工作人员踊跃捐款、奉献爱心。",
+    "扶危济困、乐善好施是中华民族的传统美德。今年“中华慈善日”活动主题是“弘扬慈善文化 践行慈善惠民”。省级机关部门、部省属企事业单位和高校积极响应“慈善一日捐”活动，募集的善款将全部用于帮助困难群众。全省各地将广泛开展慈善文化宣传、慈善惠民活动，营造崇德向善的浓厚氛围，着力解决好群众急难愁盼问题，不断增进民生福祉。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-05T23:35:49+00:00",
+  "sourceTextHash": "58fe8dfbfc647c76fa30f7b4e880c5d6a3ba41f0af774f8f5faf33cf417b4857",
+  "aiStatus": "ok",
+  "aiSummary": "9月4日，江苏省举行“慈善一日捐”活动，省委书记信长星、省长刘小涛、省政协主席张义珍带头捐款，机关工作人员踊跃参与，善款将用于帮助困难群众，全省将开展慈善文化宣传和惠民活动。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-0-36-viewpoint",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 36,
+      "text": "在第十一个“中华慈善日”到来之际，9月4日，我省举行“慈善一日捐”活动。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-36-73-viewpoint",
+      "paragraphIndex": 0,
+      "start": 36,
+      "end": 73,
+      "text": "省委书记信长星、省长刘小涛、省政协主席张义珍带头捐款，为慈善事业献上爱心。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-0-20-viewpoint",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 20,
+      "text": "扶危济困、乐善好施是中华民族的传统美德。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-20-50-exam_point",
+      "paragraphIndex": 2,
+      "start": 20,
+      "end": 50,
+      "text": "今年“中华慈善日”活动主题是“弘扬慈善文化 践行慈善惠民”。",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-82-99-exam_point",
+      "paragraphIndex": 2,
+      "start": 82,
+      "end": 99,
+      "text": "募集的善款将全部用于帮助困难群众。",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-99-157-exam_point",
+      "paragraphIndex": 2,
+      "start": 99,
+      "end": 157,
+      "text": "全省各地将广泛开展慈善文化宣传、慈善惠民活动，营造崇德向善的浓厚氛围，着力解决好群众急难愁盼问题，不断增进民生福祉。",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-6-11-term",
+      "paragraphIndex": 0,
+      "start": 6,
+      "end": 11,
+      "text": "中华慈善日",
+      "type": "term",
+      "explanation": "指每年9月5日，由我国设立的全国性慈善宣传日，旨在弘扬慈善文化，促进社会互助。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

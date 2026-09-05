@@ -1,0 +1,90 @@
+{
+  "id": "505a9e9903",
+  "date": "2026-09-05",
+  "title": "习近平主席中亚、中东之旅难忘瞬间",
+  "source": "qstheory.cn",
+  "url": "https://www.qstheory.cn/20260905/933f2d0ffc294b0582c74c28f56497db/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-05T23:34:11+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;8月30日至9月3日，国家主席习近平应邀赴吉尔吉斯斯坦出席2026年上海合作组织峰会并对吉尔吉斯斯坦、埃及进行国事访问。",
+    "&emsp;&emsp;5天4夜里，习近平主席密集出席20余场活动，双多边结合、跨区域联动，高瞻远瞩提倡议、脚踏实地促合作、推心置腹话友好，访问亮点纷呈，取得圆满成功。访问期间，一个个精彩瞬间令人难忘，中国作为可靠伙伴和负责任大国的形象更加深入人心。（视频：孙硕）"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-05T23:34:12+00:00",
+  "sourceTextHash": "417bd1e900c99cc460c4cc20fe36d659d4f77acdec81751a5eca7f42ceebce66",
+  "aiStatus": "ok",
+  "aiSummary": "习近平主席于8月30日至9月3日应邀出席上海合作组织峰会并对吉尔吉斯斯坦、埃及进行国事访问，五天四夜密集出席二十余场活动，推动双多边合作，展现中国负责任大国形象，访问取得圆满成功。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-12-22-exam_point",
+      "paragraphIndex": 0,
+      "start": 12,
+      "end": 22,
+      "text": "8月30日至9月3日",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-30-54-exam_point",
+      "paragraphIndex": 0,
+      "start": 30,
+      "end": 54,
+      "text": "应邀赴吉尔吉斯斯坦出席2026年上海合作组织峰会",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-55-71-exam_point",
+      "paragraphIndex": 0,
+      "start": 55,
+      "end": 71,
+      "text": "对吉尔吉斯斯坦、埃及进行国事访问",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-12-17-exam_point",
+      "paragraphIndex": 1,
+      "start": 12,
+      "end": 17,
+      "text": "5天4夜里",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-23-33-exam_point",
+      "paragraphIndex": 1,
+      "start": 23,
+      "end": 33,
+      "text": "密集出席20余场活动",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-46-69-viewpoint",
+      "paragraphIndex": 1,
+      "start": 46,
+      "end": 69,
+      "text": "高瞻远瞩提倡议、脚踏实地促合作、推心置腹话友好",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-70-83-viewpoint",
+      "paragraphIndex": 1,
+      "start": 70,
+      "end": 83,
+      "text": "访问亮点纷呈，取得圆满成功",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-101-124-viewpoint",
+      "paragraphIndex": 1,
+      "start": 101,
+      "end": 124,
+      "text": "中国作为可靠伙伴和负责任大国的形象更加深入人心",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

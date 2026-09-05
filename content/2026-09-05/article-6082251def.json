@@ -1,0 +1,114 @@
+{
+  "id": "6082251def",
+  "date": "2026-09-05",
+  "title": "江苏省人民政府 要闻关注 刘小涛会见强生公司高管",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/5/art_84322_11825690.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-05T23:35:45+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月3日，省长刘小涛在南京会见强生公司执行副总裁、医疗科技全球主席史明德。",
+    "双方表示，将依托江苏生物医药产业的优质生态、庞大市场和强生公司的技术优势、国际布局，进一步深化产学研用合作，携手江苏高校、科研院所和医疗卫生机构开展创新平台共建、人才联合培养，带动更多企业融入江苏生物医药产业链上下游，更好助力创新成果走向全球市场，不断增进人民健康福祉。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-05T23:35:46+00:00",
+  "sourceTextHash": "f9b5a9a21eb93221812e1f4b013f5c0dc27062adac4fe80bafcd290ebb47dc80",
+  "aiStatus": "ok",
+  "aiSummary": "江苏省省长刘小涛会见强生公司高管，双方表示将依托江苏生物医药产业生态和强生技术优势，深化产学研用合作，共建创新平台，培养人才，推动创新成果走向全球，增进人民健康福祉。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-6-41-viewpoint",
+      "paragraphIndex": 1,
+      "start": 6,
+      "end": 41,
+      "text": "依托江苏生物医药产业的优质生态、庞大市场和强生公司的技术优势、国际布局",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-45-53-viewpoint",
+      "paragraphIndex": 1,
+      "start": 45,
+      "end": 53,
+      "text": "深化产学研用合作",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-109-123-viewpoint",
+      "paragraphIndex": 1,
+      "start": 109,
+      "end": 123,
+      "text": "更好助力创新成果走向全球市场",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-124-134-viewpoint",
+      "paragraphIndex": 1,
+      "start": 124,
+      "end": 134,
+      "text": "不断增进人民健康福祉",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-0-4-exam_point",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 4,
+      "text": "9月3日",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-5-10-exam_point",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 10,
+      "text": "省长刘小涛",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-11-13-exam_point",
+      "paragraphIndex": 0,
+      "start": 11,
+      "end": 13,
+      "text": "南京",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-15-36-exam_point",
+      "paragraphIndex": 0,
+      "start": 15,
+      "end": 36,
+      "text": "强生公司执行副总裁、医疗科技全球主席史明德",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-47-53-exam_point",
+      "paragraphIndex": 1,
+      "start": 47,
+      "end": 53,
+      "text": "产学研用合作",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-74-80-exam_point",
+      "paragraphIndex": 1,
+      "start": 74,
+      "end": 80,
+      "text": "创新平台共建",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-81-87-exam_point",
+      "paragraphIndex": 1,
+      "start": 81,
+      "end": 87,
+      "text": "人才联合培养",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 2
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "id": "ad71911829",
+  "date": "2026-09-05",
+  "title": "亚太媒体高端论坛今天开幕！400人齐聚深圳共话区域合作机遇",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202609/05/139996_55000159.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-05T23:34:56+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月5日上午，亚太媒体高端论坛（APMF）在深圳前海国际会议中心拉开帷幕。来自国际组织、中外政府机构、媒体、智库、高校等各界代表共400人齐聚深圳，以“共筑亚太共同体繁荣之路：媒体的共识与行动”为主题，共话区域合作机遇。",
+    "开幕前，与会嘉宾先领略了一番科技盛宴——以“万物皆媒 Media未来”为主题的科技创新成果展。从数智Media到具身Media，从Media城市到Media生活，四大展区层层铺开，把深圳的创新底色一件件摊开在客人面前。",
+    "从数智工具重构媒体生态，到具身智能开启人机新伙伴关系，再到充满人文关怀的媒介城市，最后落到烟火升腾的日常生活。这是APEC“中国年”的又一场重要活动。再过两个多月，APEC也将在深圳举办。这是中国第三次、时隔12年再次担任APEC东道主。",
+    "论坛前夕，与会嘉宾已在广州、佛山、东莞、深圳、珠海、中山等大湾区多个城市开展巡回参访，从千年商都到制造重镇，从跨海大桥到科技园区，多角度记录湾区高质量发展图景。",
+    "今天，他们聚在前海。论坛以“共筑亚太共同体繁荣之路：媒体的共识与行动”为主题，将围绕开放、创新、合作等议题展开对话，形成多项成果。",
+    "本次论坛由中共中央宣传部、新华通讯社、广东省人民政府主办，深圳市人民政府承办。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-05T23:34:57+00:00",
+  "sourceTextHash": "873d31bb1a3962197cfc796555b45ba6df805e06a5256111cafc9d08733f5bfd",
+  "aiStatus": "ok",
+  "aiSummary": "9月5日，亚太媒体高端论坛在深圳前海开幕，400名代表共话区域合作。论坛展示科技创新成果，并作为APEC中国年重要活动，将探讨开放创新合作议题。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-7-36-viewpoint",
+      "paragraphIndex": 0,
+      "start": 7,
+      "end": 36,
+      "text": "亚太媒体高端论坛（APMF）在深圳前海国际会议中心拉开帷幕",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-76-96-viewpoint",
+      "paragraphIndex": 0,
+      "start": 76,
+      "end": 96,
+      "text": "共筑亚太共同体繁荣之路：媒体的共识与行动",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-22-34-term",
+      "paragraphIndex": 1,
+      "start": 22,
+      "end": 34,
+      "text": "万物皆媒 Media未来",
+      "type": "term",
+      "explanation": "本次科技创新成果展的主题，寓意媒体形态的多样化和未来发展趋势。"
+    },
+    {
+      "id": "ai-2-57-74-viewpoint",
+      "paragraphIndex": 2,
+      "start": 57,
+      "end": 74,
+      "text": "APEC“中国年”的又一场重要活动",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-96-118-exam_point",
+      "paragraphIndex": 2,
+      "start": 96,
+      "end": 118,
+      "text": "中国第三次、时隔12年再次担任APEC东道主",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-29-42-exam_point",
+      "paragraphIndex": 3,
+      "start": 29,
+      "end": 42,
+      "text": "大湾区多个城市开展巡回参访",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-40-57-exam_point",
+      "paragraphIndex": 4,
+      "start": 40,
+      "end": 57,
+      "text": "围绕开放、创新、合作等议题展开对话",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-5-28-exam_point",
+      "paragraphIndex": 5,
+      "start": 5,
+      "end": 28,
+      "text": "中共中央宣传部、新华通讯社、广东省人民政府主办",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

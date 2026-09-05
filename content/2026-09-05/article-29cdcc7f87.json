@@ -1,0 +1,158 @@
+{
+  "id": "29cdcc7f87",
+  "date": "2026-09-05",
+  "title": "江苏省人民政府 要闻关注 六十二载薪火相传，江苏三支援外医疗队即将出征",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/5/art_84322_11825692.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-05T23:35:32+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月4日，2026年中国（江苏）援外医疗队出征仪式在南京举行。此次江苏省共派出第36批援桑给巴尔、第22批援圭亚那和第22批援马耳他中国医疗队，三支队伍将奔赴受援国，执行为期一年的援外医疗任务。副省长赵岩为医疗队授旗并讲话。",
+    "赵岩指出，援外医疗是服务“十五五”对外开放布局、共建“一带一路”、完善全球卫生治理的长期战略举措。全体队员要锚定政治方向，践行援外使命，为推动构建人类卫生健康共同体贡献江苏力量；要发扬光荣传统，坚守医者仁心，创新帮扶模式、用实干实绩展现江苏风采；要深化文明互鉴，做好民心外交，当好“民间大使”，讲好中国故事、传递中国声音。",
+    "据了解，三支医疗队共48名队员，主要来自省人民医院、省中医院以及盐城市第一人民医院等。江苏自1964年起承担向国外派遣援外医疗队任务，累计向坦桑尼亚桑给巴尔、圭亚那、马耳他、伊朗、利比亚等国家（地区）派出医疗队（组）82批1329人次，救治受援国患者1000多万人次，开展各类手术30多万例。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-05T23:35:34+00:00",
+  "sourceTextHash": "c3a46fdd7fc5da5b27829dfb1c85bcb1dca760d9d0ac6e9e24bf5e66517feb91",
+  "aiStatus": "ok",
+  "aiSummary": "江苏省举行2026年援外医疗队出征仪式，派出三支医疗队共48人赴桑给巴尔、圭亚那和马耳他执行任务。副省长赵岩强调援外医疗服务国家战略，要求队员践行使命、发扬传统、深化文明互鉴。江苏自1964年起累计派出82批1329人次。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-16-25-viewpoint",
+      "paragraphIndex": 0,
+      "start": 16,
+      "end": 25,
+      "text": "援外医疗队出征仪式",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-83-96-viewpoint",
+      "paragraphIndex": 0,
+      "start": 83,
+      "end": 96,
+      "text": "执行为期一年的援外医疗任务",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-5-48-viewpoint",
+      "paragraphIndex": 1,
+      "start": 5,
+      "end": 48,
+      "text": "援外医疗是服务“十五五”对外开放布局、共建“一带一路”、完善全球卫生治理的长期战略举措",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-69-82-viewpoint",
+      "paragraphIndex": 1,
+      "start": 69,
+      "end": 82,
+      "text": "推动构建人类卫生健康共同体",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-124-137-viewpoint",
+      "paragraphIndex": 1,
+      "start": 124,
+      "end": 137,
+      "text": "深化文明互鉴，做好民心外交",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-39-48-exam_point",
+      "paragraphIndex": 0,
+      "start": 39,
+      "end": 48,
+      "text": "第36批援桑给巴尔",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-49-57-exam_point",
+      "paragraphIndex": 0,
+      "start": 49,
+      "end": 57,
+      "text": "第22批援圭亚那",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-58-66-exam_point",
+      "paragraphIndex": 0,
+      "start": 58,
+      "end": 66,
+      "text": "第22批援马耳他",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-10-15-exam_point",
+      "paragraphIndex": 2,
+      "start": 10,
+      "end": 15,
+      "text": "48名队员",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-46-51-exam_point",
+      "paragraphIndex": 2,
+      "start": 46,
+      "end": 51,
+      "text": "1964年",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-108-117-exam_point",
+      "paragraphIndex": 2,
+      "start": 108,
+      "end": 117,
+      "text": "82批1329人次",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-125-133-exam_point",
+      "paragraphIndex": 2,
+      "start": 125,
+      "end": 133,
+      "text": "1000多万人次",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-140-145-exam_point",
+      "paragraphIndex": 2,
+      "start": 140,
+      "end": 145,
+      "text": "30多万例",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-73-82-term",
+      "paragraphIndex": 1,
+      "start": 73,
+      "end": 82,
+      "text": "人类卫生健康共同体",
+      "type": "term",
+      "explanation": "指各国共同维护全球公共卫生安全、促进健康公平的理念，强调国际合作与责任共担。"
+    },
+    {
+      "id": "ai-1-141-145-term",
+      "paragraphIndex": 1,
+      "start": 141,
+      "end": 145,
+      "text": "民间大使",
+      "type": "term",
+      "explanation": "指通过民间交流活动促进国家间友好关系、传播本国文化的非官方代表。"
+    },
+    {
+      "id": "ai-2-59-64-term",
+      "paragraphIndex": 2,
+      "start": 59,
+      "end": 64,
+      "text": "援外医疗队",
+      "type": "term",
+      "explanation": "由国家派遣至其他国家提供医疗援助的专业团队，通常执行长期任务，体现国际人道主义精神。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

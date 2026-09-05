@@ -1,0 +1,84 @@
+{
+  "id": "2193bc570e",
+  "date": "2026-09-05",
+  "title": "崖壁上的盛唐，坝坝宴上的新生｜文化中国行・走进四川乡村石窟文化公园",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83317147.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-05T23:35:03+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "四川在线记者&nbsp;向宇&nbsp;陈宇&nbsp;摄影报道",
+    "9月1日，记者走进自贡市荣县东兴镇吕仙村。吕仙崖摩崖造像于2025年入选第二批四川省乡村石窟文化景点，崖壁距地面约30米处，四龛共十七尊唐代摩崖造像保存完好，被业界视为川南唐代石刻造像的精品代表。",
+    "依托石刻文物、穹窿地貌与古寨资源，当地已串联起狮子寨、吕仙崖、大老君山、集生砦等点位，打造出一条全长约5公里的乡村徒步旅游环线，全程含游览约需3小时。为兼顾保护与开放，村里已完成登山步道修缮，搭建了造像防护棚架，并配套设置文物标识和解说牌，在做好文物保护的前提下提升游客参观体验。",
+    "为进一步延伸文旅业态，村里计划将现有农家乐升级为特色坝坝宴，主打土鸡、竹笋、山菌等本地农家菜，同时拟增设步道休息区和观景台。当地也坦诚面对交通可达性不足、宣传推广薄弱、步道规划有待优化等短板。“我们希望让深山文物被更多游客看见，真正以石窟文化赋能乡村振兴。”吕仙村相关负责人表示。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-05T23:35:05+00:00",
+  "sourceTextHash": "65ddb40c58e70d7c2e61db57dd0928ac024771b0c9ed7685b704bbcfc48cf59a",
+  "aiStatus": "ok",
+  "aiSummary": "四川荣县吕仙村依托唐代摩崖造像等资源，打造5公里乡村徒步环线，升级农家乐为坝坝宴，推动石窟文化赋能乡村振兴，同时正视交通、宣传等短板。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-21-50-viewpoint",
+      "paragraphIndex": 1,
+      "start": 21,
+      "end": 50,
+      "text": "吕仙崖摩崖造像于2025年入选第二批四川省乡村石窟文化景点",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-120-139-viewpoint",
+      "paragraphIndex": 2,
+      "start": 120,
+      "end": 139,
+      "text": "在做好文物保护的前提下提升游客参观体验",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-114-127-viewpoint",
+      "paragraphIndex": 3,
+      "start": 114,
+      "end": 127,
+      "text": "真正以石窟文化赋能乡村振兴",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-62-78-exam_point",
+      "paragraphIndex": 1,
+      "start": 62,
+      "end": 78,
+      "text": "四龛共十七尊唐代摩崖造像保存完好",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-48-63-exam_point",
+      "paragraphIndex": 2,
+      "start": 48,
+      "end": 63,
+      "text": "全长约5公里的乡村徒步旅游环线",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-13-29-exam_point",
+      "paragraphIndex": 3,
+      "start": 13,
+      "end": 29,
+      "text": "计划将现有农家乐升级为特色坝坝宴",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-69-92-exam_point",
+      "paragraphIndex": 3,
+      "start": 69,
+      "end": 92,
+      "text": "交通可达性不足、宣传推广薄弱、步道规划有待优化",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

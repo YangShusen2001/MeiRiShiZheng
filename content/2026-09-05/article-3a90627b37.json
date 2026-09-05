@@ -1,0 +1,22 @@
+{
+  "id": "3a90627b37",
+  "date": "2026-09-05",
+  "title": "首个化妆品强制性国家标准来了！儿童化妆品怎么选？丨民生情报站",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83317135.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-05T23:35:26+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "市面上那些儿童彩妆礼盒，到底能不能给娃用？怎么挑才放心？好消息是&mdash;&mdash;首个化妆品强制性国家标准来了！",
+    "今年8月，国家标准化管理委员会发布《化妆品 安全通用要求》，将于2028年1月1日起实施，其中对儿童用妆安全作出了严格规定。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-05T23:35:28+00:00",
+  "sourceTextHash": "a61c51cf6d15cc0e52e527a58b9a20ec5be6f392d1b90c348696ee5854f94e59",
+  "aiStatus": "error",
+  "aiAnnotations": [],
+  "aiError": "ai_semantic:summary_length"
+}
