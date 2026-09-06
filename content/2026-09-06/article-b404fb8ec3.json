@@ -1,0 +1,111 @@
+{
+  "id": "b404fb8ec3",
+  "date": "2026-09-06",
+  "title": "从“姜”到“酱油”，APEC嘉宾讲述粤语如何走进拉美日常生活",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202609/06/139996_55000416.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-06T23:29:42+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月5日，第32次APEC中小企业部长会议期间，与会嘉宾走进广州塔和广东省博物馆，继续感受广州的城市魅力与文化底蕴。",
+    "秘鲁代表团团长、秘鲁驻华大使馆大使Carlos Raul Vasquez Corrales在游览广州塔后表示：“广州塔非常壮观，这里的视野非常开阔。总的来说，我觉得广州这座城市非常漂亮、非常美。”",
+    "在点赞广州城市魅力的同时，他也谈到了此次会议对秘鲁中小企业的重要意义。“此次部长会议讨论收获颇丰，会议的举办对秘鲁中小企业尤为重要，因为他们需要获得能力建设，并融入区域和全球供应链，从而更好地销售自己的产品。”",
+    "Carlos Raul Vasquez Corrales大使随即分享了一个有趣的事实：“秘鲁和广东省之间有着非常有趣的联系。从19世纪中期开始，一大批中国移民来到秘鲁，以至于现在，在拉丁美洲我们这一地区，最大的华人社区恰恰就在秘鲁。”他说，一些粤语词汇已经融入了当地日常语言，比如姜，西班牙语里叫“Jengibre”，但秘鲁人更习惯叫它“goeng”（粤语“姜”的发音）；酱油在当地也非常受欢迎，人们叫它“si jau”（粤语“豉油”的发音）。",
+    "智利代表团团长、智利经济、发展和旅游部技术合作服务局总经理 Henry Patricio Azurmendi Toledo 则表示，广州有一些令人惊叹的景点。他提到，在来中国之前就看过不少中国电影，特别是成龙的电影，他非常期待能在博物馆亲眼看到中国古老的历史。“中国文化历史悠久，所有人都想更了解一点。”他补充说。",
+    "当天，嘉宾们还参观了广东省博物馆，近距离感受中华文化的深厚底蕴。从珠江边的现代地标到承载历史文脉的博物馆，广州以开放、包容、创新的城市形象，给与会嘉宾留下了深刻印象。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-06T23:29:43+00:00",
+  "sourceTextHash": "9f435ffec4c90dfb2723c9ac07ce9102087bdfa3bb8639d01bf7216496cbbb5b",
+  "aiStatus": "ok",
+  "aiSummary": "APEC中小企业部长会议期间，秘鲁大使分享粤语词汇融入拉美日常生活的趣事，如“姜”和“酱油”的粤语发音，展现广州开放包容的文化魅力及会议对中小企业融入全球供应链的意义。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-5-21-exam_point",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 21,
+      "text": "第32次APEC中小企业部长会议",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-56-63-viewpoint",
+      "paragraphIndex": 1,
+      "start": 56,
+      "end": 63,
+      "text": "广州塔非常壮观",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-18-34-viewpoint",
+      "paragraphIndex": 2,
+      "start": 18,
+      "end": 34,
+      "text": "此次会议对秘鲁中小企业的重要意义",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-80-90-exam_point",
+      "paragraphIndex": 2,
+      "start": 80,
+      "end": 90,
+      "text": "融入区域和全球供应链",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-44-61-viewpoint",
+      "paragraphIndex": 3,
+      "start": 44,
+      "end": 61,
+      "text": "秘鲁和广东省之间有着非常有趣的联系",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-122-137-exam_point",
+      "paragraphIndex": 3,
+      "start": 122,
+      "end": 137,
+      "text": "粤语词汇已经融入了当地日常语言",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-169-174-term",
+      "paragraphIndex": 3,
+      "start": 169,
+      "end": 174,
+      "text": "goeng",
+      "type": "term",
+      "explanation": "粤语中“姜”的发音，被秘鲁人用于日常语言，体现粤语对拉美的影响。"
+    },
+    {
+      "id": "ai-3-203-209-term",
+      "paragraphIndex": 3,
+      "start": 203,
+      "end": 209,
+      "text": "si jau",
+      "type": "term"
+    },
+    {
+      "id": "ai-4-131-139-viewpoint",
+      "paragraphIndex": 4,
+      "start": 131,
+      "end": 139,
+      "text": "中国文化历史悠久",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-5-56-69-exam_point",
+      "paragraphIndex": 5,
+      "start": 56,
+      "end": 69,
+      "text": "开放、包容、创新的城市形象",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

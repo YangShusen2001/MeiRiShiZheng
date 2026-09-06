@@ -1,0 +1,110 @@
+{
+  "id": "35ab4e10ef",
+  "date": "2026-09-06",
+  "title": "做一名护水治水的河流&ldquo;管家&rdquo;是什么体验？带着问题，记者来到了大渡河畔丨C视频",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83317368.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-06T23:30:09+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "河流虽不会说话，但&ldquo;管家&rdquo;得替它把每一件事都操心到位&mdash;&mdash;行洪通道通不通畅、岸线是否被侵占、河道干不干净、水质有无变味，事无巨细，都得看在眼里、记在心头、管在手上。",
+    "作为四川省级十大河流之一，大渡河是长江上游的重要支流和水源涵养地。在流经汉源县时，大渡河干流因瀑布沟水电站截流蓄水，形成了一片宽阔的人工湖&mdash;&mdash;汉源湖。与此同时，地处大渡河中游的汉源县，沿河居民与企业密集，巡河任务不轻。",
+    "近日，记者跟随着汉源县当地&ldquo;巡河员&rdquo;一道，走进大渡河的汛期巡河日常。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-06T23:30:11+00:00",
+  "sourceTextHash": "50670a1fe7a9fac02af47450a1e51247292da9001d42e73199bded3fb29495a0",
+  "aiStatus": "ok",
+  "aiSummary": "本文通过记者跟随汉源县巡河员参与大渡河汛期巡河，展现河流“管家”如何细致管护河道、岸线、水质等，凸显基层护水治水工作的责任与日常。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-52-105-viewpoint",
+      "paragraphIndex": 0,
+      "start": 52,
+      "end": 105,
+      "text": "行洪通道通不通畅、岸线是否被侵占、河道干不干净、水质有无变味，事无巨细，都得看在眼里、记在心头、管在手上。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-13-32-exam_point",
+      "paragraphIndex": 1,
+      "start": 13,
+      "end": 32,
+      "text": "大渡河是长江上游的重要支流和水源涵养地",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-83-86-term",
+      "paragraphIndex": 1,
+      "start": 83,
+      "end": 86,
+      "text": "汉源湖",
+      "type": "term",
+      "explanation": "因瀑布沟水电站截流蓄水形成的人工湖，位于大渡河干流汉源县段。"
+    },
+    {
+      "id": "ai-0-52-56-term",
+      "paragraphIndex": 0,
+      "start": 52,
+      "end": 56,
+      "text": "行洪通道",
+      "type": "term"
+    },
+    {
+      "id": "ai-1-27-32-term",
+      "paragraphIndex": 1,
+      "start": 27,
+      "end": 32,
+      "text": "水源涵养地",
+      "type": "term",
+      "explanation": "指具有蓄水保水功能、补给和调节河流水量的区域，对生态保护至关重要。"
+    },
+    {
+      "id": "ai-1-47-53-term",
+      "paragraphIndex": 1,
+      "start": 47,
+      "end": 53,
+      "text": "瀑布沟水电站",
+      "type": "term"
+    },
+    {
+      "id": "ai-2-39-41-term",
+      "paragraphIndex": 2,
+      "start": 39,
+      "end": 41,
+      "text": "汛期",
+      "type": "term",
+      "explanation": "指河流因季节性降水导致水位上涨的时期，需加强巡河和防汛工作。"
+    },
+    {
+      "id": "ai-0-61-68-exam_point",
+      "paragraphIndex": 0,
+      "start": 61,
+      "end": 68,
+      "text": "岸线是否被侵占",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-104-120-exam_point",
+      "paragraphIndex": 1,
+      "start": 104,
+      "end": 120,
+      "text": "沿河居民与企业密集，巡河任务不轻",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-39-45-exam_point",
+      "paragraphIndex": 2,
+      "start": 39,
+      "end": 45,
+      "text": "汛期巡河日常",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 2
+  }
+}

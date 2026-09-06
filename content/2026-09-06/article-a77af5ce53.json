@@ -1,0 +1,77 @@
+{
+  "id": "a77af5ce53",
+  "date": "2026-09-06",
+  "title": "蓉城客场0‑0战平河南 中超冠军悬念延续",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83317385.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-06T23:29:46+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "四川在线记者&nbsp;华小峰&nbsp;发自河南郑州",
+    "2026年9月6日晚，中超第26轮焦点战在郑州航海体育场打响。领头羊成都蓉城客场0比0战平河南俱乐部彩陶坊队，提前夺冠的愿望未能如愿。河南队凭借主场顽强表现成功阻击，未让成都蓉城队在郑州加冕中超冠军。",
+    "本场比赛对抗激烈，河南队全场占据主动，共完成16次射门，全力捍卫主场，拒绝成为对手夺冠的“背景板”。受主力前锋费利佩停赛影响，成都蓉城进攻端火力不足，全场零射正。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-06T23:29:47+00:00",
+  "sourceTextHash": "dbe34f9c390140c24213ac856e1b966688e27b01f23a7c2cdcf8658c9bb0698b",
+  "aiStatus": "ok",
+  "aiSummary": "2026年9月6日，中超第26轮，成都蓉城客场0比0战平河南队，提前夺冠愿望落空。河南队主场顽强阻击，蓉城因费利佩停赛进攻乏力，冠军悬念延续。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-31-66-viewpoint",
+      "paragraphIndex": 1,
+      "start": 31,
+      "end": 66,
+      "text": "领头羊成都蓉城客场0比0战平河南俱乐部彩陶坊队，提前夺冠的愿望未能如愿",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-67-99-viewpoint",
+      "paragraphIndex": 1,
+      "start": 67,
+      "end": 99,
+      "text": "河南队凭借主场顽强表现成功阻击，未让成都蓉城队在郑州加冕中超冠军",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-9-27-exam_point",
+      "paragraphIndex": 2,
+      "start": 9,
+      "end": 27,
+      "text": "河南队全场占据主动，共完成16次射门",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-50-80-exam_point",
+      "paragraphIndex": 2,
+      "start": 50,
+      "end": 80,
+      "text": "受主力前锋费利佩停赛影响，成都蓉城进攻端火力不足，全场零射正",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-11-17-term",
+      "paragraphIndex": 1,
+      "start": 11,
+      "end": 17,
+      "text": "中超第26轮",
+      "type": "term",
+      "explanation": "中国足球协会超级联赛赛季中的第26轮比赛，通常接近赛季尾声，对争冠和保级形势有重要影响。"
+    },
+    {
+      "id": "ai-1-45-54-term",
+      "paragraphIndex": 1,
+      "start": 45,
+      "end": 54,
+      "text": "河南俱乐部彩陶坊队",
+      "type": "term",
+      "explanation": "中国足球超级联赛的一支职业球队，主场位于河南郑州，因赞助商冠名而使用此名称。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

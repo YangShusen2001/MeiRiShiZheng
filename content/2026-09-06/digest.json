@@ -1,0 +1,84 @@
+{
+  "date": "2026-09-06",
+  "title": "每日日报 · 2026-09-06（周日）",
+  "sections": [
+    {
+      "id": "essay",
+      "title": "申论精读",
+      "items": [
+        {
+          "title": "青春华章丨壹时评：以坚实基础托举远大理想",
+          "date": "09-06",
+          "sourceUrl": "http://opinion.people.com.cn/n1/2026/0906/c223228-40793241.html"
+        },
+        {
+          "title": "陇上种麻记",
+          "date": "09-06",
+          "sourceUrl": "https://www.news.cn/fortune/20260906/24832987557c4f9a92830c14d6489671/c.html"
+        }
+      ]
+    },
+    {
+      "id": "guangdong",
+      "title": "广东要闻动态",
+      "items": [
+        {
+          "title": "植根，滴灌，绽放——广东文化强省建设成效观察",
+          "date": "09-06",
+          "sourceUrl": "https://news.dayoo.com/guangdong/202609/06/139996_55000440.htm"
+        },
+        {
+          "title": "亚太媒体高端论坛在深圳举办",
+          "date": "09-06",
+          "sourceUrl": "https://news.dayoo.com/guangdong/202609/06/139996_55000372.htm"
+        },
+        {
+          "title": "17场招聘会、13万个次岗位！广东将给江浙沪学子送offer｜百万英才汇南粤",
+          "date": "09-06",
+          "sourceUrl": "https://news.dayoo.com/guangdong/202609/06/139996_55000634.htm"
+        },
+        {
+          "title": "从“姜”到“酱油”，APEC嘉宾讲述粤语如何走进拉美日常生活",
+          "date": "09-06",
+          "sourceUrl": "https://news.dayoo.com/guangdong/202609/06/139996_55000416.htm"
+        }
+      ]
+    },
+    {
+      "id": "sichuan",
+      "title": "四川要闻动态",
+      "items": [
+        {
+          "title": "蓉城客场0‑0战平河南 中超冠军悬念延续",
+          "date": "09-06",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83317385.html"
+        },
+        {
+          "title": "全球“大脑”对话蓉城！千余名顶尖专家共话脑机产业新未来",
+          "date": "09-06",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83317384.html"
+        },
+        {
+          "title": "大渡河畔，河流“管家”的汛期巡河日记",
+          "date": "09-06",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83317371.html"
+        },
+        {
+          "title": "做一名护水治水的河流“管家”是什么体验？带着问题，记者来到了大渡河畔丨C视频",
+          "date": "09-06",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83317368.html"
+        },
+        {
+          "title": "坚持产销齐抓、农文旅融合、定向合作，建设重庆都市圈优质农产品保供基地 让更多广安菜端上重庆餐桌丨市州观察",
+          "date": "09-06",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83317365.html"
+        },
+        {
+          "title": "一座白塔，一条岸线，串起文商旅新体验丨市州观察",
+          "date": "09-06",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83317364.html"
+        }
+      ]
+    }
+  ]
+}
