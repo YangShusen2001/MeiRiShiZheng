@@ -1,0 +1,93 @@
+{
+  "id": "caee7e591d",
+  "date": "2026-09-08",
+  "title": "在长征第一渡，他们一遍遍演绎着那场90多年前的&ldquo;告别&rdquo;丨史诗之路",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83318624.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-08T23:51:19+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "90多年前，一支8.6万人的队伍从于都河畔踏上长征之路；90多年后，同一个渡口，当地百姓们义务演出，用一场情景剧，深情回响那场告别。",
+    "组建于2021年的于都县长征源演艺团，在长征第一渡&mdash;&mdash;于都河畔，不定期演出情景剧《告别》，五年过去，演出已达903场。",
+    "整个长征源演艺团，参与演出的人员由260余名志愿者组成，大部分为红军后代。他们都是于都本地人，来自各行各业，全是义务演出。",
+    "于都河畔的903次&ldquo;告别&rdquo;丨史诗之路"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-08T23:51:21+00:00",
+  "sourceTextHash": "248f2776d865c230c1f6997dc514e9aa8ca90200f8769e334e170cd4230a680e",
+  "aiStatus": "ok",
+  "aiSummary": "于都县长征源演艺团由260余名红军后代志愿者组成，自2021年起在长征第一渡义务演出情景剧《告别》，五年间已演出903场，深情回响90多年前那场8.6万人的长征告别。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-0-27-viewpoint",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 27,
+      "text": "90多年前，一支8.6万人的队伍从于都河畔踏上长征之路",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-40-65-viewpoint",
+      "paragraphIndex": 0,
+      "start": 40,
+      "end": 65,
+      "text": "当地百姓们义务演出，用一场情景剧，深情回响那场告别",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-0-18-exam_point",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 18,
+      "text": "组建于2021年的于都县长征源演艺团",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-57-70-exam_point",
+      "paragraphIndex": 1,
+      "start": 57,
+      "end": 70,
+      "text": "五年过去，演出已达903场",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-9-27-exam_point",
+      "paragraphIndex": 2,
+      "start": 9,
+      "end": 27,
+      "text": "参与演出的人员由260余名志愿者组成",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-28-36-exam_point",
+      "paragraphIndex": 2,
+      "start": 28,
+      "end": 36,
+      "text": "大部分为红军后代",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-54-60-viewpoint",
+      "paragraphIndex": 2,
+      "start": 54,
+      "end": 60,
+      "text": "全是义务演出",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-23-25-term",
+      "paragraphIndex": 0,
+      "start": 23,
+      "end": 25,
+      "text": "长征",
+      "type": "term",
+      "explanation": "指1934年至1936年中国工农红军进行的战略转移，于都河是长征出发地之一。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

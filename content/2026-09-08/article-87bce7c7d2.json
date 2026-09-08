@@ -1,0 +1,137 @@
+{
+  "id": "87bce7c7d2",
+  "date": "2026-09-08",
+  "title": "全国首批川剧专业本科新生报到 新兴专业吸引青年逐梦川剧",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83318575.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-08T23:51:37+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月8日至10日，全国首批“川剧专业”本科新生陆续在成都报到入学。今年四川首次开设川剧本科相关专业，共计招录60名学生。其中，四川音乐学院、四川艺术职业学院、四川省川剧院联合培养的川剧音乐本科专业招收20人，采用“2+2”分段培养模式；成都艺术职业大学戏曲表演（川剧）职教本科专业招收40人。",
+    "四川音乐学院民乐系迎新点，全国首批“川剧专业”本科新生陆续报到入学。",
+    "作为全新设立的本科专业，不少拥有艺术基础且热爱传统文化的学生主动报考。曾学习古筝专业的新生周佳一，此番选择“川剧音乐”专业，源于专业形式的独特魅力。她表示，古筝学习多以独奏为主，而川剧专业侧重合奏与戏曲排练，形式新颖，希望在新专业中尝试更多艺术新元素。",
+    "普高生董子莹则因年少时的川剧情缘坚定了求学选择。她曾在宽窄巷子观看川剧表演，深受震撼。“我是普高生，专业基础相对薄弱，想通过系统学习夯实技能。”董子莹说，传统戏曲需要青年接续守护，她希望学有所成后，主动传播川剧文化，助力传统艺术延续发展。",
+    "新生填写四川音乐学院2026级本科新生报到流程表。",
+    "不少家长也十分看好本土戏曲专业的发展。新生家长李春丽表示，孩子长期学习音乐表演，与川剧专业适配度高，希望孩子深耕专业、精进技艺，在戏曲道路稳步成长。",
+    "据四川音乐学院民乐系副主任、教授江澹曦介绍，学校今年首次招收川剧器乐表演本科方向，在传统民族器乐课程基础上增设川剧专项课程。全新的课程设置，能够丰富学生专业技能，补齐传统器乐学习的短板，进一步拓宽学生未来的就业发展渠道。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-08T23:51:39+00:00",
+  "sourceTextHash": "3e9e48270538d777891b81d4dcfab3d6020c08f4d5b16c165c4ee679789f2cc0",
+  "aiStatus": "ok",
+  "aiSummary": "全国首批川剧专业本科新生在成都报到，四川首次开设川剧本科专业共招录60人，采用联合培养和职教本科模式，吸引有艺术基础和热爱传统文化的青年报考，旨在传承川剧文化并拓宽就业渠道。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-35-59-viewpoint",
+      "paragraphIndex": 0,
+      "start": 35,
+      "end": 59,
+      "text": "四川首次开设川剧本科相关专业，共计招录60名学生",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-104-117-term",
+      "paragraphIndex": 0,
+      "start": 104,
+      "end": 117,
+      "text": "采用“2+2”分段培养模式",
+      "type": "term",
+      "explanation": "指前两年在四川音乐学院学习，后两年在四川艺术职业学院和四川省川剧院进行实践培养的联合教学模式。"
+    },
+    {
+      "id": "ai-2-0-34-viewpoint",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 34,
+      "text": "作为全新设立的本科专业，不少拥有艺术基础且热爱传统文化的学生主动报考",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-77-89-viewpoint",
+      "paragraphIndex": 3,
+      "start": 77,
+      "end": 89,
+      "text": "传统戏曲需要青年接续守护",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-5-0-18-viewpoint",
+      "paragraphIndex": 5,
+      "start": 0,
+      "end": 18,
+      "text": "不少家长也十分看好本土戏曲专业的发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-90-98-exam_point",
+      "paragraphIndex": 0,
+      "start": 90,
+      "end": 98,
+      "text": "川剧音乐本科专业",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-126-140-exam_point",
+      "paragraphIndex": 0,
+      "start": 126,
+      "end": 140,
+      "text": "戏曲表演（川剧）职教本科专业",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-85-89-term",
+      "paragraphIndex": 0,
+      "start": 85,
+      "end": 89,
+      "text": "联合培养",
+      "type": "term",
+      "explanation": "指高校与艺术院校、剧院等机构合作，共同制定培养方案并实施教学，以提升学生实践能力。"
+    },
+    {
+      "id": "ai-2-54-58-exam_point",
+      "paragraphIndex": 2,
+      "start": 54,
+      "end": 58,
+      "text": "川剧音乐",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-30-40-exam_point",
+      "paragraphIndex": 6,
+      "start": 30,
+      "end": 40,
+      "text": "川剧器乐表演本科方向",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-42-50-exam_point",
+      "paragraphIndex": 6,
+      "start": 42,
+      "end": 50,
+      "text": "传统民族器乐课程",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-55-61-exam_point",
+      "paragraphIndex": 6,
+      "start": 55,
+      "end": 61,
+      "text": "川剧专项课程",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-96-109-viewpoint",
+      "paragraphIndex": 6,
+      "start": 96,
+      "end": 109,
+      "text": "拓宽学生未来的就业发展渠道",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "id": "0ce21698c0",
+  "date": "2026-09-08",
+  "title": "450个班级！四川老年大学秋季学期开学了",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83318595.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-08T23:51:23+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月7日，四川老年大学2026秋季学期正式开课，校本部与城南教学点，共计450个班级同步有序开学。银龄学子重返校园，满怀热忱开启新学期学习生活，校园处处洋溢着蓬勃生机。",
+    "开学当天，学校银龄志愿服务队在校园内设立服务点，为新老学员提供报名咨询、校园指引、问题答疑等贴心服务，以细致周到的志愿服务保障开学各项工作平稳运行。",
+    "校本部声乐、舞蹈、运动健身、生活保健、书画、语言文学、信息技术、器乐八大系全面开课，共计396个班级。课程兼顾传统文化与新潮内容，覆盖文艺、健体、科技、生活等多个方向，充分适配老年学员多元化学习需求。",
+    "城南教学点办学条件持续提质升级。相比春季学期，新增2间教室，在原有声乐、舞蹈、健身、生活艺术四大专业基础上增设器乐专业，新开设太极拳、气功、书画、AI人工智能、家庭理财等14个班级，现有共计54个班级，在校学员1300余人。同时，教学点还推出蒙古舞精品班和瑜伽小班，进一步满足学员高品质学习需求。",
+    "此外，校本部操场同步启动“起航新征程・银龄展风采”开学季系列活动，活动持续至9月11日。现场设有创意打卡、趣味游园、健康义诊等环节，投福球、听音猜歌名等游戏趣味十足，幸运抽奖惊喜不断，专家义诊为学员科普养生知识。学员们打卡留念、欢聚游园，在欢声笑语中感受浓厚的开学氛围。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-08T23:51:25+00:00",
+  "sourceTextHash": "427ccd8b35df769c0d11608b3396dcefb67fb64d53993feb02025e61a82a8b5d",
+  "aiStatus": "ok",
+  "aiSummary": "四川老年大学2026秋季学期开学，450个班级同步开课，校本部八大系全面开课，城南教学点提质升级，新增专业和班级，并举办开学季系列活动，满足老年学员多元化学习需求。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-36-48-viewpoint",
+      "paragraphIndex": 0,
+      "start": 36,
+      "end": 48,
+      "text": "450个班级同步有序开学",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-49-57-viewpoint",
+      "paragraphIndex": 0,
+      "start": 49,
+      "end": 57,
+      "text": "银龄学子重返校园",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-51-64-viewpoint",
+      "paragraphIndex": 2,
+      "start": 51,
+      "end": 64,
+      "text": "课程兼顾传统文化与新潮内容",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-5-15-viewpoint",
+      "paragraphIndex": 3,
+      "start": 5,
+      "end": 15,
+      "text": "办学条件持续提质升级",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-5-23-exam_point",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 23,
+      "text": "四川老年大学2026秋季学期正式开课",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-24-33-exam_point",
+      "paragraphIndex": 0,
+      "start": 24,
+      "end": 33,
+      "text": "校本部与城南教学点",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-34-41-exam_point",
+      "paragraphIndex": 2,
+      "start": 34,
+      "end": 41,
+      "text": "八大系全面开课",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-44-50-exam_point",
+      "paragraphIndex": 2,
+      "start": 44,
+      "end": 50,
+      "text": "396个班级",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-23-29-exam_point",
+      "paragraphIndex": 3,
+      "start": 23,
+      "end": 29,
+      "text": "新增2间教室",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-53-59-exam_point",
+      "paragraphIndex": 3,
+      "start": 53,
+      "end": 59,
+      "text": "增设器乐专业",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-73-79-exam_point",
+      "paragraphIndex": 3,
+      "start": 73,
+      "end": 79,
+      "text": "AI人工智能",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-13-24-exam_point",
+      "paragraphIndex": 4,
+      "start": 13,
+      "end": 24,
+      "text": "起航新征程・银龄展风采",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-7-14-term",
+      "paragraphIndex": 1,
+      "start": 7,
+      "end": 14,
+      "text": "银龄志愿服务队",
+      "type": "term"
+    },
+    {
+      "id": "ai-3-0-5-term",
+      "paragraphIndex": 3,
+      "start": 0,
+      "end": 5,
+      "text": "城南教学点",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

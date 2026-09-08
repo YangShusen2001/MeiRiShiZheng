@@ -1,0 +1,28 @@
+{
+  "date": "2026-09-08",
+  "sourcesOk": 15,
+  "sourceErrors": [],
+  "candidates": 18,
+  "articles": 15,
+  "aiOk": 12,
+  "aiError": 3,
+  "aiFailures": [
+    {
+      "articleId": "0632e36811",
+      "reason": "ai_semantic:annotation_count_exam_point"
+    },
+    {
+      "articleId": "44af7af367",
+      "reason": "ai_semantic:summary_length"
+    },
+    {
+      "articleId": "f348c345ac",
+      "reason": "ai_semantic:summary_length"
+    }
+  ],
+  "locationErrors": 19,
+  "schemaErrors": [],
+  "semanticErrors": [],
+  "volumeErrors": [],
+  "qualityStatus": "degraded"
+}

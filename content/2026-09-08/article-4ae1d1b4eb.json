@@ -1,0 +1,134 @@
+{
+  "id": "4ae1d1b4eb",
+  "date": "2026-09-08",
+  "title": "习近平同英国首相伯纳姆通电话",
+  "source": "qstheory.cn",
+  "url": "https://www.qstheory.cn/20260908/8fa0312c843f44368c8f0d399d213d49/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-08T23:50:41+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;新华社北京9月8日电 9月8日晚，国家主席习近平应约同英国首相伯纳姆通电话。",
+    "&emsp;&emsp;习近平祝贺伯纳姆就任英国首相，指出中英是全面战略伙伴，虽然两国社会制度和国情不同，但共同利益大于分歧，双方应当互尊互信、超越分歧、求同存异，做大互利合作的蛋糕。两国政府都致力于发展经济、改善民生，可以优势互补、相互助力。中国“十五五”时期将进一步扩大教育、医疗、金融对外开放，这些都是两国合作有潜力的领域。中英都是科技大国，都有丰富的教育、文化、体育等资源，应当保持开放前瞻意识，加强各领域交流合作。希望英方充分保障中国投资者合法权益。中英两国作为联合国安理会常任理事国和世界主要经济体，都支持多边主义、开放贸易，维护联合国核心地位，要加强在联合国、二十国集团、世界贸易组织等框架内的沟通和协作，推动平等有序的世界多极化、普惠包容的经济全球化。",
+    "&emsp;&emsp;伯纳姆对此表示赞同，表示我曾长期担任曼彻斯特市长，与中国有着多年友好交往。习近平主席2015年对英国进行国事访问时曾到访曼彻斯特，对推动当地与中方的交流合作产生重要影响。英方愿保持对华政策连续性，坚定不移发展英中长期稳定的战略伙伴关系。英方愿同中方开展高层交往，推动两国各领域合作，加强人文交流，将双边关系恢复到历史最高水平，更好造福两国人民。英方在台湾问题上的立场没有改变。在当前动荡复杂的国际变局下，作为安理会常任理事国，英中应推动通过对话解决国际热点问题，共同应对气候变化等全球性挑战，携手维护世界稳定繁荣。伯纳姆赞赏中方高效有力应对西藏吉隆遭受泥石流灾害，感谢中方为受影响的英国公民提供协助。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-08T23:50:43+00:00",
+  "sourceTextHash": "af3df016c1027f95e31bf0a138cac069619f0834912171c9f6a11fa24bc839b0",
+  "aiStatus": "ok",
+  "aiSummary": "习近平同英国首相伯纳姆通电话，强调中英应超越分歧、互利合作，扩大开放领域，加强多边协作；伯纳姆表示愿发展长期稳定关系，恢复双边关系至历史最高水平，并赞赏中方应对灾害的协助。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-29-38-viewpoint",
+      "paragraphIndex": 1,
+      "start": 29,
+      "end": 38,
+      "text": "中英是全面战略伙伴",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-54-62-viewpoint",
+      "paragraphIndex": 1,
+      "start": 54,
+      "end": 62,
+      "text": "共同利益大于分歧",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-310-333-viewpoint",
+      "paragraphIndex": 1,
+      "start": 310,
+      "end": 333,
+      "text": "推动平等有序的世界多极化、普惠包容的经济全球化",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-97-109-viewpoint",
+      "paragraphIndex": 2,
+      "start": 97,
+      "end": 109,
+      "text": "英方愿保持对华政策连续性",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-122-149-exam_point",
+      "paragraphIndex": 1,
+      "start": 122,
+      "end": 149,
+      "text": "中国“十五五”时期将进一步扩大教育、医疗、金融对外开放",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-230-255-exam_point",
+      "paragraphIndex": 1,
+      "start": 230,
+      "end": 255,
+      "text": "中英两国作为联合国安理会常任理事国和世界主要经济体",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-269-278-exam_point",
+      "paragraphIndex": 1,
+      "start": 269,
+      "end": 278,
+      "text": "维护联合国核心地位",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-184-199-exam_point",
+      "paragraphIndex": 2,
+      "start": 184,
+      "end": 199,
+      "text": "英方在台湾问题上的立场没有改变",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-243-257-exam_point",
+      "paragraphIndex": 2,
+      "start": 243,
+      "end": 257,
+      "text": "共同应对气候变化等全球性挑战",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-282-293-exam_point",
+      "paragraphIndex": 2,
+      "start": 282,
+      "end": 293,
+      "text": "西藏吉隆遭受泥石流灾害",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-32-38-term",
+      "paragraphIndex": 1,
+      "start": 32,
+      "end": 38,
+      "text": "全面战略伙伴",
+      "type": "term",
+      "explanation": "指国家间建立的全面、长期、稳定的战略合作关系，涵盖政治、经济、文化等多领域。"
+    },
+    {
+      "id": "ai-1-259-263-term",
+      "paragraphIndex": 1,
+      "start": 259,
+      "end": 263,
+      "text": "多边主义",
+      "type": "term",
+      "explanation": "指多个国家通过国际组织和机制协调政策、共同处理国际事务的原则和做法。"
+    },
+    {
+      "id": "ai-1-328-333-term",
+      "paragraphIndex": 1,
+      "start": 328,
+      "end": 333,
+      "text": "经济全球化",
+      "type": "term",
+      "explanation": "指商品、资本、技术等要素在全球范围内流动和配置，各国经济相互依存加深的过程。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}
