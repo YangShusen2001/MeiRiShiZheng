@@ -1,0 +1,91 @@
+{
+  "date": "2026-09-07",
+  "title": "每日日报 · 2026-09-07（周一）",
+  "sections": [
+    {
+      "id": "essay",
+      "title": "申论精读",
+      "items": [
+        {
+          "title": "监管部门严查直播间售卖假冒名家书画乱象",
+          "date": "09-07",
+          "sourceUrl": "https://www.news.cn/fortune/20260907/b91d4ff2d3384995a7cd7d727bb06091/c.html"
+        },
+        {
+          "title": "森林碳汇赋能 守护万里晴空",
+          "date": "09-07",
+          "sourceUrl": "https://www.news.cn/politics/20260907/6109c64b6d43433883f2513923997c41/c.html"
+        }
+      ]
+    },
+    {
+      "id": "sichuan",
+      "title": "四川要闻动态",
+      "items": [
+        {
+          "title": "好戏连台 四川省第四届川剧汇演在成都启幕",
+          "date": "09-07",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83317945.html"
+        },
+        {
+          "title": "23℃的夏天丨理响巴蜀",
+          "date": "09-07",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83317942.html"
+        }
+      ]
+    },
+    {
+      "id": "jiangsu",
+      "title": "江苏要闻动态",
+      "items": [
+        {
+          "title": "江苏再添58家新质生产力科技馆 产业一线“长”出科普新力量",
+          "date": "09-07",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/9/7/art_84322_11825983.html"
+        },
+        {
+          "title": "刘小涛主持召开第九期政企恳谈会 推动汽车产业特色发展提质增效",
+          "date": "09-07",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/9/7/art_84322_11825966.html"
+        },
+        {
+          "title": "省领导出席全省安全生产领域专场招聘会",
+          "date": "09-07",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/9/7/art_84322_11825967.html"
+        },
+        {
+          "title": "长三角G60科创走廊低空安全联合行动倡议发布",
+          "date": "09-07",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/9/7/art_84322_11825971.html"
+        }
+      ]
+    },
+    {
+      "id": "today-talk",
+      "title": "今日谈（半月谈·申论素材）",
+      "items": [
+        {
+          "title": "新乡村文化激活农耕文明",
+          "date": "09-07",
+          "sourceUrl": "http://www.banyuetan.org/jrt/detail/20260907/1000200033134991788763945622555363_1.html"
+        }
+      ]
+    },
+    {
+      "id": "south-review",
+      "title": "南方时评（南方网·广东申论素材）",
+      "items": [
+        {
+          "title": "头条",
+          "date": "09-07",
+          "sourceUrl": "https://opinion.southcn.com/node_87fa4020d8"
+        },
+        {
+          "title": "南方快评",
+          "date": "09-07",
+          "sourceUrl": "https://opinion.southcn.com/node_e4f9db6b4d"
+        }
+      ]
+    }
+  ]
+}

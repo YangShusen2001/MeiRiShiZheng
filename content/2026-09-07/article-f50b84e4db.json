@@ -1,0 +1,114 @@
+{
+  "id": "f50b84e4db",
+  "date": "2026-09-07",
+  "title": "江苏省人民政府 要闻关注 长三角G60科创走廊低空安全联合行动倡议发布",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/7/art_84322_11825971.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-08T00:02:15+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月3日至5日，以“共创安全低空新生态 打造高质量发展新支柱”为主题的2026低空经济发展大会在安徽省芜湖市举办。上海松江、浙江杭州、江苏苏州、安徽合肥、安徽芜湖、安徽宣城、浙江嘉兴、浙江湖州、浙江金华九城齐聚，长三角G60科创走廊九城市政府联合发布《长三角G60科创走廊城市低空安全联合行动倡议》。倡议聚焦规范城市场景飞行等六大维度，全方位筑牢安全屏障。此次联合倡议的发布，是长三角G60科创走廊在低空经济领域跨区域协同治理的首次制度性探索。",
+    "G60低空经济协同创新联盟成立一年来成效显著，目前已汇聚300余家低空制造、基础设施、科研院所、场景应用及配套服务领域单位。今年以来，G60联席办依托联盟平台，深度参与编撰专业教材《低空经济概论》，会同紫金山实验室、上海铁塔等单位在松江综保区前置货站探索“低空+前置货站”落地应用，携手顺丰速运与中国铁塔规划跨区域低空物流航线，在浙江德清举办产业对接交流会，推动产业链与创新链深度融合。未来，G60科创走廊将持续以联盟为抓手，在区域低空安全标准制定、跨省航线试点、企业出海服务、低空监管平台互联互通等方面先行先试，为全国低空经济发展贡献经验和方案。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-08T00:02:16+00:00",
+  "sourceTextHash": "9e8585ac26f2c660eb5ad7ff3fd3762b6256ee9a963d19a9bdb5a10fb5e507ba",
+  "aiStatus": "ok",
+  "aiSummary": "长三角G60科创走廊九城市在芜湖低空经济发展大会上联合发布低空安全倡议，首次实现跨区域制度性协同治理。联盟成立一年汇聚300余家单位，推动教材编撰、低空物流等应用，未来将在标准制定、跨省航线等方面先行先试。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-10-30-viewpoint",
+      "paragraphIndex": 0,
+      "start": 10,
+      "end": 30,
+      "text": "共创安全低空新生态 打造高质量发展新支柱",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-189-221-viewpoint",
+      "paragraphIndex": 0,
+      "start": 189,
+      "end": 221,
+      "text": "长三角G60科创走廊在低空经济领域跨区域协同治理的首次制度性探索",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-179-192-viewpoint",
+      "paragraphIndex": 1,
+      "start": 179,
+      "end": 192,
+      "text": "推动产业链与创新链深度融合",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-257-273-viewpoint",
+      "paragraphIndex": 1,
+      "start": 257,
+      "end": 273,
+      "text": "为全国低空经济发展贡献经验和方案",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-35-47-exam_point",
+      "paragraphIndex": 0,
+      "start": 35,
+      "end": 47,
+      "text": "2026低空经济发展大会",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-106-125-exam_point",
+      "paragraphIndex": 0,
+      "start": 106,
+      "end": 125,
+      "text": "长三角G60科创走廊九城市政府联合发布",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-154-167-exam_point",
+      "paragraphIndex": 0,
+      "start": 154,
+      "end": 167,
+      "text": "规范城市场景飞行等六大维度",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-0-13-exam_point",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 13,
+      "text": "G60低空经济协同创新联盟",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-128-135-exam_point",
+      "paragraphIndex": 1,
+      "start": 128,
+      "end": 135,
+      "text": "低空+前置货站",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-154-163-exam_point",
+      "paragraphIndex": 1,
+      "start": 154,
+      "end": 163,
+      "text": "跨区域低空物流航线",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-239-249-exam_point",
+      "paragraphIndex": 1,
+      "start": 239,
+      "end": 249,
+      "text": "低空监管平台互联互通",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 2
+  }
+}

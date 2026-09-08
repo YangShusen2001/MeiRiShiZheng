@@ -1,0 +1,116 @@
+{
+  "id": "0ec83bc5df",
+  "date": "2026-09-07",
+  "title": "江苏省人民政府 要闻关注 刘小涛主持召开第九期政企恳谈会 推动汽车产业特色发展提质增效",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/7/art_84322_11825966.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-08T00:01:59+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月4日，省长刘小涛主持召开今年第九期政企恳谈会，深入学习贯彻习近平总书记关于推动汽车产业高质量发展的重要指示精神，围绕推动做大做强汽车产业、塑造产业竞争优势听取相关企业意见建议。",
+    "会上，理想、比亚迪、长安、奇瑞捷豹路虎、悦达起亚、上汽大众、徐工、威孚高科、魔门塔等企业负责人先后发言。大家表示，汽车产业是制造业的龙头产业、实体经济的支柱产业，将坚定发展信心、抢抓转型机遇，持续夯实整车制造基本盘，加快电动化、智能化步伐，加强品牌培育建设，加大海外市场布局力度，不断提升核心竞争力。省有关部门单位和设区市逐项回应企业诉求，表示将强化政策供给，优化全链条服务保障，全力护航我省汽车产业高质量发展。",
+    "会议指出，要统筹扩大国内消费和拓展海外出口，支持创新营销模式、丰富促销场景、激活终端消费潜力，鼓励整车和零部件企业拓宽出口渠道，加强跨境物流、外贸金融、合规风控等服务保障。强化创新驱动引领，聚焦关键核心技术开展补短板攻关，完善整零对接、校企对接机制，推动技术共享、成果转化、协同配套。统筹推进充电桩、换电站、训练场、公共测试中心等基础设施布局建设，厚植产业发展良好生态，引导行业理性竞争、良性发展，聚力打造“江苏智造”公共品牌，促进汽车产业高端化、智能化、绿色化升级。",
+    "副省长沈剑荣，省政府秘书长赵建军，省有关部门单位和部分设区市负责同志参加。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-08T00:01:59+00:00",
+  "sourceTextHash": "ac9257d08035c79ce87fc2b0b2fe2096ca4edf64c7d06da676050cb19bd4e424",
+  "aiStatus": "ok",
+  "aiSummary": "9月4日，江苏省省长刘小涛主持召开第九期政企恳谈会，听取企业意见，强调推动汽车产业高质量发展，强化创新驱动，统筹消费与出口，完善基础设施，打造“江苏智造”品牌。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-25-57-viewpoint",
+      "paragraphIndex": 0,
+      "start": 25,
+      "end": 57,
+      "text": "深入学习贯彻习近平总书记关于推动汽车产业高质量发展的重要指示精神",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-57-80-viewpoint",
+      "paragraphIndex": 1,
+      "start": 57,
+      "end": 80,
+      "text": "汽车产业是制造业的龙头产业、实体经济的支柱产业",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-6-21-viewpoint",
+      "paragraphIndex": 2,
+      "start": 6,
+      "end": 21,
+      "text": "统筹扩大国内消费和拓展海外出口",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-86-94-viewpoint",
+      "paragraphIndex": 2,
+      "start": 86,
+      "end": 94,
+      "text": "强化创新驱动引领",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-214-233-viewpoint",
+      "paragraphIndex": 2,
+      "start": 214,
+      "end": 233,
+      "text": "促进汽车产业高端化、智能化、绿色化升级",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-19-24-term",
+      "paragraphIndex": 0,
+      "start": 19,
+      "end": 24,
+      "text": "政企恳谈会",
+      "type": "term"
+    },
+    {
+      "id": "ai-1-110-117-exam_point",
+      "paragraphIndex": 1,
+      "start": 110,
+      "end": 117,
+      "text": "电动化、智能化",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-97-103-exam_point",
+      "paragraphIndex": 2,
+      "start": 97,
+      "end": 103,
+      "text": "关键核心技术",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-146-153-exam_point",
+      "paragraphIndex": 2,
+      "start": 146,
+      "end": 153,
+      "text": "充电桩、换电站",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-66-80-exam_point",
+      "paragraphIndex": 2,
+      "start": 66,
+      "end": 80,
+      "text": "跨境物流、外贸金融、合规风控",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-204-208-term",
+      "paragraphIndex": 2,
+      "start": 204,
+      "end": 208,
+      "text": "江苏智造",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

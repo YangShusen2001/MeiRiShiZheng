@@ -1,0 +1,116 @@
+{
+  "id": "b1b47a4607",
+  "date": "2026-09-07",
+  "title": "江苏省人民政府 要闻关注 省领导出席全省安全生产领域专场招聘会",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/7/art_84322_11825967.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-08T00:02:06+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月6日，我省举办“苏就美好·安全同行”安全生产领域专场招聘会。省委常委、常务副省长马欣参加南京主会场活动，与企业招聘负责人和求职者现场交流，了解用工需求和岗位设置情况。",
+    "马欣强调，安全生产事关人民群众生命财产安全，实现安全发展需要大量的安全专业人才。要全面压紧压实各地、各行业领域特别是企业的安全责任，严格配备在岗的安全和技术负责人，强化在岗员工安全教育培训，坚决守牢安全底线。要以此次专场招聘会为契机，进一步拓宽安全生产领域人才供给渠道，促进安全生产领域人才精准对接，为深入推进安全生产“六化”建设、提升全省安全生产治理能力提供有力的人才支撑。",
+    "本次招聘会由省人社厅、省应急管理厅、省住房城乡建设厅、省交通运输厅联合举办，全省共有608家企业提供招聘需求1.1万人，面向持有注册安全工程师、特种作业操作证等职业资格证书的有就业需求人员，以及安全工程等相关专业离校未就业毕业生提供适配岗位。招聘岗位信息同步在“就在江苏”智慧就业服务平台线上发布。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-08T00:02:07+00:00",
+  "sourceTextHash": "4347f75722bf3f9cce0ce81b55910e9e1fbf6c70974464751178a91a9a13e015",
+  "aiStatus": "ok",
+  "aiSummary": "9月6日，江苏举办安全生产领域专场招聘会，608家企业提供1.1万岗位，面向持证人员及毕业生。常务副省长马欣强调压实安全责任，拓宽人才供给，促进精准对接，为安全发展提供人才支撑。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-5-31-viewpoint",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 31,
+      "text": "我省举办“苏就美好·安全同行”安全生产领域专场招聘会",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-5-21-viewpoint",
+      "paragraphIndex": 1,
+      "start": 5,
+      "end": 21,
+      "text": "安全生产事关人民群众生命财产安全",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-41-65-viewpoint",
+      "paragraphIndex": 1,
+      "start": 41,
+      "end": 65,
+      "text": "全面压紧压实各地、各行业领域特别是企业的安全责任",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-117-134-viewpoint",
+      "paragraphIndex": 1,
+      "start": 117,
+      "end": 134,
+      "text": "进一步拓宽安全生产领域人才供给渠道",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-0-4-exam_point",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 4,
+      "text": "9月6日",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-32-44-exam_point",
+      "paragraphIndex": 0,
+      "start": 32,
+      "end": 44,
+      "text": "省委常委、常务副省长马欣",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-155-165-exam_point",
+      "paragraphIndex": 1,
+      "start": 155,
+      "end": 165,
+      "text": "安全生产“六化”建设",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-42-59-exam_point",
+      "paragraphIndex": 2,
+      "start": 42,
+      "end": 59,
+      "text": "608家企业提供招聘需求1.1万人",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-64-79-exam_point",
+      "paragraphIndex": 2,
+      "start": 64,
+      "end": 79,
+      "text": "注册安全工程师、特种作业操作证",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-130-144-exam_point",
+      "paragraphIndex": 2,
+      "start": 130,
+      "end": 144,
+      "text": "“就在江苏”智慧就业服务平台",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-64-71-term",
+      "paragraphIndex": 2,
+      "start": 64,
+      "end": 71,
+      "text": "注册安全工程师",
+      "type": "term",
+      "explanation": "指通过国家注册安全工程师执业资格考试并取得资格证书的专业技术人员，负责企业安全生产管理、隐患排查等工作。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "id": "2c86b4525c",
+  "date": "2026-09-07",
+  "title": "好戏连台 四川省第四届川剧汇演在成都启幕",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83317945.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-08T00:01:43+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月7日，四川省第四届川剧汇演在成都正式拉开帷幕，系列活动将持续半年。开幕当晚，《杀瞿义》《双天官》《乔子口》等经典剧目轮番上演，为戏迷带来精彩戏曲盛宴。",
+    "川剧《乔子口》舞台剧照，多位演员同台演绎，身段程式尽显川剧韵味",
+    "《乔子口》演出现场，舞台之上，演员正在进行剧目表演，乐师在侧伴奏。",
+    "川剧《杀瞿义》舞台表演，两名演员对手戏，展现戏剧冲突。",
+    "本次汇演汇集全省国有院团、民营剧团及戏曲院校力量，将展演9部大幕戏、21部精品折子戏。活动分三阶段推进，包含剧目展演、名师带徒、青年演员技能大赛、戏曲文创大赛等五大特色活动。",
+    "川剧演出期间，台下观众纷纷举起手机记录舞台精彩瞬间。",
+    "汇演聚焦川剧活态传承，通过老中青同台、师生共演、以赛育新的模式培育戏曲后备人才，全程推出惠民票价与线上直播，全方位拓宽川剧传播渠道，持续擦亮“川流不息”川剧文化品牌。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-08T00:01:45+00:00",
+  "sourceTextHash": "4ef87bd2a557a16d5f0fddb1946403b405f98df317ec66af6ac5b166a289f1ec",
+  "aiStatus": "ok",
+  "aiSummary": "四川省第四届川剧汇演在成都启幕，持续半年，展演经典剧目，汇集全省力量，推出五大活动，聚焦活态传承，培育后备人才，惠民直播传播川剧文化。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-5-24-viewpoint",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 24,
+      "text": "四川省第四届川剧汇演在成都正式拉开帷幕",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-0-24-viewpoint",
+      "paragraphIndex": 4,
+      "start": 0,
+      "end": 24,
+      "text": "本次汇演汇集全省国有院团、民营剧团及戏曲院校力量",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-6-0-10-viewpoint",
+      "paragraphIndex": 6,
+      "start": 0,
+      "end": 10,
+      "text": "汇演聚焦川剧活态传承",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-56-64-exam_point",
+      "paragraphIndex": 0,
+      "start": 56,
+      "end": 64,
+      "text": "经典剧目轮番上演",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-26-42-exam_point",
+      "paragraphIndex": 4,
+      "start": 26,
+      "end": 42,
+      "text": "展演9部大幕戏、21部精品折子戏",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-80-86-exam_point",
+      "paragraphIndex": 4,
+      "start": 80,
+      "end": 86,
+      "text": "五大特色活动",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-13-28-exam_point",
+      "paragraphIndex": 6,
+      "start": 13,
+      "end": 28,
+      "text": "老中青同台、师生共演、以赛育新",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-44-53-exam_point",
+      "paragraphIndex": 6,
+      "start": 44,
+      "end": 53,
+      "text": "惠民票价与线上直播",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-71-75-term",
+      "paragraphIndex": 6,
+      "start": 71,
+      "end": 75,
+      "text": "川流不息",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}
