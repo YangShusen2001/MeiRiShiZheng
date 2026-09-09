@@ -1,0 +1,99 @@
+{
+  "id": "15acdee565",
+  "date": "2026-09-09",
+  "title": "江苏省人民政府 要闻关注 第三届公共安全科技装备展连云港开幕 96件“江苏造”警用装备专区亮相",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/9/art_84322_11827007.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-09T23:50:54+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月8日，由公安部第一研究所主办的第三届公共安全科技装备展在连云港开幕。自2024年首展以来，该展会已成为公共安全领域先进技术和装备国际交流的重要窗口。此次展会首次设立江苏智慧警务专区，来自全省公安机关的96件警用科技装备集中亮相，包含智能终端、应急救援、交通管理等10余个品类。这些装备主要由江苏企业研发制造，部分由南京、无锡、苏州、连云港等地的公安机关自主研发。",
+    "无人智能装备数量较多，覆盖水陆空各领域：无人巡逻警车依托专属平台，可远程集中操控警用设备，在城市商圈、主干道等区域自主巡逻；轮足式警用机器狗灵活深入窄巷、死角，有效补盲；警用无人船兼具快速救援与日常巡防功能，实现水域立体化管控。智能化装备发挥着“降风险、提效率”的关键作用：水上救生机器人仅救生圈大小，单人即可快速布放，遥控抵近落水者；防爆人形机器人可替代人员进入火灾、危化品泄漏等高危场景；专为视障群体设计的“小苏智能导盲犬”搭载全景相机和一键报警功能，遇险时民警能第一时间定位施救。",
+    "近年来，省公安厅专门设立警用装备联创中心，聚合省内外优质科研资源和装备企业，搭建高水平协同创新平台。目前，该中心自主研发的上百件“高精尖”与“小快灵”装备已投入实战应用并在全省推广，其中30余项创新成果获得国家专利或入选省部级技术革新项目。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-09T23:50:55+00:00",
+  "sourceTextHash": "0b8a3aedeee95dfa38cb77e00b82c3867089de9edd9b3f789455ab29a433115b",
+  "aiStatus": "ok",
+  "aiSummary": "第三届公共安全科技装备展在连云港开幕，首次设立江苏智慧警务专区，展示96件警用装备，涵盖无人智能、应急救援等品类，体现警企协同创新成果。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-36-75-viewpoint",
+      "paragraphIndex": 0,
+      "start": 36,
+      "end": 75,
+      "text": "自2024年首展以来，该展会已成为公共安全领域先进技术和装备国际交流的重要窗口",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-114-136-viewpoint",
+      "paragraphIndex": 1,
+      "start": 114,
+      "end": 136,
+      "text": "智能化装备发挥着“降风险、提效率”的关键作用",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-4-49-viewpoint",
+      "paragraphIndex": 2,
+      "start": 4,
+      "end": 49,
+      "text": "省公安厅专门设立警用装备联创中心，聚合省内外优质科研资源和装备企业，搭建高水平协同创新平台",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-17-35-exam_point",
+      "paragraphIndex": 0,
+      "start": 17,
+      "end": 35,
+      "text": "第三届公共安全科技装备展在连云港开幕",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-80-92-exam_point",
+      "paragraphIndex": 0,
+      "start": 80,
+      "end": 92,
+      "text": "首次设立江苏智慧警务专区",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-102-115-exam_point",
+      "paragraphIndex": 0,
+      "start": 102,
+      "end": 115,
+      "text": "96件警用科技装备集中亮相",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-0-19-exam_point",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 19,
+      "text": "无人智能装备数量较多，覆盖水陆空各领域",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-93-119-exam_point",
+      "paragraphIndex": 2,
+      "start": 93,
+      "end": 119,
+      "text": "30余项创新成果获得国家专利或入选省部级技术革新项目",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-20-29-term",
+      "paragraphIndex": 0,
+      "start": 20,
+      "end": 29,
+      "text": "公共安全科技装备展",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

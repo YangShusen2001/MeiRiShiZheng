@@ -1,0 +1,108 @@
+{
+  "id": "4d21672b98",
+  "date": "2026-09-09",
+  "title": "在第四十二个教师节到来之际 习近平向全国广大教师和教育工作者致以节日祝贺和诚挚问候",
+  "source": "qstheory.cn",
+  "url": "https://www.qstheory.cn/20260909/30dfb2fe9e61450294447c6283263039/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-09T23:49:56+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;新华社北京9月9日电 在第四十二个教师节到来之际，中共中央总书记、国家主席、中央军委主席习近平代表党中央，向全国广大教师和教育工作者致以节日祝贺和诚挚问候。",
+    "&emsp;&emsp;习近平指出，长期以来，全国广大教师认真贯彻党的教育方针，躬耕教坛、传道授业，为党和国家事业发展作出了重要贡献。",
+    "&emsp;&emsp;习近平强调，新征程上，希望广大教师牢记为党育人、为国育才的初心使命，落实立德树人根本任务，大力弘扬教育家精神，涵养高尚师德师风，提升专业素质能力，努力培养担当民族复兴大任的时代新人。各级党委和政府要重视加强教师队伍建设，在全社会营造尊师重教良好氛围，汇聚起教育强国建设的强大合力。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-09T23:49:57+00:00",
+  "sourceTextHash": "4a717ce2ef0668b6f37df4d8a6983416ff462a4979caa813ca22396643ce6c6a",
+  "aiStatus": "ok",
+  "aiSummary": "习近平在第四十二个教师节向全国教师致贺，强调教师应牢记育人使命，弘扬教育家精神，培养时代新人，并要求全社会尊师重教，建设教育强国。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-56-89-viewpoint",
+      "paragraphIndex": 0,
+      "start": 56,
+      "end": 89,
+      "text": "习近平代表党中央，向全国广大教师和教育工作者致以节日祝贺和诚挚问候",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-23-66-viewpoint",
+      "paragraphIndex": 1,
+      "start": 23,
+      "end": 66,
+      "text": "全国广大教师认真贯彻党的教育方针，躬耕教坛、传道授业，为党和国家事业发展作出了重要贡献",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-29-45-viewpoint",
+      "paragraphIndex": 2,
+      "start": 29,
+      "end": 45,
+      "text": "牢记为党育人、为国育才的初心使命",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-46-56-exam_point",
+      "paragraphIndex": 2,
+      "start": 46,
+      "end": 56,
+      "text": "落实立德树人根本任务",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-57-66-exam_point",
+      "paragraphIndex": 2,
+      "start": 57,
+      "end": 66,
+      "text": "大力弘扬教育家精神",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-67-75-exam_point",
+      "paragraphIndex": 2,
+      "start": 67,
+      "end": 75,
+      "text": "涵养高尚师德师风",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-76-84-exam_point",
+      "paragraphIndex": 2,
+      "start": 76,
+      "end": 84,
+      "text": "提升专业素质能力",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-103-121-exam_point",
+      "paragraphIndex": 2,
+      "start": 103,
+      "end": 121,
+      "text": "各级党委和政府要重视加强教师队伍建设",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-122-136-exam_point",
+      "paragraphIndex": 2,
+      "start": 122,
+      "end": 136,
+      "text": "在全社会营造尊师重教良好氛围",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-140-146-term",
+      "paragraphIndex": 2,
+      "start": 140,
+      "end": 146,
+      "text": "教育强国建设",
+      "type": "term",
+      "explanation": "指通过优先发展教育、深化教育改革，使国家教育水平位居世界前列，为现代化建设提供人才支撑的战略目标。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

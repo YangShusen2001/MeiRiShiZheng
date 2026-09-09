@@ -1,0 +1,122 @@
+{
+  "date": "2026-09-09",
+  "title": "每日日报 · 2026-09-09（周三）",
+  "sections": [
+    {
+      "id": "essay",
+      "title": "申论精读",
+      "items": [
+        {
+          "title": "壹时评：最高法意见划出边界，助力AI跑得更快、更稳",
+          "date": "09-09",
+          "sourceUrl": "http://opinion.people.com.cn/n1/2026/0909/c223228-40795696.html"
+        },
+        {
+          "title": "在第四十二个教师节到来之际 习近平向全国广大教师和教育工作者致以节日祝贺和诚挚问候",
+          "date": "09-09",
+          "sourceUrl": "https://www.qstheory.cn/20260909/30dfb2fe9e61450294447c6283263039/c.html"
+        },
+        {
+          "title": "多彩实践绘就乡村振兴新图景",
+          "date": "09-09",
+          "sourceUrl": "https://www.news.cn/politics/20260909/58b16008c3664b0cba9e9f0e80c7aa29/c.html"
+        }
+      ]
+    },
+    {
+      "id": "guangdong",
+      "title": "广东要闻动态",
+      "items": [
+        {
+          "title": "黄坤明到深圳走访学校，向全省教师致以节日问候",
+          "date": "09-09",
+          "sourceUrl": "https://news.dayoo.com/guangdong/202609/09/139996_55001420.htm"
+        },
+        {
+          "title": "提前探营服贸会：四大永久展馆合体 广东元素惊艳亮相",
+          "date": "09-09",
+          "sourceUrl": "https://news.dayoo.com/guangdong/202609/09/139996_55001461.htm"
+        },
+        {
+          "title": "374个项目集中发布！广东乡村优质资产赴沪寻找“合伙人”",
+          "date": "09-09",
+          "sourceUrl": "https://news.dayoo.com/guangdong/202609/09/139996_55001458.htm"
+        }
+      ]
+    },
+    {
+      "id": "sichuan",
+      "title": "四川要闻动态",
+      "items": [
+        {
+          "title": "注意！本周成都市区有“熊猫”出没",
+          "date": "09-09",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83319312.html"
+        },
+        {
+          "title": "划定89个重点投资领域！四川政府投资基金“投向哪”有了依据",
+          "date": "09-09",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83319310.html"
+        },
+        {
+          "title": "看大熊猫、学制茶，中外嘉宾沉浸式感受雅安生态之美",
+          "date": "09-09",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83319309.html"
+        }
+      ]
+    },
+    {
+      "id": "jiangsu",
+      "title": "江苏要闻动态",
+      "items": [
+        {
+          "title": "第三届公共安全科技装备展连云港开幕 96件“江苏造”警用装备专区亮相",
+          "date": "09-09",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/9/9/art_84322_11827007.html"
+        },
+        {
+          "title": "泰国苏商总会企业代表团来访",
+          "date": "09-09",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/9/9/art_84322_11826986.html"
+        },
+        {
+          "title": "刘小涛主持召开就业工作座谈会 多措并举推动高质量充分就业",
+          "date": "09-09",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/9/9/art_84322_11826985.html"
+        }
+      ]
+    },
+    {
+      "id": "today-talk",
+      "title": "今日谈（半月谈·申论素材）",
+      "items": [
+        {
+          "title": "中报增披露新规，基民真盈亏首现！“买在何时、拿得多久”有学问",
+          "date": "09-09",
+          "sourceUrl": "http://www.banyuetan.org/jrt/detail/20260909/1000200033134991788936414306589812_1.html"
+        },
+        {
+          "title": "大连：把绿茵场作为“流量支点”",
+          "date": "09-09",
+          "sourceUrl": "http://www.banyuetan.org/jrt/detail/20260909/1000200033134991788935460020588351_1.html"
+        }
+      ]
+    },
+    {
+      "id": "south-review",
+      "title": "南方时评（南方网·广东申论素材）",
+      "items": [
+        {
+          "title": "头条",
+          "date": "09-09",
+          "sourceUrl": "https://opinion.southcn.com/node_87fa4020d8"
+        },
+        {
+          "title": "南方快评",
+          "date": "09-09",
+          "sourceUrl": "https://opinion.southcn.com/node_e4f9db6b4d"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "c266e922ef",
+  "date": "2026-09-09",
+  "title": "新华视点丨多彩实践绘就乡村振兴新图景",
+  "source": "news.cn",
+  "url": "https://www.news.cn/politics/20260909/58b16008c3664b0cba9e9f0e80c7aa29/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-09T23:50:03+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;金秋时节，各地立足资源禀赋，围绕产业发展、农旅融合、民生改善探索多元路径，以务实举措绘就乡村振兴新图景。",
+    "&emsp;&emsp;连日来，贵州三都县都江镇2.61万亩梯田陆续迎来收割季。梯田依山就势、层叠绵延，金色稻海与古朴村寨交相辉映，铺展出一幅壮阔的丰收画卷。",
+    "&emsp;&emsp;不少游客慕名而来，赏梯田盛景、体验乡土风情。梯田既是丰产田，也成了风景田。",
+    "&emsp;&emsp;秋日的秦巴山区，夜色正浓。陕西省岚皋县的“村BA”赛事持续升温。",
+    "&emsp;&emsp;依托赛事人气，岚皋县组织12个镇分时段在赛场周边设展，让游客在观赛之余选购特色农产品，将体育流量转化为民生红利。",
+    "&emsp;&emsp;近日，在云南省宣威市普立乡尼珠河大峡谷谷底的尼珠河村，村内学生们搭乘由摆渡车、悬崖电梯、高空缆车组成的“空中校车”前往学校。原本3个多小时的艰险路程，被压缩至30分钟以内。",
+    "&emsp;&emsp;“空中校车”承载着大山孩子的求学梦想，在山海云端间书写乡村振兴的温暖答卷。",
+    "&emsp;&emsp;统筹：李杰 李佳琳 王冰笛"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-09T23:50:05+00:00",
+  "sourceTextHash": "196675e46483cb509af97888b1a2a7cdafe82bb002b4f16a57176c7770c9b633",
+  "aiStatus": "error",
+  "aiAnnotations": [],
+  "aiError": "ai_semantic:summary_length"
+}

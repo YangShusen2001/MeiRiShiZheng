@@ -1,0 +1,83 @@
+{
+  "id": "d8fe1212bf",
+  "date": "2026-09-09",
+  "title": "江苏省人民政府 要闻关注 泰国苏商总会企业代表团来访",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/9/art_84322_11826986.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-09T23:51:02+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月7日，省长刘小涛在南京会见由泰国苏商总会主席陈柱率领的企业代表团。",
+    "双方表示，江苏和泰国贸易往来频繁、人文互动融洽，将进一步发挥泰国苏商总会桥梁纽带作用，为江苏企业赴泰投资做好政策咨询、服务对接，推动更多泰国企业来苏考察交流、拓展事业，促进两地产业链供应链深度对接，深化拓展新能源、高端装备、数字经济、文旅教育等领域合作，厚植中泰友好合作务实基础。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-09T23:51:04+00:00",
+  "sourceTextHash": "2359e3b58345e4f4f746162e301c721d2e6cbf305472f6dee394c16c5a40d93b",
+  "aiStatus": "ok",
+  "aiSummary": "9月7日，江苏省长刘小涛会见泰国苏商总会企业代表团，双方将深化新能源、高端装备等领域合作，促进产业链供应链对接，厚植中泰友好基础。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-5-34-viewpoint",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 34,
+      "text": "省长刘小涛在南京会见由泰国苏商总会主席陈柱率领的企业代表团",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-5-23-viewpoint",
+      "paragraphIndex": 1,
+      "start": 5,
+      "end": 23,
+      "text": "江苏和泰国贸易往来频繁、人文互动融洽",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-28-42-viewpoint",
+      "paragraphIndex": 1,
+      "start": 28,
+      "end": 42,
+      "text": "发挥泰国苏商总会桥梁纽带作用",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-99-126-exam_point",
+      "paragraphIndex": 1,
+      "start": 99,
+      "end": 126,
+      "text": "深化拓展新能源、高端装备、数字经济、文旅教育等领域合作",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-84-98-exam_point",
+      "paragraphIndex": 1,
+      "start": 84,
+      "end": 98,
+      "text": "促进两地产业链供应链深度对接",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-127-139-exam_point",
+      "paragraphIndex": 1,
+      "start": 127,
+      "end": 139,
+      "text": "厚植中泰友好合作务实基础",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-30-36-term",
+      "paragraphIndex": 1,
+      "start": 30,
+      "end": 36,
+      "text": "泰国苏商总会",
+      "type": "term",
+      "explanation": "泰国苏商总会是泰国江苏籍商人的社团组织，旨在促进会员交流及中泰经贸合作。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

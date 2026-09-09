@@ -1,0 +1,134 @@
+{
+  "id": "6dac3eaf34",
+  "date": "2026-09-09",
+  "title": "江苏省人民政府 要闻关注 刘小涛主持召开就业工作座谈会 多措并举推动高质量充分就业",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/9/art_84322_11826985.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-09T23:51:09+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月7日上午，省长刘小涛主持召开就业工作座谈会，深入学习贯彻习近平总书记关于就业工作的重要论述和对江苏工作重要讲话精神，围绕加强重点群体就业服务、促进高质量充分就业听取意见建议。",
+    "会上，省人力资源社会保障厅汇报促进就业工作情况，中智江苏、智联招聘、先声药业、智元创新、南京邮电大学、常州技师学院、南京顶山街道“家门口”就业服务站等企业、人力资源服务机构、院校和基层服务平台先后发言。省有关部门单位和设区市逐一回应所反映的诉求关切，表示将以更大力度、更实举措打好政策“组合拳”，加强供需精准对接，全面优化服务保障，加快推进稳岗扩容提质行动，全力稳住就业基本盘、兜牢民生底线。",
+    "会议指出，要把就业当作民生头等大事，坚持经济发展、产业升级与就业协同发力，支持优质企业增资扩产带动就业扩容，聚焦新产业、新业态培育就业增量，发挥服务业就业蓄水池作用。着力破解结构性就业矛盾，统筹抓好教育、培训和就业，深化双高协同、推动校企双进双聘，健全高校专业设置动态调整机制，迭代升级人才培养模式，加强人工智能等领域复合型人才培养。优化就业公共服务体系，发挥人力资源市场就业主渠道作用，加强灵活就业人员和新就业形态劳动者权益保障，营造公平就业环境。精准帮扶重点群体就业，落实就业援助、兜底帮扶等政策，统筹用好公益性岗位，确保零就业家庭动态清零。",
+    "省委常委、常务副省长马欣，省政府秘书长赵建军，省有关部门单位和部分设区市负责同志参加。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-09T23:51:09+00:00",
+  "sourceTextHash": "2efc566894332ac0bfe67eb6a1cb0b2d9375fbfd37d908fd5b73506117161742",
+  "aiStatus": "ok",
+  "aiSummary": "江苏省省长刘小涛主持召开就业工作座谈会，强调把就业作为民生头等大事，通过政策组合拳、供需对接、稳岗扩容等措施，破解结构性就业矛盾，优化公共服务，精准帮扶重点群体，推动高质量充分就业。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-24-59-viewpoint",
+      "paragraphIndex": 0,
+      "start": 24,
+      "end": 59,
+      "text": "深入学习贯彻习近平总书记关于就业工作的重要论述和对江苏工作重要讲话精神",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-128-147-viewpoint",
+      "paragraphIndex": 1,
+      "start": 128,
+      "end": 147,
+      "text": "以更大力度、更实举措打好政策“组合拳”",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-6-17-viewpoint",
+      "paragraphIndex": 2,
+      "start": 6,
+      "end": 17,
+      "text": "把就业当作民生头等大事",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-83-94-viewpoint",
+      "paragraphIndex": 2,
+      "start": 83,
+      "end": 94,
+      "text": "着力破解结构性就业矛盾",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-225-235-viewpoint",
+      "paragraphIndex": 2,
+      "start": 225,
+      "end": 235,
+      "text": "精准帮扶重点群体就业",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-75-82-exam_point",
+      "paragraphIndex": 0,
+      "start": 75,
+      "end": 82,
+      "text": "高质量充分就业",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-170-178-exam_point",
+      "paragraphIndex": 1,
+      "start": 170,
+      "end": 178,
+      "text": "稳岗扩容提质行动",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-87-94-exam_point",
+      "paragraphIndex": 2,
+      "start": 87,
+      "end": 94,
+      "text": "结构性就业矛盾",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-110-114-exam_point",
+      "paragraphIndex": 2,
+      "start": 110,
+      "end": 114,
+      "text": "双高协同",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-117-123-exam_point",
+      "paragraphIndex": 2,
+      "start": 117,
+      "end": 123,
+      "text": "校企双进双聘",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-263-272-exam_point",
+      "paragraphIndex": 2,
+      "start": 263,
+      "end": 272,
+      "text": "零就业家庭动态清零",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-75-80-term",
+      "paragraphIndex": 2,
+      "start": 75,
+      "end": 80,
+      "text": "就业蓄水池",
+      "type": "term",
+      "explanation": "指服务业等行业能够吸纳大量劳动力，在就业波动时起到缓冲和稳定作用。"
+    },
+    {
+      "id": "ai-2-255-260-term",
+      "paragraphIndex": 2,
+      "start": 255,
+      "end": 260,
+      "text": "公益性岗位",
+      "type": "term",
+      "explanation": "由政府出资设置，用于安置就业困难人员的公共服务类岗位，具有托底保障性质。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}
