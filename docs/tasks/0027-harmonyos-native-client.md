@@ -38,7 +38,43 @@ in_progress — Phase 0 代码已完成并独立验证；待环境修复后跑�
 
 ## 仓库事实校正（2026-09-11，开工后核实）
 
-用户提示「GitHub 上应该有最新的」，核查结论：**代码本地最新，内容远端最新，但远端内容是已退役管道的产物。**
+> ### ⚠️ 更正（同日，用户指出后复核）
+>
+> **本文件的上一版结论有错。** 需要更正的两条：
+>
+> 1. ❌ 曾写「`C:\Users\26671\Desktop\kaogong-cloud-v2` 不是本仓库，是另一个项目」——
+>    **错误**。它是同一项目的 **重写版**，标题为「考公云 · kaogong-cloud-v2（重构版）」，
+>    最后修改 **2026-08-22**，比本仓库任何提交都新。当时仅凭目录名（`backend`/`frontend`/`render.yaml`）
+>    就判定为无关项目，未打开 README，属于误判。
+> 2. ❌ 曾写「本地 `public-release` 是最新代码，无需返工」——**仅在本仓库范围内成立**。
+>    该仓库的架构文档已自述：**「在旧代码改崩、前后端都重做的前提下」重建**，
+>    即本仓库（Astro 静态站 + Cloudflare Worker）属于**被替换掉的旧版**。
+>
+> **重写版（重构版）实测形态**：
+>
+> | 项 | 内容 |
+> |---|---|
+> | 位置 | `C:\Users\26671\Desktop\kaogong-cloud-v2`（**非 git 仓库，无任何版本控制**） |
+> | 前端 | React 18 + Vite + TS + Tailwind + TanStack Query + Zustand（`frontend/src`：`App.tsx`、`ArticleViewer.tsx`、`AuthForm.tsx`、`AdminPanel.tsx`、`lib/{api,text,visuals}.ts`） |
+> | 后端 | FastAPI + SQLAlchemy 2.0 + Alembic + Pydantic v2（`backend/app`：`api/routes/{health,auth,articles,annotations,admin}.py`） |
+> | 数据库 | PostgreSQL（开发 SQLite）；部署 Vercel + Render + Neon/Supabase（`render.yaml`） |
+> | 认证 | **JWT Bearer**（`/api/auth/register`、`/login`、`/me`） |
+> | 核心 API | `GET /api/articles`、`GET /api/articles/{id}`、`GET/POST/DELETE /api/annotations`、**`POST /api/annotations/propose`（AI 提议标注）**、`/api/admin/*` |
+> | 数据模型 | `User` / `Article` / `Annotation`（`Span` + `BracketConfig` + `Arrow`，即手绘括号与箭头） |
+> | 内容来源 | 读取本仓库 `D:\kaogong-cloud-v2\content` 导入（`app/scripts/import_content`，195 篇） |
+>
+> **对本任务的影响（待用户确认基线后执行）**：
+>
+> - 若基线 = **重构版**：ADR 0009 的前提（复用 Cloudflare Worker + 静态内容通道）**基本失效**，
+>   Phase 0 的 `public/content/*` 静态分发层**用不上**（原生端应直接调 `/api/articles`）；
+>   本任务需按「对接 FastAPI + JWT」重写，ADR 0009 需作废或重立。
+> - 若基线 = **本仓库（Astro）**：现 Phase 0 有效，但对接的是一个自述「改崩待替换」的旧架构。
+>
+> **另一风险**：重构版**没有 git**。一套已完成量级不小的重写（后端 30 个测试、前端 7 个测试通过）
+> 目前零版本控制，建议优先纳入 git 并备份。
+
+用户提示「GitHub 上应该有最新的」，在本仓库范围内的核查结论是：
+**代码本地最新，内容远端最新，但远端内容是已退役管道的产物。**（此结论仅适用于本仓库）
 
 ### 分支拓扑
 
