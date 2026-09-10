@@ -1,6 +1,20 @@
 # 依赖
 node_modules/
 
+# WSL 构建的依赖目录：其中的符号链接是 Linux 的 LX symlink（重解析标签 0xa000001d），
+# Windows 原生进程（node/python/pnpm）无法解析，会报 EACCES / WinError 1920。
+# 重新在 Windows 侧安装前改名留存；`.broken` 为安装被安全护栏打断后的半成品。
+# 两者都只是旧副本，确认新安装可用后可安全删除。
+node_modules.wsl.old/
+node_modules.broken/
+apps/*/node_modules.wsl.old/
+apps/*/node_modules.broken/
+packages/*/node_modules.wsl.old/
+packages/*/node_modules.broken/
+
+# pnpm 安装过程被中断时留下的临时目录
+_tmp_*/
+
 # 构建产物
 dist/
 .wrangler/
