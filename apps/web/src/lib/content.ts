@@ -88,6 +88,11 @@ function dateDirs(): string[] {
   );
 }
 
+/** 全部内容日期，按倒序（最新在前）。内容分发清单据此生成。 */
+export function listContentDates(): string[] {
+  return dateDirs().sort().reverse();
+}
+
 /** 列出所有已生成的日报，按日期倒序。 */
 export function listDigests(): DailyDigest[] {
   return dateDirs()

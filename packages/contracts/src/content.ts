@@ -211,3 +211,36 @@ export interface CardDeck {
   policyLine?: string;
   cards: ReviewCard[];
 }
+
+/**
+ * 内容清单里的一天（原生客户端据此发现「哪天有哪些内容」，无需猜测 URL）。
+ * 由 `apps/web/scripts/build-content-api.mjs` 生成。
+ */
+export interface ContentManifestDay {
+  /** "2026-08-19"。 */
+  date: string;
+  /** 该日全部剪藏原文 id（已在 Web 站预渲染，与 `/read/{id}` 集合一致）。 */
+  articleIds: string[];
+  hasDigest: boolean;
+  hasSummary: boolean;
+  hasPractice: boolean;
+  /** 是否有策展槽位产物 picks.json（见 ADR 0008）。 */
+  hasPicks: boolean;
+}
+
+/**
+ * 内容分发清单：原生客户端启动时先取它，再按需取具体内容。
+ * 是「内容发现」的唯一入口，避免客户端硬编码日期或文章 id。
+ */
+export interface ContentManifest {
+  /** 生成时间，ISO8601。 */
+  generatedAt: string;
+  /** 最新内容日期（`days[0].date`）；无任何内容时为 null。 */
+  latestDate: string | null;
+  /** 全部内容日，按日期倒序（最新在前）。 */
+  days: ContentManifestDay[];
+  /** 考点卡片总数。 */
+  cardCount: number;
+  /** 活跃政策主线总数。 */
+  policyLineCount: number;
+}

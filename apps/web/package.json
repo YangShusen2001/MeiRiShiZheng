@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "node scripts/check-build-env.mjs",
+    "content:api": "node scripts/build-content-api.mjs",
+    "predev": "node scripts/build-content-api.mjs",
+    "prebuild": "node scripts/check-build-env.mjs && node scripts/build-content-api.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",

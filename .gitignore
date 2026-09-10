@@ -31,6 +31,9 @@ __pycache__/
 apps/web/src/site-config.json
 apps/web/src/font-config.json
 
+# 内容分发产物：由 apps/web/scripts/build-content-api.mjs 从 content/ 生成，随构建产出，不入库
+apps/web/public/content/
+
 # 生产配置：本地保留真实值，仓库只放 wrangler.toml.example
 apps/api/wrangler.toml
 

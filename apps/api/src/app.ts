@@ -52,7 +52,8 @@ export function createApp(db: DB, config: AppConfig = {}) {
         origins.length && requestOrigin && origins.includes(requestOrigin) ? requestOrigin : null,
       credentials: true,
       allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowHeaders: ["Content-Type", "X-Device-Id", "Authorization"],
+      // Cookie 供原生客户端（HarmonyOS）手工携带会话令牌；浏览器同站请求本就不需要它出现在这里。
+      allowHeaders: ["Content-Type", "X-Device-Id", "Authorization", "Cookie"],
       maxAge: 86400,
     }),
   );
