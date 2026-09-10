@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>关系标注样式样板 · 素材版</title>
+<style>
+  :root {
+    --paper: #fffdf8; --ink: #20140f; --sub: #6b5f58; --line: #e7ddd2;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #f3ede4; color: var(--ink); font-family: "STKaiti", "楷体", "KaiTi", serif; }
+  header { padding: 26px 28px 10px; max-width: 1040px; margin: 0 auto; }
+  header h1 { font-size: 22px; margin: 0 0 6px; letter-spacing: 1px; }
+  header p { color: var(--sub); font-size: 14px; margin: 0; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 16px 28px 60px; max-width: 1040px; margin: 0 auto; }
+  .card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px 24px 16px; box-shadow: 0 2px 10px rgba(90, 60, 30, .05); }
+  .name { font-size: 17px; font-weight: 600; display: flex; justify-content: space-between; align-items: baseline; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .name code { font-weight: 400; color: var(--sub); font-size: 12px; }
+  .demo { position: relative; margin-top: 12px; }
+  .demo p { font-size: 18px; line-height: 2.1; margin: 0; color: #2b2119; }
+  .center { font-weight: 600; }
+  .arrow { position: absolute; right: -34px; top: 34px; width: 84px; height: 84px; pointer-events: none; }
+  .arrow svg { width: 100%; height: 100%; overflow: visible; }
+  .demo .rough-annotation-highlight path { fill-opacity: 0.32; }
+  .tag { font-size: 12px; color: var(--sub); background: #f6efe6; border-radius: 5px; padding: 2px 7px; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+</style>
+</head>
+<body>
+<header>
+  <h1>关系标注 · 样式样板（手绘素材版）</h1>
+  <p>每张卡：中心句动态标注（rough-notation 书写动画）+ 专业手绘箭头指向支撑句。素材来自 Handy Arrows（手绘插画师原笔触）。</p>
+</header>
+<div class="grid" id="grid"></div>
+
+<script type="module">
+  import { annotate } from "/vendor/rough-notation.esm.js";
+
+  const INK = "#8f1d1d";
+  const INK2 = "#b2493a";
+  const BASE = `以\"锦绣南充·浪漫蓬安\"为主题的2026年南充市\"我们的节日·七夕\"主题文化活动在蓬安县相如故城南门广场启动，<span class="center">本次活动以沉浸式、场景化的群众活动形式，丰富群众精神文化生活</span>。以蓬安相如文化为底色，融合传统民俗传承、文明婚恋培育、民俗体验、文艺展演、美食惠民，<span class="point">推动优秀传统文化可感可及、浸润人心</span>。`;
+
+  const samples = [
+    { svg: "1.svg",  label: "回勾箭头", annot: "bracket", color: INK,  rotate: 108 },
+    { svg: "4.svg",  label: "长弧箭头", annot: "highlight", color: INK2, rotate: 112 },
+    { svg: "10.svg", label: "带尾弧箭头", annot: "bracketL", color: INK,  rotate: 105 },
+    { svg: "16.svg", label: "S 形箭头", annot: "underline", color: INK2, rotate: 112 },
+    { svg: "22.svg", label: "双头箭头", annot: "bracket", color: INK,  rotate: 102 },
+    { svg: "33.svg", label: "快速弧箭头", annot: "highlight", color: INK2, rotate: 110 },
+    { svg: "41.svg", label: "大跨弧箭头", annot: "bracketL", color: INK,  rotate: 104 },
+    { svg: "55.svg", label: "回旋箭头", annot: "underline", color: INK2, rotate: 108 },
+  ];
+
+  const grid = document.getElementById("grid");
+  const loadArrow = async (name, color) => {
+    const res = await fetch(`/vendor/handy/${name}`);
+    const text = await res.text();
+    return text.replace(/fill="black"/g, `fill="${color}"`);
+  };
+
+  for (let i = 0; i < samples.length; i++) {
+    const s = samples[i];
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `<div class="name"><span>№${i + 1} ${s.label}</span><code>${s.annot === "highlight" ? "荧光笔高亮" : s.annot === "bracket" ? "双括号 [ ]" : s.annot === "bracketL" ? "左括号 [ 配右小点" : "手绘下划线"} · ${s.color === INK ? "暗红" : "砖红"} · 动画</code><span class="tag">箭头素材</span></div>
+      <div class="demo"><p>${BASE}</p><div class="arrow" data-rotate="${s.rotate}"></div></div>`;
+    grid.appendChild(card);
+    const center = card.querySelector(".center");
+    const point = card.querySelector(".point");
+    const opts = { color: s.color, strokeWidth: 2.6, padding: 4, animate: true };
+    if (s.annot === "highlight") annotate(point, { type: "highlight", color: "#e8b93c", strokeWidth: 7, padding: 2 }).show();
+    if (s.annot === "bracket") annotate(center, { type: "bracket", brackets: ["left", "right"], ...opts }).show();
+    if (s.annot === "bracketL") annotate(center, { type: "bracket", brackets: ["left"], ...opts }).show();
+    if (s.annot === "underline") annotate(center, { type: "underline", color: s.color, strokeWidth: 3, padding: 3 }).show();
+    loadArrow(s.svg, s.color).then((svg) => {
+      const box = card.querySelector(".arrow");
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = svg;
+      const svgEl = wrapper.querySelector("svg");
+      svgEl.style.transform = `rotate(${s.rotate}deg)`;
+      box.appendChild(svgEl);
+    });
+  }
+</script>
+</body>
+</html>

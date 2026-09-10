@@ -31,6 +31,7 @@ def test_published_content_matches_schema():
         "practice": _validator("practice.schema.json"),
         "summary": _validator("summary.schema.json"),
         "card": _validator("card.schema.json"),
+        "picks": _validator("picks.schema.json"),
     }
     published = sorted(
         path
@@ -48,6 +49,102 @@ def test_published_content_matches_schema():
             validator.validate(data)
         except jsonschema.ValidationError as exc:
             raise AssertionError(f"{f.relative_to(CONTENT)} 未通过 Schema：{exc.message}") from exc
+
+
+def test_policy_lines_file_matches_schema():
+    # policy-lines.json 位于 content/ 根，不在日期目录里，需单独校验。
+    schema = _load(SCHEMAS / "policy-lines.schema.json")
+    try:
+        jsonschema.validate(_load(CONTENT / "policy-lines.json"), schema)
+    except jsonschema.ValidationError as exc:
+        raise AssertionError(f"policy-lines.json 未通过 Schema：{exc.message}") from exc
+
+
+def test_card_decks_match_schema():
+    # content/cards/ 不在日期目录扫描范围内，单独校验（含新增 policyLine/anchor 字段）。
+    schema = _load(SCHEMAS / "card.schema.json")
+    for f in sorted((CONTENT / "cards").glob("*.json")):
+        try:
+            jsonschema.validate(_load(f), schema)
+        except jsonschema.ValidationError as exc:
+            raise AssertionError(f"{f.name} 未通过 Schema：{exc.message}") from exc
+
+
+def _strip_defs_locations(value):
+    """对比两段 def 定义时忽略描述文案差异，只比形状与约束。"""
+    if isinstance(value, dict):
+        return {k: _strip_defs_locations(v) for k, v in value.items() if k != "description"}
+    if isinstance(value, list):
+        return [_strip_defs_locations(v) for v in value]
+    return value
+
+
+def test_article_ai_card_def_matches_card_schema():
+    # article.schema.json 的 aiCard 与 card.schema.json 的 card 必须形状一致（跨文件漂移保护）。
+    article_def = _load(SCHEMAS / "article.schema.json")["$defs"]["aiCard"]
+    card_def = _load(SCHEMAS / "card.schema.json")["$defs"]["card"]
+    assert _strip_defs_locations(article_def) == _strip_defs_locations(card_def)
+
+
+def test_ai_cards_contract_accepts_valid_and_rejects_invalid():
+    schema = _load(SCHEMAS / "article.schema.json")
+    article = _article_with_ai()
+    article["aiCards"] = [{
+        "id": "card-ai-contract-1",
+        "question": "2026 年经济增长预期目标是多少？",
+        "answer": "4.5%—5%，在实际工作中努力争取更好结果。",
+        "tags": ["数字"],
+        "anchor": {"articleId": "ai-contract", "paragraphIndex": 0, "sentence": "高质量发展是全面建设社会主义现代化国家的首要任务。"},
+    }]
+    jsonschema.validate(article, schema)
+    bad = json.loads(json.dumps(article))
+    bad["aiCards"][0]["tags"] = []
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(bad, schema)
+
+
+def _relations_included(article: dict) -> dict:
+    article = dict(article)
+    article["aiRelations"] = [
+        {
+            "id": "rel-1", "paragraphIndex": 0,
+            "anchor": "ann-1",
+            "points": [{"annotationId": "ann-2", "kind": "support"}],
+            "kind": "support", "aiGenerated": True,
+        },
+    ]
+    return article
+
+
+def test_ai_relations_contract_accepts_valid_and_edited():
+    schema = _load(SCHEMAS / "article.schema.json")
+    jsonschema.validate(_relations_included(_article_with_ai()), schema)
+    edited = _relations_included(_article_with_ai())
+    edited["aiRelations"][0]["aiGenerated"] = False
+    edited["aiRelations"][0]["editedAt"] = "2026-08-14T09:00:00+00:00"
+    edited["aiRelations"][0]["editedBy"] = "owner"
+    jsonschema.validate(edited, schema)
+
+
+@pytest.mark.parametrize(
+    "relations",
+    [
+        [{"id": "rel-1", "paragraphIndex": 0, "anchor": "ann-1",
+          "points": [{"annotationId": "ann-2", "kind": "wrong-kind"}],
+          "kind": "support", "aiGenerated": True}],
+        [{"id": "rel-1", "paragraphIndex": 0, "anchor": "ann-1",
+          "points": [], "kind": "support", "aiGenerated": True}],
+        [{"id": "rel-1", "paragraphIndex": 0, "anchor": "",
+          "points": [{"annotationId": "ann-2", "kind": "support"}],
+          "kind": "support", "aiGenerated": True}],
+    ],
+)
+def test_ai_relations_contract_rejects_invalid(relations):
+    schema = _load(SCHEMAS / "article.schema.json")
+    article = _relations_included(_article_with_ai())
+    article["aiRelations"] = relations
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(article, schema)
 
 
 def _article_with_ai(**overrides) -> dict:

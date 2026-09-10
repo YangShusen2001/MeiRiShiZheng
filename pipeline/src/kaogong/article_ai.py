@@ -14,8 +14,8 @@ from typing import TypedDict
 from .deepseek import DEFAULT_MODEL, chat
 
 PROMPT_VERSION = "article-analysis-v1"
-ALLOWED_TYPES = {"viewpoint", "exam_point", "term"}
-ANNOTATION_MAXIMA = {"viewpoint": 5, "exam_point": 8, "term": 5}
+ALLOWED_TYPES = {"viewpoint", "exam_point", "term", "figure"}
+ANNOTATION_MAXIMA = {"viewpoint": 5, "exam_point": 8, "term": 5, "figure": 10}
 
 
 class RawAnnotation(TypedDict, total=False):
@@ -218,8 +218,11 @@ def _messages(title: str, paragraphs: list[str], *, rewrite: bool = False, corre
         {"role": "system", "content": (
             "你是公务员考试时政内容编辑。只返回 JSON，不得返回 Markdown/HTML。"
             "不得补充原文没有的事实。annotations 每项只返回 paragraphIndex、text、type、explanation；"
-            "text 必须是对应段落中的连续原文且在该段唯一。type 只能是 viewpoint、exam_point、term。"
-            "仅 term 可有 explanation，释义 30-80 个中文字符。观点 2-5 处、考点 3-8 处、术语 1-5 处。"
+            "text 必须是对应段落中的连续原文且在该段唯一。type 只能是 viewpoint、exam_point、term、figure；"
+            "仅 term 可有 explanation，释义 30-80 个中文字符。"
+            "观点 2-5 处、考点 3-8 处、术语 1-5 处、数字/指标 1-10 处；"
+            "figure 用于标注纯数字/指标值（增速、总额、覆盖率、时间节点等），不写 explanation；"
+            "数字/指标考点不生成卡片，由 figure 标注在原文中高亮记忆。"
         )},
         {"role": "user", "content": (
             f"{length}\n输出形状：{{\"summary\":\"...\",\"annotations\":[{{\"paragraphIndex\":0,"

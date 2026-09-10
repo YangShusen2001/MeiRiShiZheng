@@ -60,6 +60,10 @@ def classify_artifact(path: Path) -> str | None:
             return "practice"
         case "summary.json":
             return "summary"
+        case "policy-lines.json":
+            return "policy-lines"
+        case "picks.json":
+            return "picks"
         case name if name.startswith("article-") and name.endswith(".json"):
             return "article"
         case _:
@@ -107,6 +111,9 @@ def artifact_semantic_errors(artifact: Artifact) -> list[dict[str, str]]:
             pass
         case "card":
             # 考点卡片：语义（一问一答、原子、非空）已由 card.schema.json 校验覆盖，无额外语义规则
+            pass
+        case "picks":
+            # 选材定稿：结构已由 picks.schema.json 校验覆盖；picked 与槽位一致性由 gate 兜底
             pass
         case _:
             raise AssertionError(f"unexpected artifact kind: {artifact.kind}")

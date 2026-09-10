@@ -5,6 +5,10 @@ interface ReaderSegment {
   text: string;
   userStyles: Span["styles"];
   aiAnnotations: AiAnnotation[];
+  /** 该 segment 覆盖的关系标注 id（多簇合并，逗号拼接输出）。 */
+  relIds: string[];
+  /** 与 segment 区间精确一致的标注 id（关系箭头锚点渲染用）。 */
+  annotationExact?: string;
   note?: string;
   explanation?: string;
 }
@@ -16,7 +20,7 @@ function escapeHtml(value: string): string {
 /** Ignore stale or malformed AI offsets instead of marking unrelated article text. */
 export function validAiAnnotations(text: string, annotations: AiAnnotation[]): AiAnnotation[] {
   return annotations.filter((annotation) =>
-    ["viewpoint", "exam_point", "term"].includes(annotation.type) &&
+    ["viewpoint", "exam_point", "term", "figure"].includes(annotation.type) &&
     Number.isInteger(annotation.start)
     && Number.isInteger(annotation.end)
     && annotation.start >= 0
@@ -30,6 +34,7 @@ export function buildReaderSegments(
   text: string,
   userSpans: Span[],
   aiAnnotations: AiAnnotation[],
+  relByAnnotation?: Map<string, string[]>,
 ): ReaderSegment[] {
   const validAi = validAiAnnotations(text, aiAnnotations);
   const boundaries = new Set<number>([0, text.length]);
@@ -42,6 +47,17 @@ export function buildReaderSegments(
     boundaries.add(annotation.end);
   }
 
+  const relIdsFor = (start: number, end: number): string[] => {
+    const ids = new Set<string>();
+    if (!relByAnnotation) return [];
+    for (const annotation of validAi) {
+      if (annotation.start <= start && end <= annotation.end) {
+        for (const relId of relByAnnotation.get(annotation.id) ?? []) ids.add(relId);
+      }
+    }
+    return [...ids];
+  };
+
   const sorted = [...boundaries].sort((a, b) => a - b);
   const userSegments = buildSegments(text, userSpans);
   const segments: ReaderSegment[] = [];
@@ -53,10 +69,15 @@ export function buildReaderSegments(
     while (userOffset + (userSegments[0]?.text.length ?? 0) <= start && userSegments.length > 1) {
       userOffset += userSegments.shift()!.text.length;
     }
+    const exact = validAi.find(
+      (annotation) => annotation.start === start && annotation.end === end,
+    );
     segments.push({
       text: text.slice(start, end),
       userStyles: userSegments[0]?.styles ?? [],
       aiAnnotations: validAi.filter((annotation) => annotation.start <= start && end <= annotation.end),
+      relIds: relIdsFor(start, end),
+      annotationExact: exact?.id,
       note: userSegments[0]?.note,
       explanation: userSegments[0]?.explanation,
     });
@@ -71,10 +92,16 @@ export function readerSegmentsToHtml(segments: ReaderSegment[]): string {
       ...segment.userStyles.map((style) => `hl-${style}`),
       ...new Set(segment.aiAnnotations.map((annotation) => `ai-${annotation.type.replace("_", "-")}`)),
     ];
-    if (!classes.length) return text;
+    if (!classes.length && !segment.relIds.length) return text;
 
     const term = segment.aiAnnotations.find((annotation) => annotation.type === "term" && annotation.explanation);
     const attributes = [`class="${classes.join(" ")}"`];
+    if (segment.relIds.length) {
+      attributes.push(`data-rel-ids="${segment.relIds.join(",")}"`);
+    }
+    if (segment.annotationExact) {
+      attributes.push(`data-annotation-id="${escapeHtml(segment.annotationExact)}"`);
+    }
     if (segment.userStyles.length) {
       attributes.push('data-user-highlight="true"');
       if (segment.explanation) {

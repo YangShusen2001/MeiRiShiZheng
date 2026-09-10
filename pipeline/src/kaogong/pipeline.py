@@ -359,6 +359,7 @@ def quality_gate(target: dt.date, content_dir: Path) -> dict:
         "article": json.loads((schema_dir / "article.schema.json").read_text(encoding="utf-8")),
         "practice": json.loads((schema_dir / "practice.schema.json").read_text(encoding="utf-8")),
         "summary": json.loads((schema_dir / "summary.schema.json").read_text(encoding="utf-8")),
+        "picks": json.loads((schema_dir / "picks.schema.json").read_text(encoding="utf-8")),
     }
     schema_error_list: list[dict[str, str]] = []
     semantic_error_list: list[dict[str, str]] = []
@@ -384,9 +385,27 @@ def quality_gate(target: dt.date, content_dir: Path) -> dict:
         report["volumeErrors"] = []
     else:
         report["volumeErrors"] = volume_error_list[:50]
+    # 0022 选材口径：picks 缺失/为空 → 选材失败（degraded，不阻止原文发布）；
+    # 卡片/关系提炼失败同理只降级（内容可读，只是少了记忆辅助）。
+    picks_path = out_dir / "picks.json"
+    curation_errors: list[str] = []
+    if not picks_path.exists():
+        # 只有当天确有文章产物时才要求选材（空跑/历史文件缺失不误判）
+        if report.get("articles", 0) > 0:
+            curation_errors.append("picks_missing")
+    else:
+        try:
+            picks_data = json.loads(picks_path.read_text(encoding="utf-8"))
+            if not picks_data.get("picked"):
+                curation_errors.append("picks_empty")
+        except json.JSONDecodeError:
+            curation_errors.append("picks_invalid_json")
+    if report.get("curation", {}).get("cardErrors") or report.get("curation", {}).get("relationErrors"):
+        curation_errors.append("ai_refinement_errors")
+    report["curationErrors"] = curation_errors[:10]
     if schema_error_list or semantic_error_list or volume_error_list or report.get("sourcesOk", 0) == 0 or report.get("candidates", 0) == 0:
         report["qualityStatus"] = "failed"
-    elif report.get("sourceErrors") or report.get("aiError", 0) or report.get("locationErrors", 0):
+    elif report.get("sourceErrors") or report.get("aiError", 0) or report.get("locationErrors", 0) or curation_errors:
         report["qualityStatus"] = "degraded"
     else:
         report["qualityStatus"] = "ok"

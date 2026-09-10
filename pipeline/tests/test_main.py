@@ -11,6 +11,9 @@ def test_main_emits_json_completion_event_and_fails_quality_gate(tmp_path, monke
     monkeypatch.setattr(cli, "clip_content", lambda target, content_dir: 0)
     monkeypatch.setattr(cli, "practice_content", lambda target, content_dir: None)
     monkeypatch.setattr(cli, "summary_content", lambda target, content_dir: None)
+    monkeypatch.setattr(cli, "curate_content", lambda target, content_dir, **kw: {
+        "curation": {"candidates": 0, "picked": 0},
+    })
     monkeypatch.setattr(cli, "quality_gate", lambda target, content_dir: {"qualityStatus": "failed"})
 
     # When: the CLI executes through its real main boundary.
@@ -26,8 +29,20 @@ def test_main_emits_json_completion_event_and_fails_quality_gate(tmp_path, monke
         "articles": 0,
         "practice": None,
         "summary": None,
+        "curation": {"candidates": 0, "picked": 0},
         "qualityStatus": "failed",
     }
+
+
+def test_main_curate_only_skips_fetch(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(cli, "curate_content", lambda target, content_dir, **kw: {
+        "curation": {"candidates": 3, "picked": 2},
+    })
+    exit_code = cli.main(["2026-08-12", "--content-dir", str(tmp_path), "--curate-only"])
+    event = json.loads(capsys.readouterr().out)
+    assert exit_code == 0
+    assert event == {"event": "pipeline.curate", "date": "2026-08-12",
+                     "curation": {"candidates": 3, "picked": 2}}
 
 
 def test_main_reanalyze_skips_fetch_and_reports_rewritten(tmp_path, monkeypatch, capsys):

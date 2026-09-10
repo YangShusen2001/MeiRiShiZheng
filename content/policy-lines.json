@@ -1,0 +1,18 @@
+{
+  "lines": [
+    {
+      "id": "fifteen-five-plan",
+      "name": "十五五规划建议",
+      "status": "active",
+      "window": { "start": "2025-10-23", "end": null },
+      "retireHint": "相关文章连续 14 天低于阈值时提示人工审查"
+    },
+    {
+      "id": "govt-work-report-2026",
+      "name": "2026 年政府工作报告",
+      "status": "active",
+      "window": { "start": "2026-03-05", "end": null },
+      "retireHint": "次年政府工作报告发布后提示退休"
+    }
+  ]
+}

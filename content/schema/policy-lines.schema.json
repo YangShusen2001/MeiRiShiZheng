@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kaogong.local/schema/policy-lines.schema.json",
+  "title": "PolicyLinesFile",
+  "description": "活跃政策主线池（人工维护的策展静态内容 → 管道/前端消费，不分用户）。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["lines"],
+  "properties": {
+    "lines": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/policyLine" }
+    }
+  },
+  "$defs": {
+    "policyLine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "status", "window"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "主线 slug，被文章 policyLine / 卡片 policyLine 引用"
+        },
+        "name": { "type": "string", "minLength": 1, "description": "主线名称，如「十五五规划建议」" },
+        "status": {
+          "enum": ["active", "retiring", "archived"],
+          "description": "active=当前学习主线；retiring=逐步退出；archived=已归档"
+        },
+        "window": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start"],
+          "properties": {
+            "start": { "type": "string", "format": "date", "description": "主线开始日期 YYYY-MM-DD" },
+            "end": {
+              "oneOf": [{ "const": null }, { "type": "string", "format": "date" }],
+              "description": "主线结束日期；null 表示尚未结束"
+            }
+          }
+        },
+        "retireHint": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "description": "人工退休参考信号（如「近 14 天相关文章占比 < 阈值时提示审查」），仅提示不自动生效"
+        }
+      }
+    }
+  }
+}

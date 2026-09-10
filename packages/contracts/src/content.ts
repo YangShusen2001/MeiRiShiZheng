@@ -9,7 +9,11 @@
 
 export type AiStatus = "pending" | "ok" | "error";
 
-export type AiAnnotationType = "viewpoint" | "exam_point" | "term";
+/** 标注类型：viewpoint 观点 / exam_point 考点 / term 术语 / figure 数字指标（原文高亮，不生成卡片）。 */
+export type AiAnnotationType = "viewpoint" | "exam_point" | "term" | "figure";
+
+/** 关系簇类型：中心句与支撑点的关系（决策 0022 §5.1）。 */
+export type AiRelationKind = "support" | "explain" | "example" | "contrast";
 
 /** AI 在一段原文中的只读标注；start/end 为段落内左闭右开字符偏移。 */
 export interface AiAnnotation {
@@ -21,6 +25,47 @@ export interface AiAnnotation {
   type: AiAnnotationType;
   /** 仅 term 使用，目标 30-80 个中文字符；生成失败时省略。 */
   explanation?: string;
+}
+
+/** 关系标注（中心句→支撑点，即「箭头」）里的一个支撑点，引用已校验的标注 id。 */
+export interface AiRelationPoint {
+  annotationId: string;
+  kind: AiRelationKind;
+}
+
+/**
+ * 关系标注（中心句→支撑点）：AI 生成初稿，人工可修正。
+ * 程序校验引用有效、不跨段、数量上限；跨字段校验在 Python 语义层（validate_article_ai）。
+ */
+export interface AiRelation {
+  id: string;
+  paragraphIndex: number;
+  /** 中心句：引用同文章 aiAnnotations[].id。 */
+  anchor: string;
+  points: AiRelationPoint[];
+  kind: AiRelationKind;
+  /** 是否 AI 生成初稿。 */
+  aiGenerated: boolean;
+  /** 人工修正时间；晚于文章 aiGeneratedAt 时管道重跑不得覆盖（locked）。 */
+  editedAt?: string;
+  /** 人工修正者标识。 */
+  editedBy?: string;
+}
+
+/** 活跃政策主线（人工维护，对应 content/policy-lines.json）。 */
+export interface PolicyLine {
+  /** 主线 slug，被文章/卡片的 policyLine 引用。 */
+  id: string;
+  name: string;
+  status: "active" | "retiring" | "archived";
+  window: { start: string; end?: string | null };
+  /** 人工退休参考信号，仅提示不自动生效。 */
+  retireHint?: string;
+}
+
+/** content/policy-lines.json 文件形状。 */
+export interface PolicyLinesFile {
+  lines: PolicyLine[];
 }
 
 /** 剪藏原文（对应原 data/原文/{date}/*.json）。 */
@@ -57,6 +102,14 @@ export interface ClippedArticle {
   /** aiStatus=error 时必填，最多 500 字符。 */
   aiError?: string;
   aiQuality?: { locationErrors: number };
+  /** 关系标注（箭头）：AI 生成初稿，人工可修正；引用 aiAnnotations[].id。 */
+  aiRelations?: AiRelation[];
+  /** AI 提炼的考点卡片（待人工确认后发布；与 content/cards 的 ReviewCard 同构）。 */
+  aiCards?: ReviewCard[];
+  /** 归属的活跃主线 slug（policy-lines.json 的 id）；无归属省略。 */
+  policyLine?: string;
+  /** 是否可长期作为「补剧」素材（历史文章重提）；默认 false。 */
+  evergreen?: boolean;
 }
 
 /** 日报里的单条新闻。 */
@@ -122,6 +175,16 @@ export interface TodaySummary {
   keywords: string[];
 }
 
+/** 卡片↔精读锚定：卡片来源于哪篇文章哪一段（0022 阶段 2）。 */
+export interface CardAnchor {
+  /** 出处文章 id。 */
+  articleId: string;
+  /** 出处段落下标。 */
+  paragraphIndex: number;
+  /** 出处句子（跨段定位出错时的兜底文本）。 */
+  sentence?: string;
+}
+
 /** 一张考点卡片（策展静态内容，一问一答，对应 content/cards/*.json）。 */
 export interface ReviewCard {
   /** 全局唯一卡片 id。 */
@@ -132,11 +195,19 @@ export interface ReviewCard {
   answer: string;
   /** 标签，如 定位/目标/数字。 */
   tags: string[];
+  /** 归属的主线 slug；缺省继承卡组 policyLine。 */
+  policyLine?: string;
+  /** 所属考点（结构化考点库阶段 2）。 */
+  examPointId?: string;
+  /** 卡片↔精读锚定。 */
+  anchor?: CardAnchor;
 }
 
 /** 一组考点卡片。 */
 export interface CardDeck {
   /** 卡组所属政策/文件，如「十五五规划建议」。 */
   policy: string;
+  /** 整组卡归属的主线 slug；card 级 policyLine 可覆盖。 */
+  policyLine?: string;
   cards: ReviewCard[];
 }

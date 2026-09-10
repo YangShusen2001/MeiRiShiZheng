@@ -17,16 +17,27 @@ DEFAULT_MODEL = "deepseek-chat"
 
 
 def load_config(config_path: Path | None = None) -> dict[str, str]:
-    """DEEPSEEK_API_KEY 环境变量优先，其次读 config.json；无 key 返回空 dict。"""
+    """DEEPSEEK_API_KEY 环境变量优先，其次读 config.json / 仓库根 .env.local；无 key 返回空 dict。"""
     env_key = (os.environ.get("DEEPSEEK_API_KEY") or "").strip()
     if env_key:
         return {"deepseek_api_key": env_key}
     if config_path is None or not config_path.exists():
-        return {}
+        # CLI 兜底：python -m kaogong 直接跑时自动读仓库根 .env.local（审核台 bat 注入的同一份）
+        config_path = Path(__file__).resolve().parents[3] / ".env.local"
+        if not config_path.exists():
+            return {}
     try:
         return json.loads(config_path.read_text(encoding="utf-8"))
     except Exception:
-        return {}
+        # .env.local 是 key=value 文本而非 JSON（Windows CRLF 常见），按行解析
+        values = {}
+        for line in config_path.read_text(encoding="utf-8-sig").splitlines():
+            line = line.strip().rstrip("\r")
+            if line and not line.startswith("#") and "=" in line:
+                key, _, value = line.partition("=")
+                values[key.strip()] = value.strip().strip('"').strip("'")
+        key = values.get("DEEPSEEK_API_KEY", "").strip()
+        return {"deepseek_api_key": key} if key else {}
 
 
 def chat(

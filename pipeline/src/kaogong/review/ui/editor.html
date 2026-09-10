@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>关系标注编辑器 · 每日时政</title>
+<style>
+  :root { --paper:#fffdf8; --ink:#20140f; --sub:#6b5f58; --line:#e7ddd2; --brick:#b2493a; --hl:#e8b93c; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#f3ede4; color:var(--ink); font-family:"PingFang SC","Microsoft YaHei",sans-serif; }
+  header { display:flex; align-items:center; gap:12px; padding:12px 20px; border-bottom:1px solid var(--line); background:var(--paper); position:sticky; top:0; z-index:20; }
+  header h1 { font-size:16px; margin:0; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  header button { border:1px solid var(--line); background:#fff; border-radius:8px; padding:7px 14px; font-size:13px; cursor:pointer; }
+  header button.primary { background:var(--brick); color:#fff; border-color:var(--brick); }
+  .wrap { display:grid; grid-template-columns: 1fr 360px; gap:16px; padding:16px 20px; max-width:1280px; margin:0 auto; }
+  .reader { background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:18px 26px; font-family:"STKaiti","楷体",serif; }
+  .reader p { font-size:17px; line-height:2.05; margin:12px 0; }
+  .reader .ann { cursor:pointer; border-radius:3px; }
+  .reader .ann.focus { box-shadow: 0 0 0 2px rgba(178,73,58,.35); }
+  .reader .ann.point { background: color-mix(in srgb, var(--hl) 35%, transparent); }
+  .reader .ann.center { font-weight:700; background: color-mix(in srgb, var(--hl) 20%, transparent); }
+  .panel { display:flex; flex-direction:column; gap:12px; }
+  .box { background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:12px 14px; }
+  .box h3 { margin:0 0 8px; font-size:14px; }
+  .hint { color:var(--sub); font-size:12px; line-height:1.7; }
+  .rel { border:1px solid var(--line); border-radius:10px; padding:10px 12px; margin-bottom:10px; background:#fff; }
+  .rel .head { font-size:13px; font-weight:600; }
+  .rel .center-txt { color:var(--brick); font-size:12px; margin:4px 0 6px; }
+  .pt { display:flex; align-items:center; gap:8px; padding:5px 0; border-top:1px dashed var(--line); font-size:12px; }
+  .pt .txt { flex:1; color:#3a2b20; }
+  .pt img { width:34px; height:34px; object-fit:contain; background:#f7f1e8; border-radius:6px; padding:2px; cursor:pointer; }
+  .pt button, .rel button.sm { border:1px solid var(--line); background:#fff; border-radius:6px; font-size:11px; cursor:pointer; padding:3px 6px; }
+  .rel .del { color:#a33; }
+  .tray { position:fixed; inset:0; background:rgba(30,20,10,.35); display:none; align-items:center; justify-content:center; z-index:50; }
+  .tray.open { display:flex; }
+  .tray-card { background:var(--paper); border-radius:14px; padding:18px 20px; width:min(920px, 94vw); max-height:82vh; overflow:auto; }
+  .tray-card h3 { margin:0 0 10px; font-size:15px; }
+  .arrow-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(64px,1fr)); gap:8px; }
+  .arrow-grid img { width:100%; aspect-ratio:1; object-fit:contain; background:#f7f1e8; border:1px solid var(--line); border-radius:8px; padding:4px; cursor:pointer; }
+  .arrow-grid img.sel { outline:3px solid var(--brick); }
+  .style-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:13px; }
+  .style-grid label { display:flex; flex-direction:column; gap:4px; color:var(--sub); }
+  .style-grid input[type=range] { width:100%; }
+  .style-grid input[type=color] { width:56px; height:30px; border:none; background:none; }
+  .toast { position:fixed; bottom:18px; left:50%; transform:translateX(-50%); background:#20140f; color:#fff; padding:9px 18px; border-radius:8px; font-size:13px; opacity:0; transition:opacity .2s; }
+  .toast.show { opacity:.92; }
+  .rough-annotation-highlight svg path { fill-opacity: .32; }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">关系标注编辑器</h1>
+  <button id="style-btn">样式面板</button>
+  <button id="save-btn" class="primary">保存</button>
+</header>
+<div class="wrap">
+  <div class="reader" id="reader" style="position:relative;"></div>
+  <div class="panel">
+    <div class="box">
+      <h3>操作指引</h3>
+      <div class="hint">① 点正文中的<b>标注句</b>设为要点；② 再点「设为[ ]中心句」或「加入支撑点」；③ 支撑点可换箭头素材、切上下方向；④ 保存。</div>
+    </div>
+    <div class="box">
+      <h3 id="rel-title">关系（<span id="rel-count">0</span>）</h3>
+      <div id="rels"></div>
+    </div>
+  </div>
+</div>
+
+<div class="tray" id="arrow-tray">
+  <div class="tray-card">
+    <h3>选择手绘箭头素材（185 支 · 可上传自定义）<button style="float:right;border:1px solid var(--line);background:#fff;border-radius:6px;padding:4px 10px;cursor:pointer" id="arrow-close">关闭</button></h3>
+    <input type="file" id="arrow-upload" accept=".svg" style="margin-bottom:10px;" />
+    <div class="arrow-grid" id="arrow-grid"></div>
+  </div>
+</div>
+
+<div class="tray" id="style-tray">
+  <div class="tray-card">
+    <h3>样式面板（全局 · 线上站刷新生效）<button style="float:right;border:1px solid var(--line);background:#fff;border-radius:6px;padding:4px 10px;cursor:pointer" id="style-close">关闭</button></h3>
+    <div class="style-grid">
+      <label>主色（[ ] 与箭头）<input type="color" id="st-color" /></label>
+      <label>荧光笔色<input type="color" id="st-hl" /></label>
+      <label>括号线粗 <span id="st-w-val"></span><input type="range" id="st-width" min="1" max="5" step="0.2" /></label>
+      <label>荧光透明度 <span id="st-op-val"></span><input type="range" id="st-op" min="10" max="90" step="5" /></label>
+      <label>箭头尺寸 <span id="st-size-val"></span><input type="range" id="st-size" min="40" max="160" step="4" /></label>
+      <label>默认方向（新关系）<select id="st-dir"><option value="down">向下（最下行）</option><option value="up">向上（最上行）</option></select></label>
+    </div>
+    <button id="style-save" class="primary" style="margin-top:14px;border:1px solid var(--brick);background:var(--brick);color:#fff;border-radius:8px;padding:8px 18px;cursor:pointer">保存样式</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+  import { annotate } from "/vendor/rough-notation.esm.js";
+
+  const articleId = location.pathname.split("/").pop();
+  const $ = (s) => document.querySelector(s);
+  const state = { annotations: [], relations: [], focusId: null, centerId: null, myAnnots: {} };
+  const byId = () => new Map(state.annotations.map((a) => [a.id, a]));
+  let style = { color: "#b2493a", highlightColor: "#e8b93c", strokeWidth: 2.8, highlightOpacity: 0.32, defaultArrow: "41.svg", arrowSize: 84, defaultDirection: "down" };
+  let pendingPoint = null; // 编辑中的 point（索引）
+
+  function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1800); }
+
+  async function fetchJSON(url, opts) { const r = await fetch(url, opts); return r.json(); }
+
+  function renderReader(paragraphs) {
+    const reader = $("#reader");
+    reader.innerHTML = "";
+    const lines = [];
+    paragraphs.forEach((p, pi) => {
+      const el = document.createElement("p");
+      let offset = 0;
+      const parts = [];
+      const anns = state.annotations.filter((a) => a.paragraphIndex === pi);
+      const sorted = [...anns].sort((a, b) => a.start - b.start);
+      for (const a of sorted) {
+        if (a.start < offset) continue;
+        if (a.start > offset) parts.push(p.text.slice(offset, a.start));
+        parts.push(`<span class="ann" data-id="${a.id}" data-start="${a.start}" data-end="${a.end}">${p.text.slice(a.start, a.end)}</span>`);
+        offset = a.end;
+      }
+      parts.push(p.text.slice(offset));
+      el.innerHTML = parts.join("");
+      reader.appendChild(el);
+      lines.push(...Array.from(el.querySelectorAll(".ann")).map((s) => s));
+    });
+    state.myAnnots = {};
+    lines.forEach((s) => (state.myAnnots[s.dataset.id] = s));
+    refreshMarks();
+  }
+
+  function refreshMarks() {
+    const idMap = byId();
+    const centers = new Set(), points = new Set();
+    for (const rel of state.relations) {
+      centers.add(rel.anchor);
+      for (const p of rel.points) points.add(p.annotationId);
+    }
+    state.myAnnots && Object.entries(state.myAnnots).forEach(([id, el]) => {
+      el.classList.toggle("center", centers.has(id));
+      el.classList.toggle("point", points.has(id));
+      el.classList.toggle("focus", id === state.focusId);
+    });
+    $("#rel-count").textContent = String(state.relations.length);
+    renderRels();
+  }
+
+  function renderRels() {
+    const box = $("#rels");
+    box.innerHTML = "";
+    const idMap = byId();
+    state.relations.forEach((rel, ri) => {
+      const card = document.createElement("div");
+      card.className = "rel";
+      const center = idMap.get(rel.anchor);
+      card.innerHTML = `<div class="head">[ ] 中心句</div><div class="center-txt">${center ? center.text : rel.anchor}</div>`;
+      rel.points.forEach((p, pi) => {
+        const ann = idMap.get(p.annotationId);
+        const row = document.createElement("div");
+        row.className = "pt";
+        const arrow = p.style?.arrow || style.defaultArrow;
+        row.innerHTML = `<img src="/vendor/handy/${arrow}" data-pi="${pi}" title="换箭头" />
+          <span class="txt">${ann ? ann.text : p.annotationId}</span>
+          <button data-act="dir" data-pi="${pi}">${(p.direction || "down") === "up" ? "↑上" : "↓下"}</button>
+          <button data-act="del" data-pi="${pi}">删</button>`;
+        card.appendChild(row);
+      });
+      const delRel = document.createElement("button");
+      delRel.className = "sm del";
+      delRel.textContent = "删除整条关系";
+      delRel.style.marginTop = "6px";
+      delRel.onclick = () => { state.relations.splice(ri, 1); refreshMarks(); };
+      card.appendChild(delRel);
+      box.appendChild(card);
+    });
+    box.querySelectorAll("[data-act]").forEach((btn) => {
+      btn.onclick = (e) => {
+        const pi = Number(btn.dataset.pi);
+        const rel = state.relations[riOf(btn)];
+        if (!rel) return;
+        const p = rel.points[pi];
+        if (btn.dataset.act === "dir") p.direction = (p.direction || "down") === "up" ? "down" : "up";
+        if (btn.dataset.act === "del") { rel.points.splice(pi, 1); if (!rel.points.length) state.relations = state.relations.filter((r) => r !== rel); }
+        refreshMarks();
+      };
+    });
+    function riOf(btn) {
+      const card = btn.closest(".rel");
+      return Array.from(box.children).indexOf(card);
+    }
+  }
+
+  function drawHighlights() {
+    document.querySelectorAll(".rough-annotation").forEach((el) => el.remove());
+    const idMap = byId();
+    for (const rel of state.relations) {
+      const anchorEl = state.myAnnots[rel.anchor];
+      if (anchorEl) annotate(anchorEl, { type: "bracket", brackets: ["left", "right"], color: style.color, strokeWidth: style.strokeWidth, padding: 6 }).show();
+      for (const p of rel.points) {
+        const el = state.myAnnots[p.annotationId];
+        if (el) annotate(el, { type: "highlight", color: style.highlightColor, strokeWidth: 8, padding: 2 }).show();
+      }
+    }
+  }
+
+  function openArrowTray(pi) {
+    pendingPoint = pi;
+    const grid = $("#arrow-grid");
+    grid.innerHTML = "";
+    fetchJSON("/vendor/handy/index.json").then((items) => {
+      items.slice(0, 60).forEach((it) => {
+        const img = document.createElement("img");
+        img.src = `/vendor/handy/${it.file}`;
+        img.onclick = () => {
+          selectArrow(it.file, pi);
+          $("#arrow-tray").classList.remove("open");
+        };
+        grid.appendChild(img);
+      });
+    });
+    $("#arrow-tray").classList.add("open");
+  }
+
+  function selectArrow(file, pi) {
+    const rel = state.relations[activeRelIndex()];
+    if (!rel || pi === null || pi === undefined) return;
+    rel.points[pi].style = { arrow: file };
+    refreshMarks();
+  }
+
+  // 当前"活跃关系"= 最后一个（新建逻辑：只有一个编辑关系上下文）
+  function activeRelIndex() { return state.relations.length - 1; }
+
+  // —— 事件：点标注句 ——
+  function initReaderEvents() {
+    $("#reader").addEventListener("click", (e) => {
+      const el = e.target.closest(".ann");
+      if (!el) return;
+      state.focusId = el.dataset.id;
+      const idMap = byId();
+      const ann = idMap.get(el.dataset.id);
+      const pick = new Set(["viewpoint", "exam_point"]);
+      if (!ann) return;
+      if (!state.relations.length || state.centerId !== el.dataset.id) {
+        // 设为新建关系的中心句
+        state.relations.push({ id: `rel-${Date.now()}`, paragraphIndex: ann.paragraphIndex, anchor: ann.id, kind: "support", points: [], direction: style.defaultDirection });
+        state.centerId = ann.id;
+        toast("已设为[ ]中心句——再点正文标注句加入支撑点");
+      } else {
+        // 加支撑点（去重）
+        const rel = state.relations[activeRelIndex()];
+        if (rel.points.some((p) => p.annotationId === ann.id)) { toast("该句已是支撑点"); return; }
+        rel.points.push({ annotationId: ann.id, kind: "support", style: { arrow: style.defaultArrow }, direction: style.defaultDirection });
+        toast("已加入支撑点（点右侧箭头素材/方向可换）");
+      }
+      refreshMarks();
+      drawHighlights();
+    });
+    $("#reader").addEventListener("dblclick", (e) => {
+      const el = e.target.closest(".ann");
+      if (!el) return;
+      // 双击任意标注：切换"设为中心句"（重置上下文）
+      state.centerId = el.dataset.id;
+      const idMap = byId();
+      const ann = idMap.get(el.dataset.id);
+      if (ann && !state.relations.some((r) => r.anchor === ann.id)) {
+        state.relations.push({ id: `rel-${Date.now()}`, paragraphIndex: ann.paragraphIndex, anchor: ann.id, kind: "support", points: [], direction: style.defaultDirection });
+      }
+      refreshMarks();
+    });
+  }
+
+  async function init() {
+    const data = await fetchJSON(`/api/relations/${articleId}`);
+    if (!data.ok) { toast("文章不存在"); return; }
+    $("#title").textContent = `关系标注编辑器 · ${data.article.title}`;
+    state.annotations = data.annotations || [];
+    state.relations = data.relations || [];
+    renderReader(data.paragraphs);
+    initReaderEvents();
+    drawHighlights();
+    const st = await fetchJSON("/api/relation-style");
+    if (st.ok) style = Object.assign(style, st.style);
+    loadStylePanel();
+    applyCssVars();
+  }
+
+  // —— 样式面板 ——
+  function applyCssVars() {
+    document.documentElement.style.setProperty("--brick", style.color);
+    document.documentElement.style.setProperty("--hl", style.highlightColor);
+    document.documentElement.style.setProperty("--rel-hl-opacity", String(style.highlightOpacity));
+    document.querySelectorAll(".rough-annotation-highlight svg path").forEach((p) => p.setAttribute("fill-opacity", String(style.highlightOpacity)));
+  }
+  function loadStylePanel() {
+    $("#st-color").value = style.color;
+    $("#st-hl").value = style.highlightColor;
+    $("#st-width").value = style.strokeWidth; $("#st-w-val").textContent = style.strokeWidth;
+    $("#st-op").value = Math.round(style.highlightOpacity * 100); $("#st-op-val").textContent = Math.round(style.highlightOpacity * 100) + "%";
+    $("#st-size").value = style.arrowSize; $("#st-size-val").textContent = style.arrowSize;
+    $("#st-dir").value = style.defaultDirection;
+  }
+
+  // —— 事件绑定 ——
+  $("#save-btn").onclick = async () => {
+    const body = { relations: state.relations };
+    const r = await fetchJSON(`/api/relations/${articleId}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    toast(r.ok ? "已保存（.bak 已备份，审核台可回退）" : "保存失败");
+  };
+  $("#style-btn").onclick = () => $("#style-tray").classList.add("open");
+  $("#style-close").onclick = () => $("#style-tray").classList.remove("open");
+  $("#arrow-close").onclick = () => $("#arrow-tray").classList.remove("open");
+  $("#arrow-upload").onchange = async (e) => {
+    const f = e.target.files[0];
+    if (!f) return;
+    const fd = new FormData();
+    fd.append("file", f);
+    const r = await fetchJSON("/api/relation-arrow/upload", { method: "POST", body: fd });
+    if (r.ok) { toast("已上传到素材库"); openArrowTray(pendingPoint); }
+  };
+  $("#style-save").onclick = async () => {
+    style = { ...style,
+      color: $("#st-color").value,
+      highlightColor: $("#st-hl").value,
+      strokeWidth: Number($("#st-width").value),
+      highlightOpacity: Number($("#st-op").value) / 100,
+      arrowSize: Number($("#st-size").value),
+      defaultDirection: $("#st-dir").value,
+    };
+    await fetchJSON("/api/relation-style", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(style) });
+    toast("样式已保存（线上站刷新生效）");
+  };
+  ["st-width", "st-op", "st-size"].forEach((id) => {
+    const el = $("#" + id);
+    el.addEventListener("input", () => {
+      const v = el.id === "st-op" ? Math.round(Number(el.value)) + "%" : el.value;
+      $("#" + id.replace("st-", "st-") + "-val").textContent = v;
+    });
+  });
+  $("#rels").addEventListener("click", (e) => {
+    const img = e.target.closest("img[data-pi]");
+    if (img) openArrowTray(Number(img.dataset.pi));
+  });
+
+  init();
+</script>
+</body>
+</html>

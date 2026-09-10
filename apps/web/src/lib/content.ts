@@ -1,19 +1,23 @@
 // 内容加载器：构建时用 Node 直接读仓库根 content/ 目录。
 // 类型来自 @kaogong/contracts（单一事实源），不在此重复定义——否则会漂移。
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import type { CardDeck, ClippedArticle, DailyDigest, PracticeSet, ReviewCard, TodaySummary } from "@kaogong/contracts";
+import type { CardDeck, ClippedArticle, DailyDigest, PolicyLine, PracticeSet, ReviewCard, TodaySummary } from "@kaogong/contracts";
 
 export type {
   AiAnnotation,
   AiAnnotationType,
+  AiRelation,
+  AiRelationKind,
+  AiRelationPoint,
   AiStatus,
   CardDeck,
   ClippedArticle,
   DailyDigest,
   DigestItem,
   DigestSection,
+  PolicyLine,
   PracticeSet,
   Question,
   ReviewCard,
@@ -76,10 +80,17 @@ function loadArticle(p: string): ClippedArticle | null {
   return article ? unescapeArticle(article) : null;
 }
 
+/** content/ 下有效的日期目录（YYYY-MM-DD），跳过文件（policy-lines.json 等）与非日期目录。 */
+function dateDirs(): string[] {
+  if (!existsSync(CONTENT_DIR)) return [];
+  return readdirSync(CONTENT_DIR).filter(
+    (entry) => /^\d{4}-\d{2}-\d{2}$/.test(entry) && statSync(join(CONTENT_DIR, entry)).isDirectory(),
+  );
+}
+
 /** 列出所有已生成的日报，按日期倒序。 */
 export function listDigests(): DailyDigest[] {
-  if (!existsSync(CONTENT_DIR)) return [];
-  return readdirSync(CONTENT_DIR)
+  return dateDirs()
     .filter((d) => existsSync(join(CONTENT_DIR, d, "digest.json")))
     .sort()
     .reverse()
@@ -99,8 +110,7 @@ export function latestNonEmptyDigest(digests: DailyDigest[]): DailyDigest | unde
 
 /** 列出所有每日一练题集，按日期倒序。 */
 export function listPracticeSets(): PracticeSet[] {
-  if (!existsSync(CONTENT_DIR)) return [];
-  return readdirSync(CONTENT_DIR)
+  return dateDirs()
     .filter((d) => existsSync(join(CONTENT_DIR, d, "practice.json")))
     .sort()
     .reverse()
@@ -120,8 +130,7 @@ export function getSummary(date: string): TodaySummary | null {
 
 /** 按文章 id 取剪藏原文（全文），不存在返回 null。 */
 export function getArticle(id: string): ClippedArticle | null {
-  if (!existsSync(CONTENT_DIR)) return null;
-  for (const d of readdirSync(CONTENT_DIR)) {
+  for (const d of dateDirs()) {
     const p = join(CONTENT_DIR, d, `article-${id}.json`);
     if (existsSync(p)) return loadArticle(p);
   }
@@ -130,9 +139,8 @@ export function getArticle(id: string): ClippedArticle | null {
 
 /** 列出所有剪藏原文。 */
 export function listArticles(): ClippedArticle[] {
-  if (!existsSync(CONTENT_DIR)) return [];
   const out: ClippedArticle[] = [];
-  for (const d of readdirSync(CONTENT_DIR)) {
+  for (const d of dateDirs()) {
     for (const f of readdirSync(join(CONTENT_DIR, d))) {
       if (f.startsWith("article-") && f.endsWith(".json")) {
         const a = loadArticle(join(CONTENT_DIR, d, f));
@@ -151,4 +159,9 @@ export function listCards(): ReviewCard[] {
     .filter((f) => f.endsWith(".json"))
     .sort()
     .flatMap((f) => loadJson<CardDeck>(join(cardsDir, f))?.cards ?? []);
+}
+
+/** 列出全部政策主线（content/policy-lines.json，人工维护；文件缺失返回 []）。 */
+export function listPolicyLines(): PolicyLine[] {
+  return loadJson<{ lines: PolicyLine[] }>(join(CONTENT_DIR, "policy-lines.json"))?.lines ?? [];
 }

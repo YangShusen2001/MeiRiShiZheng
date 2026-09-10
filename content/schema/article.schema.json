@@ -48,6 +48,27 @@
       "maxItems": 30,
       "items": { "$ref": "#/$defs/aiAnnotation" }
     },
+    "aiRelations": {
+      "type": "array",
+      "maxItems": 20,
+      "items": { "$ref": "#/$defs/aiRelation" },
+      "description": "关系标注（中心句→支撑点，即「箭头」）：AI 生成初稿，人工可修正；引用 aiAnnotations[].id；支撑点允许跨段（真实总分结构常跨段）"
+    },
+    "aiCards": {
+      "type": "array",
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/aiCard" },
+      "description": "AI 提炼的考点卡片（待人工确认后发布；字段与 card.schema.json 的 card def 一致，由一致性测试保证）"
+    },
+    "policyLine": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "文章归属的活跃主线 slug（policy-lines.json 的 id）；无归属文章省略"
+    },
+    "evergreen": {
+      "type": "boolean",
+      "description": "是否可长期作为「补剧」素材（历史文章重提）；默认 false"
+    },
     "aiModel": { "type": "string", "minLength": 1 },
     "aiPromptVersion": { "type": "string", "minLength": 1 },
     "aiGeneratedAt": { "type": "string", "format": "strict-date-time" },
@@ -123,7 +144,7 @@
         "start": { "type": "integer", "minimum": 0 },
         "end": { "type": "integer", "minimum": 1 },
         "text": { "type": "string", "minLength": 1, "maxLength": 500 },
-        "type": { "enum": ["viewpoint", "exam_point", "term"] },
+        "type": { "enum": ["viewpoint", "exam_point", "term", "figure"] },
         "explanation": {
           "type": "string",
           "minLength": 30,
@@ -138,6 +159,81 @@
           "else": { "not": { "required": ["explanation"] } }
         }
       ]
+    },
+    "aiRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "paragraphIndex", "anchor", "points", "kind", "aiGenerated"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "paragraphIndex": { "type": "integer", "minimum": 0 },
+        "anchor": {
+          "type": "string",
+          "minLength": 1,
+          "description": "中心句：引用同文件 aiAnnotations[].id"
+        },
+        "points": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": { "$ref": "#/$defs/aiRelationPoint" }
+        },
+        "kind": { "enum": ["support", "explain", "example", "contrast"], "description": "关系簇类型" },
+        "aiGenerated": { "type": "boolean", "description": "是否 AI 生成初稿" },
+        "editedAt": {
+          "type": "string",
+          "format": "strict-date-time",
+          "description": "人工修正时间；存在且晚于文章 aiGeneratedAt 时管道重跑不得覆盖（locked）"
+        },
+        "editedBy": { "type": "string", "minLength": 1, "description": "人工修正者标识" }
+      }
+    },
+    "aiRelationPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["annotationId", "kind"],
+      "properties": {
+        "annotationId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "支撑点：引用同文件 aiAnnotations[].id"
+        },
+        "kind": { "enum": ["support", "explain", "example", "contrast"] }
+      }
+    },
+    "aiCard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "question", "answer", "tags"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "description": "全局唯一卡片 id（card-{articleId}-{n}）" },
+        "question": { "type": "string", "minLength": 10, "maxLength": 40, "description": "正面问题（主动回忆）" },
+        "answer": { "type": "string", "minLength": 6, "maxLength": 200, "description": "反面答案" },
+        "tags": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": { "type": "string", "minLength": 1 },
+          "description": "标签，如 定位/目标/数字"
+        },
+        "policyLine": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "卡片归属的主线 slug；由程序回填"
+        },
+        "examPointId": { "type": "string", "minLength": 1, "description": "所属考点（结构化考点库阶段 2；可先空）" },
+        "anchor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["articleId", "paragraphIndex"],
+          "properties": {
+            "articleId": { "type": "string", "minLength": 1, "description": "出处文章 id（程序回填）" },
+            "paragraphIndex": { "type": "integer", "minimum": 0, "description": "出处段落下标" },
+            "sentence": { "type": "string", "minLength": 1, "description": "出处原文连续子串，程序逐字定位" }
+          },
+          "description": "卡片↔精读锚定"
+        }
+      }
     }
   }
 }

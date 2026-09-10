@@ -40,6 +40,7 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
           <option value="shoujin">瘦金简体</option>
         </select>
         <button type="button" id="immersive" title="沉浸式阅读">沉浸</button>
+        <button type="button" id="link-mode" title="显示论证连线（LiquidText 式）" disabled>连线</button>
         <button type="button" id="fullscreen" title="全屏">⛶</button>
       </div>
     </div>
@@ -77,8 +78,12 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
   <article class="reading" id="article" data-id={article.id} data-ai-status={article.aiStatus ?? "legacy"}>
     {article.keySentences?.length > 0 && <blockquote>{article.keySentences[0]}</blockquote>}
     {article.paragraphs.map((p) => <p class="reading-para">{p}</p>)}
+    <div class="relation-overlay" aria-hidden="true"><svg></svg></div>
   </article>
   <script type="application/json" id="ai-annotations" set:html={JSON.stringify(aiAnnotations).replace(/</g, "\\u003c")}></script>
+  {article.aiRelations?.length > 0 && (
+    <script type="application/json" id="ai-relations" set:html={JSON.stringify(article.aiRelations).replace(/</g, "\\u003c")}></script>
+  )}
 
   <div id="hl-toolbar" class="hl-toolbar" hidden>
     <button type="button" data-act="green">荧光笔</button>
@@ -100,6 +105,14 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
       </div>
     </div>
   </div>
+
+  <div class="rel-mobile-panel" id="rel-mobile-panel" hidden>
+    <div class="rel-mobile-head">
+      <span>论证结构</span>
+      <button type="button" id="rel-mobile-close" aria-label="关闭">×</button>
+    </div>
+    <div id="rel-mobile-body"></div>
+  </div>
 </Base>
 
 <script>
@@ -111,8 +124,9 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     type Highlight, type HighlightRange, type LegacyHighlightRecord, type Span,
   } from "../../lib/highlights";
   import { readerSegmentsToHtml, validAiAnnotations, buildReaderSegments } from "../../lib/reader-annotations";
+  import { drawRelationOverlay, relationSpanMap, validRelations } from "../../lib/reader-relations";
   import { renderMarkdown } from "../../lib/markdown";
-  import type { AiAnnotation, HighlightStyle } from "@kaogong/contracts";
+  import type { AiAnnotation, AiRelation, HighlightStyle } from "@kaogong/contracts";
 
   const articleEl = document.getElementById("article") as HTMLElement;
   const toolbar = document.getElementById("hl-toolbar") as HTMLElement;
@@ -146,6 +160,16 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     const text = paraText[annotation.paragraphIndex];
     return text !== undefined && validAiAnnotations(text, [annotation]).length === 1;
   });
+  // 关系标注（箭头）：仅 AI 模式显示；引用失效的关系被过滤
+  const relationsData = document.getElementById("ai-relations")?.textContent ?? "[]";
+  let aiRelationsVal: AiRelation[] = [];
+  try {
+    aiRelationsVal = JSON.parse(relationsData) as AiRelation[];
+  } catch {
+    aiRelationsVal = [];
+  }
+  const validRel = validRelations(aiRelationsVal, validAnnotations);
+  const relByAnnotation = relationSpanMap(validRel, validAnnotations);
   let aiMode = false;
 
   const originalModeButton = document.getElementById("mode-original") as HTMLButtonElement;
@@ -376,12 +400,87 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     if (!para) return;
     const text = paraText[index] ?? para.textContent ?? "";
     const annotations = aiMode ? validAnnotations.filter((annotation) => annotation.paragraphIndex === index) : [];
-    para.innerHTML = readerSegmentsToHtml(buildReaderSegments(text, spansFor(index), annotations));
+    para.innerHTML = readerSegmentsToHtml(buildReaderSegments(text, spansFor(index), annotations, aiMode ? relByAnnotation : undefined));
   }
 
   function renderAll() {
     paraEls.forEach((_, i) => renderParagraph(i));
     applyTermFavMarks();
+    redrawRelations();
+  }
+
+  // ===== 关系标注（LiquidText 式：圈 + 半透明连线，默认关闭）=====
+  const overlayEl = articleEl.querySelector<HTMLDivElement>(".relation-overlay");
+  let relationHandle: ReturnType<typeof drawRelationOverlay> | null = null;
+  let flashTimer = 0;
+  const linkModeButton = document.getElementById("link-mode") as HTMLButtonElement;
+  let linkMode = false;
+
+  function redrawRelations() {
+    relationHandle?.destroy();
+    relationHandle = null;
+    if (!overlayEl) return;
+    if (!aiMode || !linkMode || validRel.length === 0) {
+      overlayEl.hidden = true;
+      return;
+    }
+    overlayEl.hidden = false;
+    relationHandle = drawRelationOverlay(articleEl, validRel, validAnnotations);
+  }
+
+  function activateRelationCluster(relId: string | null) {
+    overlayEl?.querySelectorAll<SVGGElement>("[data-rel-hover]").forEach((g) => {
+      g.classList.toggle("is-active", relId !== null && g.dataset.relHover === relId);
+    });
+  }
+
+  linkModeButton.disabled = !(aiAvailable && validRel.length > 0);
+  linkModeButton.addEventListener("click", () => {
+    linkMode = !linkMode;
+    linkModeButton.textContent = linkMode ? "退出连线" : "连线";
+    linkModeButton.setAttribute("aria-pressed", String(linkMode));
+    redrawRelations();
+  });
+
+  articleEl.addEventListener("mouseover", (e) => {
+    const el = (e.target as HTMLElement).closest<HTMLElement>("[data-rel-ids]");
+    activateRelationCluster(el?.dataset.relIds?.split(",")[0] ?? null);
+  });
+  articleEl.addEventListener("mouseout", () => activateRelationCluster(null));
+  articleEl.addEventListener("click", (e) => {
+    const el = (e.target as HTMLElement).closest<HTMLElement>("[data-rel-ids]");
+    if (!el) return;
+    const relId = el.dataset.relIds?.split(",")[0];
+    if (!relId) return;
+    activateRelationCluster(relId);
+    // 移动端兜底：中心句/支撑点闪烁定位
+    window.clearTimeout(flashTimer);
+    articleEl.querySelectorAll<HTMLElement>(`[data-rel-ids*="${relId}"]`).forEach((p) => {
+      p.classList.add("rel-flash");
+      window.setTimeout(() => p.classList.remove("rel-flash"), 1200);
+    });
+    flashTimer = window.setTimeout(() => activateRelationCluster(null), 3000);
+    if (window.innerWidth < 768) showMobilePanel(relId);
+  });
+
+  // 移动端结构卡片：点击中心句弹出底部面板（中心句 + 支撑点列表）
+  const mobilePanel = document.getElementById("rel-mobile-panel") as HTMLElement;
+  const mobileBody = document.getElementById("rel-mobile-body") as HTMLElement;
+  document.getElementById("rel-mobile-close")!.addEventListener("click", hideMobilePanel);
+  function hideMobilePanel() { mobilePanel.hidden = true; }
+  function showMobilePanel(relId: string) {
+    const rel = validRel.find((r) => r.id === relId);
+    if (!rel) return;
+    const byId = new Map(validAnnotations.map((a) => [a.id, a]));
+    const center = byId.get(rel.anchor);
+    const rows = rel.points.map((p) => {
+      const ann = byId.get(p.annotationId);
+      return ann ? `<li>${ann.text}</li>` : "";
+    }).join("");
+    mobileBody.innerHTML = `
+      <p class="rel-mobile-center">${center?.text ?? ""}</p>
+      <ul>${rows}</ul>`;
+    mobilePanel.hidden = false;
   }
 
   function setAiMode(enabled: boolean) {

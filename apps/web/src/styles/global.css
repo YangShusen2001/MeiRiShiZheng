@@ -769,6 +769,31 @@ mark.hl-bold { font-weight: 700; }
   position: relative;
   box-shadow: inset 0 -2px var(--primary);
 }
+/* 关系标注（LiquidText 式：中心句 [ ] + 双模式箭头，阅读页「连线」开关控制，默认关闭）
+   overlay 向左扩 64px 作为连线走廊；默认只显示淡括号，hover/点击中心句时该簇加深并显示箭头 */
+.reading { position: relative; }
+.relation-overlay { position: absolute; inset: 0; margin-left: -64px; width: calc(100% + 64px); pointer-events: none; z-index: 6; }
+.relation-overlay svg { position: absolute; top: 0; left: 0; overflow: visible; }
+.relation-ring { opacity: 0.35; transition: opacity 150ms ease; }
+.relation-link { opacity: 0; transition: opacity 150ms ease; }
+.relation-grp.is-active .relation-ring { opacity: 0.8; }
+.relation-grp.is-active .relation-link { opacity: 0.55; }
+[data-rel-ids] { position: relative; }
+span.rel-flash { background: var(--accent-soft); border-radius: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .relation-ring, .relation-link { transition: none; }
+  span.rel-flash { background: none; }
+}
+.rough-annotation-highlight svg path { fill-opacity: var(--rel-hl-opacity, 0.32); }
+.rough-annotation svg { pointer-events: none; }
+/* 数字/指标标注（0022）：原文高亮标记，不生成卡片；视觉层手绘化之前在 C 阶段统一 */
+.ai-figure {
+  background:
+    linear-gradient(90deg, var(--accent-soft) 0%, var(--accent-soft) 100%) center / 2px 0.8em no-repeat;
+  background-position: 0 50%;
+  text-decoration: underline dotted var(--accent) 1.5px;
+  text-underline-offset: 2px;
+}
 .ai-term[data-explanation] { cursor: help; outline-offset: 3px; }
 /* 术语收藏（0018）：整个术语可点击；收藏后金色高亮 + 👻/😃 状态 */
 [data-term-text] { cursor: pointer; }
@@ -1461,3 +1486,12 @@ summary:active,
     transition-duration: 200ms !important;
   }
 }
+
+/* 移动端结构卡片（0022）：点击中心句弹出底部面板 */
+.rel-mobile-panel { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: var(--surface); border-top: 1px solid var(--line); padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); max-height: 46vh; overflow: auto; box-shadow: 0 -6px 24px rgba(0,0,0,.08); }
+.rel-mobile-head { display: flex; justify-content: space-between; align-items: center; font-weight: 600; margin-bottom: 8px; }
+.rel-mobile-head button { border: none; background: none; font-size: 22px; cursor: pointer; color: var(--sub); }
+.rel-mobile-center { margin: 0 0 8px; font-weight: 700; }
+.rel-mobile-panel ul { margin: 0; padding-left: 18px; }
+.rel-mobile-panel li { margin: 4px 0; }
+@media (min-width: 768px) { .rel-mobile-panel { display: none; } }

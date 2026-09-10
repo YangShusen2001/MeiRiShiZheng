@@ -1037,3 +1037,156 @@ def api_review_agent_rollback(body: ReviewAgentBody) -> dict:
     _review_state["diff"] = None
     _audit(target, "review-rollback", "", {"restored": restored})
     return {"ok": True, "restored": restored}
+
+
+# ============================================================================
+# 关系标注编辑器（工作台）：荧光笔 → [ ] 吸附 → 箭头素材库 → 方向 → 保存。
+# 样式面板：全局配置写 apps/web/public/relation-style.json（线上站 fetch 生效）。
+# ============================================================================
+EDITOR_UI = Path(__file__).resolve().parent / "ui" / "editor.html"
+ARROW_DIR = WEB / "public" / "vendor" / "handy"
+STYLE_FILE = WEB / "public" / "relation-style.json"
+
+DEFAULT_RELATION_STYLE = {
+    "color": "#b2493a",
+    "highlightColor": "#e8b93c",
+    "strokeWidth": 2.8,
+    "highlightOpacity": 0.32,
+    "defaultArrow": "41.svg",
+    "arrowSize": 84,
+    "defaultDirection": "down",
+}
+
+
+def _find_article(article_id: str) -> tuple[Path, dict] | None:
+    for day in sorted(CONTENT.iterdir()):
+        if not day.is_dir() or day.name == "schema" or day.name.startswith("_"):
+            continue
+        p = day / f"article-{article_id}.json"
+        if p.exists():
+            return p, json.loads(p.read_text(encoding="utf-8"))
+    return None
+
+
+@app.get("/vendor/{path:path}")
+def editor_vendor(path: str) -> FileResponse:
+    """编辑器复用线上站 vendored 素材（手绘箭头库 / rough-notation / roughjs）。"""
+    target = (ARROW_DIR.parent / path).resolve()
+    if not str(target).startswith(str((ARROW_DIR.parent).resolve())) or not target.exists():
+        from fastapi import HTTPException
+        raise HTTPException(404, "asset not found")
+    return FileResponse(target)
+
+
+@app.get("/editor/{article_id}", response_class=HTMLResponse)
+def editor_page(article_id: str) -> HTMLResponse:
+    return HTMLResponse(EDITOR_UI.read_text(encoding="utf-8"))
+
+
+@app.get("/api/relations/{article_id}")
+def api_get_relations(article_id: str) -> dict:
+    found = _find_article(article_id)
+    if not found:
+        from fastapi import HTTPException
+        raise HTTPException(404, "article not found")
+    _, article = found
+    paragraphs = [{"text": p} for p in article.get("paragraphs") or []]
+    return {
+        "ok": True,
+        "article": {
+            "id": article.get("id"), "date": article.get("date"),
+            "title": article.get("title"), "source": article.get("source"),
+        },
+        "paragraphs": paragraphs,
+        "annotations": article.get("aiAnnotations") or [],
+        "relations": article.get("aiRelations") or [],
+        "hasAiStatus": article.get("aiStatus"),
+    }
+
+
+class RelationsBody(BaseModel):
+    relations: list[dict]
+
+
+@app.put("/api/relations/{article_id}")
+def api_put_relations(article_id: str, body: RelationsBody) -> dict:
+    """保存关系标注：写前备份 .bak（可回退），校验引用存在性后写回。"""
+    found = _find_article(article_id)
+    if not found:
+        from fastapi import HTTPException
+        raise HTTPException(404, "article not found")
+    path, article = found
+    annotations = {a.get("id"): a for a in (article.get("aiAnnotations") or []) if a.get("id")}
+    cleaned: list[dict] = []
+    for rel in body.relations:
+        r = dict(rel)
+        anchor = annotations.get(str(r.get("anchor", "")))
+        if not anchor:
+            continue
+        points = []
+        for p in r.get("points", []) or []:
+            if str(p.get("annotationId", "")) in annotations:
+                points.append({
+                    "annotationId": str(p["annotationId"]),
+                    "kind": str(p.get("kind") or "support"),
+                    **(p.get("style") or {}),
+                    **({"direction": p.get("direction")} if p.get("direction") else {}),
+                })
+        if not points:
+            continue
+        cleaned.append({
+            "id": str(r.get("id") or f"rel-{len(cleaned) + 1}"),
+            "paragraphIndex": int(anchor.get("paragraphIndex", 0)),
+            "anchor": str(r.get("anchor")),
+            "kind": str(r.get("kind") or "support"),
+            "points": points,
+            "aiGenerated": False,
+            "editedAt": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
+            "editedBy": _env_clean("USERNAME") or "owner",
+        })
+    shutil.copy2(path, path.with_suffix(".json.bak"))
+    article["aiRelations"] = cleaned
+    article.pop("slot", None)
+    path.write_text(json.dumps(article, ensure_ascii=False, indent=2), encoding="utf-8")
+    _audit(dt.date.fromisoformat(str(article.get("date"))), "relations-edit", article_id, {"count": len(cleaned)})
+    return {"ok": True, "relations": cleaned}
+
+
+@app.get("/api/relation-style")
+def api_get_style() -> dict:
+    if STYLE_FILE.exists():
+        try:
+            return {"ok": True, "style": json.loads(STYLE_FILE.read_text(encoding="utf-8"))}
+        except ValueError:
+            pass
+    return {"ok": True, "style": DEFAULT_RELATION_STYLE}
+
+
+class StyleBody(BaseModel):
+    color: str
+    highlightColor: str
+    strokeWidth: float
+    highlightOpacity: float
+    defaultArrow: str
+    arrowSize: float
+    defaultDirection: str
+
+
+@app.put("/api/relation-style")
+def api_put_style(body: StyleBody) -> dict:
+    style = body.model_dump()
+    STYLE_FILE.write_text(json.dumps(style, ensure_ascii=False, indent=2), encoding="utf-8")
+    return {"ok": True, "style": style}
+
+
+@app.post("/api/relation-arrow/upload")
+async def api_upload_arrow(file: UploadFile) -> dict:
+    """上传自定义箭头 SVG 到素材库（命名 custom-{ts}.svg），编辑器立即可选。"""
+    raw = (await file.read()).decode("utf-8", errors="ignore")
+    if "<svg" not in raw[:200]:
+        from fastapi import HTTPException
+        raise HTTPException(400, "只支持 SVG 文件")
+    name = f"custom-{int(time.time() * 1000)}.svg"
+    dest = ARROW_DIR / name
+    dest.write_text(raw, encoding="utf-8")
+    return {"ok": True, "file": name}

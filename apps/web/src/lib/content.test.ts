@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { latestNonEmptyDigest, unescapeArticle, unescapeHtmlEntities } from "./content";
+import { latestNonEmptyDigest, listPolicyLines, unescapeArticle, unescapeHtmlEntities } from "./content";
 import type { ClippedArticle, DailyDigest } from "@kaogong/contracts";
 
 function article(partial: Partial<ClippedArticle> = {}): ClippedArticle {
@@ -65,5 +65,17 @@ describe("latestNonEmptyDigest", () => {
   it("全部为空时回退到第一个，空列表返回 undefined", () => {
     expect(latestNonEmptyDigest([digest("2026-08-16", 0)])?.date).toBe("2026-08-16");
     expect(latestNonEmptyDigest([])).toBeUndefined();
+  });
+});
+
+describe("listPolicyLines", () => {
+  it("读取 content/policy-lines.json 并返回全部主线（含激活状态与窗口）", () => {
+    const lines = listPolicyLines();
+    expect(lines.length).toBeGreaterThan(0);
+    for (const line of lines) {
+      expect(line.id).toMatch(/^[a-z0-9-]+$/);
+      expect(["active", "retiring", "archived"]).toContain(line.status);
+      expect(line.window.start).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    }
   });
 });

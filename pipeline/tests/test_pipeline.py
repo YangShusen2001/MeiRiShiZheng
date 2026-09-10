@@ -228,6 +228,11 @@ def _write_digest(root, date):
     (day / "digest.json").write_text(json.dumps({
         "date": date.isoformat(), "title": "digest", "sections": [],
     }), encoding="utf-8")
+    # 0022：picks 是每日选材产物；测试 fixture 提供非空 picks 以免误判 picks_missing
+    (day / "picks.json").write_text(json.dumps({
+        "date": date.isoformat(), "slots": {"headline": "a", "essay": [], "exam": None, "extra": None},
+        "picked": ["a"], "assignments": {"a": None},
+    }), encoding="utf-8")
 
 
 def test_quality_gate_revalidates_successful_ai_article_semantics(tmp_path):

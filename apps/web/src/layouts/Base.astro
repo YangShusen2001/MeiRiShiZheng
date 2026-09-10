@@ -49,7 +49,7 @@ const reviewCardsJson = JSON.stringify(listCards());
     {fontCss && <style set:html={fontCss} />}
   </head>
   <body>
-    <script type="application/json" id="review-cards-data">{reviewCardsJson}</script>
+    <script type="application/json" id="review-cards-data" set:html={reviewCardsJson.replace(/</g, "\\u003c")}></script>
     <header class="top" id="top">
       <a class="logo" href="/" aria-label="每日时政">
         <span class="logo-text">每日时政</span>
