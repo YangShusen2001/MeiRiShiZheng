@@ -4,6 +4,9 @@
 packages:
   - "apps/*"
   - "packages/*"
+  # 鸿蒙原生工程（ArkTS/DevEco）不是 pnpm 包，显式排除，
+  # 避免 pnpm install / pnpm -r 误扫导致门禁失败。
+  - "!apps/harmony"
 
 # pnpm 11 默认不跑依赖的 postinstall 脚本（供应链安全），这里显式批准需要构建/下载二进制的依赖
 allowBuilds:

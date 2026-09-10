@@ -58,3 +58,15 @@ apps/web/public/fonts/*
 .omo/
 pipeline/_test_subset.woff2
 scripts/local-daily.bat
+
+# HarmonyOS 工程（apps/harmony）构建产物与本地环境
+apps/harmony/**/build/
+apps/harmony/**/oh_modules/
+apps/harmony/**/.cxx/
+apps/harmony/**/.preview/
+apps/harmony/.hvigor/
+apps/harmony/.clangd
+apps/harmony/.clang-format
+apps/harmony/local.properties
+apps/harmony/**/*.har
+apps/harmony/**/oh-package-lock.json5

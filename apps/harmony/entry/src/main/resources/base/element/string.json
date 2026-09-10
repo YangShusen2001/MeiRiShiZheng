@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "考公云鸿蒙客户端主模块"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "考公云 · 时政 AI 阅读"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "考公云"
+    },
+    {
+      "name": "reason_internet",
+      "value": "读取时政文章与 AI 标注"
+    }
+  ]
+}
