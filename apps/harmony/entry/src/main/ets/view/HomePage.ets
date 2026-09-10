@@ -1,6 +1,6 @@
 import { ContentManifest, DigestItem, DigestSection, TodaySummary } from '../model/Content';
 import { ContentService } from '../service/ContentService';
-import { HttpError } from '../service/Http';
+import { HttpError, STATUS_LOCAL_FAILURE } from '../service/Http';
 import { ReadParam } from './ReadPage';
 
 /**
@@ -88,6 +88,10 @@ export struct HomePage {
 
   private static describe(err: Error): string {
     if (err instanceof HttpError) {
+      if (err.status === STATUS_LOCAL_FAILURE) {
+        // 已是可执行提示（响应不是 JSON）
+        return err.message;
+      }
       if (err.status === 404) {
         return '内容通道尚未部署到线上（/content/* 返回 404）。请先部署一次 Pages 构建。';
       }

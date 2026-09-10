@@ -1,6 +1,6 @@
 import { AiAnnotation, ClippedArticle } from '../model/Content';
 import { ContentService } from '../service/ContentService';
-import { HttpError } from '../service/Http';
+import { HttpError, STATUS_LOCAL_FAILURE } from '../service/Http';
 import { annotationColor, annotationLabel, buildReaderSegments, ReaderSegment } from './ReaderSegments';
 
 /** 阅读页路由参数。 */
@@ -57,6 +57,9 @@ export struct ReadPage {
 
   private static describe(err: Error): string {
     if (err instanceof HttpError) {
+      if (err.status === STATUS_LOCAL_FAILURE) {
+        return err.message;
+      }
       if (err.status === 404) {
         return '找不到这篇原文（可能内容通道尚未部署，或文章 id 已失效）。';
       }
