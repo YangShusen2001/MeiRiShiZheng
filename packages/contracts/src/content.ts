@@ -212,6 +212,17 @@ export interface CardDeck {
   cards: ReviewCard[];
 }
 
+/** 清单里的一篇文章摘要：足够客户端渲染卡片与反查定位，无需再逐篇拉取全文。 */
+export interface ContentManifestArticle {
+  id: string;
+  title: string;
+  source: string;
+  /** 官方原文链接。日报条目的 `sourceUrl` 用它反查文章 id（与 Web 端 clipMap 同源逻辑）。 */
+  url: string;
+  /** "ok" 表示该篇有可用的 AI 概括与标注；其余值客户端不得渲染 AI 内容。 */
+  aiStatus: string;
+}
+
 /**
  * 内容清单里的一天（原生客户端据此发现「哪天有哪些内容」，无需猜测 URL）。
  * 由 `apps/web/scripts/build-content-api.mjs` 生成。
@@ -219,8 +230,8 @@ export interface CardDeck {
 export interface ContentManifestDay {
   /** "2026-08-19"。 */
   date: string;
-  /** 该日全部剪藏原文 id（已在 Web 站预渲染，与 `/read/{id}` 集合一致）。 */
-  articleIds: string[];
+  /** 该日全部剪藏原文（已在 Web 站预渲染，与 `/read/{id}` 集合一致）。 */
+  articles: ContentManifestArticle[];
   hasDigest: boolean;
   hasSummary: boolean;
   hasPractice: boolean;

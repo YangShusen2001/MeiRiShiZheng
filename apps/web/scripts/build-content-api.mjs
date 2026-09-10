@@ -74,7 +74,16 @@ for (const date of dates) {
 
   days.push({
     date,
-    articleIds: articles.filter((a) => a.date === date).map((a) => a.id),
+    // 摘要足够客户端渲染卡片、并把日报条目的 sourceUrl 反查成文章 id，避免逐篇拉取全文。
+    articles: articles
+      .filter((a) => a.date === date)
+      .map((a) => ({
+        id: a.id,
+        title: a.title,
+        source: a.source,
+        url: a.url,
+        aiStatus: a.aiStatus ?? "unknown",
+      })),
     hasDigest: Boolean(digest),
     hasSummary: Boolean(summary),
     hasPractice: Boolean(practice),
@@ -122,7 +131,7 @@ for (let i = 1; i < days.length; i += 1) {
   if (days[i - 1].date <= days[i].date) failures.push(`days 未按倒序：${days[i - 1].date} → ${days[i].date}`);
 }
 for (const day of days) {
-  if (day.hasDigest && day.articleIds.length === 0) failures.push(`${day.date} 有 digest 但无文章`);
+  if (day.hasDigest && day.articles.length === 0) failures.push(`${day.date} 有 digest 但无文章`);
 }
 if (cards.some((c) => !c.id || !c.question || !c.answer)) failures.push("存在字段缺失的卡片");
 if (policyLines.some((l) => !l.id || !l.name)) failures.push("存在字段缺失的政策主线");

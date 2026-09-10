@@ -50,7 +50,12 @@ describe("内容分发层产物", () => {
     expect(manifest.days.length).toBeGreaterThan(0);
     for (const day of manifest.days) {
       expect(day.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-      expect(Array.isArray(day.articleIds)).toBe(true);
+      expect(Array.isArray(day.articles)).toBe(true);
+      for (const article of day.articles) {
+        expect(typeof article.id).toBe("string");
+        expect(article.url).toMatch(/^https?:\/\//);
+        expect(typeof article.aiStatus).toBe("string");
+      }
       expect(typeof day.hasDigest).toBe("boolean");
       expect(typeof day.hasSummary).toBe("boolean");
       expect(typeof day.hasPractice).toBe("boolean");
@@ -65,7 +70,7 @@ describe("内容分发层产物", () => {
 
   it("文章集合与 Web 站 read/[id] 预渲染集合一致", () => {
     const webIds = listArticles().map((a) => a.id).sort();
-    const manifestIds = manifest.days.flatMap((d) => d.articleIds).sort();
+    const manifestIds = manifest.days.flatMap((d) => d.articles.map((a) => a.id)).sort();
     expect(manifestIds).toEqual(webIds);
     for (const id of webIds) {
       expect(existsSync(join(outDir, "articles", `${id}.json`))).toBe(true);
@@ -73,6 +78,27 @@ describe("内容分发层产物", () => {
     // 清单里每条 id 都指向真实文件，客户端不会拿到 404
     for (const id of manifestIds) {
       expect(existsSync(join(outDir, "articles", `${id}.json`))).toBe(true);
+    }
+  });
+
+  it("清单摘要里的原文链接可唯一反查文章 id（客户端首页跳转依赖这个映射）", () => {
+    const byUrl = new Map<string, string>();
+    for (const day of manifest.days) {
+      for (const article of day.articles) {
+        const seen = byUrl.get(article.url);
+        if (seen !== undefined) {
+          expect(seen).toBe(article.id);
+        }
+        byUrl.set(article.url, article.id);
+      }
+    }
+    // 摘要字段与文章正文必须一致，否则首页链接会指向错误文章
+    for (const day of manifest.days) {
+      for (const article of day.articles) {
+        const raw = readJson<{ title: string; url: string }>(join(outDir, "articles", `${article.id}.json`));
+        expect(article.title).toBe(raw.title);
+        expect(article.url).toBe(raw.url);
+      }
     }
   });
 
@@ -85,7 +111,7 @@ describe("内容分发层产物", () => {
 
   it("有 digest 的内容日必然带文章，反之亦然", () => {
     for (const day of manifest.days) {
-      expect(day.articleIds.length > 0).toBe(day.hasDigest);
+      expect(day.articles.length > 0).toBe(day.hasDigest);
     }
   });
 
