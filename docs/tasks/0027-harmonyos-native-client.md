@@ -210,6 +210,39 @@ GitHub `main` 的每日内容是 **ADR 0007 已退役的自动聚合管道**输�
 假失败**——vitest 默认排除的是 `**/node_modules/**`，匹配不到改名后的目录，
 因而把 wrangler / zod 自带的测试文件也收集了（已实测：显式排除后 apps/api 恢复 12 个套件全过）。
 
+### 部署阻塞：`/content/*` 尚未上线（Phase 1 实机验收的前置）
+
+鸿蒙端装机后首页显示「响应不是 JSON：内容通道可能尚未部署（/content/* 会命中站点回退页）」。
+三个独立角度确认同一结论：
+
+1. **云端探针**：取一个必然不存在的路径
+   `https://www.meirishizheng.cn/content/_definitely_missing_.json` → 返回站点首页 HTML。
+   说明 Pages 对任何 `/content/*` 都回退为 `index.html`（**HTTP 200 + text/html，不是 404**）。
+2. **设备侧 hilog（决定性证据）**：
+   ```
+   E A00000/…/KaogongHttp: GET https://www.meirishizheng.cn/content/manifest.json
+     -> HTTP 200 but NOT JSON | body=<!DOCTYPE html><html lang="zh-CN"> …
+   ```
+3. **客户端行为**：`responseCode === 200` → 直接 `JSON.parse` HTML → 抛 SyntaxError。
+   （已修：Http 层改用「先解析、失败即归类为非 JSON 失败」，不再误报为网络异常。）
+
+**部署现状（`wrangler pages deployment list --project-name kaogong-web`）**：
+
+- 该 Pages 项目域名 `kaogong-web.pages.dev` + `www.meirishizheng.cn`。
+- **最近一次生产部署是 3 周前**（分支 `main`，commit `d0f5c3a`）→ 线上站点自那以后未更新过，
+  这正是线上内容停在 2026-08-20 的原因。`daily.yml` 的部署步骤因 `release:check` 失败而始终 skipped。
+
+**发布被项目自身门禁阻塞**（`pnpm release:check` 实测）：
+
+```
+release gate blocked:
+- REL-NEWSLETTER-PROVIDER: Production Resend newsletter delivery evidence is incomplete (high, open)
+- REL-PRODUCTION-DEPLOYMENT: Production Worker, D1, Pages, and same-site verification are incomplete (high, open)
+```
+
+**凭据情况**：本机 wrangler 已登录（OAuth，账号 `e006b675…`），权限含 **`pages (write)`**，
+技术上可代执行部署；但生产发布按项目规范需先过 `release:check` 或由用户明确授权，故未擅自执行。
+
 ### Verification
 
 ```text
