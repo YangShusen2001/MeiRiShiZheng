@@ -243,6 +243,31 @@ release gate blocked:
 **凭据情况**：本机 wrangler 已登录（OAuth，账号 `e006b675…`），权限含 **`pages (write)`**，
 技术上可代执行部署；但生产发布按项目规范需先过 `release:check` 或由用户明确授权，故未擅自执行。
 
+### preview 验证结果：内容通道**服务端已通过**（2026-09-11）
+
+按用户决定（方案 B：只发 preview、不碰线上）执行：
+
+```
+pnpm exec wrangler pages deploy ../web/dist \
+  --project-name kaogong-web --branch=preview-content-verify --commit-dirty=true
+→ Success! Uploaded 17 files (628 already uploaded)
+→ https://preview-content-verify.kaogong-web.pages.dev
+```
+
+**验证 `https://preview-content-verify.kaogong-web.pages.dev/content/manifest.json` → 返回 JSON**：
+
+```json
+{ "latestDate": "2026-08-21", "days": [ …7 个内容日… ] }
+```
+
+`days[0].articles` 46 条。**结论：Phase 0 的内容分发层在真实 Cloudflare Pages 上工作正常**，
+此前鸿蒙端失败纯粹是因为**该层从未部署到生产域名**。
+
+> 注：本机 astro 构建的 `dist/` 会残留服务端产物（`dist/pages/`、`renderers.mjs`、
+> `noop-entrypoint.mjs`、`_noop-middleware.mjs`、`manifest_*.mjs`、`chunks/`），
+> 原因是构建末尾 `cleanServerOutput` 的删除动作被本机安全护栏拦截（见下）。
+> 这些文件在预览里无副作用，但生产发布前应清理干净。
+
 ### Verification
 
 ```text
