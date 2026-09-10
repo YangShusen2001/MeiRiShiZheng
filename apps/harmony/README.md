@@ -51,14 +51,18 @@ apps/harmony/
 │       ├── module.json5             权限（INTERNET）、Ability 注册
 │       ├── resources/               字符串 / 颜色 / 图标 / main_pages
 │       └── ets/
-│           ├── theme/Tokens.ets         设计令牌（视觉唯一事实源）
+│           ├── theme/Tokens.ets         设计令牌（视觉唯一事实源，含深浅色 + 字号档位）
 │           ├── config/Endpoints.ets     云端端点集中配置
 │           ├── model/Content.ets        领域模型（对齐 packages/contracts）
-│           ├── service/Http.ets         JSON HTTP 客户端
+│           ├── service/Http.ets         JSON HTTP 客户端 + 失败日志
 │           ├── service/ContentService.ets  取数入口 + aiStatus 门控
+│           ├── service/Settings.ets     用户偏好持久化（深色 / 字号 / 阅读位置）
+│           ├── service/Net.ets          网络可达性探测（区分离线与服务异常）
+│           ├── service/Clipboard.ets    系统剪贴板（复制原文链接）
 │           ├── view/ReaderSegments.ets  标注切片（纯函数）
+│           ├── view/SettingsSheet.ets   阅读设置面板（可复用）
 │           ├── view/HomePage.ets        首页：日期切换 + 今日速览 + 日报分栏
-│           ├── view/ReadPage.ets        阅读页：分段 + 四色标注 + 标注清单
+│           ├── view/ReadPage.ets        阅读页：分段 + 四色标注 + 标注清单 + 篇间翻阅
 │           ├── pages/Index.ets          Navigation 容器
 │           └── entryability/EntryAbility.ets
 └── ...
@@ -99,20 +103,30 @@ print('硬编码色值:', len(bad) or '0 ✓')
   `apps/web/src/pages/read/[id].astro:10-11`）。页面不得自行判断。
 - 不使用已废弃的 `@ohos.router`，统一用 `Navigation` + `NavPathStack`。
 
-## 当前状态（Phase 1）
+## 当前状态（Phase 1 + P0–P2 交互）
 
 已完成：
 
 - [x] 工程骨架（DevEco 可直接打开）
-- [x] 云端端点配置、HTTP 层、内容服务 + 门控
-- [x] 首页：今日速览（一句话 + 关键词）+ 日报分栏列表，点击进阅读页
-- [x] 阅读页：原文分段 + 考点/观点/术语/数字指标四色标注，点击看释义
+- [x] 云端端点配置、HTTP 层（含失败日志）、内容服务 + aiStatus 门控
+- [x] 设计令牌层（深浅双色板、字号档位、间距/圆角/动效/阴影），页面零硬编码
+- [x] 首页：**日期切换** + 今日速览（一句话 + 关键词）+ 日报分栏列表
+- [x] 首页：**下拉刷新**、骨架屏、列表行按压反馈
+- [x] 阅读页：原文分段 + 考点/观点/术语/数字指标四色标注
+- [x] 阅读页：**底部释义浮层**（遮罩可点收起）、**标注清单 + 跳转原文段落**
+- [x] 阅读页：**标注类型筛选**、**阅读进度**、**继续上次阅读**
+- [x] 阅读页：**上一篇 / 下一篇**、**复制原文链接**
+- [x] **深色模式** + **字号调节**（四档，持久化，面板内实时预览）
+- [x] **离线感知**：区分「没联网」与「服务异常」
+- [x] 无障碍：交互元素 ≥44vp、文本对比度 ≥4.5:1、不靠颜色单独表意
 
 未包含（按 Phase 1 范围明确不做）：
 
 - [ ] 登录 / 收藏 / 划线 / 每日一练 / 错题本 / AI 解析
 - [ ] 离线缓存、桌面卡片、实况窗、推送
 - [ ] 平板与折叠屏适配、横屏
+
+仍缺（详见 `DESIGN.md` §5）：浮层动效、实时网络监听、完整分享面板、标题吸顶。
 
 ## 已知风险
 
@@ -122,6 +136,16 @@ print('硬编码色值:', len(bad) or '0 ✓')
 3. `Text() { ForEach(...) { Span(...) } }` 用于动态分段高亮。若编译器不接受
    `ForEach` 作为 `Text` 的子节点，改用 `MutableStyledString` + `Text(styledString)`。
 4. 内容为**部署时快照**：线上内容 = 最近一次 Pages 部署。更新内容需重新构建部署。
+5. 以下 API 用法存在 SDK 版本差异，**首次 Sync 若报错优先看这几处**
+   （都在本文档标注过，改动量都很小）：
+   - `Refresh({ refreshing: $$this.refreshing })` —— `$$` 双向绑定（首页下拉刷新）
+   - `.stateStyles({ normal, pressed })` + `@Styles` —— 列表行按压反馈
+   - `List({ scroller })` + `Scroller.scrollToIndex(index, true)` —— 标注跳转 / 续读定位
+   - `List.onScrollIndex((first, last) => …)` —— 阅读进度（若签名要求三参，补一个即可）
+   - `NavPathStack.replacePathByName(name, param)` —— 篇间翻阅（若不可用，改 pop + push）
+   - `preferences.getPreferencesSync(context, { name })` + `putSync` / `flush` —— 偏好持久化
+   - `connection.getDefaultNet()` —— 离线探测
+   - `pasteboard.getSystemPasteboard().setData()` —— 复制链接
 
 ## 契约一致性门禁
 

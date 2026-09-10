@@ -1,17 +1,21 @@
 import { ContentManifest, DigestItem, DigestSection, TodaySummary } from '../model/Content';
 import { ContentService } from '../service/ContentService';
 import { HttpError, STATUS_LOCAL_FAILURE } from '../service/Http';
-import { KColor, KFont, KLine, KRadius, KShadow, KSpace } from '../theme/Tokens';
+import { Net } from '../service/Net';
+import { KColor, KFont, KLine, KRadius, KShadow, KSize, KSpace } from '../theme/Tokens';
 import { ReadParam } from './ReadPage';
+import { SettingsSheet } from './SettingsSheet';
 
 /**
  * 首页：日期切换 + 今日速览 + 当日日报（分栏列表）。
  *
- * 交互补齐项（相对首版）：
- * 1. **日期切换**——清单本身带 7 个内容日，首版只显示最新一天，历史内容完全无法触达；
+ * 交互补齐项：
+ * 1. **日期切换**——清单带 7 个内容日，首版只显示最新一天，历史内容完全无法触达；
  * 2. **下拉刷新**——失败后原先只能点「重试」按钮；
  * 3. **骨架屏**——首版是居中转圈，阅读类 App 用骨架屏更少跳动；
- * 4. **按压反馈 + 触摸目标**——列表行整行可点、高度 ≥44vp（可达性下限）。
+ * 4. **按压反馈 + 触摸目标**——列表行整行可点、高度 ≥44vp；
+ * 5. **离线感知**——区分「设备没联网」与「服务异常」，不再笼统报「网络异常」；
+ * 6. **阅读设置入口**——字号与深色在首页即可调整（夜间不必先点进文章才能切深色）。
  *
  * 视觉全部取自 `theme/Tokens.ets`，本文件不含任何硬编码色值/字号/间距。
  * 数据来自 `manifest.json` + `{date}/summary.json` + `{date}/digest.json`。
@@ -19,6 +23,9 @@ import { ReadParam } from './ReadPage';
 @Component
 export struct HomePage {
   @Consume('navStack') navStack: NavPathStack;
+  /** 订阅主题与字号，使令牌取值变化时本页重建（子组件需各自订阅）。 */
+  @StorageLink('darkMode') darkMode: boolean = false;
+  @StorageLink('fontScale') fontScale: number = 1;
   @State loading: boolean = true;
   @State refreshing: boolean = false;
   @State errorText: string = '';
@@ -28,6 +35,7 @@ export struct HomePage {
   @State summaryText: string = '';
   @State keywords: string[] = [];
   @State sections: DigestSection[] = [];
+  @State settingsOpen: boolean = false;
 
   /** 骨架屏占位行。 */
   private skeletonRows: number[] = [0, 1, 2, 3, 4];
@@ -35,6 +43,8 @@ export struct HomePage {
   private urlToId: Map<string, string> = new Map<string, string>();
   /** 官方原文链接 → 来源名（如「南方网」）。 */
   private urlToSource: Map<string, string> = new Map<string, string>();
+  /** 日期 → 该日全部文章 id（按清单顺序），用于算上一篇/下一篇。 */
+  private dayIds: Map<string, string[]> = new Map<string, string[]>();
 
   aboutToAppear(): void {
     this.loadLatest();
@@ -43,12 +53,12 @@ export struct HomePage {
   // —— 按压反馈：轻量背景变化（不做缩放，避免长列表滚动时抖动）——
   @Styles
   rowNormal() {
-    .backgroundColor(KColor.SURFACE)
+    .backgroundColor(KColor.surface())
   }
 
   @Styles
   rowPressed() {
-    .backgroundColor(KColor.SURFACE_ALT)
+    .backgroundColor(KColor.surfaceAlt())
   }
 
   private loadLatest(): void {
@@ -70,20 +80,22 @@ export struct HomePage {
         this.loadDay(latest);
       })
       .catch((err: Error) => {
-        this.loading = false;
-        this.refreshing = false;
-        this.errorText = HomePage.describe(err);
+        this.report(err, true);
       });
   }
 
   private indexManifest(manifest: ContentManifest): void {
     this.urlToId.clear();
     this.urlToSource.clear();
+    this.dayIds.clear();
     for (const day of manifest.days) {
+      const ids: string[] = [];
       for (const article of day.articles) {
         this.urlToId.set(article.url, article.id);
         this.urlToSource.set(article.url, article.source);
+        ids.push(article.id);
       }
+      this.dayIds.set(day.date, ids);
     }
   }
 
@@ -107,9 +119,7 @@ export struct HomePage {
         this.refreshing = false;
       })
       .catch((err: Error) => {
-        this.errorText = HomePage.describe(err);
-        this.loading = false;
-        this.refreshing = false;
+        this.report(err, true);
       });
   }
 
@@ -123,7 +133,21 @@ export struct HomePage {
     this.loadDay(date);
   }
 
-  private static describe(err: Error): string {
+  /**
+   * 统一错误出口：先探测网络可达性，再决定提示措辞。
+   * 报错时不武断归因——「没联网」和「服务异常」的处置动作完全不同。
+   */
+  private report(err: Error, stopLoading: boolean): void {
+    Net.isOnline().then((online: boolean) => {
+      this.errorText = HomePage.describe(err, online);
+      if (stopLoading) {
+        this.loading = false;
+        this.refreshing = false;
+      }
+    });
+  }
+
+  private static describe(err: Error, online: boolean): string {
     if (err instanceof HttpError) {
       if (err.status === STATUS_LOCAL_FAILURE) {
         return err.message;
@@ -132,6 +156,9 @@ export struct HomePage {
         return '内容通道尚未部署到线上（/content/* 返回 404）。请先部署一次 Pages 构建。';
       }
       return `请求失败：HTTP ${err.status}`;
+    }
+    if (!online) {
+      return '当前设备没有网络连接。请检查网络后下拉刷新。';
     }
     return `网络异常：${err.message}`;
   }
@@ -164,34 +191,55 @@ export struct HomePage {
       return;
     }
     this.hintText = '';
-    const param: ReadParam = { articleId: articleId };
-    this.navStack.pushPathByName('read', param);
+    this.navStack.pushPathByName('read', this.readParamFor(articleId));
   }
 
-  /** 日期切换条：横向可滚，选中态用品牌色填充。 */
+  /** 带上当日文章列表：阅读页据此自行算出上一篇/下一篇，支持一直往下翻。 */
+  private readParamFor(articleId: string): ReadParam {
+    const ids: string[] | undefined = this.dayIds.get(this.selectedDate);
+    const dayIds: string[] = ids === undefined ? [] : ids;
+    const param: ReadParam = { articleId: articleId, dayIds: dayIds };
+    return param;
+  }
+
+  /** 顶部：日期切换条 + 阅读设置入口。 */
   @Builder
-  dateStrip() {
-    Scroll() {
-      Row() {
-        ForEach(this.dates, (date: string) => {
-          Text(date.substring(5))
-            .fontSize(KFont.META)
-            .fontColor(date === this.selectedDate ? KColor.SURFACE : KColor.SUB)
-            .backgroundColor(date === this.selectedDate ? KColor.PRIMARY : KColor.SURFACE)
-            .borderRadius(KRadius.FULL)
-            .height(44)
-            .padding({ left: KSpace.L, right: KSpace.L })
-            .margin({ right: KSpace.S })
-            .textAlign(TextAlign.Center)
-            .onClick(() => {
-              this.selectDate(date);
-            })
-        }, (date: string) => date)
+  headerRow() {
+    Row() {
+      Scroll() {
+        Row() {
+          ForEach(this.dates, (date: string) => {
+            Text(date.substring(5))
+              .fontSize(KFont.meta())
+              .fontColor(date === this.selectedDate ? KColor.surface() : KColor.sub())
+              .backgroundColor(date === this.selectedDate ? KColor.primary() : KColor.surface())
+              .borderRadius(KRadius.FULL)
+              .height(KSize.TOUCH_MIN)
+              .padding({ left: KSpace.L, right: KSpace.L })
+              .margin({ right: KSpace.S })
+              .textAlign(TextAlign.Center)
+              .onClick(() => {
+                this.selectDate(date);
+              })
+          }, (date: string) => date)
+        }
       }
+      .scrollable(ScrollDirection.Horizontal)
+      .scrollBar(BarState.Off)
+      .layoutWeight(1)
+
+      Text('Aa')
+        .fontSize(KFont.meta())
+        .fontColor(KColor.sub())
+        .height(KSize.TOUCH_MIN)
+        .padding({ left: KSpace.M, right: KSpace.XS })
+        .textAlign(TextAlign.Center)
+        .onClick(() => {
+          this.settingsOpen = true;
+        })
     }
-    .scrollable(ScrollDirection.Horizontal)
-    .scrollBar(BarState.Off)
     .width('100%')
+    .alignItems(VerticalAlign.Center)
     .margin({ bottom: KSpace.M })
   }
 
@@ -201,23 +249,23 @@ export struct HomePage {
     Column() {
       Row()
         .width(64)
-        .height(KFont.TITLE_M)
+        .height(KFont.titleM())
         .borderRadius(KRadius.XS)
-        .backgroundColor(KColor.SKELETON)
+        .backgroundColor(KColor.skeleton())
 
       ForEach(this.skeletonRows, () => {
         Column() {
           Row()
             .width('100%')
-            .height(KFont.META)
+            .height(KFont.meta())
             .borderRadius(KRadius.XS)
-            .backgroundColor(KColor.SKELETON)
+            .backgroundColor(KColor.skeleton())
             .margin({ bottom: KSpace.S })
           Row()
             .width('62%')
-            .height(KFont.META)
+            .height(KFont.meta())
             .borderRadius(KRadius.XS)
-            .backgroundColor(KColor.SKELETON)
+            .backgroundColor(KColor.skeleton())
         }
         .alignItems(HorizontalAlign.Start)
         .width('100%')
@@ -227,7 +275,7 @@ export struct HomePage {
     .alignItems(HorizontalAlign.Start)
     .width('100%')
     .padding(KSpace.L)
-    .backgroundColor(KColor.SURFACE)
+    .backgroundColor(KColor.surface())
     .borderRadius(KRadius.L)
     .shadow({ radius: KShadow.CARD_RADIUS, color: KShadow.CARD_COLOR, offsetY: KShadow.CARD_OFFSET_Y })
   }
@@ -236,20 +284,20 @@ export struct HomePage {
   summaryCard() {
     Column() {
       Text('今日速览')
-        .fontSize(KFont.CAPTION)
-        .fontColor(KColor.SUB)
+        .fontSize(KFont.caption())
+        .fontColor(KColor.sub())
       Text(this.summaryText)
-        .fontSize(KFont.BODY)
-        .lineHeight(KLine.NORMAL)
-        .fontColor(KColor.INK)
+        .fontSize(KFont.body())
+        .lineHeight(KLine.normal())
+        .fontColor(KColor.ink())
         .margin({ top: KSpace.S })
         .width('100%')
       Flex({ wrap: FlexWrap.Wrap }) {
         ForEach(this.keywords, (keyword: string) => {
           Text(keyword)
-            .fontSize(KFont.CAPTION)
-            .fontColor(KColor.PRIMARY_TEXT)
-            .backgroundColor(KColor.PRIMARY_SOFT)
+            .fontSize(KFont.caption())
+            .fontColor(KColor.primaryText())
+            .backgroundColor(KColor.primarySoft())
             .borderRadius(KRadius.FULL)
             .padding({ left: KSpace.M, right: KSpace.M, top: KSpace.XS, bottom: KSpace.XS })
             .margin({ right: KSpace.S, top: KSpace.S })
@@ -261,7 +309,7 @@ export struct HomePage {
     .alignItems(HorizontalAlign.Start)
     .width('100%')
     .padding(KSpace.L)
-    .backgroundColor(KColor.SURFACE)
+    .backgroundColor(KColor.surface())
     .borderRadius(KRadius.L)
   }
 
@@ -270,12 +318,12 @@ export struct HomePage {
     Column() {
       Row() {
         Text(section.title)
-          .fontSize(KFont.TITLE_S)
+          .fontSize(KFont.titleS())
           .fontWeight(FontWeight.Bold)
-          .fontColor(KColor.INK)
+          .fontColor(KColor.ink())
         Text(`${section.items.length} 条`)
-          .fontSize(KFont.CAPTION)
-          .fontColor(KColor.MUT)
+          .fontSize(KFont.caption())
+          .fontColor(KColor.mut())
           .margin({ left: KSpace.S })
       }
       .width('100%')
@@ -284,30 +332,30 @@ export struct HomePage {
       ForEach(section.items, (item: DigestItem, index: number) => {
         Row() {
           Text(`${index + 1}`)
-            .fontSize(KFont.CAPTION)
-            .fontColor(KColor.MUT)
+            .fontSize(KFont.caption())
+            .fontColor(KColor.mut())
             .width(KSpace.XXL)
           Column() {
             Text(item.title)
-              .fontSize(KFont.BODY)
+              .fontSize(KFont.body())
               .fontWeight(FontWeight.Medium)
-              .fontColor(KColor.INK)
+              .fontColor(KColor.ink())
               .maxLines(2)
               .textOverflow({ overflow: TextOverflow.Ellipsis })
               .width('100%')
             if (this.summaryOf(item).length > 0) {
               Text(this.summaryOf(item))
-                .fontSize(KFont.META)
-                .lineHeight(KLine.TIGHT)
-                .fontColor(KColor.SUB)
+                .fontSize(KFont.meta())
+                .lineHeight(KLine.tight())
+                .fontColor(KColor.sub())
                 .maxLines(2)
                 .textOverflow({ overflow: TextOverflow.Ellipsis })
                 .margin({ top: KSpace.XS })
                 .width('100%')
             }
             Text(this.sourceOf(item))
-              .fontSize(KFont.CAPTION)
-              .fontColor(KColor.MUT)
+              .fontSize(KFont.caption())
+              .fontColor(KColor.mut())
               .margin({ top: KSpace.S })
           }
           .alignItems(HorizontalAlign.Start)
@@ -315,7 +363,7 @@ export struct HomePage {
         }
         .width('100%')
         .alignItems(VerticalAlign.Top)
-        .constraintSize({ minHeight: 44 })
+        .constraintSize({ minHeight: KSize.TOUCH_MIN })
         .padding({ top: KSpace.M, bottom: KSpace.M })
         .stateStyles({ normal: this.rowNormal, pressed: this.rowPressed })
         .onClick(() => {
@@ -327,7 +375,7 @@ export struct HomePage {
     .width('100%')
     .padding(KSpace.L)
     .margin({ top: KSpace.M })
-    .backgroundColor(KColor.SURFACE)
+    .backgroundColor(KColor.surface())
     .borderRadius(KRadius.L)
   }
 
@@ -335,17 +383,17 @@ export struct HomePage {
   errorCard() {
     Column() {
       Text('无法加载内容')
-        .fontSize(KFont.TITLE_S)
+        .fontSize(KFont.titleS())
         .fontWeight(FontWeight.Bold)
-        .fontColor(KColor.DANGER)
+        .fontColor(KColor.danger())
       Text(this.errorText)
-        .fontSize(KFont.META)
-        .lineHeight(KLine.TIGHT)
-        .fontColor(KColor.SUB)
+        .fontSize(KFont.meta())
+        .lineHeight(KLine.tight())
+        .fontColor(KColor.sub())
         .margin({ top: KSpace.S })
         .textAlign(TextAlign.Center)
       Button('重试')
-        .height(44)
+        .height(KSize.TOUCH_MIN)
         .margin({ top: KSpace.XL })
         .onClick(() => {
           this.loadLatest();
@@ -354,7 +402,7 @@ export struct HomePage {
     .width('100%')
     .padding(KSpace.XXL)
     .margin({ top: KSpace.XXXL })
-    .backgroundColor(KColor.SURFACE)
+    .backgroundColor(KColor.surface())
     .borderRadius(KRadius.L)
   }
 
@@ -371,9 +419,9 @@ export struct HomePage {
         }
         if (this.hintText.length > 0) {
           Text(this.hintText)
-            .fontSize(KFont.META)
-            .fontColor(KColor.WARN_INK)
-            .backgroundColor(KColor.WARN_SOFT)
+            .fontSize(KFont.meta())
+            .fontColor(KColor.warnInk())
+            .backgroundColor(KColor.warnSoft())
             .borderRadius(KRadius.S)
             .padding(KSpace.M)
             .width('100%')
@@ -389,26 +437,46 @@ export struct HomePage {
   }
 
   build() {
-    Refresh({ refreshing: $$this.refreshing }) {
-      Scroll() {
-        Column() {
-          this.dateStrip()
-          this.content()
+    Stack({ alignContent: Alignment.Bottom }) {
+      Refresh({ refreshing: $$this.refreshing }) {
+        Scroll() {
+          Column() {
+            this.headerRow()
+            this.content()
+          }
+          .width('100%')
+          .alignItems(HorizontalAlign.Start)
+          .padding({ left: KSpace.PAGE, right: KSpace.PAGE, top: KSpace.M, bottom: KSpace.XXL })
         }
         .width('100%')
-        .alignItems(HorizontalAlign.Start)
-        .padding({ left: KSpace.PAGE, right: KSpace.PAGE, top: KSpace.M, bottom: KSpace.XXL })
+        .height('100%')
+        .align(Alignment.Top)
+        .scrollBar(BarState.Off)
       }
+      .onRefreshing(() => {
+        this.loadLatest();
+      })
       .width('100%')
       .height('100%')
-      .align(Alignment.Top)
-      .scrollBar(BarState.Off)
+      .backgroundColor(KColor.bg())
+
+      if (this.settingsOpen) {
+        Column()
+          .width('100%')
+          .height('100%')
+          .backgroundColor(KColor.scrim())
+          .onClick(() => {
+            this.settingsOpen = false;
+          })
+        SettingsSheet({
+          onClose: () => {
+            this.settingsOpen = false;
+          },
+        })
+      }
     }
-    .onRefreshing(() => {
-      this.loadLatest();
-    })
     .width('100%')
     .height('100%')
-    .backgroundColor(KColor.BG)
+    .backgroundColor(KColor.bg())
   }
 }

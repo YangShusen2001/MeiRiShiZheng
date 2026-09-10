@@ -1,7 +1,6 @@
 import { KColor } from '../theme/Tokens';
 import { HomePage } from '../view/HomePage';
 import { ReadPage, ReadParam } from '../view/ReadPage';
-
 /**
  * 应用根容器：用 Navigation + NavPathStack 管理页面栈。
  *
@@ -13,11 +12,21 @@ import { ReadPage, ReadParam } from '../view/ReadPage';
 @Component
 struct Index {
   @Provide('navStack') navStack: NavPathStack = new NavPathStack();
+  /**
+   * 订阅主题与字号：@StorageLink 变化会触发本组件重建。
+   * 注意——**每个页面都要自己订阅**：父组件重建不保证子组件的 build() 重跑，
+   * 只靠这里订阅的话，切深色时页面颜色不会更新。
+   */
+  @StorageLink('darkMode') darkMode: boolean = false;
+  @StorageLink('fontScale') fontScale: number = 1;
 
   @Builder
   pageMap(name: string, param: object) {
     if (name === 'read') {
-      ReadPage({ articleId: (param as ReadParam).articleId })
+      ReadPage({
+        articleId: (param as ReadParam).articleId,
+        dayIds: (param as ReadParam).dayIds,
+      })
     }
   }
 
@@ -30,6 +39,6 @@ struct Index {
     .mode(NavigationMode.Stack)
     .hideBackButton(true)
     .navDestination(this.pageMap)
-    .backgroundColor(KColor.BG)
+    .backgroundColor(KColor.bg())
   }
 }
