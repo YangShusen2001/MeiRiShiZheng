@@ -2,7 +2,8 @@
 
 ## Status
 
-in_progress — Phase 0 代码已完成并独立验证；待环境修复后跑全量门禁。Phase 1 未开工。
+in_progress — Phase 0 已完成（待环境修复后跑门禁）；**Phase 1 骨架已落地**（`apps/harmony/`，
+首页 + 阅读页 + 云端对接），待 DevEco 实机编译验证。
 
 ## Owner
 
