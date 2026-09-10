@@ -31,4 +31,20 @@ export class Endpoints {
   static summaryUrl(date: string): string {
     return `${Endpoints.CONTENT_BASE}/content/${date}/summary.json`;
   }
+
+  /**
+   * AI 解析（Worker 侧 DeepSeek）。
+   * 需带 `X-Device-Id` 头；服务端有配额与限流（匿名需邀请码，10 次/分钟）。
+   */
+  static explainUrl(): string {
+    return `${Endpoints.API_BASE}/api/explain`;
+  }
+
+  /**
+   * 邀请码激活。匿名用户以此获得 AI 解析额度（身份用 `X-Device-Id`）。
+   * 响应：`{ ok: true, data: { active, remaining, code } }`。
+   */
+  static inviteActivateUrl(): string {
+    return `${Endpoints.API_BASE}/api/invite/activate`;
+  }
 }

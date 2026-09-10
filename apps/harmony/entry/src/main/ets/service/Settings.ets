@@ -1,6 +1,7 @@
 import { preferences } from '@kit.ArkData';
 import { common, ConfigurationConstant } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
+import { util } from '@kit.ArkTS';
 
 const DOMAIN: number = 0x0000;
 const TAG: string = 'KaogongSettings';
@@ -22,6 +23,7 @@ export class Settings {
   static readonly KEY_FONT_SCALE: string = 'fontScale';
   static readonly KEY_LAST_ID: string = 'lastReadId';
   static readonly KEY_LAST_INDEX: string = 'lastReadIndex';
+  static readonly KEY_DEVICE_ID: string = 'deviceId';
 
   /** 阅读档位系数（与 DESIGN.md 的档位表一致）。 */
   static readonly FONT_STEPS: number[] = [0.88, 1, 1.15, 1.3];
@@ -117,6 +119,22 @@ export class Settings {
 
   static lastReadIndex(): number {
     return Settings.readNumber(Settings.KEY_LAST_INDEX, 0);
+  }
+
+  /**
+   * 匿名设备标识。服务端用它做配额与限流（`X-Device-Id`，要求 `[a-zA-Z0-9_-]{8,64}`）。
+   *
+   * 首次调用生成并持久化——**必须持久化**，否则每次冷启动都算新设备，
+   * 会绕过配额（对服务端不友好）也会丢掉已激活的邀请码额度。
+   */
+  static deviceId(): string {
+    const existing: string = Settings.readString(Settings.KEY_DEVICE_ID, '');
+    if (existing.length >= 8) {
+      return existing;
+    }
+    const generated: string = util.generateRandomUUID(false);
+    Settings.writeString(Settings.KEY_DEVICE_ID, generated);
+    return generated;
   }
 
   /**

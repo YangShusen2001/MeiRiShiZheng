@@ -1,8 +1,10 @@
 import { AiAnnotation, ClippedArticle } from '../model/Content';
+import { Ai, AiResult, CODE_AI_ERROR, CODE_NETWORK, CODE_RATE_LIMITED } from '../service/Ai';
 import { Clipboard } from '../service/Clipboard';
 import { ContentService } from '../service/ContentService';
 import { HttpError, STATUS_LOCAL_FAILURE } from '../service/Http';
 import { Net } from '../service/Net';
+import { Invite, InviteResult } from '../service/Invite';
 import { Settings } from '../service/Settings';
 import { Share } from '../service/Share';
 import { annotationBg, KColor, KFont, KLine, KRadius, KSize, KSpace } from '../theme/Tokens';
@@ -70,6 +72,20 @@ export struct ReadPage {
   @State resumeIndex: number = 0;
   /** 是否已滚过头部。只在**翻转时**改状态，避免滚动中高频重建。 */
   @State scrolledPastHeader: boolean = false;
+  /** AI 深挖状态。 */
+  @State aiRequested: boolean = false;
+  @State aiLoading: boolean = false;
+  @State aiOk: boolean = false;
+  @State aiText: string = '';
+  @State aiCode: string = '';
+  /** 邀请码激活（AI 额度）。 */
+  @State inviteInput: string = '';
+  @State inviteBusy: boolean = false;
+  @State inviteMsg: string = '';
+  @State inviteOk: boolean = false;
+
+  /** 触发 AI 的原文片段（与释义分开存，避免两件事混在一起）。 */
+  private aiSource: string = '';
 
   /** 段落列表滚动控制器：标注跳转与续读定位用。 */
   private scroller: Scroller = new Scroller();
@@ -204,7 +220,41 @@ export struct ReadPage {
     this.tipText = segment.explanation.length > 0
       ? segment.explanation
       : `${segment.text}（本篇未生成释义）`;
+    // 换片段时重置 AI 结果，避免上一段的解释残留造成误读
+    this.aiSource = segment.text;
+    this.aiRequested = false;
+    this.aiLoading = false;
+    this.aiOk = false;
+    this.aiText = '';
+    this.aiCode = '';
     this.tipVisible = true;
+  }
+
+  /** 对当前片段发起 AI 深挖（走 Worker，密钥不落客户端）。 */
+  private runAi(): void {
+    if (this.aiLoading || this.aiSource.length === 0) {
+      return;
+    }
+    this.aiRequested = true;
+    this.aiLoading = true;
+    this.aiOk = false;
+    this.aiText = '';
+    this.aiCode = '';
+    Ai.explain(this.aiSource).then((result: AiResult) => {
+      this.aiLoading = false;
+      this.aiOk = result.ok;
+      this.aiText = result.text;
+      this.aiCode = result.code;
+    });
+  }
+
+  /**
+   * 只有"等一会儿就会好"的原因才给重试按钮。
+   * 邀请码/配额/未配置密钥这三种，重试一百次也一样——给重试按钮反而误导。
+   */
+  private aiRetryable(): boolean {
+    return this.aiCode === '' || this.aiCode === CODE_RATE_LIMITED
+      || this.aiCode === CODE_AI_ERROR || this.aiCode === CODE_NETWORK;
   }
 
   /** 跳到指定段落（列表第 0 项是头部信息，正文段自 1 起）。 */
@@ -523,6 +573,158 @@ export struct ReadPage {
     .margin({ top: KSpace.XXL })
   }
 
+  /**
+   * 激活邀请码。成功后**自动接着发起 AI 解析**——
+   * 让用户再点一次「AI 深挖」是多余的一步，意图已经明确。
+   */
+  private activateInvite(): void {
+    if (this.inviteBusy) {
+      return;
+    }
+    this.inviteBusy = true;
+    this.inviteMsg = '';
+    Invite.activate(this.inviteInput).then((result: InviteResult) => {
+      this.inviteBusy = false;
+      this.inviteOk = result.ok;
+      this.inviteMsg = result.text;
+      if (result.ok) {
+        this.runAi();
+      }
+    });
+  }
+
+  /** 邀请码入口：只在「缺码 / 额度用尽」时出现，其他错误摆出来只会误导。 */
+  @Builder
+  inviteBlock() {
+    Column() {
+      Text('填写邀请码即可启用 AI 解析')
+        .fontSize(KFont.caption())
+        .fontColor(KColor.sub())
+        .width('100%')
+      Row() {
+        TextInput({ text: this.inviteInput, placeholder: '请输入邀请码' })
+          .fontSize(KFont.meta())
+          .height(KSize.TOUCH_MIN)
+          .layoutWeight(1)
+          .backgroundColor(KColor.surfaceAlt())
+          .borderRadius(KRadius.S)
+          .onChange((value: string) => {
+            this.inviteInput = value;
+          })
+        Text(this.inviteBusy ? '激活中…' : '激活')
+          .fontSize(KFont.meta())
+          .fontColor(KColor.surface())
+          .backgroundColor(KColor.primary())
+          .borderRadius(KRadius.S)
+          .height(KSize.TOUCH_MIN)
+          .padding({ left: KSpace.L, right: KSpace.L })
+          .textAlign(TextAlign.Center)
+          .margin({ left: KSpace.S })
+          .onClick(() => {
+            this.activateInvite();
+          })
+      }
+      .width('100%')
+      .margin({ top: KSpace.S })
+
+      if (this.inviteMsg.length > 0) {
+        Text(this.inviteMsg)
+          .fontSize(KFont.caption())
+          .lineHeight(KLine.tight())
+          .fontColor(this.inviteOk ? KColor.primaryText() : KColor.warnInk())
+          .width('100%')
+          .margin({ top: KSpace.S })
+      }
+    }
+    .alignItems(HorizontalAlign.Start)
+    .width('100%')
+    .margin({ top: KSpace.S })
+  }
+
+  /**
+   * AI 深挖区块（嵌在释义浮层里）。
+   * 复用释义浮层而不是另开入口：用户读释义时正是最想追问的时刻。
+   */
+  @Builder
+  aiBlock() {
+    Column() {
+      Divider()
+        .color(KColor.lineSoft())
+        .margin({ top: KSpace.M, bottom: KSpace.M })
+
+      if (!this.aiRequested) {
+        Text('AI 深挖这句')
+          .fontSize(KFont.meta())
+          .fontWeight(FontWeight.Medium)
+          .fontColor(KColor.surface())
+          .backgroundColor(KColor.primary())
+          .borderRadius(KRadius.S)
+          .height(KSize.TOUCH_MIN)
+          .width('100%')
+          .textAlign(TextAlign.Center)
+          .onClick(() => {
+            this.runAi();
+          })
+      } else if (this.aiLoading) {
+        Row() {
+          LoadingProgress().width(20).height(20)
+          Text('AI 正在解析…')
+            .fontSize(KFont.meta())
+            .fontColor(KColor.sub())
+            .margin({ left: KSpace.S })
+        }
+        .width('100%')
+        .height(KSize.TOUCH_MIN)
+        .alignItems(VerticalAlign.Center)
+      } else if (this.aiOk) {
+        Column() {
+          Text('AI 解析')
+            .fontSize(KFont.caption())
+            .fontColor(KColor.sub())
+          Text(this.aiText)
+            .fontSize(KFont.meta())
+            .lineHeight(KLine.tight())
+            .fontColor(KColor.ink())
+            .margin({ top: KSpace.XS })
+            .width('100%')
+        }
+        .alignItems(HorizontalAlign.Start)
+        .width('100%')
+      } else {
+        Column() {
+          Text(this.aiText)
+            .fontSize(KFont.meta())
+            .lineHeight(KLine.tight())
+            .fontColor(KColor.warnInk())
+            .width('100%')
+          if (this.aiRetryable()) {
+            Text('重试')
+              .fontSize(KFont.meta())
+              .fontColor(KColor.primaryText())
+              .backgroundColor(KColor.surfaceAlt())
+              .borderRadius(KRadius.S)
+              .height(KSize.TOUCH_MIN)
+              .width('100%')
+              .textAlign(TextAlign.Center)
+              .margin({ top: KSpace.S })
+              .onClick(() => {
+                this.runAi();
+              })
+          }
+          if (Ai.needsInvite(this.aiCode)) {
+            this.inviteBlock()
+          }
+        }
+        .alignItems(HorizontalAlign.Start)
+        .width('100%')
+        .padding(KSpace.M)
+        .backgroundColor(KColor.surface())
+        .borderRadius(KRadius.S)
+      }
+    }
+    .width('100%')
+  }
+
   /** 底部释义浮层：整屏遮罩可点关闭。 */
   @Builder
   tipSheet() {
@@ -554,6 +756,8 @@ export struct ReadPage {
         .fontColor(KColor.ink())
         .margin({ top: KSpace.S })
         .width('100%')
+
+      this.aiBlock()
     }
     .alignItems(HorizontalAlign.Start)
     .width('100%')

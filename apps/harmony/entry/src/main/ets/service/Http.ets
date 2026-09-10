@@ -10,10 +10,16 @@ export const STATUS_LOCAL_FAILURE: number = -1;
 /** HTTP 层错误：携带状态码，便于上层区分「响应不是 JSON」「HTTP 状态码异常」「内容不存在(404)」。 */
 export class HttpError extends Error {
   readonly status: number;
+  /**
+   * 非 200 时的原始响应体。AI 接口把业务原因放在响应体的 `code` 里
+   * （INVITE_REQUIRED / QUOTA_EXHAUSTED / RATE_LIMITED …），只看状态码无法区分。
+   */
+  readonly body: string;
 
-  constructor(status: number, message: string) {
+  constructor(status: number, message: string, body: string = '') {
     super(message);
     this.status = status;
+    this.body = body;
   }
 }
 
@@ -29,31 +35,52 @@ export class HttpError extends Error {
  */
 export class HttpClient {
   static async getJson<T>(url: string): Promise<T> {
+    return HttpClient.send<T>(http.RequestMethod.GET, url, HttpClient.jsonHeaders(), null);
+  }
+
+  /**
+   * POST JSON。用于 AI 解析等需要提交正文的接口。
+   * `headers` 由调用方给出——AI 接口要求 `X-Device-Id`，而内容接口不需要，
+   * 不宜在通用层写死。
+   */
+  static async postJson<T>(url: string, body: string, headers: Record<string, string>): Promise<T> {
+    return HttpClient.send<T>(http.RequestMethod.POST, url, headers, body);
+  }
+
+  private static async send<T>(
+    method: http.RequestMethod,
+    url: string,
+    headers: Record<string, string>,
+    body: string | null,
+  ): Promise<T> {
     const requester: http.HttpRequest = http.createHttp();
     try {
       const options: http.HttpRequestOptions = {
-        method: http.RequestMethod.GET,
-        header: HttpClient.jsonHeaders(),
+        method: method,
+        header: headers,
         connectTimeout: 10000,
         readTimeout: 15000,
         expectDataType: http.HttpDataType.STRING,
       };
+      if (body !== null) {
+        options.extraData = body;
+      }
       const response: http.HttpResponse = await requester.request(url, options);
-      const body: string = typeof response.result === 'string'
+      const payload: string = typeof response.result === 'string'
         ? response.result
         : JSON.stringify(response.result);
 
       if (response.responseCode !== 200) {
-        hilog.error(DOMAIN, TAG, 'GET %{public}s -> HTTP %{public}d | body=%{public}s',
-          url, response.responseCode, HttpClient.head(body));
-        throw new HttpError(response.responseCode, `HTTP ${response.responseCode}`);
+        hilog.error(DOMAIN, TAG, '%{public}s %{public}s -> HTTP %{public}d | body=%{public}s',
+          method, url, response.responseCode, HttpClient.head(payload));
+        throw new HttpError(response.responseCode, `HTTP ${response.responseCode}`, payload);
       }
 
-      const parsed: T | null = HttpClient.parse<T>(body);
+      const parsed: T | null = HttpClient.parse<T>(payload);
       if (parsed === null) {
         // 典型场景：/content/* 未部署时，Pages 会用站点首页/404 页兜底，返回 200 + text/html。
-        hilog.error(DOMAIN, TAG, 'GET %{public}s -> HTTP 200 but NOT JSON | body=%{public}s',
-          url, HttpClient.head(body));
+        hilog.error(DOMAIN, TAG, '%{public}s %{public}s -> HTTP 200 but NOT JSON | body=%{public}s',
+          method, url, HttpClient.head(payload));
         throw new HttpError(STATUS_LOCAL_FAILURE,
           '响应不是 JSON：内容通道可能尚未部署（/content/* 会命中站点回退页）');
       }
