@@ -37,6 +37,12 @@ export class HttpClient {
         throw new HttpError(response.responseCode, `HTTP ${response.responseCode}`);
       }
       return JSON.parse(body) as T;
+    } catch (err) {
+      // ArkTS 要求对可能抛异常的调用显式处理（arkts-require-explicit-handling）。
+      // 这里原样重抛，保持错误类型不被抹平：上层按 HttpError.status 区分
+      // 「网络/解析失败」「HTTP 状态码异常」「内容不存在(404)」。
+      const cause: Error = err as Error;
+      throw cause;
     } finally {
       requester.destroy();
     }

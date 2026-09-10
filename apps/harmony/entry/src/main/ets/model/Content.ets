@@ -1,14 +1,29 @@
 /**
  * 内容领域模型：与 `packages/contracts/src/content.ts` 一一对应。
  *
- * ⚠️ 契约纪律：字段名与可选性必须与 contracts 保持一致，不得在此另立字段。
- * 契约若变更，先改 `packages/contracts`，再同步本文件。
+ * ⚠️ 契约纪律：
+ * - **客户端消费的接口**（ContentManifest / ContentManifestDay / TodaySummary /
+ *   DigestItem / DigestSection / DailyDigest / AiAnnotation）必须与 contracts **逐字段一致**，
+ *   不得自行增删改。契约变更时先改 `packages/contracts`，再同步本文件。
+ * - `ClippedArticle` 是 contracts 的**有意子集**：只声明客户端实际渲染所需字段
+ *   （不声明 aiModel / aiPromptVersion / aiGeneratedAt / sourceTextHash / aiError /
+ *   aiQuality / aiRelations / aiCards / policyLine / evergreen）。JSON 里的多余字段会被忽略。
  */
+
+/** 清单里的一篇文章摘要：够渲染卡片，并能把日报条目的 sourceUrl 反查成文章 id。 */
+export interface ContentManifestArticle {
+  id: string;
+  title: string;
+  source: string;
+  url: string;
+  /** "ok" 表示该篇有可用的 AI 概括与标注；其余值客户端不得渲染 AI 内容。 */
+  aiStatus: string;
+}
 
 /** 内容清单里的一天（构建产物，由 build-content-api.mjs 生成）。 */
 export interface ContentManifestDay {
   date: string;
-  articleIds: string[];
+  articles: ContentManifestArticle[];
   hasDigest: boolean;
   hasSummary: boolean;
   hasPractice: boolean;

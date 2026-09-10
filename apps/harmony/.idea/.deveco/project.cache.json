@@ -1,0 +1,16 @@
+{
+	"CommonInfo":{
+		"project.ide.version":"6.1.1.300",
+		"current.select.product":"default",
+		"current.select.buildMode":"",
+		"crossplatform.projectType":""
+	},
+	"BuildOptions":{
+		"SELECT_BUILD_PRODUCT":"default",
+		"BUNDLE_NAME":"cn.meirishizheng.kaogong",
+		"BUILD_PATH":{
+			"OUTPUT_PATH":"D:\\kaogong-cloud-v2\\apps\\harmony\\build\\outputs\\default"
+		},
+		"SELECT_BUILD_MODE":""
+	}
+}

@@ -36,13 +36,6 @@ export struct ReadPage {
     this.loadArticle();
   }
 
-  /** 从首页再次进入不同文章时，@Prop 变化需触发重新加载。 */
-  onPageShow(): void {
-    if (this.title.length === 0 && !this.loading) {
-      this.loadArticle();
-    }
-  }
-
   private loadArticle(): void {
     this.loading = true;
     this.errorText = '';

@@ -92,4 +92,21 @@ apps/harmony/
 1. `Span.textBackgroundStyle` 用于内联高亮底色。若本机 SDK 不支持，删除该行即降级为
    仅文字颜色/字重区分（`view/ReadPage.ets` 中已就地注释标记）。
 2. `Span.onClick` 用于点击术语看释义；同版本差异。
-3. 内容为**部署时快照**：线上内容 = 最近一次 Pages 部署。更新内容需重新构建部署。
+3. `Text() { ForEach(...) { Span(...) } }` 用于动态分段高亮。若编译器不接受
+   `ForEach` 作为 `Text` 的子节点，改用 `MutableStyledString` + `Text(styledString)`。
+4. 内容为**部署时快照**：线上内容 = 最近一次 Pages 部署。更新内容需重新构建部署。
+
+## 契约一致性门禁
+
+`apps/harmony` 不是 pnpm 包，不参与 `pnpm -r test`。为避免 ArkTS 模型与
+`packages/contracts` 静默漂移（曾发生：contracts 把 `ContentManifestDay.articleIds`
+改为 `articles`，鸿蒙模型未同步，直到编译期才报 `arkts-no-any-unknown`），
+一致性检查放在 **`apps/web/test/harmony-contract-parity.test.ts`**，随 `pnpm -r test` 执行。
+
+规则：客户端消费的接口（`ContentManifest` / `ContentManifestDay` / `ContentManifestArticle` /
+`TodaySummary` / `DigestItem` / `DigestSection` / `DailyDigest` / `AiAnnotation`）
+必须与 contracts **逐字段与顺序完全一致**；`ClippedArticle` 允许为有意子集，
+但不得出现 contracts 之外的字段。
+
+**改契约时**：先改 `packages/contracts/src/content.ts`，再同步本工程的
+`entry/src/main/ets/model/Content.ets`，然后跑 `pnpm --filter @kaogong/web test` 验证。
