@@ -1,3 +1,4 @@
+import { KColor } from '../theme/Tokens';
 import { HomePage } from '../view/HomePage';
 import { ReadPage, ReadParam } from '../view/ReadPage';
 
@@ -29,6 +30,6 @@ struct Index {
     .mode(NavigationMode.Stack)
     .hideBackButton(true)
     .navDestination(this.pageMap)
-    .backgroundColor('#F5F1E8')
+    .backgroundColor(KColor.BG)
   }
 }

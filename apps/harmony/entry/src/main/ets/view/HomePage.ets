@@ -1,26 +1,36 @@
 import { ContentManifest, DigestItem, DigestSection, TodaySummary } from '../model/Content';
 import { ContentService } from '../service/ContentService';
 import { HttpError, STATUS_LOCAL_FAILURE } from '../service/Http';
+import { KColor, KFont, KLine, KRadius, KShadow, KSpace } from '../theme/Tokens';
 import { ReadParam } from './ReadPage';
 
 /**
- * 首页：今日速览 + 当日日报（分栏列表）。
+ * 首页：日期切换 + 今日速览 + 当日日报（分栏列表）。
  *
- * 数据只来自 `manifest.json` + `{date}/summary.json` + `{date}/digest.json`：
- * 清单里已带每篇文章的 id/title/source/url，所以「日报条目 sourceUrl → 文章 id」
- * 可在本地完成反查，无需逐篇拉取全文（与 Web 端 clipMap 同源逻辑）。
+ * 交互补齐项（相对首版）：
+ * 1. **日期切换**——清单本身带 7 个内容日，首版只显示最新一天，历史内容完全无法触达；
+ * 2. **下拉刷新**——失败后原先只能点「重试」按钮；
+ * 3. **骨架屏**——首版是居中转圈，阅读类 App 用骨架屏更少跳动；
+ * 4. **按压反馈 + 触摸目标**——列表行整行可点、高度 ≥44vp（可达性下限）。
+ *
+ * 视觉全部取自 `theme/Tokens.ets`，本文件不含任何硬编码色值/字号/间距。
+ * 数据来自 `manifest.json` + `{date}/summary.json` + `{date}/digest.json`。
  */
 @Component
 export struct HomePage {
   @Consume('navStack') navStack: NavPathStack;
   @State loading: boolean = true;
+  @State refreshing: boolean = false;
   @State errorText: string = '';
   @State hintText: string = '';
-  @State dateText: string = '';
+  @State dates: string[] = [];
+  @State selectedDate: string = '';
   @State summaryText: string = '';
   @State keywords: string[] = [];
   @State sections: DigestSection[] = [];
 
+  /** 骨架屏占位行。 */
+  private skeletonRows: number[] = [0, 1, 2, 3, 4];
   /** 官方原文链接 → 本地文章 id；用于日报条目跳转。 */
   private urlToId: Map<string, string> = new Map<string, string>();
   /** 官方原文链接 → 来源名（如「南方网」）。 */
@@ -28,6 +38,17 @@ export struct HomePage {
 
   aboutToAppear(): void {
     this.loadLatest();
+  }
+
+  // —— 按压反馈：轻量背景变化（不做缩放，避免长列表滚动时抖动）——
+  @Styles
+  rowNormal() {
+    .backgroundColor(KColor.SURFACE)
+  }
+
+  @Styles
+  rowPressed() {
+    .backgroundColor(KColor.SURFACE_ALT)
   }
 
   private loadLatest(): void {
@@ -39,15 +60,18 @@ export struct HomePage {
         const latest: string | null = manifest.latestDate;
         if (latest === null || latest.length === 0) {
           this.loading = false;
+          this.refreshing = false;
           this.errorText = '内容清单为空：线上还没有可展示的日报。';
           return;
         }
         this.indexManifest(manifest);
-        this.dateText = latest;
+        this.dates = manifest.days.map((day) => day.date);
+        this.selectedDate = latest;
         this.loadDay(latest);
       })
       .catch((err: Error) => {
         this.loading = false;
+        this.refreshing = false;
         this.errorText = HomePage.describe(err);
       });
   }
@@ -67,6 +91,7 @@ export struct HomePage {
     this.summaryText = '';
     this.keywords = [];
     this.sections = [];
+    this.hintText = '';
     ContentService.loadSummary(date)
       .then((summary: TodaySummary) => {
         this.summaryText = summary.summary;
@@ -79,17 +104,28 @@ export struct HomePage {
       .then((digest) => {
         this.sections = digest.sections;
         this.loading = false;
+        this.refreshing = false;
       })
       .catch((err: Error) => {
         this.errorText = HomePage.describe(err);
         this.loading = false;
+        this.refreshing = false;
       });
+  }
+
+  private selectDate(date: string): void {
+    if (date === this.selectedDate) {
+      return;
+    }
+    this.selectedDate = date;
+    this.loading = true;
+    this.errorText = '';
+    this.loadDay(date);
   }
 
   private static describe(err: Error): string {
     if (err instanceof HttpError) {
       if (err.status === STATUS_LOCAL_FAILURE) {
-        // 已是可执行提示（响应不是 JSON）
         return err.message;
       }
       if (err.status === 404) {
@@ -123,7 +159,7 @@ export struct HomePage {
   private openItem(item: DigestItem): void {
     const articleId: string | undefined = this.urlToId.get(item.sourceUrl);
     if (articleId === undefined) {
-      // 未剪藏的条目没有本地原文：明确提示，不静默失败也不跳外部浏览器。
+      // 未剪藏的条目没有本地原文：给出明确提示，不静默失败也不跳外部浏览器。
       this.hintText = `「${item.title}」未收录原文，无法在本应用内阅读。`;
       return;
     }
@@ -132,37 +168,101 @@ export struct HomePage {
     this.navStack.pushPathByName('read', param);
   }
 
+  /** 日期切换条：横向可滚，选中态用品牌色填充。 */
+  @Builder
+  dateStrip() {
+    Scroll() {
+      Row() {
+        ForEach(this.dates, (date: string) => {
+          Text(date.substring(5))
+            .fontSize(KFont.META)
+            .fontColor(date === this.selectedDate ? KColor.SURFACE : KColor.SUB)
+            .backgroundColor(date === this.selectedDate ? KColor.PRIMARY : KColor.SURFACE)
+            .borderRadius(KRadius.FULL)
+            .height(44)
+            .padding({ left: KSpace.L, right: KSpace.L })
+            .margin({ right: KSpace.S })
+            .textAlign(TextAlign.Center)
+            .onClick(() => {
+              this.selectDate(date);
+            })
+        }, (date: string) => date)
+      }
+    }
+    .scrollable(ScrollDirection.Horizontal)
+    .scrollBar(BarState.Off)
+    .width('100%')
+    .margin({ bottom: KSpace.M })
+  }
+
+  /** 首屏骨架：结构与真实卡片一致，减少内容到达时的跳动。 */
+  @Builder
+  skeletonCard() {
+    Column() {
+      Row()
+        .width(64)
+        .height(KFont.TITLE_M)
+        .borderRadius(KRadius.XS)
+        .backgroundColor(KColor.SKELETON)
+
+      ForEach(this.skeletonRows, () => {
+        Column() {
+          Row()
+            .width('100%')
+            .height(KFont.META)
+            .borderRadius(KRadius.XS)
+            .backgroundColor(KColor.SKELETON)
+            .margin({ bottom: KSpace.S })
+          Row()
+            .width('62%')
+            .height(KFont.META)
+            .borderRadius(KRadius.XS)
+            .backgroundColor(KColor.SKELETON)
+        }
+        .alignItems(HorizontalAlign.Start)
+        .width('100%')
+        .padding({ top: KSpace.M, bottom: KSpace.M })
+      }, (index: number) => `sk-${index}`)
+    }
+    .alignItems(HorizontalAlign.Start)
+    .width('100%')
+    .padding(KSpace.L)
+    .backgroundColor(KColor.SURFACE)
+    .borderRadius(KRadius.L)
+    .shadow({ radius: KShadow.CARD_RADIUS, color: KShadow.CARD_COLOR, offsetY: KShadow.CARD_OFFSET_Y })
+  }
+
   @Builder
   summaryCard() {
     Column() {
       Text('今日速览')
-        .fontSize(13)
-        .fontColor('#6B7280')
+        .fontSize(KFont.CAPTION)
+        .fontColor(KColor.SUB)
       Text(this.summaryText)
-        .fontSize(16)
-        .lineHeight(26)
-        .fontColor('#1F2937')
-        .margin({ top: 8 })
+        .fontSize(KFont.BODY)
+        .lineHeight(KLine.NORMAL)
+        .fontColor(KColor.INK)
+        .margin({ top: KSpace.S })
         .width('100%')
       Flex({ wrap: FlexWrap.Wrap }) {
         ForEach(this.keywords, (keyword: string) => {
           Text(keyword)
-            .fontSize(12)
-            .fontColor('#4C795B')
-            .backgroundColor('#E6EFE8')
-            .borderRadius(10)
-            .padding({ left: 10, right: 10, top: 4, bottom: 4 })
-            .margin({ right: 8, top: 10 })
-        })
+            .fontSize(KFont.CAPTION)
+            .fontColor(KColor.PRIMARY_TEXT)
+            .backgroundColor(KColor.PRIMARY_SOFT)
+            .borderRadius(KRadius.FULL)
+            .padding({ left: KSpace.M, right: KSpace.M, top: KSpace.XS, bottom: KSpace.XS })
+            .margin({ right: KSpace.S, top: KSpace.S })
+        }, (keyword: string) => keyword)
       }
-      .margin({ top: 4 })
+      .margin({ top: KSpace.XS })
       .width('100%')
     }
     .alignItems(HorizontalAlign.Start)
     .width('100%')
-    .padding(16)
-    .backgroundColor('#FFFFFF')
-    .borderRadius(12)
+    .padding(KSpace.L)
+    .backgroundColor(KColor.SURFACE)
+    .borderRadius(KRadius.L)
   }
 
   @Builder
@@ -170,53 +270,54 @@ export struct HomePage {
     Column() {
       Row() {
         Text(section.title)
-          .fontSize(17)
+          .fontSize(KFont.TITLE_S)
           .fontWeight(FontWeight.Bold)
-          .fontColor('#1F2937')
+          .fontColor(KColor.INK)
         Text(`${section.items.length} 条`)
-          .fontSize(12)
-          .fontColor('#9CA3AF')
-          .margin({ left: 8 })
+          .fontSize(KFont.CAPTION)
+          .fontColor(KColor.MUT)
+          .margin({ left: KSpace.S })
       }
       .width('100%')
-      .padding({ bottom: 4 })
+      .padding({ bottom: KSpace.XS })
 
       ForEach(section.items, (item: DigestItem, index: number) => {
         Row() {
           Text(`${index + 1}`)
-            .fontSize(12)
-            .fontColor('#6B7280')
-            .width(22)
-            .textAlign(TextAlign.Center)
+            .fontSize(KFont.CAPTION)
+            .fontColor(KColor.MUT)
+            .width(KSpace.XXL)
           Column() {
             Text(item.title)
-              .fontSize(16)
+              .fontSize(KFont.BODY)
               .fontWeight(FontWeight.Medium)
-              .fontColor('#1F2937')
+              .fontColor(KColor.INK)
               .maxLines(2)
               .textOverflow({ overflow: TextOverflow.Ellipsis })
               .width('100%')
             if (this.summaryOf(item).length > 0) {
               Text(this.summaryOf(item))
-                .fontSize(13)
-                .lineHeight(21)
-                .fontColor('#6B7280')
+                .fontSize(KFont.META)
+                .lineHeight(KLine.TIGHT)
+                .fontColor(KColor.SUB)
                 .maxLines(2)
                 .textOverflow({ overflow: TextOverflow.Ellipsis })
-                .margin({ top: 4 })
+                .margin({ top: KSpace.XS })
                 .width('100%')
             }
             Text(this.sourceOf(item))
-              .fontSize(12)
-              .fontColor('#9CA3AF')
-              .margin({ top: 6 })
+              .fontSize(KFont.CAPTION)
+              .fontColor(KColor.MUT)
+              .margin({ top: KSpace.S })
           }
           .alignItems(HorizontalAlign.Start)
           .layoutWeight(1)
         }
         .width('100%')
         .alignItems(VerticalAlign.Top)
-        .padding({ top: 12, bottom: 12 })
+        .constraintSize({ minHeight: 44 })
+        .padding({ top: KSpace.M, bottom: KSpace.M })
+        .stateStyles({ normal: this.rowNormal, pressed: this.rowPressed })
         .onClick(() => {
           this.openItem(item);
         })
@@ -224,76 +325,90 @@ export struct HomePage {
     }
     .alignItems(HorizontalAlign.Start)
     .width('100%')
-    .padding(16)
-    .margin({ top: 12 })
-    .backgroundColor('#FFFFFF')
-    .borderRadius(12)
+    .padding(KSpace.L)
+    .margin({ top: KSpace.M })
+    .backgroundColor(KColor.SURFACE)
+    .borderRadius(KRadius.L)
+  }
+
+  @Builder
+  errorCard() {
+    Column() {
+      Text('无法加载内容')
+        .fontSize(KFont.TITLE_S)
+        .fontWeight(FontWeight.Bold)
+        .fontColor(KColor.DANGER)
+      Text(this.errorText)
+        .fontSize(KFont.META)
+        .lineHeight(KLine.TIGHT)
+        .fontColor(KColor.SUB)
+        .margin({ top: KSpace.S })
+        .textAlign(TextAlign.Center)
+      Button('重试')
+        .height(44)
+        .margin({ top: KSpace.XL })
+        .onClick(() => {
+          this.loadLatest();
+        })
+    }
+    .width('100%')
+    .padding(KSpace.XXL)
+    .margin({ top: KSpace.XXXL })
+    .backgroundColor(KColor.SURFACE)
+    .borderRadius(KRadius.L)
+  }
+
+  @Builder
+  content() {
+    Column() {
+      if (this.loading) {
+        this.skeletonCard()
+      } else if (this.errorText.length > 0) {
+        this.errorCard()
+      } else {
+        if (this.summaryText.length > 0) {
+          this.summaryCard()
+        }
+        if (this.hintText.length > 0) {
+          Text(this.hintText)
+            .fontSize(KFont.META)
+            .fontColor(KColor.WARN_INK)
+            .backgroundColor(KColor.WARN_SOFT)
+            .borderRadius(KRadius.S)
+            .padding(KSpace.M)
+            .width('100%')
+            .margin({ top: KSpace.M })
+        }
+        ForEach(this.sections, (section: DigestSection) => {
+          this.sectionBlock(section)
+        }, (section: DigestSection) => `${this.selectedDate}-${section.id}`)
+      }
+    }
+    .width('100%')
+    .alignItems(HorizontalAlign.Start)
   }
 
   build() {
-    Scroll() {
-      Column() {
-        if (this.loading) {
-          Row() {
-            LoadingProgress().width(28).height(28)
-            Text('正在读取云端内容…').fontSize(14).fontColor('#6B7280').margin({ left: 10 })
-          }
-          .margin({ top: 80 })
-        } else if (this.errorText.length > 0) {
-          Column() {
-            Text('无法加载内容')
-              .fontSize(17)
-              .fontWeight(FontWeight.Bold)
-              .fontColor('#B91C1C')
-            Text(this.errorText)
-              .fontSize(14)
-              .lineHeight(22)
-              .fontColor('#6B7280')
-              .margin({ top: 10 })
-              .textAlign(TextAlign.Center)
-            Button('重试')
-              .margin({ top: 18 })
-              .onClick(() => {
-                this.loadLatest();
-              })
-          }
-          .width('100%')
-          .padding(24)
-          .margin({ top: 60 })
-          .backgroundColor('#FFFFFF')
-          .borderRadius(12)
-        } else {
-          Text(this.dateText)
-            .fontSize(13)
-            .fontColor('#6B7280')
-            .width('100%')
-            .margin({ bottom: 10 })
-          if (this.summaryText.length > 0) {
-            this.summaryCard()
-          }
-          if (this.hintText.length > 0) {
-            Text(this.hintText)
-              .fontSize(13)
-              .fontColor('#92400E')
-              .backgroundColor('#FEF3C7')
-              .borderRadius(8)
-              .padding(10)
-              .width('100%')
-              .margin({ top: 12 })
-          }
-          ForEach(this.sections, (section: DigestSection) => {
-            this.sectionBlock(section)
-          }, (section: DigestSection) => section.id)
+    Refresh({ refreshing: $$this.refreshing }) {
+      Scroll() {
+        Column() {
+          this.dateStrip()
+          this.content()
         }
+        .width('100%')
+        .alignItems(HorizontalAlign.Start)
+        .padding({ left: KSpace.PAGE, right: KSpace.PAGE, top: KSpace.M, bottom: KSpace.XXL })
       }
       .width('100%')
-      .padding({ left: 16, right: 16, top: 12, bottom: 24 })
-      .alignItems(HorizontalAlign.Start)
+      .height('100%')
+      .align(Alignment.Top)
+      .scrollBar(BarState.Off)
     }
+    .onRefreshing(() => {
+      this.loadLatest();
+    })
     .width('100%')
     .height('100%')
-    .align(Alignment.Top)
-    .scrollBar(BarState.Off)
-    .backgroundColor('#F5F1E8')
+    .backgroundColor(KColor.BG)
   }
 }

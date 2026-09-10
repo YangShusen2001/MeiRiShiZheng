@@ -7,24 +7,7 @@ export interface ReaderSegment {
   explanation: string;
 }
 
-/** 标注类型 → 高亮底色。与 Web 端三色（考点/观点/术语）+ 数字指标一致。 */
-export function annotationColor(type: string): string {
-  if (type === 'exam_point') {
-    return '#FFE7A0';
-  }
-  if (type === 'viewpoint') {
-    return '#C8E6C9';
-  }
-  if (type === 'term') {
-    return '#BBDEFB';
-  }
-  if (type === 'figure') {
-    return '#F8BBD0';
-  }
-  return '';
-}
-
-/** 标注类型 → 中文标签（点击释义卡片用）。 */
+/** 标注类型 → 中文标签（释义浮层与标注总览用）。 */
 export function annotationLabel(type: string): string {
   if (type === 'exam_point') {
     return '考点';

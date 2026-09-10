@@ -51,16 +51,43 @@ apps/harmony/
 │       ├── module.json5             权限（INTERNET）、Ability 注册
 │       ├── resources/               字符串 / 颜色 / 图标 / main_pages
 │       └── ets/
+│           ├── theme/Tokens.ets         设计令牌（视觉唯一事实源）
 │           ├── config/Endpoints.ets     云端端点集中配置
 │           ├── model/Content.ets        领域模型（对齐 packages/contracts）
 │           ├── service/Http.ets         JSON HTTP 客户端
 │           ├── service/ContentService.ets  取数入口 + aiStatus 门控
 │           ├── view/ReaderSegments.ets  标注切片（纯函数）
-│           ├── view/HomePage.ets        首页：今日速览 + 日报分栏
-│           ├── view/ReadPage.ets        阅读页：分段 + 三色标注
+│           ├── view/HomePage.ets        首页：日期切换 + 今日速览 + 日报分栏
+│           ├── view/ReadPage.ets        阅读页：分段 + 四色标注 + 标注清单
 │           ├── pages/Index.ets          Navigation 容器
 │           └── entryability/EntryAbility.ets
 └── ...
+```
+
+## 设计规范
+
+**视觉的唯一事实源是 `entry/src/main/ets/theme/Tokens.ets`。**
+页面里不允许出现硬编码色值、字号、间距；新增视觉需求先在 Tokens 加令牌。
+
+调性：暖米底 `#F5F1E8` + 深绿 `#4C795B` 的护眼阅读配色（**有意不跟随 Web 的冷蓝体系**，
+理由与完整令牌表、**WCAG 对比度实算审计**、交互清单见 [`DESIGN.md`](DESIGN.md)）。
+
+自检（期望输出 `硬编码色值: 0 ✓`）：
+
+```bash
+cd apps/harmony/entry/src/main/ets
+python -c "
+import os,re
+bad=[]
+for dp,_,fs in os.walk('.'):
+    for f in fs:
+        if not f.endswith('.ets'): continue
+        p=os.path.join(dp,f)
+        if p.endswith('Tokens.ets'): continue
+        for m in re.finditer(r'#[0-9A-Fa-f]{6,8}', open(p,encoding='utf-8').read()):
+            bad.append(f'{p}: {m.group(0)}')
+print('硬编码色值:', len(bad) or '0 ✓')
+"
 ```
 
 ## 分层纪律
