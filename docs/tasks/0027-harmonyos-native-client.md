@@ -2,9 +2,9 @@
 
 ## Status
 
-in_progress — **Phase 0 已完成，全量门禁通过**（typecheck / build exit=0，test 全过，
-`dist/content/` 产物齐全）；**Phase 1 骨架已落地**（`apps/harmony/`，首页 + 阅读页 + 云端对接），
-待 DevEco 实机编译验证与一次 Pages 部署让 `/content/*` 上线。
+**Phase 0 完成并全量门禁通过；Phase 1 已实机验收通过。**
+内容分发层已部署到生产（`www.meirishizheng.cn`），鸿蒙端在 nova 14 Pro 上完整跑通
+「云端取数 → 首页 → 阅读页 → 三色标注」。
 
 ## Owner
 
@@ -267,6 +267,40 @@ pnpm exec wrangler pages deploy ../web/dist \
 > `noop-entrypoint.mjs`、`_noop-middleware.mjs`、`manifest_*.mjs`、`chunks/`），
 > 原因是构建末尾 `cleanServerOutput` 的删除动作被本机安全护栏拦截（见下）。
 > 这些文件在预览里无副作用，但生产发布前应清理干净。
+
+### 生产部署与 Phase 1 实机验收（2026-09-11，用户授权后执行）
+
+**发布前清理**：确认那批服务端残留文件**无任何客户端引用**
+（`renderers.mjs` 仅被 `manifest_*.mjs` 与 `pages/**` 互引；HTML / `_astro` 零引用），
+故整组 16 个文件移除，dist 由 645 → 629 个文件。
+
+**生产发布**：
+```
+pnpm exec wrangler pages deploy ../web/dist --project-name kaogong-web --branch=main
+→ Success! Uploaded 0 files (629 already uploaded)
+→ https://86083cbc.kaogong-web.pages.dev
+```
+
+**验证**：
+
+| 检查 | 结果 |
+|---|---|
+| `https://86083cbc.kaogong-web.pages.dev/content/manifest.json` | ✅ 返回 JSON，`latestDate=2026-08-21`，7 个内容日 |
+| `https://www.meirishizheng.cn/content/manifest.json` | ✅ 返回 JSON（同内容） |
+| 鸿蒙端设备（nova 14 Pro） | ✅ 首页取到内容，阅读页正常渲染 |
+
+> 注意：对同一 URL 反复抓取时要加查询串换缓存键（如 `?v=20260911a`），
+> 否则会命中抓取工具的 15 分钟缓存，误判为「未生效」。
+
+**Phase 1 实机证据（截图核对）**：阅读页渲染出
+标题栏「阅读」+ 来源行「人民网 · 2026-08-21」+ 标题 + **AI 概括**卡片
++ **图例「考点 8 / 观点 5 / 术语 2 / 数字指标 1」** + 正文**三处内联彩色高亮**。
+
+**由此一并确认（此前标注为风险的项全部通过）**：
+
+- `Text() { ForEach(...) { Span(...) } }` 可用于动态分段高亮 ✅
+- `Span.textBackgroundStyle` 内联高亮底色生效 ✅
+- `aiStatus === "ok"` 门控生效（该篇有 AI 概括与标注，故正常渲染）✅
 
 ### Verification
 
