@@ -1,0 +1,124 @@
+{
+  "id": "a7674aafa5",
+  "date": "2026-09-10",
+  "title": "江苏省人民政府 要闻关注 刘小涛看望慰问一线教师 共筑尊师重教良好社会风尚",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/10/art_84322_11827564.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-10T23:45:08+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "在第42个教师节来临之际，省长刘小涛来到沭阳县青伊湖中心小学、泗洪县天岗湖中学看望慰问一线教师，向全省广大教师和教育工作者致以节日问候和衷心感谢。",
+    "刘小涛来到校园，实地了解办学条件、教学特色、师资建设，与教师代表亲切交流，向他们送上鲜花和节日祝福。他说，教育是育人才、传递爱的事业，大家长期耕耘一线、扎根乡村讲台，用知识点亮孩子逐梦之路、以匠心铺就成长轨迹，惠及千万家庭，是最敬爱、最可爱的人。教师是立教之本、兴教之源，希望大家牢记初心使命，紧扣立德树人根本任务，大力弘扬教育家精神，不断提高教育教学质量水平，促进学生身心健康、幸福成长。我们将深入学习贯彻习近平总书记关于教育的重要论述，坚持教育优先发展，加大投入保障力度，扎实办好教育领域民生实事，关心关爱教师工作生活，让广大教师安心从教、潜心育人，不断增强幸福感成就感荣誉感。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-10T23:45:08+00:00",
+  "sourceTextHash": "3e4db1136f2b9ed419af0c6ae76cf4adb94b5903231336146d0de78ec12709ed",
+  "aiStatus": "ok",
+  "aiSummary": "第42个教师节来临之际，省长刘小涛赴沭阳县青伊湖中心小学、泗洪县天岗湖中学看望慰问一线教师，向全省教师和教育工作者致以节日问候。他肯定教师扎根乡村、耕耘一线的奉献，强调教师是立教之本、兴教之源，希望弘扬教育家精神、落实立德树人，并表示将坚持教育优先发展，关心关爱教师，共筑尊师重教良好风尚。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-48-72-viewpoint",
+      "paragraphIndex": 0,
+      "start": 48,
+      "end": 72,
+      "text": "向全省广大教师和教育工作者致以节日问候和衷心感谢",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-53-66-viewpoint",
+      "paragraphIndex": 1,
+      "start": 53,
+      "end": 66,
+      "text": "教育是育人才、传递爱的事业",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-123-135-viewpoint",
+      "paragraphIndex": 1,
+      "start": 123,
+      "end": 135,
+      "text": "教师是立教之本、兴教之源",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-195-228-viewpoint",
+      "paragraphIndex": 1,
+      "start": 195,
+      "end": 228,
+      "text": "我们将深入学习贯彻习近平总书记关于教育的重要论述，坚持教育优先发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-1-8-exam_point",
+      "paragraphIndex": 0,
+      "start": 1,
+      "end": 8,
+      "text": "第42个教师节",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-13-18-exam_point",
+      "paragraphIndex": 0,
+      "start": 13,
+      "end": 18,
+      "text": "省长刘小涛",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-149-157-exam_point",
+      "paragraphIndex": 1,
+      "start": 149,
+      "end": 157,
+      "text": "立德树人根本任务",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-162-167-exam_point",
+      "paragraphIndex": 1,
+      "start": 162,
+      "end": 167,
+      "text": "教育家精神",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-222-228-exam_point",
+      "paragraphIndex": 1,
+      "start": 222,
+      "end": 228,
+      "text": "教育优先发展",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-281-290-exam_point",
+      "paragraphIndex": 1,
+      "start": 281,
+      "end": 290,
+      "text": "幸福感成就感荣誉感",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-162-167-term",
+      "paragraphIndex": 1,
+      "start": 162,
+      "end": 167,
+      "text": "教育家精神",
+      "type": "term",
+      "explanation": "指心有大我、至诚报国，言为士则、行为世范，启智润心、因材施教，勤学笃行、求是创新，乐教爱生、甘于奉献，胸怀天下、以文化人的精神。"
+    },
+    {
+      "id": "ai-1-149-153-term",
+      "paragraphIndex": 1,
+      "start": 149,
+      "end": 153,
+      "text": "立德树人",
+      "type": "term",
+      "explanation": "指坚持德育为先，通过正面教育引导人、感化人、激励人，培养德智体美劳全面发展的社会主义建设者和接班人。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

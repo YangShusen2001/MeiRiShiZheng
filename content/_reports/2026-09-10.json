@@ -1,0 +1,48 @@
+{
+  "date": "2026-09-10",
+  "sourcesOk": 15,
+  "sourceErrors": [],
+  "candidates": 21,
+  "articles": 18,
+  "aiOk": 10,
+  "aiError": 8,
+  "aiFailures": [
+    {
+      "articleId": "ce2722f2f7",
+      "reason": "ai_semantic:annotation_count_exam_point"
+    },
+    {
+      "articleId": "3d1e940ab8",
+      "reason": "ai_semantic:annotation_count_viewpoint"
+    },
+    {
+      "articleId": "c88147f1a4",
+      "reason": "ai_semantic:summary_length"
+    },
+    {
+      "articleId": "2417f0c2a7",
+      "reason": "ai_semantic:annotation_count_viewpoint"
+    },
+    {
+      "articleId": "2ba8014281",
+      "reason": "ai_semantic:summary_length"
+    },
+    {
+      "articleId": "0a7e8ea9ff",
+      "reason": "ai_semantic:summary_length"
+    },
+    {
+      "articleId": "0a9f2919e8",
+      "reason": "ai_semantic:summary_length"
+    },
+    {
+      "articleId": "d7d722cf91",
+      "reason": "ai_semantic:summary_length"
+    }
+  ],
+  "locationErrors": 1,
+  "schemaErrors": [],
+  "semanticErrors": [],
+  "volumeErrors": [],
+  "qualityStatus": "degraded"
+}

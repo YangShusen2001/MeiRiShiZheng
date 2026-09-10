@@ -1,0 +1,22 @@
+{
+  "id": "0a7e8ea9ff",
+  "date": "2026-09-10",
+  "title": "江苏省人民政府 要闻关注 香港理工大学一行来访",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/10/art_84322_11827562.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-10T23:45:15+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月7日下午，省长刘小涛在南京会见香港理工大学董事会主席林大辉、香港理工大学校长滕锦光一行。",
+    "双方表示，将立足国家重大战略需求，聚焦区域创新重点任务，推动科技创新和产业创新深度融合，围绕人工智能、生物医药、航天材料、机器人等赛道，协同推进关键核心技术攻关和成果转化，做强香港理工大学在南京、无锡设立的技术创新研究院平台，支持企业参与共建联合实验室、创新联合体，加快优质科创项目孵化落地，打造苏港校地合作标杆。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-10T23:45:15+00:00",
+  "sourceTextHash": "f02f24dd992840156f01c4f547ec2c1700dedacba9aa5baf8ce2e1c72c65f7be",
+  "aiStatus": "error",
+  "aiAnnotations": [],
+  "aiError": "ai_semantic:summary_length"
+}

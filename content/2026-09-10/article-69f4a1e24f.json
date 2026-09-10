@@ -1,0 +1,135 @@
+{
+  "id": "69f4a1e24f",
+  "date": "2026-09-10",
+  "title": "江苏省人民政府 要闻关注 全省金融系统党的建设工作会议召开",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/10/art_84322_11827565.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-10T23:45:20+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月9日，全省金融系统党的建设工作会议在南京召开。省委常委、常务副省长、省委金融工委书记马欣出席并讲话。",
+    "会议强调，全省金融系统要深入学习贯彻习近平党建思想和习近平总书记在庆祝中国共产党成立105周年大会上的重要讲话精神，认真落实金融系统党的建设工作会议、省委金融委第五次全体会议精神，持续加强全省金融系统党建工作，以高质量党建促进全省金融高质量发展。",
+    "会议指出，要始终把党的政治建设摆在首位，持续深化党的创新理论武装，坚持金融工作的政治性、人民性，牢牢把握正确政治方向。要进一步健全地方金融党建工作体系，加大各部门单位协同联动，合力提升党建工作质效。要加强金融系统干部人才队伍建设，加大教育培训力度，健全人才交流机制，发挥先进典型示范带动作用，激发干事创业内生动能。要突出常态长效，巩固拓展树立和践行正确政绩观学习教育成果。要压紧压实全面从严治党责任，更高标准落实“一岗双责”，纵深推进正风肃纪反腐，扎扎实实做好巡视整改“后半篇文章”。要切实抓好当前金融工作，增强责任感紧迫感，聚焦重点领域和薄弱环节精准发力，加强金融对实体经济的服务支撑，深入推进地方金融组织规范整治，持续守牢金融安全稳定底线，全力完成好年初确定的目标任务，为助力实现“十五五”良好开局提供坚实的金融支撑。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-10T23:45:20+00:00",
+  "sourceTextHash": "9fc817bf1227d8c2b90254dd0d992b19233f73859fe3737a64f73a3decbd0b79",
+  "aiStatus": "ok",
+  "aiSummary": "9月9日，全省金融系统党的建设工作会议在南京召开，省委常委、常务副省长、省委金融工委书记马欣出席并讲话。会议强调深入学习贯彻习近平党建思想，以高质量党建促进金融高质量发展，并就政治建设、党建体系、干部人才、从严治党及当前金融工作作出部署。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-5-24-exam_point",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 24,
+      "text": "全省金融系统党的建设工作会议在南京召开",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-44-46-term",
+      "paragraphIndex": 0,
+      "start": 44,
+      "end": 46,
+      "text": "马欣",
+      "type": "term",
+      "explanation": "江苏省委常委、常务副省长，兼任省委金融工委书记，出席本次会议并讲话。"
+    },
+    {
+      "id": "ai-1-18-25-term",
+      "paragraphIndex": 1,
+      "start": 18,
+      "end": 25,
+      "text": "习近平党建思想",
+      "type": "term",
+      "explanation": "习近平总书记关于党的建设的重要思想，是新时代加强党的建设的根本遵循和行动指南。"
+    },
+    {
+      "id": "ai-1-105-122-viewpoint",
+      "paragraphIndex": 1,
+      "start": 105,
+      "end": 122,
+      "text": "以高质量党建促进全省金融高质量发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-62-74-exam_point",
+      "paragraphIndex": 1,
+      "start": 62,
+      "end": 74,
+      "text": "金融系统党的建设工作会议",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-75-89-exam_point",
+      "paragraphIndex": 1,
+      "start": 75,
+      "end": 89,
+      "text": "省委金融委第五次全体会议精神",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-5-19-viewpoint",
+      "paragraphIndex": 2,
+      "start": 5,
+      "end": 19,
+      "text": "要始终把党的政治建设摆在首位",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-33-47-viewpoint",
+      "paragraphIndex": 2,
+      "start": 33,
+      "end": 47,
+      "text": "坚持金融工作的政治性、人民性",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-207-211-term",
+      "paragraphIndex": 2,
+      "start": 207,
+      "end": 211,
+      "text": "一岗双责",
+      "type": "term",
+      "explanation": "指领导干部在承担业务工作职责的同时，还要承担分管范围内的党风廉政建设责任。"
+    },
+    {
+      "id": "ai-2-230-241-term",
+      "paragraphIndex": 2,
+      "start": 230,
+      "end": 241,
+      "text": "巡视整改“后半篇文章”",
+      "type": "term",
+      "explanation": "指巡视反馈问题后的整改落实工作，强调做好整改这一后续关键环节，确保巡视成果落地见效。"
+    },
+    {
+      "id": "ai-2-279-293-exam_point",
+      "paragraphIndex": 2,
+      "start": 279,
+      "end": 293,
+      "text": "加强金融对实体经济的服务支撑",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-309-321-exam_point",
+      "paragraphIndex": 2,
+      "start": 309,
+      "end": 321,
+      "text": "持续守牢金融安全稳定底线",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-337-360-viewpoint",
+      "paragraphIndex": 2,
+      "start": 337,
+      "end": 360,
+      "text": "为助力实现“十五五”良好开局提供坚实的金融支撑",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}
