@@ -63,13 +63,46 @@ GitHub `main` 的每日内容是 **ADR 0007 已退役的自动聚合管道**输�
 → **Phase 1 的内容基线继续用本地策展内容**；若需要更多演示体量，须由用户明确决定后再并入，
    并接受 `policyLine` / `aiCards` / 关系标注缺失导致的功能降级。
 
-### 遗留问题（需用户决策）
+### 遗留问题处置（2026-09-11 用户决策：三项均按建议执行）
 
-1. GitHub `main` 仍在接收退役管道的每日自动提交 → 与 ADR 0007 矛盾。
-2. 工作树有 **35 个文件的未提交修改**（绝大多数非本任务产生，含删除 4 张 screenshots），
-   且所在分支与 `main` 分叉 → 建议尽快明确提交/暂存归属，避免丢失。
-3. git 协议不通（代理失效）。可用通道：`api.github.com`（200）、`codeload.github.com`（可下 tarball）；
-   `raw.githubusercontent.com` 不通。
+**① 内容基线 —— 定稿：继续用本地策展内容，不并入远端旧管道内容。**
+理由见上节：远端 `main` 的 26 天内容缺 `picks` / `cards` / `policy-lines` / `policyLine` /
+`aiCards` / `aiRelations`，属 ADR 0007 已退役形态，并入会导致功能降级。
+
+**② 每日自动提交 —— 定稿：应关闭。已查明来源与影响范围。**
+
+来源是 `main` 分支上的 GitHub Actions 工作流 `.github/workflows/daily.yml`：
+
+- 触发：`cron: "0 22 * * *"`（UTC）= 北京时间每天 06:00，另有 `workflow_dispatch`。
+- 行为：跑 Python 管道 → `git add content` → 以 `kaogong-bot` 提交「每日更新 YYYY-MM-DD」→
+  随后构建前端并部署 Cloudflare Pages。
+- **实测运行结论（Sep 2 ~ Sep 9 全部 `failure`）**：卡在「生产发布阻塞门禁」`pnpm release:check`，
+  其后「安装前端依赖 / 构建前端 / **部署到 Cloudflare Pages** / 部署后冒烟」**全部 skipped**。
+  → 该工作流**每天只产生内容提交，从未真正部署过**；关闭它不会影响线上发布。
+- 关闭方式（需用户操作，本机 git 协议不通且无 GitHub token，无法代做）：
+  GitHub 仓库 → Actions → 左侧 `daily` → **Disable workflow**。
+
+**③ 未提交工作归属 —— 已处置：拆成两个提交入库。**
+
+- 处置前：工作树有 **35 个已跟踪文件的修改 + 大量未跟踪资源**（185 支箭头 SVG、`vendor/`、
+  `reader-relations.ts`、`policies`/`picks` schema 等），合计 247 个待提交文件，
+  所在分支 `public-release` 与 `main` 分叉。
+- 处置动作：先把 3 个「既有 WIP 与本次改动混合」的文件中属于本次的增量撤回，
+  提交既有 WIP；再重新应用本次增量并单独提交。结果：
+
+  | 提交 | 说明 | 文件数 |
+  |---|---|---|
+  | `8ba7a82` | `wip: 保全 public-release 上既有未提交工作（非本次任务产出）` | 247 |
+  | `cb5eb8b` | `feat(harmony): Phase 0 内容分发层——为鸿蒙原生端提供内容通道` | 9 |
+
+- 注意：`8ba7a82` 同时删除了 `docs/screenshots` 下 4 张截图（README 仍引用该路径），
+  该删除来自既有工作树状态，未做判断；如需保留请另行恢复。
+- `.workbuddy/`（项目记忆）仍为未跟踪，未纳入任何提交。
+
+**④ 网络通道（备忘）**：git 协议不通（代理 21081 / 10655 均失效，直连被 reset）。
+可用通道：`api.github.com`（200）、`codeload.github.com`（可下 tarball）；
+`raw.githubusercontent.com` 不通。取远端内容可绕开 git：
+`curl -sL -o kga.tar.gz https://api.github.com/repos/YangShusen2001/kaogong-cloud-v2/tarball/main`
 
 ---
 
