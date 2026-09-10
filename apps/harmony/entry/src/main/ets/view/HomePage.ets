@@ -36,6 +36,8 @@ export struct HomePage {
   @State keywords: string[] = [];
   @State sections: DigestSection[] = [];
   @State settingsOpen: boolean = false;
+  /** 设备当前是否断网。由 `Net.watch` 持续更新，不是"失败时才探测"。 */
+  @State offline: boolean = false;
 
   /** 骨架屏占位行。 */
   private skeletonRows: number[] = [0, 1, 2, 3, 4];
@@ -47,7 +49,22 @@ export struct HomePage {
   private dayIds: Map<string, string[]> = new Map<string, string[]>();
 
   aboutToAppear(): void {
+    // 持续监听网络：断网时挂提示条，恢复后自动重载，不必等用户手动刷新。
+    Net.watch((online: boolean) => {
+      this.offline = !online;
+      if (online) {
+        this.loadLatest();
+      }
+    });
+    Net.probe().then((online: boolean) => {
+      this.offline = !online;
+    });
     this.loadLatest();
+  }
+
+  aboutToDisappear(): void {
+    // 监听器在服务里是单例，页面销毁必须注销，否则回调会指向已销毁的实例。
+    Net.unwatch();
   }
 
   // —— 按压反馈：轻量背景变化（不做缩放，避免长列表滚动时抖动）——
@@ -138,7 +155,8 @@ export struct HomePage {
    * 报错时不武断归因——「没联网」和「服务异常」的处置动作完全不同。
    */
   private report(err: Error, stopLoading: boolean): void {
-    Net.isOnline().then((online: boolean) => {
+    Net.probe().then((online: boolean) => {
+      this.offline = !online;
       this.errorText = HomePage.describe(err, online);
       if (stopLoading) {
         this.loading = false;
@@ -409,6 +427,17 @@ export struct HomePage {
   @Builder
   content() {
     Column() {
+      // 断网横幅：主动告知，不让用户对着旧内容猜为什么刷不出来
+      if (this.offline) {
+        Text('当前无网络连接，恢复网络后会自动刷新。')
+          .fontSize(KFont.meta())
+          .fontColor(KColor.warnInk())
+          .backgroundColor(KColor.warnSoft())
+          .borderRadius(KRadius.S)
+          .padding(KSpace.M)
+          .width('100%')
+          .margin({ bottom: KSpace.M })
+      }
       if (this.loading) {
         this.skeletonCard()
       } else if (this.errorText.length > 0) {
@@ -465,6 +494,7 @@ export struct HomePage {
           .width('100%')
           .height('100%')
           .backgroundColor(KColor.scrim())
+          .transition(TransitionEffect.OPACITY)
           .onClick(() => {
             this.settingsOpen = false;
           })
@@ -473,6 +503,7 @@ export struct HomePage {
             this.settingsOpen = false;
           },
         })
+          .transition(TransitionEffect.OPACITY.combine(TransitionEffect.translate({ y: 60 })))
       }
     }
     .width('100%')

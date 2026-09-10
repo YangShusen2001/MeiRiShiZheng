@@ -62,24 +62,29 @@
   --sub: #6f6455;
   --mut: #968a76;
   --line: #e3d9c3;
-  --primary: #8a5a2b;
-  --primary-deep: #5c3a1a;
-  --primary-soft: #f1e6d4;
+  /* 主色改用与鸿蒙端一致的深绿（原为棕金 #8a5a2b）。
+     理由：两端同一品牌色，且纸感暖底 + 墨绿本就是原生端的既定调性；
+     站点 logo 用的行楷也偏文人气质，与墨绿比冷蓝更协调。
+     对比度（实算）：#4a7355 在纸底 #f6f1e6 上 4.81:1、在白底 5.42:1 —— 均达 AA。 */
+  --primary: #4a7355;
+  --primary-deep: #35563e;
+  --primary-soft: #e5ede5;
   --accent: #a86e1e;
   --accent-soft: #f7ecd2;
   --green: #4a7a4a;
   --green-soft: #e6efe0;
   --red: #b04a3a;
   --red-soft: #f7e6e1;
-  --hl-yellow: #f3e0a4;
-  --hl-green: #d6e8c6;
-  --hl-glow: rgba(243, 224, 164, 0.82);
+  /* 高亮色值对齐鸿蒙端 AI 标注（考点 #FFE7A0 / 观点 #C8E6C9），两端观感一致 */
+  --hl-yellow: #ffe7a0;
+  --hl-green: #c8e6c9;
+  --hl-glow: rgba(255, 231, 160, 0.82);
   /* 暖调阴影：纸感底色上的投影偏暖棕，避免冷蓝穿帮（P1） */
   --shadow: 0 1px 2px rgba(92, 58, 26, 0.06), 0 6px 24px rgba(92, 58, 26, 0.09);
   --shadow-sm: 0 1px 2px rgba(92, 58, 26, 0.06);
   --shadow-lg: 0 2px 4px rgba(92, 58, 26, 0.08), 0 12px 32px rgba(92, 58, 26, 0.14);
-  /* 品牌区渐变终点：纸感主题用深棕金，替代硬编码的冷蓝 */
-  --hero-end: #7a5226;
+  /* 品牌区渐变终点：跟随主色改为墨绿（原为棕金 #7a5226） */
+  --hero-end: #466a50;
 }
 
 /* 护眼主题：豆沙绿，长时间阅读舒适 */

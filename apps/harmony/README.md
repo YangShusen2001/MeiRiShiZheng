@@ -76,23 +76,26 @@ apps/harmony/
 调性：暖米底 `#F5F1E8` + 深绿 `#4C795B` 的护眼阅读配色（**有意不跟随 Web 的冷蓝体系**，
 理由与完整令牌表、**WCAG 对比度实算审计**、交互清单见 [`DESIGN.md`](DESIGN.md)）。
 
-自检（期望输出 `硬编码色值: 0 ✓`）：
+自检（已入库为脚本，期望输出 `✓ 全部通过`）：
 
 ```bash
-cd apps/harmony/entry/src/main/ets
-python -c "
-import os,re
-bad=[]
-for dp,_,fs in os.walk('.'):
-    for f in fs:
-        if not f.endswith('.ets'): continue
-        p=os.path.join(dp,f)
-        if p.endswith('Tokens.ets'): continue
-        for m in re.finditer(r'#[0-9A-Fa-f]{6,8}', open(p,encoding='utf-8').read()):
-            bad.append(f'{p}: {m.group(0)}')
-print('硬编码色值:', len(bad) or '0 ✓')
-"
+node apps/harmony/scripts/audit-arkts.mjs
 ```
+
+检查 6 项硬约束：相对导入可达、无 `any`/`unknown`、无未使用导入、无孤立 `@Builder`、
+**Tokens 之外零硬编码色值**、无残留的旧式常量令牌引用。失败 `exit 1`，可接进 CI。
+
+### 应用图标
+
+概念：**一页被划亮的书**（深绿底盘 + 暖米书页折角 + 一条考点黄高亮）。
+
+```bash
+node apps/harmony/design/build-icons.mjs
+```
+
+矢量源在 `design/app-icon.svg`（**唯一事实源**），一条命令产出
+`AppScope/.../app_icon.png`、`entry/.../startIcon.png`、`design/app-icon-512.png`。
+只留位图的话下次调色就得重画，所以矢量源与构建脚本都入库。图标规范见 `DESIGN.md` §6。
 
 ## 分层纪律
 
@@ -144,8 +147,13 @@ print('硬编码色值:', len(bad) or '0 ✓')
    - `List.onScrollIndex((first, last) => …)` —— 阅读进度（若签名要求三参，补一个即可）
    - `NavPathStack.replacePathByName(name, param)` —— 篇间翻阅（若不可用，改 pop + push）
    - `preferences.getPreferencesSync(context, { name })` + `putSync` / `flush` —— 偏好持久化
-   - `connection.getDefaultNet()` —— 离线探测
+   - `connection.getDefaultNet()` / `createNetConnection()` + `on('netLost')` —— 离线探测与监听
    - `pasteboard.getSystemPasteboard().setData()` —— 复制链接
+   - `TransitionEffect.OPACITY.combine(TransitionEffect.translate({ y: 60 }))` —— 浮层动效
+   - `@kit.ShareKit` 的 `SharedData` / `ShareController` —— 系统分享
+     **（风险最高的一处：参数结构跨版本有差异。若编译不过，删掉
+     `service/Share.ets` 与 `ReadPage.ets` 里那一处调用即可——
+     「复制原帖链接」是独立路径，不受影响。）**
 
 ## 契约一致性门禁
 

@@ -33,6 +33,15 @@ export class Settings {
   private static store: preferences.Preferences | null = null;
   private static appContext: common.UIAbilityContext | null = null;
 
+  /**
+   * 应用级 context（EntryAbility 已持有）。
+   * 供需要 context 的能力复用（如系统分享），避免在组件内使用获取 hostContext 的那套
+   * API——它跨版本行为不一致。
+   */
+  static context(): common.UIAbilityContext | null {
+    return Settings.appContext;
+  }
+
   /** 在 `EntryAbility.onCreate` 调用（只有那里拿得到 context）。 */
   static init(context: common.UIAbilityContext): void {
     Settings.appContext = context;

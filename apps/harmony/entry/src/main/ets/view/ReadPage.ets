@@ -4,6 +4,7 @@ import { ContentService } from '../service/ContentService';
 import { HttpError, STATUS_LOCAL_FAILURE } from '../service/Http';
 import { Net } from '../service/Net';
 import { Settings } from '../service/Settings';
+import { Share } from '../service/Share';
 import { annotationBg, KColor, KFont, KLine, KRadius, KSize, KSpace } from '../theme/Tokens';
 import { annotationLabel, buildReaderSegments, ReaderSegment } from './ReaderSegments';
 import { SettingsSheet } from './SettingsSheet';
@@ -67,6 +68,8 @@ export struct ReadPage {
   @State copiedText: string = '';
   @State progress: number = 0;
   @State resumeIndex: number = 0;
+  /** 是否已滚过头部。只在**翻转时**改状态，避免滚动中高频重建。 */
+  @State scrolledPastHeader: boolean = false;
 
   /** 段落列表滚动控制器：标注跳转与续读定位用。 */
   private scroller: Scroller = new Scroller();
@@ -111,7 +114,7 @@ export struct ReadPage {
   }
 
   private report(err: Error): void {
-    Net.isOnline().then((online: boolean) => {
+    Net.probe().then((online: boolean) => {
       this.errorText = ReadPage.describe(err, online);
       this.loading = false;
     });
@@ -226,6 +229,18 @@ export struct ReadPage {
     });
   }
 
+  /** 系统分享。拉不起来时退回复制链接——按钮点了没反应是最糟的结果。 */
+  private shareArticle(): void {
+    if (this.url.length === 0) {
+      return;
+    }
+    Share.shareText(this.title, this.url).then((shown: boolean) => {
+      if (!shown) {
+        this.copyLink();
+      }
+    });
+  }
+
   // —— 图例（同时是筛选器）——
   @Builder
   legendChip(label: string, type: string) {
@@ -321,7 +336,7 @@ export struct ReadPage {
           .fontSize(KFont.meta())
           .fontColor(KColor.sub())
           .layoutWeight(1)
-        Text(this.copiedText.length > 0 ? this.copiedText : '复制链接')
+        Text(this.copiedText.length > 0 ? this.copiedText : '复制')
           .fontSize(KFont.caption())
           .fontColor(this.copiedText.length > 0 ? KColor.primaryText() : KColor.mut())
           .height(KSize.TOUCH_MIN)
@@ -383,7 +398,16 @@ export struct ReadPage {
             .fontSize(KFont.caption())
             .fontColor(KColor.mut())
             .layoutWeight(1)
-          Text(this.overviewOpen ? '收起清单' : '标注清单')
+          Text('分享')
+            .fontSize(KFont.caption())
+            .fontColor(KColor.sub())
+            .height(KSize.TOUCH_MIN)
+            .padding({ left: KSpace.S, right: KSpace.S })
+            .textAlign(TextAlign.Center)
+            .onClick(() => {
+              this.shareArticle();
+            })
+          Text(this.overviewOpen ? '收起' : '清单')
             .fontSize(KFont.caption())
             .fontColor(KColor.primaryText())
             .height(KSize.TOUCH_MIN)
@@ -604,6 +628,11 @@ export struct ReadPage {
           .padding({ left: KSpace.PAGE, right: KSpace.PAGE, top: KSpace.M, bottom: KSpace.XXL })
           .onScrollIndex((first: number, last: number) => {
             this.currentTopIndex = first;
+            // 只在"越过头部"这一状态翻转时改 @State，避免滚动中高频重建
+            const past: boolean = first > 0;
+            if (past !== this.scrolledPastHeader) {
+              this.scrolledPastHeader = past;
+            }
             const total: number = this.paragraphs.length + 1;
             this.progress = last >= total - 1 ? 1 : (last + 1) / total;
           })
@@ -626,10 +655,12 @@ export struct ReadPage {
             .width('100%')
             .height('100%')
             .backgroundColor(KColor.scrim())
+            .transition(TransitionEffect.OPACITY)
             .onClick(() => {
               this.tipVisible = false;
             })
           this.tipSheet()
+            .transition(TransitionEffect.OPACITY.combine(TransitionEffect.translate({ y: 60 })))
         }
 
         if (this.settingsOpen) {
@@ -637,6 +668,7 @@ export struct ReadPage {
             .width('100%')
             .height('100%')
             .backgroundColor(KColor.scrim())
+            .transition(TransitionEffect.OPACITY)
             .onClick(() => {
               this.settingsOpen = false;
             })
@@ -645,13 +677,16 @@ export struct ReadPage {
               this.settingsOpen = false;
             },
           })
+            .transition(TransitionEffect.OPACITY.combine(TransitionEffect.translate({ y: 60 })))
         }
       }
       .width('100%')
       .height('100%')
       .backgroundColor(KColor.bg())
     }
-    .title('阅读')
+    // 滚过头部后标题栏显示文章标题：起到「吸顶」的定位作用，
+    // 又不占用本就紧张的阅读高度（比真吸顶更适合长文）。
+    .title(this.scrolledPastHeader && this.title.length > 0 ? this.title : '阅读')
     .backgroundColor(KColor.bg())
   }
 }
