@@ -7,6 +7,7 @@ import { KColor, KFont, KLine, KRadius, KShadow, KSize, KSpace } from '../theme/
 import { ReadParam } from './ReadPage';
 import { SearchHit, SearchSheet } from './SearchSheet';
 import { SettingsSheet } from './SettingsSheet';
+import { TermsSheet } from './TermsSheet';
 
 /**
  * 首页：日期切换 + 今日速览 + 当日日报（分栏列表）。
@@ -37,6 +38,7 @@ export struct HomePage {
   @State keywords: string[] = [];
   @State sections: DigestSection[] = [];
   @State settingsOpen: boolean = false;
+  @State termsOpen: boolean = false;
   @State searchOpen: boolean = false;
   /** 设备当前是否断网。由 `Net.watch` 持续更新。 */
   @State offline: boolean = false;
@@ -340,6 +342,16 @@ export struct HomePage {
       .scrollable(ScrollDirection.Horizontal)
       .scrollBar(BarState.Off)
       .layoutWeight(1)
+
+      Text('术语')
+        .fontSize(KFont.meta())
+        .fontColor(KColor.sub())
+        .height(KSize.TOUCH_MIN)
+        .padding({ left: KSpace.S, right: KSpace.S })
+        .textAlign(TextAlign.Center)
+        .onClick(() => {
+          this.termsOpen = true;
+        })
 
       Text('检索')
         .fontSize(KFont.meta())
@@ -713,6 +725,22 @@ export struct HomePage {
         SettingsSheet({
           onClose: () => {
             this.settingsOpen = false;
+          },
+        })
+      }
+
+      if (this.termsOpen) {
+        Column()
+          .width('100%')
+          .height('100%')
+          .backgroundColor(KColor.scrim())
+          .transition(TransitionEffect.OPACITY)
+          .onClick(() => {
+            this.termsOpen = false;
+          })
+        TermsSheet({
+          onClose: () => {
+            this.termsOpen = false;
           },
         })
       }

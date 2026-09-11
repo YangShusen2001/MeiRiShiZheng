@@ -7,6 +7,7 @@ import { HttpError, STATUS_LOCAL_FAILURE } from '../service/Http';
 import { Net } from '../service/Net';
 import { Invite, InviteResult } from '../service/Invite';
 import { Settings } from '../service/Settings';
+import { Terms } from '../service/Terms';
 import { Share } from '../service/Share';
 import { Speech } from '../service/Speech';
 import { annotationBg, KColor, KFont, KLine, KRadius, KSize, KSpace } from '../theme/Tokens';
@@ -93,6 +94,8 @@ export struct ReadPage {
   @State askInput: string = '';
   @State askError: string = '';
   @State askCode: string = '';
+  /** 当前片段是否已收藏（每次换片段重置）。 */
+  @State termSaved: boolean = false;
   /** 邀请码激活（AI 额度）。 */
   @State inviteInput: string = '';
   @State inviteBusy: boolean = false;
@@ -332,6 +335,7 @@ export struct ReadPage {
     this.askInput = '';
     this.askError = '';
     this.askCode = '';
+    this.termSaved = Terms.has(segment.text);
     this.tipVisible = true;
   }
 
@@ -390,6 +394,27 @@ export struct ReadPage {
         this.askError = result.text;
       }
     });
+  }
+
+  /**
+   * 收藏当前片段为术语。
+   *
+   * 把已知的 AI 解析一并存下——用户在浮层里已经花额度拿到的东西，
+   * 不该在「我的术语」里再花一次。
+   */
+  private saveTerm(): void {
+    const text: string = this.aiSource.trim();
+    if (text.length === 0 || this.termSaved) {
+      return;
+    }
+    Terms.save({
+      text: text,
+      articleId: this.articleId,
+      note: '',
+      explanation: this.aiOk ? this.aiText : '',
+      savedAt: Date.now(),
+    });
+    this.termSaved = true;
   }
 
   /** 就某个问题追问（点建议问题，或自己输入）。 */
@@ -1023,6 +1048,21 @@ export struct ReadPage {
             .fontColor(KColor.ink())
             .margin({ top: KSpace.XS })
             .width('100%')
+          // 收藏：把这段连同**已经拿到的解析**一起存进「我的术语」——
+          // 用户已经花过额度的东西，不该在收藏夹里再花一次。
+          Text(this.termSaved ? '✓ 已收藏' : '收藏到我的术语')
+            .fontSize(KFont.caption())
+            .fontColor(this.termSaved ? KColor.mut() : KColor.primaryText())
+            .backgroundColor(this.termSaved ? KColor.surface() : KColor.primarySoft())
+            .borderRadius(KRadius.S)
+            .height(KSize.TOUCH_MIN)
+            .padding({ left: KSpace.L, right: KSpace.L })
+            .margin({ top: KSpace.S })
+            .textAlign(TextAlign.Center)
+            .enabled(!this.termSaved)
+            .onClick(() => {
+              this.saveTerm();
+            })
           this.askBlock()
         }
         .alignItems(HorizontalAlign.Start)
