@@ -503,7 +503,6 @@ export struct HomePage {
             this.settingsOpen = false;
           },
         })
-          .transition(TransitionEffect.OPACITY.combine(TransitionEffect.translate({ y: 60 })))
       }
     }
     .width('100%')

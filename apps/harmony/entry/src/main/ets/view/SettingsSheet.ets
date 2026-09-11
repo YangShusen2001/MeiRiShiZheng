@@ -113,5 +113,7 @@ export struct SettingsSheet {
     .padding({ left: KSpace.L, right: KSpace.L, top: KSpace.M, bottom: KSpace.XXL })
     .backgroundColor(KColor.surfaceAlt())
     .borderRadius({ topLeft: KRadius.XL, topRight: KRadius.XL })
+    // 入场动效加在根节点上——@Builder 调用返回 void，调用方无法链式加属性
+    .transition(TransitionEffect.OPACITY.combine(TransitionEffect.translate({ y: 60 })))
   }
 }

@@ -84,3 +84,4 @@ apps/harmony/.clang-format
 apps/harmony/local.properties
 apps/harmony/**/*.har
 apps/harmony/**/oh-package-lock.json5
+.demo-shots/

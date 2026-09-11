@@ -764,6 +764,8 @@ export struct ReadPage {
     .padding({ left: KSpace.L, right: KSpace.L, top: KSpace.M, bottom: KSpace.XXL })
     .backgroundColor(KColor.hintSoft())
     .borderRadius({ topLeft: KRadius.XL, topRight: KRadius.XL })
+    // 入场动效必须加在 @Builder 的根节点上——@Builder 调用返回 void，不能链式调用属性
+    .transition(TransitionEffect.OPACITY.combine(TransitionEffect.translate({ y: 60 })))
   }
 
   @Builder
@@ -864,7 +866,6 @@ export struct ReadPage {
               this.tipVisible = false;
             })
           this.tipSheet()
-            .transition(TransitionEffect.OPACITY.combine(TransitionEffect.translate({ y: 60 })))
         }
 
         if (this.settingsOpen) {
@@ -881,7 +882,6 @@ export struct ReadPage {
               this.settingsOpen = false;
             },
           })
-            .transition(TransitionEffect.OPACITY.combine(TransitionEffect.translate({ y: 60 })))
         }
       }
       .width('100%')

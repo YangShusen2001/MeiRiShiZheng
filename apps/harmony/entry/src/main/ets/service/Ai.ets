@@ -3,12 +3,15 @@ import { HttpClient, HttpError, STATUS_LOCAL_FAILURE } from './Http';
 import { Net } from './Net';
 import { Settings } from './Settings';
 
-/** 服务端错误码（见 `apps/api/src/routes/explain.ts`），必须与后端保持一致。 */
-const CODE_INVITE_REQUIRED: string = 'INVITE_REQUIRED';
-const CODE_QUOTA_EXHAUSTED: string = 'QUOTA_EXHAUSTED';
-const CODE_RATE_LIMITED: string = 'RATE_LIMITED';
-const CODE_AI_UNAVAILABLE: string = 'AI_UNAVAILABLE';
-const CODE_AI_ERROR: string = 'AI_ERROR';
+/**
+ * 服务端错误码（见 `apps/api/src/routes/explain.ts`），必须与后端保持一致。
+ * 导出给页面用于判断"能否重试"——页面不该自己写死字符串。
+ */
+export const CODE_INVITE_REQUIRED: string = 'INVITE_REQUIRED';
+export const CODE_QUOTA_EXHAUSTED: string = 'QUOTA_EXHAUSTED';
+export const CODE_RATE_LIMITED: string = 'RATE_LIMITED';
+export const CODE_AI_UNAVAILABLE: string = 'AI_UNAVAILABLE';
+export const CODE_AI_ERROR: string = 'AI_ERROR';
 /** 本地原因码（非服务端返回）：网络层失败。 */
 export const CODE_NETWORK: string = 'NETWORK';
 
