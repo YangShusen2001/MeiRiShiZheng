@@ -1,0 +1,93 @@
+{
+  "id": "e918d0731f",
+  "date": "2026-09-11",
+  "title": "江苏省人民政府 要闻关注 信长星刘小涛会见同济大学党委书记郑庆华校长杨金龙",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/11/art_84322_11828209.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-11T23:55:51+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月10日，省委书记信长星、省长刘小涛在南京会见同济大学党委书记郑庆华、校长杨金龙。",
+    "信长星、刘小涛代表省委、省政府感谢同济大学一直以来对江苏发展的大力支持。信长星说，当前，江苏正在深入学习贯彻习近平总书记重要讲话精神，一体推进教育科技人才发展，全面融入上海（长三角）国际科技创新中心建设，加快打造发展新质生产力的重要阵地。同济大学学科特色鲜明、综合实力强，与江苏发展契合度高。希望双方围绕科技创新和产业创新深度融合、人才培养交流等方面深化合作，更好助力长三角一体化发展、服务全国发展大局。",
+    "郑庆华、杨金龙表示，同济大学正在加快转型发展，朝着建设成为中国特色世界一流大学的目标奋力前行。我们将把握好长三角一体化发展带来的新机遇，进一步深化与江苏的校地校企合作，努力取得更加丰硕的成果。",
+    "省领导陈忠伟、史志军，同济大学领导许学军、刘润和部分院士专家参加有关活动。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-11T23:55:51+00:00",
+  "sourceTextHash": "0931235ff16e54dae212bf6b9b1e59225d2d4e07d8bbc43527f2b8589c223c90",
+  "aiStatus": "ok",
+  "aiSummary": "9月10日，江苏省委书记信长星、省长刘小涛在南京会见同济大学党委书记郑庆华、校长杨金龙。信长星表示，江苏正一体推进教育科技人才发展，加快打造发展新质生产力的重要阵地，希望双方在科技创新和产业创新深度融合、人才培养交流等方面深化合作。郑庆华、杨金龙表示将深化校地校企合作。省领导陈忠伟、史志军等参加。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-67-79-term",
+      "paragraphIndex": 1,
+      "start": 67,
+      "end": 79,
+      "text": "一体推进教育科技人才发展",
+      "type": "term",
+      "explanation": "指统筹推进教育、科技、人才三方面工作，形成相互支撑、协同发展的整体格局。"
+    },
+    {
+      "id": "ai-1-80-101-exam_point",
+      "paragraphIndex": 1,
+      "start": 80,
+      "end": 101,
+      "text": "全面融入上海（长三角）国际科技创新中心建设",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-102-118-exam_point",
+      "paragraphIndex": 1,
+      "start": 102,
+      "end": 118,
+      "text": "加快打造发展新质生产力的重要阵地",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-146-179-viewpoint",
+      "paragraphIndex": 1,
+      "start": 146,
+      "end": 179,
+      "text": "希望双方围绕科技创新和产业创新深度融合、人才培养交流等方面深化合作",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-180-201-viewpoint",
+      "paragraphIndex": 1,
+      "start": 180,
+      "end": 201,
+      "text": "更好助力长三角一体化发展、服务全国发展大局",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-23-46-exam_point",
+      "paragraphIndex": 2,
+      "start": 23,
+      "end": 46,
+      "text": "朝着建设成为中国特色世界一流大学的目标奋力前行",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-50-67-viewpoint",
+      "paragraphIndex": 2,
+      "start": 50,
+      "end": 67,
+      "text": "把握好长三角一体化发展带来的新机遇",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-68-83-exam_point",
+      "paragraphIndex": 2,
+      "start": 68,
+      "end": 83,
+      "text": "进一步深化与江苏的校地校企合作",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

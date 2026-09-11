@@ -1,0 +1,93 @@
+{
+  "id": "333b9d6044",
+  "date": "2026-09-11",
+  "title": "前8个月粤港澳大湾区内地9市进出口值同比增长21.9%",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202609/11/139996_55002377.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-11T23:54:29+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "据海关统计，今年前8个月，粤港澳大湾区内地9市进出口值7.28万亿元，同比增长21.9%，创历史同期新高。其中8月份进出口值达1.01万亿元，继6月首次突破万亿元后，再次迈上万亿元台阶，增长30.4%。",
+    "粤港澳大湾区内地9市包括广州、深圳、珠海、佛山、惠州、东莞、中山、江门和肇庆。",
+    "粤港澳大湾区内地9市与APEC其他经济体贸易规模创历史新高",
+    "粤港澳大湾区内地9市对APEC其他经济体贸易活跃，前8月进出口规模4.82万亿元，同比增长24.2%，创历史新高。进出口总值从2016年的4.08万亿元增长至2025年的5.96万亿元，增长近五成。其中，汽车、集成电路、电脑及其零配件等品类分别增长4.5倍、1.3倍、1.2倍。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-11T23:54:29+00:00",
+  "sourceTextHash": "9b66294501ffe6990fe9cc81b56338610c38892641f5aeb6c2425f16987738e9",
+  "aiStatus": "ok",
+  "aiSummary": "今年前8个月，粤港澳大湾区内地9市进出口值达7.28万亿元，同比增长21.9%，创历史同期新高。8月进出口值1.01万亿元，继6月后再次突破万亿元，增长30.4%。对APEC其他经济体贸易规模4.82万亿元，增长24.2%，创历史新高。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-45-52-exam_point",
+      "paragraphIndex": 0,
+      "start": 45,
+      "end": 52,
+      "text": "创历史同期新高",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-71-92-exam_point",
+      "paragraphIndex": 0,
+      "start": 71,
+      "end": 92,
+      "text": "继6月首次突破万亿元后，再次迈上万亿元台阶",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-13-23-term",
+      "paragraphIndex": 0,
+      "start": 13,
+      "end": 23,
+      "text": "粤港澳大湾区内地9市",
+      "type": "term",
+      "explanation": "指广州、深圳、珠海、佛山、惠州、东莞、中山、江门和肇庆九个城市。"
+    },
+    {
+      "id": "ai-1-12-38-exam_point",
+      "paragraphIndex": 1,
+      "start": 12,
+      "end": 38,
+      "text": "广州、深圳、珠海、佛山、惠州、东莞、中山、江门和肇庆",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-0-29-viewpoint",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 29,
+      "text": "粤港澳大湾区内地9市与APEC其他经济体贸易规模创历史新高",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-51-56-exam_point",
+      "paragraphIndex": 3,
+      "start": 51,
+      "end": 56,
+      "text": "创历史新高",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-102-117-exam_point",
+      "paragraphIndex": 3,
+      "start": 102,
+      "end": 117,
+      "text": "汽车、集成电路、电脑及其零配件",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-11-15-term",
+      "paragraphIndex": 3,
+      "start": 11,
+      "end": 15,
+      "text": "APEC",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

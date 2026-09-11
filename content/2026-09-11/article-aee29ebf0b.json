@@ -1,0 +1,135 @@
+{
+  "id": "aee29ebf0b",
+  "date": "2026-09-11",
+  "title": "江苏省人民政府 要闻关注 刘小涛在淮安宿迁调研时强调 因地制宜培育壮大县域富民产业",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/11/art_84322_11828208.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-11T23:55:56+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月9日至10日，省长刘小涛在淮安市、宿迁市调研。他强调，要深入学习贯彻习近平总书记对江苏工作重要讲话精神，完整准确全面贯彻新发展理念，因地制宜培育壮大县域富民产业，持续推动城乡融合发展、区域协调发展。",
+    "刘小涛来到沭阳县、泗洪县，走进桐昆恒阳化纤、斯迪克新材料等企业，听取县域特色优势产业发展情况汇报。他强调，要坚持智能化、绿色化、融合化方向，强化龙头企业牵引带动，深化产学研协同创新，做大做强特色产业集群，推动产业链整体向高端攀升。",
+    "在沭阳县艺川盆景园，刘小涛询问花木品种引育、线上销售等情况，勉励企业主动适应市场需求变化，积极创新业态模式，让美丽经济走进千家万户、惠及更多群众。在洪泽区西顺河大闸蟹产业园，刘小涛强调要推进全流程精细化管理，抓好养殖尾水治理和循环再利用，实现生态效益和经济效益双提升。",
+    "在洪泽湖大堤，刘小涛强调，要统筹推进防汛与水生态保护、水环境治理、水资源利用，让洪泽湖成为造福人民的幸福湖。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-11T23:55:56+00:00",
+  "sourceTextHash": "307494cf8efad3daf40e6c66bb8f54bc42c4895f9f40b96c886a9a0820bfaca3",
+  "aiStatus": "ok",
+  "aiSummary": "9月9日至10日，省长刘小涛在淮安、宿迁调研，强调要因地制宜培育壮大县域富民产业，推动城乡融合和区域协调发展。他走访企业、产业园和洪泽湖大堤，要求坚持智能化绿色化融合化方向，做强特色产业集群，创新业态模式，推进精细化管理和生态保护，实现生态与经济双提升。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-68-82-viewpoint",
+      "paragraphIndex": 0,
+      "start": 68,
+      "end": 82,
+      "text": "因地制宜培育壮大县域富民产业",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-83-100-viewpoint",
+      "paragraphIndex": 0,
+      "start": 83,
+      "end": 100,
+      "text": "持续推动城乡融合发展、区域协调发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-54-69-viewpoint",
+      "paragraphIndex": 1,
+      "start": 54,
+      "end": 69,
+      "text": "坚持智能化、绿色化、融合化方向",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-119-133-viewpoint",
+      "paragraphIndex": 2,
+      "start": 119,
+      "end": 133,
+      "text": "实现生态效益和经济效益双提升",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-54-67-exam_point",
+      "paragraphIndex": 0,
+      "start": 54,
+      "end": 67,
+      "text": "完整准确全面贯彻新发展理念",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-70-80-exam_point",
+      "paragraphIndex": 1,
+      "start": 70,
+      "end": 80,
+      "text": "强化龙头企业牵引带动",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-81-90-exam_point",
+      "paragraphIndex": 1,
+      "start": 81,
+      "end": 90,
+      "text": "深化产学研协同创新",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-102-114-exam_point",
+      "paragraphIndex": 1,
+      "start": 102,
+      "end": 114,
+      "text": "推动产业链整体向高端攀升",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-104-118-exam_point",
+      "paragraphIndex": 2,
+      "start": 104,
+      "end": 118,
+      "text": "抓好养殖尾水治理和循环再利用",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-14-38-exam_point",
+      "paragraphIndex": 3,
+      "start": 14,
+      "end": 38,
+      "text": "统筹推进防汛与水生态保护、水环境治理、水资源利用",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-76-82-term",
+      "paragraphIndex": 0,
+      "start": 76,
+      "end": 82,
+      "text": "县域富民产业",
+      "type": "term",
+      "explanation": "指立足县域资源禀赋和产业基础，能够带动当地群众就业增收、促进县域经济发展的特色优势产业。"
+    },
+    {
+      "id": "ai-1-83-90-term",
+      "paragraphIndex": 1,
+      "start": 83,
+      "end": 90,
+      "text": "产学研协同创新",
+      "type": "term",
+      "explanation": "指企业、高校和科研机构发挥各自优势，协同开展技术研发与成果转化，提升产业创新能力的合作模式。"
+    },
+    {
+      "id": "ai-2-55-59-term",
+      "paragraphIndex": 2,
+      "start": 55,
+      "end": 59,
+      "text": "美丽经济",
+      "type": "term",
+      "explanation": "指依托花卉苗木、生态景观等美丽资源，发展观光、休闲、销售等业态，将生态颜值转化为经济价值。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

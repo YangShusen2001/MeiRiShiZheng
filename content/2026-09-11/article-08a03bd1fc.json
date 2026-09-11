@@ -1,0 +1,123 @@
+{
+  "id": "08a03bd1fc",
+  "date": "2026-09-11",
+  "title": "舞蹈迎新生 成都艺体中学开学典礼“艺术范”氛围感拉满",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83320836.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-11T23:54:49+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "四川在线记者&nbsp;&nbsp;李向雨&nbsp;摄影报道",
+    "2026年9月11日，四川省成都艺体中学举行开学典礼，欢迎2026级1000余名新生入校。作为四川省的一所公办艺体特色中学，成都艺体中学本次开学典礼充满“艺术范儿”，最大看点是高二、高三全体舞蹈专业学生集体登台迎新。",
+    "2026年9月11日，在四川省成都艺体中学操场上，高二舞蹈班学生为入校新生展示舞蹈，以舞姿迎接新生。",
+    "2026年9月11日，在四川省成都艺体中学操场上，全校师生聆听开学思政第一课。",
+    "他们化身迎新主角，用专业舞姿为新生送上特别的入学礼物。现场节目精彩纷呈，音乐、舞蹈等节目轮番亮相，其中舞蹈专业特色表演尤为亮眼。操场上，舞蹈学生身姿优雅、精神昂扬，舞步轻盈灵动、动作整齐舒展。他们以自信满满的舞台表现力，尽情绽放艺体学子的青春魅力，惊艳全场，赢得新生阵阵热烈掌声。优美的舞姿不仅展现出扎实的专业功底，更彰显了学生积极向上的精神风貌。",
+    "2026年9月11日，在四川省成都艺体中学操场上，高二舞蹈班学生为入校新生展示舞蹈。",
+    "2026年9月11日，在四川省成都艺体中学操场上，高三舞蹈班学生为入校新生展示舞蹈。",
+    "表演结束后，舞蹈专业学生主动走近新生，分享专业学习心得和校园日常，拉近了与新生的距离，帮助新生快速融入校园新生活。",
+    "2026年9月11日，在四川省成都艺体中学操场上，该校教师用歌声欢迎新生入校。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-11T23:54:51+00:00",
+  "sourceTextHash": "593ef121c07c276344807c8f559a8119dfafc854d5dee59eeb6655c83b3db8b8",
+  "aiStatus": "ok",
+  "aiSummary": "2026年9月11日，四川省成都艺体中学举行开学典礼，欢迎2026级1000余名新生。高二、高三舞蹈专业学生集体登台，以专业舞姿送上入学礼物，节目精彩纷呈，展现扎实功底与青春风貌。表演后学生主动与新生交流，帮助其融入校园。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-83-107-viewpoint",
+      "paragraphIndex": 1,
+      "start": 83,
+      "end": 107,
+      "text": "最大看点是高二、高三全体舞蹈专业学生集体登台迎新",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-0-10-exam_point",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 10,
+      "text": "2026年9月11日",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-11-20-exam_point",
+      "paragraphIndex": 1,
+      "start": 11,
+      "end": 20,
+      "text": "四川省成都艺体中学",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-29-42-exam_point",
+      "paragraphIndex": 1,
+      "start": 29,
+      "end": 42,
+      "text": "2026级1000余名新生",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-53-61-term",
+      "paragraphIndex": 1,
+      "start": 53,
+      "end": 61,
+      "text": "公办艺体特色中学",
+      "type": "term",
+      "explanation": "指由政府举办、以艺术和体育教育为特色的中学，兼具普通中学文化课程与艺体专业培养。"
+    },
+    {
+      "id": "ai-3-31-38-term",
+      "paragraphIndex": 3,
+      "start": 31,
+      "end": 38,
+      "text": "开学思政第一课",
+      "type": "term",
+      "explanation": "指新学期伊始开展的以思想政治教育为主题的课程，引导学生树立正确价值观。"
+    },
+    {
+      "id": "ai-4-9-26-viewpoint",
+      "paragraphIndex": 4,
+      "start": 9,
+      "end": 26,
+      "text": "用专业舞姿为新生送上特别的入学礼物",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-147-173-viewpoint",
+      "paragraphIndex": 4,
+      "start": 147,
+      "end": 173,
+      "text": "展现出扎实的专业功底，更彰显了学生积极向上的精神风貌",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-7-43-56-viewpoint",
+      "paragraphIndex": 7,
+      "start": 43,
+      "end": 56,
+      "text": "帮助新生快速融入校园新生活",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-51-63-exam_point",
+      "paragraphIndex": 4,
+      "start": 51,
+      "end": 63,
+      "text": "舞蹈专业特色表演尤为亮眼",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-7-19-32-exam_point",
+      "paragraphIndex": 7,
+      "start": 19,
+      "end": 32,
+      "text": "分享专业学习心得和校园日常",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

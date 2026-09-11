@@ -1,0 +1,78 @@
+{
+  "id": "cbe2ac933c",
+  "date": "2026-09-11",
+  "title": "傅斯年、童第周的借书证你见过吗？川大图书馆珍藏多位大师借书证丨文化中国行·校馆弦歌",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83320805.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-11T23:54:56+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "四川在线记者&nbsp;钟帆&nbsp;周宝&nbsp;剪辑&nbsp;王帅",
+    "近日，四川在线记者打卡四川大学图书馆，竟看到好多大师们在川大借书留下的书袋卡。",
+    "“书袋卡是传统手工图书馆时代管理图书流通借阅的纸质凭证。比如说有傅斯年，这里有他的签字；曾经任过四川大学校长的柯召先生，这是他借阅过的图书；还有著名的生物学家童第周，他也在四川大学图书馆留下了自己的借阅记录。”四川大学图书馆古籍特藏中心副主任丁伟说。",
+    "借书卡上的签名有傅斯年、顾颉刚、吕叔湘、童第周、吴大猷……这些名字随便拎一个出来，都是中国学术史上的泰斗！&nbsp;其中，童第周等多人曾在川大任教。",
+    "这一张张泛黄的小纸片，把他们和川大联系到了一起。这一刻，历史不再是书上的名词，是掌心里还带着体温的痕迹。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-11T23:54:57+00:00",
+  "sourceTextHash": "25af947e82cfb28f50f47af3560a22e5ec8b1ced08e53c64472782848d4b2641",
+  "aiStatus": "ok",
+  "aiSummary": "四川在线记者探访四川大学图书馆，发现傅斯年、童第周等多位学术大师的借书书袋卡。这些泛黄纸片是传统手工图书馆时代的借阅凭证，上有大师签名，记录其借阅历史。多位大师曾在川大任教，借书证将他们与川大紧密相连，让历史变得可触可感。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-3-18-exam_point",
+      "paragraphIndex": 1,
+      "start": 3,
+      "end": 18,
+      "text": "四川在线记者打卡四川大学图书馆",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-1-27-term",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 27,
+      "text": "书袋卡是传统手工图书馆时代管理图书流通借阅的纸质凭证",
+      "type": "term",
+      "explanation": "传统手工图书馆时代用于管理图书流通借阅的纸质凭证，记录借阅者信息。"
+    },
+    {
+      "id": "ai-2-105-123-exam_point",
+      "paragraphIndex": 2,
+      "start": 105,
+      "end": 123,
+      "text": "四川大学图书馆古籍特藏中心副主任丁伟",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-29-53-viewpoint",
+      "paragraphIndex": 3,
+      "start": 29,
+      "end": 53,
+      "text": "这些名字随便拎一个出来，都是中国学术史上的泰斗！",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-62-74-exam_point",
+      "paragraphIndex": 3,
+      "start": 62,
+      "end": 74,
+      "text": "童第周等多人曾在川大任教",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-28-51-viewpoint",
+      "paragraphIndex": 4,
+      "start": 28,
+      "end": 51,
+      "text": "历史不再是书上的名词，是掌心里还带着体温的痕迹",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

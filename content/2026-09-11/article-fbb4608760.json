@@ -1,0 +1,77 @@
+{
+  "id": "fbb4608760",
+  "date": "2026-09-11",
+  "title": "2026年APEC工商领导人峰会11月17日至18日在深圳举办",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202609/11/139996_55002262.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-11T23:54:34+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "据新华社电 记者9月10日从中国贸促会获悉，2026年亚太经合组织（APEC）工商领导人峰会将于11月17日至18日在深圳举办。",
+    "作为2026年APEC东道主，中方将于11月18日至19日在深圳举行APEC第三十三次领导人非正式会议，2026年APEC工商领导人峰会是此次领导人非正式会议的配套活动。",
+    "中国贸促会新闻发言人介绍，本届工商峰会以“共促繁荣，共赢未来”为主题，由中国贸促会主办，将邀请APEC经济体政商界代表约1000人，围绕亚太自贸区建设、互联互通、人工智能、数字经济、粤港澳大湾区建设、可持续发展等议题开展交流讨论，为促进亚太经济增长建言献策。",
+    "今年以来，亚太工商界已通过APEC工商咨询理事会（ABAC）等渠道持续凝聚建设亚太共同体共识，为APEC“中国年”积累了高质量的工商界成果。11月14日至16日，中国贸促会还将在深圳举办ABAC第四次会议，各经济体ABAC代表将继续围绕“开放·互通·协同”年度主题深入开展研讨，总结全年工作。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-11T23:54:35+00:00",
+  "sourceTextHash": "6fdb4cfc3d1d0ed345e854ac172290148201c7c0fa5b34824a5cf29ce9707582",
+  "aiStatus": "ok",
+  "aiSummary": "2026年APEC工商领导人峰会将于11月17日至18日在深圳举办，是中方主办的APEC第三十三次领导人非正式会议配套活动。峰会以“共促繁荣，共赢未来”为主题，由中国贸促会主办，邀请约1000名政商界代表，围绕亚太自贸区、互联互通、人工智能、数字经济、粤港澳大湾区、可持续发展等议题交流。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-22-63-exam_point",
+      "paragraphIndex": 0,
+      "start": 22,
+      "end": 63,
+      "text": "2026年亚太经合组织（APEC）工商领导人峰会将于11月17日至18日在深圳举办",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-52-84-exam_point",
+      "paragraphIndex": 1,
+      "start": 52,
+      "end": 84,
+      "text": "2026年APEC工商领导人峰会是此次领导人非正式会议的配套活动",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-21-30-exam_point",
+      "paragraphIndex": 2,
+      "start": 21,
+      "end": 30,
+      "text": "共促繁荣，共赢未来",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-68-105-exam_point",
+      "paragraphIndex": 2,
+      "start": 68,
+      "end": 105,
+      "text": "亚太自贸区建设、互联互通、人工智能、数字经济、粤港澳大湾区建设、可持续发展",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-13-30-term",
+      "paragraphIndex": 3,
+      "start": 13,
+      "end": 30,
+      "text": "APEC工商咨询理事会（ABAC）",
+      "type": "term",
+      "explanation": "APEC工商咨询理事会，是APEC框架下工商界向领导人提供政策建议的常设咨询机构。"
+    },
+    {
+      "id": "ai-3-119-127-exam_point",
+      "paragraphIndex": 3,
+      "start": 119,
+      "end": 127,
+      "text": "开放·互通·协同",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}
