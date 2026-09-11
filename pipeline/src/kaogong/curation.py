@@ -429,6 +429,14 @@ def curate_content(
         (out_dir / f"article-{aid}.json").write_text(
             json.dumps(article, ensure_ascii=False, indent=2), encoding="utf-8"
         )
+    # picks.json 只在**真的选出内容**时写。
+    # 选不到东西时写 `picked: []` 会违反 picks.schema.json 的 minItems:1，
+    # 产出一个非法文件（实测踩过：对 08-12 跑策展写了空 picks，Schema 测试直接挂）。
+    # 选不到材料是"降级"而不是"产出"——report 里已记录，管道的质量门禁
+    # 也把 picks_missing 当降级态处理，不写文件才是符合约定的行为。
+    if not picks["picked"]:
+        report["curation"]["picksWritten"] = False
+        return report
     (day_dir / "picks.json").write_text(
         json.dumps(picks, ensure_ascii=False, indent=2), encoding="utf-8"
     )

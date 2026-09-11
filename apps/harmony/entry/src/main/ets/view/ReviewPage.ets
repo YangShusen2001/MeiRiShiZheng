@@ -1,7 +1,5 @@
-import { CardState, Choice, GRADE_EASY, GRADE_FORGOT, GRADE_RECALLED, QuizCard, Review, ReviewCard } from '../service/Review';
+import { CardState, Choice, GRADE_EASY, GRADE_FORGOT, GRADE_RECALLED, OPTION_LETTERS, QuizCard, Review, ReviewCard } from '../service/Review';
 import { KColor, KFont, KLine, KRadius, KSize, KSpace } from '../theme/Tokens';
-
-const LETTERS: string[] = ['A', 'B', 'C', 'D'];
 
 /**
  * 考点复习页（间隔重复 · ABCD 单选）。
@@ -157,7 +155,7 @@ export struct ReviewPage {
   /** 未作答显示字母；作答后正确项显 ✓、误选项显 ✗。 */
   private optionMark(choice: Choice, optionIndex: number): string {
     if (this.answered < 0) {
-      return LETTERS[optionIndex];
+      return OPTION_LETTERS[optionIndex];
     }
     if (choice.correct) {
       return '✓';
@@ -165,7 +163,7 @@ export struct ReviewPage {
     if (optionIndex === this.answered) {
       return '✗';
     }
-    return LETTERS[optionIndex];
+    return OPTION_LETTERS[optionIndex];
   }
 
   private nextDueText(): string {
@@ -344,6 +342,64 @@ export struct ReviewPage {
     .margin({ top: KSpace.XL })
   }
 
+  /**
+   * 判定后的解析。
+   *
+   * ## 为什么必须有
+   * 只给 ✓/✗ 与正确答案，用户**错了也不知道为什么错**——刷题等于白刷。
+   *
+   * ## 为什么这里没有逐项详解（如实说明）
+   * 卡片数据里没有 `explain` 字段，端上也不该自己编解析。
+   * 但**干扰项的构造方式本身就是有效信息**：四个选项都是同一批官方表述，
+   * 区分点在于「各自回答的是哪个问题」——把这一点说清楚，
+   * 用户下次看到同类表述就知道该怎么分辨。这是不留 AI 也能给出的真解析。
+   *
+   * 逐项详解需要管道为每张卡生成 `explain`（属后续接入 AI 的一步），
+   * 所以这里明确标注"归属与出处"，而不是假装有详解。
+   */
+  @Builder
+  explainBlock(question: QuizCard) {
+    Column() {
+      Text('解析')
+        .fontSize(KFont.caption())
+        .fontColor(KColor.sub())
+
+      Text(`正确答案：${Review.correctOptionLetter(question)}  ${question.answer}`)
+        .fontSize(KFont.meta())
+        .lineHeight(KLine.normal())
+        .fontColor(KColor.primaryText())
+        .margin({ top: KSpace.XS })
+        .width('100%')
+
+      if (question.tags.length > 0) {
+        Text(`考点：${question.tags.join(' · ')}`)
+          .fontSize(KFont.meta())
+          .fontColor(KColor.ink())
+          .margin({ top: KSpace.S })
+          .width('100%')
+      }
+
+      Text('四个选项都出自同一批官方表述，区别在于各自回答的是哪个问题——按题干问的「角度」去对，不要按熟悉度选。')
+        .fontSize(KFont.caption())
+        .lineHeight(KLine.tight())
+        .fontColor(KColor.sub())
+        .margin({ top: KSpace.S })
+        .width('100%')
+
+      Text('逐项详解待内容管道为卡片生成 explain 字段后补上。')
+        .fontSize(KFont.caption())
+        .fontColor(KColor.mut())
+        .margin({ top: KSpace.XS })
+        .width('100%')
+    }
+    .alignItems(HorizontalAlign.Start)
+    .width('100%')
+    .padding(KSpace.L)
+    .margin({ top: KSpace.M })
+    .backgroundColor(KColor.surfaceAlt())
+    .borderRadius(KRadius.L)
+  }
+
   @Builder
   choiceFlow(question: QuizCard) {
     ForEach(question.options, (choice: Choice, optionIndex: number) => {
@@ -351,6 +407,7 @@ export struct ReviewPage {
     }, (choice: Choice) => `${question.id}-${choice.text}`)
 
     if (this.answered >= 0) {
+      this.explainBlock(question)
       this.actionBar()
     } else {
       Text('选出正确的一项')

@@ -209,6 +209,7 @@
         "id": { "type": "string", "minLength": 1, "description": "全局唯一卡片 id（card-{articleId}-{n}）" },
         "question": { "type": "string", "minLength": 10, "maxLength": 40, "description": "正面问题（主动回忆）" },
         "answer": { "type": "string", "minLength": 6, "maxLength": 200, "description": "反面答案" },
+        "explain": { "type": "string", "minLength": 10, "maxLength": 400, "description": "思路/逐项解析（可选），答完题展示" },
         "tags": {
           "type": "array",
           "minItems": 1,

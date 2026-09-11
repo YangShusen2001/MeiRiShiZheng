@@ -38,6 +38,12 @@
           "maxLength": 200,
           "description": "反面答案；黄金样本（数字卡）最短 6 字"
         },
+        "explain": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 400,
+          "description": "思路/逐项解析（可选）。答完题展示，让用户知道为什么错——只给对错等于白刷。由内容管道生成，未生成时端上按「考点归属」给基础解析"
+        },
         "tags": {
           "type": "array",
           "minItems": 1,

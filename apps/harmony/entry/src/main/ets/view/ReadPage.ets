@@ -143,8 +143,9 @@ export struct ReadPage {
     ).then((started: boolean) => {
       if (started) {
         this.speaking = true;
+        // 在线引擎依赖云端服务：不可用时已回退离线，如实告知而不是静默换音色
+        this.hintText = Speech.didFallbackToOffline() ? '在线音质不可用（需要联网或服务未开通），已用离线引擎朗读。' : '';
       } else {
-        this.errorText = '';
         this.hintText = '系统朗读引擎不可用，无法朗读本篇。';
       }
     });

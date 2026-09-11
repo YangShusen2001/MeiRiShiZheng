@@ -69,6 +69,9 @@ export interface DueCard {
  * 而且**必须与 Web 端 `ts-fsrs` 对齐**，否则同一个人在两端会看到不同的排程。
  * 对齐工作留到下一步，不在这里半途实现一个"像 FSRS 但不是 FSRS"的东西。
  */
+/** 选项字母。 */
+export const OPTION_LETTERS: string[] = ['A', 'B', 'C', 'D'];
+
 /** 一个选项。 */
 export interface Choice {
   text: string;
@@ -284,6 +287,16 @@ export class Review {
       });
     }
     return out;
+  }
+
+  /** 正确选项的字母（A/B/C/D）；找不到返回空串。 */
+  static correctOptionLetter(question: QuizCard): string {
+    for (let index = 0; index < question.options.length; index++) {
+      if (question.options[index].correct && index < OPTION_LETTERS.length) {
+        return OPTION_LETTERS[index];
+      }
+    }
+    return '';
   }
 
   /** 造选项：正确项 + 最多 3 个干扰项。返回空数组表示无法造出合格题目。 */

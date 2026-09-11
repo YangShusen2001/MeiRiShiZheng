@@ -41,6 +41,13 @@ export class Speech {
   private static engine: textToSpeech.TextToSpeechEngine | null = null;
   /** 当前引擎是在线还是离线——模式切换时必须重建引擎（online 是建引擎时的参数）。 */
   private static engineOnline: boolean = false;
+  /** 在线引擎不可用、已回退到离线。页面据此如实提示，不静默改变音色。 */
+  private static usingOfflineFallback: boolean = false;
+
+  /** 上次启动是否发生了"在线 → 离线"回退。 */
+  static didFallbackToOffline(): boolean {
+    return Speech.usingOfflineFallback;
+  }
   private static chunks: string[] = [];
   private static cursor: number = 0;
   private static active: boolean = false;
@@ -131,36 +138,59 @@ export class Speech {
       // 在线/离线切换必须重建：online 只在 createEngine 时生效
       Speech.shutdown();
     }
+    Speech.usingOfflineFallback = false;
+    const engine: textToSpeech.TextToSpeechEngine | null = await Speech.create(wantOnline);
+    if (engine === null && wantOnline) {
+      // 在线引擎依赖华为云端语音服务：无网或服务不可用时**回退离线**，
+      // 而不是让"朗读"整个不可用。页面据 didFallbackToOffline() 如实提示。
+      hilog.warn(DOMAIN, TAG, '在线引擎不可用，回退离线引擎');
+      const fallback: textToSpeech.TextToSpeechEngine | null = await Speech.create(false);
+      if (fallback !== null) {
+        Speech.usingOfflineFallback = true;
+        Speech.engine = fallback;
+        Speech.engineOnline = false;
+      }
+      return fallback;
+    }
+    if (engine !== null) {
+      Speech.engine = engine;
+      Speech.engineOnline = wantOnline;
+    }
+    return engine;
+  }
+
+  /** 创建引擎（回调形式；失败返回 null，不抛）。 */
+  private static create(online: boolean): Promise<textToSpeech.TextToSpeechEngine | null> {
     // 必须用**回调形式**：createEngine 的重载里既有回调版也有 Promise 版，
     // 直接 await 会得到 `void & Promise<TextToSpeechEngine>`，取不到正确类型
     // （编译期已实测）。
-    const engine: textToSpeech.TextToSpeechEngine | null =
-      await new Promise<textToSpeech.TextToSpeechEngine | null>((resolve) => {
-        try {
-          textToSpeech.createEngine(
-            // person 必填（0 = 默认发音人）。
-            // online：**0 = 在线，1 = 离线**（见文件头注释）。
-            { language: 'zh-CN', person: 0, online: wantOnline ? ENGINE_ONLINE : ENGINE_OFFLINE },
-            (err: BusinessError, created: textToSpeech.TextToSpeechEngine) => {
-              if (err) {
-                hilog.error(DOMAIN, TAG, 'TTS 引擎创建失败：%{public}s', err.message);
-                resolve(null);
-                return;
-              }
-              resolve(created);
-            },
-          );
-        } catch (err) {
-          const cause: Error = err as Error;
-          hilog.error(DOMAIN, TAG, 'TTS 引擎创建异常：%{public}s', cause.message);
-          resolve(null);
-        }
-      });
+    return new Promise<textToSpeech.TextToSpeechEngine | null>((resolve) => {
+      try {
+        textToSpeech.createEngine(
+          // person 必填（0 = 默认发音人）。
+          // online：**0 = 在线，1 = 离线**（见文件头注释）。
+          { language: 'zh-CN', person: 0, online: online ? ENGINE_ONLINE : ENGINE_OFFLINE },
+          (err: BusinessError, created: textToSpeech.TextToSpeechEngine) => {
+            if (err) {
+              hilog.error(DOMAIN, TAG, 'TTS 引擎创建失败（online=%{public}s）：%{public}s',
+                online ? 'true' : 'false', err.message);
+              resolve(null);
+              return;
+            }
+            created.setListener(Speech.listener());
+            resolve(created);
+          },
+        );
+      } catch (err) {
+        const cause: Error = err as Error;
+        hilog.error(DOMAIN, TAG, 'TTS 引擎创建异常：%{public}s', cause.message);
+        resolve(null);
+      }
+    });
+  }
 
-    if (engine === null) {
-      return null;
-    }
-    engine.setListener({
+  private static listener(): textToSpeech.SpeakListener {
+    return {
       onStart: () => {
         // 段落开始播报不需要额外动作：当前段落索引在 speak() 时已回调页面
       },
@@ -175,10 +205,7 @@ export class Speech {
         hilog.warn(DOMAIN, TAG, '某一段朗读失败，跳过继续');
         Speech.advance();
       },
-    });
-    Speech.engine = engine;
-    Speech.engineOnline = wantOnline;
-    return engine;
+    };
   }
 
   /** 播下一段；已到末尾则收尾。 */

@@ -169,6 +169,31 @@ def test_card_budget_is_distributed_not_first_come():
     assert card_budget_for(5, 0) == 5
 
 
+def test_curate_content_skips_picks_file_when_nothing_picked(tmp_path):
+    """选不到材料时**不写 picks.json**。
+
+    写 `picked: []` 会违反 picks.schema.json 的 minItems:1，产出一个非法文件
+    （实测踩过：对 08-12 跑策展写了空 picks，内容 Schema 测试直接挂）。
+    而"选不到"是**降级态**——管道的质量门禁按 picks_missing 处理，
+    不落盘才符合约定。
+    """
+    import json
+
+    from kaogong.curation import curate_content
+
+    day = TARGET.isoformat()
+    (tmp_path / day).mkdir(parents=True)
+    # 一篇 AI 处理失败的文章 → coarse_filter 全丢 → picked 为空
+    article = _article("a1", "某文章", source="新华网")
+    article["aiStatus"] = "error"
+    (tmp_path / day / "article-a1.json").write_text(json.dumps(article), encoding="utf-8")
+
+    report = curate_content(TARGET, tmp_path, {"deepseek_api_key": "k"})
+    assert report["curation"]["picked"] == 0
+    assert report["curation"]["cardsProduced"] == 0
+    assert not (tmp_path / day / "picks.json").exists(), "选不到材料不应写非法空 picks"
+
+
 def test_curate_content_degrades_without_key(tmp_path):
     """无 key：仍产出 picks.json，卡片/关系标记 error，不抛异常（与管道降级哲学一致）。"""
     import json
