@@ -192,12 +192,21 @@ export class KFont {
     return value;
   }
 
+  /**
+   * 全部字号档位都随设置缩放。
+   *
+   * ⚠️ 之前 `caption` 与 `meta` 是固定值（当时想"不影响导航标签"），
+   * 但它们在首页占比最大——来源、日期、序号、关键词全在这两档，
+   * 结果用户选「特大」时这些字纹丝不动，体感就是"字号调节无效"。
+   * **用户选大字就是要都看得清**，所以内容文字一律跟随。
+   * （真正的"导航标签"由框架绘制，本来就改不了，不在此列。）
+   */
   static caption(): number {
-    return 12;
+    return Math.round(12 * KFont.scale());
   }
 
   static meta(): number {
-    return 14;
+    return Math.round(14 * KFont.scale());
   }
 
   static body(): number {
@@ -208,9 +217,8 @@ export class KFont {
     return Math.round(20 * KFont.scale());
   }
 
-  /** 区块标题不随档位放大，避免与列表抢空间。 */
   static titleM(): number {
-    return 24;
+    return Math.round(24 * KFont.scale());
   }
 
   static titleL(): number {

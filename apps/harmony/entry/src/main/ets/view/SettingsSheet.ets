@@ -133,7 +133,31 @@ export struct SettingsSheet {
       .width('100%')
       .margin({ top: KSpace.S })
 
-      Text('深色模式用的是深暖灰而非纯黑，避免夜间反光；字号只影响正文与标题，不影响导航标签。朗读从当前位置开始，适合通勤时听。')
+      Row() {
+        Column() {
+          Text('在线音质')
+            .fontSize(KFont.meta())
+            .fontColor(KColor.ink())
+          Text('用云端发音人，音色更自然；但朗读时需要联网')
+            .fontSize(KFont.caption())
+            .lineHeight(KLine.tight())
+            .fontColor(KColor.mut())
+            .margin({ top: KSpace.HAIR })
+        }
+        .alignItems(HorizontalAlign.Start)
+        .layoutWeight(1)
+
+        Toggle({ type: ToggleType.Switch, isOn: Settings.speakOnline() })
+          .onChange((isOn: boolean) => {
+            Settings.setSpeakOnline(isOn);
+          })
+      }
+      .width('100%')
+      .alignItems(VerticalAlign.Center)
+      .constraintSize({ minHeight: KSize.TOUCH_MIN })
+      .margin({ top: KSpace.M })
+
+      Text('字号影响全部正文与标签（系统绘制的导航栏除外）。深色模式用深暖灰而非纯黑，避免夜间反光。朗读默认走离线引擎——通勤没网也能听；追求音色可打开在线音质。')
         .fontSize(KFont.caption())
         .lineHeight(KLine.tight())
         .fontColor(KColor.mut())

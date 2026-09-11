@@ -1,11 +1,23 @@
 import { textToSpeech } from '@kit.CoreSpeechKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
+import { Settings } from './Settings';
 
 const DOMAIN: number = 0x0000;
 const TAG: string = 'KaogongSpeech';
 /** 段落之间的停顿：纯 TTS 连读没有换气感，听起来像机器报菜名。 */
 const GAP_MS: number = 320;
+
+/**
+ * ⚠️ SDK 的取值语义**反直觉**，原文：
+ * `The value 0 indicates online, value 1 indicates offline.`
+ *
+ * 此前的实现写的是 `online: 0` 并注释成"离线引擎"——**恰好写反了**，
+ * 等于一直在用在线引擎却声称离线可用，没网时直接不可用。
+ * 现在默认离线（通勤场景），在线音质由设置决定。
+ */
+const ENGINE_ONLINE: number = 0;
+const ENGINE_OFFLINE: number = 1;
 
 /**
  * 朗读（系统 TTS）。
@@ -27,6 +39,8 @@ const GAP_MS: number = 320;
  */
 export class Speech {
   private static engine: textToSpeech.TextToSpeechEngine | null = null;
+  /** 当前引擎是在线还是离线——模式切换时必须重建引擎（online 是建引擎时的参数）。 */
+  private static engineOnline: boolean = false;
   private static chunks: string[] = [];
   private static cursor: number = 0;
   private static active: boolean = false;
@@ -108,9 +122,14 @@ export class Speech {
   }
 
   private static async ensureEngine(): Promise<textToSpeech.TextToSpeechEngine | null> {
+    const wantOnline: boolean = Settings.speakOnline();
     const existing: textToSpeech.TextToSpeechEngine | null = Speech.engine;
     if (existing !== null) {
-      return existing;
+      if (Speech.engineOnline === wantOnline) {
+        return existing;
+      }
+      // 在线/离线切换必须重建：online 只在 createEngine 时生效
+      Speech.shutdown();
     }
     // 必须用**回调形式**：createEngine 的重载里既有回调版也有 Promise 版，
     // 直接 await 会得到 `void & Promise<TextToSpeechEngine>`，取不到正确类型
@@ -119,9 +138,9 @@ export class Speech {
       await new Promise<textToSpeech.TextToSpeechEngine | null>((resolve) => {
         try {
           textToSpeech.createEngine(
-            // person 为必填（0 = 默认发音人）；online: 0 = 离线引擎，
-            // 离线是硬要求：通勤场景经常没网。
-            { language: 'zh-CN', person: 0, online: 0 },
+            // person 必填（0 = 默认发音人）。
+            // online：**0 = 在线，1 = 离线**（见文件头注释）。
+            { language: 'zh-CN', person: 0, online: wantOnline ? ENGINE_ONLINE : ENGINE_OFFLINE },
             (err: BusinessError, created: textToSpeech.TextToSpeechEngine) => {
               if (err) {
                 hilog.error(DOMAIN, TAG, 'TTS 引擎创建失败：%{public}s', err.message);
@@ -158,6 +177,7 @@ export class Speech {
       },
     });
     Speech.engine = engine;
+    Speech.engineOnline = wantOnline;
     return engine;
   }
 

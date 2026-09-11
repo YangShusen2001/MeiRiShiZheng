@@ -895,7 +895,10 @@ export struct ReadPage {
           .width('100%')
           .padding({ left: KSpace.PAGE, right: KSpace.PAGE })
         } else {
-          List({ scroller: this.scroller, space: KSpace.XL }) {
+          // 主题指纹层：字号 / 深色变化时整层重建，令牌随之重新取值。
+          // ArkUI 追踪不到"全局读 AppStorage"的令牌，只订阅状态变量不会重绘（详见 HomePage）。
+          ForEach([`${this.darkMode ? 'd' : 'l'}-${this.fontScale}`], () => {
+            List({ scroller: this.scroller, space: KSpace.XL }) {
             // 第 0 项为头部（标题 / AI 概括 / 图例 / 标注清单），正文段自 1 起。
             ListItem() {
               this.headerBlock()
@@ -923,6 +926,7 @@ export struct ReadPage {
             const total: number = this.paragraphs.length + 1;
             this.progress = last >= total - 1 ? 1 : (last + 1) / total;
           })
+          }, (key: string) => key)
         }
 
         // 底部阅读进度条：轨道 + 填充（最底层，浮层会盖住它）

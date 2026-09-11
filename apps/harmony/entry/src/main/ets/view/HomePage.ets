@@ -653,13 +653,37 @@ export struct HomePage {
     .alignItems(HorizontalAlign.Start)
   }
 
+  /**
+   * 主题指纹层：深色 / 字号任一变化时**整层重建**。
+   *
+   * ## 为什么必须这样
+   * 字号与颜色令牌是**全局读 `AppStorage`** 的
+   * （`KFont.scale()` → `AppStorage.get('fontScale')`），
+   * 这条路**不在 ArkUI 的依赖追踪范围内**——框架只把"在 build 里直接读到的状态变量"
+   * 记为依赖。所以只在组件上声明 `@StorageLink('fontScale')` 而 build 里不引用它，
+   * 改设置**不会重绘**（实测：字号选了没反应）。
+   *
+   * 把「深色 + 字号」写进 ForEach 的 key：key 一变，整棵子树重建，令牌随之重新取值。
+   * 代价是切换设置时丢一次滚动位置——设置是低频操作，可以接受。
+   */
+  @Builder
+  themedPage() {
+    ForEach([`${this.darkMode ? 'd' : 'l'}-${this.fontScale}`], () => {
+      Column() {
+        this.headerRow()
+        this.content()
+      }
+      .width('100%')
+      .alignItems(HorizontalAlign.Start)
+    }, (key: string) => key)
+  }
+
   build() {
     Stack({ alignContent: Alignment.Bottom }) {
       Refresh({ refreshing: $$this.refreshing }) {
         Scroll() {
           Column() {
-            this.headerRow()
-            this.content()
+            this.themedPage()
           }
           .width('100%')
           .alignItems(HorizontalAlign.Start)

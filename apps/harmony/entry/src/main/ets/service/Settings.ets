@@ -25,6 +25,7 @@ export class Settings {
   static readonly KEY_LAST_INDEX: string = 'lastReadIndex';
   static readonly KEY_DEVICE_ID: string = 'deviceId';
   static readonly KEY_SPEAK_SPEED: string = 'speakSpeed';
+  static readonly KEY_SPEAK_ONLINE: string = 'speakOnline';
 
   /** 朗读速度档位。通勤场景下 1.25 倍是刚需——省时间且不失可懂度。 */
   static readonly SPEED_STEPS: number[] = [0.8, 1, 1.25, 1.5];
@@ -163,6 +164,25 @@ export class Settings {
       return;
     }
     Settings.writeNumber(Settings.KEY_SPEAK_SPEED, Settings.SPEED_STEPS[stepIndex]);
+  }
+
+  /**
+   * 朗读是否用在线引擎。
+   *
+   * **默认 false（离线）**：目标场景是通勤，地铁里没网——
+   * 在线引擎在没网时直接不可用，那是致命的。
+   * 在线引擎音色更自然（走云端发音人），愿意用流量/有网的用户可以打开。
+   *
+   * 注意 SDK 的取值语义是**反直觉**的：
+   * `The value 0 indicates online, value 1 indicates offline.`
+   * （此前的实现把 0 当成离线，等于一直在用在线引擎却声称离线。）
+   */
+  static speakOnline(): boolean {
+    return Settings.readBool(Settings.KEY_SPEAK_ONLINE, false);
+  }
+
+  static setSpeakOnline(online: boolean): void {
+    Settings.writeBool(Settings.KEY_SPEAK_ONLINE, online);
   }
 
   /**

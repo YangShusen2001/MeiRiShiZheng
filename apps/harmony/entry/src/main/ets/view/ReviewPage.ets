@@ -470,7 +470,15 @@ export struct ReviewPage {
   build() {
     NavDestination() {
       Scroll() {
-        this.body()
+        // Scroll 只允许一个子组件，所以由外层 Column 兜住 ForEach
+        Column() {
+          // 主题指纹层：字号 / 深色变化时重建（令牌全局读 AppStorage，ArkUI 追踪不到）
+          ForEach([`${this.darkMode ? 'd' : 'l'}-${this.fontScale}`], () => {
+            this.body()
+          }, (key: string) => key)
+        }
+        .width('100%')
+        .alignItems(HorizontalAlign.Start)
       }
       .width('100%')
       .height('100%')
