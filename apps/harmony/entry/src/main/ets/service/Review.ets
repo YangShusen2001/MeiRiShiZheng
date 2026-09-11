@@ -124,14 +124,23 @@ export class Review {
    * SM-2 排程。`grade` 用三档，映射到 SM-2 的 quality：
    * 忘了→2、想起→4、太简单→5。
    *
-   * 「忘了」不排到明天：间隔归零并在 **10 分钟后**再出现——
-   * 当天就补一次，比"明天再说"有效得多（也符合 Anki 的做法）。
+   * ## 「忘了」为什么排到 4 小时后而不是 10 分钟后（实测返工）
+   * 原来排 10 分钟，理由是"当天补一次比明天再说有效"——道理没错，
+   * **但踩到了这个 App 的真实用法**：通勤场景一天就一两次会话，
+   * 一次会话里连做几十张；答错的卡 10 分钟内**立刻又回到待复习**，
+   * 于是"刚做过的题又出现"，用户反馈**"待复习的依旧重复"**。
+   *
+   * 实测证据：设备上 30 张卡里 **19 张 `intervalDays: 0`**（重排队列），
+   * due 都距今几分钟——而题库与队列本身**没有任何重复题干**。
+   *
+   * 改 4 小时：早上通勤错的，晚上回来正好复现（间隔足够长，不会在同一次会话里撞车）；
+   * 仍然做不到"当天补一次"以外的效果——对每日两趟通勤的节奏正好。
    */
   static schedule(state: CardState, grade: number, now: number = Date.now()): CardState {
     const quality: number = grade === GRADE_FORGOT ? 2 : (grade === GRADE_RECALLED ? 4 : 5);
     if (quality < 3) {
       return {
-        due: now + 10 * 60 * 1000,
+        due: now + 4 * 60 * 60 * 1000,
         intervalDays: 0,
         ease: state.ease,
         reps: 0,
