@@ -7,6 +7,7 @@ import { Net } from '../service/Net';
 import { Invite, InviteResult } from '../service/Invite';
 import { Settings } from '../service/Settings';
 import { Share } from '../service/Share';
+import { Speech } from '../service/Speech';
 import { annotationBg, KColor, KFont, KLine, KRadius, KSize, KSpace } from '../theme/Tokens';
 import { annotationLabel, buildReaderSegments, ReaderSegment } from './ReaderSegments';
 import { SettingsSheet } from './SettingsSheet';
@@ -54,6 +55,8 @@ export struct ReadPage {
   @StorageLink('fontScale') fontScale: number = 1;
   @State loading: boolean = true;
   @State errorText: string = '';
+  /** 非致命提示（如朗读引擎不可用）：不打断阅读，只说明情况。 */
+  @State hintText: string = '';
   @State title: string = '';
   @State metaText: string = '';
   @State url: string = '';
@@ -85,6 +88,9 @@ export struct ReadPage {
   @State inviteOk: boolean = false;
   /** 本篇是否来自本地缓存（离线可读已看过的文章）。 */
   @State showingCache: boolean = false;
+  /** 朗读状态与当前朗读到的段落（-1 = 未朗读）。 */
+  @State speaking: boolean = false;
+  @State speakIndex: number = -1;
 
   /** 触发 AI 的原文片段（与释义分开存，避免两件事混在一起）。 */
   private aiSource: string = '';
@@ -100,9 +106,48 @@ export struct ReadPage {
 
   /** 离开时记录阅读位置：一次写入，避免滚动中频繁落盘。 */
   aboutToDisappear(): void {
+    // 朗读必须随页面销毁停止，否则返回首页后还在念
+    Speech.stop();
+    this.speaking = false;
     if (this.paragraphs.length > 0 && this.currentTopIndex > 0) {
       Settings.saveReadingPosition(this.articleId, this.currentTopIndex);
     }
+  }
+
+  /**
+   * 开始/停止朗读。
+   * 从**当前可见段落**开始，而不是从头——通勤时用户往往已经看了前半段，
+   * 从头发起等于让他重听一遍。
+   */
+  private toggleSpeech(): void {
+    if (this.speaking) {
+      Speech.stop();
+      this.speaking = false;
+      this.speakIndex = -1;
+      return;
+    }
+    const from: number = Math.max(0, this.currentTopIndex - 1);
+    Speech.start(
+      this.paragraphs,
+      from,
+      Settings.speakSpeed(),
+      (index: number) => {
+        this.speakIndex = index;
+        // 跟随滚动：让正在朗读的段落保持在视野内
+        this.scroller.scrollToIndex(index + 1, true);
+      },
+      () => {
+        this.speaking = false;
+        this.speakIndex = -1;
+      },
+    ).then((started: boolean) => {
+      if (started) {
+        this.speaking = true;
+      } else {
+        this.errorText = '';
+        this.hintText = '系统朗读引擎不可用，无法朗读本篇。';
+      }
+    });
   }
 
   private loadArticle(): void {
@@ -410,6 +455,17 @@ export struct ReadPage {
           .margin({ top: KSpace.XS })
       }
 
+      if (this.hintText.length > 0) {
+        Text(this.hintText)
+          .fontSize(KFont.caption())
+          .fontColor(KColor.warnInk())
+          .backgroundColor(KColor.warnSoft())
+          .borderRadius(KRadius.S)
+          .padding(KSpace.S)
+          .width('100%')
+          .margin({ top: KSpace.S })
+      }
+
       Text(this.title)
         .fontSize(KFont.titleL())
         .fontWeight(FontWeight.Bold)
@@ -459,6 +515,16 @@ export struct ReadPage {
             .fontSize(KFont.caption())
             .fontColor(KColor.mut())
             .layoutWeight(1)
+          Text(this.speaking ? '停止' : '听')
+            .fontSize(KFont.caption())
+            .fontWeight(this.speaking ? FontWeight.Bold : FontWeight.Normal)
+            .fontColor(this.speaking ? KColor.primaryText() : KColor.sub())
+            .height(KSize.TOUCH_MIN)
+            .padding({ left: KSpace.S, right: KSpace.S })
+            .textAlign(TextAlign.Center)
+            .onClick(() => {
+              this.toggleSpeech();
+            })
           Text('分享')
             .fontSize(KFont.caption())
             .fontColor(KColor.sub())
@@ -545,6 +611,10 @@ export struct ReadPage {
     .lineHeight(KLine.relaxed())
     .fontColor(KColor.ink())
     .width('100%')
+    // 正在朗读的段落加底色跟随。只加底色、不加内边距——加内边距会让整篇
+    // 版式随朗读位置跳动，读者会看着文字上下窜。
+    .borderRadius(KRadius.S)
+    .backgroundColor(paragraphIndex === this.speakIndex ? KColor.primarySoft() : Color.Transparent)
   }
 
   /** 篇间翻阅：不退回首页即可连续读。 */

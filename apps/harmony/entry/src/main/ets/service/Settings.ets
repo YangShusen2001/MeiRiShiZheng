@@ -24,6 +24,11 @@ export class Settings {
   static readonly KEY_LAST_ID: string = 'lastReadId';
   static readonly KEY_LAST_INDEX: string = 'lastReadIndex';
   static readonly KEY_DEVICE_ID: string = 'deviceId';
+  static readonly KEY_SPEAK_SPEED: string = 'speakSpeed';
+
+  /** 朗读速度档位。通勤场景下 1.25 倍是刚需——省时间且不失可懂度。 */
+  static readonly SPEED_STEPS: number[] = [0.8, 1, 1.25, 1.5];
+  static readonly SPEED_LABELS: string[] = ['0.8×', '1.0×', '1.25×', '1.5×'];
 
   /** 阅读档位系数（与 DESIGN.md 的档位表一致）。 */
   static readonly FONT_STEPS: number[] = [0.88, 1, 1.15, 1.3];
@@ -137,11 +142,33 @@ export class Settings {
     return generated;
   }
 
+  /** 朗读速度（倍速）。默认 1.0。 */
+  static speakSpeed(): number {
+    return Settings.readNumber(Settings.KEY_SPEAK_SPEED, 1);
+  }
+
+  /** 当前速度档位下标（无法匹配时回落到 1.0 档）。 */
+  static speedStepIndex(): number {
+    const current: number = Settings.speakSpeed();
+    for (let index = 0; index < Settings.SPEED_STEPS.length; index++) {
+      if (Math.abs(Settings.SPEED_STEPS[index] - current) < 0.001) {
+        return index;
+      }
+    }
+    return 1;
+  }
+
+  static setSpeedStep(stepIndex: number): void {
+    if (stepIndex < 0 || stepIndex >= Settings.SPEED_STEPS.length) {
+      return;
+    }
+    Settings.writeNumber(Settings.KEY_SPEAK_SPEED, Settings.SPEED_STEPS[stepIndex]);
+  }
+
   /**
    * 同步系统级配色模式，让框架自带组件（加载指示、系统弹窗）一起跟随。
    * 令牌层不依赖它——令牌读的是 AppStorage，二者互为补充。
-   */
-  private static applyColorMode(dark: boolean): void {
+   */  private static applyColorMode(dark: boolean): void {
     const context: common.UIAbilityContext | null = Settings.appContext;
     if (context === null) {
       return;

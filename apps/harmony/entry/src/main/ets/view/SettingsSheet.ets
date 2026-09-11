@@ -41,6 +41,25 @@ export struct SettingsSheet {
       })
   }
 
+  /** 朗读速度档位；选中态除配色外**另有加粗**，不靠颜色单独表意。 */
+  @Builder
+  speedChip(label: string, index: number) {
+    Text(label)
+      .fontSize(KFont.meta())
+      .fontWeight(Settings.speedStepIndex() === index ? FontWeight.Bold : FontWeight.Normal)
+      .fontColor(Settings.speedStepIndex() === index ? KColor.surface() : KColor.sub())
+      .backgroundColor(Settings.speedStepIndex() === index ? KColor.primary() : KColor.surface())
+      .borderRadius(KRadius.S)
+      .borderWidth(1)
+      .borderColor(Settings.speedStepIndex() === index ? KColor.primary() : KColor.line())
+      .height(KSize.TOUCH_MIN)
+      .layoutWeight(1)
+      .textAlign(TextAlign.Center)
+      .onClick(() => {
+        Settings.setSpeedStep(index);
+      })
+  }
+
   build() {
     Column() {
       Row() {
@@ -101,12 +120,25 @@ export struct SettingsSheet {
       .constraintSize({ minHeight: KSize.TOUCH_MIN })
       .margin({ top: KSpace.M })
 
-      Text('深色模式用的是深暖灰而非纯黑，避免夜间反光；字号只影响正文与标题，不影响导航标签。')
+      Text('朗读速度')
+        .fontSize(KFont.caption())
+        .fontColor(KColor.sub())
+        .margin({ top: KSpace.M })
+
+      Row() {
+        ForEach(Settings.SPEED_LABELS, (label: string, index: number) => {
+          this.speedChip(label, index)
+        }, (label: string) => label)
+      }
+      .width('100%')
+      .margin({ top: KSpace.S })
+
+      Text('深色模式用的是深暖灰而非纯黑，避免夜间反光；字号只影响正文与标题，不影响导航标签。朗读从当前位置开始，适合通勤时听。')
         .fontSize(KFont.caption())
         .lineHeight(KLine.tight())
         .fontColor(KColor.mut())
         .width('100%')
-        .margin({ top: KSpace.XS })
+        .margin({ top: KSpace.M })
     }
     .alignItems(HorizontalAlign.Start)
     .width('100%')

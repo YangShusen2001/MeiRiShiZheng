@@ -64,8 +64,11 @@ try {
   log = `${err.stdout ?? ""}${err.stderr ?? ""}`;
 }
 
-// ArkTS 编译错误：逐条打印，这是本脚本存在的意义
-const arkErrors = [...log.matchAll(/Error Message: (.+?) At File: (\S+):(\d+):(\d+)/g)];
+// ArkTS 编译错误：逐条打印，这是本脚本存在的意义。
+// 注意报错有两种排版：`Error Message: xxx. At File: a.ets:1:2`（单行）
+// 与 `Error Message: xxx.\n  Property ... At File: a.ets:1:2`（换行续写），
+// 所以匹配要跨行非贪婪——第一版只匹配单行，漏报过一次。
+const arkErrors = [...log.matchAll(/Error Message: ([\s\S]*?)At File: (\S+):(\d+):(\d+)/g)];
 const compileFailed = /COMPILE RESULT:FAIL/.test(log);
 
 if (arkErrors.length > 0) {
