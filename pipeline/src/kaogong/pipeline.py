@@ -398,6 +398,16 @@ def quality_gate(target: dt.date, content_dir: Path) -> dict:
             picks_data = json.loads(picks_path.read_text(encoding="utf-8"))
             if not picks_data.get("picked"):
                 curation_errors.append("picks_empty")
+            else:
+                # 0022 P0 门禁：picked 非空但 essay/exam/extra 三槽位同时为空——
+                # 「合法但空转」的 picks（schema 只要求 minItems:1；bug 期间 4 天实测
+                # 形态：essay 恒 []、exam/extra 恒 null，仅靠 supplement 凑够下限）。
+                # 判 degraded 暴露而非静默发布（AGENTS.md 第 8 条），不阻止原文发布
+                # ——与 picks_missing 的降级哲学一致；即便偶发合法全空，代价只是
+                # 多一条 degraded 记录，不会误停发布。
+                picks_slots = picks_data.get("slots") or {}
+                if not picks_slots.get("essay") and not picks_slots.get("exam") and not picks_slots.get("extra"):
+                    curation_errors.append("picks_slots_all_empty")
         except json.JSONDecodeError:
             curation_errors.append("picks_invalid_json")
     if report.get("curation", {}).get("cardErrors") or report.get("curation", {}).get("relationErrors"):

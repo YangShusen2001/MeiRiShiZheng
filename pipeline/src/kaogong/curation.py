@@ -2,15 +2,18 @@
 """每日选材漏斗：粗筛（减法）→ AI 评级与主线归属（只排序）→ 槽位分配 → picks 定稿。
 
 规则见提案 0022 §4：AI 只输出等级（S/A/B/C）+ 理由 + 主线归属；程序负责排序与槽位。
-头版要闻可脱离主线池；申论精读 ×2 / 考点提炼 ×1 / 多样性补充 ×1 绑主线；
-picks 2-5 篇（下限 2，不足时历史文章补剧）；AI 只排序不打分。
+头版要闻可脱离主线池；申论精读 ×2（essay 路由）/ 考点提炼 ×1（file 路由）/ 多样性补充 ×1：
+槽位按**路由类型**分配，主线归属只作同分 tie-breaker（0022 P0 修复：原「绑主线」硬条件
+在主线归属失手时让三槽位恒空，已解耦）；picks 2-5 篇（下限 2，不足时历史文章补剧）；
+AI 只排序不打分。
 """
 from __future__ import annotations
 
 import datetime as dt
 import re
+import unicodedata
 from collections.abc import Callable
-from typing import TypedDict
+from typing import Literal, TypedDict
 
 from .card_ai import route_card_variant
 from .deepseek import DEFAULT_MODEL, chat
@@ -29,6 +32,11 @@ class _Graded(TypedDict, total=False):
     grade: str
     reason: str
     policyLine: str | None
+    # 观测标记（0022 P0 方案 α）：policyLine 值的来源，只观测、不猜主线——
+    # "model"    模型返回且（精确/归一化后）命中主线白名单；
+    # "none"     无归属（模型输出 null、归一化未命中、或程序兜底路径）；
+    # "fallback" 预留给未来的兜底归属机制（方案 β，需主线池带类型标签，不在 P0）。
+    lineSource: Literal["model", "fallback", "none"]
 
 
 def authority_rank(source: str) -> float:
@@ -90,6 +98,17 @@ def _grade_messages(items: list[dict], lines: list[dict]) -> list[dict[str, str]
         f"标注密度 {it['metadata']['annotationDensity']} | 金句 {it['metadata']['keySentenceCount']}"
         for i, it in enumerate(items)
     )
+    # 0022 P0（1a）：few-shot 示例的 policyLine 从 lines 动态注入，与清单永远同源。
+    # 修复前硬编码提案设计值 `15w-plan`（不在真实主线池），模型照抄示例 → 主线归属
+    # 0% 命中（实测 0/159）。主线池换代后也不会复发同一接缝 bug。
+    # 无活跃主线时示例输出 null，与 system 提示「无归属输出 null」保持一致。
+    import json
+
+    sample_line = lines[0]["id"] if lines else None
+    output_shape = json.dumps(
+        {"items": [{"index": 0, "grade": "A", "policyLine": sample_line, "reason": "权威源+标注密"}]},
+        ensure_ascii=False,
+    )
     return [
         {"role": "system", "content": (
             "你是公务员考试的时政编辑。只返回 JSON，不得输出其他内容。"
@@ -98,7 +117,7 @@ def _grade_messages(items: list[dict], lines: list[dict]) -> list[dict[str, str]
             "policyLine 从给出的主线 id 中选；无归属输出 null。每篇给一句话理由（≤30 字）。"
         )},
         {"role": "user", "content": (
-            "输出形状：{\"items\":[{\"index\":0,\"grade\":\"A\",\"policyLine\":\"15w-plan\",\"reason\":\"权威源+标注密\"}]}\n"
+            f"输出形状：{output_shape}\n"
             f"活跃主线：{line_list}\n候选文章（index 与下方一致）：\n{items_text}"
         )},
     ]
@@ -120,11 +139,56 @@ def _json_object(raw: str) -> dict:
     return value if isinstance(value, dict) else {}
 
 
+# 归一化时剥掉的包裹字符：半/全角引号、书名号、反引号（id 契约 ^[a-z0-9-]+$ 不会以这些开头）
+_LINE_WRAP_CHARS = "\"'`“”‘’「」『』"
+
+
+def _normalize_line_id(raw: object, lines: list[dict]) -> str | None:
+    """把模型返回的 policyLine 归一化到主线白名单（0022 P0 §2.2，保守零误匹配）。
+
+    支持：去首尾空白 / 去包裹引号（含全角）/ 全角转半角（NFKC：ｆ→f、－→-、（→(、＂→"）/
+    大小写归一 / 裁剪「id(名称)」回显后缀（模型照抄清单形态 `id(name)` 时截掉名称部分）。
+    明确不支持（会引入误匹配，架构文档 §2.2）：子串/包含匹配、对 p['name'] 的名称模糊匹配、
+    短 id 别名字典（15w-plan→…，为当前池打补丁换代即失效）、LLM 二次仲裁。
+    返回 None = 无归属（保持旧行为：宁可无归属，不可误归属——误归属会污染 extra 的
+    「已选主线」多样性判断，产生连锁误判）。
+    """
+    if not lines:
+        return None
+    ids = [str(p.get("id") or "") for p in lines if p.get("id")]
+    text = str(raw or "").strip()
+    if not text:
+        return None
+    text = text.strip(_LINE_WRAP_CHARS).strip()
+    text = unicodedata.normalize("NFKC", text)
+    text = text.strip().strip(_LINE_WRAP_CHARS).strip()
+    lowered = text.lower()
+    for line_id in ids:  # 1) 精确命中（大小写归一后）
+        if lowered == line_id.lower():
+            return line_id
+    trimmed = lowered.split("(", 1)[0].strip()  # 2) 裁剪「id(名称)」回显
+    if trimmed and trimmed != lowered:
+        for line_id in ids:
+            if trimmed == line_id.lower():
+                return line_id
+    return None
+
+
 def _program_fallback(article: dict) -> _Graded:
-    """程序兜底排序（无 key / 模型漏评时）：权威性 × 标注密度，不依赖模型。"""
+    """程序兜底排序（无 key / 模型漏评时）：权威性 × 标注密度，不依赖模型。
+
+    0022 P0（1c，方案 α）：只加 lineSource 观测标记、不猜主线（policyLine 仍为 None）。
+    误归属比 None 更糟——None 是「明确未知」可降级，误归属是「错误确定」。
+    """
     score = authority_rank(str(article.get("source", ""))) * (1 + len(article.get("aiAnnotations") or []))
     grade = "A" if score >= 6 else "B"
-    return {"article": article, "grade": grade, "reason": "程序兜底排序", "policyLine": None}
+    return {
+        "article": article,
+        "grade": grade,
+        "reason": "程序兜底排序",
+        "policyLine": None,
+        "lineSource": "none",
+    }
 
 
 def assign_grades(
@@ -161,13 +225,16 @@ def assign_grades(
         if item is None:
             graded.append(_program_fallback(article))
             continue
-        line = str(item.get("policyLine") or "").strip()
-        line_id = line if any(p.get("id") == line for p in lines) else None
+        # 0022 P0（1b）：归一化匹配——精确/大小写/引号/空白/全角/「id(名称)」回显 → 白名单 id；
+        # 其余归 None。修复前是精确匹配，示例短 id 与真实 id 对不上 → 归属 100% 落空。
+        line_id = _normalize_line_id(item.get("policyLine"), lines)
         graded.append({
             "article": article,
             "grade": str(item.get("grade", "B")).upper(),
             "reason": str(item.get("reason", ""))[:60],
             "policyLine": line_id,
+            # 观测标记（1c）：命中（精确或归一化）=model；null/未命中=none
+            "lineSource": "model" if line_id else "none",
         })
     return graded
 
@@ -176,63 +243,78 @@ def _sort_key(entry: _Graded) -> tuple[int, float]:
     return (GRADES.index(entry.get("grade", "B")), authority_rank(str(entry.get("article", {}).get("source", ""))))
 
 
+def _entry_line(entry: _Graded) -> str | None:
+    """槽位判定用的主线值：评级结果优先，其次文章自带的 policyLine（历史运行回写）。"""
+    line = entry.get("policyLine") or entry.get("article", {}).get("policyLine")
+    return str(line) if line else None
+
+
 def assign_slots(graded: list[_Graded], *, limit: int = MAX_PICKS) -> dict:
-    """程序槽位分配：头版（可脱离主线）→ 申论精读 ×2 → 考点提炼 ×1 → 多样性补充 ×1。"""
-    slots: dict[str, str | None] = {"headline": None, "essay": [], "exam": None, "extra": None}
+    """程序槽位分配：头版（无条件）→ 申论精读 ×2 → 考点提炼 ×1 → 多样性补充 ×1。
+
+    0022 P0（1d，方案 c）：槽位第一判定只看**路由类型**（essay→申论精读 / file→考点提炼），
+    policyLine 仅作同分 tie-breaker（有主线者优先；extra 偏好主线不在已选集合）。
+    修复前把 policyLine 非空当 essay/exam/extra 的硬准入条件——主线归属失手
+    （few-shot 短 id → 0% 命中）时三槽位恒空，picks 退化为只有 headline。
+    槽位填不满就让它空着（门禁 picks_slots_all_empty 负责暴露该状态），
+    禁止拿不合适路由类型的文章降级补位——那会把「没选出来」伪装成「选出来了」。
+    """
+    del limit  # 保留签名兼容 build_picks(limit=max_picks)；槽位自然上限 1+2+1+1=MAX_PICKS
+    slots: dict[str, str | None | list[str]] = {"headline": None, "essay": [], "exam": None, "extra": None}
     pool = sorted(graded, key=_sort_key)
     used: set[str] = set()
-    taken = set()
 
-    def pick(pred, *, skip_used: bool = True):
-        for entry in pool:
-            aid = str(entry["article"].get("id", ""))
-            if aid in taken:
-                continue
-            if skip_used and aid in used:
-                continue
-            if pred(entry):
-                taken.add(aid)
-                return entry
-        return None
+    def entry_id(entry: _Graded) -> str:
+        return str(entry["article"].get("id", ""))
 
-    # 头版要闻：等级最高者，允许无主线（脱离主线池）
-    headline = pick(lambda e: True, skip_used=False)
-    if headline:
-        slots["headline"] = str(headline["article"].get("id"))
-        used.add(str(headline["article"].get("id")))
+    def variant(entry: _Graded) -> str:
+        return route_card_variant(
+            str(entry["article"].get("title", "")), str(entry["article"].get("source", ""))
+        )
 
+    # 头版要闻：等级最高者，允许无主线（脱离主线池）——无条件槽位，不要求路由类型
+    if pool:
+        slots["headline"] = entry_id(pool[0])
+        used.add(entry_id(pool[0]))
 
-    # 申论精读：评论类（essay 路由）
-    essay_pool = [e for e in pool if e["article"].get("id") not in used]
-    for entry in sorted(essay_pool, key=_sort_key):
+    # 申论精读 ×2：essay 路由即可入池；同分时有主线者优先（tie-breaker，非硬条件）
+    essay_pool = sorted(
+        (e for e in pool if entry_id(e) not in used and variant(e) == "essay"),
+        key=lambda e: (_sort_key(e), _entry_line(e) is None),
+    )
+    for entry in essay_pool:
         if len(slots["essay"]) >= 2:
             break
-        if route_card_variant(str(entry["article"].get("title", "")), str(entry["article"].get("source", ""))) == "essay" \
-                and (entry.get("policyLine") or entry.get("article", {}).get("policyLine")):
-            slots["essay"].append(str(entry["article"].get("id")))
-            used.add(str(entry["article"].get("id")))
+        slots["essay"].append(entry_id(entry))
+        used.add(entry_id(entry))
 
+    # 考点提炼 ×1：file 路由即可入池；同分时有主线者优先（tie-breaker，非硬条件）
+    exam_pool = sorted(
+        (e for e in pool if entry_id(e) not in used and variant(e) == "file"),
+        key=lambda e: (_sort_key(e), _entry_line(e) is None),
+    )
+    if exam_pool:
+        slots["exam"] = entry_id(exam_pool[0])
+        used.add(entry_id(exam_pool[0]))
 
-    # 考点提炼：文件类（file 路由），绑主线
-    exam = pick(lambda e: route_card_variant(
-        str(e["article"].get("title", "")), str(e["article"].get("source", ""))) == "file"
-        and (e.get("policyLine") or e["article"].get("policyLine")))
-    if exam:
-        slots["exam"] = str(exam["article"].get("id"))
-        used.add(slots["exam"])
+    # 多样性补充 ×1：不要求主线非空；tie-breaker 偏好「主线不在已选集合」
+    selected_lines = {_entry_line(e) for e in graded if entry_id(e) in used and _entry_line(e)}
 
+    def extra_rank(entry: _Graded) -> int:
+        line = _entry_line(entry)
+        if line and line not in selected_lines:
+            return 0  # 新主线：多样性最佳
+        if not line:
+            return 1  # 无主线：中性（不违反多样性）
+        return 2  # 主线已选：重复，最不优先
 
-    # 多样性补充：剩余最高等级，主线与已选不同
-    selected_lines = {
-        entry.get("policyLine") for entry in graded
-        if str(entry["article"].get("id")) in used and entry.get("policyLine")
-    }
-    extra = pick(lambda e: (e.get("policyLine") or e["article"].get("policyLine"))
-                 and (e.get("policyLine") not in selected_lines))
-    if extra:
-        slots["extra"] = str(extra["article"].get("id"))
-        used.add(slots["extra"])
-
+    remaining = sorted(
+        (e for e in pool if entry_id(e) not in used),
+        key=lambda e: (_sort_key(e), extra_rank(e)),
+    )
+    if remaining:
+        slots["extra"] = entry_id(remaining[0])
+        used.add(entry_id(remaining[0]))
 
     picked_ids = [slots["headline"], *slots["essay"], slots["exam"], slots["extra"]]
     slots["picked"] = [pid for pid in picked_ids if pid]

@@ -64,6 +64,10 @@ def test_assign_grades_falls_back_without_key():
 
 
 def test_assign_slots_structure():
+    """0022 P0 后语义：路由类型优先，主线仅同分 tie-breaker（原「绑主线」硬条件已解耦）。
+
+    架构文档 §5 T01 风险项预告：本测试曾依赖旧逻辑（extra 需要主线），按方案 c 更新。
+    """
     articles = [
         _article("h", "某头版要闻", source="人民网", ann_count=6),                       # 头版候选
         _article("e1", "学习时报评论：敬畏历史", source="学习时报"),                        # essay
@@ -82,8 +86,8 @@ def test_assign_slots_structure():
     assert slots["headline"] == "h"            # 头版可无主线
     assert set(slots["essay"]) == {"e1", "e2"}
     assert slots["exam"] == "x"
-    assert slots["extra"] is None              # 无剩余绑主线且不同主线者
-    assert len(slots["picked"]) == 4
+    assert slots["extra"] == "n"               # extra 不再要求主线非空：剩余最高等级即可入选
+    assert len(slots["picked"]) == 5
 
 
 def test_build_picks_supplements_from_history():
@@ -222,3 +226,117 @@ def test_load_lines_only_active(tmp_path):
     }), encoding="utf-8")
     lines = _load_lines(tmp_path)
     assert [p["id"] for p in lines] == ["a"]
+
+
+# ---------------------------------------------------------------- 0022 P0 契约测试
+# 背景：few-shot 示例硬编码提案设计值短 id `15w-plan`（curation.py:101），而真实主线 id
+# 是 `fifteen-five-plan`；加上 :164-165 精确匹配不归一化 → policyLine 100% 归 None（实测
+# 0/159）→ essay/exam/extra 三槽位准入条件恒假 → 选材成功率实际为 0（picks 靠 supplement
+# 凑数「空转」）。以下测试用**真实的 prompt 输出形状**喂校验函数——原测试喂手写正确 id，
+# 恰好绕过了这个接缝 bug（测试盲区）。每个测试在修复前的代码上必失败（架构文档 §3.3）。
+
+
+def test_grade_prompt_sample_id_is_valid():
+    """契约 1（1a）：few-shot 输出形状示例里的 policyLine 必须是真实主线 id。
+
+    修复前必失败：示例硬编码 `15w-plan`，不在主线池 {fifteen-five-plan,
+    govt-work-report-2026}——模型照抄示例 → 主线归属必然全灭。
+    """
+    import re
+
+    from kaogong.curation import _grade_messages, graded_meta
+
+    articles = [_article("a1", "学习时报评论：敬畏历史"), _article("a2", "全国统一大市场建设方案")]
+    msgs = _grade_messages([{"metadata": graded_meta(a)} for a in articles], LINES)
+    match = re.search(r'"policyLine"\s*:\s*"([^"]+)"', msgs[1]["content"])
+    assert match, "输出形状示例必须含 policyLine 示例值"
+    assert match.group(1) in {p["id"] for p in LINES}, (
+        f"示例 id {match.group(1)!r} 不在真实主线池 {[p['id'] for p in LINES]}——"
+        "示例与清单必须同源（变量注入），否则主线池换代后复发同一接缝 bug"
+    )
+
+
+def test_normalize_line_id_variants():
+    """契约 2（1b）：模型返回的 id 变体归一化命中白名单；别名/名称模糊匹配必须保持 None。
+
+    修复前必失败：_normalize_line_id 不存在（ImportError），且旧精确匹配对一切变体归 None。
+    归一化边界（架构文档 §2.2，保守零误匹配）：支持大小写/引号/空白/全角/「id(名称)」回显；
+    明确不支持短 id 别名字典、名称模糊匹配——宁可无归属，不可误归属。
+    """
+    from kaogong.curation import _normalize_line_id
+
+    # 支持的变体 → 全部命中真实主线 id
+    assert _normalize_line_id("fifteen-five-plan", LINES) == "fifteen-five-plan"       # 精确
+    assert _normalize_line_id("Fifteen-Five-Plan", LINES) == "fifteen-five-plan"       # 大小写
+    assert _normalize_line_id("  fifteen-five-plan  ", LINES) == "fifteen-five-plan"   # 空白
+    assert _normalize_line_id('"fifteen-five-plan"', LINES) == "fifteen-five-plan"     # 包裹引号
+    assert _normalize_line_id("“fifteen-five-plan”", LINES) == "fifteen-five-plan"     # 全角引号
+    assert _normalize_line_id("ｆｉｆｔｅｅｎ－ｆｉｖｅ－ｐｌａｎ", LINES) == "fifteen-five-plan"  # 全角字母+全角连字符
+    assert _normalize_line_id("fifteen-five-plan(十五五规划建议)", LINES) == "fifteen-five-plan"  # 照抄清单 id(name) 回显
+    assert _normalize_line_id("GOVT-WORK-REPORT-2026", LINES) == "govt-work-report-2026"
+    # 不支持的形态 → None（保持旧行为；固化「不做别名映射/名称模糊匹配」）
+    assert _normalize_line_id("15w-plan", LINES) is None       # 短 id 别名 → 不打补丁式映射
+    assert _normalize_line_id("不存在的线", LINES) is None
+    assert _normalize_line_id("十五五规划建议", LINES) is None  # 主线名称 → 不做模糊匹配
+    assert _normalize_line_id(None, LINES) is None
+    assert _normalize_line_id("", LINES) is None
+    assert _normalize_line_id("fifteen-five-plan", []) is None  # 空主线池 → 无可归属
+
+
+def test_fallback_line_source_marked():
+    """契约 3（1c）：lineSource 观测标记（方案 α：只观测、不猜主线、不恢复产能）。
+
+    修复前必失败：_Graded 无 lineSource 字段（KeyError）。
+    - 无 key → _program_fallback：policyLine=None + lineSource="none"
+    - 模型命中（精确或归一化）→ lineSource="model"
+    - 模型输出 null / 归一化未命中 → lineSource="none"
+    （"fallback" 预留给未来的兜底归属机制——方案 β，不在 P0。）
+    """
+    # 无 key：全走程序兜底（_program_fallback 不猜主线，只标记）
+    graded = assign_grades([_article("a1", "某文章")], LINES, {})
+    assert graded[0]["policyLine"] is None
+    assert graded[0]["lineSource"] == "none"
+
+    # 模型返回：精确 id / 归一化变体 / null / 未命中短 id ——走真实校验路径
+    articles = [_article("a1", "标题一"), _article("a2", "标题二"),
+                _article("a3", "标题三"), _article("a4", "标题四")]
+    graded = assign_grades(articles, LINES, {"deepseek_api_key": "k"}, call=_call([
+        {"index": 0, "grade": "A", "policyLine": "fifteen-five-plan", "reason": "精确命中"},
+        {"index": 1, "grade": "A", "policyLine": "  Fifteen-Five-Plan ", "reason": "归一化命中"},
+        {"index": 2, "grade": "A", "policyLine": None, "reason": "模型判无归属"},
+        {"index": 3, "grade": "A", "policyLine": "15w-plan", "reason": "短 id 未命中"},
+    ]))
+    assert (graded[0]["policyLine"], graded[0]["lineSource"]) == ("fifteen-five-plan", "model")
+    assert (graded[1]["policyLine"], graded[1]["lineSource"]) == ("fifteen-five-plan", "model")
+    assert (graded[2]["policyLine"], graded[2]["lineSource"]) == (None, "none")
+    assert (graded[3]["policyLine"], graded[3]["lineSource"]) == (None, "none")
+
+
+def test_assign_slots_route_first_without_line():
+    """契约 4（1d，方案 c）：槽位按路由类型分配，主线只作同分 tie-breaker。
+
+    修复前必失败：旧代码把 policyLine 非空当 essay/exam/extra 的硬准入条件
+    （:211/:219/:231），主线归属全 None 时三槽位恒空 → 选材塌陷为只有 headline
+    （线上 4 天实测形态：essay 恒 []、exam/extra 恒 null，靠 supplement 凑数）。
+    """
+    articles = [
+        _article("h", "某头版要闻", source="人民网", ann_count=6),
+        _article("e1", "学习时报评论：敬畏历史", source="学习时报"),
+        _article("e2", "南方网评：把饭碗端牢", source="南方网"),
+        _article("x", "国务院关于《特殊教育发展提升十五五行动计划》的批复", source="中国政府网"),
+        _article("n", "普通社会新闻", source="news.cn", ann_count=1),
+    ]
+    # 模型主线归属全部失败（policyLine 全 None）——正是 bug 期间的真实形态
+    graded = assign_grades(articles, LINES, {"deepseek_api_key": "k"}, call=_call([
+        {"index": 0, "grade": "S", "policyLine": None, "reason": "头版"},
+        {"index": 1, "grade": "A", "policyLine": None, "reason": "评论"},
+        {"index": 2, "grade": "B", "policyLine": None, "reason": "评论"},
+        {"index": 3, "grade": "A", "policyLine": None, "reason": "文件"},
+        {"index": 4, "grade": "C", "policyLine": None, "reason": "普通"},
+    ]))
+    slots = assign_slots(graded)
+    assert slots["headline"] == "h"            # 头版无条件槽位，不变
+    assert set(slots["essay"]) == {"e1", "e2"}  # essay 路由即可入池，无需主线
+    assert slots["exam"] == "x"                 # file 路由即可入池，无需主线
+    assert slots["extra"] == "n"                # extra 不再要求主线非空
+    assert len(slots["picked"]) == 5            # 选材不再塌陷（产能恢复由本项负责）

@@ -215,6 +215,37 @@ def test_quality_gate_is_degraded_for_recoverable_ai_failure(tmp_path):
     assert result["qualityStatus"] == "degraded"
 
 
+def test_quality_gate_degrades_when_picks_slots_all_empty(tmp_path):
+    """0022 P0 门禁：picked 非空但 essay/exam/extra 三槽位同时为空 → degraded。
+
+    「合法但空转」的 picks（schema 只要求 minItems:1；bug 期间 4 天实测形态：
+    essay 恒 []、exam/extra 恒 null，仅靠 supplement 凑够下限）必须被门禁暴露
+    并写失败原因，不得静默发布（AGENTS.md 第 8 条）。
+    修复前必失败：无该规则时本场景 qualityStatus == "ok"。
+    """
+    # Given: a schema-valid picks with picked non-empty but all three slots empty.
+    target = dt.date(2026, 8, 14)
+    day = tmp_path / target.isoformat()
+    day.mkdir()
+    (day / "picks.json").write_text(json.dumps({
+        "date": target.isoformat(),
+        "slots": {"headline": "a", "essay": [], "exam": None, "extra": None},
+        "picked": ["a"], "assignments": {"a": None},
+    }), encoding="utf-8")
+    reports = tmp_path / "_reports"
+    reports.mkdir()
+    (reports / f"{target.isoformat()}.json").write_text(json.dumps({
+        "date": target.isoformat(), "sourcesOk": 1, "candidates": 2, "articles": 2,
+    }), encoding="utf-8")
+
+    # When: the publication gate evaluates the hollow picks.
+    result = quality_gate(target, tmp_path)
+
+    # Then: it is degraded (not failed—原文仍可发布) with a machine-readable reason.
+    assert result["qualityStatus"] == "degraded"
+    assert "picks_slots_all_empty" in result["curationErrors"]
+
+
 def _write_report(root, date, **values):
     reports = root / "_reports"
     reports.mkdir(exist_ok=True)
@@ -228,10 +259,15 @@ def _write_digest(root, date):
     (day / "digest.json").write_text(json.dumps({
         "date": date.isoformat(), "title": "digest", "sections": [],
     }), encoding="utf-8")
-    # 0022：picks 是每日选材产物；测试 fixture 提供非空 picks 以免误判 picks_missing
+    # 0022：picks 是每日选材产物；测试 fixture 提供非空 picks 以免误判 picks_missing。
+    # 槽位必须非空：旧 fixture 的 {essay: [], exam: None, extra: None} 恰是 bug 期间的
+    # 「空转」形态，会触发 picks_slots_all_empty 门禁（本组测试只验证数量/分类/语义门禁，
+    # 该门禁由 test_quality_gate_degrades_when_picks_slots_all_empty 专门覆盖）。
     (day / "picks.json").write_text(json.dumps({
-        "date": date.isoformat(), "slots": {"headline": "a", "essay": [], "exam": None, "extra": None},
-        "picked": ["a"], "assignments": {"a": None},
+        "date": date.isoformat(),
+        "slots": {"headline": "a", "essay": ["b"], "exam": "c", "extra": "d"},
+        "picked": ["a", "b", "c", "d"],
+        "assignments": {"a": None, "b": None, "c": None, "d": None},
     }), encoding="utf-8")
 
 
