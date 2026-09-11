@@ -1,7 +1,7 @@
 import { AiAnnotation, ClippedArticle } from '../model/Content';
 import { Ai, AiResult, CODE_AI_ERROR, CODE_NETWORK, CODE_RATE_LIMITED } from '../service/Ai';
 import { Clipboard } from '../service/Clipboard';
-import { ContentService } from '../service/ContentService';
+import { ContentService, Loaded } from '../service/ContentService';
 import { HttpError, STATUS_LOCAL_FAILURE } from '../service/Http';
 import { Net } from '../service/Net';
 import { Invite, InviteResult } from '../service/Invite';
@@ -83,6 +83,8 @@ export struct ReadPage {
   @State inviteBusy: boolean = false;
   @State inviteMsg: string = '';
   @State inviteOk: boolean = false;
+  /** 本篇是否来自本地缓存（离线可读已看过的文章）。 */
+  @State showingCache: boolean = false;
 
   /** 触发 AI 的原文片段（与释义分开存，避免两件事混在一起）。 */
   private aiSource: string = '';
@@ -113,7 +115,8 @@ export struct ReadPage {
     this.progress = 0;
     this.currentTopIndex = 0;
     ContentService.loadArticle(this.articleId)
-      .then((article: ClippedArticle) => {
+      .then((loaded: Loaded<ClippedArticle>) => {
+        const article: ClippedArticle = loaded.data;
         this.title = article.title;
         this.metaText = `${article.source} · ${article.date}`;
         this.url = article.url;
@@ -122,6 +125,7 @@ export struct ReadPage {
         this.annotations = ContentService.usableAnnotations(article);
         // 仅当记录的就是本篇时才提示续读
         this.resumeIndex = Settings.lastReadId() === this.articleId ? Settings.lastReadIndex() : 0;
+        this.showingCache = loaded.cached;
         this.loading = false;
       })
       .catch((err: Error) => {
@@ -398,6 +402,13 @@ export struct ReadPage {
       }
       .width('100%')
       .alignItems(VerticalAlign.Center)
+
+      if (this.showingCache) {
+        Text('离线内容：本篇来自本地缓存')
+          .fontSize(KFont.caption())
+          .fontColor(KColor.mut())
+          .margin({ top: KSpace.XS })
+      }
 
       Text(this.title)
         .fontSize(KFont.titleL())

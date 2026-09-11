@@ -1,24 +1,24 @@
-import { ContentManifest, DigestItem, DigestSection, TodaySummary } from '../model/Content';
-import { ContentService } from '../service/ContentService';
+import { ContentManifest, DailyDigest, DigestItem, DigestSection, TodaySummary } from '../model/Content';
+import { ContentService, Loaded } from '../service/ContentService';
 import { HttpError, STATUS_LOCAL_FAILURE } from '../service/Http';
 import { Net } from '../service/Net';
 import { KColor, KFont, KLine, KRadius, KShadow, KSize, KSpace } from '../theme/Tokens';
 import { ReadParam } from './ReadPage';
+import { SearchHit, SearchSheet } from './SearchSheet';
 import { SettingsSheet } from './SettingsSheet';
 
 /**
  * 首页：日期切换 + 今日速览 + 当日日报（分栏列表）。
  *
- * 交互补齐项：
- * 1. **日期切换**——清单带 7 个内容日，首版只显示最新一天，历史内容完全无法触达；
- * 2. **下拉刷新**——失败后原先只能点「重试」按钮；
- * 3. **骨架屏**——首版是居中转圈，阅读类 App 用骨架屏更少跳动；
- * 4. **按压反馈 + 触摸目标**——列表行整行可点、高度 ≥44vp；
- * 5. **离线感知**——区分「设备没联网」与「服务异常」，不再笼统报「网络异常」；
- * 6. **阅读设置入口**——字号与深色在首页即可调整（夜间不必先点进文章才能切深色）。
+ * ## 数据与离线
+ * 取数一律走 `ContentService`（内部先网络、失败回落缓存）。
+ * **冷启动先同步读缓存渲染首帧**（`paintFromCache`），再后台请求刷新——
+ * 这是"秒开"的关键：异步读缓存会先闪一帧空白。首帧来自缓存时明确标注，
+ * 不让用户误以为内容是最新的。
  *
- * 视觉全部取自 `theme/Tokens.ets`，本文件不含任何硬编码色值/字号/间距。
- * 数据来自 `manifest.json` + `{date}/summary.json` + `{date}/digest.json`。
+ * ## 交互
+ * 日期切换 · 下拉刷新 · 骨架屏 · 按压反馈 · 断网/缓存状态条 ·
+ * **跨日检索**（本地索引，零网络）· 阅读设置入口 · 空态
  */
 @Component
 export struct HomePage {
@@ -36,20 +36,26 @@ export struct HomePage {
   @State keywords: string[] = [];
   @State sections: DigestSection[] = [];
   @State settingsOpen: boolean = false;
-  /** 设备当前是否断网。由 `Net.watch` 持续更新，不是"失败时才探测"。 */
+  @State searchOpen: boolean = false;
+  /** 设备当前是否断网。由 `Net.watch` 持续更新。 */
   @State offline: boolean = false;
+  /** 当前展示内容是否来自缓存（含首帧秒开与断网兜底两种）。 */
+  @State showingCache: boolean = false;
+  /** 缓存写入时间，用于「缓存于 x 前」。 */
+  @State cachedAt: number = 0;
 
   /** 骨架屏占位行。 */
   private skeletonRows: number[] = [0, 1, 2, 3, 4];
-  /** 官方原文链接 → 本地文章 id；用于日报条目跳转。 */
+  /** 官方原文链接 → 本地文章 id。 */
   private urlToId: Map<string, string> = new Map<string, string>();
-  /** 官方原文链接 → 来源名（如「南方网」）。 */
+  /** 官方原文链接 → 来源名。 */
   private urlToSource: Map<string, string> = new Map<string, string>();
   /** 日期 → 该日全部文章 id（按清单顺序），用于算上一篇/下一篇。 */
   private dayIds: Map<string, string[]> = new Map<string, string[]>();
+  /** 检索索引（全量文章）。非状态字段：仅在 manifest 更新时重建。 */
+  private searchHits: SearchHit[] = [];
 
   aboutToAppear(): void {
-    // 持续监听网络：断网时挂提示条，恢复后自动重载，不必等用户手动刷新。
     Net.watch((online: boolean) => {
       this.offline = !online;
       if (online) {
@@ -59,15 +65,15 @@ export struct HomePage {
     Net.probe().then((online: boolean) => {
       this.offline = !online;
     });
+    // 先拿缓存把首帧点亮，再走网络刷新
+    this.paintFromCache();
     this.loadLatest();
   }
 
   aboutToDisappear(): void {
-    // 监听器在服务里是单例，页面销毁必须注销，否则回调会指向已销毁的实例。
     Net.unwatch();
   }
 
-  // —— 按压反馈：轻量背景变化（不做缩放，避免长列表滚动时抖动）——
   @Styles
   rowNormal() {
     .backgroundColor(KColor.surface())
@@ -78,22 +84,75 @@ export struct HomePage {
     .backgroundColor(KColor.surfaceAlt())
   }
 
+  /**
+   * 用缓存渲染首帧。返回 true 表示已有内容可展示（此时不显示骨架屏）。
+   * 必须同步读：异步读会让用户先看到一帧空白，秒开就失去意义。
+   */
+  private paintFromCache(): boolean {
+    const manifest: Loaded<ContentManifest> | null = ContentService.cachedManifest();
+    if (manifest === null) {
+      return false;
+    }
+    const latest: string | null = manifest.data.latestDate;
+    if (latest === null || latest.length === 0) {
+      return false;
+    }
+    this.applyManifest(manifest.data);
+    this.selectedDate = latest;
+    const digest: Loaded<DailyDigest> | null = ContentService.cachedDigest(latest);
+    if (digest !== null) {
+      this.sections = digest.data.sections;
+    }
+    const summary: Loaded<TodaySummary> | null = ContentService.cachedSummary(latest);
+    if (summary !== null) {
+      this.summaryText = summary.data.summary;
+      this.keywords = summary.data.keywords;
+    }
+    this.showingCache = true;
+    this.cachedAt = manifest.savedAt;
+    this.loading = this.sections.length === 0;
+    return this.sections.length > 0;
+  }
+
+  /** 重建各层索引（manifest 是全量索引的唯一来源）。 */
+  private applyManifest(manifest: ContentManifest): void {
+    this.urlToId.clear();
+    this.urlToSource.clear();
+    this.dayIds.clear();
+    const hits: SearchHit[] = [];
+    for (const day of manifest.days) {
+      const ids: string[] = [];
+      for (const article of day.articles) {
+        this.urlToId.set(article.url, article.id);
+        this.urlToSource.set(article.url, article.source);
+        ids.push(article.id);
+        hits.push({ id: article.id, title: article.title, source: article.source, date: day.date });
+      }
+      this.dayIds.set(day.date, ids);
+    }
+    this.searchHits = hits;
+    this.dates = manifest.days.map((day) => day.date);
+  }
+
   private loadLatest(): void {
-    this.loading = true;
+    if (!this.showingCache) {
+      this.loading = true;
+    }
     this.errorText = '';
     this.hintText = '';
     ContentService.loadManifest()
-      .then((manifest: ContentManifest) => {
-        const latest: string | null = manifest.latestDate;
+      .then((loaded: Loaded<ContentManifest>) => {
+        const latest: string | null = loaded.data.latestDate;
         if (latest === null || latest.length === 0) {
           this.loading = false;
           this.refreshing = false;
           this.errorText = '内容清单为空：线上还没有可展示的日报。';
           return;
         }
-        this.indexManifest(manifest);
-        this.dates = manifest.days.map((day) => day.date);
+        this.applyManifest(loaded.data);
         this.selectedDate = latest;
+        this.showingCache = loaded.cached;
+        this.cachedAt = loaded.savedAt;
         this.loadDay(latest);
       })
       .catch((err: Error) => {
@@ -101,37 +160,22 @@ export struct HomePage {
       });
   }
 
-  private indexManifest(manifest: ContentManifest): void {
-    this.urlToId.clear();
-    this.urlToSource.clear();
-    this.dayIds.clear();
-    for (const day of manifest.days) {
-      const ids: string[] = [];
-      for (const article of day.articles) {
-        this.urlToId.set(article.url, article.id);
-        this.urlToSource.set(article.url, article.source);
-        ids.push(article.id);
-      }
-      this.dayIds.set(day.date, ids);
-    }
-  }
-
   private loadDay(date: string): void {
-    this.summaryText = '';
-    this.keywords = [];
-    this.sections = [];
     this.hintText = '';
     ContentService.loadSummary(date)
-      .then((summary: TodaySummary) => {
-        this.summaryText = summary.summary;
-        this.keywords = summary.keywords;
+      .then((loaded: Loaded<TodaySummary>) => {
+        this.summaryText = loaded.data.summary;
+        this.keywords = loaded.data.keywords;
       })
       .catch(() => {
         // 今日速览是可选产物：缺失不影响日报展示，不报错。
       })
       .then(() => ContentService.loadDigest(date))
-      .then((digest) => {
-        this.sections = digest.sections;
+      .then((loaded: Loaded<DailyDigest>) => {
+        this.sections = loaded.data.sections;
+        this.showingCache = loaded.cached;
+        this.cachedAt = loaded.savedAt;
+        this.errorText = '';
         this.loading = false;
         this.refreshing = false;
       })
@@ -145,15 +189,23 @@ export struct HomePage {
       return;
     }
     this.selectedDate = date;
-    this.loading = true;
     this.errorText = '';
+    // 切日期时先用该日缓存立刻给内容，再刷新
+    const cached: Loaded<DailyDigest> | null = ContentService.cachedDigest(date);
+    if (cached !== null) {
+      this.sections = cached.data.sections;
+      this.showingCache = true;
+      this.cachedAt = cached.savedAt;
+      this.loading = false;
+    } else {
+      this.sections = [];
+      this.summaryText = '';
+      this.keywords = [];
+      this.loading = true;
+    }
     this.loadDay(date);
   }
 
-  /**
-   * 统一错误出口：先探测网络可达性，再决定提示措辞。
-   * 报错时不武断归因——「没联网」和「服务异常」的处置动作完全不同。
-   */
   private report(err: Error, stopLoading: boolean): void {
     Net.probe().then((online: boolean) => {
       this.offline = !online;
@@ -171,14 +223,33 @@ export struct HomePage {
         return err.message;
       }
       if (err.status === 404) {
-        return '内容通道尚未部署到线上（/content/* 返回 404）。请先部署一次 Pages 构建。';
+        return '内容通道尚未部署到线上（/content/* 返回 404）。';
       }
       return `请求失败：HTTP ${err.status}`;
     }
     if (!online) {
-      return '当前设备没有网络连接。请检查网络后下拉刷新。';
+      return '当前无网络，且本地还没有缓存内容。联网后下拉刷新即可。';
     }
     return `网络异常：${err.message}`;
+  }
+
+  /** 「缓存于 x 前」。 */
+  private static agoText(savedAt: number): string {
+    if (savedAt <= 0) {
+      return '';
+    }
+    const minutes: number = Math.floor((Date.now() - savedAt) / 60000);
+    if (minutes < 1) {
+      return '刚刚';
+    }
+    if (minutes < 60) {
+      return `${minutes} 分钟前`;
+    }
+    const hours: number = Math.floor(minutes / 60);
+    if (hours < 24) {
+      return `${hours} 小时前`;
+    }
+    return `${Math.floor(hours / 24)} 天前`;
   }
 
   private sourceOf(item: DigestItem): string {
@@ -204,23 +275,30 @@ export struct HomePage {
   private openItem(item: DigestItem): void {
     const articleId: string | undefined = this.urlToId.get(item.sourceUrl);
     if (articleId === undefined) {
-      // 未剪藏的条目没有本地原文：给出明确提示，不静默失败也不跳外部浏览器。
       this.hintText = `「${item.title}」未收录原文，无法在本应用内阅读。`;
       return;
     }
     this.hintText = '';
-    this.navStack.pushPathByName('read', this.readParamFor(articleId));
+    this.navStack.pushPathByName('read', this.readParamFor(articleId, this.selectedDate));
   }
 
-  /** 带上当日文章列表：阅读页据此自行算出上一篇/下一篇，支持一直往下翻。 */
-  private readParamFor(articleId: string): ReadParam {
-    const ids: string[] | undefined = this.dayIds.get(this.selectedDate);
+  /** 检索命中 → 打开文章（带上该文章所属日期的清单，保证篇间翻阅可用）。 */
+  private openHit(hit: SearchHit): void {
+    this.searchOpen = false;
+    if (hit.date !== this.selectedDate) {
+      this.selectDate(hit.date);
+    }
+    this.navStack.pushPathByName('read', this.readParamFor(hit.id, hit.date));
+  }
+
+  private readParamFor(articleId: string, date: string): ReadParam {
+    const ids: string[] | undefined = this.dayIds.get(date);
     const dayIds: string[] = ids === undefined ? [] : ids;
     const param: ReadParam = { articleId: articleId, dayIds: dayIds };
     return param;
   }
 
-  /** 顶部：日期切换条 + 阅读设置入口。 */
+  /** 顶部：日期切换条 + 检索 / 设置入口。 */
   @Builder
   headerRow() {
     Row() {
@@ -246,11 +324,21 @@ export struct HomePage {
       .scrollBar(BarState.Off)
       .layoutWeight(1)
 
+      Text('检索')
+        .fontSize(KFont.meta())
+        .fontColor(KColor.sub())
+        .height(KSize.TOUCH_MIN)
+        .padding({ left: KSpace.S, right: KSpace.S })
+        .textAlign(TextAlign.Center)
+        .onClick(() => {
+          this.searchOpen = true;
+        })
+
       Text('Aa')
         .fontSize(KFont.meta())
         .fontColor(KColor.sub())
         .height(KSize.TOUCH_MIN)
-        .padding({ left: KSpace.M, right: KSpace.XS })
+        .padding({ left: KSpace.XS, right: KSpace.XS })
         .textAlign(TextAlign.Center)
         .onClick(() => {
           this.settingsOpen = true;
@@ -259,6 +347,30 @@ export struct HomePage {
     .width('100%')
     .alignItems(VerticalAlign.Center)
     .margin({ bottom: KSpace.M })
+  }
+
+  /** 离线 / 缓存状态条：如实告知内容来源，不冒充"刚刚更新"。 */
+  @Builder
+  statusStrip() {
+    if (this.offline) {
+      Text(this.showingCache
+        ? `当前无网络，展示的是缓存内容（${HomePage.agoText(this.cachedAt)}）。恢复后会自动刷新。`
+        : '当前无网络，且本地没有缓存内容。联网后下拉刷新即可。')
+        .fontSize(KFont.meta())
+        .lineHeight(KLine.tight())
+        .fontColor(KColor.warnInk())
+        .backgroundColor(KColor.warnSoft())
+        .borderRadius(KRadius.S)
+        .padding(KSpace.M)
+        .width('100%')
+        .margin({ bottom: KSpace.M })
+    } else if (this.showingCache) {
+      Text(`离线内容（缓存于 ${HomePage.agoText(this.cachedAt)}），正在刷新…`)
+        .fontSize(KFont.caption())
+        .fontColor(KColor.mut())
+        .width('100%')
+        .margin({ bottom: KSpace.M })
+    }
   }
 
   /** 首屏骨架：结构与真实卡片一致，减少内容到达时的跳动。 */
@@ -397,6 +509,28 @@ export struct HomePage {
     .borderRadius(KRadius.L)
   }
 
+  /** 空态：该日没有内容。给出可执行的方向，不留白。 */
+  @Builder
+  emptyCard() {
+    Column() {
+      Text('这一天没有内容')
+        .fontSize(KFont.titleS())
+        .fontWeight(FontWeight.Bold)
+        .fontColor(KColor.ink())
+      Text('可能当天未产出日报。可切换其他日期，或用「检索」找往期文章。')
+        .fontSize(KFont.meta())
+        .lineHeight(KLine.tight())
+        .fontColor(KColor.sub())
+        .margin({ top: KSpace.S })
+        .textAlign(TextAlign.Center)
+    }
+    .width('100%')
+    .padding(KSpace.XXL)
+    .margin({ top: KSpace.XXXL })
+    .backgroundColor(KColor.surface())
+    .borderRadius(KRadius.L)
+  }
+
   @Builder
   errorCard() {
     Column() {
@@ -427,21 +561,14 @@ export struct HomePage {
   @Builder
   content() {
     Column() {
-      // 断网横幅：主动告知，不让用户对着旧内容猜为什么刷不出来
-      if (this.offline) {
-        Text('当前无网络连接，恢复网络后会自动刷新。')
-          .fontSize(KFont.meta())
-          .fontColor(KColor.warnInk())
-          .backgroundColor(KColor.warnSoft())
-          .borderRadius(KRadius.S)
-          .padding(KSpace.M)
-          .width('100%')
-          .margin({ bottom: KSpace.M })
-      }
+      this.statusStrip()
+
       if (this.loading) {
         this.skeletonCard()
       } else if (this.errorText.length > 0) {
         this.errorCard()
+      } else if (this.sections.length === 0) {
+        this.emptyCard()
       } else {
         if (this.summaryText.length > 0) {
           this.summaryCard()
@@ -501,6 +628,26 @@ export struct HomePage {
         SettingsSheet({
           onClose: () => {
             this.settingsOpen = false;
+          },
+        })
+      }
+
+      if (this.searchOpen) {
+        Column()
+          .width('100%')
+          .height('100%')
+          .backgroundColor(KColor.scrim())
+          .transition(TransitionEffect.OPACITY)
+          .onClick(() => {
+            this.searchOpen = false;
+          })
+        SearchSheet({
+          hits: this.searchHits,
+          onPick: (hit: SearchHit) => {
+            this.openHit(hit);
+          },
+          onClose: () => {
+            this.searchOpen = false;
           },
         })
       }
