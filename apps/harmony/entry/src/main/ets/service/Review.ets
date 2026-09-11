@@ -335,11 +335,53 @@ export class Review {
     for (const text of distractors) {
       all.push({ text: text, correct: false });
     }
-    // 顺序按 (卡片 id + 选项文本) 的散列确定：同一张卡每次进来位置一致，
-    // 但正确答案不会永远落在 A。
-    return all.sort((left: Choice, right: Choice) => {
-      return Review.hash(`${card.id}|${left.text}`) - Review.hash(`${card.id}|${right.text}`);
-    });
+    return Review.arrange(card.id, all);
+  }
+
+  /**
+   * 选项定序：用**卡片 id 播种**的确定性洗牌（Fisher–Yates）。
+   *
+   * ## ⚠️ 这里修的是一个真实反馈："选项全是 C"
+   * 原实现按 `hash(cardId + 选项文本)` 排序。问题在于：
+   * **同一卡组的卡片，干扰项取自同一批答案，选项文本几乎完全一样**，
+   * 而落位只由文本决定 → 组内正确答案的位置高度相关。
+   * 实测前 8 题为 `B C C C A B C A`——用户连着看到几个 C，直接反馈"全是 C"。
+   * （全局分布其实是均匀的 A:8 B:7 C:9 D:6，但**组内聚集**才是体感问题。）
+   *
+   * 改成由卡片 id 决定的置换：位置不再受文本支配，跨卡片独立且均匀。
+   * 用确定性伪随机（同卡 id 结果稳定），避免每次进入题面跳位。
+   */
+  private static arrange(cardId: string, all: Choice[]): Choice[] {
+    const out: Choice[] = all.slice();
+    let state: number = Review.seedOf(cardId);
+    for (let i = out.length - 1; i > 0; i--) {
+      state = Review.nextRandom(state);
+      const j: number = state % (i + 1);
+      const swap: Choice = out[i];
+      out[i] = out[j];
+      out[j] = swap;
+    }
+    return out;
+  }
+
+  /** xorshift32：确定性、无依赖、跨平台一致。 */
+  private static nextRandom(state: number): number {
+    let x: number = state === 0 ? 0x9E3779B9 : state;
+    x = x ^ (x << 13);
+    x = x ^ (x >>> 17);
+    x = x ^ (x << 5);
+    const unsigned: number = x >>> 0;
+    return unsigned === 0 ? 1 : unsigned;
+  }
+
+  /** FNV-1a：把卡片 id 折成 32 位种子（用 Math.imul 保证不丢精度）。 */
+  private static seedOf(text: string): number {
+    let value: number = 2166136261;
+    for (let i = 0; i < text.length; i++) {
+      value = Math.imul(value ^ text.charCodeAt(i), 16777619);
+    }
+    const unsigned: number = value >>> 0;
+    return unsigned === 0 ? 1 : unsigned;
   }
 
   /** 字符二元组重合度（0~1）。用来判定"两个答案其实是同一句话"。 */
@@ -371,15 +413,6 @@ export class Review {
     const longer: number = Math.max(answer.length, candidate.length);
     const shorter: number = Math.min(answer.length, candidate.length);
     return shorter * 2 >= longer;
-  }
-
-  /** 稳定散列（djb2 变体）：同一输入永远同一结果。 */
-  private static hash(text: string): number {
-    let value: number = 5381;
-    for (let i = 0; i < text.length; i++) {
-      value = (value * 33 + text.charCodeAt(i)) % 2147483647;
-    }
-    return value;
   }
 
   private static statePath(): string | null {

@@ -26,6 +26,7 @@ export class Settings {
   static readonly KEY_DEVICE_ID: string = 'deviceId';
   static readonly KEY_SPEAK_SPEED: string = 'speakSpeed';
   static readonly KEY_SPEAK_ONLINE: string = 'speakOnline';
+  static readonly KEY_SPEAK_PERSON: string = 'speakPerson';
 
   /** 朗读速度档位。通勤场景下 1.25 倍是刚需——省时间且不失可懂度。 */
   static readonly SPEED_STEPS: number[] = [0.8, 1, 1.25, 1.5];
@@ -183,6 +184,21 @@ export class Settings {
 
   static setSpeakOnline(online: boolean): void {
     Settings.writeBool(Settings.KEY_SPEAK_ONLINE, online);
+  }
+
+  /**
+   * 朗读发音人（`CreateEngineParams.person`），默认 0 = 系统默认。
+   *
+   * 可用发音人**由设备与系统版本决定**（`listVoices` 枚举），
+   * 所以这里不能预置一份"童声/女声"名单——写死的值在别的机器上会
+   * 直接报 `1002300003 The person is not supported`。
+   */
+  static speakPerson(): number {
+    return Settings.readNumber(Settings.KEY_SPEAK_PERSON, 0);
+  }
+
+  static setSpeakPerson(person: number): void {
+    Settings.writeNumber(Settings.KEY_SPEAK_PERSON, person);
   }
 
   /**

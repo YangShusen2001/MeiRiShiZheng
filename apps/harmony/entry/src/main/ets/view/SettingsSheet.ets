@@ -1,4 +1,5 @@
 import { Settings } from '../service/Settings';
+import { Speech, VoiceOption } from '../service/Speech';
 import { KColor, KFont, KLine, KRadius, KSize, KSpace } from '../theme/Tokens';
 
 /**
@@ -19,6 +20,34 @@ import { KColor, KFont, KLine, KRadius, KSize, KSpace } from '../theme/Tokens';
 export struct SettingsSheet {
   @StorageLink('darkMode') darkMode: boolean = false;
   @StorageLink('fontScale') fontScale: number = 1;
+  /** 设备可用发音人（异步枚举）。 */
+  @State voices: VoiceOption[] = [];
+  @State voicesLoading: boolean = true;
+
+  aboutToAppear(): void {
+    Speech.listVoices().then((list: VoiceOption[]) => {
+      this.voices = list;
+      this.voicesLoading = false;
+    });
+  }
+
+  /** 发音人选项。选中态除配色外**另有加粗**，不靠颜色单独表意。 */
+  @Builder
+  voiceChip(voice: VoiceOption) {
+    Text(voice.label)
+      .fontSize(KFont.caption())
+      .fontWeight(Settings.speakPerson() === voice.person ? FontWeight.Bold : FontWeight.Normal)
+      .fontColor(Settings.speakPerson() === voice.person ? KColor.surface() : KColor.sub())
+      .backgroundColor(Settings.speakPerson() === voice.person ? KColor.primary() : KColor.surface())
+      .borderRadius(KRadius.S)
+      .borderWidth(1)
+      .borderColor(Settings.speakPerson() === voice.person ? KColor.primary() : KColor.line())
+      .padding({ left: KSpace.M, right: KSpace.M, top: KSpace.S, bottom: KSpace.S })
+      .margin({ right: KSpace.S, top: KSpace.S })
+      .onClick(() => {
+        Settings.setSpeakPerson(voice.person);
+      })
+  }
   /** 关闭回调由父组件注入。 */
   onClose: () => void = () => {
   };
@@ -157,7 +186,32 @@ export struct SettingsSheet {
       .constraintSize({ minHeight: KSize.TOUCH_MIN })
       .margin({ top: KSpace.M })
 
-      Text('字号影响全部正文与标签（系统绘制的导航栏除外）。深色模式用深暖灰而非纯黑，避免夜间反光。朗读默认走离线引擎——通勤没网也能听；追求音色可打开在线音质。')
+      Text('朗读发音人')
+        .fontSize(KFont.caption())
+        .fontColor(KColor.sub())
+        .margin({ top: KSpace.S })
+
+      if (this.voicesLoading) {
+        Text('正在读取设备可用发音人…')
+          .fontSize(KFont.caption())
+          .fontColor(KColor.mut())
+          .margin({ top: KSpace.S })
+      } else if (this.voices.length === 0) {
+        Text('设备未返回可用发音人列表，当前使用系统默认发音人。')
+          .fontSize(KFont.caption())
+          .lineHeight(KLine.tight())
+          .fontColor(KColor.mut())
+          .margin({ top: KSpace.S })
+      } else {
+        Flex({ wrap: FlexWrap.Wrap }) {
+          ForEach(this.voices, (voice: VoiceOption) => {
+            this.voiceChip(voice)
+          }, (voice: VoiceOption) => `${voice.person}`)
+        }
+        .width('100%')
+      }
+
+      Text('字号影响全部正文与标签（系统绘制的导航栏除外）。深色模式用深暖灰而非纯黑，避免夜间反光。朗读默认走离线引擎——通勤没网也能听；追求音色可打开在线音质，若云端不可用会自动回退离线。')
         .fontSize(KFont.caption())
         .lineHeight(KLine.tight())
         .fontColor(KColor.mut())
