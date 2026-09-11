@@ -7,12 +7,19 @@
 // 每次改动都能真编译，ArkTS 的硬性限制（类型、@Builder 限制、导出可见性…）
 // 会在提交前就暴露出来。
 //
-// 两个必须知道的约束（均已实测）：
+// 两个必须知道的约束（均已实测追到底）：
 // 1. 必须设 `DEVECO_SDK_HOME`，否则报 `00303217 Invalid value of 'DEVECO_SDK_HOME'`。
-// 2. **签名这一步在 CLI 下过不去**：`build-profile.json5` 里的
-//    keyPassword / storePassword 是 DevEco **加密后**的值，CLI 解不开，
-//    报 `11014003 Init keystore failed`。所以本脚本把「签名失败」视为
-//    已知情况——它只负责回答"代码能不能编译过"，装机仍在 DevEco 里点 Run。
+// 2. **签名这一步在 CLI 下过不去**（`11014003 Init keystore failed`）。
+//    已把机制挖清楚，供以后复查：
+//    - `build-profile.json5` 里的 keyPassword / storePassword 是**密文**
+//      （形如 `0000001B...`，AES-GCM，密钥由 `~/.ohos/config/material/{fd,ac,ce}`
+//       与硬编码分量异或后经 PBKDF2-HMAC-SHA256 迭代 1 万次派生）。
+//    - 解密由插件的 `DecipherUtil.decryptPwd(materialDir, encryptedPwd, signConfigSrcPath)`
+//      完成；直接把明文写进 build-profile.json5 会被判非法
+//      （`00303116 The length ... is less than 32`——该字段必须 ≥32 字符的密文）。
+//    - 已排除的猜测：keystore 文件损坏（Java 21 下用 keytool 可正常读取）、
+//      JDK 版本不匹配（把 DevEco JBR 提到 PATH 最前仍失败）、常见明文密码。
+//    ⇒ 本脚本只负责回答"代码能不能编译过"，**装机在 DevEco 点 Run**。
 //
 // 退出码：ArkTS 编译错误 → 1；否则 0（即使签名没过）。
 import { execFileSync } from "node:child_process";
