@@ -1,6 +1,7 @@
 import { AiAnnotation, ClippedArticle } from '../model/Content';
 import { Ai, AiResult, CODE_AI_ERROR, CODE_NETWORK, CODE_RATE_LIMITED } from '../service/Ai';
 import { Clipboard } from '../service/Clipboard';
+import { common } from '@kit.AbilityKit';
 import { ContentService, Loaded } from '../service/ContentService';
 import { HttpError, STATUS_LOCAL_FAILURE } from '../service/Http';
 import { Net } from '../service/Net';
@@ -88,9 +89,8 @@ export struct ReadPage {
   @State inviteOk: boolean = false;
   /** 本篇是否来自本地缓存（离线可读已看过的文章）。 */
   @State showingCache: boolean = false;
-  /** 朗读状态与当前朗读到的段落（-1 = 未朗读）。 */
+  /** 朗读状态（由朗读控件的 stateChange 事件驱动）。 */
   @State speaking: boolean = false;
-  @State speakIndex: number = -1;
 
   /** 触发 AI 的原文片段（与释义分开存，避免两件事混在一起）。 */
   private aiSource: string = '';
@@ -123,31 +123,23 @@ export struct ReadPage {
     if (this.speaking) {
       Speech.stop();
       this.speaking = false;
-      this.speakIndex = -1;
       return;
     }
+    const context: common.UIAbilityContext | null = Settings.context();
+    if (context === null) {
+      this.hintText = '上下文未就绪，无法朗读。';
+      return;
+    }
+    // 从**当前可见段落**开始：控件只能从文章开头播，所以先把前面已读的部分截掉
     const from: number = Math.max(0, this.currentTopIndex - 1);
-    Speech.start(
-      this.paragraphs,
-      from,
-      Settings.speakSpeed(),
-      (index: number) => {
-        this.speakIndex = index;
-        // 跟随滚动：让正在朗读的段落保持在视野内
-        this.scroller.scrollToIndex(index + 1, true);
-      },
-      () => {
-        this.speaking = false;
-        this.speakIndex = -1;
-      },
-    ).then((started: boolean) => {
-      if (started) {
-        this.speaking = true;
-        // 在线引擎依赖云端服务：不可用时已回退离线，如实告知而不是静默换音色
-        this.hintText = Speech.didFallbackToOffline() ? '在线音质不可用（需要联网或服务未开通），已用离线引擎朗读。' : '';
-      } else {
-        this.hintText = '系统朗读引擎不可用，无法朗读本篇。';
+    Speech.ready(context).then((ready: boolean) => {
+      if (!ready) {
+        this.hintText = '系统朗读控件不可用（仅支持中国境内的手机 / 平板 / PC），无法朗读本篇。';
+        return;
       }
+      Speech.start(this.title, this.paragraphs, from, this.articleId).then((started: boolean) => {
+        this.hintText = started ? '' : '朗读启动失败，请稍后重试。';
+      });
     });
   }
 
@@ -612,10 +604,6 @@ export struct ReadPage {
     .lineHeight(KLine.relaxed())
     .fontColor(KColor.ink())
     .width('100%')
-    // 正在朗读的段落加底色跟随。只加底色、不加内边距——加内边距会让整篇
-    // 版式随朗读位置跳动，读者会看着文字上下窜。
-    .borderRadius(KRadius.S)
-    .backgroundColor(paragraphIndex === this.speakIndex ? KColor.primarySoft() : Color.Transparent)
   }
 
   /** 篇间翻阅：不退回首页即可连续读。 */

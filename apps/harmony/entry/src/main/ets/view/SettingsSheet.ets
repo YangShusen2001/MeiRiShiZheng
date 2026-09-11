@@ -1,5 +1,4 @@
 import { Settings } from '../service/Settings';
-import { Speech, VoiceOption } from '../service/Speech';
 import { KColor, KFont, KLine, KRadius, KSize, KSpace } from '../theme/Tokens';
 
 /**
@@ -13,6 +12,12 @@ import { KColor, KFont, KLine, KRadius, KSize, KSpace } from '../theme/Tokens';
  * - 面板本身只负责"设置内容"，浮层容器（遮罩 + 圆角）由调用方提供，
  *   这样首页与阅读页可以各自决定浮层形态。
  *
+ * ## 朗读设置为什么不在这个面板里（迁移后已移除）
+ * 朗读改用系统**朗读控件**（Speech Kit 的 TextReader）后，音色与语速由
+ * **控件自带的播放面板**提供（还带上下一句 / 快进 15 秒）。
+ * 面板里再放一套自己的音色/语速选择就会变成**点了没反应的死控件**——
+ * 那比没有更糟，所以移除，并把入口如实指向朗读面板。
+ *
  * 无障碍：所有可点元素高度 ≥44vp；选中态除颜色外**另有文字加粗**，
  * 不依赖颜色单独传达状态。
  */
@@ -20,34 +25,6 @@ import { KColor, KFont, KLine, KRadius, KSize, KSpace } from '../theme/Tokens';
 export struct SettingsSheet {
   @StorageLink('darkMode') darkMode: boolean = false;
   @StorageLink('fontScale') fontScale: number = 1;
-  /** 设备可用发音人（异步枚举）。 */
-  @State voices: VoiceOption[] = [];
-  @State voicesLoading: boolean = true;
-
-  aboutToAppear(): void {
-    Speech.listVoices().then((list: VoiceOption[]) => {
-      this.voices = list;
-      this.voicesLoading = false;
-    });
-  }
-
-  /** 发音人选项。选中态除配色外**另有加粗**，不靠颜色单独表意。 */
-  @Builder
-  voiceChip(voice: VoiceOption) {
-    Text(voice.label)
-      .fontSize(KFont.caption())
-      .fontWeight(Settings.speakPerson() === voice.person ? FontWeight.Bold : FontWeight.Normal)
-      .fontColor(Settings.speakPerson() === voice.person ? KColor.surface() : KColor.sub())
-      .backgroundColor(Settings.speakPerson() === voice.person ? KColor.primary() : KColor.surface())
-      .borderRadius(KRadius.S)
-      .borderWidth(1)
-      .borderColor(Settings.speakPerson() === voice.person ? KColor.primary() : KColor.line())
-      .padding({ left: KSpace.M, right: KSpace.M, top: KSpace.S, bottom: KSpace.S })
-      .margin({ right: KSpace.S, top: KSpace.S })
-      .onClick(() => {
-        Settings.setSpeakPerson(voice.person);
-      })
-  }
   /** 关闭回调由父组件注入。 */
   onClose: () => void = () => {
   };
@@ -67,25 +44,6 @@ export struct SettingsSheet {
       .textAlign(TextAlign.Center)
       .onClick(() => {
         Settings.setFontStep(index);
-      })
-  }
-
-  /** 朗读速度档位；选中态除配色外**另有加粗**，不靠颜色单独表意。 */
-  @Builder
-  speedChip(label: string, index: number) {
-    Text(label)
-      .fontSize(KFont.meta())
-      .fontWeight(Settings.speedStepIndex() === index ? FontWeight.Bold : FontWeight.Normal)
-      .fontColor(Settings.speedStepIndex() === index ? KColor.surface() : KColor.sub())
-      .backgroundColor(Settings.speedStepIndex() === index ? KColor.primary() : KColor.surface())
-      .borderRadius(KRadius.S)
-      .borderWidth(1)
-      .borderColor(Settings.speedStepIndex() === index ? KColor.primary() : KColor.line())
-      .height(KSize.TOUCH_MIN)
-      .layoutWeight(1)
-      .textAlign(TextAlign.Center)
-      .onClick(() => {
-        Settings.setSpeedStep(index);
       })
   }
 
@@ -149,74 +107,19 @@ export struct SettingsSheet {
       .constraintSize({ minHeight: KSize.TOUCH_MIN })
       .margin({ top: KSpace.M })
 
-      Text('朗读速度')
-        .fontSize(KFont.caption())
-        .fontColor(KColor.sub())
-        .margin({ top: KSpace.M })
-
-      Row() {
-        ForEach(Settings.SPEED_LABELS, (label: string, index: number) => {
-          this.speedChip(label, index)
-        }, (label: string) => label)
-      }
-      .width('100%')
-      .margin({ top: KSpace.S })
-
-      Row() {
-        Column() {
-          Text('在线音质')
-            .fontSize(KFont.meta())
-            .fontColor(KColor.ink())
-          Text('用云端发音人，音色更自然；但朗读时需要联网')
-            .fontSize(KFont.caption())
-            .lineHeight(KLine.tight())
-            .fontColor(KColor.mut())
-            .margin({ top: KSpace.HAIR })
-        }
-        .alignItems(HorizontalAlign.Start)
-        .layoutWeight(1)
-
-        Toggle({ type: ToggleType.Switch, isOn: Settings.speakOnline() })
-          .onChange((isOn: boolean) => {
-            Settings.setSpeakOnline(isOn);
-          })
-      }
-      .width('100%')
-      .alignItems(VerticalAlign.Center)
-      .constraintSize({ minHeight: KSize.TOUCH_MIN })
-      .margin({ top: KSpace.M })
-
-      Text('朗读发音人')
-        .fontSize(KFont.caption())
-        .fontColor(KColor.sub())
-        .margin({ top: KSpace.S })
-
-      if (this.voicesLoading) {
-        Text('正在读取设备可用发音人…')
-          .fontSize(KFont.caption())
-          .fontColor(KColor.mut())
-          .margin({ top: KSpace.S })
-      } else if (this.voices.length === 0) {
-        Text('设备未返回可用发音人列表，当前使用系统默认发音人。')
-          .fontSize(KFont.caption())
-          .lineHeight(KLine.tight())
-          .fontColor(KColor.mut())
-          .margin({ top: KSpace.S })
-      } else {
-        Flex({ wrap: FlexWrap.Wrap }) {
-          ForEach(this.voices, (voice: VoiceOption) => {
-            this.voiceChip(voice)
-          }, (voice: VoiceOption) => `${voice.person}`)
-        }
-        .width('100%')
-      }
-
-      Text('字号影响全部正文与标签（系统绘制的导航栏除外）。深色模式用深暖灰而非纯黑，避免夜间反光。朗读默认走离线引擎——通勤没网也能听；追求音色可打开在线音质，若云端不可用会自动回退离线。')
+      Text('字号影响全部正文与标签（系统绘制的导航栏除外）。深色模式用深暖灰而非纯黑，避免夜间反光。')
         .fontSize(KFont.caption())
         .lineHeight(KLine.tight())
         .fontColor(KColor.mut())
         .width('100%')
         .margin({ top: KSpace.M })
+
+      Text('朗读由系统朗读控件承担：点阅读页的「听」开始，音色与语速在该控件的播放面板里调节。')
+        .fontSize(KFont.caption())
+        .lineHeight(KLine.tight())
+        .fontColor(KColor.mut())
+        .width('100%')
+        .margin({ top: KSpace.XS })
     }
     .alignItems(HorizontalAlign.Start)
     .width('100%')
