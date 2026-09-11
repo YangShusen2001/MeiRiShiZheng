@@ -137,6 +137,38 @@ def test_curate_content_end_to_end(tmp_path):
     assert (tmp_path / day / "article-a1.json").exists()
 
 
+def test_card_budget_is_distributed_not_first_come():
+    """回归防护：每日卡片配额必须按篇数分配，不能让第一篇吃掉全部。
+
+    原实现 `budget = 每日上限 - 已用`（先到先得）下，2 篇被选中时第二篇预算为 0
+    —— 等于"选了它却不给它产出"。实测在 2026-08-21 上真的发生了：
+    跑出 5 张卡却只落在第 1 篇文章上，第 2 篇一张没有。
+    """
+    from kaogong.curation import card_budget_for
+
+    # 两篇被选中：5 张按 3 + 2 分配（靠前的槽位略多）
+    quota = 5
+    picked = 2
+    granted = []
+    for index in range(picked):
+        got = card_budget_for(quota, picked - index)
+        granted.append(got)
+        quota -= got
+    assert granted == [3, 2]
+    assert all(b >= 1 for b in granted), f"每篇都应分到额度，实际 {granted}"
+    assert sum(granted) <= 5, f"总产出不应超过每日上限，实际 {granted}"
+
+    # 单篇：拿满
+    assert card_budget_for(5, 1) == 5
+    # 额度刚好够每篇一张
+    assert card_budget_for(2, 2) == 1
+    assert card_budget_for(1, 3) == 1
+    # 额度耗尽：不再产出（而不是负数）
+    assert card_budget_for(0, 3) == 0
+    # 篇数为 0：不会除零
+    assert card_budget_for(5, 0) == 5
+
+
 def test_curate_content_degrades_without_key(tmp_path):
     """无 key：仍产出 picks.json，卡片/关系标记 error，不抛异常（与管道降级哲学一致）。"""
     import json

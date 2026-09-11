@@ -336,6 +336,22 @@ def _load_history(content_dir, target: dt.date, days: int = 7) -> list[dict]:
     return out
 
 
+def card_budget_for(remaining_quota: int, remaining_articles: int) -> int:
+    """每日新卡配额分配：按剩余篇数均分（向上取整）。
+
+    为什么需要它：原实现是 `budget = 每日上限 - 已用`（先到先得），
+    第一篇文章就能吃掉全部 5 张，**后面被选中的文章一张卡都拿不到**——
+    那"选材 ≥2 篇"就失去了意义：选它出来就是为了让它产出可复习的卡片。
+
+    向上取整让靠前的槽位（头版要闻 / 申论精读）略多，同时保证每篇都拿得到。
+    """
+    if remaining_articles <= 0:
+        return max(0, remaining_quota)
+    if remaining_quota <= 0:
+        return 0
+    return (remaining_quota + remaining_articles - 1) // remaining_articles
+
+
 def curate_content(
     target: dt.date,
     content_dir,
@@ -379,7 +395,13 @@ def curate_content(
     for article in history:
         if article.get("id") not in by_id:
             by_id.setdefault(str(article.get("id")), article)
-    for aid in picks["picked"]:
+    # 每日新卡配额按「被选中的篇数」均分，而不是先到先得。
+    # 原实现 `budget = 上限 - 已用` 允许第一篇文章吃掉全部 5 张，
+    # 后面被选中的文章一张卡都拿不到——那"选材 ≥2 篇"就没有意义了：
+    # 选它出来的目的就是让它产出可复习的卡片。
+    # 向上取整分配：靠前的槽位（头版要闻/申论精读）略多，且每篇都拿得到。
+    picked_ids: list[str] = [aid for aid in picks["picked"] if by_id.get(aid) is not None]
+    for index, aid in enumerate(picked_ids):
         article = by_id.get(aid)
         if article is None:
             continue
@@ -387,8 +409,9 @@ def curate_content(
         line_id = picks.get("assignments", {}).get(aid)
         if line_id:
             article["policyLine"] = line_id
-        # 卡片提炼（每日新卡 ≤5 全局配额）
-        budget = max(0, DAILY_NEW_CARD_LIMIT - quota_used)
+        # 卡片提炼（每日新卡 ≤5 全局配额，按剩余篇数均分——见 card_budget_for）
+        left = max(0, DAILY_NEW_CARD_LIMIT - quota_used)
+        budget = card_budget_for(left, len(picked_ids) - index)
         card_result = refine_cards(article, cfg, daily_budget=budget, call=call)
         if "error" in card_result:
             report["curation"]["cardErrors"] += 1
