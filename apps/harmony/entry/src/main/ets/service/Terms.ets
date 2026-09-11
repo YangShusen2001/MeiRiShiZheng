@@ -1,5 +1,7 @@
 import { fileIo as fs } from '@kit.CoreFileKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
+import { Endpoints } from '../config/Endpoints';
+import { HttpClient } from './Http';
 import { Settings } from './Settings';
 
 const DOMAIN: number = 0x0000;
@@ -7,6 +9,34 @@ const TAG: string = 'KaogongTerms';
 const FILE: string = 'terms.json';
 /** 收藏上限。够了就够——收藏夹不是仓库，超出时淘汰最旧的。 */
 const MAX_TERMS: number = 200;
+/** 服务端 `termText` 上限（契约 max 200）。 */
+const TERM_TEXT_LIMIT: number = 200;
+
+/** 上行请求体。必须显式声明接口：ArkTS 禁止无类型对象字面量（`Record` 不算接口）。 */
+interface FavoritePayload {
+  url: string;
+  title: string;
+  kind: string;
+  termText: string;
+  termExplanation: string;
+  articleId: string;
+  note: string;
+}
+
+interface FavoriteEnvelope {
+  ok: boolean;
+}
+
+/** 同步结果。 */
+export interface TermsSyncResult {
+  ok: boolean;
+  /** 成功上行条数。 */
+  uploaded: number;
+  /** 跳过条数（超长等）。 */
+  skipped: number;
+  /** 失败说明；成功为空串。 */
+  message: string;
+}
 
 /** 一条收藏的术语。 */
 export interface SavedTerm {
@@ -95,6 +125,67 @@ export class Terms {
       }
     }
     Terms.write(kept);
+  }
+
+  /**
+   * 上行到服务端（跨端同步）。
+   *
+   * ## 为什么可以无脑重试
+   * 服务端对术语按 `(owner, url, termText)` **幂等**：重复上行只会返回已存在的那条。
+   * 所以中断后重试是安全的——文案里也如实这么告诉用户，而不是让他"小心别重复点"。
+   *
+   * ## 超长的跳过而不是截断
+   * 服务端 `termText` 上限 200 字。截断会改变术语本身（那正是这条内容的意义），
+   * 所以计入 skipped 并如实报出来。
+   *
+   * ## 上行过去有什么用
+   * 网页端本来就有收藏页（`/favorites`），所以同步后**在网页上就能看到这些术语**
+   * ——这才是"跨端"的实际收益，不是把数据搬到另一个看不见的地方。
+   */
+  static async sync(): Promise<TermsSyncResult> {
+    const list: SavedTerm[] = Terms.list();
+    if (list.length === 0) {
+      return { ok: true, uploaded: 0, skipped: 0, message: '' };
+    }
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-Device-Id': Settings.deviceId(),
+    };
+    let uploaded: number = 0;
+    let skipped: number = 0;
+    for (const item of list) {
+      const text: string = item.text.trim();
+      if (text.length === 0 || text.length > TERM_TEXT_LIMIT) {
+        skipped += 1;
+        continue;
+      }
+      const payload: FavoritePayload = {
+        url: item.articleId.length > 0
+          ? `${Endpoints.CONTENT_BASE}/read/${item.articleId}`
+          : Endpoints.CONTENT_BASE,
+        title: text,
+        kind: 'term',
+        termText: text,
+        termExplanation: item.explanation,
+        articleId: item.articleId,
+        note: item.note,
+      };
+      try {
+        await HttpClient.postJson<FavoriteEnvelope>(
+          Endpoints.favoritesUrl(), JSON.stringify(payload), headers);
+        uploaded += 1;
+      } catch (err) {
+        const cause: Error = err as Error;
+        return {
+          ok: false,
+          uploaded: uploaded,
+          skipped: skipped,
+          message: `上行中断：${cause.message}（已成功 ${uploaded} 条；服务端按术语去重，可直接重试）`,
+        };
+      }
+    }
+    return { ok: true, uploaded: uploaded, skipped: skipped, message: '' };
   }
 
   private static write(list: SavedTerm[]): void {

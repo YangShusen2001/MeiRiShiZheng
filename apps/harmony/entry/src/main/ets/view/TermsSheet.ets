@@ -1,5 +1,5 @@
 import { Ai, AiResult } from '../service/Ai';
-import { SavedTerm, Terms } from '../service/Terms';
+import { SavedTerm, Terms, TermsSyncResult } from '../service/Terms';
 import { KColor, KFont, KLine, KRadius, KSize, KSpace } from '../theme/Tokens';
 
 /**
@@ -21,6 +21,9 @@ export struct TermsSheet {
   /** 正在解析的术语原文；空串表示没有进行中的请求。 */
   @State pending: string = '';
   @State errorText: string = '';
+  /** 同步状态与结果文案。 */
+  @State syncing: boolean = false;
+  @State syncMessage: string = '';
   onClose: () => void = () => {
   };
 
@@ -30,6 +33,24 @@ export struct TermsSheet {
 
   private reload(): void {
     this.terms = Terms.list();
+  }
+
+  /** 上行到服务端。幂等，可重复点。 */
+  private syncNow(): void {
+    if (this.syncing || this.terms.length === 0) {
+      return;
+    }
+    this.syncing = true;
+    this.syncMessage = '';
+    Terms.sync().then((result: TermsSyncResult) => {
+      this.syncing = false;
+      if (result.ok) {
+        const skipped: string = result.skipped > 0 ? `，跳过 ${result.skipped} 条超长内容` : '';
+        this.syncMessage = `已同步 ${result.uploaded} 条到云端收藏${skipped}。在网页端「收藏」页可以看到。`;
+      } else {
+        this.syncMessage = result.message;
+      }
+    });
   }
 
   private explainTerm(text: string): void {
@@ -112,6 +133,18 @@ export struct TermsSheet {
           .fontWeight(FontWeight.Bold)
           .fontColor(KColor.ink())
         Blank()
+        if (this.terms.length > 0) {
+          Text(this.syncing ? '同步中…' : '同步到云端')
+            .fontSize(KFont.caption())
+            .fontColor(KColor.primaryText())
+            .height(KSize.TOUCH_MIN)
+            .padding({ left: KSpace.M, right: KSpace.M })
+            .textAlign(TextAlign.Center)
+            .enabled(!this.syncing)
+            .onClick(() => {
+              this.syncNow();
+            })
+        }
         Text('关闭')
           .fontSize(KFont.meta())
           .fontColor(KColor.sub())
@@ -124,6 +157,15 @@ export struct TermsSheet {
       }
       .width('100%')
       .alignItems(VerticalAlign.Center)
+
+      if (this.syncMessage.length > 0) {
+        Text(this.syncMessage)
+          .fontSize(KFont.caption())
+          .lineHeight(KLine.tight())
+          .fontColor(KColor.sub())
+          .width('100%')
+          .margin({ top: KSpace.S })
+      }
 
       if (this.errorText.length > 0) {
         Text(this.errorText)

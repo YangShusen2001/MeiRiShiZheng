@@ -59,6 +59,15 @@ export class Endpoints {
   }
 
   /**
+   * 收藏（跨端同步）。
+   * 契约里 `favoriteKindSchema` 本来就有 `term`——术语是一等类型，
+   * 不是硬塞进荧光笔的高亮模型。
+   */
+  static favoritesUrl(): string {
+    return `${Endpoints.API_BASE}/api/favorites`;
+  }
+
+  /**
    * 邀请码激活。匿名用户以此获得 AI 解析额度（身份用 `X-Device-Id`）。
    * 响应：`{ ok: true, data: { active, remaining, code } }`。
    */
