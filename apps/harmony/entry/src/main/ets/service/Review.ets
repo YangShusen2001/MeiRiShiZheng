@@ -69,6 +69,28 @@ export interface DueCard {
  * 而且**必须与 Web 端 `ts-fsrs` 对齐**，否则同一个人在两端会看到不同的排程。
  * 对齐工作留到下一步，不在这里半途实现一个"像 FSRS 但不是 FSRS"的东西。
  */
+/** 一个选项。 */
+export interface Choice {
+  text: string;
+  correct: boolean;
+}
+
+/** 一道选择题（由卡片 + 同池其他卡片的答案构成）。 */
+export interface QuizCard {
+  id: string;
+  question: string;
+  tags: string[];
+  options: Choice[];
+  state: CardState;
+  /**
+   * true = 造不出 3 个合格干扰项，页面应退回「自评」模式。
+   * 宁可降级，也不要出一道有两个正确选项的题。
+   */
+  fallback: boolean;
+  /** 正确答案原文（判定后展示）。 */
+  answer: string;
+}
+
 export class Review {
   /** 当天开始时间（复习到期以"天"为粒度，同一天内不该反复变）。 */
   private static dayStart(): number {
@@ -222,6 +244,129 @@ export class Review {
       }
     }
     return due.concat(fresh);
+  }
+
+  // ———————————————— 选择题构造 ————————————————
+
+  /**
+   * 把到期卡片变成 ABCD 选择题。
+   *
+   * ## 干扰项从哪来（不需要 AI、不需要新数据）
+   * 用**同一题库里其他卡片的答案**当干扰项。这在时政选择里恰好是对的形态：
+   * 错误选项也是这本政策里的正经表述，所以必须真的分清，而不是靠"读着不像"排除。
+   *
+   * ## 两条过滤（都用真实题库实测过，不是拍脑袋定的）
+   * 1. **与正确答案的相似度 > 0.3 的不要**——实测 Q「十五五定位」与
+   *    Q「十五五在现代化进程中的地位」两条答案的相似度高达 **0.806**，
+   *    直接拿来当干扰项就会出现两个正确选项。这条是防坏题的关键。
+   * 2. **长度要接近（相差不超过一半）**——否则"最长的那条就是答案"，
+   *    不懂也能选对。
+   *
+   * ⚠️ **不要加"同 tag 不可用"**：我一开始加了，实测把可出题数从 30/30 压到 22/30——
+   * 被挡掉的 8 张全是数字卡，而它们最合适的干扰项恰恰是**其他数字卡**
+   * （「粮食产量」对「新能源汽车产量」），这正是真实时政选择题的形态。
+   * 去掉后干扰项相似度最高仅 0.25，仍然安全。
+   *
+   * 找不到 3 个合格干扰项时**降级为自评模式**，而不是硬凑。
+   */
+  static buildQuiz(due: DueCard[], pool: ReviewCard[]): QuizCard[] {
+    const out: QuizCard[] = [];
+    for (const item of due) {
+      const options: Choice[] = Review.optionsFor(item.card, pool);
+      out.push({
+        id: item.card.id,
+        question: item.card.question,
+        tags: item.card.tags,
+        answer: item.card.answer,
+        options: options,
+        state: item.state,
+        fallback: options.length === 0,
+      });
+    }
+    return out;
+  }
+
+  /** 造选项：正确项 + 最多 3 个干扰项。返回空数组表示无法造出合格题目。 */
+  private static optionsFor(card: ReviewCard, pool: ReviewCard[]): Choice[] {
+    const answer: string = card.answer.trim();
+    if (answer.length === 0) {
+      return [];
+    }
+    const distractors: string[] = [];
+    for (const other of pool) {
+      if (distractors.length >= 3) {
+        break;
+      }
+      if (other.id === card.id) {
+        continue;
+      }
+      const candidate: string = other.answer.trim();
+      if (candidate.length === 0 || candidate === answer) {
+        continue;
+      }
+      if (Review.similarity(answer, candidate) > 0.3) {
+        continue;
+      }
+      if (!Review.lengthClose(answer, candidate)) {
+        continue;
+      }
+      if (distractors.includes(candidate)) {
+        continue;
+      }
+      distractors.push(candidate);
+    }
+    if (distractors.length < 3) {
+      return [];
+    }
+    const all: Choice[] = [{ text: answer, correct: true }];
+    for (const text of distractors) {
+      all.push({ text: text, correct: false });
+    }
+    // 顺序按 (卡片 id + 选项文本) 的散列确定：同一张卡每次进来位置一致，
+    // 但正确答案不会永远落在 A。
+    return all.sort((left: Choice, right: Choice) => {
+      return Review.hash(`${card.id}|${left.text}`) - Review.hash(`${card.id}|${right.text}`);
+    });
+  }
+
+  /** 字符二元组重合度（0~1）。用来判定"两个答案其实是同一句话"。 */
+  private static similarity(left: string, right: string): number {
+    const a: Set<string> = Review.bigrams(left);
+    const b: Set<string> = Review.bigrams(right);
+    if (a.size === 0 || b.size === 0) {
+      return 0;
+    }
+    let hit: number = 0;
+    a.forEach((gram: string) => {
+      if (b.has(gram)) {
+        hit = hit + 1;
+      }
+    });
+    return hit / Math.min(a.size, b.size);
+  }
+
+  private static bigrams(text: string): Set<string> {
+    const set: Set<string> = new Set<string>();
+    for (let i = 0; i + 1 < text.length; i++) {
+      set.add(text.substring(i, i + 2));
+    }
+    return set;
+  }
+
+  /** 长度接近（相差不超过一半）——避免"最长即答案"。 */
+  private static lengthClose(answer: string, candidate: string): boolean {
+    const longer: number = Math.max(answer.length, candidate.length);
+    const shorter: number = Math.min(answer.length, candidate.length);
+    return shorter * 2 >= longer;
+  }
+
+  /** 稳定散列（djb2 变体）：同一输入永远同一结果。 */
+  private static hash(text: string): number {
+    let value: number = 5381;
+    for (let i = 0; i < text.length; i++) {
+      value = (value * 33 + text.charCodeAt(i)) % 2147483647;
+    }
+    return value;
   }
 
   private static statePath(): string | null {

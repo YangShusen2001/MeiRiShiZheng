@@ -1,22 +1,26 @@
-import { ContentService } from '../service/ContentService';
-import { CardState, DueCard, GRADE_EASY, GRADE_FORGOT, GRADE_RECALLED, Review, ReviewCard } from '../service/Review';
+import { CardState, Choice, GRADE_EASY, GRADE_FORGOT, GRADE_RECALLED, QuizCard, Review, ReviewCard } from '../service/Review';
 import { KColor, KFont, KLine, KRadius, KSize, KSpace } from '../theme/Tokens';
 
+const LETTERS: string[] = ['A', 'B', 'C', 'D'];
+
 /**
- * 考点复习页（间隔重复）。
+ * 考点复习页（间隔重复 · ABCD 单选）。
  *
- * ## 交互设计取舍
- * - **一屏一张卡**：复习时干扰越少越好，不放列表、不放侧栏。
- * - **评分按钮直接显示"下次间隔"**（1 天后 / 6 天后 / …）：
- *   让用户理解自己这次选择的后果，而不是盲点"记得/不记得"。
- * - **忘了 → 10 分钟后再出现**（同一会话内补一次），不排到明天。
- * - **完成态给反馈**：今日复习 N 张 + 下次到期时间，
- *   让"我进步了"这件事可见——这是留存的关键。
+ * ## 为什么是选择题
+ * 考公笔试（行测常识 / 公基）本就是选择题形态，用户在这种形态下更容易进入状态；
+ * 更重要的是**判定客观**——自评"记得 / 不记得"会自我欺骗，选错就是选错。
  *
- * ## 空态（三种，都要给可执行方向）
- * 1. 没有卡片：说明题库来源，指向阅读页
- * 2. 有卡片但今天没有到期的：告诉用户下次到期时间
- * 3. 加载失败：区分没联网/服务异常，给重试
+ * ## 评分与调度
+ * 判定结果自动映射到 SM-2：答错 → 忘了（10 分钟后重现）；答对 → 想起。
+ * 答对后额外给一个「太简单」把间隔拉长——这是唯一的自评入口，
+ * 且只在"已证明答对"之后才可用。
+ *
+ * **一次复习只记一次分**：选中选项时**不记分**，点「下一题」/「太简单」时才记。
+ * 否则同一张卡会被记两次，间隔被重复放大。
+ *
+ * ## 降级
+ * 造不出 3 个合格干扰项的卡（见 `Review.buildQuiz` 的三重过滤）走**自评模式**：
+ * 显示答案 → 三档评分。宁可降级，也不能出一道有两个正确选项的题。
  */
 @Component
 export struct ReviewPage {
@@ -26,12 +30,19 @@ export struct ReviewPage {
   @State loading: boolean = true;
   @State errorText: string = '';
   @State cached: boolean = false;
-  @State queue: DueCard[] = [];
+  @State quiz: QuizCard[] = [];
   @State index: number = 0;
+  /** 已选中的选项下标；-1 表示尚未作答。 */
+  @State answered: number = -1;
+  /** 自评模式的答案是否已展开。 */
   @State revealed: boolean = false;
   @State doneCount: number = 0;
+  /** 上一题是否答对（决定「下一题」按哪档记分）。 */
+  @State lastCorrect: boolean = false;
   /** 全部卡片（用于统计"下次到期"）。非状态：只在加载时赋值。 */
   private allCards: ReviewCard[] = [];
+  /** 缓存的题目引用：避免 @Builder 里反复调 current() 触发重复计算。 */
+  @State fallbackMode: boolean = false;
 
   aboutToAppear(): void {
     this.load();
@@ -44,11 +55,13 @@ export struct ReviewPage {
       .then((loaded) => {
         this.allCards = loaded.data;
         this.cached = loaded.cached;
-        const states = Review.readState();
-        this.queue = Review.dueCards(this.allCards, states);
+        const due = Review.dueCards(this.allCards, Review.readState());
+        this.quiz = Review.buildQuiz(due, this.allCards);
         this.index = 0;
+        this.answered = -1;
         this.revealed = false;
         this.doneCount = 0;
+        this.syncFallbackMode();
         this.loading = false;
       })
       .catch((err: Error) => {
@@ -57,46 +70,104 @@ export struct ReviewPage {
       });
   }
 
-  private current(): DueCard | null {
-    if (this.index < 0 || this.index >= this.queue.length) {
+  private current(): QuizCard | null {
+    if (this.index < 0 || this.index >= this.quiz.length) {
       return null;
     }
-    return this.queue[this.index];
+    return this.quiz[this.index];
   }
 
-  private grade(value: number): void {
-    const item: DueCard | null = this.current();
-    if (item === null) {
+  private syncFallbackMode(): void {
+    const question: QuizCard | null = this.current();
+    this.fallbackMode = question === null ? false : question.fallback;
+  }
+
+  /** 选中某个选项：只改状态，不记分（记分在「下一题」/「太简单」时做）。 */
+  private pick(optionIndex: number): void {
+    if (this.answered >= 0) {
       return;
     }
-    Review.record(item.card.id, value);
+    const question: QuizCard | null = this.current();
+    if (question === null || optionIndex < 0 || optionIndex >= question.options.length) {
+      return;
+    }
+    this.answered = optionIndex;
+    this.lastCorrect = question.options[optionIndex].correct;
+  }
+
+  private advance(grade: number): void {
+    const question: QuizCard | null = this.current();
+    if (question === null) {
+      return;
+    }
+    Review.record(question.id, grade);
     this.doneCount = this.doneCount + 1;
     this.index = this.index + 1;
+    this.answered = -1;
     this.revealed = false;
+    this.syncFallbackMode();
   }
 
-  /** 评分按钮上的"下次间隔"预览——把选择的后果直接摆出来。 */
-  private nextGapText(value: number): string {
-    const item: DueCard | null = this.current();
-    if (item === null) {
-      return '';
-    }
-    const next = Review.schedule(item.state, value);
-    if (next.intervalDays <= 0) {
-      return '10 分钟后';
-    }
-    return `${next.intervalDays} 天后`;
+  /** 选择题提交：答对按"想起"，答错按"忘了"。 */
+  private submitChoice(): void {
+    this.advance(this.lastCorrect ? GRADE_RECALLED : GRADE_FORGOT);
   }
 
-  private switchTagText(): string {
-    const item: DueCard | null = this.current();
-    if (item === null || item.card.tags.length === 0) {
-      return '';
+  // —— 选项配色与标记：对错**同时用颜色和符号**表达，不靠颜色单独表意 ——
+
+  private optionBg(choice: Choice, optionIndex: number): string {
+    if (this.answered < 0) {
+      return KColor.surface();
     }
-    return item.card.tags.join(' · ');
+    if (choice.correct) {
+      return KColor.primarySoft();
+    }
+    if (optionIndex === this.answered) {
+      return KColor.dangerSoft();
+    }
+    return KColor.surface();
   }
 
-  /** 最近的下次到期（用于完成态/无到期态）。 */
+  private optionBorder(choice: Choice, optionIndex: number): string {
+    if (this.answered < 0) {
+      return KColor.line();
+    }
+    if (choice.correct) {
+      return KColor.primary();
+    }
+    if (optionIndex === this.answered) {
+      return KColor.danger();
+    }
+    return KColor.lineSoft();
+  }
+
+  private optionInk(choice: Choice, optionIndex: number): string {
+    if (this.answered < 0) {
+      return KColor.ink();
+    }
+    if (choice.correct) {
+      return KColor.primaryText();
+    }
+    if (optionIndex === this.answered) {
+      return KColor.danger();
+    }
+    return KColor.mut();
+  }
+
+  /** 未作答显示字母；作答后正确项显 ✓、误选项显 ✗。 */
+  private optionMark(choice: Choice, optionIndex: number): string {
+    if (this.answered < 0) {
+      return LETTERS[optionIndex];
+    }
+    if (choice.correct) {
+      return '✓';
+    }
+    if (optionIndex === this.answered) {
+      return '✗';
+    }
+    return LETTERS[optionIndex];
+  }
+
   private nextDueText(): string {
     const map: Map<string, CardState> = Review.stateMap(Review.readState());
     let earliest: number = 0;
@@ -117,7 +188,36 @@ export struct ReviewPage {
   }
 
   @Builder
-  gradeButton(label: string, hint: string, value: number, primary: boolean) {
+  optionRow(choice: Choice, optionIndex: number) {
+    Row() {
+      Text(this.optionMark(choice, optionIndex))
+        .fontSize(KFont.meta())
+        .fontWeight(FontWeight.Bold)
+        .fontColor(this.optionInk(choice, optionIndex))
+        .width(KSpace.XXL)
+        .textAlign(TextAlign.Center)
+      Text(choice.text)
+        .fontSize(KFont.meta())
+        .lineHeight(KLine.normal())
+        .fontColor(this.optionInk(choice, optionIndex))
+        .layoutWeight(1)
+    }
+    .width('100%')
+    .alignItems(VerticalAlign.Center)
+    .constraintSize({ minHeight: KSize.TOUCH_MIN })
+    .padding(KSpace.M)
+    .margin({ top: KSpace.S })
+    .backgroundColor(this.optionBg(choice, optionIndex))
+    .borderRadius(KRadius.S)
+    .borderWidth(1)
+    .borderColor(this.optionBorder(choice, optionIndex))
+    .onClick(() => {
+      this.pick(optionIndex);
+    })
+  }
+
+  @Builder
+  gradeButton(label: string, hint: string, grade: number, primary: boolean) {
     Column() {
       Text(label)
         .fontSize(KFont.body())
@@ -138,7 +238,7 @@ export struct ReviewPage {
     .borderColor(KColor.line())
     .margin({ left: KSpace.S })
     .onClick(() => {
-      this.grade(value);
+      this.advance(grade);
     })
   }
 
@@ -173,6 +273,135 @@ export struct ReviewPage {
     .margin({ top: KSpace.XXXL })
     .backgroundColor(KColor.surface())
     .borderRadius(KRadius.L)
+  }
+
+  @Builder
+  questionBlock(question: QuizCard) {
+    Column() {
+      if (question.tags.length > 0) {
+        Text(question.tags.join(' · '))
+          .fontSize(KFont.caption())
+          .fontColor(KColor.primaryText())
+          .backgroundColor(KColor.primarySoft())
+          .borderRadius(KRadius.XS)
+          .padding({ left: KSpace.S, right: KSpace.S, top: KSpace.HAIR, bottom: KSpace.HAIR })
+      }
+      Text(question.question)
+        .fontSize(KFont.titleS())
+        .lineHeight(KLine.normal())
+        .fontColor(KColor.ink())
+        .margin({ top: KSpace.S })
+        .width('100%')
+    }
+    .alignItems(HorizontalAlign.Start)
+    .width('100%')
+    .padding(KSpace.L)
+    .backgroundColor(KColor.surface())
+    .borderRadius(KRadius.L)
+  }
+
+  /** 判定后的操作条：答对给「太简单」，答错只给「下一题」。 */
+  @Builder
+  actionBar() {
+    Row() {
+      Text(this.lastCorrect ? '✓ 答对了' : '✗ 答错了')
+        .fontSize(KFont.meta())
+        .fontWeight(FontWeight.Medium)
+        .fontColor(this.lastCorrect ? KColor.primaryText() : KColor.danger())
+        .layoutWeight(1)
+
+      if (this.lastCorrect) {
+        Text('太简单')
+          .fontSize(KFont.meta())
+          .fontColor(KColor.sub())
+          .borderWidth(1)
+          .borderColor(KColor.line())
+          .borderRadius(KRadius.S)
+          .height(KSize.TOUCH_MIN)
+          .padding({ left: KSpace.L, right: KSpace.L })
+          .textAlign(TextAlign.Center)
+          .margin({ right: KSpace.S })
+          .onClick(() => {
+            this.advance(GRADE_EASY);
+          })
+      }
+
+      Text('下一题')
+        .fontSize(KFont.meta())
+        .fontWeight(FontWeight.Medium)
+        .fontColor(KColor.surface())
+        .backgroundColor(KColor.primary())
+        .borderRadius(KRadius.S)
+        .height(KSize.TOUCH_MIN)
+        .padding({ left: KSpace.XL, right: KSpace.XL })
+        .textAlign(TextAlign.Center)
+        .onClick(() => {
+          this.submitChoice();
+        })
+    }
+    .width('100%')
+    .alignItems(VerticalAlign.Center)
+    .margin({ top: KSpace.XL })
+  }
+
+  @Builder
+  choiceFlow(question: QuizCard) {
+    ForEach(question.options, (choice: Choice, optionIndex: number) => {
+      this.optionRow(choice, optionIndex)
+    }, (choice: Choice) => `${question.id}-${choice.text}`)
+
+    if (this.answered >= 0) {
+      this.actionBar()
+    } else {
+      Text('选出正确的一项')
+        .fontSize(KFont.caption())
+        .fontColor(KColor.mut())
+        .width('100%')
+        .margin({ top: KSpace.XL })
+    }
+  }
+
+  @Builder
+  selfReviewFlow(question: QuizCard) {
+    Text('这道题暂无合格选项，改为自评')
+      .fontSize(KFont.caption())
+      .fontColor(KColor.mut())
+      .width('100%')
+      .margin({ top: KSpace.M })
+
+    if (!this.revealed) {
+      Text('显示答案')
+        .fontSize(KFont.body())
+        .fontWeight(FontWeight.Medium)
+        .fontColor(KColor.surface())
+        .backgroundColor(KColor.primary())
+        .borderRadius(KRadius.S)
+        .height(KSize.TOUCH_MIN + 8)
+        .width('100%')
+        .textAlign(TextAlign.Center)
+        .margin({ top: KSpace.XL })
+        .onClick(() => {
+          this.revealed = true;
+        })
+    } else {
+      Text(question.answer)
+        .fontSize(KFont.body())
+        .lineHeight(KLine.relaxed())
+        .fontColor(KColor.ink())
+        .width('100%')
+        .padding(KSpace.L)
+        .margin({ top: KSpace.M })
+        .backgroundColor(KColor.surfaceAlt())
+        .borderRadius(KRadius.L)
+
+      Row() {
+        this.gradeButton('忘了', '10 分钟后', GRADE_FORGOT, false)
+        this.gradeButton('想起', '正常间隔', GRADE_RECALLED, true)
+        this.gradeButton('太简单', '拉长间隔', GRADE_EASY, false)
+      }
+      .width('100%')
+      .margin({ top: KSpace.XL })
+    }
   }
 
   @Builder
@@ -219,68 +448,17 @@ export struct ReviewPage {
           `本次复习了 ${this.doneCount} 张卡片。${this.nextDueText().length > 0 ? `下一批将在 ${this.nextDueText()}到期。` : '继续积累卡片即可持续复习。'}`,
         )
       } else {
-        // 进度
-        Text(`第 ${this.index + 1} / ${this.queue.length} 张` + (this.cached ? ' · 离线题库' : ''))
+        Text(`第 ${this.index + 1} / ${this.quiz.length} 题` + (this.cached ? ' · 离线题库' : ''))
           .fontSize(KFont.caption())
           .fontColor(KColor.mut())
           .width('100%')
 
-        // 问题
-        Column() {
-          if (this.switchTagText().length > 0) {
-            Text(this.switchTagText())
-              .fontSize(KFont.caption())
-              .fontColor(KColor.primaryText())
-              .backgroundColor(KColor.primarySoft())
-              .borderRadius(KRadius.XS)
-              .padding({ left: KSpace.S, right: KSpace.S, top: KSpace.HAIR, bottom: KSpace.HAIR })
-          }
-          Text(this.current()?.card.question ?? '')
-            .fontSize(KFont.titleS())
-            .lineHeight(KLine.normal())
-            .fontColor(KColor.ink())
-            .margin({ top: KSpace.S })
-            .width('100%')
-        }
-        .alignItems(HorizontalAlign.Start)
-        .width('100%')
-        .padding(KSpace.L)
-        .margin({ top: KSpace.M })
-        .backgroundColor(KColor.surface())
-        .borderRadius(KRadius.L)
+        this.questionBlock(this.current()!)
 
-        if (!this.revealed) {
-          Text('显示答案')
-            .fontSize(KFont.body())
-            .fontWeight(FontWeight.Medium)
-            .fontColor(KColor.surface())
-            .backgroundColor(KColor.primary())
-            .borderRadius(KRadius.S)
-            .height(KSize.TOUCH_MIN + 8)
-            .width('100%')
-            .textAlign(TextAlign.Center)
-            .margin({ top: KSpace.XL })
-            .onClick(() => {
-              this.revealed = true;
-            })
+        if (this.fallbackMode) {
+          this.selfReviewFlow(this.current()!)
         } else {
-          Text(this.current()?.card.answer ?? '')
-            .fontSize(KFont.body())
-            .lineHeight(KLine.relaxed())
-            .fontColor(KColor.ink())
-            .width('100%')
-            .padding(KSpace.L)
-            .margin({ top: KSpace.M })
-            .backgroundColor(KColor.surfaceAlt())
-            .borderRadius(KRadius.L)
-
-          Row() {
-            this.gradeButton('忘了', this.nextGapText(GRADE_FORGOT), GRADE_FORGOT, false)
-            this.gradeButton('想起', this.nextGapText(GRADE_RECALLED), GRADE_RECALLED, true)
-            this.gradeButton('太简单', this.nextGapText(GRADE_EASY), GRADE_EASY, false)
-          }
-          .width('100%')
-          .margin({ top: KSpace.XL })
+          this.choiceFlow(this.current()!)
         }
       }
     }
