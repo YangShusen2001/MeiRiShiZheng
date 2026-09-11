@@ -50,6 +50,15 @@ export class Endpoints {
   }
 
   /**
+   * 术语追问。同一套配额与限流（匿名需邀请码，10 次/分钟）。
+   * - 只传 `term` + `explanation`：返回**建议问题**（最多 3 条）；
+   * - 再传 `question`：返回该问题的回答。
+   */
+  static termAskUrl(): string {
+    return `${Endpoints.API_BASE}/api/explain/term/ask`;
+  }
+
+  /**
    * 邀请码激活。匿名用户以此获得 AI 解析额度（身份用 `X-Device-Id`）。
    * 响应：`{ ok: true, data: { active, remaining, code } }`。
    */

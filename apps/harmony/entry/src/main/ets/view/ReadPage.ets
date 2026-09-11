@@ -1,5 +1,5 @@
 import { AiAnnotation, ClippedArticle } from '../model/Content';
-import { Ai, AiResult, CODE_AI_ERROR, CODE_NETWORK, CODE_RATE_LIMITED } from '../service/Ai';
+import { Ai, AiResult, CODE_AI_ERROR, CODE_NETWORK, CODE_RATE_LIMITED, TermAskResult } from '../service/Ai';
 import { Clipboard } from '../service/Clipboard';
 import { common } from '@kit.AbilityKit';
 import { ContentService, Loaded } from '../service/ContentService';
@@ -12,6 +12,9 @@ import { Speech } from '../service/Speech';
 import { annotationBg, KColor, KFont, KLine, KRadius, KSize, KSpace } from '../theme/Tokens';
 import { annotationLabel, buildReaderSegments, ReaderSegment } from './ReaderSegments';
 import { SettingsSheet } from './SettingsSheet';
+
+/** 追问主题长度上限（与后端 `term` 契约一致：min 1 / max 100）。 */
+const ASK_TERM_LIMIT: number = 100;
 
 /**
  * 阅读页路由参数。
@@ -82,6 +85,14 @@ export struct ReadPage {
   @State aiOk: boolean = false;
   @State aiText: string = '';
   @State aiCode: string = '';
+  /** 术语追问状态。 */
+  @State askRequested: boolean = false;
+  @State askLoading: boolean = false;
+  @State askSuggestions: string[] = [];
+  @State askAnswer: string = '';
+  @State askInput: string = '';
+  @State askError: string = '';
+  @State askCode: string = '';
   /** 邀请码激活（AI 额度）。 */
   @State inviteInput: string = '';
   @State inviteBusy: boolean = false;
@@ -313,6 +324,14 @@ export struct ReadPage {
     this.aiOk = false;
     this.aiText = '';
     this.aiCode = '';
+    // 追问同理：建议问题与回答都是"针对上一段的"，留着会张冠李戴
+    this.askRequested = false;
+    this.askLoading = false;
+    this.askSuggestions = [];
+    this.askAnswer = '';
+    this.askInput = '';
+    this.askError = '';
+    this.askCode = '';
     this.tipVisible = true;
   }
 
@@ -338,8 +357,64 @@ export struct ReadPage {
    * 只有"等一会儿就会好"的原因才给重试按钮。
    * 邀请码/配额/未配置密钥这三种，重试一百次也一样——给重试按钮反而误导。
    */
-  private aiRetryable(): boolean {
-    return this.aiCode === '' || this.aiCode === CODE_RATE_LIMITED
+  /**
+   * 追问用的主题文本：后端 `term` 限长 100 字。
+   * **超长时不给追问入口而不是截断**——截断会改变语义，问出来的答案会跑偏。
+   */
+  private askTermText(): string {
+    const source: string = this.aiSource.trim();
+    return source.length <= ASK_TERM_LIMIT ? source : '';
+  }
+
+  /**
+   * 拉「建议问题」。
+   *
+   * **只在用户主动点「问点什么」时才花额度**：服务端是邀请码额度 + 10 次/分钟限流，
+   * AI 深挖已经花掉一次，再自动追问一次等于每次都双花——额度是用户的稀缺资源，
+   * 不该替他花掉。
+   */
+  private loadSuggestions(): void {
+    const term: string = this.askTermText();
+    if (term.length === 0 || this.askLoading) {
+      return;
+    }
+    this.askRequested = true;
+    this.askLoading = true;
+    this.askError = '';
+    Ai.askTerm(term, this.aiText, '').then((result: TermAskResult) => {
+      this.askLoading = false;
+      if (result.ok) {
+        this.askSuggestions = result.suggestions;
+      } else {
+        this.askCode = result.code;
+        this.askError = result.text;
+      }
+    });
+  }
+
+  /** 就某个问题追问（点建议问题，或自己输入）。 */
+  private ask(question: string): void {
+    const term: string = this.askTermText();
+    const asked: string = question.trim();
+    if (term.length === 0 || asked.length === 0 || this.askLoading) {
+      return;
+    }
+    this.askLoading = true;
+    this.askError = '';
+    this.askAnswer = '';
+    Ai.askTerm(term, this.aiText, asked).then((result: TermAskResult) => {
+      this.askLoading = false;
+      if (result.ok) {
+        this.askAnswer = result.answer;
+        this.askInput = '';
+      } else {
+        this.askCode = result.code;
+        this.askError = result.text;
+      }
+    });
+  }
+
+  private aiRetryable(): boolean {    return this.aiCode === '' || this.aiCode === CODE_RATE_LIMITED
       || this.aiCode === CODE_AI_ERROR || this.aiCode === CODE_NETWORK;
   }
 
@@ -756,6 +831,153 @@ export struct ReadPage {
   }
 
   /**
+   * 建议问题（点一下就问）。
+   * 用 chip 而不是列表：问题是短句、数量 ≤3，chip 更省竖向空间，也更像"可选动作"。
+   */
+  @Builder
+  suggestionChip(question: string) {
+    Text(question)
+      .fontSize(KFont.caption())
+      .lineHeight(KLine.tight())
+      .fontColor(KColor.primaryText())
+      .backgroundColor(KColor.primarySoft())
+      .borderRadius(KRadius.S)
+      .padding({ left: KSpace.M, right: KSpace.M, top: KSpace.S, bottom: KSpace.S })
+      .margin({ right: KSpace.S, top: KSpace.S })
+      .onClick(() => {
+        this.ask(question);
+      })
+  }
+
+  /**
+   * 术语追问区块（嵌在 AI 解析之下）。
+   *
+   * ## 为什么先给"建议问题"而不是直接摆输入框
+   * 空输入框会让人**不知道从何问起**；给出几个能点的具体问题，
+   * 用户立刻知道"原来还能这样问"。移动端也少打字。
+   *
+   * ## 四种状态都要有去处
+   * 未开始（一个明确按钮）→ 加载中（说明在做什么）→ 有结果（chips + 自由输入 + 回答）
+   * → 失败（原话 + 可重试）。**不留空白态**，否则用户会以为卡住了。
+   *
+   * ## 片段过长时不给入口
+   * 后端 `term` 限 100 字，超长就说明原因、不给按钮——**不截断**（截断会改变语义）。
+   */
+  @Builder
+  askBlock() {
+    Column() {
+      if (this.askTermText().length === 0) {
+        Text('这段较长，暂不支持追问——换一段更短的文字再试。')
+          .fontSize(KFont.caption())
+          .lineHeight(KLine.tight())
+          .fontColor(KColor.mut())
+          .margin({ top: KSpace.M })
+          .width('100%')
+      } else {
+        Divider()
+          .color(KColor.lineSoft())
+          .margin({ top: KSpace.M, bottom: KSpace.M })
+
+        if (this.askAnswer.length > 0) {
+          Text('AI 回答')
+            .fontSize(KFont.caption())
+            .fontColor(KColor.sub())
+          Text(this.askAnswer)
+            .fontSize(KFont.meta())
+            .lineHeight(KLine.tight())
+            .fontColor(KColor.ink())
+            .margin({ top: KSpace.XS })
+            .width('100%')
+        }
+
+        if (this.askLoading) {
+          Row() {
+            LoadingProgress().width(20).height(20)
+            Text(this.askAnswer.length > 0 ? 'AI 正在回答…' : 'AI 正在想可以问什么…')
+              .fontSize(KFont.meta())
+              .fontColor(KColor.sub())
+              .margin({ left: KSpace.S })
+          }
+          .width('100%')
+          .height(KSize.TOUCH_MIN)
+          .alignItems(VerticalAlign.Center)
+          .margin({ top: KSpace.S })
+        } else {
+          if (this.askError.length > 0) {
+            Text(this.askError)
+              .fontSize(KFont.caption())
+              .lineHeight(KLine.tight())
+              .fontColor(KColor.warnInk())
+              .margin({ top: KSpace.S })
+              .width('100%')
+          }
+
+          if (!this.askRequested) {
+            Text('问点什么（AI 帮你想）')
+              .fontSize(KFont.meta())
+              .fontWeight(FontWeight.Medium)
+              .fontColor(KColor.primaryText())
+              .backgroundColor(KColor.surfaceAlt())
+              .borderRadius(KRadius.S)
+              .height(KSize.TOUCH_MIN)
+              .width('100%')
+              .textAlign(TextAlign.Center)
+              .margin({ top: KSpace.S })
+              .onClick(() => {
+                this.loadSuggestions();
+              })
+          } else {
+            if (this.askSuggestions.length > 0) {
+              Flex({ wrap: FlexWrap.Wrap }) {
+                ForEach(this.askSuggestions, (question: string) => {
+                  this.suggestionChip(question)
+                }, (question: string) => question)
+              }
+              .width('100%')
+            }
+
+            Row() {
+              TextInput({ text: this.askInput, placeholder: '也可以自己问…' })
+                .layoutWeight(1)
+                .height(KSize.TOUCH_MIN)
+                .fontSize(KFont.meta())
+                .fontColor(KColor.ink())
+                .placeholderColor(KColor.mut())
+                .backgroundColor(KColor.surface())
+                .borderRadius(KRadius.S)
+                .onChange((value: string) => {
+                  this.askInput = value;
+                })
+
+              // 输入为空时降透明度而非隐藏：位置稳定，用户知道"填了就能点"
+              Text('问')
+                .fontSize(KFont.meta())
+                .fontWeight(FontWeight.Medium)
+                .fontColor(KColor.surface())
+                .backgroundColor(KColor.primary())
+                .borderRadius(KRadius.S)
+                .height(KSize.TOUCH_MIN)
+                .padding({ left: KSpace.XL, right: KSpace.XL })
+                .textAlign(TextAlign.Center)
+                .margin({ left: KSpace.S })
+                .opacity(this.askInput.trim().length === 0 ? 0.4 : 1)
+                .enabled(this.askInput.trim().length > 0)
+                .onClick(() => {
+                  this.ask(this.askInput);
+                })
+            }
+            .width('100%')
+            .alignItems(VerticalAlign.Center)
+            .margin({ top: KSpace.S })
+          }
+        }
+      }
+    }
+    .alignItems(HorizontalAlign.Start)
+    .width('100%')
+  }
+
+  /**
    * AI 深挖区块（嵌在释义浮层里）。
    * 复用释义浮层而不是另开入口：用户读释义时正是最想追问的时刻。
    */
@@ -801,6 +1023,7 @@ export struct ReadPage {
             .fontColor(KColor.ink())
             .margin({ top: KSpace.XS })
             .width('100%')
+          this.askBlock()
         }
         .alignItems(HorizontalAlign.Start)
         .width('100%')

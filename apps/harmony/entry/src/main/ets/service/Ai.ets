@@ -40,13 +40,50 @@ interface ErrorBody {
   message?: string;
 }
 
-/** AI 调用结果。统一成"要么给解释、要么给一句可直接展示的话"，页面不必再判空。 */
+/**
+ * AI 调用结果。统一成"要么给解释、要么给一句可直接展示的话"，页面不必再判空。
+ */
 export interface AiResult {
   ok: boolean;
   /** 成功为解释正文；失败为可直接展示给用户的说明。 */
   text: string;
   /** 失败原因码；成功为空串。用于区分"可重试"与"要去找管理员"。 */
   code: string;
+}
+
+/** 术语追问结果。 */
+export interface TermAskResult {
+  ok: boolean;
+  /** 失败时可直接展示的说明。 */
+  text: string;
+  /** 失败原因码；成功为空串。 */
+  code: string;
+  /** 建议问题（只传 term 时返回，最多 3 条）。 */
+  suggestions: string[];
+  /** 追问的回答；没提问时为空串。 */
+  answer: string;
+}
+
+interface TermAskData {
+  suggestions?: string[];
+  answer?: string;
+}
+
+interface TermAskEnvelope {
+  ok: boolean;
+  data?: TermAskData;
+}
+
+/**
+ * 追问请求体。
+ * 必须用显式接口而不是 `Record<string, string>`——
+ * ArkTS 禁止无类型对象字面量（`arkts-no-untyped-obj-literals`，编译期实测）。
+ */
+interface TermAskPayload {
+  term: string;
+  explanation: string;
+  /** 缺省时只生成建议问题。 */
+  question?: string;
 }
 
 /**
@@ -83,11 +120,7 @@ export class Ai {
       return Ai.failure('', `这段内容有 ${trimmed.length} 字，超出 AI 解析上限（${TEXT_LIMIT} 字）。请换一段更短的文本。`);
     }
 
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'X-Device-Id': Settings.deviceId(),
-    };
+    const headers: Record<string, string> = Ai.jsonHeaders();
     const body: string = JSON.stringify({ text: trimmed });
 
     try {
@@ -113,6 +146,64 @@ export class Ai {
 
   private static failure(code: string, text: string): AiResult {
     return { ok: false, code: code, text: text };
+  }
+
+  private static termFailure(code: string, text: string): TermAskResult {
+    return { ok: false, code: code, text: text, suggestions: [], answer: '' };
+  }
+
+  private static jsonHeaders(): Record<string, string> {
+    return {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-Device-Id': Settings.deviceId(),
+    };
+  }
+
+  /**
+   * 术语追问。
+   *
+   * 两种用法（同一个端点）：
+   * - **只给 `term` + `explanation`** → 返回建议问题：让用户"看得见能问什么"，
+   *   比丢一个空输入框有效得多——空框会让人不知道从何问起。
+   * - **再给 `question`** → 返回该问题的回答。
+   *
+   * 服务端门禁与 `/api/explain` 完全一致（邀请码 / 额度 / 限流 / 未配置），
+   * 所以错误映射直接复用，文案也一样。
+   */
+  static async askTerm(term: string, explanation: string, question: string): Promise<TermAskResult> {
+    const trimmedTerm: string = term.trim();
+    if (trimmedTerm.length === 0) {
+      return Ai.termFailure('', '没有可追问的术语。');
+    }
+    const payload: TermAskPayload = { term: trimmedTerm, explanation: explanation };
+    const asked: string = question.trim();
+    if (asked.length > 0) {
+      payload.question = asked;
+    }
+    try {
+      const envelope: TermAskEnvelope = await HttpClient.postJson<TermAskEnvelope>(
+        Endpoints.termAskUrl(), JSON.stringify(payload), Ai.jsonHeaders());
+      const data: TermAskData | undefined = envelope.data;
+      const suggestions: string[] = data === undefined || data.suggestions === undefined ? [] : data.suggestions;
+      const answer: string = data === undefined || data.answer === undefined ? '' : data.answer;
+      if (asked.length > 0 && answer.trim().length === 0) {
+        return Ai.termFailure(CODE_AI_ERROR, 'AI 没有返回回答，请稍后重试。');
+      }
+      if (asked.length === 0 && suggestions.length === 0) {
+        return Ai.termFailure(CODE_AI_ERROR, 'AI 没有返回建议问题，请稍后重试。');
+      }
+      return { ok: true, code: '', text: '', suggestions: suggestions, answer: answer };
+    } catch (err) {
+      const cause: Error = err as Error;
+      if (cause instanceof HttpError) {
+        const code: string = Ai.codeOf(cause);
+        return Ai.termFailure(code, Ai.messageFor(code, cause.status));
+      }
+      return Ai.termFailure(CODE_NETWORK, Net.isOnline()
+        ? `请求失败：${cause.message}`
+        : '当前无网络连接，请检查网络后重试。');
+    }
   }
 
   /** 从响应体里取业务错误码；解析失败不抛，交给状态码兜底。 */
