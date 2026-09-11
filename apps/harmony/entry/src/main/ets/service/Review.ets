@@ -260,7 +260,47 @@ export class Review {
         due.push({ card: card, state: state, fresh: false });
       }
     }
-    return due.concat(fresh);
+    return Review.interleave(due.concat(fresh));
+  }
+
+  /**
+   * 打散顺序：**同族题不要连续出现**。
+   *
+   * ## 解决的是什么
+   * 题库里有「十五五」主要目标之一/之二/…/之七 这样的模板题：
+   * 结构完全一样、只换序号与关键词。它们内容各不相同（高质量发展 / 科技自立自强 /
+   * 全面深化改革…），**都是有效考点，不该删**；但它们相邻排列时，
+   * 复习者会连着一路看到 7 道长得一样的题——体感就是"题目重复了"。
+   *
+   * ## 做法
+   * 贪心：每一步从剩余里挑**与上一题最不相似**的那张。
+   * 顺带符合"交错练习优于集中练习"的学习规律。
+   *
+   * 不删卡片——删掉是丢考点；只是把它们的出场顺序拉开。
+   */
+  private static interleave(list: DueCard[]): DueCard[] {
+    if (list.length <= 2) {
+      return list;
+    }
+    const out: DueCard[] = [];
+    const remaining: DueCard[] = list.slice();
+    while (remaining.length > 0) {
+      let pick: number = 0;
+      if (out.length > 0) {
+        const previous: string = out[out.length - 1].card.question;
+        let lowest: number = 2;
+        for (let index = 0; index < remaining.length; index++) {
+          const score: number = Review.similarity(previous, remaining[index].card.question);
+          if (score < lowest) {
+            lowest = score;
+            pick = index;
+          }
+        }
+      }
+      out.push(remaining[pick]);
+      remaining.splice(pick, 1);
+    }
+    return out;
   }
 
   // ———————————————— 选择题构造 ————————————————
