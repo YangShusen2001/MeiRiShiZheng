@@ -137,3 +137,33 @@ def test_locate_alignment_with_annotation_offsets():
     # 锚定定位与 AI 标注共用 _locate：同一片段得到同一组偏移（左闭右开 UTF-16）。
     start, end, matched = _locate(PARAGRAPHS[2], "2026 年经济增长预期目标为 4.5%—5%。")
     assert PARAGRAPHS[2][start:end] == matched
+
+
+def test_explain_is_optional_enhancement():
+    """explain（逐项解析）是**增强**：合规就带上，缺了或不合规只丢这个字段，
+    不作废整张卡——与管道"降级不阻断"的一贯做法一致（端上用基础解析兜底）。"""
+    paragraphs = ["全面贯彻党的教育方针，落实立德树人根本任务。"]
+    base = {
+        "question": "《行动计划》实施要落实的根本任务是什么？",
+        "answer": "落实立德树人根本任务。",
+        "tags": ["任务"],
+        "anchor": {"paragraphIndex": 0, "sentence": "落实立德树人根本任务"},
+    }
+
+    cards, dropped = validate_cards(
+        [dict(base, explain="原文明确「落实立德树人根本任务」，这是教育领域一贯的根本任务提法。")],
+        paragraphs,
+        "a1",
+    )
+    assert dropped == 0
+    assert cards[0]["explain"].startswith("原文明确")
+
+    # 缺 explain：卡片仍有效，只是没有该字段
+    cards, dropped = validate_cards([base], paragraphs, "a1")
+    assert dropped == 0
+    assert "explain" not in cards[0]
+
+    # explain 过短：同样只丢字段，不作废卡片
+    cards, dropped = validate_cards([dict(base, explain="太短")], paragraphs, "a1")
+    assert dropped == 0
+    assert "explain" not in cards[0]

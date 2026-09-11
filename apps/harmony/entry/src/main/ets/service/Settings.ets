@@ -27,6 +27,9 @@ export class Settings {
   static readonly KEY_SPEAK_SPEED: string = 'speakSpeed';
   static readonly KEY_SPEAK_ONLINE: string = 'speakOnline';
   static readonly KEY_SPEAK_PERSON: string = 'speakPerson';
+  /** 朗读进度：只保留最近一篇（与阅读位置同一策略——单点续播即可满足"接着听"）。 */
+  static readonly KEY_PLAY_ID: string = 'playArticleId';
+  static readonly KEY_PLAY_PERCENT: string = 'playPercent';
 
   /** 朗读速度档位。通勤场景下 1.25 倍是刚需——省时间且不失可懂度。 */
   static readonly SPEED_STEPS: number[] = [0.8, 1, 1.25, 1.5];
@@ -199,6 +202,30 @@ export class Settings {
 
   static setSpeakPerson(person: number): void {
     Settings.writeNumber(Settings.KEY_SPEAK_PERSON, person);
+  }
+
+  /**
+   * 记录朗读进度（百分比 0-100）。
+   *
+   * **为什么只留最近一篇**：与阅读位置同一策略——"接着听"的真实需求是
+   * "刚才那篇没听完"，不是"每篇都记"；只留一条既够用，存储也不随听过的篇数增长。
+   */
+  static savePlayProgress(articleId: string, percent: number): void {
+    Settings.writeString(Settings.KEY_PLAY_ID, articleId);
+    Settings.writeNumber(Settings.KEY_PLAY_PERCENT, percent);
+  }
+
+  static clearPlayProgress(): void {
+    Settings.savePlayProgress('', 0);
+  }
+
+  /** 取某篇的朗读进度；不是最近听的那篇返回 0。 */
+  static playProgress(articleId: string): number {
+    const savedId: string = Settings.readString(Settings.KEY_PLAY_ID, '');
+    if (savedId !== articleId) {
+      return 0;
+    }
+    return Settings.readNumber(Settings.KEY_PLAY_PERCENT, 0);
   }
 
   /**

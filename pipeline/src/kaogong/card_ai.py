@@ -41,6 +41,8 @@ _BASE_RULES = (
     "6. 标签：tags 1-5 个，从「定位/原则/目标/数字/任务/术语/要求/意义」中选，可加一个自定义词（不超过 3 字）。"
     "7. 纯数字/指标（增速、总额、覆盖率、时间节点、具体数值）不出卡——它们将由 AI 标注在原文中高亮标记；"
     "卡片只出结构、任务、定位、原则类考点。结构性提法（如「两个同步」「十五五」定位）允许成卡。"
+    "8. explain：用 40-120 字说明**为什么这个答案对、最容易混的说法错在哪**，"
+    "依据必须能在原文里找到；写不出有依据的解释就不要硬编。"
     "黄金样本：question「十五五」时期的官方定位是什么？"
     "answer 基本实现社会主义现代化「夯实基础、全面发力」的关键时期，具有承前启后的重要地位。"
     "tags 定位,关键时期"
@@ -123,6 +125,7 @@ def _messages(
     article = "\n".join(f"[{i}] {p}" for i, p in enumerate(paragraphs))
     output_shape = (
         f"输出形状：{{\"cards\":[{{\"question\":\"...\",\"answer\":\"...\",\"tags\":[\"...\"],"
+        f"\"explain\":\"为什么是这个答案、其他说法错在哪（40~120 字，依据原文）\","
         f"\"anchor\":{{\"paragraphIndex\":0,\"sentence\":\"原文连续子串\"}}}}]}}"
     )
     rules = _VARIANT_RULES.get(variant, _VARIANT_RULES[VARIANT_FALLBACK])
@@ -185,6 +188,11 @@ def validate_cards(cards: list[dict], paragraphs: list[str], article_id: str) ->
                     "sentence": sentence,
                 },
             }
+            # explain 是**增强而非必需**：缺了或不合规只丢这个字段，不作废整张卡
+            # （与管道"降级不阻断"的一贯做法一致；端上没有 explain 时用基础解析兜底）。
+            explain = str(raw.get("explain", "")).strip()
+            if 10 <= len(explain) <= 400:
+                card["explain"] = explain
             valid.append(card)
         except (KeyError, TypeError, ValueError):
             dropped += 1

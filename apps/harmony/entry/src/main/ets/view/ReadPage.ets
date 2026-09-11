@@ -101,7 +101,42 @@ export struct ReadPage {
   private currentTopIndex: number = 0;
 
   aboutToAppear(): void {
+    // 朗读状态由控件事件驱动（暂停 / 停止 / 播完都会回调），页面不需要自己猜
+    Speech.onStateChange((playing: boolean) => {
+      this.speaking = playing;
+    });
+    // 朗读进度落盘：暂停 / 停止 / 播完都会回调，用于"接着听"
+    Speech.onProgress((percent: number) => {
+      if (this.articleId.length > 0 && percent > 0) {
+        Settings.savePlayProgress(this.articleId, percent);
+      }
+    });
     this.loadArticle();
+  }
+
+  /**
+   * 按已播放百分比推出起始段（按字数折算）。
+   *
+   * 控件只回报**整篇的播放百分比**、不回报"读到文本哪一段"，
+   * 所以用字数比例折算——对通勤"接着听"够用，且不依赖控件内部实现。
+   */
+  private paragraphAtPercent(percent: number): number {
+    let total: number = 0;
+    for (const paragraph of this.paragraphs) {
+      total += paragraph.length;
+    }
+    if (total === 0 || this.paragraphs.length === 0) {
+      return 0;
+    }
+    const target: number = Math.floor(total * percent / 100);
+    let acc: number = 0;
+    for (let index = 0; index < this.paragraphs.length; index++) {
+      acc += this.paragraphs[index].length;
+      if (acc >= target) {
+        return index;
+      }
+    }
+    return this.paragraphs.length - 1;
   }
 
   /** 离开时记录阅读位置：一次写入，避免滚动中频繁落盘。 */
@@ -130,15 +165,24 @@ export struct ReadPage {
       this.hintText = '上下文未就绪，无法朗读。';
       return;
     }
-    // 从**当前可见段落**开始：控件只能从文章开头播，所以先把前面已读的部分截掉
-    const from: number = Math.max(0, this.currentTopIndex - 1);
+    // 起始段：优先"上次听到哪"（持久化的朗读进度），其次当前可见段落。
+    // 控件只能从文章开头播，所以先把前面已读的部分截掉——这就是"接着听"的实现。
+    const saved: number = Settings.playProgress(this.articleId);
+    const resuming: boolean = saved >= 5 && saved <= 95;
+    const from: number = resuming
+      ? this.paragraphAtPercent(saved)
+      : Math.max(0, this.currentTopIndex - 1);
     Speech.ready(context).then((ready: boolean) => {
       if (!ready) {
         this.hintText = '系统朗读控件不可用（仅支持中国境内的手机 / 平板 / PC），无法朗读本篇。';
         return;
       }
       Speech.start(this.title, this.paragraphs, from, this.articleId).then((started: boolean) => {
-        this.hintText = started ? '' : '朗读启动失败，请稍后重试。';
+        if (!started) {
+          this.hintText = '朗读启动失败，请稍后重试。';
+        } else {
+          this.hintText = resuming ? `从上次听到的地方继续（约 ${Math.round(saved)}%）。` : '';
+        }
       });
     });
   }

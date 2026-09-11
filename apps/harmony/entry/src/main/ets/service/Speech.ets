@@ -29,6 +29,8 @@ export class Speech {
   private static playing: boolean = false;
   private static stateListener: (playing: boolean) => void = () => {
   };
+  private static progressListener: (percent: number) => void = () => {
+  };
 
   /** 初始化一次（应用启动或首次朗读时）。失败不阻断阅读，只是"听"不可用。 */
   static async init(context: common.UIAbilityContext): Promise<boolean> {
@@ -65,6 +67,17 @@ export class Speech {
   /** 播放状态变化回调（页面据此更新按钮与提示）。 */
   static onStateChange(listener: (playing: boolean) => void): void {
     Speech.stateListener = listener;
+  }
+
+  /**
+   * 播放进度回调（百分比 0-100）——**"接着听"的持久化就靠它**。
+   *
+   * 用 `maxPercent`（用户曾经播放到的最大百分比）而不是当前百分比：
+   * 通勤场景的真实诉求是"上次听到哪就接着听"，回拖过也不该把进度退回去。
+   * 事件在**暂停 / 停止 / 播完**时都会触发，所以不需要另外设上报周期。
+   */
+  static onProgress(listener: (percent: number) => void): void {
+    Speech.progressListener = listener;
   }
 
   /** 未初始化则先初始化。 */
@@ -120,6 +133,10 @@ export class Speech {
         const playing: boolean = state.state === ReadStateCode.PLAYING;
         Speech.playing = playing;
         Speech.stateListener(playing);
+      });
+      // 进度回调：暂停/停止/播完时触发，页面据此落盘（"接着听"）
+      TextReader.on('readProgress', (progress: TextReader.ReadProgress) => {
+        Speech.progressListener(progress.maxPercent);
       });
     } catch (err) {
       const cause: BusinessError = err as BusinessError;
