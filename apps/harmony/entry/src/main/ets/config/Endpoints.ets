@@ -33,6 +33,15 @@ export class Endpoints {
   }
 
   /**
+   * 跨日考点卡片（`content/cards/*.json` 合并产物）。
+   * 是复习功能的题库来源——**与文章级 `aiCards` 不是同一条来源**，
+   * 二者合并是内容侧的待办。
+   */
+  static cardsUrl(): string {
+    return `${Endpoints.CONTENT_BASE}/content/cards.json`;
+  }
+
+  /**
    * AI 解析（Worker 侧 DeepSeek）。
    * 需带 `X-Device-Id` 头；服务端有配额与限流（匿名需邀请码，10 次/分钟）。
    */

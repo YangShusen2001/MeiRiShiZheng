@@ -2,6 +2,7 @@ import { ContentManifest, DailyDigest, DigestItem, DigestSection, TodaySummary }
 import { ContentService, Loaded } from '../service/ContentService';
 import { HttpError, STATUS_LOCAL_FAILURE } from '../service/Http';
 import { Net } from '../service/Net';
+import { Review } from '../service/Review';
 import { KColor, KFont, KLine, KRadius, KShadow, KSize, KSpace } from '../theme/Tokens';
 import { ReadParam } from './ReadPage';
 import { SearchHit, SearchSheet } from './SearchSheet';
@@ -43,6 +44,8 @@ export struct HomePage {
   @State showingCache: boolean = false;
   /** 缓存写入时间，用于「缓存于 x 前」。 */
   @State cachedAt: number = 0;
+  /** 今日待复习卡片数。让"必须回来"这件事在首页可见。 */
+  @State dueCount: number = 0;
 
   /** 骨架屏占位行。 */
   private skeletonRows: number[] = [0, 1, 2, 3, 4];
@@ -68,6 +71,20 @@ export struct HomePage {
     // 先拿缓存把首帧点亮，再走网络刷新
     this.paintFromCache();
     this.loadLatest();
+    this.refreshDueCount();
+  }
+
+  /** 待复习数量：卡片取自本地缓存，离线也能算出来。 */
+  private refreshDueCount(): void {
+    Review.loadCards()
+      .then((loaded) => {
+        const states = Review.readState();
+        this.dueCount = Review.dueCards(loaded.data, states).length;
+      })
+      .catch(() => {
+        // 题库拉不到不算错误：首页仍有内容可看，复习入口显示为 0
+        this.dueCount = 0;
+      });
   }
 
   aboutToDisappear(): void {
@@ -410,6 +427,48 @@ export struct HomePage {
     .shadow({ radius: KShadow.CARD_RADIUS, color: KShadow.CARD_COLOR, offsetY: KShadow.CARD_OFFSET_Y })
   }
 
+  /**
+   * 今日复习入口。
+   * 有待复习时用主色底强调（这是"今天该做什么"的确定答案）；
+   * 没有时降低存在感但仍可达——不要让入口凭空消失让用户找不到。
+   */
+  @Builder
+  reviewEntry() {
+    Row() {
+      Column() {
+        Text(this.dueCount > 0 ? `今日待复习 ${this.dueCount} 张` : '考点复习')
+          .fontSize(KFont.body())
+          .fontWeight(FontWeight.Medium)
+          .fontColor(this.dueCount > 0 ? KColor.primaryText() : KColor.ink())
+        Text(this.dueCount > 0 ? '按间隔重复安排，先把到期的记牢' : '暂无到期卡片，随时可回看题库')
+          .fontSize(KFont.caption())
+          .fontColor(KColor.sub())
+          .margin({ top: KSpace.HAIR })
+      }
+      .alignItems(HorizontalAlign.Start)
+      .layoutWeight(1)
+
+      Text(this.dueCount > 0 ? '去复习' : '查看')
+        .fontSize(KFont.meta())
+        .fontWeight(FontWeight.Medium)
+        .fontColor(KColor.surface())
+        .backgroundColor(KColor.primary())
+        .borderRadius(KRadius.S)
+        .height(KSize.TOUCH_MIN)
+        .padding({ left: KSpace.L, right: KSpace.L })
+        .textAlign(TextAlign.Center)
+    }
+    .width('100%')
+    .alignItems(VerticalAlign.Center)
+    .padding(KSpace.L)
+    .backgroundColor(this.dueCount > 0 ? KColor.primarySoft() : KColor.surface())
+    .borderRadius(KRadius.L)
+    .margin({ bottom: KSpace.M })
+    .onClick(() => {
+      this.navStack.pushPathByName('review', '');
+    })
+  }
+
   @Builder
   summaryCard() {
     Column() {
@@ -562,6 +621,8 @@ export struct HomePage {
   content() {
     Column() {
       this.statusStrip()
+      // 复习入口常驻：即使内容还在加载，它也该可见（它不依赖当日内容）
+      this.reviewEntry()
 
       if (this.loading) {
         this.skeletonCard()
@@ -655,5 +716,11 @@ export struct HomePage {
     .width('100%')
     .height('100%')
     .backgroundColor(KColor.bg())
+    // 从复习页返回时刷新待复习数：否则刚复习完仍显示旧的到期数量
+    .onVisibleAreaChange([0.0, 1.0], (isVisible: boolean, ratio: number) => {
+      if (isVisible) {
+        this.refreshDueCount();
+      }
+    })
   }
 }

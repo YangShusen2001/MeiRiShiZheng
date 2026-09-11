@@ -1,6 +1,7 @@
 import { KColor } from '../theme/Tokens';
 import { HomePage } from '../view/HomePage';
 import { ReadPage, ReadParam } from '../view/ReadPage';
+import { ReviewPage } from '../view/ReviewPage';
 /**
  * 应用根容器：用 Navigation + NavPathStack 管理页面栈。
  *
@@ -27,6 +28,8 @@ struct Index {
         articleId: (param as ReadParam).articleId,
         dayIds: (param as ReadParam).dayIds,
       })
+    } else if (name === 'review') {
+      ReviewPage()
     }
   }
 
