@@ -548,13 +548,27 @@ export struct ReviewPage {
           .fontColor(KColor.mut())
           .width('100%')
 
-        this.questionBlock(this.current()!)
+        // ⚠️ 题面与选项**必须由 index 建 key**，否则切题不刷新。
+        //
+        // 原因（实测踩过）：题面是 `this.questionBlock(this.current()!)` ——
+        // **状态是通过方法间接读到的**（`current()` 里才访问 `this.quiz[this.index]`），
+        // ArkUI 的依赖追踪不认这种间接读取。
+        // 于是出现最诡异的现象：**「第 N / M 题」计数器在正常递增，题面却一直停在第一道**，
+        // 用户反馈"后续所有题目都是第一题"。
+        // 把 index 写进 ForEach 的 key：key 一变整块重建，题面与选项必然跟着换。
+        ForEach([this.index], (index: number) => {
+          Column() {
+            this.questionBlock(this.current()!)
 
-        if (this.fallbackMode) {
-          this.selfReviewFlow(this.current()!)
-        } else {
-          this.choiceFlow(this.current()!)
-        }
+            if (this.fallbackMode) {
+              this.selfReviewFlow(this.current()!)
+            } else {
+              this.choiceFlow(this.current()!)
+            }
+          }
+          .width('100%')
+          .alignItems(HorizontalAlign.Start)
+        }, (index: number) => `q-${index}`)
       }
     }
     .width('100%')
