@@ -1,5 +1,6 @@
 import { CardState, Choice, GRADE_EASY, GRADE_FORGOT, GRADE_RECALLED, OPTION_LETTERS, QuizCard, Review, ReviewCard } from '../service/Review';
 import { KColor, KFont, KLine, KRadius, KSize, KSpace } from '../theme/Tokens';
+import { ReadParam } from './ReadPage';
 
 /**
  * 考点复习页（间隔重复 · ABCD 单选）。
@@ -379,18 +380,45 @@ export struct ReviewPage {
           .width('100%')
       }
 
-      Text('四个选项都出自同一批官方表述，区别在于各自回答的是哪个问题——按题干问的「角度」去对，不要按熟悉度选。')
-        .fontSize(KFont.caption())
-        .lineHeight(KLine.tight())
-        .fontColor(KColor.sub())
-        .margin({ top: KSpace.S })
-        .width('100%')
+      if (question.explain.length > 0) {
+        // 管道生成的逐项解析（有就用它）
+        Text(question.explain)
+          .fontSize(KFont.meta())
+          .lineHeight(KLine.normal())
+          .fontColor(KColor.ink())
+          .margin({ top: KSpace.S })
+          .width('100%')
+      } else {
+        // 尚未生成解析时，用「干扰项是怎么造的」给基础解析——不留空、也不编造
+        Text('四个选项都出自同一批官方表述，区别在于各自回答的是哪个问题——按题干问的「角度」去对，不要按熟悉度选。')
+          .fontSize(KFont.caption())
+          .lineHeight(KLine.tight())
+          .fontColor(KColor.sub())
+          .margin({ top: KSpace.S })
+          .width('100%')
 
-      Text('逐项详解待内容管道为卡片生成 explain 字段后补上。')
-        .fontSize(KFont.caption())
-        .fontColor(KColor.mut())
-        .margin({ top: KSpace.XS })
-        .width('100%')
+        Text('逐项详解待内容管道为卡片生成 explain 字段后补上。')
+          .fontSize(KFont.caption())
+          .fontColor(KColor.mut())
+          .margin({ top: KSpace.XS })
+          .width('100%')
+      }
+
+      if (question.articleId.length > 0) {
+        Text('查看原文 ›')
+          .fontSize(KFont.meta())
+          .fontWeight(FontWeight.Medium)
+          .fontColor(KColor.primaryText())
+          .backgroundColor(KColor.primarySoft())
+          .borderRadius(KRadius.S)
+          .height(KSize.TOUCH_MIN)
+          .padding({ left: KSpace.L, right: KSpace.L })
+          .margin({ top: KSpace.M })
+          .textAlign(TextAlign.Center)
+          .onClick(() => {
+            this.openSource(question.articleId);
+          })
+      }
     }
     .alignItems(HorizontalAlign.Start)
     .width('100%')
@@ -398,6 +426,16 @@ export struct ReviewPage {
     .margin({ top: KSpace.M })
     .backgroundColor(KColor.surfaceAlt())
     .borderRadius(KRadius.L)
+  }
+
+  /**
+   * 回到原文出处。
+   * 只带 articleId（不带当日清单）：从复习流跳转是"看去处"，
+   * 不是"按天顺序读"，所以不需要上一篇/下一篇。
+   */
+  private openSource(articleId: string): void {
+    const param: ReadParam = { articleId: articleId, dayIds: [] };
+    this.navStack.pushPathByName('read', param);
   }
 
   @Builder

@@ -10,12 +10,22 @@ const DOMAIN: number = 0x0000;
 const TAG: string = 'KaogongReview';
 const STATE_FILE: string = 'review-state.json';
 
+/** 卡片↔原文锚点。有它才能"回到原文"——这也是卡片可溯源的底线。 */
+export interface CardAnchor {
+  articleId: string;
+  paragraphIndex: number;
+}
+
 /** 一张考点卡片（分发产物 `content/cards.json`）。 */
 export interface ReviewCard {
   id: string;
   question: string;
   answer: string;
+  /** 思路/逐项解析（可选）：管道生成后才有。 */
+  explain?: string;
   tags: string[];
+  /** 出处。人工卡组没有，管道从文章提炼的卡有。 */
+  anchor?: CardAnchor;
 }
 
 /** 单卡复习进度。 */
@@ -92,6 +102,10 @@ export interface QuizCard {
   fallback: boolean;
   /** 正确答案原文（判定后展示）。 */
   answer: string;
+  /** 逐项解析；空串表示管道尚未生成，页面用「考点归属」给基础解析。 */
+  explain: string;
+  /** 出处文章 id；空串表示这张卡没有出处（人工卡组）。 */
+  articleId: string;
 }
 
 export class Review {
@@ -276,6 +290,8 @@ export class Review {
     const out: QuizCard[] = [];
     for (const item of due) {
       const options: Choice[] = Review.optionsFor(item.card, pool);
+      const explain: string | undefined = item.card.explain;
+      const anchor: CardAnchor | undefined = item.card.anchor;
       out.push({
         id: item.card.id,
         question: item.card.question,
@@ -284,6 +300,8 @@ export class Review {
         options: options,
         state: item.state,
         fallback: options.length === 0,
+        explain: explain === undefined ? '' : explain,
+        articleId: anchor === undefined ? '' : anchor.articleId,
       });
     }
     return out;

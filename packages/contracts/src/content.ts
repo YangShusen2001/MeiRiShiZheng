@@ -193,6 +193,11 @@ export interface ReviewCard {
   question: string;
   /** 反面答案。 */
   answer: string;
+  /**
+   * 思路/逐项解析（可选）。
+   * 只给对错等于白刷——答错时必须能知道为什么错，所以这是卡片的正式字段。
+   */
+  explain?: string;
   /** 标签，如 定位/目标/数字。 */
   tags: string[];
   /** 归属的主线 slug；缺省继承卡组 policyLine。 */

@@ -156,14 +156,62 @@ export function listArticles(): ClippedArticle[] {
   return out;
 }
 
-/** 列出所有考点卡片（content/cards/*.json，按文件名排序后拼接）。 */
+/**
+ * 列出所有考点卡片。
+ *
+ * **两个来源，缺一不可**：
+ * 1. `content/cards/*.json`——人工策展的卡组（无出处）；
+ * 2. **各日文章里的 `aiCards`**——管道从原文提炼，带 `anchor`（出处文章 + 段落）。
+ *
+ * 只读前者会让管道产出的卡片永远到不了端上；而 `anchor` 是"卡片能回到原文"
+ * 的唯一来源，所以必须并入。按 id 去重（人工卡优先）。
+ */
 export function listCards(): ReviewCard[] {
+  const deckCards = listDeckCards();
+  const seen = new Set(deckCards.map((card) => card.id));
+  const articleCards: ReviewCard[] = [];
+  for (const entry of safeReaddir(CONTENT_DIR)) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(entry)) {
+      continue;
+    }
+    for (const file of safeReaddir(join(CONTENT_DIR, entry))) {
+      if (!file.startsWith("article-") || !file.endsWith(".json")) {
+        continue;
+      }
+      const article = loadJson<ClippedArticle>(join(CONTENT_DIR, entry, file));
+      // 渲染门控：AI 未成功的文章，其卡片同样不可用（与端上一致）
+      if (!article || article.aiStatus !== "ok") {
+        continue;
+      }
+      for (const card of article.aiCards ?? []) {
+        if (seen.has(card.id)) {
+          continue;
+        }
+        seen.add(card.id);
+        articleCards.push(card);
+      }
+    }
+  }
+  return [...deckCards, ...articleCards];
+}
+
+/** 人工策展卡组（content/cards/*.json，按文件名排序后拼接）。 */
+function listDeckCards(): ReviewCard[] {
   const cardsDir = join(CONTENT_DIR, "cards");
   if (!existsSync(cardsDir)) return [];
   return readdirSync(cardsDir)
     .filter((f) => f.endsWith(".json"))
     .sort()
     .flatMap((f) => loadJson<CardDeck>(join(cardsDir, f))?.cards ?? []);
+}
+
+/** 目录读不到时返回空数组（内容目录在不同环境下形态不一致，不该让构建炸掉）。 */
+function safeReaddir(dir: string): string[] {
+  try {
+    return readdirSync(dir);
+  } catch {
+    return [];
+  }
 }
 
 /** 列出全部政策主线（content/policy-lines.json，人工维护；文件缺失返回 []）。 */
