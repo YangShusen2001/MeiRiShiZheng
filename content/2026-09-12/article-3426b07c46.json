@@ -1,0 +1,136 @@
+{
+  "id": "3426b07c46",
+  "date": "2026-09-12",
+  "title": "习近平总结金砖20年发展成就",
+  "source": "qstheory.cn",
+  "url": "https://www.qstheory.cn/20260912/2e90cc75e8e34f8aac8879ae0028757e/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T23:44:32+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;新华社新德里9月12日电 当地时间9月12日下午，国家主席习近平在新德里出席金砖国家领导人第十八次会晤第一阶段会议并发表重要讲话。",
+    "&emsp;&emsp;习近平指出，今年是金砖国家合作20周年。20年来，金砖合作机制不断发展壮大，展现出蓬勃生机活力，成为当今世界最具影响力的新兴市场和发展中国家合作平台。",
+    "&emsp;&emsp;这是自立自强的20年。金砖国家作为全球南方第一方阵，坚持独立自主，积极探索符合自身国情的发展道路，成为新兴市场和发展中国家联合自强的典范。",
+    "&emsp;&emsp;这是风雨同舟的20年。金砖国家不畏艰难、砥砺前行，携手应对国际金融危机、新冠疫情、气候变化等挑战，坚定维护全球南方共同利益，为世界提供稳定性和正能量。",
+    "&emsp;&emsp;这是成果丰硕的20年。金砖国家实现历史性扩员，建立起全方位、多层次合作架构，不断深化贸易、投资、金融、科技等合作，迈入“大金砖合作”高质量发展新阶段。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-12T23:44:32+00:00",
+  "sourceTextHash": "f35d8c2ca8f37da235941e527506bdadb23431f1809d401219740c03a627088e",
+  "aiStatus": "ok",
+  "aiSummary": "习近平在新德里金砖领导人第十八次会晤上总结金砖合作20年成就，指出机制不断壮大，成为最具影响力的新兴市场和发展中国家合作平台，并从自立自强、风雨同舟、成果丰硕三方面概括历程，强调扩员后迈入大金砖合作高质量发展新阶段。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-60-86-viewpoint",
+      "paragraphIndex": 1,
+      "start": 60,
+      "end": 86,
+      "text": "成为当今世界最具影响力的新兴市场和发展中国家合作平台",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-61-80-viewpoint",
+      "paragraphIndex": 2,
+      "start": 61,
+      "end": 80,
+      "text": "成为新兴市场和发展中国家联合自强的典范",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-74-86-viewpoint",
+      "paragraphIndex": 3,
+      "start": 74,
+      "end": 86,
+      "text": "为世界提供稳定性和正能量",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-69-86-viewpoint",
+      "paragraphIndex": 4,
+      "start": 69,
+      "end": 86,
+      "text": "迈入“大金砖合作”高质量发展新阶段",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-50-63-exam_point",
+      "paragraphIndex": 0,
+      "start": 50,
+      "end": 63,
+      "text": "金砖国家领导人第十八次会晤",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-18-31-exam_point",
+      "paragraphIndex": 1,
+      "start": 18,
+      "end": 31,
+      "text": "今年是金砖国家合作20周年",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-29-37-exam_point",
+      "paragraphIndex": 2,
+      "start": 29,
+      "end": 37,
+      "text": "全球南方第一方阵",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-41-57-exam_point",
+      "paragraphIndex": 3,
+      "start": 41,
+      "end": 57,
+      "text": "国际金融危机、新冠疫情、气候变化",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-27-34-exam_point",
+      "paragraphIndex": 4,
+      "start": 27,
+      "end": 34,
+      "text": "实现历史性扩员",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-38-49-exam_point",
+      "paragraphIndex": 4,
+      "start": 38,
+      "end": 49,
+      "text": "全方位、多层次合作架构",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-37-43-term",
+      "paragraphIndex": 1,
+      "start": 37,
+      "end": 43,
+      "text": "金砖合作机制",
+      "type": "term",
+      "explanation": "指金砖国家建立的合作机制，通过领导人会晤等推动新兴市场和发展中国家协调合作。"
+    },
+    {
+      "id": "ai-2-29-33-term",
+      "paragraphIndex": 2,
+      "start": 29,
+      "end": 33,
+      "text": "全球南方",
+      "type": "term",
+      "explanation": "通常指新兴市场国家和发展中国家，强调其在国际事务中共同利益和联合自强。"
+    },
+    {
+      "id": "ai-4-72-77-term",
+      "paragraphIndex": 4,
+      "start": 72,
+      "end": 77,
+      "text": "大金砖合作",
+      "type": "term",
+      "explanation": "指金砖国家扩员后形成的更大范围合作格局，推动合作高质量发展。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

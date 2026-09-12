@@ -1,0 +1,27 @@
+{
+  "id": "014a511d8f",
+  "date": "2026-09-12",
+  "title": "习近平抵达新德里出席金砖国家领导人第十八次会晤",
+  "source": "qstheory.cn",
+  "url": "https://www.qstheory.cn/20260912/f335e6b350d44e9ebceee20650a847bb/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T23:44:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;当地时间9月12日中午，国家主席习近平乘专机抵达新德里，应印度总理莫迪邀请，出席金砖国家领导人第十八次会晤。习近平抵达新德里帕拉姆空军基地时，印度政府高级官员热情迎接。 新华社记者 谢环驰 摄",
+    "&emsp;&emsp;新华社新德里9月12日电（记者宿亮）当地时间9月12日中午，国家主席习近平乘专机抵达新德里，应印度总理莫迪邀请，出席金砖国家领导人第十八次会晤。",
+    "&emsp;&emsp;当地时间9月12日中午，国家主席习近平乘专机抵达新德里，应印度总理莫迪邀请，出席金砖国家领导人第十八次会晤。习近平抵达新德里帕拉姆空军基地时，印度政府高级官员热情迎接。&nbsp;新华社记者 谢环驰 摄",
+    "&emsp;&emsp;习近平抵达新德里帕拉姆空军基地时，印度政府高级官员热情迎接。礼兵分列红毯两侧致敬。",
+    "&emsp;&emsp;蔡奇、王毅等陪同人员同机抵达。",
+    "&emsp;&emsp;中国驻印度大使徐飞洪也到机场迎接。",
+    "&emsp;&emsp;习近平乘车从机场赴下榻饭店途中，当地华侨华人和中资企业代表挥舞中印两国国旗，热烈欢迎习近平到访。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-12T23:44:35+00:00",
+  "sourceTextHash": "dfa7cc2d69bead8623d0c9a9732e1b8008604f694b48e93881c303a36253ef4a",
+  "aiStatus": "error",
+  "aiAnnotations": [],
+  "aiError": "ai_semantic:summary_length"
+}

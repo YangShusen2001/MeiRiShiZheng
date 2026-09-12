@@ -1,0 +1,24 @@
+{
+  "date": "2026-09-12",
+  "sourcesOk": 15,
+  "sourceErrors": [],
+  "candidates": 24,
+  "articles": 21,
+  "aiOk": 19,
+  "aiError": 2,
+  "aiFailures": [
+    {
+      "articleId": "014a511d8f",
+      "reason": "ai_semantic:summary_length"
+    },
+    {
+      "articleId": "cfd297dadb",
+      "reason": "ai_semantic:annotation_count_viewpoint"
+    }
+  ],
+  "locationErrors": 5,
+  "schemaErrors": [],
+  "semanticErrors": [],
+  "volumeErrors": [],
+  "qualityStatus": "degraded"
+}

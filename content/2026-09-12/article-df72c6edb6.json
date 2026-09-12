@@ -1,0 +1,103 @@
+{
+  "id": "df72c6edb6",
+  "date": "2026-09-12",
+  "title": "11块巨型“积木”精准拼装 狮子洋通道迎新进展",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202609/12/139996_55002786.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T23:45:10+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月12日，粤港澳大湾区核心枢纽工程——狮子洋通道跨西樵水道钢桁梁桥完成11个节段拼装，实现精准合龙。",
+    "狮子洋通道是继港珠澳大桥、深中通道之后大湾区又一超大型跨江通道工程，为双层过江通道，全长约35公里，连接广州市南沙区和东莞市虎门、沙田两镇，主体工程由跨江主桥狮子洋大桥和两岸陆域引线工程组成。",
+    "西樵水道钢桁梁桥主跨165米，是目前国内单跨跨径最大的双层钢桁梁，可满足内河Ⅱ级航道通航标准。钢桁梁宽41米，桁高约15米，总重8100吨，共划分为11个节段，如同11块巨型“积木”，由工厂智能化预制运至现场精准拼装。",
+    "狮子洋通道建成通车后，将横向串联粤港澳大湾区三大都市圈，辐射粤东西两翼，进一步织密“黄金内湾”骨干交通网络，为大湾区一体化协同发展注入强劲动能。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-12T23:45:11+00:00",
+  "sourceTextHash": "b3845024f57ff7b069c103996a197d7ca228958b78026691a11ef9fc24d6770e",
+  "aiStatus": "ok",
+  "aiSummary": "9月12日，狮子洋通道跨西樵水道钢桁梁桥完成11个节段拼装并精准合龙。该通道为双层过江通道，全长约35公里，连接广州南沙与东莞虎门、沙田。西樵水道桥主跨165米，是国内单跨跨径最大的双层钢桁梁。建成后将串联大湾区三大都市圈，助力一体化发展。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-6-18-term",
+      "paragraphIndex": 0,
+      "start": 6,
+      "end": 18,
+      "text": "粤港澳大湾区核心枢纽工程",
+      "type": "term",
+      "explanation": "指在粤港澳大湾区交通网络中起关键连接与支撑作用的重大基础设施项目。"
+    },
+    {
+      "id": "ai-0-44-50-exam_point",
+      "paragraphIndex": 0,
+      "start": 44,
+      "end": 50,
+      "text": "实现精准合龙",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-6-33-exam_point",
+      "paragraphIndex": 1,
+      "start": 6,
+      "end": 33,
+      "text": "继港珠澳大桥、深中通道之后大湾区又一超大型跨江通道工程",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-35-41-term",
+      "paragraphIndex": 1,
+      "start": 35,
+      "end": 41,
+      "text": "双层过江通道",
+      "type": "term",
+      "explanation": "指桥梁上下两层均可通行车辆的跨江通道形式，可提高通行能力并节约空间。"
+    },
+    {
+      "id": "ai-2-16-32-exam_point",
+      "paragraphIndex": 2,
+      "start": 16,
+      "end": 32,
+      "text": "目前国内单跨跨径最大的双层钢桁梁",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-33-46-exam_point",
+      "paragraphIndex": 2,
+      "start": 33,
+      "end": 46,
+      "text": "可满足内河Ⅱ级航道通航标准",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-92-108-term",
+      "paragraphIndex": 2,
+      "start": 92,
+      "end": 108,
+      "text": "由工厂智能化预制运至现场精准拼装",
+      "type": "term",
+      "explanation": "指桥梁节段在工厂预先制造，再运到施工现场进行精确组装的建设方式。"
+    },
+    {
+      "id": "ai-3-12-27-viewpoint",
+      "paragraphIndex": 3,
+      "start": 12,
+      "end": 27,
+      "text": "横向串联粤港澳大湾区三大都市圈",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-54-71-viewpoint",
+      "paragraphIndex": 3,
+      "start": 54,
+      "end": 71,
+      "text": "为大湾区一体化协同发展注入强劲动能",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

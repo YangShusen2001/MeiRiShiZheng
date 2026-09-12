@@ -1,0 +1,100 @@
+{
+  "id": "966cad21c9",
+  "date": "2026-09-12",
+  "title": "江苏省人民政府 要闻关注 刘小涛主持召开省政府党组（扩大）会议",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/12/art_84322_11828896.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T23:46:30+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月11日，省政府党组（扩大）会议召开，学习贯彻习近平总书记重要讲话重要指示和重要贺信精神，按照省委要求，研究政府系统贯彻落实工作。省政府党组书记、省长刘小涛主持会议。",
+    "会议指出，要深入学习贯彻习近平总书记对山东青岛市北海造船厂火灾事故重要指示精神，强化底线思维、极限思维，组织开展船舶修造行业消防安全专项检查，深入排查整治各类火灾隐患，深化安全生产“六化”建设和“一件事”全链条治理，统筹做好节假日安全防范和应急值守，切实维护人民群众生命财产安全。",
+    "会议强调，要认真学习领会习近平总书记出席2026年上海合作组织峰会并对吉尔吉斯斯坦、埃及进行国事访问期间的重要讲话精神，持续深化与上合组织国家经贸合作，增强东西双向开放功能，高质量推进“一带一路”交汇点建设。要认真贯彻落实习近平总书记致第八届中俄能源商务论坛的重要贺信精神，拓展清洁能源、新能源装备等合作领域，增强能源资源安全保障能力。要认真学习贯彻习近平总书记致中央广播电视总台《小喇叭》节目开播70周年的重要贺信精神，落实立德树人根本任务，加强少儿文艺创作，打造更多精品佳作，为未成年人健康成长营造良好环境。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-12T23:46:30+00:00",
+  "sourceTextHash": "98799b6519f508964c0df27e582af8e1b9c28d501b96159ec88464dcb068af61",
+  "aiStatus": "ok",
+  "aiSummary": "9月11日，江苏省政府党组（扩大）会议召开，省长刘小涛主持。会议学习贯彻习近平总书记重要讲话重要指示和重要贺信精神，要求强化底线思维，开展船舶修造行业消防安全专项检查，深化安全生产治理；同时深化与上合组织国家经贸合作，推进“一带一路”交汇点建设，拓展清洁能源合作，加强少儿文艺创作。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-20-45-exam_point",
+      "paragraphIndex": 0,
+      "start": 20,
+      "end": 45,
+      "text": "学习贯彻习近平总书记重要讲话重要指示和重要贺信精神",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-66-83-exam_point",
+      "paragraphIndex": 0,
+      "start": 66,
+      "end": 83,
+      "text": "省政府党组书记、省长刘小涛主持会议",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-40-51-viewpoint",
+      "paragraphIndex": 1,
+      "start": 40,
+      "end": 51,
+      "text": "强化底线思维、极限思维",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-52-70-exam_point",
+      "paragraphIndex": 1,
+      "start": 52,
+      "end": 70,
+      "text": "组织开展船舶修造行业消防安全专项检查",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-86-107-term",
+      "paragraphIndex": 1,
+      "start": 86,
+      "end": 107,
+      "text": "安全生产“六化”建设和“一件事”全链条治理",
+      "type": "term",
+      "explanation": "指安全生产领域推进的六方面规范化建设，以及针对具体事项实施全链条闭环治理的工作机制。"
+    },
+    {
+      "id": "ai-2-60-75-exam_point",
+      "paragraphIndex": 2,
+      "start": 60,
+      "end": 75,
+      "text": "持续深化与上合组织国家经贸合作",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-87-103-exam_point",
+      "paragraphIndex": 2,
+      "start": 87,
+      "end": 103,
+      "text": "高质量推进“一带一路”交汇点建设",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-137-154-exam_point",
+      "paragraphIndex": 2,
+      "start": 137,
+      "end": 154,
+      "text": "拓展清洁能源、新能源装备等合作领域",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-211-221-viewpoint",
+      "paragraphIndex": 2,
+      "start": 211,
+      "end": 221,
+      "text": "落实立德树人根本任务",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

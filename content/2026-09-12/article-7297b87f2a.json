@@ -1,0 +1,84 @@
+{
+  "id": "7297b87f2a",
+  "date": "2026-09-12",
+  "title": "别错过！四川启动公共管理优秀实践经验案例征集工作",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83321097.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T23:45:54+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "“四川省2026年度公共管理实践典型案例征集活动”近日启动。活动聚焦中国式现代化治理创新、公共服务优化、数字政府建设、民生服务保障、应急安全保障、基层优秀实践等领域，面向省直有关部门、直属机构及事业单位等征集破解治理难题的典型经验和有效做法。有好经验好做法的，12月31日前均可申报。",
+    "征集活动由四川省行政管理学会、四川省政治学会联合主办，省委、省政府决策咨询委员会指导。活动不收取费用。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-12T23:45:56+00:00",
+  "sourceTextHash": "53a4165d3ac18b424b9fce59fea76c7af4fa99b9ed0e0e798c7c6c4246066f69",
+  "aiStatus": "ok",
+  "aiSummary": "四川省2026年度公共管理实践典型案例征集活动近日启动，聚焦中国式现代化治理创新、公共服务优化、数字政府建设、民生服务保障、应急安全保障、基层优秀实践等领域，面向省直有关部门、直属机构及事业单位等征集破解治理难题的典型经验和有效做法，12月31日前可申报，活动不收取费用。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-34-79-exam_point",
+      "paragraphIndex": 0,
+      "start": 34,
+      "end": 79,
+      "text": "中国式现代化治理创新、公共服务优化、数字政府建设、民生服务保障、应急安全保障、基层优秀实践",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-83-120-exam_point",
+      "paragraphIndex": 0,
+      "start": 83,
+      "end": 120,
+      "text": "面向省直有关部门、直属机构及事业单位等征集破解治理难题的典型经验和有效做法",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-130-141-exam_point",
+      "paragraphIndex": 0,
+      "start": 130,
+      "end": 141,
+      "text": "12月31日前均可申报",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-5-42-exam_point",
+      "paragraphIndex": 1,
+      "start": 5,
+      "end": 42,
+      "text": "四川省行政管理学会、四川省政治学会联合主办，省委、省政府决策咨询委员会指导",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-43-50-exam_point",
+      "paragraphIndex": 1,
+      "start": 43,
+      "end": 50,
+      "text": "活动不收取费用",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-10-24-term",
+      "paragraphIndex": 0,
+      "start": 10,
+      "end": 24,
+      "text": "公共管理实践典型案例征集活动",
+      "type": "term",
+      "explanation": "指面向公共管理领域，征集具有示范推广价值的实践案例并评选典型的活动。"
+    },
+    {
+      "id": "ai-0-34-44-term",
+      "paragraphIndex": 0,
+      "start": 34,
+      "end": 44,
+      "text": "中国式现代化治理创新",
+      "type": "term",
+      "explanation": "指在中国式现代化进程中，对治理理念、体制、机制和方式方法进行的创新探索。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

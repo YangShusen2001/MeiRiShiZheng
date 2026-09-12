@@ -1,0 +1,110 @@
+{
+  "id": "5f7ba6a6b6",
+  "date": "2026-09-12",
+  "title": "聚焦AI安全 第二届“湾区杯”网络安全大赛总决赛将于9月14日开赛",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202609/12/139996_55002834.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T23:45:03+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "近日记者从活动主办方获悉，第二届“湾区杯”网络安全大赛总决赛将于9月14日广东省网络安全宣传周开幕式当天，在华南理工大学广州国际校区开赛。本届大赛由省委网信办、省公安厅、省教育厅、团省委指导，广东省计算机信息网络安全协会、华南理工大学、中国电信广东分公司联合主办。",
+    "随着人工智能技术的爆发式增长，传统的安全防护手段面临严峻挑战。基于这一趋势与大湾区真实防护需求，本届赛事聚焦AI安全，探索人工智能技术在网络安全领域的实战应用。广东省计算机信息网络安全协会相关负责人表示：“我们希望通过引入AI Agent自主解题、数字孪生以及AI漏洞挖掘智能体与选手对抗等赛制，将赛场从单纯的代码攻防升级为人机协同与AI安全防御的综合演练，从而精准检验并提升安全从业者在智能时代的实战应变能力。”",
+    "大赛依托区块链“全链上存证”技术，为赛事公平性提供坚实保障，并配套设立了丰厚的奖金与奖励机制。中国电信战新能力中心此次将拿出18个实习岗位，奖励在赛事中胜出的选手，期望他们将大赛的经验反哺到云网算力安全建设中，助力大湾区打造可信可控的智能化网络安全防线。",
+    "文、图/广州日报新花城记者：侯翔宇 通讯员：楼奕希"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-12T23:45:04+00:00",
+  "sourceTextHash": "4c9d7f6f540ec40fdbf59753abfa19784b891baee1862b60d50dba5eb14b9248",
+  "aiStatus": "ok",
+  "aiSummary": "第二届“湾区杯”网络安全大赛总决赛将于9月14日在华南理工大学广州国际校区开赛，由省委网信办等单位指导、多家机构联合主办。赛事聚焦AI安全，引入AI Agent自主解题、数字孪生及AI漏洞挖掘智能体对抗等赛制，并依托区块链存证保障公平，配套奖金及18个实习岗位奖励。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-13-68-exam_point",
+      "paragraphIndex": 0,
+      "start": 13,
+      "end": 68,
+      "text": "第二届“湾区杯”网络安全大赛总决赛将于9月14日广东省网络安全宣传周开幕式当天，在华南理工大学广州国际校区开赛",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-74-95-exam_point",
+      "paragraphIndex": 0,
+      "start": 74,
+      "end": 95,
+      "text": "省委网信办、省公安厅、省教育厅、团省委指导",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-48-79-viewpoint",
+      "paragraphIndex": 1,
+      "start": 48,
+      "end": 79,
+      "text": "本届赛事聚焦AI安全，探索人工智能技术在网络安全领域的实战应用",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-111-147-exam_point",
+      "paragraphIndex": 1,
+      "start": 111,
+      "end": 147,
+      "text": "AI Agent自主解题、数字孪生以及AI漏洞挖掘智能体与选手对抗等赛制",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-148-205-viewpoint",
+      "paragraphIndex": 1,
+      "start": 148,
+      "end": 205,
+      "text": "将赛场从单纯的代码攻防升级为人机协同与AI安全防御的综合演练，从而精准检验并提升安全从业者在智能时代的实战应变能力",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-111-119-term",
+      "paragraphIndex": 1,
+      "start": 111,
+      "end": 119,
+      "text": "AI Agent",
+      "type": "term",
+      "explanation": "人工智能代理，指能自主感知环境、规划并执行任务以达成目标的人工智能系统。"
+    },
+    {
+      "id": "ai-1-124-128-term",
+      "paragraphIndex": 1,
+      "start": 124,
+      "end": 128,
+      "text": "数字孪生",
+      "type": "term",
+      "explanation": "通过数字技术构建物理实体的虚拟映射，实现实时同步与仿真分析的技术。"
+    },
+    {
+      "id": "ai-2-0-29-exam_point",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 29,
+      "text": "大赛依托区块链“全链上存证”技术，为赛事公平性提供坚实保障",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-47-81-exam_point",
+      "paragraphIndex": 2,
+      "start": 47,
+      "end": 81,
+      "text": "中国电信战新能力中心此次将拿出18个实习岗位，奖励在赛事中胜出的选手",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-105-126-viewpoint",
+      "paragraphIndex": 2,
+      "start": 105,
+      "end": 126,
+      "text": "助力大湾区打造可信可控的智能化网络安全防线",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

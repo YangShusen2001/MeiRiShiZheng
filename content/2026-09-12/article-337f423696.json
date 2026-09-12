@@ -1,0 +1,75 @@
+{
+  "id": "337f423696",
+  "date": "2026-09-12",
+  "title": "推进横琴粤澳深度合作区建设专题会在横琴召开",
+  "source": "news.dayoo.com",
+  "url": "https://news.dayoo.com/guangdong/202609/12/139996_55002699.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T23:44:57+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "推进横琴粤澳深度合作区建设专题会10日在横琴召开。会议深入学习贯彻习近平总书记关于横琴建设的重要指示批示精神，加快推动“深入推进横琴粤澳深度合作区建设一揽子政策举措”落地实施，支持澳门主动对接国家“十五五”规划、落实特区新的五年规划，推进横琴建设再上新台阶，为澳门经济适度多元发展作出新贡献。中央港澳工作办公室主任、国务院港澳事务办公室主任夏宝龙出席会议并讲话。会前，中央有关部委与横琴粤澳深度合作区执行委员会、澳门特区政府签署了支持横琴建设的有关协议。与会人员还对横琴重点项目进行了实地调研。",
+    "澳门特别行政区行政长官、横琴粤澳深度合作区管理委员会主任岑浩辉，广东省省长、横琴粤澳深度合作区管理委员会主任孟凡利，国家发展改革委负责同志等在会上发言。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-12T23:44:59+00:00",
+  "sourceTextHash": "46ef089f48882de9f42ccfd47e9111ce973c9ab66ed50d10420ab5e88e39c6c6",
+  "aiStatus": "ok",
+  "aiSummary": "推进横琴粤澳深度合作区建设专题会10日在横琴召开，夏宝龙出席讲话。会议贯彻习近平总书记关于横琴建设重要指示批示精神，推动一揽子政策举措落地，支持澳门对接国家“十五五”规划，会前签署支持横琴建设有关协议，与会人员实地调研重点项目。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-0-24-exam_point",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 24,
+      "text": "推进横琴粤澳深度合作区建设专题会10日在横琴召开",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-33-54-exam_point",
+      "paragraphIndex": 0,
+      "start": 33,
+      "end": 54,
+      "text": "习近平总书记关于横琴建设的重要指示批示精神",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-88-105-exam_point",
+      "paragraphIndex": 0,
+      "start": 88,
+      "end": 105,
+      "text": "支持澳门主动对接国家“十五五”规划",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-129-145-viewpoint",
+      "paragraphIndex": 0,
+      "start": 129,
+      "end": 145,
+      "text": "为澳门经济适度多元发展作出新贡献",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-146-180-exam_point",
+      "paragraphIndex": 0,
+      "start": 146,
+      "end": 180,
+      "text": "中央港澳工作办公室主任、国务院港澳事务办公室主任夏宝龙出席会议并讲话",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-191-205-term",
+      "paragraphIndex": 0,
+      "start": 191,
+      "end": 205,
+      "text": "横琴粤澳深度合作区执行委员会",
+      "type": "term",
+      "explanation": "横琴粤澳深度合作区的管理机构，由粤澳双方共同组建，负责合作区日常开发建设与运营管理。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}
