@@ -80,3 +80,64 @@ export function groupArchiveSummary(rows: ArchiveSummary[]): Record<string, Arch
   }
   return out;
 }
+
+/** 全馆合计（首页「政策档案入口」的一句话统计用）。 */
+export interface ArchiveTotals {
+  /** 最早月份 YYYY-MM；无数据时为空串。 */
+  firstMonth: string;
+  /** 最新月份 YYYY-MM；无数据时为空串。 */
+  lastMonth: string;
+  /** 月份总数。 */
+  months: number;
+  /** 文件总数。 */
+  files: number;
+  /** 核心考点（importance=高）总数。 */
+  core: number;
+}
+
+/**
+ * 汇总全部月份的合计数。
+ * 刻意不新开扫描逻辑：复用 listArchiveSummary()（它已是侧边栏的数据源），
+ * 保证首页统计与档案页侧边栏永远同源、不会各算一套。
+ */
+export function listArchiveTotals(): ArchiveTotals {
+  const rows = listArchiveSummary(); // 倒序：最新在前
+  return {
+    firstMonth: rows[rows.length - 1]?.month ?? "",
+    lastMonth: rows[0]?.month ?? "",
+    months: rows.length,
+    files: rows.reduce((sum, r) => sum + r.count, 0),
+    core: rows.reduce((sum, r) => sum + r.high, 0),
+  };
+}
+
+/** 首页月份卡（画布「政策档案入口」网格）。 */
+export interface ArchiveMonthCard {
+  month: string;
+  count: number;
+  high: number;
+  /** 要点摘要：优先取「高」标题，不足再补中/低；最多 3 条。 */
+  highlights: string[];
+}
+
+/**
+ * 首页月份卡列表，最新在前，最多 limit 张。
+ * 要点优先取核心文件——「核心考点」才是用户划过一眼时要看到的东西，
+ * 拿最新几篇的标题反而全是杂项。
+ */
+export function listArchiveCards(limit: number): ArchiveMonthCard[] {
+  return listArchiveSummary()
+    .slice(0, limit)
+    .map((row) => {
+      const items = getArchive(row.month)?.items ?? [];
+      const byCore = [...items].sort(
+        (a, b) => (a.importance === "高" ? 0 : 1) - (b.importance === "高" ? 0 : 1),
+      );
+      return {
+        month: row.month,
+        count: row.count,
+        high: row.high,
+        highlights: byCore.slice(0, 3).map((it) => it.title),
+      };
+    });
+}

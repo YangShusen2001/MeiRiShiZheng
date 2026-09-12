@@ -1,5 +1,5 @@
 /* 自动生成，请勿手改：packages/design-tokens/generate.mjs → pipeline/src/kaogong/review/ui/tokens.css */
-/* SOURCE_SHA256:8000cebdfad2686f12f67d2f6ad35d4e5b1f012584b1042e413e0c040833a948 */
+/* SOURCE_SHA256:b67ab4c8a38f8545b1ec38607933eff797f9c2185453c2f8b8bdf24efd21c766 */
 /* 规范 docs/design/design-system-v3.md · v3 · 2026-09-12 */
 
 /* 必须置于 Tabler CDN <link> 之后：既有类名自动换肤，布局零改动 */
@@ -24,6 +24,18 @@
   --kg-accent: #8C5A16;
   --kg-neutral-soft: #EAE4D6;
   --kg-on-brand: #FFFFFF;
+  --kg-panel-deep: #232C5C;
+  --kg-panel-raised: #3A4785;
+  --kg-panel-chip: #434C79;
+  --kg-panel-stroke: #7E88BE;
+  --kg-panel-divider: #3A4576;
+  --kg-panel-strong: #FFFDF6;
+  --kg-panel-body: #E4E7F5;
+  --kg-panel-label: #C7CDEB;
+  --kg-panel-small: #DDE1F4;
+  --kg-panel-meta: #AEB6D8;
+  --kg-panel-faint: #8E97BE;
+  --kg-panel-on-btn: #F5F1E8;
   --kg-highlight-exam-point: #FFE7A0;
   --kg-highlight-viewpoint: #C9E7CE;
   --kg-highlight-term: #B9DEE6;

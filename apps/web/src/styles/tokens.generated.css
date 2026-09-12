@@ -1,5 +1,5 @@
 /* 自动生成，请勿手改：packages/design-tokens/generate.mjs → apps/web/src/styles/tokens.generated.css */
-/* SOURCE_SHA256:8000cebdfad2686f12f67d2f6ad35d4e5b1f012584b1042e413e0c040833a948 */
+/* SOURCE_SHA256:b67ab4c8a38f8545b1ec38607933eff797f9c2185453c2f8b8bdf24efd21c766 */
 /* 规范 docs/design/design-system-v3.md · v3 · 2026-09-12 */
 
 /* 浅色：暖纸底 */
@@ -24,6 +24,18 @@
   --color-accent: #8C5A16;
   --color-neutral-soft: #EAE4D6;
   --color-on-brand: #FFFFFF;
+  --color-panel-deep: #232C5C;
+  --color-panel-raised: #3A4785;
+  --color-panel-chip: #434C79;
+  --color-panel-stroke: #7E88BE;
+  --color-panel-divider: #3A4576;
+  --color-panel-strong: #FFFDF6;
+  --color-panel-body: #E4E7F5;
+  --color-panel-label: #C7CDEB;
+  --color-panel-small: #DDE1F4;
+  --color-panel-meta: #AEB6D8;
+  --color-panel-faint: #8E97BE;
+  --color-panel-on-btn: #F5F1E8;
   --highlight-exam-point: #FFE7A0;
   --highlight-viewpoint: #C9E7CE;
   --highlight-term: #B9DEE6;
@@ -98,6 +110,18 @@
   --color-accent: #D9A441;
   --color-neutral-soft: #33302B;
   --color-on-brand: #232C5C;
+  --color-panel-deep: #232C5C;
+  --color-panel-raised: #3A4785;
+  --color-panel-chip: #434C79;
+  --color-panel-stroke: #7E88BE;
+  --color-panel-divider: #3A4576;
+  --color-panel-strong: #FFFDF6;
+  --color-panel-body: #E4E7F5;
+  --color-panel-label: #C7CDEB;
+  --color-panel-small: #DDE1F4;
+  --color-panel-meta: #AEB6D8;
+  --color-panel-faint: #8E97BE;
+  --color-panel-on-btn: #F5F1E8;
   --highlight-exam-point: #574818;
   --highlight-viewpoint: #2C4C31;
   --highlight-term: #285058;

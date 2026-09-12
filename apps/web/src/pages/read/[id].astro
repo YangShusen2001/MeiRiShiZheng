@@ -81,7 +81,7 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     <div class="relation-overlay" aria-hidden="true"><svg></svg></div>
   </article>
   <script type="application/json" id="ai-annotations" set:html={JSON.stringify(aiAnnotations).replace(/</g, "\\u003c")}></script>
-  {article.aiRelations?.length > 0 && (
+  {(article.aiRelations?.length ?? 0) > 0 && (
     <script type="application/json" id="ai-relations" set:html={JSON.stringify(article.aiRelations).replace(/</g, "\\u003c")}></script>
   )}
 

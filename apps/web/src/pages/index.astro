@@ -1,278 +1,392 @@
 ---
-import fs from "node:fs";
-import path from "node:path";
+// 首页：按画布（Ardot fileId 725031652757066）1:1 重做，取代原来的「按栏目分组列表」。
+// 版式是四条全幅横带：Hero 今日速览(深靛) → 今日精选(纸底) → 政策档案(浅赭) → 历史材料(纸底)，
+// 页脚在 Base.astro（深靛）。横带内的间距/配色全部走 design-tokens，不写字面量数值。
 import Base from "../layouts/Base.astro";
-import { getSummary, latestNonEmptyDigest, listArticles, listDigests } from "../lib/content";
-
-// 后台可配置的开关（无配置文件时默认全开）
-let siteConfig: { carousel?: boolean; aiBanner?: boolean } = {};
-try {
-  siteConfig = JSON.parse(fs.readFileSync(path.join(process.cwd(), "src", "site-config.json"), "utf-8"));
-} catch { /* 无配置则默认开 */ }
-const showCarousel = siteConfig.carousel !== false;
-const showAiBanner = siteConfig.aiBanner !== false;
+import { getArticle, getPicks, getReport, getSummary, latestNonEmptyDigest, listDigests } from "../lib/content";
+import { listArchiveCards, listArchiveTotals } from "../lib/archive";
 
 const digests = listDigests();
 const latest = latestNonEmptyDigest(digests);
-const todaySummary = latest ? getSummary(latest.date) : null;
-const clipMap = new Map(listArticles().map((a) => [a.url, a]));
+const date = latest?.date ?? "";
+const todaySummary = latest ? getSummary(date) : null;
+const picks = latest ? getPicks(date) : null;
+const report = latest ? getReport(date) : null;
 
-function sourceName(url: string) {
-  try {
-    return new URL(url).hostname.replace(/^www\./, "");
-  } catch {
-    return "官方来源";
-  }
+// —— Hero 统计行：日期 + 星期 + 「N 源已检 · 精选 M 篇」——
+// 源数取当日质量报告的 sourcesOk（真实巡检计数），篇数取 picks.picked（选材定稿）。
+// 两者都是「当天到底跑了什么」的权威记录，不在这里二次推断。
+const WEEK_CN = ["日", "一", "二", "三", "四", "五", "六"];
+function weekdayCn(iso: string): string {
+  const t = new Date(`${iso}T00:00:00`);
+  return Number.isNaN(t.getTime()) ? "" : `星期${WEEK_CN[t.getDay()]}`;
+}
+const CN_NUM = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+const cnNum = (n: number) => (n >= 0 && n <= 10 ? CN_NUM[n] : String(n));
+
+const pickedCount = picks?.picked.length ?? 0;
+const sourceOk = typeof report?.sourcesOk === "number" ? report.sourcesOk : null;
+const heroStats = [
+  date ? `${date} ${weekdayCn(date)}` : "",
+  sourceOk !== null ? `${sourceOk} 源已检` : "",
+  pickedCount > 0 ? `精选 ${pickedCount} 篇` : "",
+]
+  .filter(Boolean)
+  .join(" · ");
+
+// Hero 主标题：画布是「今天只推三篇，都是能出题的」——句式和数字都由当日入选篇数推出，
+// 所以 sparse 日（1–2 篇）会自然变成「只推一篇／两篇」，不需要另写文案。
+const heroTitle = pickedCount > 0 ? `今天只推${cnNum(pickedCount)}篇，都是能出题的` : "今天没有够格的，宁缺勿滥";
+const heroLede = todaySummary?.summary?.trim() ?? "";
+const heroKeys = todaySummary?.keywords ?? [];
+
+// —— 来源显示名 ——
+// 抓取层存的是域名（news.cn / sichuan.scol.com.cn），首页卡片按画布显示媒体名。
+// 只做展示映射，不改动 content/ 里的原始 source 值。
+const SOURCE_LABEL: Record<string, string> = {
+  "news.cn": "新华网",
+  "people.com.cn": "人民网",
+  "sichuan.scol.com.cn": "四川在线",
+  "news.dayoo.com": "大洋网",
+  "qstheory.cn": "求是网",
+  "banyuetan.org": "半月谈",
+  "southcn.com": "南方网",
+  "gov.cn": "中国政府网",
+  "gd.gov.cn": "广东省人民政府网",
+};
+const sourceLabel = (raw: string) => SOURCE_LABEL[raw] ?? raw;
+
+// —— 阅读时长 ——
+// 画布头条标注「阅读约 6 分钟」，对应正文 1478 字 → 250 字/分钟。
+// 用精读速度而不是浏览速度：这些文章是要划考点、要背的。
+const CHARS_PER_MIN = 250;
+const readingMinutes = (chars: number) => Math.max(1, Math.round(chars / CHARS_PER_MIN));
+
+// —— 栏目标签 ——
+// 文章落在日报的哪一节，就用那一节的标题（时政要闻 / 申论精读 …）。
+// 不在任何一节里的（例如只在精选池里）退回「今日精选」，不编造栏目名。
+const sectionOfUrl = new Map<string, string>();
+for (const s of latest?.sections ?? []) {
+  for (const it of s.items) sectionOfUrl.set(it.sourceUrl, s.title);
 }
 
-function cardItem(it: { title: string; date: string; sourceUrl: string; summary?: string }, category: string) {
-  const article = clipMap.get(it.sourceUrl);
-  const aiSummary = article?.aiStatus === "ok" ? article.aiSummary?.trim() : "";
+type PickCard = {
+  id: string;
+  href: string;
+  title: string;
+  category: string;
+  source: string;
+  date: string;
+  minutes: number;
+  summary: string;
+  stats: { label: string; kind: "exam" | "view" | "term" }[];
+  checked: boolean;
+};
+
+/** 把一条入选 id 组装成画布卡片所需字段；文章缺失时返回 null（宁可少一张，不填假数据）。 */
+function toCard(id: string): PickCard | null {
+  const article = getArticle(id);
+  if (!article) return null;
+  const body = (article.paragraphs ?? []).join("");
+  const counts = { exam_point: 0, viewpoint: 0, term: 0 };
+  for (const a of article.aiAnnotations ?? []) {
+    if (a.type === "exam_point") counts.exam_point += 1;
+    else if (a.type === "viewpoint") counts.viewpoint += 1;
+    else if (a.type === "term") counts.term += 1;
+  }
+  // 只列有数的类别：画布上没有「考点 0」这种东西，0 就是「这篇文章没有这类标注」。
+  const stats: PickCard["stats"] = [];
+  if (counts.exam_point > 0) stats.push({ label: `考点 ${counts.exam_point}`, kind: "exam" });
+  if (counts.viewpoint > 0) stats.push({ label: `观点 ${counts.viewpoint}`, kind: "view" });
+  if (counts.term > 0) stats.push({ label: `术语 ${counts.term}`, kind: "term" });
+
+  const aiSummary = article.aiStatus === "ok" ? article.aiSummary?.trim() ?? "" : "";
   return {
-    title: it.title,
-    date: it.date,
-    source: article?.source || sourceName(it.sourceUrl),
-    category,
-    summary: aiSummary || it.summary?.trim() || article?.keySentences?.[0] || "暂无摘要，可进入阅读页查看原文。",
-    summaryKind: aiSummary ? "AI 概括" : "内容提示",
-    href: article ? `/read/${article.id}/` : it.sourceUrl,
-    external: !article,
+    id,
+    href: `/read/${id}/`,
+    title: article.title,
+    category: sectionOfUrl.get(article.url) ?? "今日精选",
+    source: sourceLabel(article.source || ""),
+    date,
+    minutes: readingMinutes(body.length),
+    summary: aiSummary || article.keySentences?.[0]?.trim() || "暂无摘要，可进入阅读页查看原文。",
+    stats,
+    // 「AI 概括已通过校验」是渲染门控：aiStatus 不是 ok 就不挂这个徽标。
+    checked: article.aiStatus === "ok",
   };
 }
 
-// 轮播：取最新一期前面的条目，标签显示其所属分类；有剪藏的跳阅读页
-const carouselItems = latest
-  ? latest.sections.flatMap((s) =>
-      s.items.map((it) => {
-        return cardItem(it, s.title);
-      }),
-    ).slice(0, 6)
-  : [];
+const pickedIds = picks?.picked ?? [];
+const headlineId = picks?.slots.headline ?? pickedIds[0] ?? null;
+const lead = headlineId ? toCard(headlineId) : null;
+const subs = pickedIds
+  .filter((id) => id !== headlineId)
+  .slice(0, 4)
+  .map(toCard)
+  .filter((c): c is PickCard => c !== null);
+const picksSubtitle = pickedCount > 0
+  ? `按栏目分组 · 入选 ${pickedCount} 篇 · 宁缺勿滥`
+  : "今天没有达到入选标准的内容 · 宁缺勿滥";
 
-// 今日时政：按分类分组，每类一个标题；全局序号便于定位「今日第 N 篇」
-let _no = 0;
-const todaySections = latest
-  ? latest.sections.map((s) => ({
-      title: s.title,
-      items: s.items.map((it) => {
-        _no += 1;
-        return { ...cardItem(it, s.title), no: _no };
-      }),
-    }))
-  : [];
+// —— 政策档案入口：与档案页侧边栏同源（listArchiveSummary），不会各算一套统计 ——
+const archiveTotals = listArchiveTotals();
+const archiveCards = listArchiveCards(4);
+const archiveSubtitle = archiveTotals.months > 0
+  ? `按月归档 · ${archiveTotals.firstMonth} 至 ${archiveTotals.lastMonth} 共 ${archiveTotals.months} 个月 · ${archiveTotals.files} 份文件 · 核心考点 ${archiveTotals.core} 份`
+  : "按月归档 · 暂无归档";
+// 「本月」只在最新归档月确实等于当前自然月时才标注，不硬贴标签。
+const nowMonth = new Date().toISOString().slice(0, 7);
+
+// —— 历史材料：一行一天，标题由当天入选文章推出（「3 篇：A / B / C」）——
+/** 标题取首个分隔符前的部分：画布历史行的「慈善 + 社工协同 / 服务出海」就是这个粒度。 */
+function shortLabel(title: string): string {
+  const head = title.split(/[：:丨|]/)[0].trim();
+  return head.length > 16 ? `${head.slice(0, 16)}…` : head;
+}
+const historyRows = digests.slice(0, 6).map((d) => {
+  const ids = getPicks(d.date)?.picked ?? [];
+  const labels = ids
+    .map((id) => getArticle(id)?.title ?? "")
+    .filter(Boolean)
+    .map(shortLabel);
+  return {
+    date: d.date,
+    text: labels.length > 0 ? `${ids.length} 篇：${labels.join(" / ")}` : d.title,
+  };
+});
 ---
-<Base title="每日时政">
-  {showCarousel && latest && (
-    <section class="carousel" id="carousel">
-      <div class="hero__aurora" aria-hidden="true">
-        <span class="a1"></span><span class="a2"></span><span class="a3"></span>
-      </div>
-      <canvas id="hero-particles" class="hero__particles" aria-hidden="true"></canvas>
-      <div class="carousel-track" id="carousel-track">
-        {carouselItems.map((it) => (
-          <a class="carousel-slide" href={it.href} {...(it.external ? { target: "_blank", rel: "noopener" } : {})}>
-            <span class="carousel-tag">{it.category}</span>
-            <h2>{it.title}</h2>
-            <p class="carousel-meta">{it.source} · {it.summaryKind}</p>
-            <p>{it.summary}</p>
-          </a>
-        ))}
-      </div>
-      <div class="carousel-dots" id="carousel-dots"></div>
-    </section>
-  )}
 
-  {showAiBanner && todaySummary && (
-    <section class="today-brief" id="today-brief" data-date={todaySummary.date}>
-      <div class="tb-head">
-        <span class="tb-logo">每日时政</span>
-        <span class="tb-date">{todaySummary.date}</span>
+<Base title="每日时政" bleed>
+  <!-- ===== Hero · 今日速览（画布 3:24）===== -->
+  <section class="home-hero">
+    <div class="hero__aurora" aria-hidden="true">
+      <span class="a1"></span><span class="a2"></span><span class="a3"></span>
+    </div>
+    <canvas id="hero-particles" class="hero__particles" aria-hidden="true"></canvas>
+    <div class="home-hero__in">
+      <div class="home-hero__top">
+        <span class="pnl-chip pnl-chip--label">今日速览</span>
+        {heroStats && <span class="home-hero__date">{heroStats}</span>}
       </div>
-      <p class="tb-summary">{todaySummary.summary}</p>
-      {todaySummary.keywords.length > 0 && (
-        <div class="tb-keywords">
-          {todaySummary.keywords.map((k) => <span class="tb-tag">{k}</span>)}
+      <h1>{heroTitle}</h1>
+      {heroLede && <p class="home-hero__lede">{heroLede}</p>}
+      {heroKeys.length > 0 && (
+        <div class="home-hero__keys" id="hero-keys">
+          {heroKeys.map((k) => <span class="pnl-chip pnl-chip--key">{k}</span>)}
         </div>
       )}
-      <div class="tb-actions">
-        <button type="button" class="tb-btn" id="tb-poster">生成海报</button>
-        <button type="button" class="tb-btn tb-btn-ghost" id="tb-dismiss">今日不再显示</button>
+      <div class="home-hero__acts">
+        <a class="pnl-btn pnl-btn--primary" href={lead?.href ?? (date ? `/daily/${date}/` : "/search/")}>
+          {lead ? "开始阅读" : "去搜索"}
+        </a>
+        <button
+          type="button"
+          class="pnl-btn pnl-btn--ghost"
+          id="hero-poster"
+          data-date={date}
+          data-summary={heroLede}
+          data-keys={heroKeys.join("|")}
+        >生成今日海报</button>
       </div>
-    </section>
-  )}
+    </div>
+  </section>
 
-  {latest && (
-    <section class="card">
-      <div class="card-head">
-        <h2>今日时政 · {latest.date}</h2>
-        <button type="button" class="view-toggle" id="view-toggle" aria-pressed="false">列表视图</button>
-      </div>
-      {todaySections.map((s) => (
-        <details class="section" open>
-          <summary><h3>{s.title}</h3><span class="section-count">{s.items.length} 条</span></summary>
-          <div class="article-grid">
-            {s.items.map((it) => (
-              <a class="article-card" href={it.href} {...(it.external ? { target: "_blank", rel: "noopener" } : {})}>
-                <div class="article-card__meta"><span>{it.source}</span></div>
-                <h4><span class="article-card__no">{String(it.no).padStart(2, "0")}</span>{it.title}</h4>
-                <p>{it.summary}</p>
-              </a>
-            ))}
-          </div>
-        </details>
-      ))}
-    </section>
-  )}
-
-  <section class="card" id="history">
-    <h2>历史材料</h2>
-    {digests.length ? (
-      <div class="day-list">
-        {digests.map((d, i) => (
-          <a class="day-row" href={`/daily/${d.date}/`}>
-            <span class="day-num">{String(i + 1).padStart(2, "0")}</span>
-            <span class="day-date">{d.date.slice(5)}</span>
-            <span class="day-title">{d.title}</span>
-            <span class="day-arrow">›</span>
+  <!-- ===== 今日精选（画布 3:45）===== -->
+  <section class="band">
+    <div class="band-in">
+      <div class="band-head">
+        <div class="band-head__l">
+          <h2 class="band-title">今日精选</h2>
+          <p class="band-sub">{picksSubtitle}</p>
+        </div>
+        {date && (
+          <a class="band-link" href={`/daily/${date}/`}>
+            全部材料
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
           </a>
-        ))}
+        )}
       </div>
-    ) : (
-      <p>还没有材料。</p>
-    )}
+
+      {lead ? (
+        <>
+          <a class="pick-lead" href={lead.href}>
+            <div class="pick-meta">
+              <div class="pick-meta__l">
+                <span class="pick-cat">{lead.category}</span>
+                <span class="pick-src">{lead.source} · {lead.date} · 阅读约 {lead.minutes} 分钟</span>
+              </div>
+              {lead.checked && <span class="pick-check">AI 概括已通过校验</span>}
+            </div>
+            <h3>{lead.title}</h3>
+            <p>{lead.summary}</p>
+            <div class="pick-stats">
+              {lead.stats.map((s) => <span class={`pick-stat pick-stat--${s.kind}`}>{s.label}</span>)}
+              <span class="pick-more">阅读全文</span>
+            </div>
+          </a>
+
+          {subs.length > 0 && (
+            <div class="pick-row">
+              {subs.map((c) => (
+                <a class="pick-card" href={c.href}>
+                  <div class="pick-meta">
+                    <div class="pick-meta__l">
+                      <span class="pick-cat">{c.category}</span>
+                      <span class="pick-src">{c.source} · {c.date.slice(5)}</span>
+                    </div>
+                  </div>
+                  <h3>{c.title}</h3>
+                  <p>{c.summary}</p>
+                  <div class="pick-stats">
+                    {c.stats.map((s) => <span class={`pick-stat pick-stat--${s.kind}`}>{s.label}</span>)}
+                    <span class="pick-more">阅读全文</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
+        </>
+      ) : (
+        <p class="band-empty">今天还没有落盘的选材。管道只在有够格内容时才写 picks.json，这里宁缺勿滥。</p>
+      )}
+    </div>
+  </section>
+
+  <!-- ===== 政策档案入口（画布 3:102）===== -->
+  {archiveCards.length > 0 && (
+    <section class="band band--alt">
+      <div class="band-in">
+        <div class="band-head">
+          <div class="band-head__l">
+            <h2 class="band-title">政策档案</h2>
+            <p class="band-sub">{archiveSubtitle}</p>
+          </div>
+          <a class="band-link" href="/policy/">全部档案 →</a>
+        </div>
+        <div class="month-grid">
+          {archiveCards.map((m, i) => (
+            <a class={`month-card${i === 0 ? " month-card--now" : ""}`} href={`/policy/${m.month}/`}>
+              <span class="month-card__label">
+                {m.month}{i === 0 && m.month === nowMonth ? " · 本月" : ""}
+              </span>
+              <span class="month-card__count">{m.count} 份 · 核心 {m.high}</span>
+              <span class="month-card__pts">{m.highlights.join("、")}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ===== 历史材料（画布 3:125）===== -->
+  <section class="band">
+    <div class="band-in">
+      <div class="band-head">
+        <div class="band-head__l">
+          <h2 class="band-title">历史材料</h2>
+          <p class="band-sub">按日归档 · 每天 2-5 篇 · 可回看任意一天</p>
+        </div>
+      </div>
+      {historyRows.length > 0 ? (
+        <div class="hist">
+          {historyRows.map((r, i) => (
+            <a class="hist-row" href={`/daily/${r.date}/`}>
+              <span class="hist-no">{String(i + 1).padStart(2, "0")}</span>
+              <span class="hist-date">{r.date}</span>
+              <span class="hist-title">{r.text}</span>
+              <svg class="hist-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="band-empty">还没有历史材料。</p>
+      )}
+    </div>
   </section>
 </Base>
 
 <script>
   import { staggerReveal } from "../lib/motion";
 
-  // P2：卡片组 stagger（桌面端 + IO once，首屏不重播）；今日速览标签 stagger
-  document.querySelectorAll<HTMLElement>(".article-grid").forEach((grid) => {
-    staggerReveal(grid, ".article-card", { gap: 40 });
+  // P2：卡片组 stagger（桌面端 + IO once，首屏不重播）
+  const keys = document.getElementById("hero-keys");
+  if (keys) staggerReveal(keys, ".pnl-chip", { gap: 30 });
+  const row = document.querySelector(".pick-row");
+  if (row) staggerReveal(row, ".pick-card", { gap: 40 });
+
+  // 生成今日海报：数据直接从按钮的 data-* 读，不依赖 DOM 结构（Hero 后续改版不会连带失效）
+  const poster = document.getElementById("hero-poster") as HTMLButtonElement | null;
+  poster?.addEventListener("click", () => {
+    const date = poster.dataset.date ?? "";
+    const summary = poster.dataset.summary ?? "";
+    const tags = (poster.dataset.keys ?? "").split("|").filter(Boolean);
+    const canvas = document.createElement("canvas");
+    const W = 800, H = 1000;
+    canvas.width = W; canvas.height = H;
+    const ctx = canvas.getContext("2d")!;
+    // 底色取 Hero 同一对面板令牌（--panel-* 明暗同值），海报与页面观感一致
+    const cs = getComputedStyle(document.documentElement);
+    const c0 = cs.getPropertyValue("--panel-deep").trim() || "#232C5C";
+    const c1 = cs.getPropertyValue("--panel-raised").trim() || "#3A4785";
+    const gradient = ctx.createLinearGradient(0, 0, 0, H);
+    gradient.addColorStop(0, c0);
+    gradient.addColorStop(1, c1);
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, W, H);
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "700 88px 'STKaiti','KaiTi',serif";
+    ctx.fillText("每日时政", W / 2, 180);
+    ctx.font = "400 32px sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,.75)";
+    ctx.fillText(`${date} · 今日速览`, W / 2, 240);
+    // 一句话总结（按字符宽度自动换行）
+    ctx.font = "500 44px 'PingFang SC','Microsoft YaHei',sans-serif";
+    ctx.fillStyle = "#ffffff";
+    let line = "";
+    let y = 380;
+    for (const ch of Array.from(summary)) {
+      const test = line + ch;
+      if (ctx.measureText(test).width > W - 120) {
+        ctx.fillText(line, W / 2, y);
+        line = ch;
+        y += 68;
+      } else {
+        line = test;
+      }
+    }
+    if (line) ctx.fillText(line, W / 2, y);
+    if (tags.length) {
+      ctx.font = "400 32px sans-serif";
+      ctx.fillStyle = "rgba(255,255,255,.9)";
+      ctx.fillText(tags.map((t) => `#${t}`).join("  "), W / 2, Math.min(H - 200, y + 90));
+    }
+    ctx.font = "400 26px sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,.55)";
+    ctx.fillText("时政小助手 · 内容来自官方原文", W / 2, H - 60);
+    const a = document.createElement("a");
+    a.download = `每日时政-${date}.png`;
+    a.href = canvas.toDataURL("image/png");
+    a.click();
   });
-  const briefEl = document.getElementById("today-brief");
-  if (briefEl) staggerReveal(briefEl, ".tb-tag", { gap: 30 });
 
-  // 视图切换：卡片 / 列表（紧凑单行），localStorage 记忆
-  const viewToggle = document.getElementById("view-toggle");
-  if (viewToggle) {
-    const setView = (list: boolean) => {
-      document.body.classList.toggle("view-list", list);
-      viewToggle.textContent = list ? "卡片视图" : "列表视图";
-      viewToggle.setAttribute("aria-pressed", String(list));
-      localStorage.setItem("kaogong.indexView", list ? "list" : "grid");
-    };
-    setView(localStorage.getItem("kaogong.indexView") === "list");
-    viewToggle.addEventListener("click", () => setView(!document.body.classList.contains("view-list")));
-  }
-
-  // 今日速览横幅：生成海报 + 今日不再显示
-  const brief = document.getElementById("today-brief");
-  if (brief) {
-    const date = brief.dataset.date || "";
-    const dismissKey = `kaogong.summaryDismissed.${date}`;
-    if (localStorage.getItem(dismissKey) === "1") {
-      brief.remove();
-    } else {
-      document.getElementById("tb-dismiss")?.addEventListener("click", () => {
-        localStorage.setItem(dismissKey, "1");
-        brief.remove();
-      });
-      document.getElementById("tb-poster")?.addEventListener("click", () => {
-        const summary = brief.querySelector<HTMLElement>(".tb-summary")?.textContent ?? "";
-        const tags = Array.from(brief.querySelectorAll<HTMLElement>(".tb-tag")).map((t) => t.textContent ?? "").filter(Boolean);
-        const canvas = document.createElement("canvas");
-        const W = 800, H = 1000;
-        canvas.width = W; canvas.height = H;
-        const ctx = canvas.getContext("2d")!;
-        // 品牌渐变跟随主题（P1）：从 CSS 变量取色，paper 主题下为深棕金，与 hero 一致
-        const cs = getComputedStyle(document.documentElement);
-        const c0 = cs.getPropertyValue("--primary").trim() || "#1d4ed8";
-        const c1 = cs.getPropertyValue("--primary-deep").trim() || "#122a5c";
-        const gradient = ctx.createLinearGradient(0, 0, 0, H);
-        gradient.addColorStop(0, c0);
-        gradient.addColorStop(1, c1);
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, W, H);
-        ctx.textAlign = "center";
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "700 88px 'STKaiti','KaiTi',serif";
-        ctx.fillText("每日时政", W / 2, 180);
-        ctx.font = "400 32px sans-serif";
-        ctx.fillStyle = "rgba(255,255,255,.75)";
-        ctx.fillText(`${date} · 今日速览`, W / 2, 240);
-        // 一句话总结（自动换行）
-        ctx.font = "500 44px 'PingFang SC','Microsoft YaHei',sans-serif";
-        ctx.fillStyle = "#ffffff";
-        const words = Array.from(summary);
-        let line = "";
-        let y = 380;
-        for (const ch of words) {
-          const test = line + ch;
-          if (ctx.measureText(test).width > W - 120) {
-            ctx.fillText(line, W / 2, y);
-            line = ch;
-            y += 68;
-          } else {
-            line = test;
-          }
-        }
-        if (line) ctx.fillText(line, W / 2, y);
-        // 关键词
-        if (tags.length) {
-          const tagLine = tags.map((t) => `#${t}`).join("  ");
-          ctx.font = "400 32px sans-serif";
-          ctx.fillStyle = "rgba(255,255,255,.9)";
-          ctx.fillText(tagLine, W / 2, Math.min(H - 200, y + 90));
-        }
-        ctx.font = "400 26px sans-serif";
-        ctx.fillStyle = "rgba(255,255,255,.55)";
-        ctx.fillText("时政小助手 · 内容来自官方原文", W / 2, H - 60);
-        const a = document.createElement("a");
-        a.download = `每日时政-${date}.png`;
-        a.href = canvas.toDataURL("image/png");
-        a.click();
-      });
-    }
-  }
-
-  // 轮播：自动滚动 + 圆点导航
-  const track = document.getElementById("carousel-track") as HTMLElement | null;
-  const slides = track ? Array.from(track.querySelectorAll(".carousel-slide")) : [];
-  const dots = document.getElementById("carousel-dots");
-  if (track && dots && slides.length > 1) {
-    let idx = 0;
-    slides.forEach((_, i) => {
-      const d = document.createElement("button");
-      d.type = "button";
-      d.addEventListener("click", () => { idx = i; update(); });
-      dots.appendChild(d);
-    });
-    function update() {
-      track!.style.transform = `translateX(-${idx * 100}%)`;
-      Array.from(dots!.children).forEach((d, i) => d.classList.toggle("on", i === idx));
-    }
-    update();
-    setInterval(() => { idx = (idx + 1) % slides.length; update(); }, 4500);
-  }
-
-  // 粒子网络（背景）
-  const canvas = document.getElementById("hero-particles") as HTMLCanvasElement | null;
-  if (canvas && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const ctx = canvas.getContext("2d");
+  // 粒子网络（Hero 背景）：reduced-motion 下不启动
+  const pc = document.getElementById("hero-particles") as HTMLCanvasElement | null;
+  if (pc && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const ctx = pc.getContext("2d");
     if (ctx) {
-      const parent = canvas.parentElement!;
-      let dotsArr: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
+      const parent = pc.parentElement!;
+      let dots: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
       let w = 0, h = 0, raf = 0;
       const resize = () => {
         const rect = parent.getBoundingClientRect();
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         w = rect.width; h = rect.height;
-        canvas.width = w * dpr; canvas.height = h * dpr;
-        canvas.style.width = `${w}px`; canvas.style.height = `${h}px`;
+        pc.width = w * dpr; pc.height = h * dpr;
+        pc.style.width = `${w}px`; pc.style.height = `${h}px`;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         const count = Math.min(60, Math.max(24, Math.floor((w * h) / 26000)));
-        dotsArr = Array.from({ length: count }, () => ({
+        dots = Array.from({ length: count }, () => ({
           x: Math.random() * w, y: Math.random() * h,
           vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
           r: Math.random() * 1.6 + 0.6,
@@ -280,21 +394,21 @@ const todaySections = latest
       };
       const step = () => {
         ctx.clearRect(0, 0, w, h);
-        for (const d of dotsArr) {
+        for (const d of dots) {
           d.x += d.vx; d.y += d.vy;
           if (d.x < 0 || d.x > w) d.vx *= -1;
           if (d.y < 0 || d.y > h) d.vy *= -1;
         }
         ctx.fillStyle = "rgba(255,255,255,.5)";
-        for (const d of dotsArr) { ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2); ctx.fill(); }
+        for (const d of dots) { ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2); ctx.fill(); }
         ctx.lineWidth = 1;
-        for (let i = 0; i < dotsArr.length; i++) {
-          for (let j = i + 1; j < dotsArr.length; j++) {
-            const dx = dotsArr[i].x - dotsArr[j].x, dy = dotsArr[i].y - dotsArr[j].y;
+        for (let i = 0; i < dots.length; i++) {
+          for (let j = i + 1; j < dots.length; j++) {
+            const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y;
             const dist = Math.hypot(dx, dy);
             if (dist < 110) {
               ctx.strokeStyle = `rgba(255,255,255,${((1 - dist / 110) * 0.18).toFixed(3)})`;
-              ctx.beginPath(); ctx.moveTo(dotsArr[i].x, dotsArr[i].y); ctx.lineTo(dotsArr[j].x, dotsArr[j].y); ctx.stroke();
+              ctx.beginPath(); ctx.moveTo(dots[i].x, dots[i].y); ctx.lineTo(dots[j].x, dots[j].y); ctx.stroke();
             }
           }
         }

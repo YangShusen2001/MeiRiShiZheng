@@ -175,6 +175,73 @@ export interface TodaySummary {
   keywords: string[];
 }
 
+/** 选材槽位（picks.schema.json 的 slots）。 */
+export interface PicksSlots {
+  /** 头版要闻（可脱离主线池）。 */
+  headline: string | null;
+  /** 申论精读 ≤2。 */
+  essay: string[];
+  /** 考点提炼。 */
+  exam: string | null;
+  /** 多样性补充。 */
+  extra: string | null;
+  /** 历史补剧（v2.1 §7.1 起不再写入，键保留兼容历史产物）。 */
+  supplement?: string[];
+  /** 宁缺勿滥标记：picked<2 时为 true，当日为合法 sparse 日。 */
+  sparse?: boolean;
+}
+
+/** 每日选材定稿（content/<date>/picks.json，见 ADR 0008）。 */
+export interface DailyPicks {
+  /** YYYY-MM-DD。 */
+  date: string;
+  slots: PicksSlots;
+  /** 最终精选 1-5 篇（picked=0 不落盘），顺序即头版优先。 */
+  picked: string[];
+  /** 文章 id → 主线归属（AI 评级结果；null=无归属）。 */
+  assignments: Record<string, string | null>;
+  /** 待人工审核名单（不进槽位）。 */
+  needsHuman?: string[];
+}
+
+/** 每日管道质量报告里的选材段（content/_reports/<date>.json 的 curation）。 */
+export interface ReportCuration {
+  candidates: number;
+  coarseKept: number;
+  /** 最终入选篇数——首页「精选 N 篇」用它，与 picks.picked 长度一致。 */
+  picked: number;
+  slots?: Partial<Omit<PicksSlots, "essay">> & { essay?: string[] };
+  needsHuman?: string[];
+  cardsProduced?: number;
+  relationsProduced?: number;
+  /** 当日是否落盘 picks.json（false 即 curationErrors 含 picks_missing）。 */
+  picksWritten?: boolean;
+}
+
+/**
+ * 每日管道质量报告（content/_reports/<date>.json）。
+ * 是「这天到底跑了什么」的唯一权威记录：抓取源数、候选数、密度/配额淘汰、选材结果。
+ * 首页 Hero 的「N 源已检 · 精选 M 篇」直接取自 sourcesOk 与 curation.picked。
+ */
+export interface DailyReport {
+  date: string;
+  /** 抓取成功的源数。 */
+  sourcesOk: number;
+  sourceErrors?: { source?: string; reason?: string }[];
+  /** 剪藏前候选篇数。 */
+  candidates: number;
+  /** 剪藏成功篇数。 */
+  articles: number;
+  aiOk: number;
+  aiError: number;
+  /** ok / sparse / degraded / failed，优先级 failed > degraded > sparse > ok。 */
+  qualityStatus?: string;
+  curation?: ReportCuration;
+  curationErrors?: string[];
+  fetch?: { candidatesRaw?: number };
+  clip?: { clipped?: number };
+}
+
 /** 卡片↔精读锚定：卡片来源于哪篇文章哪一段（0022 阶段 2）。 */
 export interface CardAnchor {
   /** 出处文章 id。 */

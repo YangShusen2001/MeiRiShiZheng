@@ -204,6 +204,22 @@ def check_wcag(rep: Report, tokens: dict) -> None:
         # 中性软底（徽标「排除/未知」用）：文字压在上面必须达标
         pairs.append((f"{name} neutralSoft 软底压次级文字", c["sub"], c["neutralSoft"], text_min))
 
+    # 品牌深底面板（首页 Hero / 页脚 / 被填充的月份卡）。
+    # ⚠️ 只跑一遍：panel* 面板色族**两套主题同值**（见 tokens.json color._note），
+    # 由 check_panel_invariance 强制这条不变式，所以拿浅色一套代表即可。
+    # 如果这里跟着主题循环跑，深色一趟会用翻成亮靛青的 brandDeep/brand 去算，
+    # 得出「面板在深色下不可读」的假告警 —— 面板压根不用那两个令牌。
+    panel = light
+    pairs.append(("面板 Hero 标题压品牌深底", panel["panelStrong"], panel["panelDeep"], text_min))
+    pairs.append(("面板 Hero 摘要压品牌深底", panel["panelBody"], panel["panelDeep"], text_min))
+    pairs.append(("面板次按钮文字压品牌深底", panel["panelOnBtn"], panel["panelDeep"], text_min))
+    pairs.append(("面板日期/页脚链接压品牌深底", panel["panelMeta"], panel["panelDeep"], text_min))
+    pairs.append(("面板页脚细字压品牌深底", panel["panelFaint"], panel["panelDeep"], text_min))
+    pairs.append(("面板关键词文字压胶囊底", panel["panelBody"], panel["panelChip"], text_min))
+    pairs.append(("面板月份数量压品牌底", panel["panelStrong"], panel["panelRaised"], text_min))
+    pairs.append(("面板月份标签压品牌底", panel["panelLabel"], panel["panelRaised"], text_min))
+    pairs.append(("面板月份要点压品牌底", panel["panelSmall"], panel["panelRaised"], text_min))
+
     for theme_name, hl in (("浅色", hl_light), ("深色", hl_dark)):
         on_hl = hl["onHighlight"]
         for key, cn in label.items():
@@ -260,8 +276,35 @@ def check_hue_ring(rep: Report, tokens: dict) -> None:
                 rep.warn(f"[色相环] {theme}：brand 压 {bg_key} 仅 {got:.2f}，偏低")
 
 
-# ─────────────────────────── 5. 后台接线 ───────────────────────────
+# ─────────────────── 4b. 面板色族主题不变式 ───────────────────
 
+
+def check_panel_invariance(rep: Report, tokens: dict) -> None:
+    """panel* 面板色族必须两套主题同值。
+
+    这条不变式是别的检查的前提：check_wcag 只跑一遍面板对比度（拿浅色代表），
+    一旦有人为了「修深色」只改 dark 块里的 panel*，面板就会在深色下偷偷换色，
+    而对比度断言仍在拿旧值算 —— 于是门禁静默失效。宁可直接失败。
+    """
+    names = tokens["audit"]["panelTokens"]
+    light, dark = tokens["color"]["light"], tokens["color"]["dark"]
+    mismatched: list[dict[str, str]] = []
+    for key in names:
+        if key not in light or key not in dark:
+            rep.fail(f"[面板] 令牌缺失：{key} 必须在 color.light 与 color.dark 同时存在")
+            continue
+        if light[key].upper() != dark[key].upper():
+            mismatched.append({"token": key, "light": light[key], "dark": dark[key]})
+    rep.checks["panel_tokens"] = len(names)
+    rep.checks["panel_invariance_violations"] = mismatched
+    for item in mismatched:
+        rep.fail(
+            f"[面板] {item['token']} 两套主题取值不同（{item['light']} / {item['dark']}）"
+            " —— panel* 是品牌面，不随主题翻转"
+        )
+
+
+# ─────────────────────────── 5. 后台接线 ───────────────────────────
 
 def check_admin_wiring(rep: Report, tokens: dict) -> None:
     audit = tokens["audit"]
@@ -431,6 +474,7 @@ def main() -> int:
     check_vectors(rep)
     check_wcag(rep, tokens)
     check_hue_ring(rep, tokens)
+    check_panel_invariance(rep, tokens)
     check_admin_wiring(rep, tokens)
     check_scale(rep, tokens)
     check_raw_hex(rep, tokens)
@@ -475,6 +519,10 @@ def main() -> int:
             )
     if href := rep.checks.get("admin_tokens_href"):
         print(f"后台接线    link href = {href}")
+    print(
+        f"面板色族    {rep.checks.get('panel_tokens', 0)} 项主题不变"
+        f"（违例 {len(rep.checks.get('panel_invariance_violations') or [])}）"
+    )
     for label in ("Web 全局样式", "后台页面"):
         count = rep.checks.get(f"raw_hex_{label}")
         if count is not None:

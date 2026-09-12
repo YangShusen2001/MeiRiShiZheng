@@ -3,7 +3,7 @@
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import type { CardDeck, ClippedArticle, DailyDigest, PolicyLine, PracticeSet, ReviewCard, TodaySummary } from "@kaogong/contracts";
+import type { CardDeck, ClippedArticle, DailyDigest, DailyPicks, DailyReport, PolicyLine, PracticeSet, ReviewCard, TodaySummary } from "@kaogong/contracts";
 
 export type {
   AiAnnotation,
@@ -15,11 +15,15 @@ export type {
   CardDeck,
   ClippedArticle,
   DailyDigest,
+  DailyPicks,
+  DailyReport,
   DigestItem,
   DigestSection,
+  PicksSlots,
   PolicyLine,
   PracticeSet,
   Question,
+  ReportCuration,
   ReviewCard,
   TodaySummary,
 } from "@kaogong/contracts";
@@ -131,6 +135,19 @@ export function getPracticeSet(date: string): PracticeSet | null {
 /** 按日期取今日速览（一句话 + 关键词），不存在返回 null。 */
 export function getSummary(date: string): TodaySummary | null {
   return loadJson<TodaySummary>(join(CONTENT_DIR, date, "summary.json"));
+}
+
+/** 按日期取选材定稿（精选 id 清单 + 槽位），不存在返回 null（sparse/失败日会缺）。 */
+export function getPicks(date: string): DailyPicks | null {
+  return loadJson<DailyPicks>(join(CONTENT_DIR, date, "picks.json"));
+}
+
+/**
+ * 按日期取管道质量报告（content/_reports/<date>.json）。
+ * 与 dateDirs() 不同源：报告存在独立的 _reports 目录，不随内容日走。
+ */
+export function getReport(date: string): DailyReport | null {
+  return loadJson<DailyReport>(join(CONTENT_DIR, "_reports", `${date}.json`));
 }
 
 /** 按文章 id 取剪藏原文（全文），不存在返回 null。 */

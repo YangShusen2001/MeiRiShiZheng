@@ -10,10 +10,13 @@ import { listCards } from "../lib/content";
 interface Props {
   title: string;
   description?: string;
+  /** 首页用：横向不套 .wrap 的居中窄栏，改由各条横带自带底色与内边距（画布版式）。 */
+  bleed?: boolean;
 }
 const {
   title,
   description = "每天整理全国时政、申论精读与政策解读，来源均为官方原文。",
+  bleed = false,
 } = Astro.props;
 
 // 字体配置：本地审核后台上传/选择后写入 src/font-config.json，构建时注入 @font-face 与变量。
@@ -81,8 +84,31 @@ const reviewCardsJson = JSON.stringify(listCards());
         {/* <button type="button" class="theme-toggle" id="theme-toggle" title="切换主题">主题</button> */}
       </div>
     </header>
-    <main class="wrap"><slot /></main>
-    <footer class="foot">时政小助手 · 内容来自官方原文，请以原文为准</footer>
+    <main class={bleed ? "wrap wrap--bleed" : "wrap"}><slot /></main>
+    {/* 页脚（画布 3:158）：深靛面板 + 标识 + 三个入口 + 分隔线 + 说明/回到顶部 */}
+    <footer class="foot">
+      <div class="foot-in">
+        <div class="foot-top">
+          <a class="foot-brand" href="/">
+            <svg class="foot-mark" viewBox="0 0 24 24" aria-hidden="true">
+              <rect width="24" height="24" rx="6" />
+              <path d="M8 7.5v9M16 7.5v9M8 12h8" fill="none" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+            <span class="foot-name">每日时政 · 时政小助手</span>
+          </a>
+          <nav class="foot-links" aria-label="站内链接">
+            <a href="/about/">关于本站</a>
+            <a href="/sources/">数据来源</a>
+            <a href="/design/">设计规范</a>
+          </nav>
+        </div>
+        <div class="foot-hr"></div>
+        <div class="foot-bottom">
+          <span>内容均来自官方原文，保留来源与发布时间；AI 概括仅供参考，以原文为准。</span>
+          <a class="foot-to-top" href="#top">回到顶部</a>
+        </div>
+      </div>
+    </footer>
     <!-- 底部 Tab 导航（P3）：仅移动端显示；桌面端隐藏 -->
     <nav class="tabbar" id="tabbar" aria-label="主导航">
       <a href="/" data-tab="home"><span class="tab-ic">🏠</span><span>首页</span></a>
