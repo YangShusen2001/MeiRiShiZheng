@@ -2,6 +2,7 @@
 """本地审核服务测试：北京时间日期、参数校验、补跑 AI 守卫、发布拦截。"""
 import datetime as dt
 import json
+from pathlib import Path
 
 import pytest
 from fastapi import HTTPException
@@ -9,6 +10,9 @@ from fastapi.testclient import TestClient
 import kaogong.review.server as server
 
 UTC = dt.timezone.utc
+
+# 仓库根 content/（测试进程真实写入目标）——用于断言测试不污染真实审计日志
+REAL_AUDIT_LOG = Path(__file__).resolve().parents[2] / "content" / "_reports" / "audit.jsonl"
 
 
 @pytest.fixture()
@@ -187,7 +191,6 @@ def test_items_view_aggregates_clip_and_ai_status(client, tmp_path, monkeypatch)
 
 def test_exclude_and_restore_item(client, tmp_path, monkeypatch):
     monkeypatch.setattr(server, "CONTENT", tmp_path)
-    monkeypatch.setattr(server, "AUDIT_LOG", tmp_path / "_reports" / "audit.jsonl")
     date = "2026-08-15"
     url = "https://example.com/a2"
     aid = server._article_id(url)
@@ -258,7 +261,6 @@ def test_report_explain_and_note_acknowledges_volume(client, tmp_path, monkeypat
 
 def test_audit_written_and_history_served(client, tmp_path, monkeypatch):
     monkeypatch.setattr(server, "CONTENT", tmp_path)
-    monkeypatch.setattr(server, "AUDIT_LOG", tmp_path / "_reports" / "audit.jsonl")
     date = "2026-08-15"
     url = "https://example.com/a5"
     aid = server._article_id(url)
@@ -270,3 +272,22 @@ def test_audit_written_and_history_served(client, tmp_path, monkeypatch):
     h = client.get(f"/api/items/{date}/{aid}/history")
     assert h.status_code == 200
     assert len(h.json()["history"]) >= 1
+
+
+def test_audit_never_writes_real_content_log(tmp_path, monkeypatch):
+    """防回归：审计日志路径必须随 CONTENT 动态解析，测试不得污染真实 content/。
+
+    修复前必失败：AUDIT_LOG 是模块级常量（导入时固化），monkeypatch CONTENT 到
+    tmp_path 后 _audit 仍写真实 content/_reports/audit.jsonl——实测真实日志 597 行中
+    486 行是测试噪音（假 publish / retry / note）。
+    """
+    before = REAL_AUDIT_LOG.stat().st_size if REAL_AUDIT_LOG.exists() else 0
+    monkeypatch.setattr(server, "CONTENT", tmp_path)
+
+    server._audit(dt.date(2026, 8, 15), "test-only", "x1", {"probe": True})
+
+    after = REAL_AUDIT_LOG.stat().st_size if REAL_AUDIT_LOG.exists() else 0
+    assert after == before, "测试写入了真实审计日志（路径未跟随 CONTENT）"
+    scoped = tmp_path / "_reports" / "audit.jsonl"
+    assert scoped.exists(), "审计应写入被 patch 的 CONTENT"
+    assert "test-only" in scoped.read_text(encoding="utf-8")

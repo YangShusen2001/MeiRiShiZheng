@@ -152,8 +152,6 @@ def _report_summary(target: dt.date) -> dict:
 
 # ===== 0018 审核台：条目状态 / 重试 / 排除 / 强制收录 / 报告解释 / 审计 =====
 
-AUDIT_LOG = CONTENT / "_reports" / "audit.jsonl"
-
 # 门禁错误的人类可读解释（Phase B）
 VOLUME_ERROR_EXPLAIN = {
     # 2026-09-12 前旧码（历史报告可能仍携带，保留解释供追溯）
@@ -163,6 +161,17 @@ VOLUME_ERROR_EXPLAIN = {
     "below_fetch_floor": "fetch 层原始候选数低于绝对下限（13 源经栏目白名单后正常约 10-20 篇）。"
                          "多为多源同时故障或白名单配置错误；天生日薄不会触发本项。",
 }
+
+
+def _audit_log() -> Path:
+    """审计日志路径随 CONTENT 动态解析。
+
+    2026-09-12 修复：原为模块级常量 `AUDIT_LOG = CONTENT / "_reports" / "audit.jsonl"`，
+    导入时即固化——测试 monkeypatch CONTENT 到 tmp_path 后写审计仍落真实日志
+    （实测污染：真实 audit.jsonl 597 行中 486 行是测试噪音，含假 publish/retry/note）。
+    与 _load_report / _write_report 一致，改为每次从当前 CONTENT 计算。
+    """
+    return CONTENT / "_reports" / "audit.jsonl"
 
 
 def _audit(target: dt.date, action: str, item_id: str = "", detail: dict | None = None) -> None:
@@ -175,8 +184,9 @@ def _audit(target: dt.date, action: str, item_id: str = "", detail: dict | None 
             "itemId": item_id,
             "detail": detail or {},
         }
-        AUDIT_LOG.parent.mkdir(parents=True, exist_ok=True)
-        with AUDIT_LOG.open("a", encoding="utf-8") as f:
+        path = _audit_log()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("a", encoding="utf-8") as f:
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
     except OSError:
         pass  # 审计失败不阻断操作
@@ -506,8 +516,9 @@ def api_item_history(date: str, id: str) -> dict:
     """条目操作历史（Phase C）：从 audit.jsonl 过滤。"""
     target = _parse_target(date)
     rows: list[dict] = []
-    if AUDIT_LOG.exists():
-        for line in AUDIT_LOG.read_text(encoding="utf-8").splitlines():
+    log_path = _audit_log()
+    if log_path.exists():
+        for line in log_path.read_text(encoding="utf-8").splitlines():
             try:
                 entry = json.loads(line)
             except json.JSONDecodeError:
