@@ -114,6 +114,29 @@ def _strip_fence(text: str) -> str:
     return text
 
 
+def _focus_note(article: dict, pages: list[str]) -> str:
+    """T05：文章带 aiFocus（T04 段落聚焦标注）时，把出题范围收到重点段。
+
+    aiFocus 语义（article_ai v2）：整篇价值集中在若干段（如「最后三段才是
+    政策阐释」，其余是背景/导语）时标注的段落闭区间。此处收紧卡片 anchor：
+    越界即抛给模型的不变量，但不硬过滤——AI 若在范围外给出可锚定的合法考点，
+    仍是有价值的内容（软引导，避免误杀）。
+    """
+    focus = article.get("aiFocus")
+    if not isinstance(focus, dict):
+        return ""
+    try:
+        lo, hi = int(focus["from"]), int(focus["to"])
+    except (KeyError, TypeError, ValueError):
+        return ""
+    if not (0 <= lo <= hi < len(pages)) or hi - lo + 1 >= len(pages):
+        return ""  # 非法或与全文等价（无收缩价值）→ 不注入
+    return (
+        f"本文重点段落在 [{lo}]-[{hi}]（其余段落为背景/导语），"
+        f"卡片 anchor.paragraphIndex 必须落在此范围内。\n"
+    )
+
+
 def _messages(
     title: str,
     paragraphs: list[str],
@@ -121,6 +144,7 @@ def _messages(
     variant: str,
     policy_line: str = "",
     existing_notes: str = "",
+    focus_note: str = "",
 ) -> list[dict[str, str]]:
     article = "\n".join(f"[{i}] {p}" for i, p in enumerate(paragraphs))
     output_shape = (
@@ -136,6 +160,7 @@ def _messages(
             f"{output_shape}\n"
             + (f"标题：{title}\n")
             + (f"所属主线：{policy_line}\n" if policy_line else "")
+            + (focus_note)
             + (notes)
             + f"原文（段落已编号，[n] 为段落下标）：\n{article}"
         )},
@@ -224,6 +249,7 @@ def refine_cards(
             _messages(
                 str(article.get("title", "")), pages,
                 variant=variant, policy_line=str(article.get("policyLine", "")),
+                focus_note=_focus_note(article, pages),
             ),
             cfg, max_tokens=1400, temperature=0.2,
         ))

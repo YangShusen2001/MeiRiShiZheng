@@ -167,3 +167,34 @@ def test_explain_is_optional_enhancement():
     cards, dropped = validate_cards([dict(base, explain="太短")], paragraphs, "a1")
     assert dropped == 0
     assert "explain" not in cards[0]
+
+
+def test_refine_cards_injects_ai_focus_range():
+    """T05：文章带 aiFocus 时，出题范围收到重点段（prompt 注入段落闭区间）。
+
+    场景（v2.1 设计动机）：整篇不入选价值、但某几段是政策阐释——T04 的
+    aiFocus 标出该范围，卡片提炼据此收窄，避免从背景段抽出无考点价值的卡。
+    """
+    captured = {}
+
+    def _probe(messages, _cfg, **_kw):
+        captured["user"] = messages[1]["content"]
+        return _payload([_card()])
+
+    refine_cards(_article(aiFocus={"from": 1, "to": 2}), {"deepseek_api_key": "k"},
+                 call=_probe, daily_budget=5)
+    assert "[1]-[2]" in captured["user"]
+    assert "重点段落" in captured["user"]
+
+
+def test_refine_cards_skips_focus_note_when_absent_or_degenerate():
+    """无 aiFocus / 非法值 / 范围等价全文 → 不注入提示（保持原有 prompt 形态）。"""
+    captured = {}
+
+    def _probe(messages, _cfg, **_kw):
+        captured["user"] = messages[1]["content"]
+        return _payload([_card()])
+
+    for focus in (None, {"from": 0, "to": 99}, {"from": "x", "to": 1}, {}, {"from": 0, "to": 2}):
+        refine_cards(_article(aiFocus=focus), {"deepseek_api_key": "k"}, call=_probe, daily_budget=5)
+        assert "重点段落" not in captured["user"], f"focus={focus} 不应注入"
