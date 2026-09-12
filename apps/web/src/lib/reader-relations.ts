@@ -1,6 +1,6 @@
 // 关系标注渲染层（正式版）：rough-notation 书写动画（中心句双括号 + 支撑句荧光笔）
 // + Handy Arrows 素材箭头（矢量方向摆放，可换素材/旋转）。
-// 交互规格见 docs/tasks/0024：编辑器先画荧光笔区域 → [ ] 吸附左右 → 箭头素材库自选 +
+// 交互规格见 docs/archive/2026-08/tasks/0024：编辑器先画荧光笔区域 → [ ] 吸附左右 → 箭头素材库自选 +
 // 方向（up=锚定句最上行 / down=锚定句最下行）。渲染按当前 DOM 实时计算（响应式自适应）。
 import rough from "roughjs";
 import type { AiAnnotation, AiRelation } from "@kaogong/contracts";

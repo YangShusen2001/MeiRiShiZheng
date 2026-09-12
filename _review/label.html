@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="uhdUgR8LyER5J7E93xs0zF">
+<head data-page-node-id="z7PdesVrgIUppEsS1DNKXv">
+<meta charset="utf-8" data-page-node-id="65bV5G9vPk5phPn15COFWw">
+<meta name="viewport" content="width=device-width,initial-scale=1" data-page-node-id="v6AYRhGVW200dsWjYigAm8">
+<title>黄金样本标注 · 2026-09-11</title>
+<style>
+  :root{--bg:#F5F1E8;--ink:#2B2B28;--sub:#6B6B63;--line:#DFD8C8;--green:#4C795B;--red:#A8543F;--card:#FFFDF8}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+  header{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);padding:14px 20px}
+  .bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  h1{font-size:16px;margin:0;font-weight:600;letter-spacing:.02em}
+  .prog{font-variant-numeric:tabular-nums;color:var(--sub);font-size:13px}
+  .track{flex:1;min-width:120px;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+  .fill{height:100%;width:0;background:var(--green);transition:width .2s}
+  button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:7px 14px;color:var(--ink)}
+  button:hover{border-color:var(--green)}
+  button.primary{background:var(--green);color:#fff;border-color:var(--green)}
+  main{max-width:860px;margin:0 auto;padding:22px 20px 120px}
+  .guide{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:22px;font-size:14px}
+  .guide h2{font-size:14px;margin:0 0 10px;color:var(--green)}
+  .guide ul{margin:6px 0;padding-left:20px}
+  .guide li{margin:3px 0}
+  .guide .no{color:var(--red)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:14px;transition:border-color .2s,opacity .2s}
+  .card.done{opacity:.55}
+  .card.in{border-color:var(--green);border-width:2px}
+  .card.out{border-color:var(--red);border-width:2px}
+  .meta{display:flex;gap:10px;align-items:center;font-size:12px;color:var(--sub);margin-bottom:8px;flex-wrap:wrap}
+  .tag{background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:1px 7px}
+  .tag.host{color:var(--green)}
+  h3{font-size:16px;margin:0 0 10px;line-height:1.5;font-weight:600}
+  .prev{font-size:13.5px;color:var(--sub);white-space:pre-wrap;max-height:120px;overflow:hidden;position:relative;margin-bottom:12px}
+  .prev.noclip{font-style:italic;color:#9A9A90}
+  .prev::after{content:"";position:absolute;bottom:0;left:0;right:0;height:32px;background:linear-gradient(transparent,var(--card))}
+  .acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .acts button{min-height:44px;min-width:104px;font-weight:500}
+  .acts button[data-v="in"].on{background:var(--green);color:#fff;border-color:var(--green)}
+  .acts button[data-v="out"].on{background:var(--red);color:#fff;border-color:var(--red)}
+  .reason{width:100%;margin-top:10px;border:1px dashed var(--line);border-radius:8px;background:transparent;padding:8px 12px;font:inherit;font-size:13.5px;color:var(--ink);resize:vertical;min-height:38px}
+  .reason:focus{border-color:var(--green);outline:none;border-style:solid;background:var(--card)}
+  .reason::-webkit-textarea-placeholder{color:#B0AFA5}
+  a{color:var(--green);font-size:13px}
+  .float{position:fixed;bottom:0;left:0;right:0;background:rgba(245,241,232,.96);backdrop-filter:blur(6px);border-top:1px solid var(--line);padding:12px 20px;display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}
+  .stat{font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+  .stat b{color:var(--green)}.stat i{color:var(--red);font-style:normal}
+  kbd{background:var(--bg);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;font-size:11px;font-family:inherit}
+  @media(max-width:600px){.prev{max-height:88px}}
+</style>
+</head>
+<body data-page-node-id="Sf7dM2SBH2FfYcTP6AJMFh">
+<header data-page-node-id="5Jpslcbo3EAUl8je1rTagb">
+  <div class="bar" data-page-node-id="4UIOrhuG7AaTwWfX2ZHNzl">
+    <h1 data-page-node-id="Xf8xqob7hB1ZAczlVqejXw">黄金样本标注</h1>
+    <span class="prog" id="prog" data-page-node-id="u5MIvNjKXZKqDjrGZWzQgo">0 / 40</span>
+    <div class="track" data-page-node-id="dpBo70LGpfUJ0PIBZWPQwq"><div class="fill" id="fill" data-page-node-id="CBbbNhW8LRz5ePtXJk0vD3"></div></div>
+    <button onclick="exportJSON()" data-page-node-id="AMP8iTQmO7QD65Yn5DGm0N">导出结果</button>
+    <button onclick="resetAll()" data-page-node-id="7uJBcNuPrjG0tqCCLcRZeN">清空</button>
+  </div>
+</header>
+<main data-page-node-id="Zl0Sztq8EZqP6jZT9gEZ3Z">
+  <div class="guide" data-page-node-id="ME6BpCOBeCo5r1K9IA9kg2">
+    <h2 data-page-node-id="T1wN8htHpKBtXFZjMECVnZ">判据：这篇能不能进「精品阅读池」？</h2>
+    <div data-page-node-id="jdWYtpfLyAGbfdUxvIHm4H"><b data-page-node-id="gzmEqM7V0gb0yM2OGGBkN5">进池（✅）——面向公务员考试，具备以下任一：</b></div>
+    <ul data-page-node-id="blaks1YPKFtx2kcTJaggU9">
+      <li data-page-node-id="DFnLqBdCDjtdHPjA7DIzqJ"><b data-page-node-id="JNrhjoIRIsWEwdII2P9rUt">观点式表述</b>：可背诵、可用于申论写作的规范表述（如"以正确政绩观推进…"）</li>
+      <li data-page-node-id="8dkPmoKWRSwWTZ3HbUOroM"><b data-page-node-id="BmKwEgsexjUZeKYH1jSFBd">政策落点</b>：中央级政策文件、重大部署、领导人重要活动</li>
+      <li data-page-node-id="cEjbaxF5jBHGCbFz0Cds2m"><b data-page-node-id="oHcynuINHBPE2Wn5IiTzQR">结构式论证</b>：有清晰分论点（如"五个发力"式的动宾结构）</li>
+      <li data-page-node-id="Cus3pYAfDH2TmiWdlo0I86"><b data-page-node-id="WckcB7FMPfY8dd6koFtDpC">可复用案例</b>：能浓缩成十几字的典型案例素材</li>
+      <li data-page-node-id="A1ApnntECbUHcrZP037hH2"><b data-page-node-id="cO05kLnQyzJJICJFCvOH3h">重点领域动态</b>：AI、知识产权、生态、教育科技人才等高频考点领域</li>
+    </ul>
+    <div class="no" data-page-node-id="DHpHKmj7skeAAgGS4FRznR"><b data-page-node-id="esLEHB0eYJEH1iwNETc249">不进池（❌）：</b></div>
+    <ul data-page-node-id="rauLNSqMFJsNzgRwNOXNEI">
+      <li data-page-node-id="43751dcTKxyUDDXBMkoPbE">地方工作动态、地方通稿（无论哪个省）</li>
+      <li data-page-node-id="yI2Gz4lA232bQPE81vb3ou">人事任免、气象天气、票务服务、民生事务细节</li>
+      <li data-page-node-id="hweGNVVW1zFjKxFtAfTBgi">展会节庆、文化活动、体育赛事</li>
+      <li data-page-node-id="7EKQVXU0er2HouWAb0Uw4s">个案执法、社会新闻</li>
+      <li data-page-node-id="zWUBFF6cxCX2kJGYFVIGcr">纯信息通报，无可背诵表述、无结构、无案例价值</li>
+    </ul>
+    <div style="margin-top:10px;color:#6B6B63;font-size:13px" data-page-node-id="ekggC9umaeREqGAPgOR7tM">
+      快捷键：<kbd data-page-node-id="2nSduWZnG1NBVhGsevAMjT">1</kbd> 进池 · <kbd data-page-node-id="e1zWNfwklYXCh6FCkjeTCx">2</kbd> 不进池 · <kbd data-page-node-id="aGCteDXswoPL2ujHCs12pW">←</kbd><kbd data-page-node-id="GtfDHwHFYFRJupimxagCbp">→</kbd> 上下 · <kbd data-page-node-id="lCboWEN3j3dF3y9Z6G1eYf">Esc</kbd> 退出理由框 · 进池后光标自动跳进理由框 · 进度自动保存在本机
+    </div>
+  </div>
+  <div id="list" data-page-node-id="r6VdKPCTh1qUQkXyuheEYZ"></div>
+</main>
+<div class="float" data-page-node-id="eBNJnHcS1kLl1TKA6xnkJ3">
+  <span class="stat" data-page-node-id="KIqtBgIdFJRlSMupBBM858">已标 <b id="sIn" data-page-node-id="mN0Y0eNGwcw5Da5MjR6FJ0">0</b> 进池 · <i id="sOut" data-page-node-id="CVou7qckhAmsG2Yyqtpv4p">0</i> 不进池 · 已写理由 <span id="sReason" data-page-node-id="YAHCTF7xGU0GoJDFhZFCv0">0</span> · 余 <span id="sLeft" data-page-node-id="3bcYvOOsFYSKTt7lw4jWZw">40</span></span>
+  <span class="stat" style="margin-left:12px" data-page-node-id="XRZR3v59O2OdyNg7Km88rA">进池标题：</span>
+  <span class="stat" id="inList" style="max-width:520px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" data-page-node-id="B6K1Sz6RPX9JnL6VpZ8RlA"></span>
+</div>
+<script>
+const DATA = [{"id": "588533e84d", "section": "全国时政要闻", "title": "国际打击电信网络诈骗联盟成立大会举行 王小洪出席并致辞", "url": "http://politics.people.com.cn/n1/2026/0911/c1001-40796429.html", "host": "politics.people.com.cn", "hasClip": true, "preview": "新华社南京9月10日电（记者董雪、李明辉）国际打击电信网络诈骗联盟成立大会10日在江苏连云港举行，国务委员、公安部部长王小洪出席并致辞。\n王小洪指出，中方愿同各方一道，积极践行人类命运共同体理念和四大全球倡议，坚守法治精神、完善合作机制，坚持平等包容、筑牢多边合作根基，坚持规则引领、健全反诈治理体系，坚持实战导向、提升联合打击效能，坚持能力共建、推动资源手段共享，坚持机制对接、加强整体协调联动，共同把联盟建设成为全球反诈治理重要平台、多边执法合作崭新标杆、守护共同安全坚实屏障，为完善全球公共安\n王小洪表示，希望各方携手同心、群策群力，加速推进联盟实体化建设，围绕重点区域、重点案件、关键链条稳步推进常态化执法合作，组织开展专业培训、联合演练加快推进整体能力提升，坚决遏制跨国电诈犯罪蔓延态势，坚决保障各国人民福祉。"}, {"id": "ff7fb5de51", "section": "全国时政要闻", "title": "退役军人服务保障先进单位及个人表彰大会在京召开 谌贻琴出席并讲话", "url": "http://politics.people.com.cn/n1/2026/0911/c1001-40796428.html", "host": "politics.people.com.cn", "hasClip": false, "preview": ""}, {"id": "50fb91dd80", "section": "全国时政要闻", "title": "丁薛祥出席第十六次亚太经合组织能源部长会议开幕式并致辞", "url": "http://politics.people.com.cn/n1/2026/0911/c1024-40796438.html", "host": "politics.people.com.cn", "hasClip": true, "preview": "新华社北京9月10日电 第十六次亚太经合组织能源部长会议10日在北京开幕，中共中央政治局常委、国务院副总理丁薛祥出席并致辞。\n丁薛祥指出，在习近平主席“四个革命、一个合作”能源安全新战略指引下，中国能源供给能力持续增强，绿色低碳转型深入推进，新能源产业快速成长壮大，能源高质量发展取得显著成效。中国深度参与亚太经合组织框架内能源务实合作，有力促进区域能源发展，为维护全球能源安全作出重要贡献。\n丁薛祥表示，中国将始终做世界能源市场稳定的维护者、全球绿色低碳转型的贡献者、国际能源合作的实干者，愿同各方共同推动全球能源安全和可持续发展。他提出3点建议：一是加强普惠共享。落实亚太经合组织提升能源可及性倡议，优先推进绿色能源“小而美”项目合作，大力促进分布式能源、充电基础设施发展，不断提升亚太地区能源包容发展水平。二是加强创新合作。携手营造良好创新生态，联"}, {"id": "0bd839c1d9", "section": "全国时政要闻", "title": "习近平将赴印度出席金砖国家领导人第十八次会晤", "url": "http://politics.people.com.cn/n1/2026/0911/c1024-40796437.html", "host": "politics.people.com.cn", "hasClip": true, "preview": "新华社北京9月10日电 外交部发言人10日宣布：应印度共和国总理莫迪邀请，国家主席习近平将于9月12日至13日赴印度新德里出席金砖国家领导人第十八次会晤。\n《 人民日报 》（ 2026年09月11日 01 版）"}, {"id": "d62be2b998", "section": "全国时政要闻", "title": "深入排查整治各类火灾隐患 落实落细防范措施 坚决遏制重特大事故发生", "url": "http://politics.people.com.cn/n1/2026/0911/c1024-40796436.html", "host": "politics.people.com.cn", "hasClip": true, "preview": "习近平对山东青岛市北海造船厂一货轮火灾事故作出重要指示强调\n新华社北京9月10日电 9月10日11时15分许，山东青岛市北海造船有限公司一艘外籍货轮靠港维修期间起火，造成重大人员伤亡。\n事故发生后，中共中央总书记、国家主席、中央军委主席习近平高度重视并作出重要指示指出，山东青岛市北海造船厂一货轮发生火灾，造成重大人员伤亡。要抓紧搜救失联人员，妥善做好善后安抚等工作，并尽快查明事故原因，依法严肃追究责任。"}, {"id": "ec808afa83", "section": "全国时政要闻", "title": "文化中国行丨千年溇港，藏着东方治水“密码”", "url": "https://www.news.cn/politics/20260911/7f98f8c0e08c4c0e9503279d50edee52/c.html", "host": "news.cn", "hasClip": false, "preview": ""}, {"id": "5686e3b171", "section": "全国时政要闻", "title": "中国知识产权行政执法十大案例发布", "url": "https://www.news.cn/politics/20260911/7a7c88d4e77d4d2c9a80d0718d52fd99/c.html", "host": "news.cn", "hasClip": true, "preview": "新华社长沙9月10日电（记者赵怡宁、戴小河）由国家市场监督管理总局与世界知识产权组织共同主办的第二届知识产权执法国际交流大会10日在湖南长沙开幕，会上发布了2025年—2026年中国知识产权行政执法十大案例，集中展现了中国市场监管部门加强知识产权执法的坚定决心和显著成效。\n本次发布的十大案例涵盖商标、专利、商业秘密等领域，聚焦民生热点和中外品牌，具有很强的代表性和警示意义。其中包括浙江省杭州市上城区市场监管局查处曹某华伪造、变造专利证书及销售假冒专利产品案，江苏省苏州工业园区市场监管局查处张某楠等人销售侵犯爱马仕注册商标专用权的包具案，山东省淄博高新区市场监管局查处季某某侵犯商业秘密案，安徽省宁国市市场监管局查处李某销售侵犯2\n江苏省苏州工业园区市场监管局查处张某楠等人销售侵犯爱马仕注册商标专用权的包具案中，苏州工业园区市场监管局根据线索查获大量标注爱马仕注册商标的包、鞋、饰品等侵权商品，全案涉案货值5000余万元。针对这一团伙利用云端存储、远程销毁等新型手段规避监管的难题，市场监管部门精准突破数字取证障碍，健全行刑双向衔接机制，10名犯罪嫌疑人落网，对主犯追究刑事责任。"}, {"id": "ef44cf6075", "section": "全国时政要闻", "title": "首套海上保护区数据集面世", "url": "https://www.news.cn/politics/20260911/0df3ecb0694e45fab51ab19170db1d90/c.html", "host": "news.cn", "hasClip": true, "preview": "新华社天津9月10日电（记者周润健）记者从交通运输部北海航海保障中心获悉，由中心牵头实施的全国首套S-122海上保护区专题数据集近日编制完成，并顺利通过船载终端加载测试。这一成果将海洋保护区法定管控边界转化为标准化航海数据，推动生态保护法规从纸面落到船舶航行一线。\nS-100是国际通用海道测量数据标准体系，相当于海上空间信息的“通用语言”，按照这个标准制作的数据，可在各类合规船载导航终端上识别、展示。S-122作为这个体系下的特色专题数据集，专门承载海上保护区相关信息。\n交通运输部北海航海保障中心海事测绘处副处长邬凌智介绍，以往不少海上保护区边界数据资料仅以纸质形式保存在管理部门，难以在船舶导航设备直观呈现，船舶存在误入生态敏感海域的风险。这套数据集将生态保护红线、海域管控规则搬到船载屏幕，打通信息传递“最后一公里”，兼顾船舶航行安全与海洋生物多样性保护，助力提升我国海洋治理数字化水平，为海洋资源可持续开发利用提供支撑。"}, {"id": "1428152df1", "section": "全国时政要闻", "title": "坚持以正确政绩观高质量推进国防和军队现代化——军队开展树立和践行正确政绩观学习教育取得明显成效", "url": "https://www.news.cn/politics/20260911/fc09e139ec174d00b1183bcbe55fac4b/c.html", "host": "news.cn", "hasClip": true, "preview": "新华社北京9月10日电 题：坚持以正确政绩观高质量推进国防和军队现代化——军队开展树立和践行正确政绩观学习教育取得明显成效\n政绩观问题是一个根本性问题，关乎立党为公、执政为民。\n全军各级坚决贯彻党中央、中央军委决策部署，深入学习贯彻习主席关于树立和践行正确政绩观的重要论述，认真学习贯彻习主席重要讲话和重要指示精神，紧扣“立党为公、为民造福、科学决策、真抓实干”总要求和“三个认认真真、扎扎实实”重要要求，坚持与思想整风、政治整训统筹起来抓，一体推进学查改，推动学习教育取得明显成效、达到预期目的。"}, {"id": "ded9ac3b03", "section": "全国时政要闻", "title": "凝智献策聚力 赋能塞上江南——党外院士专家与留学人员国情考察服务团走进宁夏", "url": "https://www.news.cn/politics/20260911/289fce5980934ce18604525efd77d8aa/c.html", "host": "news.cn", "hasClip": true, "preview": "新华社银川9月10日电 题：凝智献策聚力 赋能塞上江南——党外院士专家与留学人员国情考察服务团走进宁夏\n近日，中央统战部组织党外院士专家与留学人员国情考察服务团走进宁夏回族自治区开展为期6天的考察服务活动。来自能源化工、生态治理、城市建设等领域的近30位党外院士专家和高层次归国留学人才深入银川、吴忠、中卫、固原等地考察调研，结合各自研究领域，为宁夏高质量发展建言献策、汇智聚力。\n抵达当天，考察服务团成员便分别赶赴有关部门、高等院校、科研院所和企业开展服务对接。"}, {"id": "42b52e2f23", "section": "申论精读", "title": "全力救治善后 深入排查隐患", "url": "https://www.qstheory.cn/20260911/c2228237449c4ee3adb3c6bee3d63e5d/c.html", "host": "qstheory.cn", "hasClip": true, "preview": "新华社北京9月10日电 题：全力救治善后 深入排查隐患——各地各部门贯彻落实习近平总书记重要指示精神坚决守牢安全发展底线\n9月10日11时15分许，山东青岛市北海造船有限公司一艘外籍货轮靠港维修期间起火，造成重大人员伤亡。\n事故发生后，习近平总书记高度重视并作出重要指示，要求“抓紧搜救失联人员，妥善做好善后安抚等工作”“尽快查明事故原因，依法严肃追究责任”“各地区各有关部门要深刻汲取教训，深入排查整治各类火灾隐患，落实落细防范措施，坚决遏制重特大事故发生”。"}, {"id": "2a713d887b", "section": "申论精读", "title": "看产业蝶变 感受乡村振兴活力", "url": "https://www.news.cn/politics/20260911/3e1135a5a6f343128571cc3cdfc4d8bb/c.html", "host": "news.cn", "hasClip": true, "preview": "近期，各地深挖乡村发展潜力，发展生态种养、特色种植，做强乡村文旅商贸。借力数字技术改造传统农业，不断拓宽群众增收路径，多业态齐发力，为乡村振兴积蓄发展动能。\n兴安盟位于北纬46度寒地水稻黄金种植带，独特的光热与水土资源，为优质稻米产业提供了不可复制的天然禀赋。\n当地探索“一水两用、四稻共生”的“稻田+”生态立体种养模式，让寻常水田升级为生态良田、致富良田。"}, {"id": "4851b2d233", "section": "申论精读", "title": "多校医学专业投档位次下滑 年轻人不愿意学医了吗？", "url": "http://www.banyuetan.org/jrt/detail/20260911/1000200033134991789110073732613193_1.html", "host": "banyuetan.org", "hasClip": true, "preview": "“这几年，我们常开玩笑说自己是‘高位买入’。”温州医科大学2022级本科生小章（化名）回忆，当年填报志愿时，临床医学还是不少高分考生眼中的“香饽饽”。如今看到一些院校临床医学专业投档位次下滑数千位，他第一反应是意外，随后又觉得“好像也不难理解”。\n2026年各地高考录取结果出炉，不少学校医学专业录取位次出现大幅下滑。但梳理投档情况可以发现，与其说“学医降温”，不如说考生正在重新权衡培养周期、就业预期和工作压力，做出更慎重的职业抉择。\n从录取情况来看，医药类院校或综合类大学的医学院投档位次下降现象较为普遍。在广东，南方医科大学、广州医科大学、广州中医药大学等投档位次均有下滑，其中广州医科大学下滑超1.3万位；浙江大学医学院医学试验班（竺可桢学院巴德年医学班），在浙江地区招生名额比去年减少三分之一的情况下，最低录取位次仍下滑了71名。"}, {"id": "4a47f6951f", "section": "申论精读", "title": "“麻风村”里的点灯人", "url": "http://www.banyuetan.org/jrt/detail/20260911/1000200033134991789092305783608564_1.html", "host": "banyuetan.org", "hasClip": true, "preview": "从云南省文山壮族苗族自治州广南县城出发，车辆在蜿蜒的山路上行驶约一个小时，便可抵达莲城镇落松地村。\n这里曾是一个人迹罕至的无名山村。20世纪50年代，广南县出现麻风病疫情，为集中治疗、防止扩散，当地政府将患者统一安置到这片深山之中。此后30年，这里与外界少有往来。\n疾病在患者身上留下了各种痕迹——有的失去了手指，有的双腿残疾无法直立行走。但比疾病更难以治愈的，是与外界的隔阂。20世纪80年代，麻风病得到有效控制，村民们的日子逐渐安稳。他们想找一位识文断字的老师来教村里孩子读书，可外头的人一听到“麻风村”三个字，便摇头摆手拒绝。"}, {"id": "9c52f627e4", "section": "申论精读", "title": "3万澳门人，为什么坚定选择横琴？", "url": "https://opinion.southcn.com/node_87fa4020d8/0555f1cd2b.shtml", "host": "opinion.southcn.com", "hasClip": true, "preview": "“3万”这个数字，在横琴粤澳深度合作区有着沉甸甸的分量。截至2025年底，在横琴就业生活居住的澳门居民已超3万人。他们用行动做出了选择，将横琴从一纸蓝图变成了活力迸发的家园。横琴究竟做对了什么？才让这么多澳门人用脚投票？答案不在宏大的叙事里，而在一个个具体细微的生活场景中。\n让澳门人愿意留下的，首先是横琴在民生服务上的精准对接。澳门退休居民金爱萍对此深有感触：“以前办身份证要回澳门办，如今我老公都在这里换证，下楼就能办好，方便多了！” 这正是横琴设立澳门政务24小时自助服务中心的日常场景——澳门居民在横琴就能办理澳门相关事务。截至2026年4月，首个面向澳门居民的综合民生工程“澳门新街坊”已吸引超4000人入住。在教育方面，横琴\n让“双城生活”成为日常的，是跨境通勤效率的跃升。早在2025年底，横琴口岸64条合作智能快捷通道就已全面启用，跨境通关迈入“刷脸”时代；澳门单牌车全面放开指标限制，并实现“一标通琴澳”；跨境学生专车“随车查验”，随车通关儿童年龄上限由10周岁上调至14周岁。在琴澳两地均有办公地点的黄先生说：“从横琴的家到澳门的公司，加上过关时间，仅需30分钟，每天我都能先送"}, {"id": "828772806c", "section": "广东要闻动态", "title": "黄坤明到广州调研并主持召开座谈会", "url": "https://news.dayoo.com/guangdong/202609/11/139996_55002284.htm", "host": "news.dayoo.com", "hasClip": true, "preview": "9月10日，省委书记黄坤明到广州市，先后前往白云区、天河区、海珠区、南沙区，深入制造企业、创新平台、城市更新项目等调研，并主持召开座谈会，研究进一步做好广州工作，强调广州要认真学习贯彻习近平总书记对广东、对广州系列重要讲话和重要指示精神，坚定扛起经济大市挑大梁责任，扎实做好“产”“城”“人”高质量发展文章，久久为功促转型、育动能、激活力，奋力实现老城市新活力\n总部位于白云区的国家新型储能创新中心是我国新型储能领域唯一的国家制造业创新中心，黄坤明在展厅观看展陈和听取介绍，详细了解中心组织架构和近年来在技术攻关、场景拓展和产业吸聚等方面的进展。黄坤明指出，发展新型储能产业，是省市培育新质生产力的重要方向，要充分发挥国储中心创新载体作用，持续整合高端科创资源，把攻关制约行业发展的关键共性技术作为重中之重，全面打通储能产\n今年投入运营的天河区海心沙全空间智能体验中心，主要用于展销和体验各类智能装备，并提供中试等配套服务。黄坤明步入体验中心展区，参观体验低空飞行器、智能网联汽车、具身智能机器人、深海机器人等系列创新产品，仔细询问性能参数、应用场景和市场拓展情况，希望中心继续优化完善展示功能，创新多样化服务，展示宣介更多广东制造、广州制造中的明星产品、拳头产品、标杆产品，帮助企业"}, {"id": "333b9d6044", "section": "广东要闻动态", "title": "前8个月粤港澳大湾区内地9市进出口值同比增长21.9%", "url": "https://news.dayoo.com/guangdong/202609/11/139996_55002377.htm", "host": "news.dayoo.com", "hasClip": true, "preview": "据海关统计，今年前8个月，粤港澳大湾区内地9市进出口值7.28万亿元，同比增长21.9%，创历史同期新高。其中8月份进出口值达1.01万亿元，继6月首次突破万亿元后，再次迈上万亿元台阶，增长30.4%。\n粤港澳大湾区内地9市包括广州、深圳、珠海、佛山、惠州、东莞、中山、江门和肇庆。\n粤港澳大湾区内地9市与APEC其他经济体贸易规模创历史新高"}, {"id": "fbb4608760", "section": "广东要闻动态", "title": "2026年APEC工商领导人峰会11月17日至18日在深圳举办", "url": "https://news.dayoo.com/guangdong/202609/11/139996_55002262.htm", "host": "news.dayoo.com", "hasClip": true, "preview": "据新华社电 记者9月10日从中国贸促会获悉，2026年亚太经合组织（APEC）工商领导人峰会将于11月17日至18日在深圳举办。\n作为2026年APEC东道主，中方将于11月18日至19日在深圳举行APEC第三十三次领导人非正式会议，2026年APEC工商领导人峰会是此次领导人非正式会议的配套活动。\n中国贸促会新闻发言人介绍，本届工商峰会以“共促繁荣，共赢未来”为主题，由中国贸促会主办，将邀请APEC经济体政商界代表约1000人，围绕亚太自贸区建设、互联互通、人工智能、数字经济、粤港澳大湾区建设、可持续发展等议题开展交流讨论，为促进亚太经济增长建言献策。"}, {"id": "6fc7bb2b94", "section": "广东要闻动态", "title": "琴澳五载同心同行， “桃花源”写融合样本", "url": "https://news.dayoo.com/guangdong/202609/11/139996_55002364.htm", "host": "news.dayoo.com", "hasClip": true, "preview": "横琴口岸，人流穿梭；澳门新街坊，灯火渐旺；学校里，澳门孩子背着书包走进课堂；医院里，来自澳门的医生开始坐诊……昔日蕉林水塘遍地，如今处处烟火气，这就是琴澳居民共同的乐土桃源。\n由开心麻花娱乐文化（广东横琴）有限公司出品的原创互动爆笑喜剧秀《新桃花源记》11日在横琴开心麻花剧场正式首演。\n今年9月17日，横琴粤澳深度合作区挂牌成立五周年。横琴，不负时代使命与百姓期待，已成为一个让澳门居民兴家立业的新桃花源。"}, {"id": "83532f1e7b", "section": "广东要闻动态", "title": "最高减500元！广东3000万元文旅消费券9月11日发放", "url": "https://news.dayoo.com/guangdong/202609/11/139996_55002290.htm", "host": "news.dayoo.com", "hasClip": true, "preview": "9月11日至10月31日，广东省文化和旅游厅开展2026年广东“金秋文旅消费季”惠民补贴活动，面向境内外来粤游客和广东本地居民发放总计3000万元的文旅消费券。本次活动设线下、线上两个专场，诚邀八方宾客共赏南粤秋色、乐享金秋文旅红利。\n据悉，活动线下专场委托银联商务承办，线上专场联合飞猪（联动大麦）、同程、携程（联动去哪儿、trip.com）、美团（联动大众点评、猫眼）、抖音等平台发放。活动覆盖中秋、国庆重要节点，向全球友人发出“一年四季来广东”的诚挚邀请。市民游客可通过银联云闪付“一票游广东”小程序和飞猪（联动大麦）、同程、携程（联动去哪儿、trip.com）、美团（联动大众点评、猫眼）\n广东文旅消费券适用场景丰富，可用于活动商户提供的酒店民宿住宿、景区门票、文艺演出票，省内游、国内游（含湾区游）、入境游度假线路和“酒店+餐饮”“酒店+景区”“景区+餐饮”等“文旅+”套餐产品；同步覆盖省内智慧旅游、低空旅游、邮轮游艇旅游、赛事旅游、乡村旅游、工业旅游、冰雪旅游、研学旅游、银发旅游、亲子旅游、旅游演艺、文物主题游以及相关新业态产品、新场景服务等"}, {"id": "7312444984", "section": "四川要闻动态", "title": "成都警方打掉一起“猫池”涉诈案：查获138台设备1.5万余张手机卡，百余人被查处", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320413.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "“插插卡、收收验证码，躺着就能赚钱”——如果你听到这样的“兼职”邀约，千万要提高警惕。\n近期，成都成华公安重拳出击，打掉一个通过架设“猫池”设备帮助电诈分子大批量注册诈骗账号的黑灰产违法犯罪团伙，捣毁“猫池”设备窝点4处，查获“猫池”设备138台、作案电脑38台、涉案手机卡1.5万余张，并依法对涉嫌帮助信息网络犯罪活动罪（简称“帮信罪”）的44名犯罪嫌疑人采取刑事强制措施，对非法买卖手机卡的78名违法行为人给予行政处罚。\n据介绍，所谓“猫池”，是一种能将传统电话信号转化为网络信号的通信硬件设备，可同时支持多个手机号码进行批量通话、群发短信、远程控制等操作。“一台‘猫池’设备上可插上百张电话卡，原本是企业呼叫中心、短信群发平台等场景的工具。”办案民警表示。"}, {"id": "fb4a7236b2", "section": "四川要闻动态", "title": "2026年中国农民丰收节 四川180余场活动庆丰收", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320378.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "9月23日，农历秋分节气，将迎来第9个中国农民丰收节。9月11日，记者从四川省农业农村厅召开的2026年中国农民丰收节四川省庆丰收活动新闻发布会上获悉，今年四川预计开展180余场庆丰收活动，参与人数超50万人次。此外，四川省庆丰收主场活动将首次走进丘陵地区，在资阳市乐至县劳动镇庙山村举行｡\n四川省农业农村厅二级巡视员江坤峰介绍，今年四川省庆丰收活动将围绕“丰收开新局 实干促振兴”主题，从四个方向开展。\n一是紧扣粮食丰收做实“天府粮仓”系列活动，集中展示粮食生产建设成效，讲好“天府粮仓”建设故事；二是紧扣纪念红军长征胜利90周年推动红耕融合，展现革命老区乡村振兴的崭新面貌；三是紧扣丰收节、中秋、国庆“三节”叠加，策划农事体验、乡村工匠展销、农文旅打卡等多元场景；四是线上线下协同拓展活动覆盖面，策划“线上丰收节”，开展直播带货、云上推介、丰收实景展播。"}, {"id": "bb04d1699b", "section": "四川要闻动态", "title": "以“五个发力”，实现“工业倍增”丨起步奋进“十五五”遂宁专场新闻发布会", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320358.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "“万千气象看四川·起步奋进‘十五五’”遂宁专场新闻发布会现场。刘作鹏 摄\n工业是遂宁的立市之本。9月11日，省政府新闻办举行“万千气象看四川·起步奋进‘十五五’”遂宁专场新闻发布会。遂宁市委常委、常务副市长宋良勇介绍，遂宁将以“五个发力”，实现“工业倍增”。\n首先是推动锂电新能源产业向锂钠同行、固液并举全面发力。遂宁被称为“锂电之都”，拥有锂电池从原料、生产到回收循环的全产业链。“十五五”期间，遂宁将多点布局、多路突围，锂电、钠电、固态电池多条技术路线同步推进。"}, {"id": "905fb32327", "section": "四川要闻动态", "title": "构建遂宁128实验室体系，打造技术创新“训练场”、硬核企业“健身房”丨起步奋进“十五五”遂宁专场新闻发布会", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320361.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "“万千气象看四川·起步奋进‘十五五’”遂宁专场新闻发布会现场。刘作鹏 摄\n在遂宁，一个技术创新的“训练场”、硬核企业的“健身房”正在加速建设。这就是遂宁全力构建中的成渝中线科创走廊遂宁128实验室体系。\n“128”这个数字，对遂宁来说有特殊含义。9月11日，在省政府新闻办举行的“万千气象看四川·起步奋进‘十五五’”遂宁专场新闻发布会上，遂宁市委副书记、市长王忠诚给出了解释。"}, {"id": "b442ecb74f", "section": "四川要闻动态", "title": "在遂宁，每一名劳动者都会被看见、被尊重、受保障｜起步奋进“十五五”遂宁专场新闻发布会", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320364.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "“万千气象看四川·起步奋进‘十五五’”遂宁专场新闻发布会现场。刘作鹏 摄\n四川在线记者 袁敏 阚莹莹 川观新闻遂宁观察 刘作鹏\n就业是最基本的民生，对于劳务输出大市遂宁来说，如何有效促进高质量充分就业显得更为紧迫。9月11日，在省政府新闻办举行的“万千气象看四川·起步奋进‘十五五’”遂宁专场新闻发布会上，这个问题得到了深度解读。"}, {"id": "461ee16a7b", "section": "四川要闻动态", "title": "爱上一座城：赛事“燃”、演艺“火”、夜色“亮”|起步奋进“十五五”遂宁专场新闻发布会", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320365.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "“万千气象看四川·起步奋进‘十五五’”遂宁专场新闻发布会现场。刘作鹏 摄\n四川在线记者 袁敏 阚莹莹 川观新闻遂宁观察 刘作鹏\n提到遂宁，你会想到什么？地处四川盆地中心地带的遂宁虽无名山大川，但创意无限，依托特色资源“无中生有”打造了中国死海等多个超级文旅IP，创造出一众令市场惊叹的案例。"}, {"id": "af02663766", "section": "四川要闻动态", "title": "成都武侯800名环卫工人有了“定制体检”", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320349.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "9月10日，从事环卫工作五年的温大姐在成都市武侯区一家体检机构完成了血常规和心电图检查。\n即日起，武侯区总工会、区综合执法局、区卫健局联合启动2026年环卫工人健康体检，辖区800名一线环卫工人将陆续接受检查。\n体检项目共4大类30余项，包括基础检查、血液检验、专科筛查和影像检查。与常规体检不同，这批项目是针对环卫工人长期户外作业、作息不规律、体力消耗大的职业特点“量身定制”的。检查项目之外，体检机构还将为每人出具图文报告并安排专人解读。"}, {"id": "dc53c19ae7", "section": "四川要闻动态", "title": "“光影铸魂·长征路上看今朝”纪念红军长征胜利90周年主题影像巡展首展走进四川大学", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320337.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "9月10日，“光影铸魂·长征路上看今朝”纪念红军长征胜利90周年主题影像巡展首展在四川大学江安校区开幕。本次展览由四川省全民国防教育宣教中心主办、四川日报“C视觉”影像数据库承办，同步启动2026年四川省“爱我国防”主题电影公益展映首场活动，影像展与公益观影联动开展，为高校师生打造沉浸式红色思政与国防教育课堂。\n本次巡展设置四大主题篇章，共展出影像作品40余幅，以珍贵历史影像与当代实拍作品交织叙事，全景呈现四川长征文化传承、国防教育实践与老区发展成就。展出作品既有松潘红军长征纪念碑、磨西会议旧址、两河口会议纪念馆等红色地标的今貌实拍，记录全省红色遗存修缮保护、活化利用的丰硕成果；也珍藏着红军翻越夹金山、飞夺泸定桥、穿越草地等珍贵历史画面，回望红军在巴蜀大地的峥嵘征程\n展览现场，一幅幅光影作品沿展线依次铺展，历史瞬间与时代新貌交相辉映。夕阳下熠熠生辉的“中华第一金碑”、泸定铁索桥与兴康大桥的今昔对照、日干乔湿地的巍峨丰碑……一张张兼具历史厚重感与时代感染力的作品，吸引大批师生驻足凝视、轻声交流。不少学生在红军长征历史影像前久久停留，在光影流转中重温长征史诗、感悟精神力量，接受了一场生动深刻的沉浸式红色教育。"}, {"id": "ef351b10b5", "section": "四川要闻动态", "title": "绵竹年画村：一幅年画里的中华民族共有精神家园丨天府石榴情", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320321.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "9月上旬，一场秋雨落在德阳绵竹市孝德镇年画村，雨丝打湿了青石路，也让墙上的年画色彩更加鲜亮。走进年画作坊，木板、刻刀、颜料铺陈案头，游客围在村民身旁观看刻板，研学团队则拿起画笔，体验木版年画制作。一幅幅年画，在这里不仅承载着传统文化民俗，也连接起各民族交往交流交融与乡村产业发展。\n绵竹木版年画是国家级非物质文化遗产代表性项目，绵竹年画村是其发源地和核心传承地。近年来，当地以年画为核心载体，推动非遗保护传承与农文旅融合，让传统文化走进现代生活，也让越来越多群众从年画产业发展中受益。\n工作室里，画师陈刚正埋头雕刻一块木版。细密的线条勾勒出人物轮廓，连毛发都被一一刻画。今年45岁的陈刚从事绵竹木版年画制作、传承已有27年。从爷爷一代开始，其家族便与年画结缘。面对传统年画在现代生活中的传播变化，陈刚尝试在守住技艺根脉的同时进行创新。过去，年画主要以单张画作的形式呈现。如今，陈刚研发年画主题小礼品、伴手礼等文创产品，让传统年画从墙上走进日常生活"}, {"id": "833c9adb9d", "section": "四川要闻动态", "title": "每人资助40万元！四川2026年博士后创新人才支持项目申报开始", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320319.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "9月11日，记者从四川省人力资源和社会保障厅了解到，为吸引激励新近毕业的优秀博士从事博士后研究工作，深入贯彻落实国省重大发展战略，推动全省六大优势产业、“15+N”重点产业链发展，该厅决定今年继续实施博士后创新人才支持项目，遴选25名应届或新近毕业的优秀博士，专项资助其从事博士后研究工作，省级财政给予每人两年40万元资助。\n2026年博士后创新人才支持项目重点瞄准国家和四川省重大战略任务、战略性前瞻性高新技术、重大科技专项、现代产业技术和基础科学前沿研究等领域，重点依托国家级和省级科技创新平台，引领带动优秀青年科技人才开展博士后研究工作。\n项目申请人应为2026年度拟进站或新近进站从事博士后研究工作的人员，具有中国国籍，具有良好的思想政治素质、科研潜质和学术道德，1993年1月1日（含）以后出生。"}, {"id": "2a1b2b44c7", "section": "四川要闻动态", "title": "黎明任雅安市人民政府副市长、代理市长", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320254.html", "host": "sichuan.scol.com.cn", "hasClip": false, "preview": ""}, {"id": "dd07743aa5", "section": "四川要闻动态", "title": "构建公正合理的全球人工智能治理体系丨新思想自习室", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320187.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "7月17日，习近平主席出席2026世界人工智能大会暨人工智能全球治理高级别会议开幕式并发表主旨讲话。\n习近平指出，当前，世界百年变局加速演进，新一轮科技革命和产业变革加速突破，全球人工智能技术创新进入前所未有的活跃期，既蕴含巨大机遇，也面临治理挑战。人类不得不直面时代之问：当机器开始思考，人类如何与之相处？当算法参与决策，安全如何保障？当技术挑战伦理，治理如何跟上？当鸿沟不断拉大，普惠如何实现？中方认为，各国应当秉持以人为本、向上向善理念，让人工智能成为促进\n习近平就此提出4点意见：坚持开放共赢，驱动创新发展；强化风险意识，确保安全可控；鼓励包容并蓄，促进文明互鉴；倡导和衷共济，完善全球治理。"}, {"id": "5fe7d58ab7", "section": "四川要闻动态", "title": "追星自由不能逾越社会救助的制度边界丨天府新视界", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320107.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "近日，江西赣州一低保家庭中专在读女生赴香港追星观看演唱会，由此触发了低保对象动态监测预警，全家的低保资格岌岌可危，引发热议。9月7日，赣州经开区社会事务管理局发布情况通报：目前正按程序对网上反映情况和其家庭情况进行核查，将根据核查情况依法依规处置。\n女孩全家的低保资格是否会被取消，目前尚无定论，但随着官方表示将“根据核查情况依法依规处置”，事件回归制度的理性。社会舆论对此事的关注，不是干涉个人追星自由，而是维护救助制度严肃性的必然要求。\n动态监测的制度设计，是为了适配家庭经济状况的起伏变化，让低保实现托底效果最大化。2024年印发的《江西省社会救助家庭经济状况评估办法》明确规定，出国或出境旅游、就医是高消费行为之一。低保的初衷是保障最低程度的衣食住行等刚需生活支出，赴港观演属于高额娱乐消费，触发低保对象动态监测预警无可厚非，绝非打压。 需要厘清的是，完全的个人自由必须以不依赖公共援助为前提，"}, {"id": "ab75a2de64", "section": "四川要闻动态", "title": "制定一体推进教育科技人才发展方案丨天天学习", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320103.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "读原文，悟原理。天天学习今日为您摘读习近平总书记围绕科技创新提出的一系列新论断、新要求。\n2025年12月，习近平总书记在中央经济工作会议上的讲话指出，制定一体推进教育科技人才发展方案。加大对基础研究的长期稳定支持力度，强化科技基础条件自主保障和战略前沿领域布局，努力产出更多原创性成果。"}, {"id": "bcc76871aa", "section": "四川要闻动态", "title": "枢纽遂宁，如何织密立体交通网？丨起步奋进“十五五”遂宁专场新闻发布会", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320357.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "“万千气象看四川·起步奋进‘十五五’”遂宁专场新闻发布会现场。刘作鹏 摄\n遂宁与成都、重庆等距128公里，这里已建成“1环9射”高速路网，密度居全省第2位、“3向7线”铁路网密度居全省第6位。9月11日，省政府新闻办举行“万千气象看四川·起步奋进‘十五五’”遂宁专场新闻发布会。遂宁市委常委、常务副市长宋良勇介绍，作为“陆港型国家物流枢纽和省级物流承载城市”，遂宁正在着力推动通道流量转化为经济增量。\n高铁快达成都，遂宁期盼已久。记者从会上了解到，明年9月成达万高铁投用后，从成都天府站到遂宁站30分钟左右，不到10分钟一趟车。后续遂宁还将陆续建成绵遂资内铁路、遂渝高速扩容，更加高效联动周边。未来最快6.5小时到北京看天安门，6.5小时到上海登东方明珠。"}, {"id": "868ba24d3e", "section": "四川要闻动态", "title": "涪江复航，建设成都平原经济区东向“第一港”丨起步奋进“十五五”遂宁专场新闻发布会", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320360.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "“万千气象看四川·起步奋进‘十五五’”遂宁专场新闻发布会现场。刘作鹏 摄\n涪江曾是四川水运主要通道之一。上世纪50年代至60年代中期，依托涪江—长江水运通道，涪江迎来航运鼎盛时期。随着航道条件恶化，涪江航运业受到严重影响，长途运输退出货运市场。\n在涪江流域，遂宁是唯一的陆港型国家物流枢纽承载城市，也是省级物流枢纽承载城市，有条件在川中地区率先打通千吨级船舶直达长江通道。去年底，涪江遂宁段复航（一期）工程启动建设。时隔60年，遂宁再次向海而行。"}, {"id": "ee2b3a7f07", "section": "四川要闻动态", "title": "打造“西部期货交割高地”，遂宁还要留下更多丨起步奋进“十五五”遂宁专场新闻发布会", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320359.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "“万千气象看四川·起步奋进‘十五五’”遂宁专场新闻发布会现场。刘作鹏 摄\n近日，遂宁高新区西部铁路物流园内，一辆满载碳酸锂材料的货车驶入遂宁碳酸锂期货交割库，等待入库。\n在这家物流园内，聚集了全国首批、西南首家碳酸锂期货交割库，以及全国首批、四川唯一铸造铝合金期货交割库。"}, {"id": "4752629752", "section": "四川要闻动态", "title": "中秋国庆机票酒店预订提速，川西小团游走红、成都跻身热门目的地前列", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320379.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "9月11日，中秋假期首日（9月25日）火车票正式开售，并带动中秋国庆假期机票、酒店预订提速。去哪儿、同程等旅行平台数据显示，中秋假期国内热门航线的机票搜索热度周环比增幅超160%，本周机酒预订量环比上周增长119%。与此同时，受“请3休13”中秋国庆拼假出行需求带动，假期长线机票预订热度显著上升。\n从客流节奏和热门目的地看，9月24日，全国主要枢纽机场将迎来节前客流高峰。同程旅行数据显示，成都、北京、昆明、上海、重庆、深圳、广州、乌鲁木齐、西安、哈尔滨位列热门目的地前列。从预订情况看，9月25日至9月30日之间出发的1200公里以上长线机票预订热度较去年同期显著上升。截至目前，中秋国庆热度较高的民航长航线主要有深圳—重庆、北京—成都、深圳—上海、深圳—\n长线出行需求也带火了精品小团游，相关产品预订增速同比增长1.2倍。其中，2—8人成团、10人左右封顶的5—8天行程成主流，西北环线、川西、新疆等长线目的地最火。"}, {"id": "ad02f525b4", "section": "四川要闻动态", "title": "中秋假期火车票今起发售，成都至攀西、川南、重庆等地车票紧俏", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320268.html", "host": "sichuan.scol.com.cn", "hasClip": true, "preview": "9月11日，记者从中国铁路成都局集团有限公司成都车站获悉，2026年铁路中秋国庆假期运输自9月23日启动，至10月8日结束，共计16天，10月1日将迎来整体客流最高峰。目前，中秋假期首日车票已正式开启发售。\n根据全国火车票15天预售规则，9月11日起，旅客可通过12306官方渠道购买9月25日中秋假期首日火车票；9月17日将开启10月1日国庆首日车票预售；9月24日可购买10月8日假期返程车票。有出行计划的旅客可提前在12306APP设置购票提醒，精准把握售票节点。\n据客流研判，今年双节公众出行意愿强烈，旅游休闲、返乡探亲客流高度集中，铁路客流整体将持续高位运行。从目前售票数据来看，成都前往攀西、宜宾、泸州、重庆、贵阳、广元、黄龙九寨等热门旅游、城际方向的高峰时段车票尤为紧俏，部分热门车次已快速售罄。"}, {"id": "069ccba9ea", "section": "四川要闻动态", "title": "华西秋雨今年“姗姗来迟”，川渝贵雨量偏多，警惕绵绵阴雨风险丨太好“科”了", "url": "https://sichuan.scol.com.cn/ggxw/202609/83320320.html", "host": "sichuan.scol.com.cn", "hasClip": false, "preview": ""}];
+const KEY = "kaogong-gold-2026-09-11";
+const RKEY = "kaogong-gold-2026-09-11-reasons";
+let labels = JSON.parse(localStorage.getItem(KEY) || "{}");
+let reasons = JSON.parse(localStorage.getItem(RKEY) || "{}");
+let focusIdx = 0;
+
+function render(){
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+  DATA.forEach((it, i) => {
+    const v = labels[it.id];
+    const el = document.createElement("div");
+    el.className = "card" + (v ? " done " + (v === "in" ? "in" : "out") : "");
+    el.id = "c" + i;
+    const prevCls = it.hasClip ? "prev" : "prev noclip";
+    const prevTxt = it.hasClip ? esc(it.preview || "(正文为空)") : "⚠️ 剪藏失败，无正文预览（请按标题判断）";
+    const rv = reasons[it.id] || "";
+    const ph = v === "in"
+      ? "为什么进池？（必填：它是什么类型的素材——观点表述 / 政策落点 / 论证结构 / 案例 / 重点领域？）"
+      : v === "out" ? "为什么不进？（可选，一句话）" : "先标注进 / 不进，再写理由";
+    el.innerHTML = `
+      <div class="meta">
+        <span class="tag">${esc(it.section)}</span>
+        <span class="tag host">${esc(it.host)}</span>
+        <span>#${i + 1}</span>
+      </div>
+      <h3>${esc(it.title)}</h3>
+      <div class="${prevCls}">${prevTxt}</div>
+      <div class="acts">
+        <button data-v="in" class="${v === "in" ? "on" : ""}" onclick="mark(${i},'in')">✅ 进池</button>
+        <button data-v="out" class="${v === "out" ? "on" : ""}" onclick="mark(${i},'out')">❌ 不进池</button>
+        <a href="${esc(it.url)}" target="_blank" rel="noopener">查看原文 ↗</a>
+      </div>
+      <textarea class="reason" rows="2" placeholder="${ph}"
+        oninput="saveReason(${i}, this.value)">${esc(rv)}</textarea>`;
+    list.appendChild(el);
+  });
+  updateStats();
+}
+function esc(s){return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function saveReason(i, v){
+  reasons[DATA[i].id] = v;
+  localStorage.setItem(RKEY, JSON.stringify(reasons));
+  updateStats();
+}
+function mark(i, v){
+  const id = DATA[i].id;
+  if (labels[id] === v) delete labels[id]; else labels[id] = v;
+  localStorage.setItem(KEY, JSON.stringify(labels));
+  render();
+  if (v === "in" || v === "out") {
+    const ta = document.querySelector("#c" + i + " .reason");
+    if (ta) { ta.focus(); }
+  }
+}
+function updateStats(){
+  const vals = Object.values(labels);
+  const nin = vals.filter(v => v === "in").length;
+  const nout = vals.filter(v => v === "out").length;
+  const done = nin + nout;
+  const nReason = Object.values(reasons).filter(r => r && r.trim()).length;
+  document.getElementById("prog").textContent = done + " / " + DATA.length;
+  document.getElementById("fill").style.width = (done / DATA.length * 100) + "%";
+  document.getElementById("sIn").textContent = nin;
+  document.getElementById("sOut").textContent = nout;
+  document.getElementById("sLeft").textContent = DATA.length - done;
+  document.getElementById("sReason").textContent = nReason;
+  const ins = DATA.filter(it => labels[it.id] === "in").map(it => it.title).join(" / ");
+  document.getElementById("inList").textContent = ins || "（还没标）";
+}
+function exportJSON(){
+  const rows = DATA.map(it => ({id: it.id, verdict: labels[it.id] || null, reason: (reasons[it.id] || "").trim() || null, section: it.section, host: it.host, title: it.title, url: it.url}));
+  const missing = rows.filter(r => r.verdict === "in" && !r.reason);
+  const msg = missing.length
+    ? "还有 " + missing.length + " 篇进池的没写理由：\n" + missing.map(r => "· " + r.title.slice(0, 24)).join("\n") + "\n\n仍要导出吗？（理由可以之后再补）"
+    : null;
+  const go = () => {
+    const blob = new Blob([JSON.stringify({date: "2026-09-11", labels: rows}, null, 2)], {type: "application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "gold-labels-2026-09-11.json";
+    a.click();
+    navigator.clipboard && navigator.clipboard.writeText(JSON.stringify(rows.filter(r => r.verdict)));
+  };
+  if (msg && !confirm(msg)) return; else go();
+}
+function resetAll(){ if(confirm("清空全部标注与理由？")){ labels = {}; reasons = {}; localStorage.removeItem(KEY); localStorage.removeItem(RKEY); render(); } }
+document.addEventListener("keydown", e => {
+  const t = e.target;
+  const typing = t && (t.tagName === "TEXTAREA" || t.tagName === "INPUT");
+  if (e.key === "Escape" && typing) { t.blur(); return; }
+  if (typing) return;  // 打理由时不触发快捷键（1/2/方向键都是正文输入）
+  if (e.key === "1" || e.key === "2") { mark(focusIdx, e.key === "1" ? "in" : "out"); }
+  else if (e.key === "ArrowRight") { focusIdx = Math.min(focusIdx + 1, DATA.length - 1); scrollTo(); }
+  else if (e.key === "ArrowLeft") { focusIdx = Math.max(focusIdx - 1, 0); scrollTo(); }
+});
+function scrollTo(){
+  const el = document.getElementById("c" + focusIdx);
+  if (el) el.scrollIntoView({block: "center", behavior: "smooth"});
+}
+render();
+</script>
+</body>
+</html>
