@@ -18,7 +18,7 @@ async function serveAuthenticatedSession(page: Page) {
 
 async function fulfillProfile(route: Route) {
   await route.fulfill({
-    json: ok({ name: "小考", email: "123456@qq.com", avatar: "😀", subscribed: false }),
+    json: ok({ name: "小考", email: "123456@qq.com", avatar: "avatar-3", subscribed: false }),
   });
 }
 

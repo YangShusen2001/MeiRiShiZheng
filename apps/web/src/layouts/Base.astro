@@ -92,7 +92,7 @@ const reviewCardsJson = JSON.stringify(listCards());
           <a class="foot-brand" href="/">
             <svg class="foot-mark" viewBox="0 0 24 24" aria-hidden="true">
               <rect width="24" height="24" rx="6" />
-              <path d="M8 7.5v9M16 7.5v9M8 12h8" fill="none" stroke-width="1.8" stroke-linecap="round" />
+              <path d="M12 7L8.8 16.4M12.1 13.7L16.4 15.6" fill="none" stroke-width="1.9" stroke-linecap="round" />
             </svg>
             <span class="foot-name">每日时政 · 时政小助手</span>
           </a>
@@ -109,17 +109,43 @@ const reviewCardsJson = JSON.stringify(listCards());
         </div>
       </div>
     </footer>
-    <!-- 底部 Tab 导航（P3）：仅移动端显示；桌面端隐藏 -->
+    <!-- 底部 Tab 导航：仅移动端显示；桌面端隐藏。
+         图形全部照画布 3:1511 的矢量形状与尺寸画（首页 13×13.6 / 复习 13.6×12.8 /
+         收藏书签 9.2×13 / 我的 6.8 圆 + 12.8 肩线），一个 emoji 都不用：
+         emoji 是彩色位图，跟不了令牌、做不了选中态过渡，换个平台还长不一样。
+         项数也照画布取 4 项——画布把搜索放顶栏搜索框，底导只留四个去处。 -->
     <nav class="tabbar" id="tabbar" aria-label="主导航">
-      <a href="/" data-tab="home"><span class="tab-ic">🏠</span><span>首页</span></a>
-      <a href="/search/" data-tab="search"><span class="tab-ic">🔍</span><span>搜索</span></a>
-      <a href="/practice/" data-tab="practice"><span class="tab-ic">✏️</span><span>每日一练</span></a>
-      <a href="/favorites/" data-tab="fav"><span class="tab-ic">⭐</span><span>收藏</span></a>
-      <a href="/profile/" data-tab="me"><span class="tab-ic">👤</span><span>我的</span></a>
+      <a href="/" data-tab="home">
+        <svg class="tab-ic" viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M3.5 8.4 10 3.4l6.5 5V17H3.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
+        </svg>
+        <span>首页</span>
+      </a>
+      <a href="/practice/" data-tab="practice">
+        <svg class="tab-ic" viewBox="0 0 20 20" aria-hidden="true">
+          <rect x="3.2" y="3.6" width="13.6" height="12.8" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.6"></rect>
+          <path d="M7.4 10.3l1.9 1.9 3.5-3.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <span>复习</span>
+      </a>
+      <a href="/favorites/" data-tab="fav">
+        <svg class="tab-ic" viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M5.4 3.6h9.2v13L10 13.2l-4.6 3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
+        </svg>
+        <span>收藏</span>
+      </a>
+      <a href="/profile/" data-tab="me">
+        <svg class="tab-ic" viewBox="0 0 20 20" aria-hidden="true">
+          <circle cx="10" cy="7" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
+          <path d="M3.6 17a6.4 5.4 0 0 1 12.8 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+        </svg>
+        <span>我的</span>
+      </a>
     </nav>
     <script>
       import { api } from "../lib/api";
       import { initReview } from "../lib/review";
+      import { AVATAR_MARK, avatarIndex, avatarVar } from "../lib/avatar";
 
       // 主题切换：默认 / 阅读 / 护眼 / 深色（浅色系 + 深色），localStorage 记忆；无记忆跟随系统
       // 深色切换在迁移最后一步开启，所以这段现在是惰性的（themeToggle 为 null 时整段跳过）。
@@ -147,12 +173,14 @@ const reviewCardsJson = JSON.stringify(listCards());
         const session = await api.me();
         if (session.ok && session.data) {
           box.textContent = "";
-          // 确定性 emoji 头像：对邮箱哈希 → 固定头像（微软 Fluent 风格回退原生 emoji）
-          const AVATARS = ["🦊", "🐼", "🐯", "🦁", "🐨", "🐸", "🐙", "🦉", "🐢", "🦋", "🐳", "🦄", "🐧", "🐹", "🐰", "🦅"];
-          const hash = session.data.email.split("").reduce((acc, ch) => (acc * 31 + ch.charCodeAt(0)) >>> 0, 0);
+          // 头像（画布 3:2027）：身份底色圆 + 品牌字形，不用 emoji。
+          // ⚠️ `/api/auth/session` 目前只回 { id, email }，拿不到用户挑的那一格，
+          // 所以顶栏走邮箱哈希（确定性：同一邮箱永远得同一格）。
+          // 想让它跟随「我的」里选的色，得给 session 契约补 `avatar` —— 归到接 API 那一步。
           const avatar = document.createElement("span");
           avatar.className = "nav-avatar";
-          avatar.textContent = AVATARS[hash % AVATARS.length]!;
+          avatar.style.setProperty("--av", avatarVar(avatarIndex(null, session.data.email)));
+          avatar.innerHTML = AVATAR_MARK;
           avatar.setAttribute("aria-hidden", "true");
           const link = document.createElement("a");
           link.href = "/profile/";

@@ -288,31 +288,40 @@ def check_hue_ring(rep: Report, tokens: dict) -> None:
                 rep.warn(f"[色相环] {theme}：brand 压 {bg_key} 仅 {got:.2f}，偏低")
 
 
-# ─────────────────── 4b. 面板色族主题不变式 ───────────────────
+# ─────────────────── 4b. 不随主题翻转的色族不变式 ───────────────────
 
 
 def check_panel_invariance(rep: Report, tokens: dict) -> None:
-    """panel* 面板色族必须两套主题同值。
+    """panel* / avatar_* 两族必须两套主题同值。
 
     这条不变式是别的检查的前提：check_wcag 只跑一遍面板对比度（拿浅色代表），
     一旦有人为了「修深色」只改 dark 块里的 panel*，面板就会在深色下偷偷换色，
     而对比度断言仍在拿旧值算 —— 于是门禁静默失效。宁可直接失败。
+
+    avatar_* 的理由不同但同样硬：那是**用户自己挑的那一格**。切主题时换成另一种颜色，
+    等于把用户的选择抹掉。所以两族共用这一条检查，只是失败信息里的族名不同。
     """
-    names = tokens["audit"]["panelTokens"]
+    families = {
+        "面板": tokens["audit"]["panelTokens"],
+        "头像": tokens["audit"]["avatarTokens"],
+    }
     light, dark = tokens["color"]["light"], tokens["color"]["dark"]
     mismatched: list[dict[str, str]] = []
-    for key in names:
-        if key not in light or key not in dark:
-            rep.fail(f"[面板] 令牌缺失：{key} 必须在 color.light 与 color.dark 同时存在")
-            continue
-        if light[key].upper() != dark[key].upper():
-            mismatched.append({"token": key, "light": light[key], "dark": dark[key]})
-    rep.checks["panel_tokens"] = len(names)
+    total = 0
+    for family, names in families.items():
+        total += len(names)
+        for key in names:
+            if key not in light or key not in dark:
+                rep.fail(f"[{family}] 令牌缺失：{key} 必须在 color.light 与 color.dark 同时存在")
+                continue
+            if light[key].upper() != dark[key].upper():
+                mismatched.append({"family": family, "token": key, "light": light[key], "dark": dark[key]})
+    rep.checks["panel_tokens"] = total
     rep.checks["panel_invariance_violations"] = mismatched
     for item in mismatched:
         rep.fail(
-            f"[面板] {item['token']} 两套主题取值不同（{item['light']} / {item['dark']}）"
-            " —— panel* 是品牌面，不随主题翻转"
+            f"[{item['family']}] {item['token']} 两套主题取值不同（{item['light']} / {item['dark']}）"
+            " —— 这一族不随主题翻转"
         )
 
 
@@ -387,6 +396,51 @@ def check_scale(rep: Report, tokens: dict) -> None:
         rep.fail(f"[标尺] 非令牌字号 {size}px 出现在：{', '.join(sorted(where))}")
     for value, where in sorted(bad_line.items()):
         rep.fail(f"[标尺] 非令牌行高 {value} 出现在：{', '.join(sorted(where))}")
+
+
+# ─────────────────── 6b. CSS 变量引用可解析性（硬失败） ───────────────────
+
+
+CSS_VAR_DEF = re.compile(r"(--[a-z0-9][a-z0-9-]*)\s*:")
+CSS_VAR_USE = re.compile(r"var\(\s*(--[a-z0-9][a-z0-9-]*)\s*(,)?")
+
+
+def check_css_var_refs(rep: Report, tokens: dict) -> None:
+    """global.css 与 *.astro 里 `var(--x)` 用到的变量，必须真的有人定义（或带兜底值）。
+
+    为什么算硬失败：CSS 变量取不到值时**不报错**，`color: var(--brand)` 会静默回退成继承值。
+    本轮就踩了这个 —— 别名层暴露的名字是 `--primary`，我写了 `--brand`，
+    结果底部导航的当前项跟未选中项一个颜色。页面看着「正常」，
+    只有量 computed style 才看得出来 —— 正是门禁该拦的那类问题。
+
+    带兜底值的用法（`var(--av, var(--primary-soft))`）**不算违规**：那是有意写的降级，
+    典型场景是页面用 style 属性注入（`--av: var(--avatar-3)`），静态扫描看不到定义处。
+    """
+    web_src = (REPO / tokens["audit"]["webConsumer"]).resolve().parent.parent
+    sources = [REPO / tokens["audit"]["webGenerated"], REPO / tokens["audit"]["webConsumer"]]
+    sources += sorted(web_src.rglob("*.astro"))
+
+    defined: set[str] = set()
+    for path in sources:
+        if path.exists():
+            defined |= set(CSS_VAR_DEF.findall(strip_comments(path.read_text(encoding="utf-8"))))
+
+    missing: dict[str, set[str]] = {}
+    for path in sources:
+        if not path.exists():
+            continue
+        for name, fallback in CSS_VAR_USE.findall(strip_comments(path.read_text(encoding="utf-8"))):
+            if fallback or name in defined:
+                continue
+            missing.setdefault(name, set()).add(path.name)
+
+    rep.checks["undefined_css_vars"] = {k: sorted(v) for k, v in sorted(missing.items())}
+    rep.checks["css_var_definitions"] = len(defined)
+    for name, where in sorted(missing.items()):
+        rep.fail(
+            f"[CSS 变量] {name} 既无定义也无兜底值（出现在：{', '.join(sorted(where))}）"
+            " —— var() 取不到值会静默回退，界面上只会表现为「颜色不对」"
+        )
 
 
 def check_raw_hex(rep: Report, tokens: dict) -> None:
@@ -489,6 +543,7 @@ def main() -> int:
     check_panel_invariance(rep, tokens)
     check_admin_wiring(rep, tokens)
     check_scale(rep, tokens)
+    check_css_var_refs(rep, tokens)
     check_raw_hex(rep, tokens)
     check_harmony_drift(rep, tokens)
 
@@ -532,13 +587,18 @@ def main() -> int:
     if href := rep.checks.get("admin_tokens_href"):
         print(f"后台接线    link href = {href}")
     print(
-        f"面板色族    {rep.checks.get('panel_tokens', 0)} 项主题不变"
+        f"不翻转色族  {rep.checks.get('panel_tokens', 0)} 项主题不变"
         f"（违例 {len(rep.checks.get('panel_invariance_violations') or [])}）"
     )
     for label in ("Web 全局样式", "后台页面"):
         count = rep.checks.get(f"raw_hex_{label}")
         if count is not None:
             print(f"裸 hex      {label} {count} 处")
+    undefined = rep.checks.get("undefined_css_vars") or {}
+    print(
+        f"CSS 变量    {rep.checks.get('css_var_definitions', 0)} 个定义 / "
+        f"{len(undefined)} 个无定义且无兜底"
+    )
     off_font = rep.checks.get("off_scale_font") or {}
     off_line = rep.checks.get("off_scale_line") or {}
     print(

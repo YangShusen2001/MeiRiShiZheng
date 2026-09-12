@@ -10,10 +10,10 @@ import Base from "../layouts/Base.astro";
 
 <script>
   import { api } from "../lib/api";
+  import { AVATAR_COUNT, AVATAR_MARK, avatarIndex, avatarVar } from "../lib/avatar";
 
   const esc = (s: string): string =>
     String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] ?? c));
-  const AVATARS = ["😀", "😎", "🤓", "🐱", "🐼", "🦊", "🦁", "🐯"];
   const box = document.getElementById("profile-box")!;
 
   const [profileResult, subscriptionResult] = await Promise.all([
@@ -24,19 +24,24 @@ import Base from "../layouts/Base.astro";
     box.innerHTML = '<p role="alert">未登录，请先 <a href="/login/">登录</a>。</p>';
   } else {
     const p = profileResult.data;
+    // 头像（画布 3:2027）：身份底色圆 + 品牌字形。存的 avatar-N 优先，老 emoji 数据走邮箱哈希。
+    const currentAvatar = avatarIndex(p.avatar, p.email);
     const subscription = subscriptionResult.ok ? subscriptionResult.data : null;
     const subscribed = subscription?.subscribed ?? p.subscribed;
     const deliveryAvailable = subscription?.deliveryAvailable ?? false;
     const subscriptionDisabled = !subscription || (!deliveryAvailable && !subscribed);
     box.innerHTML = `
       <div class="profile-head">
-        <span class="profile-avatar">${esc(p.avatar || "😀")}</span>
+        <span class="profile-avatar" style="--av: ${avatarVar(currentAvatar)}">${AVATAR_MARK}</span>
         <div><b>${esc(p.email)}</b><p class="item-summary">已验证 QQ 邮箱</p></div>
       </div>
       <div class="auth-form">
         <label>姓名<input id="p-name" value="${esc(p.name)}" maxlength="32" /></label>
         <label>头像
-          <div class="avatar-picker">${AVATARS.map((a) => `<button type="button" class="avatar-opt ${a === p.avatar ? "on" : ""}" data-a="${a}" aria-pressed="${a === p.avatar}">${a}</button>`).join("")}</div>
+          <div class="avatar-picker">${Array.from({ length: AVATAR_COUNT }, (_, i) => {
+            const on = i === currentAvatar;
+            return `<button type="button" class="avatar-opt${on ? " on" : ""}" style="--av: ${avatarVar(i)}" data-a="avatar-${i + 1}" aria-label="头像配色 ${i + 1}" aria-pressed="${on}">${AVATAR_MARK}</button>`;
+          }).join("")}</div>
         </label>
         <div class="auth-actions"><button type="button" class="btn btn--solid" id="p-save">保存个人资料</button></div>
         <p id="p-msg" class="item-summary" role="status" aria-live="polite"></p>
@@ -71,7 +76,7 @@ import Base from "../layouts/Base.astro";
     const profileMessage = document.getElementById("p-msg") as HTMLElement;
     profileButton.addEventListener("click", async () => {
       const name = (document.getElementById("p-name") as HTMLInputElement).value.trim();
-      const avatar = box.querySelector(".avatar-opt.on")?.getAttribute("data-a") || "😀";
+      const avatar = box.querySelector(".avatar-opt.on")?.getAttribute("data-a") || `avatar-${currentAvatar + 1}`;
       profileButton.disabled = true;
       profileButton.textContent = "正在保存…";
       profileMessage.textContent = "";

@@ -1,5 +1,5 @@
 /* 自动生成，请勿手改：packages/design-tokens/generate.mjs → apps/web/src/styles/tokens.generated.css */
-/* SOURCE_SHA256:7c9d18d7c69ff92f4d88c21292632119c3995fd41af2c7ca780d35600322f0a5 */
+/* SOURCE_SHA256:c107766ad5eab6ed9c5ee939e1957c5212e9a5e464f925f64dbe582dc1a65add */
 /* 规范 docs/design/design-system-v3.md · v3 · 2026-09-12 */
 
 /* 浅色：暖纸底 */
@@ -37,6 +37,12 @@
   --color-panel-meta: #AEB6D8;
   --color-panel-faint: #8E97BE;
   --color-panel-on-btn: #F5F1E8;
+  --color-avatar-1: #E4E7F5;
+  --color-avatar-2: #C9E7CE;
+  --color-avatar-3: #FFE7A0;
+  --color-avatar-4: #B9DEE6;
+  --color-avatar-5: #F8C8D8;
+  --color-avatar-6: #EAE4D6;
   --highlight-exam-point: #FFE7A0;
   --highlight-viewpoint: #C9E7CE;
   --highlight-term: #B9DEE6;
@@ -124,6 +130,12 @@
   --color-panel-meta: #AEB6D8;
   --color-panel-faint: #8E97BE;
   --color-panel-on-btn: #F5F1E8;
+  --color-avatar-1: #E4E7F5;
+  --color-avatar-2: #C9E7CE;
+  --color-avatar-3: #FFE7A0;
+  --color-avatar-4: #B9DEE6;
+  --color-avatar-5: #F8C8D8;
+  --color-avatar-6: #EAE4D6;
   --highlight-exam-point: #574818;
   --highlight-viewpoint: #2C4C31;
   --highlight-term: #285058;

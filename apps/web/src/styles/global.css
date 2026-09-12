@@ -83,6 +83,16 @@
   --panel-meta: var(--color-panel-meta);
   --panel-faint: var(--color-panel-faint);
   --panel-on-btn: var(--color-panel-on-btn);
+
+  /* 用户自选身份色（画布 3:2043-3:2048 的六个头像色块）。
+     跟 panel* 同理不随主题翻转 —— 头像底是用户自己挑的那一格，
+     切主题时换成另一种颜色，等于把用户的选择抹掉。 */
+  --avatar-1: var(--color-avatar-1);
+  --avatar-2: var(--color-avatar-2);
+  --avatar-3: var(--color-avatar-3);
+  --avatar-4: var(--color-avatar-4);
+  --avatar-5: var(--color-avatar-5);
+  --avatar-6: var(--color-avatar-6);
 }
 
 [data-theme="dark"] .invite-modal { background: rgba(0, 0, 0, 0.55); }
@@ -661,7 +671,20 @@ p { margin: 0; }
 /* ===== 登录 / 顶栏账号 ===== */
 .nav-auth { display: inline-flex; align-items: center; gap: var(--s-1); color: var(--sub); }
 .nav-invite { font-size: var(--font-meta); color: var(--sub); white-space: nowrap; }
-.nav-avatar { font-size: var(--font-title-s); line-height: 1; }
+/* 登录态头像（画布 3:2027）：品牌字形 + 身份底色圆，不用 emoji。
+   emoji 是彩色位图 —— 跟不了令牌、切主题不跟随、三端形状还不一样。 */
+.nav-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-full);
+  background: var(--av, var(--primary-soft));
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+.nav-avatar svg { width: 62%; height: 62%; display: block; }
 .nav-logout {
   border: 1px solid var(--line);
   background: transparent;
@@ -701,27 +724,39 @@ p { margin: 0; }
 
 /* ===== 个人中心 ===== */
 .profile-head { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-4); }
+/* 头像（画布 3:2027 的 64 / 3:1937 的 56）：身份底色圆 + 品牌字形描边。
+   底色取 --av —— 页面按 avatar-N 注入 `style="--av: var(--avatar-N)"`；
+   字形固定 --primary，这样六个色块共用同一支图形，只有底色在变。 */
 .profile-avatar {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--primary-soft);
+  background: var(--av, var(--primary-soft));
+  color: var(--primary);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  flex: 0 0 auto;
 }
-.avatar-picker { display: grid; grid-template-columns: repeat(4, 44px); gap: var(--s-2); }
+.profile-avatar svg { width: 62%; height: 62%; display: block; }
+/* 六档身份色（画布 3:2042 是 6 格；线上原有 8 个 emoji，按画布收敛为 6） */
+.avatar-picker { display: grid; grid-template-columns: repeat(6, 44px); gap: var(--s-2); }
 .avatar-opt {
   width: 44px;
   height: 44px;
   border: 1px solid var(--line);
-  background: transparent;
+  background: var(--av, var(--primary-soft));
+  color: var(--primary);
   border-radius: 50%;
   cursor: pointer;
-  font-size: var(--font-title-m);
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
-.avatar-opt.on { border-color: var(--primary); background: var(--primary-soft); }
+.avatar-opt svg { width: 62%; height: 62%; display: block; }
+/* 选中态（画布 3:2043）：底色不变，描边换成品牌色 */
+.avatar-opt.on { border-color: var(--primary); border-width: 2px; }
 .auth-form .sub-row { display: flex; flex-direction: row; align-items: center; gap: var(--s-2); font-size: var(--font-meta); color: var(--sub); }
 .sub-row input { width: auto; height: auto; margin: 0; }
 .sub-row:has(input:disabled) { color: var(--mut); }
@@ -1323,14 +1358,20 @@ blockquote {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2px;
-    color: var(--mut);
+    gap: 3px;
+    /* 画布 3:1511：未选中 #5A554E（= --sub），选中 #3A4785（= --brand），
+       文字 11px／Medium + Regular。别用 --mut，它比画布浅一档。 */
+    color: var(--sub);
     font-size: var(--font-micro);
     text-decoration: none;
     min-height: 44px;
   }
-  .tabbar a .tab-ic { font-size: var(--font-title-s); line-height: 1; }
-  .tabbar a.on { color: var(--primary); font-weight: 600; }
+  /* 20×20 容器 + 现成描边：颜色交给 currentColor 继承，选中态不用换图标。 */
+  .tabbar a .tab-ic { display: block; width: 20px; height: 20px; }
+  /* 用 --primary 而不是 --brand：本文件走的是「别名层」，令牌名是 --color-brand，
+     旧名 --primary 才是这一层暴露的名字。写 var(--brand) 取不到值 → 静默回退成继承色（墨色），
+     当前项就跟未选中项一个颜色了。 */
+  .tabbar a.on { color: var(--primary); font-weight: 500; }
   /* 内容与页脚避让 Tab 栏。
      避让必须挂在「拥有底色的那一层」：
      · .wrap--bleed（首页全幅横带）不加 —— 页脚自己已经避让过了，
