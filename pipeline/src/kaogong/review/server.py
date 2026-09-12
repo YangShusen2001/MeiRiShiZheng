@@ -30,7 +30,7 @@ from ..fonts import LOGO_TEXT, NAV_TEXT, load_config, save_config, safe_stem, su
 from ..pipeline import backfill_summaries, build_content, clip_content, practice_content, quality_gate, summary_content
 from ..reanalyze import reanalyze_content, refresh_report_stats
 from ..review_agent import apply_decisions, review_date
-from ..sources import load_noise_title, load_sources, source_to_dict
+from ..sources import load_all_sources, load_noise_title, source_to_dict
 from ..clip import clip_article
 from ..article_ai import analyze_article
 from ..deepseek import load_config as load_ai_config
@@ -692,7 +692,9 @@ def api_config() -> dict:
     """返回当前站点配置：新闻源（含默认序列化）、内容筛选关键词、显示开关。"""
     cfg = load_site_config()
     return {
-        "sources": [source_to_dict(s) for s in load_sources(cfg)],
+        # v2 §2.3：返回全部源（含 background）——若只回 core 源，后台保存时会把
+        # 移出源从 config.json 里静默删掉，破坏 tier 机制的可逆性
+        "sources": [source_to_dict(s) for s in load_all_sources(cfg)],
         "noiseTitle": list(load_noise_title(cfg)),
         "carousel": bool(cfg.get("carousel", True)),
         "aiBanner": bool(cfg.get("aiBanner", True)),

@@ -70,6 +70,8 @@ class Candidate:
     title: str
     url: str
     date: dt.date
-    slot: str          # 栏目槽位：pol/gov/shi/qst/xh/rm/byt/gd/sc/js/gdp/nf
+    slot: str          # 栏目槽位：pol/gov/shi/qst/xh/rm/byt/essay/gdp/nf
     summary: str = ""
     key: bool = False
+    # 产出该候选的源名（v2 §3 每源配额的分组键；为空时回退 URL host）
+    source_name: str = ""

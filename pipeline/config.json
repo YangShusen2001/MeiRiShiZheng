@@ -12,6 +12,9 @@
       "max_pages": 6,
       "page_template": "",
       "fallback_re": "",
+      "tier": "core",
+      "column_keep_re": "",
+      "column_drop_re": "",
       "date_fn": "_yyyymmdd"
     },
     {
@@ -26,6 +29,9 @@
       "max_pages": 6,
       "page_template": "",
       "fallback_re": "",
+      "tier": "core",
+      "column_keep_re": "",
+      "column_drop_re": "",
       "date_fn": "_yyyymmdd"
     },
     {
@@ -40,6 +46,9 @@
       "max_pages": 6,
       "page_template": "",
       "fallback_re": "",
+      "tier": "core",
+      "column_keep_re": "",
+      "column_drop_re": "",
       "date_fn": "_yyyymmdd"
     },
     {
@@ -56,6 +65,9 @@
       "max_pages": 6,
       "page_template": "",
       "fallback_re": "",
+      "tier": "core",
+      "column_keep_re": "",
+      "column_drop_re": "",
       "date_fn": "_n1_yyyymmdd"
     },
     {
@@ -70,20 +82,26 @@
       "max_pages": 6,
       "page_template": "",
       "fallback_re": "",
+      "tier": "core",
+      "column_keep_re": "",
+      "column_drop_re": "",
       "date_fn": "_yyyymmdd"
     },
     {
       "name": "大洋网广东",
-      "slot": "gd",
+      "slot": "essay",
       "page": "https://www.dayoo.com/",
       "href_re": "/guangdong/(\\d{4})(\\d{2})/(\\d{2})/",
       "mode": "url",
       "title_min": 1,
       "title_drop": [],
-      "limit": 8,
+      "limit": 6,
       "max_pages": 6,
       "page_template": "",
       "fallback_re": "",
+      "tier": "core",
+      "column_keep_re": "",
+      "column_drop_re": "(消费券|优惠券)",
       "date_fn": "_ymd"
     },
     {
@@ -98,6 +116,9 @@
       "max_pages": 6,
       "page_template": "",
       "fallback_re": "",
+      "tier": "background",
+      "column_keep_re": "",
+      "column_drop_re": "",
       "date_fn": "_ymd"
     },
     {
@@ -108,10 +129,13 @@
       "mode": "list_pages",
       "title_min": 1,
       "title_drop": [],
-      "limit": 20,
-      "max_pages": 8,
+      "limit": 8,
+      "max_pages": 2,
       "page_template": "",
-      "fallback_re": ""
+      "fallback_re": "",
+      "tier": "core",
+      "column_keep_re": "",
+      "column_drop_re": ""
     },
     {
       "name": "新华网时政",
@@ -121,10 +145,13 @@
       "mode": "url",
       "title_min": 1,
       "title_drop": [],
-      "limit": 15,
-      "max_pages": 6,
+      "limit": 8,
+      "max_pages": 2,
       "page_template": "",
       "fallback_re": "",
+      "tier": "core",
+      "column_keep_re": "",
+      "column_drop_re": "",
       "date_fn": "_yyyymmdd"
     },
     {
@@ -138,7 +165,10 @@
       "limit": 15,
       "max_pages": 6,
       "page_template": "",
-      "fallback_re": ""
+      "fallback_re": "",
+      "tier": "core",
+      "column_keep_re": "",
+      "column_drop_re": ""
     },
     {
       "name": "中国政府网政策",
@@ -151,7 +181,10 @@
       "limit": 10,
       "max_pages": 6,
       "page_template": "",
-      "fallback_re": "/zhengce/content/(\\d{6})/"
+      "fallback_re": "/zhengce/content/(\\d{6})/",
+      "tier": "core",
+      "column_keep_re": "",
+      "column_drop_re": ""
     },
     {
       "name": "广东政府网要闻",
@@ -164,7 +197,10 @@
       "limit": 12,
       "max_pages": 6,
       "page_template": "",
-      "fallback_re": ""
+      "fallback_re": "",
+      "tier": "background",
+      "column_keep_re": "",
+      "column_drop_re": ""
     },
     {
       "name": "广东政策解读",
@@ -174,10 +210,13 @@
       "mode": "pubdate",
       "title_min": 1,
       "title_drop": [],
-      "limit": 15,
+      "limit": 5,
       "max_pages": 6,
       "page_template": "",
-      "fallback_re": ""
+      "fallback_re": "",
+      "tier": "core",
+      "column_keep_re": "",
+      "column_drop_re": ""
     },
     {
       "name": "南方时评",
@@ -187,14 +226,17 @@
       "mode": "pubdate",
       "title_min": 1,
       "title_drop": [],
-      "limit": 10,
+      "limit": 3,
       "max_pages": 6,
       "page_template": "",
-      "fallback_re": ""
+      "fallback_re": "",
+      "tier": "core",
+      "column_keep_re": "",
+      "column_drop_re": ""
     },
     {
       "name": "四川全媒快讯",
-      "slot": "sc",
+      "slot": "essay",
       "page": "https://sichuan.scol.com.cn/ggxw/",
       "href_re": "ggxw/(\\d{6})/",
       "mode": "pubdate",
@@ -203,7 +245,10 @@
       "limit": 12,
       "max_pages": 6,
       "page_template": "",
-      "fallback_re": "ggxw/(\\d{6})/"
+      "fallback_re": "ggxw/(\\d{6})/",
+      "tier": "core",
+      "column_keep_re": "[丨｜](新思想自习室|天府新视界)",
+      "column_drop_re": ""
     },
     {
       "name": "天府评论",
@@ -216,7 +261,10 @@
       "limit": 12,
       "max_pages": 6,
       "page_template": "",
-      "fallback_re": ""
+      "fallback_re": "",
+      "tier": "background",
+      "column_keep_re": "",
+      "column_drop_re": ""
     },
     {
       "name": "交汇点时评",
@@ -232,7 +280,10 @@
       "limit": 10,
       "max_pages": 6,
       "page_template": "",
-      "fallback_re": ""
+      "fallback_re": "",
+      "tier": "background",
+      "column_keep_re": "",
+      "column_drop_re": ""
     }
   ],
   "noiseTitle": [
@@ -245,7 +296,8 @@
     "空天侦探社",
     "食情局",
     "成工之恋",
-    "川观解盘"
+    "川观解盘",
+    "消费券"
   ],
   "carousel": false,
   "aiBanner": true

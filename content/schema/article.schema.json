@@ -82,6 +82,16 @@
       "minLength": 1,
       "maxLength": 500
     },
+    "aiFocus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to"],
+      "properties": {
+        "from": { "type": "integer", "minimum": 0, "description": "起始段索引（闭区间，0 起）" },
+        "to": { "type": "integer", "minimum": 0, "description": "结束段索引（闭区间）" }
+      },
+      "description": "AI 段落聚焦（v2.1 §7.3）：整篇并非全部值得精读、仅连续若干段有政策阐释/考点价值时的段落范围；跨字段校验 0 ≤ from ≤ to < 段数在 validate_article_ai"
+    },
     "aiQuality": {
       "type": "object",
       "additionalProperties": false,

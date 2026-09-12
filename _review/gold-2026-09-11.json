@@ -1,0 +1,365 @@
+{
+  "date": "2026-09-11",
+  "labels": [
+    {
+      "id": "588533e84d",
+      "verdict": "out",
+      "reason": "他们两个的谈话太宏大了，而且除了谈话以外就没有别的信息了，对考生还有公务员没有什么帮助。",
+      "section": "全国时政要闻",
+      "host": "politics.people.com.cn",
+      "title": "国际打击电信网络诈骗联盟成立大会举行 王小洪出席并致辞",
+      "url": "http://politics.people.com.cn/n1/2026/0911/c1001-40796429.html"
+    },
+    {
+      "id": "ff7fb5de51",
+      "verdict": "out",
+      "reason": "这一个更像是某一个部的工作报告，就上次领导来视察他们写的一个报告，不合适。",
+      "section": "全国时政要闻",
+      "host": "politics.people.com.cn",
+      "title": "退役军人服务保障先进单位及个人表彰大会在京召开 谌贻琴出席并讲话",
+      "url": "http://politics.people.com.cn/n1/2026/0911/c1001-40796428.html"
+    },
+    {
+      "id": "50fb91dd80",
+      "verdict": "out",
+      "reason": "这应该也是某一个不是特别大的会议的一个致辞，代表不了什么，更多体现的是一种形式",
+      "section": "全国时政要闻",
+      "host": "politics.people.com.cn",
+      "title": "丁薛祥出席第十六次亚太经合组织能源部长会议开幕式并致辞",
+      "url": "http://politics.people.com.cn/n1/2026/0911/c1024-40796438.html"
+    },
+    {
+      "id": "0bd839c1d9",
+      "verdict": "out",
+      "reason": "就非常短的一句话，去拜访谁，宣布受谁邀请等等等等，没什么用。",
+      "section": "全国时政要闻",
+      "host": "politics.people.com.cn",
+      "title": "习近平将赴印度出席金砖国家领导人第十八次会晤",
+      "url": "http://politics.people.com.cn/n1/2026/0911/c1024-40796437.html"
+    },
+    {
+      "id": "d62be2b998",
+      "verdict": "out",
+      "reason": "总理作出的批示其实对考生没有很大的帮助，总书记也给了建议，但总体的量很少，就不建议把这篇列作我们的文章。",
+      "section": "全国时政要闻",
+      "host": "politics.people.com.cn",
+      "title": "深入排查整治各类火灾隐患 落实落细防范措施 坚决遏制重特大事故发生",
+      "url": "http://politics.people.com.cn/n1/2026/0911/c1024-40796436.html"
+    },
+    {
+      "id": "ec808afa83",
+      "verdict": "out",
+      "reason": "网页里是一些诗句，还有一个视频。",
+      "section": "全国时政要闻",
+      "host": "news.cn",
+      "title": "文化中国行丨千年溇港，藏着东方治水“密码”",
+      "url": "https://www.news.cn/politics/20260911/7f98f8c0e08c4c0e9503279d50edee52/c.html"
+    },
+    {
+      "id": "5686e3b171",
+      "verdict": "out",
+      "reason": "这个是一个新闻发布会的一个介绍，并不是中国知识产权行政执法十大案例的详情。",
+      "section": "全国时政要闻",
+      "host": "news.cn",
+      "title": "中国知识产权行政执法十大案例发布",
+      "url": "https://www.news.cn/politics/20260911/7a7c88d4e77d4d2c9a80d0718d52fd99/c.html"
+    },
+    {
+      "id": "ef44cf6075",
+      "verdict": "out",
+      "reason": "其实我挺想把这个文章列入我们的备选名单的，可是和备考好像没有特别大的关联，和政策也没有特别大的关联，你硬要说关联的话，它其实是和人工智能是相关的，但是他这个太细了一点。",
+      "section": "全国时政要闻",
+      "host": "news.cn",
+      "title": "首套海上保护区数据集面世",
+      "url": "https://www.news.cn/politics/20260911/0df3ecb0694e45fab51ab19170db1d90/c.html"
+    },
+    {
+      "id": "1428152df1",
+      "verdict": "in",
+      "reason": "政绩观是历年来常考的一个面试题，以及申论都会有的内容。坚持与正确政绩观，推进国防和军队化建设，是一个很宏观的题，里面有很多宏观的决策，是需要我们去了解的。",
+      "section": "全国时政要闻",
+      "host": "news.cn",
+      "title": "坚持以正确政绩观高质量推进国防和军队现代化——军队开展树立和践行正确政绩观学习教育取得明显成效",
+      "url": "https://www.news.cn/politics/20260911/fc09e139ec174d00b1183bcbe55fac4b/c.html"
+    },
+    {
+      "id": "ded9ac3b03",
+      "verdict": "in",
+      "reason": "这篇文章其实严格来说并不能入选，但是他最后面的两三段，有非常好的一个政策介绍，所以这个我是想列入进来的，那么在正式生成我们的文章的时候，我希望啊前面的可以不用标注那么多，重点在最后这三段里面。这也是人工审核的一个非常的价值所在。　\n立足宁夏绿电充足、算力资源富集的区位优势，无党派人士、西安交通大学电子科学与工程学院院长刘明建议，建立发电、输电、配电、用电多方协同联动工作机制，统筹算力中心建设、电力资源调配、产业成本管控，夯实电算协同产业发展基础。\n\n　　针对宁夏枸杞、葡萄酒等特色产业，无党派人士、上海市海外经济技术促进会会长张礼立建议，构建三产联动发展模式，搭建特色产业专属数字系统，以数字化赋能特色产业提质增效、提档升级。\n\n　　“久久为功、实干兴业。‘十五五’时期，宁夏紧扣铸牢中华民族共同体意识主线，聚焦高质量发展首要任务，迎来新的重大发展机遇。”包信和说，未来考察服务团将持续深化与宁夏的产学研合作，围绕重点领域，精准对接发展需求，落地技术、项目，持续激活创新动能，助力宁夏高质量发展。",
+      "section": "全国时政要闻",
+      "host": "news.cn",
+      "title": "凝智献策聚力 赋能塞上江南——党外院士专家与留学人员国情考察服务团走进宁夏",
+      "url": "https://www.news.cn/politics/20260911/289fce5980934ce18604525efd77d8aa/c.html"
+    },
+    {
+      "id": "42b52e2f23",
+      "verdict": "in",
+      "reason": "这一篇其实我也不是特别想放进来，可是他有几个非常好的政策的一个实施，或者说我们的做法吧，就是在省一层面的，比如广东、广西、河南，他们具体是怎么做的，从宏观的这个层面来推进，他们是怎么推进的，由上而下是怎么指导的等等。\n    深刻汲取事故教训，各地系统剖析安全生产过程中存在的薄弱环节，压紧压实安全生产防范举措，全力遏制类似事故再度发生。\n　广东省进一步健全企业自查、行业检查、专家核查、社会监督相结合的排查整治机制。广东省应急管理厅火灾防治管理处处长吴海亮说，将坚决贯彻落实习近平总书记重要指示精神，深入排查整治各类隐患，立足广东产业特点，紧盯工贸、危化品、建筑施工等重点领域，统筹隐患排查、监管创新与安全宣教，督促企业落实主体责任，守护人民群众生命财产安全。\n\n　　河北省在危化、工贸、矿山行业领域集中开展消防安全大检查，切实强化重点行业领域消防安全防控；天津市聚焦工贸企业可燃气体泄漏防控等关键点开展执法，推动企业压实主体责任；湖北省安委办集中公布一批涉及化工危化品、矿山、烟花爆竹等重点行业领域的典型违法案例，要求生产经营单位切实履行安全生产主体责任……各地紧盯重点行业领域和关键环节，举一反三开展隐患排查整治，持续加大监管执法力度。\n\n　　安全生产，贵在常抓不懈。当前，全国多地正在推进安全生产治本攻坚三年行动。以习近平总书记重要指示精神为指引，各地动真碰硬，依法依规严肃追究失职失责行为，把安全生产底线守得更牢，构建起更加坚实可靠的安全屏障。",
+      "section": "申论精读",
+      "host": "qstheory.cn",
+      "title": "全力救治善后 深入排查隐患",
+      "url": "https://www.qstheory.cn/20260911/c2228237449c4ee3adb3c6bee3d63e5d/c.html"
+    },
+    {
+      "id": "2a713d887b",
+      "verdict": "out",
+      "reason": "像这么一篇文章，大部分都是一张图片配一小行的文字，其实没有什么意义。它的作用更多的像是推广介绍家乡的一些产品，家乡的一些风情，偶尔放进来一篇，缓解一下心情，那也是挺好的，但是今天的话呢我就没有想把它放进来，就暂时先搁置一边。",
+      "section": "申论精读",
+      "host": "news.cn",
+      "title": "看产业蝶变 感受乡村振兴活力",
+      "url": "https://www.news.cn/politics/20260911/3e1135a5a6f343128571cc3cdfc4d8bb/c.html"
+    },
+    {
+      "id": "4851b2d233",
+      "verdict": "in",
+      "reason": "以数据来推断宏观，为什么现在年轻人不愿意学医？他从多个角度来释，从多个方面来解释。这是一种思维上的提升，深度剖析，是非常好的文章。",
+      "section": "申论精读",
+      "host": "banyuetan.org",
+      "title": "多校医学专业投档位次下滑 年轻人不愿意学医了吗？",
+      "url": "http://www.banyuetan.org/jrt/detail/20260911/1000200033134991789110073732613193_1.html"
+    },
+    {
+      "id": "4a47f6951f",
+      "verdict": "out",
+      "reason": "这一个文章更多的是介绍他们当地的一个情况，没有有关政策相关的，就好像舌尖上的中国的纪录片一样，更多的是介绍。",
+      "section": "申论精读",
+      "host": "banyuetan.org",
+      "title": "“麻风村”里的点灯人",
+      "url": "http://www.banyuetan.org/jrt/detail/20260911/1000200033134991789092305783608564_1.html"
+    },
+    {
+      "id": "9c52f627e4",
+      "verdict": "out",
+      "reason": "和上面的一篇是一样的，麻风村里的点灯人。",
+      "section": "申论精读",
+      "host": "opinion.southcn.com",
+      "title": "3万澳门人，为什么坚定选择横琴？",
+      "url": "https://opinion.southcn.com/node_87fa4020d8/0555f1cd2b.shtml"
+    },
+    {
+      "id": "828772806c",
+      "verdict": "in",
+      "reason": "在广东的发布会里，特别是黄坤明同志的，有非常多，可是要该怎么找到与之相匹配的政策相匹配的，然后文章里面的重点内容是一个很难的点。同时还要兼顾考点。\n\n像这一篇文章的前面几段他就明确提到：发展新型储能产业，是省市培育新质生产力的重要方向。后面就是举个例子，这篇文章的结构非常好，非常值得去看。",
+      "section": "广东要闻动态",
+      "host": "news.dayoo.com",
+      "title": "黄坤明到广州调研并主持召开座谈会",
+      "url": "https://news.dayoo.com/guangdong/202609/11/139996_55002284.htm"
+    },
+    {
+      "id": "333b9d6044",
+      "verdict": "out",
+      "reason": "全是数据，没有分析。",
+      "section": "广东要闻动态",
+      "host": "news.dayoo.com",
+      "title": "前8个月粤港澳大湾区内地9市进出口值同比增长21.9%",
+      "url": "https://news.dayoo.com/guangdong/202609/11/139996_55002377.htm"
+    },
+    {
+      "id": "fbb4608760",
+      "verdict": "out",
+      "reason": "发布会介绍，应该让人来审，像刚刚黄坤明的一个发布会报道，就必须保留，这个就必须去除，他这个度机器把持不好。",
+      "section": "广东要闻动态",
+      "host": "news.dayoo.com",
+      "title": "2026年APEC工商领导人峰会11月17日至18日在深圳举办",
+      "url": "https://news.dayoo.com/guangdong/202609/11/139996_55002262.htm"
+    },
+    {
+      "id": "6fc7bb2b94",
+      "verdict": "in",
+      "reason": "这篇文章比较偏向于民生方面，说的比较细碎，其实我也不是很想放起来，但是无奈它的结构非常的好，非常值得借鉴。",
+      "section": "广东要闻动态",
+      "host": "news.dayoo.com",
+      "title": "琴澳五载同心同行， “桃花源”写融合样本",
+      "url": "https://news.dayoo.com/guangdong/202609/11/139996_55002364.htm"
+    },
+    {
+      "id": "83532f1e7b",
+      "verdict": "out",
+      "reason": "广告，不要。",
+      "section": "广东要闻动态",
+      "host": "news.dayoo.com",
+      "title": "最高减500元！广东3000万元文旅消费券9月11日发放",
+      "url": "https://news.dayoo.com/guangdong/202609/11/139996_55002290.htm"
+    },
+    {
+      "id": "7312444984",
+      "verdict": "out",
+      "reason": "案件处理结果。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "成都警方打掉一起“猫池”涉诈案：查获138台设备1.5万余张手机卡，百余人被查处",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320413.html"
+    },
+    {
+      "id": "fb4a7236b2",
+      "verdict": "out",
+      "reason": "和四川地域强绑定，主要是介绍四川部分地区的一些成果丰收情况等。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "2026年中国农民丰收节 四川180余场活动庆丰收",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320378.html"
+    },
+    {
+      "id": "bb04d1699b",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "以“五个发力”，实现“工业倍增”丨起步奋进“十五五”遂宁专场新闻发布会",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320358.html"
+    },
+    {
+      "id": "905fb32327",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "构建遂宁128实验室体系，打造技术创新“训练场”、硬核企业“健身房”丨起步奋进“十五五”遂宁专场新闻发布会",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320361.html"
+    },
+    {
+      "id": "b442ecb74f",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "在遂宁，每一名劳动者都会被看见、被尊重、受保障｜起步奋进“十五五”遂宁专场新闻发布会",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320364.html"
+    },
+    {
+      "id": "461ee16a7b",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "爱上一座城：赛事“燃”、演艺“火”、夜色“亮”|起步奋进“十五五”遂宁专场新闻发布会",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320365.html"
+    },
+    {
+      "id": "af02663766",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "成都武侯800名环卫工人有了“定制体检”",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320349.html"
+    },
+    {
+      "id": "dc53c19ae7",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "“光影铸魂·长征路上看今朝”纪念红军长征胜利90周年主题影像巡展首展走进四川大学",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320337.html"
+    },
+    {
+      "id": "ef351b10b5",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "绵竹年画村：一幅年画里的中华民族共有精神家园丨天府石榴情",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320321.html"
+    },
+    {
+      "id": "833c9adb9d",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "每人资助40万元！四川2026年博士后创新人才支持项目申报开始",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320319.html"
+    },
+    {
+      "id": "2a1b2b44c7",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "黎明任雅安市人民政府副市长、代理市长",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320254.html"
+    },
+    {
+      "id": "dd07743aa5",
+      "verdict": "in",
+      "reason": "这一整篇文章都是金句啊，非常值得背诵。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "构建公正合理的全球人工智能治理体系丨新思想自习室",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320187.html"
+    },
+    {
+      "id": "5fe7d58ab7",
+      "verdict": "in",
+      "reason": "这是社会舆情舆论，是非常好的时政文章。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "追星自由不能逾越社会救助的制度边界丨天府新视界",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320107.html"
+    },
+    {
+      "id": "ab75a2de64",
+      "verdict": "out",
+      "reason": "这个网站是一整个视频加上两句话，没啥用。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "制定一体推进教育科技人才发展方案丨天天学习",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320103.html"
+    },
+    {
+      "id": "bcc76871aa",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "枢纽遂宁，如何织密立体交通网？丨起步奋进“十五五”遂宁专场新闻发布会",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320357.html"
+    },
+    {
+      "id": "868ba24d3e",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "涪江复航，建设成都平原经济区东向“第一港”丨起步奋进“十五五”遂宁专场新闻发布会",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320360.html"
+    },
+    {
+      "id": "ee2b3a7f07",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "打造“西部期货交割高地”，遂宁还要留下更多丨起步奋进“十五五”遂宁专场新闻发布会",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320359.html"
+    },
+    {
+      "id": "4752629752",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "中秋国庆机票酒店预订提速，川西小团游走红、成都跻身热门目的地前列",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320379.html"
+    },
+    {
+      "id": "ad02f525b4",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "中秋假期火车票今起发售，成都至攀西、川南、重庆等地车票紧俏",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320268.html"
+    },
+    {
+      "id": "069ccba9ea",
+      "verdict": "out",
+      "reason": "四川强相关。",
+      "section": "四川要闻动态",
+      "host": "sichuan.scol.com.cn",
+      "title": "华西秋雨今年“姗姗来迟”，川渝贵雨量偏多，警惕绵绵阴雨风险丨太好“科”了",
+      "url": "https://sichuan.scol.com.cn/ggxw/202609/83320320.html"
+    }
+  ]
+}

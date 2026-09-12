@@ -13,7 +13,7 @@ from typing import TypedDict
 
 from .deepseek import DEFAULT_MODEL, chat
 
-PROMPT_VERSION = "article-analysis-v1"
+PROMPT_VERSION = "article-analysis-v2"
 ALLOWED_TYPES = {"viewpoint", "exam_point", "term", "figure"}
 ANNOTATION_MAXIMA = {"viewpoint": 5, "exam_point": 8, "term": 5, "figure": 10}
 
@@ -28,6 +28,9 @@ class RawAnnotation(TypedDict, total=False):
 class ArticleAiPayload(TypedDict):
     summary: str
     annotations: list[RawAnnotation]
+    # v2.1 §7.3（T04）：段落聚焦——整篇并非全部值得精读、仅连续若干段有政策
+    # 阐释/考点价值时的段落范围（塞上江南类）；无聚焦时为 None
+    focus: dict | None
 
 
 @dataclass(frozen=True, slots=True)
@@ -132,7 +135,18 @@ def _json_object(raw: str) -> ArticleAiPayload:
                 raise ArticleAiError("ai_schema:explanation_not_string")
             parsed["explanation"] = explanation
         parsed_annotations.append(parsed)
-    return {"summary": summary, "annotations": parsed_annotations}
+    # v2.1 §7.3：focus 只做形状规整（整数化），范围校验（0≤from≤to<段数）在
+    # analyze_article 里做——此处拿不到段落数
+    raw_focus = value.get("focus")
+    focus: dict | None = None
+    if isinstance(raw_focus, dict):
+        try:
+            frm, to = int(raw_focus.get("from")), int(raw_focus.get("to"))  # type: ignore[arg-type]
+        except (TypeError, ValueError):
+            frm = to = None  # type: ignore[assignment]
+        if frm is not None and to is not None and frm <= to:
+            focus = {"from": frm, "to": to}
+    return {"summary": summary, "annotations": parsed_annotations, "focus": focus}
 
 
 def _utf16_len(s: str) -> int:
@@ -206,7 +220,36 @@ def validate_article_ai(article: dict) -> list[str]:
     for kind, maximum in ANNOTATION_MAXIMA.items():
         if counts[kind] > maximum:
             errors.append(f"annotation_count_{kind}")
+    # v2.1 §7.3：aiFocus 范围校验（持久化产物守门；旧文章无该字段则跳过）
+    focus = article.get("aiFocus")
+    if focus is not None:
+        frm = to = None
+        if isinstance(focus, dict):
+            try:
+                frm, to = int(focus.get("from")), int(focus.get("to"))  # type: ignore[arg-type]
+            except (TypeError, ValueError):
+                frm = None
+        if frm is None or to is None or not 0 <= frm <= to < len(paragraphs):
+            errors.append("ai_focus_invalid")
     return errors
+
+
+def _normalize_focus(raw: object, paragraph_count: int) -> dict | None:
+    """段落聚焦范围校验（v2.1 §7.3）：0 ≤ from ≤ to < paragraph_count，非法即丢弃。
+
+    与 curation._normalize_focus 同一校验口径（各留一份，避免 card_ai → article_ai
+    依赖环）；宁缺勿滥，不带病透传。
+    """
+    if not isinstance(raw, dict) or paragraph_count <= 0:
+        return None
+    try:
+        frm = int(raw.get("from"))  # type: ignore[arg-type]
+        to = int(raw.get("to"))  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return None
+    if 0 <= frm <= to < paragraph_count:
+        return {"from": frm, "to": to}
+    return None
 
 
 def _messages(title: str, paragraphs: list[str], *, rewrite: bool = False, correction: str = "") -> list[dict[str, str]]:
@@ -223,10 +266,13 @@ def _messages(title: str, paragraphs: list[str], *, rewrite: bool = False, corre
             "观点 2-5 处、考点 3-8 处、术语 1-5 处、数字/指标 1-10 处；"
             "figure 用于标注纯数字/指标值（增速、总额、覆盖率、时间节点等），不写 explanation；"
             "数字/指标考点不生成卡片，由 figure 标注在原文中高亮记忆。"
+            "focus（段落聚焦）：整篇均有精读价值或均无价值时输出 null；"
+            "仅部分连续段落有政策阐释/考点价值时，输出该范围 {\"from\": 段索引, \"to\": 段索引}"
+            "（闭区间，段索引从 0 起，不得跨出全文）。"
         )},
         {"role": "user", "content": (
             f"{length}\n输出形状：{{\"summary\":\"...\",\"annotations\":[{{\"paragraphIndex\":0,"
-            "\"text\":\"原文片段\",\"type\":\"viewpoint\"}]}}\n"
+            "\"text\":\"原文片段\",\"type\":\"viewpoint\"}]},\"focus\":null}\n"
             f"标题：{title}\n原文：\n{article}"
         )},
     ]
@@ -304,10 +350,15 @@ def analyze_article(
             counts[kind] = counts.get(kind, 0) + 1
             truncated.append(ann)
         annotations = truncated
-        result.update(base | {
+        # v2.1 §7.3：段落聚焦持久化（仅 ok 态；范围非法时静默丢弃，不标 error）
+        success: dict = {
             "aiStatus": "ok", "aiSummary": summary, "aiAnnotations": annotations,
             "aiQuality": {"locationErrors": location_errors},
-        })
+        }
+        focus = _normalize_focus(payload.get("focus"), len(paragraphs))
+        if focus is not None:
+            success["aiFocus"] = focus
+        result.update(base | success)
         result.pop("aiError", None)  # 从 error 升级到 ok 时清理旧失败原因残留
         errors = validate_article_ai(result)
         if errors:
@@ -322,4 +373,5 @@ def analyze_article(
     })
     result.pop("aiSummary", None)
     result.pop("aiQuality", None)
+    result.pop("aiFocus", None)
     return result

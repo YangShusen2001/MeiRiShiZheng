@@ -17,7 +17,8 @@
         "essay": { "type": "array", "items": { "type": "string", "minLength": 1 }, "description": "申论精读 ≤2" },
         "exam": { "oneOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }], "description": "考点提炼" },
         "extra": { "oneOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }], "description": "多样性补充" },
-        "supplement": { "type": "array", "items": { "type": "string", "minLength": 1 }, "description": "历史补剧（仅下限不足时）" }
+        "supplement": { "type": "array", "items": { "type": "string", "minLength": 1 }, "description": "历史补剧（仅下限不足时；v2.1 §7.1 起不再写入，键保留兼容历史产物）" },
+        "sparse": { "type": "boolean", "description": "宁缺勿滥标记（v2.1 §7.1）：picked<2 时置 true，当日为合法 sparse 日" }
       }
     },
     "picked": {
@@ -25,7 +26,7 @@
       "minItems": 1,
       "maxItems": 5,
       "items": { "type": "string", "minLength": 1 },
-      "description": "最终精选 2-5 篇（下限 2，历史补剧兜底）"
+      "description": "最终精选 0-5 篇（v2.1 §7.1 宁缺勿滥：下限 2→0；picked=0 不落盘，1≤picked<2 时 slots.sparse=true）"
     },
     "assignments": {
       "type": "object",

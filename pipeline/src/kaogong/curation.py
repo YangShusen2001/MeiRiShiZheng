@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 """每日选材漏斗：粗筛（减法）→ AI 评级与主线归属（只排序）→ 槽位分配 → picks 定稿。
 
-规则见提案 0022 §4：AI 只输出等级（S/A/B/C）+ 理由 + 主线归属；程序负责排序与槽位。
-头版要闻可脱离主线池；申论精读 ×2（essay 路由）/ 考点提炼 ×1（file 路由）/ 多样性补充 ×1：
-槽位按**路由类型**分配，主线归属只作同分 tie-breaker（0022 P0 修复：原「绑主线」硬条件
-在主线归属失手时让三槽位恒空，已解耦）；picks 2-5 篇（下限 2，不足时历史文章补剧）；
-AI 只排序不打分。
+规则见提案 0022 §4 + v2.1 §7：AI 输出等级（S/A/B/C）+ 进池/不进池信号 +
+模糊地带 needsHuman + 主线归属；程序负责过滤、排序与槽位。头版要闻可脱离主线池；
+申论精读 ×2（essay 路由）/ 考点提炼 ×1（file 路由）/ 多样性补充 ×1：槽位按
+**路由类型**分配，主线归属只作同分 tie-breaker（0022 P0 修复：原「绑主线」硬条件
+在主线归属失手时让三槽位恒空，已解耦）。
+
+v2.1 §7.1 宁缺勿滥：MIN_PICKS 2→0、历史补剧删除——补剧把「当日没选出来」伪装成
+「选出来了」，且历史文章不是当日核心。1≤picked<2 落盘并标 slots.sparse=true
+（合法 sparse 日）；picked=0 不落 picks.json。needsHuman（发布会/调研类模糊地带、
+无 key 程序兜底）与 C 级（不进池 8 类）文章不进槽位，交审核工作台。
 """
 from __future__ import annotations
 
@@ -24,7 +29,9 @@ AUTHORITY_MID = 0.7
 AUTHORITY_LOW = 0.4
 HIGH_AUTHORITY_SOURCES = ("人民网", "新华", "中国政府网", "求是", "半月谈", "学习时报", "人民日报")
 MAX_PICKS = 5
-MIN_PICKS = 2
+# v2.1 §7.1 宁缺勿滥：下限 2→0（历史补剧同步删除）。picked<2 时 build_picks
+# 置 slots["sparse"]=true（合法 sparse 日）；picked=0 不落 picks.json。
+MIN_PICKS = 0
 
 
 class _Graded(TypedDict, total=False):
@@ -37,6 +44,12 @@ class _Graded(TypedDict, total=False):
     # "none"     无归属（模型输出 null、归一化未命中、或程序兜底路径）；
     # "fallback" 预留给未来的兜底归属机制（方案 β，需主线池带类型标签，不在 P0）。
     lineSource: Literal["model", "fallback", "none"]
+    # v2.1 §7.2 进池判据透传（T04）：模型输出的进池/不进池信号标签（观测用）；
+    # partial_gold 时的段落聚焦（_normalize_focus 校验后的 {"from","to"}）；
+    # needsHuman=模糊地带交人审（assign_slots 过滤，不自动放行）。
+    signals: list[str]
+    focus: dict
+    needsHuman: bool
 
 
 def authority_rank(source: str) -> float:
@@ -95,7 +108,8 @@ def _grade_messages(items: list[dict], lines: list[dict]) -> list[dict[str, str]
     line_list = "、".join(f"{p['id']}({p['name']})" for p in lines)
     items_text = "\n".join(
         f"<a{i}> 归属候选: {it['metadata']['title']} | 来源: {it['metadata']['source']} | "
-        f"标注密度 {it['metadata']['annotationDensity']} | 金句 {it['metadata']['keySentenceCount']}"
+        f"标注密度 {it['metadata']['annotationDensity']} | 金句 {it['metadata']['keySentenceCount']} | "
+        f"摘要: {it['metadata']['summary']}"
         for i, it in enumerate(items)
     )
     # 0022 P0（1a）：few-shot 示例的 policyLine 从 lines 动态注入，与清单永远同源。
@@ -105,15 +119,31 @@ def _grade_messages(items: list[dict], lines: list[dict]) -> list[dict[str, str]
     import json
 
     sample_line = lines[0]["id"] if lines else None
+    # v2.1 §7.2（T04）：7 进 8 出判据——判据在「栏目+内容形态」级，不在「源」级
+    # （四川在线"新思想自习室"是金子、"ggxw"是垃圾；领导人活动看信息密度不看出席级别）。
     output_shape = json.dumps(
-        {"items": [{"index": 0, "grade": "A", "policyLine": sample_line, "reason": "权威源+标注密"}]},
+        {"items": [{
+            "index": 0, "grade": "A", "policyLine": sample_line, "reason": "权威源+分析深度",
+            "signals": ["analysis_depth"], "focus": None, "needsHuman": False,
+        }]},
         ensure_ascii=False,
     )
     return [
         {"role": "system", "content": (
             "你是公务员考试的时政编辑。只返回 JSON，不得输出其他内容。"
-            "任务：对候选文章评级（S=当日必须精读 / A=值得精读 / B=有价值 / C=普通）并判断主线归属。"
-            "只做排序与归属，不做价值判断之外的任何决定：不评分、不写理由之外的话。"
+            "任务：按「进池 7 信号 / 不进池 8 类」对候选文章评级（S=当日必须精读 / "
+            "A=值得精读 / B=有价值 / C=不进池）并判断主线归属。"
+            "进池 7 信号（命中即进池，等级取命中的最高档）："
+            "gold_density(金句密度→S)、exam_hot(常考性→S)、analysis_depth(分析深度→A)、"
+            "structure_value(结构价值→A)、province_practices(分省做法罗列→A)、"
+            "public_opinion(社会舆情→A)、partial_gold(段落级金子→B，必须给 focus 段落范围)。"
+            "不进池 8 类（只命中这些→C）：empty_notice(空壳领导人短讯)、local_bound(地方强绑定)、"
+            "carrier_defect(载体缺陷：视频/图配字)、pure_data(纯数据无分析)、presser_sten(发布会通稿)、"
+            "too_granular(粒度太细)、ad_service(广告服务)、case_personnel(案件人事)。"
+            "signals 输出命中的信号标签数组（进池或进池外类别均可）。"
+            "发布会/调研类拿不准的模糊地带：needsHuman=true 交人审，不要硬判等级。"
+            "判定看「栏目+内容形态」，不看源的名气：权威源也有垃圾栏目，地方源也有金子。"
+            "focus 仅 partial_gold 时输出 {\"from\": 段索引, \"to\": 段索引}（闭区间、不跨出全文），否则 null。"
             "policyLine 从给出的主线 id 中选；无归属输出 null。每篇给一句话理由（≤30 字）。"
         )},
         {"role": "user", "content": (
@@ -174,11 +204,31 @@ def _normalize_line_id(raw: object, lines: list[dict]) -> str | None:
     return None
 
 
+def _normalize_focus(raw: object, paragraph_count: int) -> dict | None:
+    """段落聚焦校验（v2.1 §7.2 partial_gold）：0 ≤ from ≤ to < paragraph_count。
+
+    模型输出 {"from": 段索引, "to": 段索引}（闭区间）；越界/倒置/非整数一律
+    丢弃返回 None——宁缺勿滥，不带病透传（与 article_ai 的 aiFocus 同一校验口径）。
+    """
+    if not isinstance(raw, dict) or paragraph_count <= 0:
+        return None
+    try:
+        frm = int(raw.get("from"))  # type: ignore[arg-type]
+        to = int(raw.get("to"))  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return None
+    if 0 <= frm <= to < paragraph_count:
+        return {"from": frm, "to": to}
+    return None
+
+
 def _program_fallback(article: dict) -> _Graded:
     """程序兜底排序（无 key / 模型漏评时）：权威性 × 标注密度，不依赖模型。
 
     0022 P0（1c，方案 α）：只加 lineSource 观测标记、不猜主线（policyLine 仍为 None）。
     误归属比 None 更糟——None 是「明确未知」可降级，误归属是「错误确定」。
+    v2.1 §7.2（T04）：兜底评级没有进池判据判断能力 → needsHuman=true，
+    不自动放行进槽位（宁缺勿滥：没 AI 判断就不自动选，文章照常发布）。
     """
     score = authority_rank(str(article.get("source", ""))) * (1 + len(article.get("aiAnnotations") or []))
     grade = "A" if score >= 6 else "B"
@@ -188,6 +238,7 @@ def _program_fallback(article: dict) -> _Graded:
         "reason": "程序兜底排序",
         "policyLine": None,
         "lineSource": "none",
+        "needsHuman": True,
     }
 
 
@@ -204,8 +255,9 @@ def assign_grades(
     if not cfg.get("deepseek_api_key"):
         return [_program_fallback(a) for a in articles]
     meta = [graded_meta(a) for a in articles]
+    # v2.1 §7.2（T04）：输出新增 signals/focus/needsHuman 三字段，max_tokens 900→1200
     payload = _json_object(call(
-        _grade_messages([{"metadata": m} for m in meta], lines), cfg, max_tokens=900, temperature=0.2,
+        _grade_messages([{"metadata": m} for m in meta], lines), cfg, max_tokens=1200, temperature=0.2,
     ))
     raw_items = payload.get("items")
     by_index: dict[int, dict] = {}
@@ -228,6 +280,13 @@ def assign_grades(
         # 0022 P0（1b）：归一化匹配——精确/大小写/引号/空白/全角/「id(名称)」回显 → 白名单 id；
         # 其余归 None。修复前是精确匹配，示例短 id 与真实 id 对不上 → 归属 100% 落空。
         line_id = _normalize_line_id(item.get("policyLine"), lines)
+        # v2.1 §7.2（T04）：进池判据三字段透传（保守清洗，不带病透传）
+        raw_signals = item.get("signals")
+        signals = [
+            str(s).strip()[:40] for s in raw_signals
+            if isinstance(s, str) and s.strip()
+        ][:8] if isinstance(raw_signals, list) else []
+        focus = _normalize_focus(item.get("focus"), len(article.get("paragraphs") or []))
         graded.append({
             "article": article,
             "grade": str(item.get("grade", "B")).upper(),
@@ -235,6 +294,9 @@ def assign_grades(
             "policyLine": line_id,
             # 观测标记（1c）：命中（精确或归一化）=model；null/未命中=none
             "lineSource": "model" if line_id else "none",
+            "signals": signals,
+            "focus": focus,
+            "needsHuman": bool(item.get("needsHuman")),
         })
     return graded
 
@@ -261,7 +323,13 @@ def assign_slots(graded: list[_Graded], *, limit: int = MAX_PICKS) -> dict:
     """
     del limit  # 保留签名兼容 build_picks(limit=max_picks)；槽位自然上限 1+2+1+1=MAX_PICKS
     slots: dict[str, str | None | list[str]] = {"headline": None, "essay": [], "exam": None, "extra": None}
-    pool = sorted(graded, key=_sort_key)
+    # v2.1 §7.2（T04）进池过滤：needsHuman（发布会/调研类模糊地带、无 key 兜底）
+    # 与 C 级（不进池 8 类）不进任何槽位——needsHuman 交 review 工作台，
+    # 不放行不硬判；C 级是「机器判定不进池」的明确结论。
+    pool = sorted(
+        (e for e in graded if not e.get("needsHuman") and e.get("grade", "B") != "C"),
+        key=_sort_key,
+    )
     used: set[str] = set()
 
     def entry_id(entry: _Graded) -> str:
@@ -328,36 +396,29 @@ def build_picks(
     *,
     target: dt.date,
     call: Callable[..., str] = chat,
-    min_picks: int = MIN_PICKS,
     max_picks: int = MAX_PICKS,
-    history: list[dict] | None = None,
 ) -> dict:
-    """完整选材漏斗：粗筛 → 评级/主线 → 槽位 → picks（不足下限时历史文章补剧）。"""
+    """完整选材漏斗：粗筛 → 评级/主线 → 槽位 → picks（宁缺勿滥，不再补剧）。
+
+    v2.1 §7.1（T04）：历史补剧删除——补剧把「当日没选出来」伪装成「选出来了」，
+    且历史文章不是当日核心。1≤picked<2 时 slots["sparse"]=true（合法 sparse 日，
+    quality_gate 判 sparse 而非 degraded）；picked=0 时调用方不落 picks.json
+    （schema minItems:1），quality_gate 依据 report["curation"]["picksWritten"]
+    判 sparse。needsHuman 文章不进槽位，随返回值上交审核工作台。
+    """
     pool = coarse_filter(articles, target)
     graded = assign_grades(pool, lines, cfg, call=call)
     slots = assign_slots(graded, limit=max_picks)
     picked = slots.pop("picked")
-    # 下限补剧：当日池不足 min_picks 时，用历史文章（近 7 天、AI 成功）按程序优先级补齐，
-    # 不重新评级（当日池都缺料时，历史通常也非当日核心；标 slot=supplement 供人工确认）。
-    if len(picked) < min_picks and history:
-        history_sorted = sorted(
-            history,
-            key=lambda h: (authority_rank(str(h.get("source", ""))) * (1 + len(h.get("aiAnnotations") or [])), h.get("date", "")),
-            reverse=True,
-        )
-        for article in history_sorted:
-            if len(picked) >= min_picks:
-                break
-            aid = str(article.get("id", ""))
-            if aid in picked:
-                continue
-            slots.setdefault("supplement", []).append(aid)
-            picked.append(aid)
+    needs_human = [str(e["article"].get("id", "")) for e in graded if e.get("needsHuman")]
+    if len(picked) < 2:
+        slots["sparse"] = True
     return {
         "date": target.isoformat(),
         "slots": slots,
         "picked": picked[:max_picks],
         "assignments": {str(e["article"].get("id")): e.get("policyLine") for e in graded},
+        "needsHuman": needs_human,
     }
 
 
@@ -456,8 +517,8 @@ def curate_content(
     day_dir.mkdir(parents=True, exist_ok=True)
     articles = _load_day_articles(content_dir, target)
     lines = _load_lines(content_dir)
-    history = _load_history(content_dir, target)
-    picks = build_picks(articles, lines, cfg, target=target, history=history, call=call)
+    # v2.1 §7.1（T04）：历史加载删除——补剧废弃；_load_history 函数体保留备查
+    picks = build_picks(articles, lines, cfg, target=target, call=call)
 
     report = {
         "date": target.isoformat(),
@@ -466,6 +527,7 @@ def curate_content(
             "coarseKept": len(coarse_filter(articles, target)),
             "picked": len(picks["picked"]),
             "slots": picks["slots"],
+            "needsHuman": picks["needsHuman"],
             "cardErrors": 0,
             "relationErrors": 0,
             "cardsProduced": 0,
@@ -474,9 +536,6 @@ def curate_content(
     }
     quota_used = 0
     by_id: dict[str, dict] = {str(a.get("id")): a for a in articles}
-    for article in history:
-        if article.get("id") not in by_id:
-            by_id.setdefault(str(article.get("id")), article)
     # 每日新卡配额按「被选中的篇数」均分，而不是先到先得。
     # 原实现 `budget = 上限 - 已用` 允许第一篇文章吃掉全部 5 张，
     # 后面被选中的文章一张卡都拿不到——那"选材 ≥2 篇"就没有意义了：
@@ -511,29 +570,26 @@ def curate_content(
         (out_dir / f"article-{aid}.json").write_text(
             json.dumps(article, ensure_ascii=False, indent=2), encoding="utf-8"
         )
-    # picks.json 只在**真的选出内容**时写。
-    # 选不到东西时写 `picked: []` 会违反 picks.schema.json 的 minItems:1，
-    # 产出一个非法文件（实测踩过：对 08-12 跑策展写了空 picks，Schema 测试直接挂）。
-    # 选不到材料是"降级"而不是"产出"——report 里已记录，管道的质量门禁
-    # 也把 picks_missing 当降级态处理，不写文件才是符合约定的行为。
+    # picks.json 只在**真的选出内容**时写（picked=[] 违反 picks.schema.json 的
+    # minItems:1，实测踩过：对 08-12 跑策展写了空 picks，Schema 测试直接挂）。
+    # 但 curation 报告无论是否写出 picks 都并入 _reports/{date}.json（v2.1 §7.1）：
+    # quality_gate 靠 picksWritten/picked 区分「curate 没跑」（picks_missing，
+    # 管道不完整）与「跑了但当日无合格材料」（合法 sparse 日，宁缺勿滥）。
+    report["curation"]["picksWritten"] = bool(picks["picked"])
+    report_path = Path(content_dir) / "_reports" / f"{target.isoformat()}.json"
+    try:
+        if report_path.exists():
+            merged = json.loads(report_path.read_text(encoding="utf-8"))
+            merged["curation"] = report["curation"]
+            report_path.write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
+        else:
+            report_path.parent.mkdir(parents=True, exist_ok=True)
+            report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    except (ValueError, OSError):
+        pass
     if not picks["picked"]:
-        report["curation"]["picksWritten"] = False
         return report
     (day_dir / "picks.json").write_text(
         json.dumps(picks, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    # curation 报告并入当日 _reports/{date}.json（quality_gate 读取）
-    from pathlib import Path as _Path
-
-    report_path = Path(content_dir) / "_reports" / f"{target.isoformat()}.json"
-    if report_path.exists():
-        try:
-            merged = json.loads(report_path.read_text(encoding="utf-8"))
-            merged["curation"] = report["curation"]
-            report_path.write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
-        except (ValueError, OSError):
-            pass
-    else:
-        report_path.parent.mkdir(parents=True, exist_ok=True)
-        report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     return report

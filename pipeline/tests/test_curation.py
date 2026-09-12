@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""选材漏斗：粗筛 / 评级与主线 / 槽位 / 下限补剧。"""
+"""选材漏斗：粗筛 / 评级与主线 / 槽位 / 宁缺勿滥 sparse（v2.1 §7）。"""
 import datetime as dt
 import json
 
@@ -80,7 +80,7 @@ def test_assign_slots_structure():
         {"index": 1, "grade": "A", "policyLine": "fifteen-five-plan", "reason": "评论"},
         {"index": 2, "grade": "B", "policyLine": "fifteen-five-plan", "reason": "评论"},
         {"index": 3, "grade": "A", "policyLine": "fifteen-five-plan", "reason": "文件"},
-        {"index": 4, "grade": "C", "policyLine": None, "reason": "普通"},
+        {"index": 4, "grade": "B", "policyLine": None, "reason": "普通"},
     ]))
     slots = assign_slots(graded)
     assert slots["headline"] == "h"            # 头版可无主线
@@ -90,13 +90,19 @@ def test_assign_slots_structure():
     assert len(slots["picked"]) == 5
 
 
-def test_build_picks_supplements_from_history():
+def test_build_picks_sparse_below_two_and_no_supplement():
+    """v2.1 §7.1（T04）：历史补剧删除，1≤picked<2 → slots.sparse=true。
+
+    修复前必失败：build_picks 无 sparse 语义，靠 history 参数补剧把「没选出来」
+    伪装成「选出来了」（supplement 凑下限）。
+    """
     articles = [_article("a1", "普通文章", source="news.cn", ann_count=1)]  # 粗筛后仅 1 篇
-    history = [_article("old1", "历史好文", source="人民网", date="2026-08-20", pub="2026-08-20", ann_count=8)]
     picks = build_picks(articles, LINES, {"deepseek_api_key": "k"}, target=TARGET,
-                        call=_call([{"index": 0, "grade": "B", "policyLine": None, "reason": "普通"}]),
-                        history=history)
-    assert "a1" in picks["picked"] and "old1" in picks["picked"]  # 下限 2：历史补剧
+                        call=_call([{"index": 0, "grade": "B", "policyLine": None, "reason": "普通"}]))
+    assert picks["picked"] == ["a1"]
+    assert picks["slots"]["sparse"] is True
+    assert "supplement" not in picks["slots"]
+    assert picks["needsHuman"] == []
 
 
 def test_curate_content_end_to_end(tmp_path):
@@ -199,7 +205,14 @@ def test_curate_content_skips_picks_file_when_nothing_picked(tmp_path):
 
 
 def test_curate_content_degrades_without_key(tmp_path):
-    """无 key：仍产出 picks.json，卡片/关系标记 error，不抛异常（与管道降级哲学一致）。"""
+    """v2.1 §7.2（T04）：无 key → 程序兜底评级全部 needsHuman，不自动放行。
+
+    不写 picks.json（合法 sparse 日，宁缺勿滥：没有 AI 判断就不自动选，
+    文章照常发布）；needsHuman 名单随 report 上交审核工作台。curation 报告
+    必须并入 _reports——quality_gate 靠它区分「curate 没跑」（picks_missing）
+    与「跑了但当日无合格材料」（sparse）。
+    修复前必失败：旧语义无 key 仍产出 picks.json（补剧凑下限）。
+    """
     import json
 
     from kaogong.curation import curate_content
@@ -209,8 +222,11 @@ def test_curate_content_degrades_without_key(tmp_path):
     article = _article("a1", "某文章", source="新华网")
     (tmp_path / day / "article-a1.json").write_text(json.dumps(article), encoding="utf-8")
     report = curate_content(TARGET, tmp_path, {})
-    assert (tmp_path / day / "picks.json").exists()
-    assert report["curation"]["cardErrors"] >= 0
+    assert not (tmp_path / day / "picks.json").exists()
+    assert report["curation"]["picksWritten"] is False
+    assert report["curation"]["needsHuman"] == ["a1"]
+    merged = json.loads((tmp_path / "_reports" / f"{day}.json").read_text(encoding="utf-8"))
+    assert merged["curation"]["picksWritten"] is False
 
 
 def test_load_lines_only_active(tmp_path):
@@ -332,7 +348,7 @@ def test_assign_slots_route_first_without_line():
         {"index": 1, "grade": "A", "policyLine": None, "reason": "评论"},
         {"index": 2, "grade": "B", "policyLine": None, "reason": "评论"},
         {"index": 3, "grade": "A", "policyLine": None, "reason": "文件"},
-        {"index": 4, "grade": "C", "policyLine": None, "reason": "普通"},
+        {"index": 4, "grade": "B", "policyLine": None, "reason": "普通"},
     ]))
     slots = assign_slots(graded)
     assert slots["headline"] == "h"            # 头版无条件槽位，不变
@@ -340,3 +356,28 @@ def test_assign_slots_route_first_without_line():
     assert slots["exam"] == "x"                 # file 路由即可入池，无需主线
     assert slots["extra"] == "n"                # extra 不再要求主线非空
     assert len(slots["picked"]) == 5            # 选材不再塌陷（产能恢复由本项负责）
+
+
+def test_assign_slots_excludes_c_grade_and_needs_human():
+    """v2.1 §7.2（T04）：C 级（不进池 8 类）与 needsHuman 不进任何槽位。
+
+    C 级是机器对「不进池」的明确结论；needsHuman（发布会/调研类模糊地带、
+    无 key 程序兜底）交 review 工作台——不放行、不硬判。
+    修复前必失败：assign_slots 无进池过滤，C 级/needsHuman 照样占槽位。
+    """
+    articles = [
+        _article("h", "某头版要闻", source="人民网", ann_count=6),
+        _article("c1", "某发布会通稿", source="news.cn"),
+        _article("nh", "某调研报道", source="南方网"),
+    ]
+    graded = assign_grades(articles, LINES, {"deepseek_api_key": "k"}, call=_call([
+        {"index": 0, "grade": "A", "policyLine": None, "reason": "头版"},
+        {"index": 1, "grade": "C", "policyLine": None, "reason": "发布会通稿"},
+        {"index": 2, "grade": "B", "policyLine": None, "reason": "拿不准", "needsHuman": True},
+    ]))
+    slots = assign_slots(graded)
+    assert slots["headline"] == "h"
+    assert slots["essay"] == [] and slots["exam"] is None and slots["extra"] is None
+    assert slots["picked"] == ["h"]
+    # needsHuman 在评级结果里可见（build_picks 汇总上交）：
+    assert [str(e["article"].get("id")) for e in graded if e.get("needsHuman")] == ["nh"]

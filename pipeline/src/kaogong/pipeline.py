@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
 """内容管道编排：抓取 → 组装 → 写 content/ JSON。
 
-这是「抓取逻辑 A」的顶层：把所有源跑一遍，只保留目标日期，按槽位截断，
+这是「抓取逻辑 A」的顶层：把所有源跑一遍，只保留目标日期，
 交给 build_digest 组装，最后写成前端消费的 content/{date}/digest.json。
+
+v2.1 §3.3（配额顺序缺陷修复）：fetch 层只做标题级判断（tier/栏目/日期/噪声）
++ MAX_PRECLIP 安全阀，不再做每源配额与槽位 CAPS——「留谁砍谁」需要正文信息
+（密度/字数），配额与 CAPS 后移至 clip 层 _apply_quota_and_caps（T04），按
+total_chars 降序截断。v2 的 fetch 层列表序截断在黄金样本日误杀 3 篇 IN
+（政绩观 news.cn 第 5 / 塞上江南 news.cn 第 6 / 琴澳 dayoo 第 4）。
 """
 from __future__ import annotations
 
@@ -17,50 +23,140 @@ from pathlib import Path
 import httpx
 from .build import build_digest
 from .deepseek import load_config
+from .density import density_gate, total_chars
 from .models import Candidate
 from .practice import generate_practice, practice_set_json
 from .quality import artifact_semantic_errors, classify_artifact, load_artifact, schema_errors, volume_errors
-from .review_agent import judge_item
 from .summary import generate_summary
 from .config import load_site_config
 from .sources import Source, fetch_source, is_noise_title, load_noise_title, load_sources
 
-# 每槽位最多收录条数（与原项目 _CAP 一致）
+# 每槽位最多收录条数（v2 §3.3 取值不变：pol 25→8 严限；essay 10 承接大洋网+
+# 川观理论栏目流入；gd/sc/js 随地方分节删除；gdp 15→5 降配；其余不变）。
+# v2.1 §3.2-A1：执行点从 fetch 层 _pick_top 后移至 clip 层 _apply_quota_and_caps
+# （T04）——fetch 层截断在无 DeepSeek key 时退化为列表序（值盲截断），后移版按
+# total_chars 降序，语义从「控抓取」变「控 digest 规模」。常量保留供 T04 消费。
 CAPS = {
-    "pol": 25, "gov": 10, "shi": 18, "qst": 12, "xh": 18, "rm": 12,
-    "byt": 8, "gd": 18, "sc": 20, "js": 20, "gdp": 15, "nf": 12,
+    "pol": 8, "gov": 10, "shi": 18, "qst": 12, "xh": 18, "rm": 12,
+    "byt": 8, "essay": 10, "gdp": 5, "nf": 12,
 }
+
+# v2.1 §3.7：每源配额取值不变（默认 ≤3，理论刊物/政策原文精品率高放宽到 4），
+# 但执行位置、分组键与排序变——计量对象 = 密度门禁过滤后的净流量，分组键 =
+# 文章 URL host（去 www 前缀；digest 契约无源名字段，且大洋网源页/文章 host
+# 分裂、新华三源共享 news.cn，只有 host 在纯 digest JSON 上稳定计量），按
+# total_chars 降序截断，由 clip 层 _apply_quota_and_caps（T04）消费。
+# v2 的 fetch 层列表序配额（先到先得 = 发布时间倒序，与价值无关）是本返工摘除的对象。
+PER_SOURCE_QUOTA = 3
+QUOTA_OVERRIDES = {
+    "qstheory.cn": 4, "banyuetan.org": 4, "gov.cn": 4,
+}
+
+# v2.1 §3.3/§3.4：fetch 层安全阀——防单日刷屏（源故障/目录页改版）拖垮
+# pass-1 全量剪藏。正常日 ~22 条远不触发；仅作全局上限兜底，不做价值判断。
+MAX_PRECLIP = 48
+
 MAX_AI_FAILURES = 50
 
 
-def _pick_top(cands: list[Candidate], cap: int, ai_cfg: dict[str, str]) -> list[Candidate]:
-    """当天候选超过槽位上限时，用审核 Agent 的 judge_item 评分取 top cap（score 降序）。
+def _host_of(url: str) -> str:
+    """从 URL 提取 host（小写），取不到返回空串。
 
-    无 DeepSeek key 或评分失败时 score=0，稳定排序退化为列表顺序。
+    v2.1：source_name 缺失时的配额分组回退键，由 clip 层
+    _apply_quota_and_caps（T04）消费。
     """
-    if len(cands) <= cap:
+    m = re.search(r"https?://([^/?#]+)", url or "", re.IGNORECASE)
+    return m.group(1).lower() if m else ""
+
+
+def _quota_group(url: str) -> str:
+    """配额分组键 = 文章 URL host（去 www 前缀）。
+
+    v2.1 §3.7：digest 契约无源名字段，且大洋网源页（www.dayoo.com）与文章
+    （news.dayoo.com）host 分裂、新华三源共享 news.cn——只有 host 在纯
+    digest JSON 上稳定。新华三源共享 news.cn → 配额合并为一组（黄金样本 IN
+    恰为该组 total_chars 最长两条，降序截断下安全）。
+    """
+    host = _host_of(url)
+    return host[4:] if host.startswith("www.") else host
+
+
+# 旧版分节 id（gold 日 digest 为旧管道产物）：大洋网在 guangdong、川观在 sichuan。
+# v2.1 拍板⑧：保留地方栏目的文章统一进申论精读 → 两者都映射 essay 槽位。
+_LEGACY_ESSAY_SECTIONS = frozenset({"guangdong", "sichuan"})
+
+
+def _slot_of(url: str, section_id: str) -> str:
+    """从 digest 分节 id + URL 推导 CAPS 槽位键（digest 契约无 slot 字段）。
+
+    essay/guangdong/sichuan→essay（拍板⑧：地方栏目统一进申论精读）；
+    policy→gdp；national→（配额组恰为 gov.cn 才是 gov；gd.gov.cn 是独立
+    host，不得误匹配 gov.cn）。
+    """
+    if section_id == "policy":
+        return "gdp"
+    if section_id == "essay" or section_id in _LEGACY_ESSAY_SECTIONS:
+        return "essay"
+    return "gov" if _quota_group(url) == "gov.cn" else "pol"
+
+
+def _apply_quota_and_caps(
+    clipped: list[dict], section_by_url: dict[str, str],
+) -> tuple[list[dict], list[dict]]:
+    """密度门禁后的每源配额与槽位 CAPS（v2.1 §3.2-A1，T04 执行点）。
+
+    排序键 = total_chars 降序（复用密度已算的正文指标，零额外启发式）；
+    IN 类深度长文通常更长，v2 的列表序截断（=发布时间倒序）在黄金样本日
+    误杀 3 篇 IN 的缺陷在此修正。返回 (final, cut)：final 保持原相对顺序，
+    cut 为超额被拒条目（供 report["clip"]["quotaRejected"]）。
+    """
+    survivors = sorted(clipped, key=lambda c: -total_chars(c.get("paragraphs") or []))
+    kept: list[dict] = []
+    cut: list[dict] = []
+    per_group: dict[str, int] = {}
+    per_slot: dict[str, int] = {}
+    for c in survivors:
+        url = str(c.get("url", ""))
+        slot = _slot_of(url, section_by_url.get(url, ""))
+        cap = CAPS.get(slot)
+        if cap is not None and per_slot.get(slot, 0) >= cap:
+            cut.append(c)
+            continue
+        group = _quota_group(url)
+        limit = QUOTA_OVERRIDES.get(group, PER_SOURCE_QUOTA)
+        if per_group.get(group, 0) >= limit:
+            cut.append(c)
+            continue
+        per_slot[slot] = per_slot.get(slot, 0) + 1
+        per_group[group] = per_group.get(group, 0) + 1
+        kept.append(c)
+    order = {id(c): i for i, c in enumerate(clipped)}
+    kept.sort(key=lambda c: order[id(c)])
+    return kept, cut
+
+
+def _preclip_ceiling(cands: list[Candidate], ceiling: int = MAX_PRECLIP) -> list[Candidate]:
+    """fetch 层安全阀：候选总量超过 ceiling 时按抓取顺序截断（v2.1 §3.4）。
+
+    正常日 ~22 条远不触发；仅防单日刷屏拖垮 clip 层 pass-1 全量剪藏。
+    这是 fetch 层唯一的总量控制——每源配额与槽位 CAPS 已后移至 clip 层
+    _apply_quota_and_caps（T04），fetch 层不做任何价值判断、零 AI 调用。
+    """
+    if len(cands) <= ceiling:
         return cands
-
-    def _score_one(c: Candidate) -> tuple[Candidate, float]:
-        result = judge_item(
-            {"title": c.title, "summary": c.summary or "", "sourceUrl": c.url},
-            None, ai_cfg,
-        )
-        return c, float(result.get("score", 0) or 0)
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=min(4, len(cands))) as pool:
-        scored = list(pool.map(_score_one, cands))
-    scored.sort(key=lambda pair: pair[1], reverse=True)
-    return [c for c, _ in scored[:cap]]
+    return cands[:ceiling]
 
 
 def fetch_candidates(
     target: dt.date, *, client: httpx.Client | None = None, report: dict | None = None,
     config: dict | None = None, cfg: dict[str, str] | None = None,
 ) -> list[Candidate]:
-    """跑全部源（来源可后台配置），只保留 target 当日的候选，按槽位截断。单源失败不影响其余。"""
+    """跑全部源（来源可后台配置），只保留 target 当日的候选，过 MAX_PRECLIP 安全阀。
+
+    单源失败不影响其余。v2.1 §3.3：fetch 层零 AI 调用（配额/CAPS 已后移 clip 层）；
+    cfg 参数保留仅为签名兼容，当前不参与 fetch 决策。
+    """
     config = config if config is not None else load_site_config()
-    ai_cfg = cfg if cfg is not None else load_config()
     sources = load_sources(config)
     noise = load_noise_title(config)
     out: list[Candidate] = []
@@ -87,22 +183,25 @@ def fetch_candidates(
         c for c in out
         if c.date == target and not is_noise_title(c.title, noise)
     ]
-    # 按槽位分组；当天候选超过槽位上限时用 AI 评分挑重点（无 key 时退化为列表顺序）
-    capped: list[Candidate] = []
-    by_slot: dict[str, list[Candidate]] = {}
-    for c in out:
-        by_slot.setdefault(c.slot, []).append(c)
-    for slot, cands in by_slot.items():
-        capped.extend(_pick_top(cands, CAPS.get(slot, 20), ai_cfg))
-    return capped
+    # v2.1 §3.3：fetch 层只做标题级判断 + 安全阀——无每源配额、无槽位 CAPS、
+    # 零 AI 调用。配额/CAPS 后移至 clip 层 _apply_quota_and_caps（T04，按
+    # total_chars 降序）；v2 在此处的列表序截断曾误杀 3 篇 IN（黄金样本日）。
+    out = _preclip_ceiling(out, MAX_PRECLIP)
+    return out
 
 
 def build_content(target: dt.date, content_dir: Path, *, client: httpx.Client | None = None) -> Path:
     """抓取 → 组装 → 写 content/{date}/digest.json，返回产物路径。"""
     report: dict = {"date": target.isoformat(), "sourcesOk": 0, "sourceErrors": []}
     candidates = fetch_candidates(target, client=client, report=report)
-    report["candidates"] = len(candidates)
     digest = build_digest(candidates, target)
+    # v2.1 §3.6 硬约束：candidates 必须填「最终 digest 条数」（quality.py
+    # volume_errors 以最近 5 份报告的此字段为基线），不能填 fetch 原始量——
+    # 簇去重在 build_digest 内部执行，digest 条数可能少于 fetch 出口数；
+    # 密度门禁与配额在 clip_content 重写 digest 后，由其把 candidates 刷成
+    # 最终存活数。fetch 原始量落 report["fetch"]["candidatesRaw"] 备查。
+    report["fetch"] = {"candidatesRaw": len(candidates)}
+    report["candidates"] = sum(len(sec.items) for sec in digest.sections)
     out_dir = content_dir / target.isoformat()
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / "digest.json"
@@ -121,10 +220,15 @@ def clip_content(
     target: dt.date, content_dir: Path, *, client: httpx.Client | None = None,
     cfg: dict[str, str] | None = None,
 ) -> int:
-    """为某天日报的条目剪藏原文，写 content/{date}/article-{id}.json。返回剪藏成功数。
+    """两阶段剪藏（v2.1 §3.4）：pass-1 全量剪藏 → 密度门禁 → 配额/CAPS →
+    重写 digest.json → pass-2 仅对存活者做 AI 分析。返回最终落盘文章数。
 
-    并发剪藏 + AI 分析（默认 4 线程，可用环境变量 KAOGONG_CLIP_CONCURRENCY 调整），
-    大幅缩短整批耗时；httpx.Client 线程安全，可跨线程共享。
+    v2.1 §3.2-A1：配额与 CAPS 后移到本函数执行（fetch 层只留 MAX_PRECLIP
+    安全阀），排序键 = total_chars 降序（v2 的列表序截断在黄金样本日误杀
+    3 篇 IN）。密度门禁（§5）在剪藏后的正文层执行：被拒者不落盘、不做 AI
+    ——AI 调用从「每 digest 条目」降到「每存活条目」（正常日 ~15 次/天）。
+    并发剪藏 + AI 分析（默认 4 线程，可用环境变量 KAOGONG_CLIP_CONCURRENCY
+    调整）；httpx.Client 线程安全，可跨线程共享。
     """
     from .clip import clip_article
     from .article_ai import analyze_article
@@ -134,30 +238,65 @@ def clip_content(
         return 0
     digest = json.loads(digest_path.read_text(encoding="utf-8"))
     ai_cfg = cfg if cfg is not None else load_config()
-    items = [
-        (it.get("sourceUrl", ""), it.get("title", ""))
-        for sec in digest.get("sections", [])
-        for it in sec.get("items", [])
-        if it.get("sourceUrl")
-    ]
+    section_by_url: dict[str, str] = {}
+    items: list[tuple[str, str]] = []
+    for sec in digest.get("sections", []):
+        for it in sec.get("items", []):
+            url = str(it.get("sourceUrl", ""))
+            if not url:
+                continue
+            section_by_url[url] = str(sec.get("id", ""))
+            items.append((url, str(it.get("title", ""))))
     concurrency = max(1, min(int(os.environ.get("KAOGONG_CLIP_CONCURRENCY", "4")), 8))
 
-    def _clip_and_analyze(item: tuple[str, str]) -> tuple[str, dict]:
+    def _clip_only(item: tuple[str, str]) -> dict:
         url, title = item
-        clip = clip_article(url, title, target.isoformat(), client=client)
-        if clip.get("status") != "ok":
-            return ("clip_error", clip)
-        return ("analyzed", analyze_article(clip, ai_cfg))
+        return clip_article(url, title, target.isoformat(), client=client)
 
-    finished: list[dict] = []
+    # ---- pass-1：全量剪藏（仅 HTTP，零 AI）----
+    clips: list[dict] = []
     clip_failures: list[dict] = []
     if items:
         with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as pool:
-            for kind, data in pool.map(_clip_and_analyze, items):
-                if kind == "clip_error":
-                    clip_failures.append(data)
+            for clip in pool.map(_clip_only, items):
+                if clip.get("status") != "ok":
+                    clip_failures.append(clip)
                 else:
-                    finished.append(data)
+                    clips.append(clip)
+
+    # ---- 密度门禁（§5，正文层）：拦截「剪藏成功、有正文，但是垃圾」的载体缺陷稿 ----
+    density_rejected: list[tuple[dict, str]] = []
+    passed_density: list[dict] = []
+    for clip in clips:
+        reason = density_gate(clip.get("paragraphs") or [])
+        if reason is None:
+            passed_density.append(clip)
+        else:
+            density_rejected.append((clip, reason))
+
+    # ---- 配额/CAPS（§3.2-A1）：total_chars 降序截断 ----
+    final, quota_cut = _apply_quota_and_caps(passed_density, section_by_url)
+
+    # ---- 重写 digest.json：只留存活条目（§3.6 硬约束：candidates = 最终条数）----
+    survivor_urls = {str(c.get("url", "")) for c in final}
+    for sec in digest.get("sections", []):
+        sec["items"] = [
+            it for it in sec.get("items", [])
+            if str(it.get("sourceUrl", "")) in survivor_urls
+        ]
+    digest["sections"] = [sec for sec in digest["sections"] if sec.get("items")]
+    digest_path.write_text(
+        json.dumps(digest, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+    # ---- pass-2：仅存活者做 AI 分析并落盘 ----
+    def _analyze(clip: dict) -> dict:
+        return analyze_article(clip, ai_cfg)
+
+    finished: list[dict] = []
+    if final:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as pool:
+            finished = list(pool.map(_analyze, final))
 
     out_dir = content_dir / target.isoformat()
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -165,8 +304,23 @@ def clip_content(
     report_path = content_dir / "_reports" / f"{target.isoformat()}.json"
     report = json.loads(report_path.read_text(encoding="utf-8")) if report_path.exists() else {"date": target.isoformat()}
     report.update({
+        "candidates": len(final),
         "articles": 0, "aiOk": 0, "aiError": 0,
         "aiFailures": [], "clipDetails": [], "locationErrors": 0,
+        "clip": {
+            "clipped": len(clips),
+            "densityRejected": [
+                {"id": str(c.get("id", "")), "title": str(c.get("title", "")),
+                 "reason": reason, "source": str(c.get("source", ""))}
+                for c, reason in density_rejected
+            ],
+            "quotaRejected": [
+                {"id": str(c.get("id", "")), "title": str(c.get("title", "")),
+                 "source": str(c.get("source", "")),
+                 "totalChars": total_chars(c.get("paragraphs") or [])}
+                for c in quota_cut
+            ],
+        },
     })
     for clip in finished:
         out = out_dir / f"article-{clip['id']}.json"
@@ -198,6 +352,21 @@ def clip_content(
             "title": str(cf.get("title", "")),
             "status": "clip_error",
             "reason": str(cf.get("error", "正文提取失败"))[:120],
+        })
+    # 密度/配额被拒显性化（v2.1 §3.6）：进 clipDetails 供审核工作台排查
+    for c, reason in density_rejected:
+        report["clipDetails"].append({
+            "id": str(c.get("id", "")),
+            "title": str(c.get("title", "")),
+            "status": "density_rejected",
+            "reason": f"density_low:{reason}",
+        })
+    for c in quota_cut:
+        report["clipDetails"].append({
+            "id": str(c.get("id", "")),
+            "title": str(c.get("title", "")),
+            "status": "quota_rejected",
+            "reason": "quota_rejected",
         })
     report_dir = content_dir / "_reports"
     report_dir.mkdir(parents=True, exist_ok=True)
@@ -385,29 +554,38 @@ def quality_gate(target: dt.date, content_dir: Path) -> dict:
         report["volumeErrors"] = []
     else:
         report["volumeErrors"] = volume_error_list[:50]
-    # 0022 选材口径：picks 缺失/为空 → 选材失败（degraded，不阻止原文发布）；
-    # 卡片/关系提炼失败同理只降级（内容可读，只是少了记忆辅助）。
+    # 0022/v2.1 §7.1 选材口径：宁缺勿滥——选材跑了但当日无合格材料（picked=0
+    # 不落 picks.json；1≤picked<2 落盘且 slots.sparse=true）是合法 sparse 日，
+    # 不是错误。picks_empty 语义检查移除（picked=[] 违反 schema minItems:1，
+    # 走 schema_errors → failed）；picks_slots_all_empty 保留——非 sparse 日
+    # 三槽位全空仍是「合法但空转」降级，sparse 日豁免（量不足已由 sparse 状态
+    # 显性化，不再叠加降级）。
     picks_path = out_dir / "picks.json"
     curation_errors: list[str] = []
+    sparse_day = False
+    curation_info = report.get("curation") or {}
     if not picks_path.exists():
-        # 只有当天确有文章产物时才要求选材（空跑/历史文件缺失不误判）
-        if report.get("articles", 0) > 0:
+        # 只有当天确有文章产物、且选材确未产出时才要求选材：curate 已跑且
+        # picked=0 → sparse 合法日；curate 没跑（report 无 curation 段）→
+        # picks_missing（管道不完整）
+        curate_ran = bool(curation_info)
+        if report.get("articles", 0) > 0 and not curate_ran:
             curation_errors.append("picks_missing")
+        elif curate_ran and not curation_info.get("picked", 0):
+            # curate 已跑但 picked=0 → 合法 sparse 日（宁缺勿滥）
+            sparse_day = True
     else:
         try:
             picks_data = json.loads(picks_path.read_text(encoding="utf-8"))
-            if not picks_data.get("picked"):
-                curation_errors.append("picks_empty")
-            else:
-                # 0022 P0 门禁：picked 非空但 essay/exam/extra 三槽位同时为空——
-                # 「合法但空转」的 picks（schema 只要求 minItems:1；bug 期间 4 天实测
-                # 形态：essay 恒 []、exam/extra 恒 null，仅靠 supplement 凑够下限）。
-                # 判 degraded 暴露而非静默发布（AGENTS.md 第 8 条），不阻止原文发布
-                # ——与 picks_missing 的降级哲学一致；即便偶发合法全空，代价只是
-                # 多一条 degraded 记录，不会误停发布。
-                picks_slots = picks_data.get("slots") or {}
-                if not picks_slots.get("essay") and not picks_slots.get("exam") and not picks_slots.get("extra"):
-                    curation_errors.append("picks_slots_all_empty")
+            picks_slots = picks_data.get("slots") or {}
+            sparse_day = bool(picks_slots.get("sparse"))
+            # 0022 P0 门禁：picked 非空但 essay/exam/extra 三槽位同时为空——
+            # 「合法但空转」的 picks（schema 只要求 minItems:1；bug 期间 4 天实测
+            # 形态：essay 恒 []、exam/extra 恒 null）。判 degraded 暴露而非静默
+            # 发布（AGENTS.md 第 8 条）；sparse 日豁免（v2.1 §7.1）。
+            if (not sparse_day and not picks_slots.get("essay")
+                    and not picks_slots.get("exam") and not picks_slots.get("extra")):
+                curation_errors.append("picks_slots_all_empty")
         except json.JSONDecodeError:
             curation_errors.append("picks_invalid_json")
     if report.get("curation", {}).get("cardErrors") or report.get("curation", {}).get("relationErrors"):
@@ -417,6 +595,10 @@ def quality_gate(target: dt.date, content_dir: Path) -> dict:
         report["qualityStatus"] = "failed"
     elif report.get("sourceErrors") or report.get("aiError", 0) or report.get("locationErrors", 0) or curation_errors:
         report["qualityStatus"] = "degraded"
+    elif sparse_day:
+        # v2.1 §7.1 宁缺勿滥：量不足是显性合法状态（非错误），优先级
+        # failed > degraded > sparse > ok
+        report["qualityStatus"] = "sparse"
     else:
         report["qualityStatus"] = "ok"
     report_path.parent.mkdir(parents=True, exist_ok=True)

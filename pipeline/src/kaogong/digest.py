@@ -23,6 +23,8 @@ _SHORT_DATE_RE = re.compile(r"[（(](\d{2}-\d{2})[）)]")
 _QUOTE_RE = re.compile(r"^>\s*(.*)$")
 
 # 栏目标题 → slug 的稳定映射（用「包含」匹配，兼容 "今日谈（半月谈·申论素材）" 这类带注的标题）
+# v2 §6：地方分节删除后清理死映射（guangdong/sichuan/jiangsu）；
+# 「广东政策解读」→ policy（guangdong-policy 已去地方化），兼容新旧两种栏目标题。
 SECTION_SLUG = {
     "全国时政要闻": "national",
     "申论精读": "essay",
@@ -32,10 +34,8 @@ SECTION_SLUG = {
     "高频主题": "topics",
     "值得关注的政策": "policies",
     "相关主题": "related",
-    "广东政策解读": "guangdong-policy",
-    "广东要闻动态": "guangdong",
-    "四川要闻动态": "sichuan",
-    "江苏要闻动态": "jiangsu",
+    "政策解读": "policy",
+    "广东政策解读": "policy",
 }
 
 
