@@ -2,6 +2,7 @@
 """选材漏斗：粗筛 / 评级与主线 / 槽位 / 宁缺勿滥 sparse（v2.1 §7）。"""
 import datetime as dt
 import json
+from pathlib import Path
 
 from kaogong.curation import assign_grades, assign_slots, authority_rank, build_picks, coarse_filter
 
@@ -103,6 +104,26 @@ def test_build_picks_sparse_below_two_and_no_supplement():
     assert picks["slots"]["sparse"] is True
     assert "supplement" not in picks["slots"]
     assert picks["needsHuman"] == []
+
+
+def test_build_picks_payload_matches_schema():
+    """契约回归：build_picks 产出必须逐字段通过 picks.schema.json（顶层 additionalProperties:false）。
+
+    2026-09-12 实战暴露：T04 起 needsHuman 恒写入 picks.json 但 schema 漏加该键，
+    当日 picks.json 报 schema:additionalProperties → qualityStatus 误判 failed。
+    test_content_schema 只校验落盘产物，本测试在代码变更时即拦截。
+    """
+    from jsonschema import Draft202012Validator
+
+    from kaogong.quality import FORMAT_CHECKER
+
+    schema_path = Path(__file__).resolve().parents[2] / "content" / "schema" / "picks.schema.json"
+    validator = Draft202012Validator(json.loads(schema_path.read_text(encoding="utf-8")),
+                                     format_checker=FORMAT_CHECKER)
+    articles = [_article("a1", "普通文章", source="news.cn", ann_count=1)]
+    picks = build_picks(articles, LINES, {"deepseek_api_key": "k"}, target=TARGET,
+                        call=_call([{"index": 0, "grade": "B", "policyLine": None, "reason": "普通"}]))
+    validator.validate(picks)
 
 
 def test_curate_content_end_to_end(tmp_path):

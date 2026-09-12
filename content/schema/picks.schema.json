@@ -32,6 +32,12 @@
       "type": "object",
       "additionalProperties": { "oneOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }] },
       "description": "文章 id → 主线归属（AI 评级结果；null=无归属）"
+    },
+    "needsHuman": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true,
+      "description": "待人工审核名单（v2.1 §7.2）：发布会/调研类模糊地带与无 key 兜底，不进槽位、交 review 工作台；T04 起恒写入（可空数组）"
     }
   }
 }
