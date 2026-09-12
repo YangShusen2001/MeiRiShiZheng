@@ -1,0 +1,87 @@
+---
+import Item from "./ArchiveItem.astro";
+import type { ArchiveMonth } from "../lib/archive";
+
+interface Props {
+  doc: ArchiveMonth;
+}
+const { doc } = Astro.props;
+const [year, mon] = doc.month.split("-");
+const groups: Array<[string, string, typeof doc.items]> = [
+  ["高", "核心考点", doc.items.filter((x) => x.importance === "高")],
+  ["中", "了解即可", doc.items.filter((x) => x.importance === "中")],
+  ["低", "技术细则", doc.items.filter((x) => x.importance === "低")],
+];
+const rank = (d: string) => d;
+---
+
+<section class="archive-main">
+  <header class="arch-head">
+    <h1>{year} 年 {Number(mon)} 月 · 政策档案</h1>
+    <p class="arch-sub">
+      共 {doc.count} 份政策文件 ·
+      <span class="k">核心 {doc.high}</span> /
+      了解 {doc.medium} / 细则 {doc.low}
+    </p>
+  </header>
+
+  {groups.map(([imp, label, rows]) =>
+    rows.length === 0 ? null : imp === "高" ? (
+      <div class="grp">
+        <h2 class="grp-title">核心考点 <span class="cnt">{rows.length}</span></h2>
+        {rows.map((it) => <Item it={it} imp={imp} />)}
+      </div>
+    ) : (
+      <details class="grp-fold">
+        <summary>{label}（{rows.length}）</summary>
+        <div class="fold-body">
+          {rows.map((it) => <Item it={it} imp={imp} />)}
+        </div>
+      </details>
+    )
+  )}
+</section>
+
+<script>
+  // 供卡片样式复用；无客户端行为，仅占位避免 bundler 警告
+</script>
+
+<style>
+  .archive-main { min-width: 0; }
+  .arch-head { margin-bottom: 20px; }
+  .arch-head h1 { font-size: 22px; margin: 0 0 6px; }
+  .arch-sub { color: var(--sub); font-size: 13.5px; margin: 0; font-variant-numeric: tabular-nums; }
+  .arch-sub .k { color: var(--primary); font-weight: 600; }
+  .grp { margin-bottom: 22px; }
+  .grp-title {
+    font-size: 15px;
+    margin: 0 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .grp-title .cnt {
+    font-size: 12px;
+    background: var(--primary-soft);
+    color: var(--primary);
+    border-radius: 20px;
+    padding: 1px 9px;
+    font-variant-numeric: tabular-nums;
+  }
+  .grp-fold {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    padding: 12px 16px;
+    margin-bottom: 16px;
+  }
+  .grp-fold summary {
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--sub);
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+  }
+  .fold-body { padding-top: 12px; }
+</style>

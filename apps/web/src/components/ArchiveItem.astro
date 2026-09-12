@@ -1,0 +1,57 @@
+---
+import type { ArchiveItem } from "../lib/archive";
+
+interface Props {
+  it: ArchiveItem;
+  imp: string;
+}
+const { it, imp } = Astro.props;
+const cls = imp === "高" ? "high" : imp === "中" ? "medium" : "low";
+---
+
+<article class:list={["ai", cls]}>
+  <div class="ai-row">
+    <span class="ai-date">{it.date.slice(5)}</span>
+    <span class="ai-lib">{it.lib}</span>
+    <span class="ai-topic">{it.topic}</span>
+    <a class="ai-link" href={it.url} target="_blank" rel="noopener">原文 ↗</a>
+  </div>
+  <h3 class="ai-title">{it.title}</h3>
+  {it.gist ? <p class="ai-gist">{it.gist}</p> : <p class="ai-gist mut">（要点待补）</p>}
+</article>
+
+<style>
+  .ai {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--line);
+    border-radius: 12px;
+    padding: 13px 16px;
+    margin-bottom: 11px;
+    box-shadow: var(--shadow-sm);
+  }
+  .ai.high { border-left-color: var(--green); }
+  .ai.medium { border-left-color: var(--accent); }
+  .ai.low { border-left-color: var(--line); opacity: 0.9; }
+  .ai-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--sub);
+    margin-bottom: 6px;
+  }
+  .ai-date { font-variant-numeric: tabular-nums; }
+  .ai-lib, .ai-topic {
+    background: var(--surface-2);
+    border-radius: 5px;
+    padding: 1px 7px;
+  }
+  .ai-topic { color: var(--accent); background: var(--accent-soft); }
+  .ai-link { color: var(--primary); text-decoration: none; margin-left: auto; }
+  .ai-link:hover { text-decoration: underline; }
+  .ai-title { font-size: 15px; line-height: 1.55; margin: 0 0 6px; font-weight: 600; }
+  .ai-gist { font-size: 14px; color: var(--sub); margin: 0; line-height: 1.7; }
+  .ai-gist.mut { font-style: italic; color: var(--mut); }
+</style>

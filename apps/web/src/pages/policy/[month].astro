@@ -1,0 +1,42 @@
+---
+// 政策档案：月份页（/policy/<YYYY-MM>/）。
+// 数据来自 content/archive/<月>/archive.json（scripts/ 三脚本产出）。
+import Base from "../../layouts/Base.astro";
+import ArchiveSidebar from "../../components/ArchiveSidebar.astro";
+import PolicyArchive from "../../components/PolicyArchive.astro";
+import { getArchive, groupArchiveSummary, listArchiveSummary } from "../../lib/archive";
+
+export function getStaticPaths() {
+  return listArchiveSummary().map((row) => ({
+    params: { month: row.month },
+    props: { month: row.month },
+  }));
+}
+
+const { month } = Astro.props;
+const doc = getArchive(month);
+if (!doc) {
+  throw new Error(`档案缺失：${month}`);
+}
+const grouped = groupArchiveSummary(listArchiveSummary());
+const [year, mon] = month.split("-");
+---
+
+<Base title={`${year} 年 ${Number(mon)} 月政策档案 · 时政小助手`}>
+  <div class="archive-layout">
+    <ArchiveSidebar grouped={grouped} current={month} />
+    <PolicyArchive doc={doc} />
+  </div>
+</Base>
+
+<style>
+  .archive-layout {
+    display: grid;
+    grid-template-columns: 172px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .archive-layout { grid-template-columns: 1fr; gap: 14px; }
+  }
+</style>

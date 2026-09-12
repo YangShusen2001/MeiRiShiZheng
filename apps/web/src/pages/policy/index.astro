@@ -1,0 +1,12 @@
+---
+// 政策档案入口（/policy/）：重定向到最新月份。
+import { listArchiveMonths } from "../../lib/archive";
+
+const months = listArchiveMonths();
+const latest = months[0];
+if (!latest) {
+  // 无档案数据时不生成跳转，交由 Astro 输出空页（构建期可见）
+  throw new Error("content/archive/ 下没有 archive.json，先跑 scripts/curate-archive.py");
+}
+return Astro.redirect(`/policy/${latest}/`, 302);
+---
