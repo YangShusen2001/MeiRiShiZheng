@@ -93,3 +93,5 @@ apps/harmony/local.properties
 apps/harmony/**/*.har
 apps/harmony/**/oh-package-lock.json5
 .demo-shots/
+# 验收脚本的临时产物（截图 / 数据 / Chrome 用户目录）—— 都是按需重跑的，不入库
+.demo-shots-*/

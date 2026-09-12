@@ -40,6 +40,18 @@ VECTORS_PATH = REPO / "packages" / "design-tokens" / "test-vectors.json"
 HEX6 = re.compile(r"^#([0-9a-fA-F]{6})$")
 ANY_HEX = re.compile(r"#[0-9a-fA-F]{3,8}\b")
 
+_CSS_COMMENT = re.compile(r"/\*.*?\*/", re.S)
+_HTML_COMMENT = re.compile(r"<!--.*?-->", re.S)
+
+
+def strip_comments(text: str) -> str:
+    """扫描前先剥注释。
+
+    注释是文档：写清「这个值为什么是 #5A66A8，而不是 color-mix 派生出来的 #616A9C」，
+    正是令牌迁移要留下的证据。把注释里的色号算成裸 hex，等于让门禁惩罚正当的说明。
+    """
+    return _HTML_COMMENT.sub("", _CSS_COMMENT.sub("", text))
+
 
 # ─────────────────────────── WCAG 2.1 ───────────────────────────
 # ⚠️ 与 packages/design-tokens/wcag.mjs 是同一套公式的双实现。
@@ -359,7 +371,7 @@ def check_scale(rep: Report, tokens: dict) -> None:
     for label, path in targets:
         if not path.exists():
             continue
-        text = path.read_text(encoding="utf-8")
+        text = strip_comments(path.read_text(encoding="utf-8"))
         sizes = set(re.findall(r"font-size: *(\d+)px", text)) | set(re.findall(r"\b(\d+)px/", text))
         for size in sizes:
             if size not in font_rungs and size not in exempt_font:
@@ -383,7 +395,7 @@ def check_raw_hex(rep: Report, tokens: dict) -> None:
         path = REPO / rel
         if not path.exists():
             continue
-        count = len(ANY_HEX.findall(path.read_text(encoding="utf-8")))
+        count = len(ANY_HEX.findall(strip_comments(path.read_text(encoding="utf-8"))))
         rep.checks[f"raw_hex_{label}"] = count
         if count:
             rep.warn(f"[裸 hex] {label}（{rel}）还有 {count} 处硬编码颜色，待迁移为令牌变量")

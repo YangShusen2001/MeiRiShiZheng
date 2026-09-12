@@ -1,5 +1,5 @@
 /* 自动生成，请勿手改：packages/design-tokens/generate.mjs → apps/web/src/styles/tokens.generated.css */
-/* SOURCE_SHA256:b67ab4c8a38f8545b1ec38607933eff797f9c2185453c2f8b8bdf24efd21c766 */
+/* SOURCE_SHA256:7c9d18d7c69ff92f4d88c21292632119c3995fd41af2c7ca780d35600322f0a5 */
 /* 规范 docs/design/design-system-v3.md · v3 · 2026-09-12 */
 
 /* 浅色：暖纸底 */
@@ -26,6 +26,7 @@
   --color-on-brand: #FFFFFF;
   --color-panel-deep: #232C5C;
   --color-panel-raised: #3A4785;
+  --color-panel-mark: #5A66A8;
   --color-panel-chip: #434C79;
   --color-panel-stroke: #7E88BE;
   --color-panel-divider: #3A4576;
@@ -112,6 +113,7 @@
   --color-on-brand: #232C5C;
   --color-panel-deep: #232C5C;
   --color-panel-raised: #3A4785;
+  --color-panel-mark: #5A66A8;
   --color-panel-chip: #434C79;
   --color-panel-stroke: #7E88BE;
   --color-panel-divider: #3A4576;

@@ -72,6 +72,7 @@
      不能用 --primary-deep / --surface / --bg 这类会翻转的令牌。 */
   --panel-deep: var(--color-panel-deep);
   --panel-raised: var(--color-panel-raised);
+  --panel-mark: var(--color-panel-mark);
   --panel-chip: var(--color-panel-chip);
   --panel-stroke: var(--color-panel-stroke);
   --panel-divider: var(--color-panel-divider);
@@ -242,10 +243,12 @@ p { margin: 0; }
 .foot-top { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); flex-wrap: wrap; }
 .foot-brand { display: flex; align-items: center; gap: 10px; color: inherit; }
 .foot-mark { flex: none; width: 24px; height: 24px; display: block; }
-/* 标识方块由面板色派生（色值未经评审不新增）；笔画用面板亮色 */
-.foot-mark rect { fill: color-mix(in srgb, var(--panel-stroke) 50%, var(--panel-chip)); }
-.foot-mark path { stroke: var(--panel-strong); }
-.foot-name { font-weight: 500; color: var(--panel-strong); }
+/* 画布 3:162 的方块是 #5A66A8 —— 它是独立取值，不是 stroke/chip 的 50% 混合
+   （混出来是 #616A9C，蓝通道差 13），所以作为 panelMark 进了令牌表。
+   3:163/164 的笔画与 3:165 的品牌名同色 #F5F1E8 = --panel-on-btn（不是 --panel-strong #FFFDF6）。 */
+.foot-mark rect { fill: var(--panel-mark); }
+.foot-mark path { stroke: var(--panel-on-btn); }
+.foot-name { font-weight: 500; color: var(--panel-on-btn); }
 .foot-links { display: flex; align-items: center; gap: var(--s-5); flex-wrap: wrap; }
 .foot-links a { color: var(--panel-meta); }
 .foot-links a:hover { color: var(--panel-strong); }
@@ -272,13 +275,17 @@ p { margin: 0; }
 .home-hero {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--panel-deep), var(--panel-raised));
+  /* 画布 3:24 的 gradientTransform 是 [[1,0,0],[0,1,0]] = 纯「左→右」。
+     写 135deg 会变成左上→右下的斜向渐变，两端的落点就与画布对不上了。 */
+  background: linear-gradient(to right, var(--panel-deep), var(--panel-raised));
   color: var(--panel-strong);
 }
+/* Hero 内容区：与 .band 同构 —— 外层横带负责全幅底色与 64px 内边距，
+   内层把内容收在 1312。所以这里的 max-width 要含左右 padding（1312 + 64×2 = 1440），
+   写成 1312 会把内容挤成 1184，标题换行点就跟画布不一致了。 */
 .home-hero__in {
   position: relative;
-  z-index: 1;
-  max-width: 1312px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 56px 64px;
   display: flex;
@@ -293,6 +300,15 @@ p { margin: 0; }
   line-height: var(--line-tight);
   color: var(--panel-strong);
 }
+
+/* 画布把首页每一级标题都定为 Serif **Bold**：3:29(34) / 3:48(28) / 3:62(24) /
+   3:79(20) / 3:105(28) / 3:111(20)。全站 h1–h3 的基数是 600，所以只把首页这几处
+   提到 700 —— 不动其它页面的标题字重。 */
+.home-hero h1,
+.band-title,
+.pick-lead h3,
+.pick-card h3,
+.month-card__count { font-weight: 700; }
 .home-hero__lede {
   max-width: 880px;
   font-size: var(--font-body);
@@ -335,29 +351,6 @@ p { margin: 0; }
 .pnl-btn:hover { transform: translateY(-1px); }
 .pnl-btn:active { transform: scale(0.97); }
 
-/* 极光 + 粒子：Hero 的动效层（静态画布看不出来，网页端保留原有实现） */
-.hero__aurora { position: absolute; inset: 0; filter: blur(50px); opacity: 0.5; pointer-events: none; }
-.hero__aurora span { position: absolute; border-radius: 50%; }
-.hero__aurora .a1 {
-  width: 320px; height: 320px; left: -60px; top: -80px;
-  background: radial-gradient(circle, rgba(90, 140, 255, 0.9), transparent 70%);
-  animation: drift1 16s ease-in-out infinite alternate;
-}
-.hero__aurora .a2 {
-  width: 260px; height: 260px; right: -40px; top: 20%;
-  background: radial-gradient(circle, rgba(227, 179, 65, 0.7), transparent 70%);
-  animation: drift2 20s ease-in-out infinite alternate;
-}
-.hero__aurora .a3 {
-  width: 300px; height: 300px; left: 30%; bottom: -120px;
-  background: radial-gradient(circle, rgba(110, 80, 220, 0.7), transparent 70%);
-  animation: drift3 22s ease-in-out infinite alternate;
-}
-@keyframes drift1 { to { transform: translate(60px, 50px) scale(1.15); } }
-@keyframes drift2 { to { transform: translate(-70px, -40px) scale(0.9); } }
-@keyframes drift3 { to { transform: translate(40px, -70px) scale(1.1); } }
-.hero__particles { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.5; }
-
 /* ===== 横带通用骨架 ===== */
 .band { padding: 56px 64px; background: var(--bg); }
 .band--alt { background: var(--surface-2); }
@@ -368,8 +361,11 @@ p { margin: 0; }
   flex-direction: column;
   gap: var(--s-xl);
 }
-.band-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s-3); }
-.band-head__l { display: flex; flex-direction: column; gap: var(--s-1); }
+/* 画布 3:46 / 3:103 的 counterAxisAlignItems 是 MAX：标题块比右侧链接高，
+   「全部材料」是贴着标题块的**底边**对齐的，不是顶边。 */
+.band-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s-3); }
+/* 标题与副标题之间是 6（画布 3:47 / 3:104 / 3:127）—— 不在 4/8/12 台阶上，按画布原值。 */
+.band-head__l { display: flex; flex-direction: column; gap: 6px; }
 .band-title {
   font-family: var(--font-serif);
   font-size: var(--font-title-l);
@@ -402,13 +398,21 @@ p { margin: 0; }
   transition: border-color var(--dur-sm) var(--ease-out), transform var(--dur-sm) var(--ease-out), box-shadow var(--dur-sm) var(--ease-out);
 }
 .pick-lead { gap: var(--s-4); }
-.pick-card { gap: var(--s-3); flex: 1 1 600px; min-width: 0; }
+/* 画布 3:74 / 3:88 是 644 定宽（两条 644×2 + 24 = 1312 = 横带内容宽），卡内间距 14。
+   用 flex: 0 1 644px 而非 1 1：grow 会把不满一行的卡片拉成整行宽，而画布上末行保持原宽靠左。 */
+.pick-card { gap: 14px; flex: 0 1 644px; min-width: 0; }
 .pick-lead h3 { font-family: var(--font-serif); font-size: var(--font-title-m); line-height: var(--line-heading); }
 .pick-card h3 { font-family: var(--font-serif); font-size: var(--font-title-s); line-height: var(--line-heading); }
 .pick-lead p,
 .pick-card p { font-size: var(--font-meta); line-height: var(--line-ui); color: var(--sub); }
 .pick-meta { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
-.pick-meta__l { display: flex; align-items: center; gap: var(--s-2); flex-wrap: wrap; }
+/* 画布把两处「元信息左组」的间距定得不一样，照原值分别落：
+   3:56（头条）gap 10；3:75（次级）gap 0 —— 次级的胶囊自带 10px 左右内边距，视觉上仍有 10px 间隔。
+   次级卡没有右侧校验徽标，左组要撑满整行（594 = 644 − 24×2 − 1×2）；
+   它内部的「阅读全文」靠 .pick-more 的 margin-left:auto 顶到右边，对应画布 3:86 那个 fill 占位条。 */
+.pick-meta__l { display: flex; align-items: center; flex-wrap: wrap; }
+.pick-lead .pick-meta__l { gap: 10px; }
+.pick-card .pick-meta__l { flex: 1 1 auto; gap: 0; }
 .pick-cat {
   display: inline-flex;
   align-items: center;
@@ -451,7 +455,9 @@ p { margin: 0; }
 /* ===== 政策档案入口：月份卡网格 ===== */
 .month-grid { display: flex; flex-wrap: wrap; gap: var(--s-4); }
 .month-card {
-  flex: 1 1 316px;
+  /* 画布 3:109 是 316×139 定宽定高（1312 = 316×4 + 16×3）。
+     同样不 grow：末行不满 4 张时画布保持 316 靠左，grow 会把它拉成整行宽的巨卡。 */
+  flex: 0 1 316px;
   min-width: 0;
   min-height: 139px;
   display: flex;
@@ -466,7 +472,9 @@ p { margin: 0; }
 }
 /* 当月卡被品牌靛填实：同样是 panel-* 一族，深色主题下不翻色 */
 .month-card--now { background: var(--panel-raised); border-color: transparent; color: var(--panel-strong); }
-.month-card__label { font-size: var(--font-caption); font-weight: 500; color: var(--mut); }
+/* 单行小标签不该用正文的 1.7 行高：那是给长段落阅读留的。
+   画布 3:110 是 12px + AUTO 行高（≈17px），用紧档行高才让卡片落回 3:109 的 139 高。 */
+.month-card__label { font-size: var(--font-caption); font-weight: 500; line-height: var(--line-tight); color: var(--mut); }
 .month-card--now .month-card__label { color: var(--panel-label); }
 .month-card__count { font-family: var(--font-serif); font-size: var(--font-title-s); line-height: var(--line-heading); }
 .month-card--now .month-card__count { color: var(--panel-strong); }
@@ -1523,7 +1531,6 @@ summary:active,
 /* ===== 无障碍：尊重系统「减少动效」偏好 ===== */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero__aurora span { animation: none; }
   /* P0：去掉全部位移与时长动画；保留 modal 淡入淡出（透明度帮助理解层叠，200ms） */
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

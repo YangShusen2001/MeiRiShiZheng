@@ -157,12 +157,10 @@ const historyRows = digests.slice(0, 6).map((d) => {
 ---
 
 <Base title="每日时政" bleed>
-  <!-- ===== Hero · 今日速览（画布 3:24）===== -->
+  <!-- ===== Hero · 今日速览（画布 3:24）=====
+       画布 3:24 的子节点只有五组：标签行 / 标题 / 摘要 / 关键词 / 操作。
+       不在这五组里的装饰层（光斑、粒子网络）都会让 Hero 与画布对不上，故不设。 -->
   <section class="home-hero">
-    <div class="hero__aurora" aria-hidden="true">
-      <span class="a1"></span><span class="a2"></span><span class="a3"></span>
-    </div>
-    <canvas id="hero-particles" class="hero__particles" aria-hidden="true"></canvas>
     <div class="home-hero__in">
       <div class="home-hero__top">
         <span class="pnl-chip pnl-chip--label">今日速览</span>
@@ -369,57 +367,4 @@ const historyRows = digests.slice(0, 6).map((d) => {
     a.href = canvas.toDataURL("image/png");
     a.click();
   });
-
-  // 粒子网络（Hero 背景）：reduced-motion 下不启动
-  const pc = document.getElementById("hero-particles") as HTMLCanvasElement | null;
-  if (pc && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const ctx = pc.getContext("2d");
-    if (ctx) {
-      const parent = pc.parentElement!;
-      let dots: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
-      let w = 0, h = 0, raf = 0;
-      const resize = () => {
-        const rect = parent.getBoundingClientRect();
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        w = rect.width; h = rect.height;
-        pc.width = w * dpr; pc.height = h * dpr;
-        pc.style.width = `${w}px`; pc.style.height = `${h}px`;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        const count = Math.min(60, Math.max(24, Math.floor((w * h) / 26000)));
-        dots = Array.from({ length: count }, () => ({
-          x: Math.random() * w, y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
-          r: Math.random() * 1.6 + 0.6,
-        }));
-      };
-      const step = () => {
-        ctx.clearRect(0, 0, w, h);
-        for (const d of dots) {
-          d.x += d.vx; d.y += d.vy;
-          if (d.x < 0 || d.x > w) d.vx *= -1;
-          if (d.y < 0 || d.y > h) d.vy *= -1;
-        }
-        ctx.fillStyle = "rgba(255,255,255,.5)";
-        for (const d of dots) { ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2); ctx.fill(); }
-        ctx.lineWidth = 1;
-        for (let i = 0; i < dots.length; i++) {
-          for (let j = i + 1; j < dots.length; j++) {
-            const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y;
-            const dist = Math.hypot(dx, dy);
-            if (dist < 110) {
-              ctx.strokeStyle = `rgba(255,255,255,${((1 - dist / 110) * 0.18).toFixed(3)})`;
-              ctx.beginPath(); ctx.moveTo(dots[i].x, dots[i].y); ctx.lineTo(dots[j].x, dots[j].y); ctx.stroke();
-            }
-          }
-        }
-        raf = requestAnimationFrame(step);
-      };
-      resize();
-      window.addEventListener("resize", resize);
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) cancelAnimationFrame(raf); else raf = requestAnimationFrame(step);
-      });
-      raf = requestAnimationFrame(step);
-    }
-  }
 </script>
