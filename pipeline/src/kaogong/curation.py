@@ -32,6 +32,9 @@ MAX_PICKS = 5
 # v2.1 §7.1 宁缺勿滥：下限 2→0（历史补剧同步删除）。picked<2 时 build_picks
 # 置 slots["sparse"]=true（合法 sparse 日）；picked=0 不落 picks.json。
 MIN_PICKS = 0
+# AI 评级每批文章数：单次输出受 max_tokens=1200 约束，一次评 30+ 篇会被截断
+# 导致整批降级 needsHuman（2026-09-12 修复，详见 assign_grades 文档串）。
+GRADE_BATCH = 12
 
 
 class _Graded(TypedDict, total=False):
@@ -249,25 +252,36 @@ def assign_grades(
     *,
     call: Callable[..., str] = chat,
 ) -> list[_Graded]:
-    """AI 评级 + 主线归属（一次调用）；失败降级为程序兜底（无主线、按权威性×密度排序）。"""
+    """AI 评级 + 主线归属（分批改批）；单批失败仅该批降级为程序兜底。
+
+    2026-09-12 修复：原为「一次调用评完全部文章」+ max_tokens=1200——文章多时
+    输出被截断，JSON 解析失败 → 整批走 _program_fallback（needsHuman=true）。
+    实测 09-11 黄金日 34 篇全被误判「待人工」、picked=0；15 篇量级（黄金日
+    最初验证规模）尚可容纳，故问题在改造后的大候选池才暴露。
+    按 GRADE_BATCH 分批调用，每批输出完整，批内 index 映射回全局下标。
+    """
     if not articles:
         return []
     if not cfg.get("deepseek_api_key"):
         return [_program_fallback(a) for a in articles]
     meta = [graded_meta(a) for a in articles]
-    # v2.1 §7.2（T04）：输出新增 signals/focus/needsHuman 三字段，max_tokens 900→1200
-    payload = _json_object(call(
-        _grade_messages([{"metadata": m} for m in meta], lines), cfg, max_tokens=1200, temperature=0.2,
-    ))
-    raw_items = payload.get("items")
     by_index: dict[int, dict] = {}
-    if isinstance(raw_items, list):
+    for start in range(0, len(meta), GRADE_BATCH):
+        chunk = meta[start:start + GRADE_BATCH]
+        # v2.1 §7.2（T04）：输出含 signals/focus/needsHuman 三字段，故 token 上限 1200
+        payload = _json_object(call(
+            _grade_messages([{"metadata": m} for m in chunk], lines), cfg,
+            max_tokens=1200, temperature=0.2,
+        ))
+        raw_items = payload.get("items")
+        if not isinstance(raw_items, list):
+            continue  # 该批失败/截断 → 该批文章各自走兜底
         for item in raw_items:
             try:
                 idx = int(item.get("index", -1))
                 grade = str(item.get("grade", "")).upper()
-                if 0 <= idx < len(articles) and grade in GRADES:
-                    by_index[idx] = item
+                if 0 <= idx < len(chunk) and grade in GRADES:
+                    by_index[start + idx] = item
             except (KeyError, TypeError, ValueError):
                 continue
 

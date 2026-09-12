@@ -379,6 +379,36 @@ def test_assign_slots_route_first_without_line():
     assert len(slots["picked"]) == 5            # 选材不再塌陷（产能恢复由本项负责）
 
 
+def test_assign_grades_batches_large_pool():
+    """2026-09-12 修复：候选池 > GRADE_BATCH 时必须分批调用。
+
+    修复前必失败：一次调用评全部文章 + max_tokens=1200，文章多时输出被截断、
+    JSON 解析失败 → 整批走 _program_fallback（needsHuman=true）。
+    实测 09-11 黄金日 34 篇全被误判「待人工」、picked=0、picks 不落盘。
+    """
+    import math
+
+    from kaogong.curation import GRADE_BATCH
+
+    articles = [_article(f"a{i}", f"文章标题{i}") for i in range(30)]
+    calls: list = []
+
+    def _stub(messages, _cfg, **_kw):
+        calls.append(messages)
+        return json.dumps({"items": [
+            {"index": i, "grade": "B", "policyLine": None, "reason": "常规"}
+            for i in range(GRADE_BATCH)
+        ]})
+
+    graded = assign_grades(articles, LINES, {"deepseek_api_key": "k"}, call=_stub)
+
+    assert len(calls) == math.ceil(30 / GRADE_BATCH), f"30 篇应分 {math.ceil(30/GRADE_BATCH)} 批"
+    assert len(graded) == 30
+    # 每批都被完整解析 → 无兜底条目（grade 来自模型、needsHuman 为 False）
+    assert all(g["grade"] == "B" for g in graded)
+    assert all(g.get("needsHuman") is False for g in graded)
+
+
 def test_assign_slots_excludes_c_grade_and_needs_human():
     """v2.1 §7.2（T04）：C 级（不进池 8 类）与 needsHuman 不进任何槽位。
 
