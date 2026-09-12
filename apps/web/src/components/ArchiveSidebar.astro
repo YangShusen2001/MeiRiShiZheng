@@ -60,7 +60,7 @@ const yearHigh = (rows: ArchiveSummary[]) => rows.reduce((n, r) => n + r.high, 0
     box-shadow: var(--shadow-sm);
   }
   .side-head { padding: 0 8px 10px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
-  .side-title { font-size: 13px; font-weight: 600; color: var(--sub); letter-spacing: 0.04em; }
+  .side-title { font-size: var(--font-meta); font-weight: 600; color: var(--sub); letter-spacing: 0.04em; }
   .side-group { margin-bottom: 12px; }
   .side-year {
     display: flex;
@@ -69,8 +69,8 @@ const yearHigh = (rows: ArchiveSummary[]) => rows.reduce((n, r) => n + r.high, 0
     gap: 6px;
     padding: 6px 8px 4px;
   }
-  .y-label { font-size: 13px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
-  .y-meta { font-size: 11px; color: var(--mut); font-variant-numeric: tabular-nums; }
+  .y-label { font-size: var(--font-meta); font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .y-meta { font-size: var(--font-micro); color: var(--mut); font-variant-numeric: tabular-nums; }
   .side-month {
     display: flex;
     align-items: center;
@@ -81,14 +81,14 @@ const yearHigh = (rows: ArchiveSummary[]) => rows.reduce((n, r) => n + r.high, 0
     border-radius: 8px;
     color: var(--ink);
     text-decoration: none;
-    font-size: 14px;
+    font-size: var(--font-meta);
     transition: background var(--dur-sm, 160ms) var(--ease-out, ease);
   }
   .side-month:hover { background: var(--surface-2); }
   .side-month.active { background: var(--primary-soft); color: var(--primary); }
   .side-month:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
   .m-label { font-variant-numeric: tabular-nums; }
-  .m-meta { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--mut); }
+  .m-meta { display: flex; align-items: center; gap: 6px; font-size: var(--font-micro); color: var(--mut); }
   .side-month.active .m-meta { color: var(--primary); }
   .m-count {
     font-variant-numeric: tabular-nums;

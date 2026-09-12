@@ -49,19 +49,19 @@ const rank = (d: string) => d;
 <style>
   .archive-main { min-width: 0; }
   .arch-head { margin-bottom: 20px; }
-  .arch-head h1 { font-size: 22px; margin: 0 0 6px; }
+  .arch-head h1 { font-size: var(--font-title-m); margin: 0 0 6px; }
   .arch-sub { color: var(--sub); font-size: 13.5px; margin: 0; font-variant-numeric: tabular-nums; }
   .arch-sub .k { color: var(--primary); font-weight: 600; }
   .grp { margin-bottom: 22px; }
   .grp-title {
-    font-size: 15px;
+    font-size: var(--font-meta);
     margin: 0 0 12px;
     display: flex;
     align-items: center;
     gap: 8px;
   }
   .grp-title .cnt {
-    font-size: 12px;
+    font-size: var(--font-caption);
     background: var(--primary-soft);
     color: var(--primary);
     border-radius: 20px;
@@ -77,7 +77,7 @@ const rank = (d: string) => d;
   }
   .grp-fold summary {
     cursor: pointer;
-    font-size: 14px;
+    font-size: var(--font-meta);
     color: var(--sub);
     min-height: 32px;
     display: flex;

@@ -38,7 +38,7 @@ const cls = imp === "高" ? "high" : imp === "中" ? "medium" : "low";
     gap: 8px;
     align-items: center;
     flex-wrap: wrap;
-    font-size: 12px;
+    font-size: var(--font-caption);
     color: var(--sub);
     margin-bottom: 6px;
   }
@@ -51,7 +51,7 @@ const cls = imp === "高" ? "high" : imp === "中" ? "medium" : "low";
   .ai-topic { color: var(--accent); background: var(--accent-soft); }
   .ai-link { color: var(--primary); text-decoration: none; margin-left: auto; }
   .ai-link:hover { text-decoration: underline; }
-  .ai-title { font-size: 15px; line-height: 1.55; margin: 0 0 6px; font-weight: 600; }
-  .ai-gist { font-size: 14px; color: var(--sub); margin: 0; line-height: 1.7; }
+  .ai-title { font-size: var(--font-meta); line-height: var(--line-ui); margin: 0 0 6px; font-weight: 600; }
+  .ai-gist { font-size: var(--font-meta); color: var(--sub); margin: 0; line-height: var(--line-ui); }
   .ai-gist.mut { font-style: italic; color: var(--mut); }
 </style>

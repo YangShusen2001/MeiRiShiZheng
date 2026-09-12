@@ -1,0 +1,63 @@
+{
+  "_note": "对比度测试向量 —— 浏览器（彩蛋页 JS）与 scripts/audit-tokens.py（Python）必须各自复现同一组比值。期望值取自 docs/design/design-system-v3.md 的实算记录（独立于实现，非由实现反推）。任一侧实现漂移 → 向量不匹配 → CI 失败。",
+  "thresholds": {
+    "text": 4.5,
+    "largeText": 3.0,
+    "nonText": 3.0,
+    "highlightVisibility": 1.6
+  },
+  "tolerance": 0.03,
+  "cases": [
+    { "label": "ink 压暖底（浅色）", "fg": "#2A2723", "bg": "#F5F1E8", "expect": 13.19, "threshold": "text" },
+    { "label": "ink 压纸卡（浅色）", "fg": "#2A2723", "bg": "#FFFDF6", "expect": 14.60, "threshold": "text" },
+    { "label": "ink 压深底（深色）", "fg": "#EDE8DE", "bg": "#1A1815", "expect": 14.51, "threshold": "text" },
+    { "label": "sub 压暖底", "fg": "#5A554E", "bg": "#F5F1E8", "expect": 6.55, "threshold": "text" },
+    { "label": "sub 压纸卡", "fg": "#5A554E", "bg": "#FFFDF6", "expect": 7.25, "threshold": "text" },
+    { "label": "sub 压深底（深色）", "fg": "#B8B2A6", "bg": "#1A1815", "expect": 8.40, "threshold": "text" },
+    { "label": "mut 压暖底（本次相对旧值的实质改进）", "fg": "#635E56", "bg": "#F5F1E8", "expect": 5.70, "threshold": "text" },
+    { "label": "mut 压纸卡", "fg": "#635E56", "bg": "#FFFDF6", "expect": 6.32, "threshold": "text" },
+    { "label": "mut 压深底（深色）", "fg": "#A29B8E", "bg": "#1A1815", "expect": 6.42, "threshold": "text" },
+    { "label": "brand 压暖底", "fg": "#3A4785", "bg": "#F5F1E8", "expect": 7.70, "threshold": "text" },
+    { "label": "brand 压纸卡", "fg": "#3A4785", "bg": "#FFFDF6", "expect": 8.53, "threshold": "text" },
+    { "label": "brand 压深底（深色）", "fg": "#9099E0", "bg": "#1A1815", "expect": 6.60, "threshold": "text" },
+    { "label": "brand 压深卡（深色）", "fg": "#9099E0", "bg": "#242220", "expect": 5.90, "threshold": "text" },
+    { "label": "onBrand 白字压 brand（浅色主按钮）", "fg": "#FFFFFF", "bg": "#3A4785", "expect": 8.68, "threshold": "text" },
+    { "label": "brandInk 压 brandSoft", "fg": "#2E3A72", "bg": "#E4E7F5", "expect": 8.68, "threshold": "text" },
+    { "label": "brandDeep 压纸卡", "fg": "#232C5C", "bg": "#FFFDF6", "expect": 13.01, "threshold": "text" },
+    { "label": "danger 压纸卡", "fg": "#AF2F26", "bg": "#FFFDF6", "expect": 6.33, "threshold": "text" },
+    { "label": "warning 压暖底", "fg": "#8A5A0B", "bg": "#F5F1E8", "expect": 5.25, "threshold": "text" },
+    { "label": "success 压暖底", "fg": "#1D6F52", "bg": "#F5F1E8", "expect": 5.40, "threshold": "text" },
+    { "label": "accent 压暖底", "fg": "#8C5A16", "bg": "#F5F1E8", "expect": 5.19, "threshold": "text" },
+    { "label": "考点底压 ink", "fg": "#2A2723", "bg": "#FFE7A0", "expect": 12.17, "threshold": "text" },
+    { "label": "观点底压 ink", "fg": "#2A2723", "bg": "#C9E7CE", "expect": 11.19, "threshold": "text" },
+    { "label": "术语底压 ink", "fg": "#2A2723", "bg": "#B9DEE6", "expect": 10.37, "threshold": "text" },
+    { "label": "数字底压 ink", "fg": "#2A2723", "bg": "#F8C8D8", "expect": 10.08, "threshold": "text" },
+    { "label": "深色考点底文字", "fg": "#EDE8DE", "bg": "#574818", "expect": 7.33, "threshold": "text" },
+    { "label": "深色观点底文字", "fg": "#EDE8DE", "bg": "#2C4C31", "expect": 7.87, "threshold": "text" },
+    { "label": "深色术语底文字", "fg": "#EDE8DE", "bg": "#285058", "expect": 7.23, "threshold": "text" },
+    { "label": "深色数字底文字", "fg": "#EDE8DE", "bg": "#653744", "expect": 7.88, "threshold": "text" },
+    { "label": "深色考点底可见度（对深卡面）", "fg": "#574818", "bg": "#242220", "expect": 1.77, "threshold": "highlightVisibility" },
+    { "label": "深色观点底可见度", "fg": "#2C4C31", "bg": "#242220", "expect": 1.65, "threshold": "highlightVisibility" },
+    { "label": "深色术语底可见度", "fg": "#285058", "bg": "#242220", "expect": 1.80, "threshold": "highlightVisibility" },
+    { "label": "深色数字底可见度", "fg": "#653744", "bg": "#242220", "expect": 1.65, "threshold": "highlightVisibility" },
+    { "label": "深色主按钮文字压 brand（深色）", "fg": "#232C5C", "bg": "#9099E0", "expect": 4.93, "threshold": "text" },
+    { "label": "深色 brandDeep 压深卡", "fg": "#7C86D8", "bg": "#242220", "expect": 4.72, "threshold": "text" },
+    { "label": "深色 brandInk 压 brandSoft", "fg": "#A9B1EA", "bg": "#252843", "expect": 6.95, "threshold": "text" },
+    { "label": "深色 danger 压深卡", "fg": "#F0A0A0", "bg": "#242220", "expect": 7.73, "threshold": "text" },
+    { "label": "深色 warning 压深卡", "fg": "#E8C98A", "bg": "#242220", "expect": 9.93, "threshold": "text" },
+    { "label": "深色 success 压深卡", "fg": "#6FBE8F", "bg": "#242220", "expect": 7.12, "threshold": "text" },
+    { "label": "深色 accent 压深卡", "fg": "#D9A441", "bg": "#242220", "expect": 7.05, "threshold": "text" }
+  ],
+  "negativeCases": {
+    "_note": "这些是 v3 之前线上的真实值。它们必须在『text』阈值下判定为不达标 —— 用来证明门禁不是空转（假值也能过的话，门禁等于没有）。",
+    "cases": [
+      { "label": "旧 Web 默认主题 --mut", "fg": "#8a93a4", "bg": "#f5f7fa", "expect": 2.88 },
+      { "label": "旧 Web 阅读主题 --mut", "fg": "#968a76", "bg": "#f6f1e6", "expect": 3.01 },
+      { "label": "旧 Web 护眼主题 --mut", "fg": "#7f8f80", "bg": "#e6eee5", "expect": 2.89 },
+      { "label": "旧 Web 深色主题 --mut", "fg": "#6b7889", "bg": "#141a24", "expect": 3.88 },
+      { "label": "旧后台徽标 #c3c9d4 压白字（最低一档）", "fg": "#FFFFFF", "bg": "#c3c9d4", "expect": 1.66 },
+      { "label": "旧后台徽标 #8a93a4 压白字", "fg": "#FFFFFF", "bg": "#8a93a4", "expect": 3.09 },
+      { "label": "旧后台徽标 #d97706 压白字", "fg": "#FFFFFF", "bg": "#d97706", "expect": 3.19 }
+    ]
+  }
+}

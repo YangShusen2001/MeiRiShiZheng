@@ -12,13 +12,16 @@
  * 二者都存在 `AppStorage`，由 `service/Settings.ets` 负责持久化。
  *
  * ## 设计定位
- * 暖米底 + 深绿的「护眼阅读」调性（native-first，**不跟随 Web 的冷蓝体系**，有意分化）。
+ * 暖米底 + 靛青的「书卷」调性。v3 起与 Web / 审核后台**共用同一套值**
+ * （唯一源 packages/design-tokens/tokens.json）—— 此前「鸿蒙有意不共用色板」的结论已推翻。
  * 深色模式同理**不做反色**：反色会把米色变成脏灰，且纯黑底配暖色文本夜间过刺。
- * 暗色改用「深暖灰」体系，文字用暖白（不用纯白，避免眩光）。
+ * 暗色用独立的「深暖灰」体系，文字用暖白（不用纯白，避免眩光）。
  *
- * ## 对比度（WCAG 2.1，全部按相对亮度公式实算，非估计）
- * 浅色：INK 13.02:1（暖底）/ SUB 5.00:1 / MUT 4.85:1（仅限白底）/ PRIMARY_TEXT 4.89:1（浅绿底）
- * 深色：INK 14.43:1 / SUB 8.36:1 / MUT 5.42:1 / PRIMARY 7.14:1 / PRIMARY_TEXT 5.90:1
+ * ## 对比度（WCAG 2.1，按相对亮度公式实算；与 packages/design-tokens 的测试向量同源）
+ * 浅色：ink 13.19（暖底）/ sub 6.55 / mut 5.70 —— **双底都过 AA**（旧值只敢用在白卡上）
+ *       primaryText 8.68（brandSoft 底；直接用 primary 也有 7.04）
+ * 深色：ink 14.51 / sub 8.40 / mut 6.42 / primary 6.60（深底）/ primaryText 6.95
+ * 标注：深色标注底对卡片面的**可见度** ≥1.65 —— 文字对比度合格不等于标记本身看得见
  */
 export class KColor {
   /** 当前是否深色。由 Settings 写入 AppStorage；页面用 @StorageLink 订阅以便重建。 */
@@ -33,53 +36,53 @@ export class KColor {
   }
 
   static surface(): string {
-    return KColor.isDark() ? '#242220' : '#FFFFFF';
+    return KColor.isDark() ? '#242220' : '#FFFDF6';
   }
 
   static surfaceAlt(): string {
-    return KColor.isDark() ? '#2C2A26' : '#FAF7F0';
+    return KColor.isDark() ? '#2C2A26' : '#F0EADD';
   }
 
   // —— 文本三级 ——
   static ink(): string {
-    return KColor.isDark() ? '#EDE8DE' : '#1F2937';
+    return KColor.isDark() ? '#EDE8DE' : '#2A2723';
   }
 
   static sub(): string {
-    return KColor.isDark() ? '#B8B2A6' : '#5F6875';
+    return KColor.isDark() ? '#B8B2A6' : '#5A554E';
   }
 
   static mut(): string {
-    return KColor.isDark() ? '#948E82' : '#6A7280';
+    return KColor.isDark() ? '#A29B8E' : '#635E56';
   }
 
   // —— 描边（浅色为暖调，非冷灰；深色同为暖灰）——
   static line(): string {
-    return KColor.isDark() ? '#3A3732' : '#E6DFD0';
+    return KColor.isDark() ? '#3A3732' : '#E4DCCB';
   }
 
   static lineSoft(): string {
-    return KColor.isDark() ? '#2F2C28' : '#F0EADD';
+    return KColor.isDark() ? '#2F2C28' : '#EFE9DC';
   }
 
-  // —— 品牌绿 ——
+  // —— 品牌靛 ——
   /** 填充、图标、进度等大色块。 */
   static primary(): string {
-    return KColor.isDark() ? '#7FB08F' : '#4C795B';
+    return KColor.isDark() ? '#9099E0' : '#3A4785';
   }
 
-  /** 小字号文本专用（浅绿底上必须用它，直接用 primary 只有 4.26:1，不达 AA）。 */
+  /** 小字号文本专用：压在 brandSoft 上（浅 8.68 / 深 6.95）；直接用 primary 也达标（浅 7.04）。 */
   static primaryText(): string {
-    return KColor.isDark() ? '#8FBC9C' : '#456F53';
+    return KColor.isDark() ? '#A9B1EA' : '#2E3A72';
   }
 
   static primarySoft(): string {
-    return KColor.isDark() ? '#2A362E' : '#E6EFE8';
+    return KColor.isDark() ? '#252843' : '#E4E7F5';
   }
 
   // —— 语义色 ——
   static danger(): string {
-    return KColor.isDark() ? '#F0A0A0' : '#B91C1C';
+    return KColor.isDark() ? '#F0A0A0' : '#AF2F26';
   }
 
   static dangerSoft(): string {
@@ -99,25 +102,25 @@ export class KColor {
   }
 
   static neutralSoft(): string {
-    return KColor.isDark() ? '#33302B' : '#ECEFF3';
+    return KColor.isDark() ? '#33302B' : '#EAE4D6';
   }
 
   // —— AI 标注四色 ——
   // 浅色用浅底 + 深字；深色改用暗底 + 暖白字（浅底在暗环境下会眩光）。
   static annExam(): string {
-    return KColor.isDark() ? '#4A3E1C' : '#FFE7A0';
+    return KColor.isDark() ? '#574818' : '#FFE7A0';
   }
 
   static annViewpoint(): string {
-    return KColor.isDark() ? '#22402B' : '#C8E6C9';
+    return KColor.isDark() ? '#2C4C31' : '#C9E7CE';
   }
 
   static annTerm(): string {
-    return KColor.isDark() ? '#1E3547' : '#BBDEFB';
+    return KColor.isDark() ? '#285058' : '#B9DEE6';
   }
 
   static annFigure(): string {
-    return KColor.isDark() ? '#43242E' : '#F8BBD0';
+    return KColor.isDark() ? '#653744' : '#F8C8D8';
   }
 
   // —— 装饰 ——
@@ -132,7 +135,7 @@ export class KColor {
 
   /** 标注片段上的文字色：深色底必须配暖白字。 */
   static annInk(): string {
-    return KColor.isDark() ? '#EDE8DE' : '#1F2937';
+    return KColor.isDark() ? '#EDE8DE' : '#2A2723';
   }
 }
 

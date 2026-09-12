@@ -1,0 +1,109 @@
+/* 自动生成，请勿手改：packages/design-tokens/generate.mjs → apps/web/src/styles/tokens.generated.css */
+/* SOURCE_SHA256:8000cebdfad2686f12f67d2f6ad35d4e5b1f012584b1042e413e0c040833a948 */
+/* 规范 docs/design/design-system-v3.md · v3 · 2026-09-12 */
+
+/* 浅色：暖纸底 */
+:root {
+  color-scheme: light;
+  --color-bg: #F5F1E8;
+  --color-surface: #FFFDF6;
+  --color-surface-alt: #F0EADD;
+  --color-sunken: #EAE4D6;
+  --color-line: #E4DCCB;
+  --color-line-soft: #EFE9DC;
+  --color-ink: #2A2723;
+  --color-sub: #5A554E;
+  --color-mut: #635E56;
+  --color-brand: #3A4785;
+  --color-brand-deep: #232C5C;
+  --color-brand-soft: #E4E7F5;
+  --color-brand-ink: #2E3A72;
+  --color-danger: #AF2F26;
+  --color-warning: #8A5A0B;
+  --color-success: #1D6F52;
+  --color-accent: #8C5A16;
+  --color-neutral-soft: #EAE4D6;
+  --color-on-brand: #FFFFFF;
+  --highlight-exam-point: #FFE7A0;
+  --highlight-viewpoint: #C9E7CE;
+  --highlight-term: #B9DEE6;
+  --highlight-figure: #F8C8D8;
+  --highlight-on-highlight: #2A2723;
+  --shadow-hair: 0 1px 2px rgba(92, 58, 26, 0.06);
+  --shadow-card: 0 1px 2px rgba(92, 58, 26, 0.06), 0 6px 24px rgba(92, 58, 26, 0.09);
+  --shadow-float: 0 2px 4px rgba(92, 58, 26, 0.08), 0 12px 32px rgba(92, 58, 26, 0.14);
+  --space-hair: 2px;
+  --space-xs: 4px;
+  --space-s: 8px;
+  --space-m: 12px;
+  --space-l: 16px;
+  --space-xl: 20px;
+  --space-xxl: 24px;
+  --space-xxxl: 32px;
+  --space-page: 16px;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+  --font-micro: 11px;
+  --font-caption: 12px;
+  --font-meta: 14px;
+  --font-body: 17px;
+  --font-title-s: 20px;
+  --font-title-m: 24px;
+  --font-title-l: 28px;
+  --font-display: 34px;
+  --line-tight: 1.25;
+  --line-heading: 1.3;
+  --line-ui: 1.7;
+  --line-reading: 1.8;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --dur-xs: 120ms;
+  --dur-sm: 160ms;
+  --dur-md: 250ms;
+  --dur-lg: 400ms;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --size-touch-min: 44px;
+  --font-family-sans: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+  --font-family-serif: "Songti SC", "Noto Serif CJK SC", "SimSun", serif;
+  --font-family-logo: "HYXiaoYaoYouJ", "STXingkai", "华文行楷", "KaiTi", cursive;
+}
+
+/* 深色：深暖灰（独立取值，非反色） */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #1A1815;
+  --color-surface: #242220;
+  --color-surface-alt: #2C2A26;
+  --color-sunken: #2A2724;
+  --color-line: #3A3732;
+  --color-line-soft: #2F2C28;
+  --color-ink: #EDE8DE;
+  --color-sub: #B8B2A6;
+  --color-mut: #A29B8E;
+  --color-brand: #9099E0;
+  --color-brand-deep: #7C86D8;
+  --color-brand-soft: #252843;
+  --color-brand-ink: #A9B1EA;
+  --color-danger: #F0A0A0;
+  --color-warning: #E8C98A;
+  --color-success: #6FBE8F;
+  --color-accent: #D9A441;
+  --color-neutral-soft: #33302B;
+  --color-on-brand: #232C5C;
+  --highlight-exam-point: #574818;
+  --highlight-viewpoint: #2C4C31;
+  --highlight-term: #285058;
+  --highlight-figure: #653744;
+  --highlight-on-highlight: #EDE8DE;
+  --shadow-hair: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 24px rgba(0, 0, 0, 0.35);
+  --shadow-float: 0 2px 4px rgba(0, 0, 0, 0.5), 0 12px 32px rgba(0, 0, 0, 0.45);
+}

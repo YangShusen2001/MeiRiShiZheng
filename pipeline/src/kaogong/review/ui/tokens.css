@@ -1,0 +1,88 @@
+/* 自动生成，请勿手改：packages/design-tokens/generate.mjs → pipeline/src/kaogong/review/ui/tokens.css */
+/* SOURCE_SHA256:8000cebdfad2686f12f67d2f6ad35d4e5b1f012584b1042e413e0c040833a948 */
+/* 规范 docs/design/design-system-v3.md · v3 · 2026-09-12 */
+
+/* 必须置于 Tabler CDN <link> 之后：既有类名自动换肤，布局零改动 */
+:root {
+  color-scheme: light;
+  --kg-bg: #F5F1E8;
+  --kg-surface: #FFFDF6;
+  --kg-surface-alt: #F0EADD;
+  --kg-sunken: #EAE4D6;
+  --kg-line: #E4DCCB;
+  --kg-line-soft: #EFE9DC;
+  --kg-ink: #2A2723;
+  --kg-sub: #5A554E;
+  --kg-mut: #635E56;
+  --kg-brand: #3A4785;
+  --kg-brand-deep: #232C5C;
+  --kg-brand-soft: #E4E7F5;
+  --kg-brand-ink: #2E3A72;
+  --kg-danger: #AF2F26;
+  --kg-warning: #8A5A0B;
+  --kg-success: #1D6F52;
+  --kg-accent: #8C5A16;
+  --kg-neutral-soft: #EAE4D6;
+  --kg-on-brand: #FFFFFF;
+  --kg-highlight-exam-point: #FFE7A0;
+  --kg-highlight-viewpoint: #C9E7CE;
+  --kg-highlight-term: #B9DEE6;
+  --kg-highlight-figure: #F8C8D8;
+  --kg-highlight-on-highlight: #2A2723;
+  --kg-shadow-hair: 0 1px 2px rgba(92, 58, 26, 0.06);
+  --kg-shadow-card: 0 1px 2px rgba(92, 58, 26, 0.06), 0 6px 24px rgba(92, 58, 26, 0.09);
+  --kg-shadow-float: 0 2px 4px rgba(92, 58, 26, 0.08), 0 12px 32px rgba(92, 58, 26, 0.14);
+  --kg-space-hair: 2px;
+  --kg-space-xs: 4px;
+  --kg-space-s: 8px;
+  --kg-space-m: 12px;
+  --kg-space-l: 16px;
+  --kg-space-xl: 20px;
+  --kg-space-xxl: 24px;
+  --kg-space-xxxl: 32px;
+  --kg-space-page: 16px;
+  --kg-radius-xs: 4px;
+  --kg-radius-sm: 8px;
+  --kg-radius-md: 10px;
+  --kg-radius-lg: 14px;
+  --kg-radius-xl: 20px;
+  --kg-radius-full: 999px;
+  --kg-font-micro: 11px;
+  --kg-font-caption: 12px;
+  --kg-font-meta: 14px;
+  --kg-font-body: 17px;
+  --kg-font-title-s: 20px;
+  --kg-font-title-m: 24px;
+  --kg-font-title-l: 28px;
+  --kg-font-display: 34px;
+  --kg-line-tight: 1.25;
+  --kg-line-heading: 1.3;
+  --kg-line-ui: 1.7;
+  --kg-line-reading: 1.8;
+  --kg-font-weight-regular: 400;
+  --kg-font-weight-medium: 500;
+  --kg-font-weight-semibold: 600;
+  --kg-font-weight-bold: 700;
+  --kg-dur-xs: 120ms;
+  --kg-dur-sm: 160ms;
+  --kg-dur-md: 250ms;
+  --kg-dur-lg: 400ms;
+  --kg-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --kg-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --kg-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --kg-size-touch-min: 44px;
+  --kg-font-family-sans: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+  --kg-font-family-serif: "Songti SC", "Noto Serif CJK SC", "SimSun", serif;
+  --kg-font-family-logo: "HYXiaoYaoYouJ", "STXingkai", "华文行楷", "KaiTi", cursive;
+
+  /* —— 覆盖 Tabler 变量，使既有类名换肤 —— */
+  --tblr-primary: var(--kg-brand);
+  --tblr-body-color: var(--kg-ink);
+  --tblr-muted: var(--kg-mut);
+  --tblr-border-color: var(--kg-line);
+  --tblr-bg-surface: var(--kg-surface);
+  --tblr-light: var(--kg-surface-alt);
+  --tblr-danger: var(--kg-danger);
+  --tblr-success: var(--kg-success);
+  --tblr-warning: var(--kg-warning);
+}

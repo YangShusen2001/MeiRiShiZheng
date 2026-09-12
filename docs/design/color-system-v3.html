@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>色系统 v3 · 每日时政</title>
+<meta name="description" content="一套被算过的色板：品牌色相、每一级灰阶、每一个标注底色，都先经过对比度实算与色相环冲突检验，再定值。">
+<style>
+  /* ============================================================
+     设计令牌 v3 —— 唯一数值源
+     JS 里的 TOKENS 与这里必须一致；色相环实验台的禁入区
+     由同一份色值实时推导（不硬编码角度）。
+     ============================================================ */
+  :root{
+    --bg:#F5F1E8; --surface:#FFFDF6; --surface-alt:#F0EADD; --sunken:#EAE4D6;
+    --line:#E4DCCB; --line-soft:#EFE9DC;
+    --ink:#2A2723; --sub:#5A554E; --mut:#635E56;
+    --brand:#3A4785; --brand-deep:#232C5C; --brand-soft:#E4E7F5; --brand-ink:#2E3A72;
+    --danger:#AF2F26; --warning:#8A5A0B; --success:#1D6F52; --accent:#8C5A16;
+    --ann-exam:#FFE7A0; --ann-viewpoint:#C9E7CE; --ann-term:#B9DEE6; --ann-figure:#F8C8D8;
+
+    /* 深色（深暖灰，非反色） */
+    --d-bg:#1A1815; --d-surface:#242220; --d-surface-alt:#2C2A26; --d-sunken:#2A2724;
+    --d-line:#3A3732; --d-line-soft:#2F2C28;
+    --d-ink:#EDE8DE; --d-sub:#B8B2A6; --d-mut:#A29B8E;
+    --d-brand:#9099E0; --d-brand-deep:#7C86D8; --d-brand-soft:#252843; --d-brand-ink:#A9B1EA;
+    --d-danger:#F0A0A0; --d-warning:#E8C98A; --d-success:#6FBE8F; --d-accent:#D9A441;
+    --d-ann-exam:#574818; --d-ann-viewpoint:#2C4C31; --d-ann-term:#285058; --d-ann-figure:#653744;
+
+    /* 尺度 */
+    --s-hair:2px; --s-xs:4px; --s-s:8px; --s-m:12px; --s-l:16px; --s-xl:20px;
+    --s-xxl:20px; --s-xxxl:28px; --s-page:56px; --rail:200px;
+    --r-xs:4px; --r-sm:8px; --r-md:10px; --r-lg:14px; --r-xl:20px; --r-full:999px;
+    --dur-xs:120ms; --dur-sm:160ms; --dur-md:250ms; --dur-lg:400ms;
+    --touch:44px;
+    --content:1280px;
+
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans SC","Segoe UI",system-ui,sans-serif;
+    --serif:"Songti SC","Noto Serif SC","SimSun",Georgia,serif;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:400 17px/1.47 var(--font); letter-spacing:-0.011em;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{margin:0;font-weight:600;letter-spacing:-0.02em;line-height:1.1}
+  p{margin:0}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible,input:focus-visible{
+    outline:2px solid var(--brand); outline-offset:2px; border-radius:var(--r-xs);
+  }
+  .skip{
+    position:absolute;left:-9999px;top:0;z-index:99;
+    background:var(--brand);color:var(--surface);padding:12px 20px;border-radius:0 0 var(--r-sm) 0;
+  }
+  .skip:focus{left:0}
+  .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+      clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  .wrap{width:100%;max-width:var(--content);margin:0 auto}
+
+  /* ---------- 全局导航 ---------- */
+  .nav{background:var(--d-bg);min-height:48px;display:flex;align-items:center;padding:0 var(--s-xxl)}
+  .nav__in{display:flex;align-items:center;justify-content:space-between;gap:var(--s-xxl);width:100%}
+  .nav__logo{color:var(--d-ink);font-size:12px;font-weight:500;letter-spacing:.05em}
+  .nav__links{display:flex;gap:var(--s-xxxl);align-items:center;flex-wrap:wrap}
+  .nav__links a{color:var(--d-sub);font-size:12px;padding:14px 0;min-height:var(--touch);display:inline-flex;align-items:center}
+  .nav__links a:hover{color:var(--d-ink);text-decoration:none}
+  .nav__links a[aria-current]{color:var(--d-brand)}
+
+  /* ---------- 顶栏：吸顶 + 阅读进度 ---------- */
+  .nav{position:sticky;top:0;z-index:30}
+  .nav__progress{
+    position:absolute;left:0;bottom:0;height:2px;width:0;
+    background:var(--d-brand);transition:width 90ms linear
+  }
+
+  /* ---------- 左侧章节导航：真透明，文字随背后区块反色 ---------- */
+  .rail{
+    position:fixed;left:0;top:48px;bottom:0;width:var(--rail);
+    display:none;flex-direction:column;justify-content:center;gap:var(--s-m);
+    padding-left:var(--s-xxl);z-index:20;
+  }
+  .rail a{
+    display:flex;align-items:center;gap:var(--s-s);
+    min-height:32px;padding-left:var(--s-l);
+    border-left:2px solid transparent;
+    /* 0.72 是实测下限：再低深字压浅底就不达 AA（0.55 时仅 3.40:1） */
+    color:var(--ink);opacity:.72;font-size:13px;
+    transition:opacity var(--dur-sm) ease,border-color var(--dur-sm) ease,
+               color var(--dur-md) cubic-bezier(0.23,1,0.32,1);
+  }
+  .rail a:hover{opacity:1;text-decoration:none}
+  .rail a.is-active{opacity:1;border-left-color:currentColor}
+  .rail a.is-dark{color:var(--d-ink)}
+  .rail__n{
+    font-variant-numeric:tabular-nums;font-size:11px;opacity:.6;
+    transition:color var(--dur-sm) ease,opacity var(--dur-sm) ease
+  }
+  .rail a.is-active .rail__n{color:var(--brand);opacity:1;font-weight:500}
+  .rail a.is-dark.is-active .rail__n{color:var(--d-brand)}
+
+  /* ---------- 区块 ---------- */
+  .sec{padding:var(--s-page) var(--s-xxl)}
+  .sec--paper{background:var(--bg)}
+  .sec--dark{background:var(--d-surface);color:var(--d-ink)}
+  .sec--dark h2,.sec--dark h3{color:var(--d-ink)}
+  .sec__head{margin-bottom:48px}
+  .sec__head h2{font-size:40px;margin-bottom:var(--s-l)}
+  .sec__head p{font-size:14px;line-height:1.43;max-width:62ch}
+  .sec--paper .sec__head p{color:var(--sub)}
+  .sec--dark .sec__head p{color:var(--d-sub)}
+  .sub3{font-size:24px;font-weight:500;letter-spacing:-0.015em;margin-bottom:var(--s-xl)}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:var(--s-page) var(--s-xxl)}
+  .hero__eyebrow{
+    color:var(--brand);font-size:12px;font-weight:500;letter-spacing:.05em;
+    text-transform:uppercase;margin-bottom:var(--s-xxl)
+  }
+  .hero h1{font-size:56px;line-height:1.07;letter-spacing:-0.005em;margin-bottom:var(--s-xxl);max-width:20ch}
+  .hero__lead{font-size:24px;line-height:1.5;color:var(--sub);max-width:52ch;margin-bottom:40px}
+  .hero__cta{display:flex;align-items:center;gap:var(--s-xxl);flex-wrap:wrap}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:var(--s-s);
+    min-height:48px;padding:0 var(--s-xxxl);border:1px solid transparent;cursor:pointer;
+    background:var(--brand);color:var(--surface);border-radius:var(--r-full);
+    font:500 17px/1 var(--font);letter-spacing:-0.011em;
+    transition:transform var(--dur-sm) cubic-bezier(0.23,1,0.32,1), filter var(--dur-sm) ease;
+  }
+  .btn:hover{filter:brightness(1.12);text-decoration:none}
+  .btn:active{transform:scale(0.95)}
+  .btn--ghost{background:transparent;color:var(--brand);border-color:var(--line)}
+  .btn--ghost:hover{background:var(--brand-soft);filter:none}
+  .sec--dark .btn--ghost{color:var(--d-brand);border-color:var(--d-line)}
+  .sec--dark .btn--ghost:hover{background:var(--d-brand-soft)}
+
+  /* ---------- 色块 ---------- */
+  .row{display:grid;gap:var(--s-xxl)}
+  .row--2{grid-template-columns:repeat(2,1fr)}
+  .row--3{grid-template-columns:repeat(3,1fr)}
+  .row--4{grid-template-columns:repeat(4,1fr)}
+
+  .sw{display:flex;flex-direction:column;gap:var(--s-s)}
+  .sw__chip{height:76px;border-radius:var(--r-lg)}
+  .sw__chip--tall{height:96px}
+  .sw__chip--short{height:40px;border-radius:var(--r-sm)}
+  .sw__cap{font-size:12px;line-height:1.43;font-variant-numeric:tabular-nums}
+  .sec--paper .sw__cap{color:var(--sub)}
+  .sec--dark .sw__cap{color:var(--d-sub)}
+
+  /* 连续色阶（不分缝） */
+  .ramp{display:grid;grid-template-columns:repeat(6,1fr);height:60px}
+  .ramp span{display:block}
+  .ramp__cap{display:grid;grid-template-columns:repeat(6,1fr);margin-top:var(--s-m)}
+  .ramp__cap span{font-size:11px;font-variant-numeric:tabular-nums;color:var(--d-mut)}
+
+  /* 标注样张 */
+  .ann{
+    height:84px;border-radius:var(--r-lg);
+    display:flex;align-items:center;justify-content:center;
+    font:400 22px/1 var(--serif);color:var(--ink);
+  }
+
+  /* 纸卡内嵌（深色区块里的浅色卡） */
+  .papercard{background:var(--bg);border-radius:var(--r-lg);padding:var(--s-xxl)}
+
+  /* ---------- 色相环实验台 ---------- */
+  .lab__lead{font-size:17px;line-height:1.47;color:var(--d-sub);max-width:70ch;margin-bottom:var(--s-xxxl)}
+  .band{position:relative;margin-bottom:var(--s-l)}
+  .band__spectrum{height:36px;border:1px solid var(--d-line)}
+  .band__zones{position:absolute;inset:0;height:36px;pointer-events:none}
+  .band__zone{position:absolute;top:0;height:36px}
+  .band__zone--stop{background:color-mix(in srgb,var(--danger) 34%,transparent)}
+  .band__zone--go{background:color-mix(in srgb,var(--d-success) 24%,transparent)}
+  .band__zone span{
+    position:absolute;left:var(--s-s);top:50%;transform:translateY(-50%);
+    font-size:12px;color:var(--d-ink);white-space:nowrap;
+    background:color-mix(in srgb, var(--d-bg) 84%, transparent);
+    padding:2px 8px;border-radius:var(--r-xs)
+  }
+  .band__zone--go span{color:var(--d-success);font-weight:500}
+  .band__pointer{
+    position:absolute;top:-6px;width:3px;height:48px;background:var(--d-ink);
+    transform:translateX(-50%);pointer-events:none
+  }
+  .band__pointer::before{
+    content:"";position:absolute;left:50%;top:-7px;width:10px;height:10px;
+    margin-left:-5px;border-radius:50%;background:var(--d-ink)
+  }
+  .band__scale{display:flex;justify-content:space-between;font-size:12px;color:var(--d-mut);margin-bottom:var(--s-xxl)}
+
+  .lab__ctrl{display:flex;align-items:center;gap:var(--s-l);margin-bottom:var(--s-xxxl)}
+  .lab__ctrl label{font-size:14px;color:var(--d-sub);white-space:nowrap}
+  .lab__ctrl input[type=range]{
+    --pct:63.9%;
+    flex:1;min-height:var(--touch);margin:0;background:transparent;cursor:ew-resize;
+    -webkit-appearance:none;appearance:none;
+  }
+  .lab__ctrl input[type=range]::-webkit-slider-runnable-track{
+    height:4px;border-radius:2px;
+    background:linear-gradient(90deg,var(--d-brand) var(--pct),var(--d-line) var(--pct));
+  }
+  .lab__ctrl input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;
+    background:var(--d-brand);border:3px solid var(--d-surface);margin-top:-9px
+  }
+  .lab__ctrl input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:var(--d-line)}
+  .lab__ctrl input[type=range]::-moz-range-progress{height:4px;border-radius:2px;background:var(--d-brand)}
+  .lab__ctrl input[type=range]::-moz-range-thumb{
+    width:16px;height:16px;border-radius:50%;background:var(--d-brand);border:3px solid var(--d-surface)
+  }
+  .lab__out{font-variant-numeric:tabular-nums}
+
+  .verdicts{display:grid;gap:var(--s-m);margin-top:var(--s-xxl)}
+  .verdict{
+    display:flex;align-items:baseline;gap:var(--s-m);flex-wrap:wrap;
+    padding:var(--s-m) var(--s-l);border-radius:var(--r-sm);
+    background:var(--d-surface-alt);font-size:14px;line-height:1.43
+  }
+  .verdict b{font-weight:500;color:var(--d-ink)}
+  .verdict__num{font-variant-numeric:tabular-nums;color:var(--d-ink)}
+  .verdict--pass{box-shadow:inset 3px 0 0 var(--d-success)}
+  .verdict--fail{box-shadow:inset 3px 0 0 var(--d-danger)}
+  .verdict__tag{font-weight:500}
+  .verdict--pass .verdict__tag{color:var(--d-success)}
+  .verdict--fail .verdict__tag{color:var(--d-danger)}
+  .verdict__why{color:var(--d-mut);font-size:13px}
+
+  .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-l);margin-top:var(--s-xxxl)}
+  .tri article{background:var(--d-surface-alt);border-radius:var(--r-md);padding:var(--s-l);
+               display:flex;flex-direction:column;gap:var(--s-xs)}
+  .tri p{font-size:13px;line-height:1.45}
+  .tri .tri__deg{font-size:18px;font-weight:600;letter-spacing:-0.012em}
+  .tri__verdict{font-size:13px;font-weight:500}
+  .tri__verdict--pass{color:var(--d-success)}
+  .tri__verdict--fail{color:var(--d-danger)}
+  .tri__note{color:var(--d-mut);font-size:13px;line-height:1.45}
+
+  /* ---------- 标尺 ---------- */
+  .scale{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:var(--s-xxxl);align-items:start}
+  .space-list{display:grid;gap:0}
+  .space-list div{display:flex;align-items:center;gap:var(--s-l);min-height:20px}
+  .space-list b{font:400 13px/1 var(--font);color:var(--d-sub);width:112px;flex:none;font-weight:400}
+  .space-list i{display:block;height:12px;background:var(--d-brand);border-radius:2px}
+  .radii{display:flex;gap:26px;flex-wrap:wrap;margin:0 0 var(--s-m)}
+  .radii div{width:48px;height:48px;background:var(--d-line);border:1px solid #55504B;text-align:center;
+             font-size:12px;color:var(--d-sub);line-height:0}
+  .radii div::after{content:attr(data-r);display:block;margin-top:56px;color:var(--d-sub);font-size:12px;line-height:1}
+  .motion-list{display:grid;gap:var(--s-m);font-size:14px;color:var(--d-sub)}
+  .type-list{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s-xs) var(--s-xxxl)}
+  .type-list div{display:flex;align-items:baseline;gap:var(--s-l)}
+  .type-list b{font:400 12px/1 var(--font);color:var(--d-mut);width:86px;flex:none;font-weight:400}
+  .type-list span{color:var(--d-ink)}
+
+  /* ---------- 缘由 ---------- */
+  .reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-xxl)}
+  .reasons h3{font-size:18px;font-weight:500;margin-bottom:var(--s-s);letter-spacing:-0.012em}
+  .reasons p{color:var(--sub);font-size:15px;line-height:1.55}
+
+  /* ---------- 页脚 ---------- */
+  footer{background:var(--surface-alt);padding:48px var(--s-xxl)}
+  .foot{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s-xxxl);flex-wrap:wrap}
+  .foot__brand{display:flex;flex-direction:column;gap:var(--s-s)}
+  .foot__brand strong{font-size:14px;font-weight:500}
+  .foot__brand span{font-size:12px;color:var(--mut)}
+  .foot__links{display:flex;flex-direction:column;gap:var(--s-xs);align-items:flex-end}
+  .foot__links a{font-size:14px;padding:6px 0;min-height:32px;display:inline-flex;align-items:center}
+  .foot small{display:block;margin-top:var(--s-xxl);font-size:12px;line-height:1.5;color:var(--mut)}
+
+  /* ---------- 彩蛋（青衿） ---------- */
+  .qj{
+    margin:0 var(--s-xxl) var(--s-page);padding:var(--s-xxxl);
+    border:1px dashed var(--line);border-radius:var(--r-lg);
+    background:var(--surface);max-width:var(--content);margin-inline:auto
+  }
+  .qj blockquote{
+    margin:0 0 var(--s-l);font:400 28px/1.5 var(--serif);color:var(--brand-deep)
+  }
+  .qj p{font-size:14px;line-height:1.6;color:var(--sub);max-width:68ch}
+  .qj[hidden]{display:none}
+
+  /* ---------- 响应式（模板断点） ---------- */
+  /* ---------- 桌面：让出左栏宽度 ---------- */
+  @media (min-width:1200px){
+    .rail{display:flex}
+    .nav__links{display:none}
+    .sec,.hero,footer{padding-left:calc(var(--rail) + var(--s-xxl))}
+    .qj{margin-left:calc(var(--rail) + var(--s-xxl))}
+  }
+
+  @media (max-width:1023px){
+    :root{--s-page:44px}
+    .hero h1{font-size:38px}
+    .row--4{grid-template-columns:repeat(2,1fr)}
+    .tri,.reasons{grid-template-columns:1fr}
+    .scale,.type-list{grid-template-columns:1fr}
+  }
+  @media (max-width:767px){
+    :root{--s-page:36px}
+    .hero h1{font-size:32px}
+    .hero__lead{font-size:18px}
+    .row--2,.row--4{grid-template-columns:1fr}
+    .ramp,.ramp__cap{grid-template-columns:repeat(3,1fr)}
+    .ramp{height:auto}
+    .ramp span{height:44px}
+    .band__zone span{display:none}
+    .nav__links{gap:var(--s-l)}
+  }
+  @media (max-width:479px){
+    :root{--s-page:28px}
+    .hero h1{font-size:26px}
+    .sec__head h2{font-size:24px}
+    .qj blockquote{font-size:22px}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition:none !important;animation:none !important}
+  }
+</style>
+<style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
+<body style="">
+<a class="skip" href="#main">跳到主内容</a>
+
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="nav__logo" href="/">每日时政</a>
+    <nav class="nav__links" aria-label="页面导航">
+      
+      <a href="#lab">实验台</a>
+      <a href="#semantic">语义与标注</a>
+      <a href="#neutral">中性阶</a>
+      <a href="#why">缘由</a>
+    </nav>
+  </div>  <span class="nav__progress" id="navProgress" aria-hidden="true"></span>
+</header>
+
+<nav class="rail" id="rail" aria-label="章节导航">
+  <a href="#brand"><span class="rail__n">01</span>品牌靛青</a>
+  <a href="#lab"><span class="rail__n">02</span>实验台</a>
+  <a href="#semantic"><span class="rail__n">03</span>语义与标注</a>
+  <a href="#neutral"><span class="rail__n">04</span>中性阶与标尺</a>
+  <a href="#why"><span class="rail__n">05</span>为什么重做</a>
+</nav>
+
+<main id="main">
+
+  <!-- ========== Hero ========== -->
+  <section class="hero" data-tone="light">
+    <div class="wrap">
+      <p class="hero__eyebrow">Design System · v3 · 2026</p>
+      <h1>一套被算过的色板</h1>
+      <p class="hero__lead" style="white-space: pre-wrap; cursor: text;">颜色不是挑出来的。关于色相、每一级灰阶、每一个标注底色，都先经过对比度实算与色相环冲突检验，再定值。这份色板服务三个端：手机、网页、以及本地审核后台。​</p>
+      <div class="hero__cta">
+        <a class="btn" href="#why">看设计缘由</a>
+        <a href="#lab">跳到色相环实验台</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 品牌靛 + 实验台 ========== -->
+  <section class="sec sec--dark" id="brand" data-tone="dark">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2>品牌靛青</h2>
+        <p>色相 <span id="brand-hue-label">230</span>°（精确值 <span id="brand-hue-exact">229.6</span>°，取整记作 230°）· 距最近语义色 <span id="brand-dist-label">38.9</span>° · 对暖底 7.70:1 · 对纸卡 8.53:1。选它不是为了好看，是色相环上唯一还剩的空档。</p>
+      </div>
+
+      <div class="row row--4" style="margin-bottom:var(--s-m)">
+        <div class="sw"><div class="sw__chip sw__chip--tall" style="background:var(--brand)"></div>
+          <span class="sw__cap">brand · #3A4785 · 7.70:1</span></div>
+        <div class="sw"><div class="sw__chip sw__chip--tall" style="background:var(--brand-deep)"></div>
+          <span class="sw__cap">brandDeep · #232C5C · 13.01:1</span></div>
+        <div class="sw"><div class="sw__chip sw__chip--tall" style="background:var(--brand-soft)"></div>
+          <span class="sw__cap">brandSoft · #E4E7F5 · 浅靛底</span></div>
+        <div class="sw"><div class="sw__chip sw__chip--tall" style="background:var(--brand-ink)"></div>
+          <span class="sw__cap">brandInk · #2E3A72 · 8.68:1</span></div>
+      </div>
+
+      <h3 class="sub3 sub3--gap" id="lab">色相环实验台</h3>
+      <p class="lab__lead">拖动色相，两条硬约束实时判定：与任一语义色距离 ≥30°，对底色对比度 ≥4.5。红色区域是禁入区——每个语义色与标注色各占 ±30°，滑进去就会撞上既有含义。</p>
+
+      <div class="band" id="band">
+        <div class="band__spectrum" id="spectrum" role="img" aria-label="色相环 0 到 360 度，红色为禁入区，绿色为可用窗口" style="background: linear-gradient(90deg, rgb(186, 59, 59), rgb(186, 91, 59), rgb(186, 122, 59), rgb(186, 154, 59), rgb(186, 186, 59), rgb(154, 186, 59), rgb(122, 186, 59), rgb(91, 186, 59), rgb(59, 186, 59), rgb(59, 186, 91), rgb(59, 186, 122), rgb(59, 186, 154), rgb(59, 186, 186), rgb(59, 154, 186), rgb(59, 122, 186), rgb(59, 91, 186), rgb(59, 59, 186), rgb(91, 59, 186), rgb(122, 59, 186), rgb(154, 59, 186), rgb(186, 59, 186), rgb(186, 59, 154), rgb(186, 59, 122), rgb(186, 59, 91), rgb(186, 59, 59));"></div>
+        <div class="band__zones" id="zones"><div class="band__zone band__zone--stop" style="left: 0%; width: 20.7895%;"></div><div class="band__zone band__zone--stop" style="left: 27.7778%; width: 33.5185%;"></div><div class="band__zone band__zone--stop" style="left: 86.1111%; width: 13.8889%;"></div><div class="band__zone band__zone--go" style="left: 20.7895%; width: 6.9883%;"><span>窗口 25.2°</span></div><div class="band__zone band__zone--go" style="left: 61.2963%; width: 24.8148%;"><span>可用窗口 220.7°–310.0°</span></div></div>
+        <div class="band__pointer" id="pointer" style="left: 63.7778%;"></div>
+      </div>
+      <div class="band__scale" aria-hidden="true">
+        <span>0°</span><span>90°</span><span>180°</span><span>270°</span><span>360°</span>
+      </div>
+
+      <div class="lab__ctrl">
+        <label for="hue">品牌色相</label>
+        <input id="hue" type="range" min="0" max="359.9" step="0.1" value="229.6" aria-describedby="hue-out" aria-valuetext="230 度" style="--pct: 63.77777777777778%;">
+      </div>
+
+      <div class="lab__out" id="hue-out">
+        <div class="row row--2" style="align-items:center;margin-bottom:var(--s-xxl)">
+          <div class="sw">
+            <div class="sw__chip sw__chip--short" id="swatch" style="background: rgb(58, 71, 133);"></div>
+            <span class="sw__cap" id="swatch-cap">当前品牌色 · hsl(229.6, 39%, 37%) = #3A4785</span>
+          </div>
+          <div class="sw">
+            <p style="font-size:40px;font-weight:600;letter-spacing:-0.02em;font-variant-numeric:tabular-nums" id="deg">229.6°</p>
+            <span class="sw__cap">品牌色相</span>
+          </div>
+        </div>
+        <div class="verdicts" id="verdicts">
+    <p class="verdict verdict--pass">
+      <span class="verdict__tag">通过</span>
+      <span>与最近语义色「术语」相距 <span class="verdict__num">38.9°</span>（阈值 30°）</span>
+      <span class="verdict__why">距禁入区边界还剩 8.9°。</span>
+    </p>
+    <p class="verdict verdict--pass">
+      <span class="verdict__tag">通过</span>
+      <span>对底色对比度 <span class="verdict__num">7.70:1（暖底） / 8.53:1（纸卡）</span>（阈值 4.5:1）</span>
+      <span class="verdict__why">两底都达 AA。</span>
+    </p>
+    <p class="verdict verdict--pass">
+      <span class="verdict__tag">总判</span>
+      <b>当前色相可用作品牌色</b>
+      <span class="verdict__why">两条硬约束是「与任一语义色 ≥30°」和「对底色 ≥4.5:1」，必须同时满足。</span>
+    </p></div>
+      </div>
+
+      <div class="tri">
+        <article>
+          <div class="sw__chip sw__chip--short" style="background:var(--brand)"></div>
+          <p class="tri__deg">230° 靛青</p>
+          <p class="tri__verdict tri__verdict--pass">通过两条硬约束</p>
+          <p class="tri__note">距最近语义色 38.9°（阈值 30°），两项都过。但要留意：距禁入区边界只剩 8.9°——将来新增任何语义色，都必须重算这个余量。</p>
+        </article>
+        <article>
+          <div class="sw__chip sw__chip--short" style="background:#1F6B66"></div>
+          <p class="tri__deg">176° 墨青</p>
+          <p class="tri__verdict tri__verdict--fail">否决：撞上成功松绿</p>
+          <p class="tri__note">与成功色 156° 只差 19.8°。品牌按钮会被读成「操作成功」，语义被污染。</p>
+        </article>
+        <article>
+          <div class="sw__chip sw__chip--short" style="background:#8E3038"></div>
+          <p class="tri__deg">355° 绛</p>
+          <p class="tri__verdict tri__verdict--fail">否决：撞上危险朱红</p>
+          <p class="tri__note">与危险色 4° 只差 6.7°。品牌按钮会被读成「危险操作」，用户不敢点。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 语义色与标注四色 ========== -->
+  <section class="sec sec--paper" id="semantic" data-tone="light">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2>语义色与标注四色</h2>
+        <p>语义色承担状态，标注色承担正文标记。两者必须互不混淆——所以标注四色刻意避开品牌靛所在的区间。</p>
+      </div>
+
+      <h3 class="sub3 sub3--gap">语义色</h3>
+      <div class="row row--4">
+        <div class="sw"><div class="sw__chip" style="background:var(--danger)"></div>
+          <span class="sw__cap">danger · #AF2F26 · 6.33:1</span></div>
+        <div class="sw"><div class="sw__chip" style="background:var(--warning)"></div>
+          <span class="sw__cap">warning · #8A5A0B · 5.25:1</span></div>
+        <div class="sw"><div class="sw__chip" style="background:var(--success)"></div>
+          <span class="sw__cap">success · #1D6F52 · 5.40:1</span></div>
+        <div class="sw"><div class="sw__chip" style="background:var(--accent)"></div>
+          <span class="sw__cap">accent · #8C5A16 · 5.19:1</span></div>
+      </div>
+
+      <h3 class="sub3 sub3--gap">标注四色</h3>
+      <div class="row row--4">
+        <div class="sw"><div class="ann" style="background:var(--ann-exam)">考点</div>
+          <span class="sw__cap">考点 · #FFE7A0 · 12.17:1｜深 #574818</span></div>
+        <div class="sw"><div class="ann" style="background:var(--ann-viewpoint)">观点</div>
+          <span class="sw__cap">观点 · #C9E7CE · 11.19:1｜深 #2C4C31</span></div>
+        <div class="sw"><div class="ann" style="background:var(--ann-term)">术语</div>
+          <span class="sw__cap">术语 · #B9DEE6 · 10.37:1｜深 #285058</span></div>
+        <div class="sw"><div class="ann" style="background:var(--ann-figure)">指标</div>
+          <span class="sw__cap">数字 · #F8C8D8 · 10.08:1｜深 #653744</span></div>
+      </div>
+
+      <!-- ========== 中性阶与标尺 ========== -->
+  <section class="sec sec--dark" id="neutral" data-tone="dark">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2>中性暖墨阶</h2>
+        <p>中性色全部换成暖墨（色相 34–37°），不再用冷蓝灰。深色主题是另一套独立取值的深暖灰，不是把浅色取反。</p>
+      </div>
+
+      <h3 class="sub3 sub3--gap">浅色主题</h3>
+      <div class="ramp" aria-hidden="true">
+        <span style="background:#FFFDF6"></span><span style="background:#F5F1E8"></span>
+        <span style="background:#F0EADD"></span><span style="background:#EFE9DC"></span>
+        <span style="background:#EAE4D6"></span><span style="background:#E4DCCB"></span>
+      </div>
+      <div class="ramp__cap" aria-hidden="true">
+        <span>surface #FFFDF6</span><span>bg #F5F1E8</span><span>sAlt #F0EADD</span>
+        <span>lineSoft #EFE9DC</span><span>sunken #EAE4D6</span><span>line #E4DCCB</span>
+      </div>
+
+      <h3 class="sub3 sub3--gap">深色主题（深暖灰，非反色）</h3>
+      <div class="ramp" aria-hidden="true">
+        <span style="background:#1A1815"></span><span style="background:#242220"></span>
+        <span style="background:#2A2724"></span><span style="background:#2C2A26"></span>
+        <span style="background:#2F2C28"></span><span style="background:#3A3732"></span>
+      </div>
+      <div class="ramp__cap" aria-hidden="true">
+        <span>bg #1A1815</span><span>surface #242220</span><span>sunken #2A2724</span>
+        <span>sAlt #2C2A26</span><span>lineSoft #2F2C28</span><span>line #3A3732</span>
+      </div>
+
+      <div class="papercard sub3--gap">
+        <h3 style="font-size:17px;font-weight:500;margin-bottom:var(--s-l)">
+          文本三级（浅色主题，括号内为对暖底 / 对纸卡的实测对比度）
+        </h3>
+        <div class="row row--3">
+          <div class="sw"><div class="sw__chip" style="background:var(--ink)"></div>
+            <span class="sw__cap" style="color:var(--sub)">ink · #2A2723 · 13.19 / 14.60</span></div>
+          <div class="sw"><div class="sw__chip" style="background:var(--sub)"></div>
+            <span class="sw__cap" style="color:var(--sub)">sub · #5A554E · 6.55 / 7.25</span></div>
+          <div class="sw"><div class="sw__chip" style="background:var(--mut)"></div>
+            <span class="sw__cap" style="color:var(--sub)">mut · #635E56 · 5.70 / 6.32</span></div>
+        </div>
+      </div>
+
+      <h3 class="sub3 sub3--gap">字号、间距、圆角与动效</h3>
+      <div class="type-list" style="margin-bottom:48px">
+        <div><b>display 34</b><span style="font-size:34px;font-weight:600;letter-spacing:-0.02em">时政精读要抓住主谓宾</span></div>
+        <div><b>titleL 28</b><span style="font-size:28px;font-weight:600;letter-spacing:-0.02em">时政精读要抓住主谓宾（30 并入）</span></div>
+        <div><b>titleM 24</b><span style="font-size:24px;font-weight:600;letter-spacing:-0.02em">时政精读要抓住主谓宾（22 并入）</span></div>
+        <div><b>titleS 20</b><span style="font-size:20px">时政精读要抓住主谓宾（18 并入）</span></div>
+        <div><b>body 17</b><span style="font-size:17px">时政精读要抓住主谓宾（16 与 17 统一到 17）</span></div>
+        <div><b>meta 14</b><span style="font-size:14px">时政精读要抓住主谓宾（13 与 15 并入）</span></div>
+        <div><b>caption 12</b><span style="font-size:12px">时政精读要抓住主谓宾（序号、来源、日期）</span></div>
+        <div><b>micro 11</b><span style="font-size:11px">时政精读要抓住主谓宾（徽标与角标）</span></div>
+      </div>
+
+      <div class="scale">
+        <div>
+          <p class="sw__cap" style="margin-bottom:var(--s-l)">间距（4 基线）</p>
+          <div class="space-list">
+            <div><b>hair 2</b><i style="width:8px"></i></div>
+            <div><b>xs 4</b><i style="width:16px"></i></div>
+            <div><b>s 8</b><i style="width:32px"></i></div>
+            <div><b>m 12</b><i style="width:48px"></i></div>
+            <div><b>l 16</b><i style="width:64px"></i></div>
+            <div><b>xl 20（新增）</b><i style="width:80px"></i></div>
+            <div><b>xxl 24</b><i style="width:96px"></i></div>
+            <div><b>xxxl 32</b><i style="width:128px"></i></div>
+            <div><b>page 16</b><i style="width:64px"></i></div>
+          </div>
+        </div>
+        <div>
+          <p class="sw__cap" style="margin-bottom:var(--s-l)">圆角（以手机端为准）</p>
+          <div class="radii">
+            <div style="border-radius:4px" data-r="xs 4"></div>
+            <div style="border-radius:8px" data-r="sm 8"></div>
+            <div style="border-radius:10px" data-r="md 10"></div>
+            <div style="border-radius:14px" data-r="lg 14"></div>
+            <div style="border-radius:20px" data-r="xl 20"></div>
+            <div style="border-radius:24px" data-r="full 999"></div>
+          </div>
+        </div>
+        <div>
+          <p class="sw__cap" style="margin-bottom:var(--s-l)">动效时长（三端原本已一致）</p>
+          <div class="motion-list">
+            <span>xs 120ms · tooltip</span>
+            <span>sm 160ms · 按压反馈</span>
+            <span>md 250ms · 浮层入场</span>
+            <span>lg 400ms · 抽屉过渡</span>
+          </div>
+          <p class="sw__cap" style="margin-top:var(--s-xxl)">缓动曲线继承既有三条，禁止自造</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 缘由 ========== -->
+  <section class="sec sec--paper" id="why" data-tone="light">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2>为什么推倒重做</h2>
+        <p>三条实测出来的理由，不是审美偏好。</p>
+      </div>
+      <div class="reasons">
+        <article>
+          <h3>一、不达标就先修，不谈统一</h3>
+          <p>原网页端四个主题的辅助色（日期、来源、序号）实测为 2.88 到 3.88 比 1，全部不到无障碍 AA 的 4.5。换暖墨之后，辅助色在暖底 5.70、纸卡 6.32，双底都过。</p>
+        </article>
+        <article>
+          <h3>二、后台一直锚错了基准</h3>
+          <p>审核后台是唯一使用第三方设计系统的一端，它的内联样式里硬编码的是主站默认色值；而主站真正渲染的却是暖纸主题。也就是说，后台的视觉基准，从来不是用户看到的那一套。</p>
+        </article>
+        <article>
+          <h3>三、三端里只有手机端是真设计过的</h3>
+          <p>逐条复算手机端的对比度审计表，数值全部成立，而且它主动标注了自己两处妥协。统一的意义不是让三端长得一样，是让另外两端都达到同一把尺子。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 彩蛋 ========== -->
+  <div class="qj" id="qingjin" hidden="">
+    <blockquote>青青子衿，悠悠我心。</blockquote>
+    <p>
+      品牌色「靛青」不只是从色相环上解出来的空档，它同时是《诗经》里学子的颜色——青衿。
+      这款产品的用户就是青衿，所以这个色相既过了两条硬约束（距最近语义色 38.9°、对暖底 7.70:1），
+      在语义上也站得住：宣纸暖底配靛墨，靛与朱批构成传统「朱墨对比」，而产品最核心的动作，
+      恰恰是给原文划考点。
+    </p>
+    <p style="margin-top:var(--s-l)">
+      你读到这一页，是因为在搜索框里敲了 <code>qingjin</code>。
+    </p>
+  </div>
+
+</div></section></main>
+
+<footer data-tone="light">
+  <div class="wrap foot">
+    <div class="foot__brand">
+      <strong>每日时政</strong>
+      <span>色系统 v3 · 手机端 / 网页端 / 审核后台</span>
+    </div>
+    <nav class="foot__links" aria-label="页脚导航">
+      
+      <a href="#lab">回到实验台</a>
+      <a href="#main">回到顶部</a>
+    </nav>
+  </div>
+  <div class="wrap">
+    <small>本页所有对比度数值均按 WCAG 2.1 相对亮度公式实算，非估计值。色相环间距阈值为 30 度。</small>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   1. 令牌 —— 与 CSS 中的 :root 一一对应（唯一数值源）
+   ============================================================ */
+const TOKENS = {
+  bg:'#F5F1E8', surface:'#FFFDF6',
+  brand:'#3A4785',
+  danger:'#AF2F26', warning:'#8A5A0B', success:'#1D6F52', accent:'#8C5A16',
+  annExam:'#FFE7A0', annViewpoint:'#C9E7CE', annTerm:'#B9DEE6', annFigure:'#F8C8D8'
+};
+
+/* 参与色相环占位的全部颜色。禁入区 = 每一个 ±30°，由色值实时推导。
+   注意：这里没有硬编码任何角度。 */
+const OCCUPANTS = [
+  { key:'danger',      label:'危险',   hex:TOKENS.danger },
+  { key:'warning',     label:'警告',   hex:TOKENS.warning },
+  { key:'accent',      label:'强调',   hex:TOKENS.accent },
+  { key:'success',     label:'成功',   hex:TOKENS.success },
+  { key:'annExam',     label:'考点',   hex:TOKENS.annExam },
+  { key:'annViewpoint',label:'观点',   hex:TOKENS.annViewpoint },
+  { key:'annTerm',     label:'术语',   hex:TOKENS.annTerm },
+  { key:'annFigure',   label:'数字',   hex:TOKENS.annFigure }
+];
+
+const ZONE_HALF = 30;      // 禁入区半径（度）——硬约束
+const MIN_TEXT  = 4.5;     // 文本对比度阈值
+
+/* ============================================================
+   2. 色彩数学 —— WCAG 2.1 相对亮度 + HSL 互转
+   ============================================================ */
+function hexToRgb(hex){
+  const h = hex.replace('#','');
+  return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
+}
+function relLum(hex){
+  const [r,g,b] = hexToRgb(hex).map(v => {
+    const c = v/255;
+    return c <= 0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4);
+  });
+  return 0.2126*r + 0.7152*g + 0.0722*b;
+}
+function contrast(a,b){
+  const la = relLum(a), lb = relLum(b);
+  const hi = Math.max(la,lb), lo = Math.min(la,lb);
+  return (hi+0.05)/(lo+0.05);
+}
+function rgbToHsl(hex){
+  const [r,g,b] = hexToRgb(hex).map(v => v/255);
+  const max = Math.max(r,g,b), min = Math.min(r,g,b);
+  const l = (max+min)/2;
+  if (max === min) return [0,0,l*100];
+  const d = max-min;
+  const s = l > 0.5 ? d/(2-max-min) : d/(max+min);
+  let h;
+  if (max === r)      h = ((g-b)/d + (g < b ? 6 : 0));
+  else if (max === g) h = (b-r)/d + 2;
+  else                h = (r-g)/d + 4;
+  return [h*60, s*100, l*100];
+}
+function hslToHex(h,s,l){
+  h = ((h%360)+360)%360; s /= 100; l /= 100;
+  const c = (1-Math.abs(2*l-1))*s;
+  const x = c*(1-Math.abs(((h/60)%2)-1));
+  const m = l - c/2;
+  let rgb;
+  if (h <  60) rgb = [c,x,0];
+  else if (h < 120) rgb = [x,c,0];
+  else if (h < 180) rgb = [0,c,x];
+  else if (h < 240) rgb = [0,x,c];
+  else if (h < 300) rgb = [x,0,c];
+  else              rgb = [c,0,x];
+  return '#' + rgb.map(v => Math.round((v+m)*255).toString(16).padStart(2,'0')).join('').toUpperCase();
+}
+function angDist(a,b){
+  return Math.abs(((a-b+540) % 360) - 180);
+}
+
+/* ============================================================
+   3. 由色值推导色相与禁入区
+   ============================================================ */
+const HUE_OF = OCCUPANTS.map(o => ({ ...o, hue: rgbToHsl(o.hex)[0] }));
+
+/* 禁入区取并集并合并区间；跨 0° 的部分拆成两段 */
+function forbiddenIntervals(){
+  const raw = HUE_OF.map(o => [(o.hue - ZONE_HALF + 360) % 360, (o.hue + ZONE_HALF) % 360]);
+  const segs = [];
+  for (const [s,e] of raw){
+    if (s <= e) segs.push([s,e]);
+    else { segs.push([s,360]); segs.push([0,e]); }
+  }
+  segs.sort((a,b) => a[0]-b[0]);
+  const merged = [];
+  for (const seg of segs){
+    const last = merged[merged.length-1];
+    if (last && seg[0] <= last[1] + 0.001) last[1] = Math.max(last[1], seg[1]);
+    else merged.push([seg[0], seg[1]]);
+  }
+  return merged;
+}
+const STOPPED = forbiddenIntervals();
+
+/* 可用窗口 = 360 减去禁入区 */
+function openWindows(){
+  const out = [];
+  let cursor = 0;
+  for (const [s,e] of STOPPED){
+    if (s - cursor > 0.5) out.push([cursor, s]);
+    cursor = Math.max(cursor, e);
+  }
+  if (360 - cursor > 0.5) out.push([cursor, 360]);
+  return out;
+}
+const WINDOWS = openWindows();
+
+/* 某色相到最近禁入区边界的余量：>0 安全，≤0 已进入禁入区 */
+function zoneMargin(h){
+  let best = Infinity;
+  for (const o of HUE_OF) best = Math.min(best, angDist(h, o.hue) - ZONE_HALF);
+  return best;
+}
+function nearest(h){
+  let best = null;
+  for (const o of HUE_OF){
+    const d = angDist(h, o.hue);
+    if (!best || d < best.d) best = { ...o, d };
+  }
+  return best;
+}
+
+/* ============================================================
+   4. 渲染色相条（光谱 + 禁入区 + 可用窗口 + 指针）
+   ============================================================ */
+const pctOf = h => h/360*100;
+
+(function drawSpectrum(){
+  const stops = [];
+  for (let h = 0; h <= 360; h += 15) stops.push(`hsl(${h}, 52%, 48%)`);
+  document.getElementById('spectrum').style.background = `linear-gradient(90deg, ${stops.join(',')})`;
+})();
+
+(function drawZones(){
+  const box = document.getElementById('zones');
+  box.innerHTML = '';
+  for (const [s,e] of STOPPED){
+    const d = document.createElement('div');
+    d.className = 'band__zone band__zone--stop';
+    d.style.left  = pctOf(s) + '%';
+    d.style.width = pctOf(e - s) + '%';
+    box.appendChild(d);
+  }
+  for (const [s,e] of WINDOWS){
+    const d = document.createElement('div');
+    d.className = 'band__zone band__zone--go';
+    d.style.left  = pctOf(s) + '%';
+    d.style.width = pctOf(e - s) + '%';
+    const span = document.createElement('span');
+    const deg = e - s;
+    /* 窄窗口放不下完整标注，只报宽度，避免被裁成半截数字 */
+    span.textContent = deg >= 60
+      ? `可用窗口 ${s.toFixed(1)}°–${e.toFixed(1)}°`
+      : `窗口 ${deg.toFixed(1)}°`;
+    d.appendChild(span);
+    box.appendChild(d);
+  }
+})();
+
+/* ============================================================
+   5. 交互：拖动 → 实时判定
+   ============================================================ */
+const BRAND_HSL = rgbToHsl(TOKENS.brand);
+/* 品牌色相的精确值就是从这里推导的，不写死；滑块默认值也由它决定，
+   避免「滑块停在 230、实际品牌色在 229.6」这类漂移。 */
+const BRAND_HUE = Math.round(BRAND_HSL[0] * 10) / 10;
+const fmtDeg = v => (Number.isInteger(v) ? v + '°' : v.toFixed(1) + '°');
+
+function paint(h){
+  const hex = hslToHex(h, BRAND_HSL[1], BRAND_HSL[2]);
+  const near = nearest(h);
+  const margin = zoneMargin(h);
+  const onBg = contrast(hex, TOKENS.bg);
+  const onSf = contrast(hex, TOKENS.surface);
+
+  document.getElementById('swatch').style.background = hex;
+  document.getElementById('swatch-cap').textContent =
+    `当前品牌色 · hsl(${h}, ${BRAND_HSL[1].toFixed(0)}%, ${BRAND_HSL[2].toFixed(0)}%) = ${hex}`;
+  document.getElementById('deg').textContent = fmtDeg(h);
+  document.getElementById('pointer').style.left = pctOf(h) + '%';
+
+  const okDist = near.d >= ZONE_HALF;
+  const okContrast = onBg >= MIN_TEXT && onSf >= MIN_TEXT;
+
+  const rows = [
+    {
+      pass: okDist,
+      tag: okDist ? '通过' : '否决',
+      head: `与最近语义色「${near.label}」相距 `,
+      num: near.d.toFixed(1) + '°',
+      tail: `（阈值 ${ZONE_HALF}°）`,
+      why: okDist
+        ? `距禁入区边界还剩 ${margin.toFixed(1)}°。`
+        : `已经落进「${near.label}」的禁入区，品牌按钮会被读成该语义。`
+    },
+    {
+      pass: okContrast,
+      tag: okContrast ? '通过' : '否决',
+      head: '对底色对比度 ',
+      num: `${onBg.toFixed(2)}:1（暖底） / ${onSf.toFixed(2)}:1（纸卡）`,
+      tail: `（阈值 ${MIN_TEXT}:1）`,
+      why: okContrast ? '两底都达 AA。' : '至少一个底色不达 AA，正文与链接会不可读。'
+    }
+  ];
+
+  document.getElementById('verdicts').innerHTML = rows.map(r => `
+    <p class="verdict verdict--${r.pass ? 'pass' : 'fail'}">
+      <span class="verdict__tag">${r.tag}</span>
+      <span>${r.head}<span class="verdict__num">${r.num}</span>${r.tail}</span>
+      <span class="verdict__why">${r.why}</span>
+    </p>`).join('') + `
+    <p class="verdict verdict--${okDist && okContrast ? 'pass' : 'fail'}">
+      <span class="verdict__tag">总判</span>
+      <b>${okDist && okContrast ? '当前色相可用作品牌色' : '当前色相不可用'}</b>
+      <span class="verdict__why">两条硬约束是「与任一语义色 ≥30°」和「对底色 ≥4.5:1」，必须同时满足。</span>
+    </p>`;
+}
+
+const hue = document.getElementById('hue');
+hue.addEventListener('input', () => {
+  const h = Number(hue.value);
+  hue.style.setProperty('--pct', pctOf(h) + '%');
+  hue.setAttribute('aria-valuetext', h + ' 度，' + nearest(h).label + ' ' + nearest(h).d.toFixed(1) + ' 度');
+  paint(h);
+});
+
+/* 初始状态：由品牌色反推色相，保证默认位就是品牌色本身 */
+(function init(){
+  hue.value = BRAND_HUE;
+  hue.style.setProperty('--pct', pctOf(BRAND_HUE) + '%');
+  paint(BRAND_HUE);
+  document.getElementById('brand-hue-label').textContent  = Math.round(BRAND_HUE);
+  document.getElementById('brand-hue-exact').textContent  = BRAND_HUE.toFixed(1);
+  document.getElementById('brand-dist-label').textContent = nearest(BRAND_HUE).d.toFixed(1);
+})();
+
+/* ============================================================
+   6. 彩蛋：输入 qingjin，或者直接用 #qingjin 打开
+   ============================================================ */
+(function egg(){
+  const box = document.getElementById('qingjin');
+  const reveal = () => {
+    if (!box.hidden) return;
+    box.hidden = false;
+    box.scrollIntoView({ block:'start', behavior:'smooth' });
+  };
+  if (location.hash === '#qingjin') reveal();
+
+  let buf = '';
+  document.addEventListener('keydown', e => {
+    if (e.key.length !== 1) return;
+    buf = (buf + e.key.toLowerCase()).slice(-8);
+    if (buf.includes('qingjin')) reveal();
+  });
+
+  console.log('%c青衿', 'font:600 28px/1 "Songti SC",serif;color:#3A4785',
+    '\n这个品牌色相不是随手挑的。试试在搜索框输入 qingjin。');
+})();
+</script>
+
+
+
+
+<script>
+/* 左侧章节导航：滚动定位 + 文字随背后区块反色（真透明的关键） */
+(function rail(){
+  var rail = document.getElementById('rail');
+  if (!rail) return;
+  var links = [].slice.call(rail.querySelectorAll('a'));
+  var secs  = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  var bar   = document.getElementById('navProgress');
+  var zones = [].slice.call(document.querySelectorAll('section[data-tone], footer[data-tone]'));
+  var tick  = false;
+  function upd(){
+    tick = false;
+    var d = document.documentElement;
+    var y = window.pageYOffset || d.scrollTop || 0;
+    var max = d.scrollHeight - window.innerHeight;
+    if (bar) bar.style.width = (max > 0 ? (y / max * 100) : 0) + '%';
+    var mid = y + window.innerHeight / 2, idx = -1;
+    for (var i = 0; i < secs.length; i++) { if (secs[i] && secs[i].offsetTop <= mid) idx = i; }
+    for (var j = 0; j < links.length; j++) links[j].classList.toggle('is-active', j === idx);
+    /* 取色必须逐条判断：左栏 fixed 通高，条目会横跨明暗区块边界
+       （scroll=0 时上方条目在浅色 Hero、下方已进深色品牌区），
+       整栏一种颜色必然有一半压错。每条按自身所在位置的背景单独取色。 */
+    for (var k = 0; k < links.length; k++) {
+      var r = links[k].getBoundingClientRect();
+      var at = r.top + r.height / 2, tone = 'light';
+      for (var z = 0; z < zones.length; z++) {
+        var b = zones[z].getBoundingClientRect();
+        if (at >= b.top && at < b.bottom) { tone = zones[z].getAttribute('data-tone') || 'light'; break; }
+      }
+      links[k].classList.toggle('is-dark', tone === 'dark');
+    }
+  }
+  function onScroll(){ if (!tick) { tick = true; requestAnimationFrame(upd); } }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', onScroll);
+  upd();
+})();
+</script>
+</body></html>

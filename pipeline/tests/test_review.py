@@ -291,3 +291,38 @@ def test_audit_never_writes_real_content_log(tmp_path, monkeypatch):
     scoped = tmp_path / "_reports" / "audit.jsonl"
     assert scoped.exists(), "审计应写入被 patch 的 CONTENT"
     assert "test-only" in scoped.read_text(encoding="utf-8")
+
+
+# ─────────── 设计令牌接线（规范 v3 §4.1 / §8 第 1 步的验收信号）───────────
+
+
+def test_tokens_css_route_serves_generated_tokens(client: TestClient):
+    """验收信号②：/review/tokens.css 返回 200 且是 CSS。"""
+    resp = client.get("/review/tokens.css")
+    assert resp.status_code == 200
+    assert resp.headers["content-type"].startswith("text/css")
+
+    css = resp.text
+    assert "请勿手改" in css and "SOURCE_SHA256:" in css
+    # 验收信号①：无品牌裸 hex——品牌色必须以变量的形式提供，而不是散落在页面里
+    assert "--kg-brand: #3A4785;" in css
+
+
+def test_tokens_css_route_404s_when_generator_not_run(client: TestClient, monkeypatch, tmp_path):
+    """生成器没跑过时应给出可执行的提示，而不是 500 或空白样式。"""
+    monkeypatch.setattr(server, "UI_TOKENS_CSS", tmp_path / "missing.css")
+    resp = client.get("/review/tokens.css")
+    assert resp.status_code == 404
+    assert "generate" in resp.json()["detail"]
+
+
+def test_admin_index_links_tokens_after_pinned_tabler(client: TestClient):
+    """验收信号③的一部分：link 必须存在、必须位于 Tabler 之后，且 Tabler 已锁版本。"""
+    html = client.get("/").text
+    tabler_at = html.find("@tabler/core@")
+    tokens_at = html.find("/review/tokens.css")
+    assert tabler_at != -1, "Tabler CDN 链接不见了"
+    assert tokens_at != -1, "未引入 tokens.css"
+    assert "@tabler/core@latest" not in html, "Tabler 未锁版本（规范 §7 债务 2）"
+    assert tabler_at < tokens_at, "tokens.css 必须置于 Tabler 之后，否则覆盖不生效"
+

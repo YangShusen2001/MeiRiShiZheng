@@ -1,4 +1,7 @@
 ---
+// 设计令牌产物必须先于 global.css 引入：global.css 里的旧变量名（--bg/--ink/…）是
+// 指向 tokens.generated.css 的别名。产物由 packages/design-tokens/generate.mjs 生成。
+import "../styles/tokens.generated.css";
 import "../styles/global.css";
 import fs from "node:fs";
 import path from "node:path";
@@ -39,11 +42,13 @@ const reviewCardsJson = JSON.stringify(listCards());
     <meta name="description" content={description} />
     <title>{title}</title>
     <script>
-      // 提前应用主题，避免切换时闪白：有记忆用记忆；无记忆跟随系统（深色系统→深色，否则纸感米色）
+      // 主题：v3 收敛为「浅色 / 深色」两套，但**深色排在迁移最后一步**（规范 §8），
+      // 所以现在只出浅色——不把没评审过的深色交给用户。跟随系统的分支暂时去掉。
+      // 最后一步开启深色时：这里恢复 `matchMedia(...).matches ? "dark" : "light"`，
+      // 并把下面导航里注释掉的「主题」按钮放回来即可（令牌产物里已有 [data-theme="dark"] 块）。
       try {
-        const saved = localStorage.getItem("kaogong.theme");
-        const theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "reading");
-        document.documentElement.dataset.theme = theme;
+        document.documentElement.dataset.theme = "light";
+        localStorage.setItem("kaogong.theme", "light");
       } catch (e) {}
     </script>
     {fontCss && <style set:html={fontCss} />}
@@ -71,7 +76,9 @@ const reviewCardsJson = JSON.stringify(listCards());
             <path d="M4 7h16M4 12h16M4 17h16"></path>
           </svg>
         </button>
-        <button type="button" class="theme-toggle" id="theme-toggle" title="切换主题">主题</button>
+        {/* 深色主题排在迁移最后一步（规范 §8）：届时把下面这行放回来，
+            阴影/深色令牌产物已经就绪，不需要改样式。 */}
+        {/* <button type="button" class="theme-toggle" id="theme-toggle" title="切换主题">主题</button> */}
       </div>
     </header>
     <main class="wrap"><slot /></main>
@@ -89,12 +96,15 @@ const reviewCardsJson = JSON.stringify(listCards());
       import { initReview } from "../lib/review";
 
       // 主题切换：默认 / 阅读 / 护眼 / 深色（浅色系 + 深色），localStorage 记忆；无记忆跟随系统
-      const THEMES = ["light", "reading", "green", "dark"];
-      const THEME_LABELS: Record<string, string> = { light: "默认", reading: "阅读", green: "护眼", dark: "深色" };
+      // 深色切换在迁移最后一步开启，所以这段现在是惰性的（themeToggle 为 null 时整段跳过）。
+      // 保留代码是为了最后一步只改一行 HTML，不用重写逻辑。
+      const THEMES = ["light", "dark"];
+      const THEME_LABELS: Record<string, string> = { light: "浅色", dark: "深色" };
       const themeToggle = document.getElementById("theme-toggle");
       if (themeToggle) {
         const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const initial = localStorage.getItem("kaogong.theme") ?? (systemDark ? "dark" : "reading");
+        const LEGACY: Record<string, string> = { light: "light", reading: "light", green: "light", dark: "dark" };
+        const initial = LEGACY[localStorage.getItem("kaogong.theme") ?? ""] ?? (systemDark ? "dark" : "light");
         let idx = Math.max(0, THEMES.indexOf(initial));
         const applyTheme = () => {
           const theme = THEMES[idx] ?? "light";

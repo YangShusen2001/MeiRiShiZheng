@@ -39,6 +39,8 @@ ROOT = Path(__file__).resolve().parents[4]  # 仓库根（pipeline/src/kaogong/r
 CONTENT = ROOT / "content"
 WEB = ROOT / "apps" / "web"
 UI = Path(__file__).resolve().parent / "ui" / "index.html"
+# 设计令牌 CSS：由 packages/design-tokens/generate.mjs 生成，覆盖 Tabler 变量（规范 v3 §4.1）
+UI_TOKENS_CSS = Path(__file__).resolve().parent / "ui" / "tokens.css"
 FONT_UPLOAD_DIR = WEB / "public" / "fonts" / "uploads"
 FONT_CONFIG = WEB / "src" / "font-config.json"
 
@@ -113,6 +115,20 @@ def _has_ai_key() -> bool:
 @app.get("/", response_class=HTMLResponse)
 def index() -> HTMLResponse:
     return HTMLResponse(UI.read_text(encoding="utf-8"))
+
+
+@app.get("/review/tokens.css")
+def review_tokens_css() -> FileResponse:
+    """设计令牌 CSS（packages/design-tokens 生成）。
+
+    独立成路由而不是内联进 index.html：令牌是生成产物，改值只需重跑生成器 + 刷新，
+    不必碰手写的页面。index.html 里的 <link> 必须置于 Tabler CDN 之后。
+    """
+    if not UI_TOKENS_CSS.is_file():
+        raise HTTPException(
+            404, "tokens.css 缺失：跑 pnpm --filter @kaogong/design-tokens generate"
+        )
+    return FileResponse(UI_TOKENS_CSS, media_type="text/css")
 
 
 class FetchBody(BaseModel):
