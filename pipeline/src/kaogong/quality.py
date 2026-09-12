@@ -123,46 +123,24 @@ def artifact_semantic_errors(artifact: Artifact) -> list[dict[str, str]]:
     ]
 
 
-# 0018：数量门禁基线取「最近 N 次 ok/degraded 报告的中位数」，避免单日波动误报
-VOLUME_BASELINE_WINDOW = 5
+# v2.1 转向后校准（2026-09-12 用户拍板，pivot 方案 §9 后续）：数量体检不再用
+# 「相对近期基线」——精品转向后低量级是设计目标（≤15 篇/日），相对基线会把
+# 「天生日薄（合法 sparse）」误报为「源故障」。真正的源故障信号在 fetch 层：
+# 13 源经栏目白名单后正常日 candidatesRaw ~10-20，跌破绝对下限意味着多源故障
+# 或白名单配置错误。candidates/articles 的后置门禁量不再做数量体检（candidates==0
+# 仍由 quality_gate 直接判 failed 兜底）。
+VOLUME_FETCH_RAW_FLOOR = 5
 
 
-def _median(values: list[int]) -> float:
-    ordered = sorted(values)
-    mid = len(ordered) // 2
-    if len(ordered) % 2 == 1:
-        return float(ordered[mid])
-    return (ordered[mid - 1] + ordered[mid]) / 2.0
-
-
-def volume_errors(target: dt.date, report_dir: Path, current: Mapping[str, object]) -> list[dict[str, str]]:
+def volume_errors(current: Mapping[str, object]) -> list[dict[str, str]]:
     errors: list[dict[str, str]] = []
-    prior_reports: list[tuple[dt.date, Mapping[str, object]]] = []
-    for path in report_dir.glob("*.json") if report_dir.exists() else []:
-        try:
-            report_date = dt.date.fromisoformat(path.stem)
-            report = json.loads(path.read_text(encoding="utf-8"))
-        except (ValueError, json.JSONDecodeError):
-            continue
-        if report_date < target and report.get("qualityStatus") in {"ok", "degraded"}:
-            prior_reports.append((report_date, report))
-    prior_reports.sort(reverse=True, key=lambda entry: entry[0])
-    recent = prior_reports[:VOLUME_BASELINE_WINDOW]
-    for metric in ("candidates", "articles"):
-        values = [
-            int(report[metric])
-            for _, report in recent
-            if isinstance(report.get(metric), int) and int(report[metric]) > 0
-        ]
-        if not values:
-            continue
-        baseline = _median(values)
-        current_value = current.get(metric)
-        if isinstance(current_value, int) and current_value * 2 < baseline:
+    fetch = current.get("fetch")
+    if isinstance(fetch, Mapping):
+        raw = fetch.get("candidatesRaw")
+        if isinstance(raw, int) and 0 <= raw < VOLUME_FETCH_RAW_FLOOR:
             errors.append({
-                "metric": metric,
-                "error": "below_half_baseline",
-                "baseline": baseline,
-                "window": len(values),
+                "metric": "candidatesRaw",
+                "error": "below_fetch_floor",
+                "floor": VOLUME_FETCH_RAW_FLOOR,
             })
     return errors[:MAX_QUALITY_ERRORS]

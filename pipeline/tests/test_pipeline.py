@@ -308,39 +308,50 @@ def test_quality_gate_revalidates_successful_ai_article_semantics(tmp_path):
     assert "高质量发展" not in json.dumps(result, ensure_ascii=False)
 
 
-@pytest.mark.parametrize(("current", "expected"), [(5, "ok"), (4, "failed")])
-def test_quality_gate_enforces_half_of_volume_median_baseline(tmp_path, current, expected):
-    # Given: 5-window median baseline of ten (values 10/20/10); outliers and failed reports excluded.
+@pytest.mark.parametrize(("raw", "expected"), [(5, "ok"), (4, "failed")])
+def test_quality_gate_enforces_fetch_raw_floor(tmp_path, raw, expected):
+    """2026-09-12 校准（用户拍板）：数量体检 = fetch 层绝对下限（candidatesRaw < 5）。
+
+    v2.1 精品转向后低量级是设计目标（≤15 篇/日），旧「相对近期基线中位数」会把
+    天生日薄（合法 sparse）误报为源故障——09-12 实战：10 篇健康日被旧检查判 failed。
+    真正的源故障信号在 fetch 层：13 源经白名单后正常日 candidatesRaw ~10-20。
+    """
     target = dt.date(2026, 8, 14)
     _write_digest(tmp_path, target)
-    _write_report(tmp_path, dt.date(2026, 8, 9), candidates=10, articles=10, qualityStatus="ok")
-    _write_report(tmp_path, dt.date(2026, 8, 10), candidates=20, articles=20, qualityStatus="ok")
-    _write_report(tmp_path, dt.date(2026, 8, 11), candidates=0, articles=0, qualityStatus="ok")
-    _write_report(tmp_path, dt.date(2026, 8, 12), candidates=100, articles=100, qualityStatus="failed")
-    _write_report(tmp_path, dt.date(2026, 8, 13), candidates=10, articles=10, qualityStatus="degraded")
-    _write_report(tmp_path, dt.date(2026, 8, 15), candidates=999, articles=999, qualityStatus="ok")
-    _write_report(tmp_path, target, candidates=current, articles=current)
+    _write_report(tmp_path, target, fetch={"candidatesRaw": raw})
 
-    # When: candidate and article volume are compared independently.
     result = quality_gate(target, tmp_path)
 
-    # Then: exactly fifty percent passes, while anything below is fatal.
     assert result["qualityStatus"] == expected
-    assert len(result["volumeErrors"]) == (0 if expected == "ok" else 2)
+    assert len(result["volumeErrors"]) == (0 if expected == "ok" else 1)
+    if expected == "failed":
+        assert result["volumeErrors"][0]["metric"] == "candidatesRaw"
+        assert result["volumeErrors"][0]["error"] == "below_fetch_floor"
 
 
-def test_quality_gate_skips_volume_check_without_valid_baseline(tmp_path):
-    # Given: all earlier reports are failed or have zero metrics.
+def test_quality_gate_skips_volume_check_without_fetch_metric(tmp_path):
+    """兼容：无 fetch.candidatesRaw 的报告形态（T04 前旧格式）不触发数量误报。"""
     target = dt.date(2026, 8, 14)
     _write_digest(tmp_path, target)
-    _write_report(tmp_path, dt.date(2026, 8, 12), candidates=10, articles=10, qualityStatus="failed")
-    _write_report(tmp_path, dt.date(2026, 8, 13), candidates=0, articles=0, qualityStatus="degraded")
-    _write_report(tmp_path, target, candidates=1, articles=1)
+    _write_report(tmp_path, target)
 
-    # When: the publication gate runs.
     result = quality_gate(target, tmp_path)
 
-    # Then: absent nonzero nonfailed baselines do not invent a failure threshold.
+    assert result["qualityStatus"] == "ok"
+    assert result["volumeErrors"] == []
+
+
+def test_quality_gate_ignores_post_gate_volume(tmp_path):
+    """post-pivot 核心语义：candidates/articles 后置门禁量低是设计目标，不做数量体检。
+
+    修复前必失败：旧检查拿 candidates=3 与历史基线中位数比较 → below_half_baseline。
+    """
+    target = dt.date(2026, 8, 14)
+    _write_digest(tmp_path, target)
+    _write_report(tmp_path, target, candidates=3, articles=3, fetch={"candidatesRaw": 14})
+
+    result = quality_gate(target, tmp_path)
+
     assert result["qualityStatus"] == "ok"
     assert result["volumeErrors"] == []
 

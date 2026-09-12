@@ -238,7 +238,10 @@ def test_report_explain_and_note_acknowledges_volume(client, tmp_path, monkeypat
     _write_report_file(tmp_path, date, {
         "date": date, "candidates": 5, "articles": 5, "sourcesOk": 1,
         "qualityStatus": "failed",
-        "volumeErrors": [{"metric": "candidates", "error": "below_half_baseline"}],
+        # 2026-09-12 校准后：门禁重算 volume_errors 读 fetch.candidatesRaw（< 5 触发），
+        # 旧 below_half_baseline 相对基线已废除；acknowledge 流以新码验证。
+        "fetch": {"candidatesRaw": 3},
+        "volumeErrors": [{"metric": "candidatesRaw", "error": "below_fetch_floor", "floor": 5}],
     })
     r = client.get(f"/api/reports/{date}")
     assert r.status_code == 200

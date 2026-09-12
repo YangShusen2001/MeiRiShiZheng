@@ -195,11 +195,11 @@ def build_content(target: dt.date, content_dir: Path, *, client: httpx.Client | 
     report: dict = {"date": target.isoformat(), "sourcesOk": 0, "sourceErrors": []}
     candidates = fetch_candidates(target, client=client, report=report)
     digest = build_digest(candidates, target)
-    # v2.1 §3.6 硬约束：candidates 必须填「最终 digest 条数」（quality.py
-    # volume_errors 以最近 5 份报告的此字段为基线），不能填 fetch 原始量——
+    # v2.1 §3.6 硬约束：candidates 必须填「最终 digest 条数」，不能填 fetch 原始量——
     # 簇去重在 build_digest 内部执行，digest 条数可能少于 fetch 出口数；
     # 密度门禁与配额在 clip_content 重写 digest 后，由其把 candidates 刷成
-    # 最终存活数。fetch 原始量落 report["fetch"]["candidatesRaw"] 备查。
+    # 最终存活数。fetch 原始量落 report["fetch"]["candidatesRaw"]——
+    # volume_errors 的源健康下限检查（2026-09-12 校准）读它。
     report["fetch"] = {"candidatesRaw": len(candidates)}
     report["candidates"] = sum(len(sec.items) for sec in digest.sections)
     out_dir = content_dir / target.isoformat()
@@ -545,7 +545,7 @@ def quality_gate(target: dt.date, content_dir: Path) -> dict:
         schema_error_list.extend(artifact_schema_errors)
         if not artifact_schema_errors:
             semantic_error_list.extend(artifact_semantic_errors(artifact))
-    volume_error_list = volume_errors(target, report_path.parent, report)
+    volume_error_list = volume_errors(report)
     report["schemaErrors"] = schema_error_list[:50]
     report["semanticErrors"] = semantic_error_list[:50]
     # 0018：人工标注已知原因（notes 非空）后，数量类错误降级为 degraded 而非 failed，保留记录供追溯
