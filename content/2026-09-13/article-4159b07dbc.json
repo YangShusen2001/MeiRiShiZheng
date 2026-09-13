@@ -1,0 +1,161 @@
+{
+  "id": "4159b07dbc",
+  "date": "2026-09-13",
+  "title": "新华视点丨乡土新活力 振兴看一线",
+  "source": "news.cn",
+  "url": "https://www.news.cn/politics/20260913/56b2eb1a6b8341edbf1eed9f055ef07c/c.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-13T23:56:14+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "&emsp;&emsp;地处黄土高原的甘肃省天水市张家川县，曾面临县域水资源“东丰西欠”的困难。",
+    "&emsp;&emsp;为彻底破解水资源调配难题，补齐供水短板，张家川县科学谋划水利布局，按照“东水西引、四库连通”发展思路，累计投资1.54亿元实施中西部城乡供水水源保障工程，大幅提升县域水源调蓄能力，构建起跨区域、跨流域的水资源优化配置体系。",
+    "&emsp;&emsp;在畅通水源大动脉的基础上，张家川县持续巩固拓展饮水安全成果，稳步推进供水设施提质升级，确保供水工程长效稳定运行。",
+    "&emsp;&emsp;一系列水利惠民工程落地见效，彻底扭转了张家川县旱季缺水、供水不稳的旧貌。当地持续夯实乡村振兴水利根基，让优质安全的“放心水”源源不断惠及千家万户。",
+    "&emsp;&emsp;地处吉林西部的查干湖，半个世纪前曾因水源锐减而濒临干枯。引松工程将松花江水引入湖中，使大湖重获新生。如今，当地依托稳定补水体系，统筹推进控源截污、岸坡加固与湿地修复，一泓碧水再现生态之美。",
+    "&emsp;&emsp;目前，查干湖水域面积保持稳定，湿地功能持续恢复，水质稳定保持Ⅳ类标准，鸟类种类从239种增至276种，鱼类种群不断丰富。昔日盐碱裸露的湖滩，如今已变为水草丰茂、生机盎然的生态乐园。",
+    "&emsp;&emsp;过去，偏远村组山路远、路况差，快递进村慢、农产品出山难。如今，四川渠县引入物流企业无人机末端配送模式，架起一条条低空“空中走廊”，让快递“从天而降”，特产快速出村。",
+    "&emsp;&emsp;目前，渠县已开通48条无人机乡村航线，每天定点飞行，覆盖45个行政村，近6万名村民受益。",
+    "&emsp;&emsp;近年来，宁夏泾源县坚持科技兴农，推动中蜂产业向标准化、智能化、规模化转型升级，让传统养蜂产业跳出粗放养殖模式，迈入智慧迭代、提质增效的全新发展阶段。",
+    "&emsp;&emsp;在泾源众天蜂业标准化示范养殖基地，智能蜂箱和AI超级蜂巢共同构筑起传统蜂业与现代科技融合的全新业态。",
+    "&emsp;&emsp;统筹：李杰 李佳琳 王冰笛",
+    "&emsp;&emsp;记者：郭刚 多蕾 周万鹏 张欣明 杨华 卢鹰"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-13T23:56:14+00:00",
+  "sourceTextHash": "88ef25664c5556ea719a79d3bf7c2bf45d94885644a5b9430910af5e2cc5f402",
+  "aiStatus": "ok",
+  "aiSummary": "文章以甘肃张家川、吉林查干湖、四川渠县、宁夏泾源四地为例，展现乡村振兴一线新活力：水利工程破解缺水难题，生态修复让查干湖重现生机，无人机配送打通乡村物流，科技兴农推动中蜂产业智慧升级，共同夯实振兴根基。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-48-57-term",
+      "paragraphIndex": 1,
+      "start": 48,
+      "end": 57,
+      "text": "东水西引、四库连通",
+      "type": "term",
+      "explanation": "张家川县水利布局思路，指将东部富余水资源西调，并连通四座水库，实现跨区域水资源优化配置。"
+    },
+    {
+      "id": "ai-1-63-88-exam_point",
+      "paragraphIndex": 1,
+      "start": 63,
+      "end": 88,
+      "text": "累计投资1.54亿元实施中西部城乡供水水源保障工程",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-102-122-viewpoint",
+      "paragraphIndex": 1,
+      "start": 102,
+      "end": 122,
+      "text": "构建起跨区域、跨流域的水资源优化配置体系",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-48-62-viewpoint",
+      "paragraphIndex": 3,
+      "start": 48,
+      "end": 62,
+      "text": "当地持续夯实乡村振兴水利根基",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-40-44-term",
+      "paragraphIndex": 4,
+      "start": 40,
+      "end": 44,
+      "text": "引松工程",
+      "type": "term",
+      "explanation": "将松花江水引入查干湖的调水工程，使濒临干枯的湖泊重获新生，恢复生态功能。"
+    },
+    {
+      "id": "ai-4-76-94-exam_point",
+      "paragraphIndex": 4,
+      "start": 76,
+      "end": 94,
+      "text": "统筹推进控源截污、岸坡加固与湿地修复",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-36-46-exam_point",
+      "paragraphIndex": 5,
+      "start": 36,
+      "end": 46,
+      "text": "水质稳定保持Ⅳ类标准",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-47-62-exam_point",
+      "paragraphIndex": 5,
+      "start": 47,
+      "end": 62,
+      "text": "鸟类种类从239种增至276种",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-53-62-term",
+      "paragraphIndex": 6,
+      "start": 53,
+      "end": 62,
+      "text": "无人机末端配送模式",
+      "type": "term",
+      "explanation": "利用无人机从配送点直接飞抵偏远村组，解决快递进村慢、农产品出山难问题的物流方式。"
+    },
+    {
+      "id": "ai-6-63-76-viewpoint",
+      "paragraphIndex": 6,
+      "start": 63,
+      "end": 76,
+      "text": "架起一条条低空“空中走廊”",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-7-17-30-exam_point",
+      "paragraphIndex": 7,
+      "start": 17,
+      "end": 30,
+      "text": "已开通48条无人机乡村航线",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-7-38-55-exam_point",
+      "paragraphIndex": 7,
+      "start": 38,
+      "end": 55,
+      "text": "覆盖45个行政村，近6万名村民受益",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-8-21-27-viewpoint",
+      "paragraphIndex": 8,
+      "start": 21,
+      "end": 27,
+      "text": "坚持科技兴农",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-8-35-46-term",
+      "paragraphIndex": 8,
+      "start": 35,
+      "end": 46,
+      "text": "标准化、智能化、规模化",
+      "type": "term",
+      "explanation": "泾源县中蜂产业转型升级方向，指养殖标准统一、管理智能高效、产业规模扩大。"
+    },
+    {
+      "id": "ai-9-29-40-term",
+      "paragraphIndex": 9,
+      "start": 29,
+      "end": 40,
+      "text": "智能蜂箱和AI超级蜂巢",
+      "type": "term",
+      "explanation": "泾源县中蜂养殖基地使用的现代科技设备，实现传统蜂业与人工智能融合的智慧养殖。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

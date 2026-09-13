@@ -1,0 +1,101 @@
+{
+  "id": "8dcac82802",
+  "date": "2026-09-13",
+  "title": "医患携手追光，华西专家解读淋巴瘤诊疗新进展丨C视频",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83321335.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-13T23:56:48+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "提到淋巴瘤，很多人第一反应就是“绝症”。但随着医学发展，部分患者能获得治愈机会，部分患者可通过规范治疗达到“功能性治愈”，长期维持健康状态。",
+    "9月12日，第六届“追光者”淋巴瘤健步走公益活动在成都举行。活动以“轻松漫步、医患交流、病友互助”为核心，设置专家健康宣教、趣味科普互动、公益健步走等环节，把专业医学科普和心理情感支持带到患者身边。本次活动由成都市抗癌协会主办，成都市抗癌协会淋巴瘤专委会、四川大学华西医院联合承办。",
+    "活动现场，四川大学华西医院头颈肿瘤病房副主任、肿瘤中心淋巴瘤学科带头人邹立群教授，围绕淋巴瘤诊疗新进展，开展健康宣教。“淋巴瘤多见于60岁以上的老年群体，但呈现出年轻化趋势。”她介绍，淋巴瘤发病原因复杂、种类繁多，规范化诊疗和定期随访对淋巴瘤患者很重要。如果不幸被诊断为淋巴瘤，患者也不必过分担忧和悲观。随着医疗技术的进步及治疗经验的不断积累，淋巴瘤患者无论近期疗效还是远期生存都取得了显著改善。",
+    "活动还设置趣味科普互动问答环节，围绕淋巴瘤诊疗知识展开趣味答题互动。华西医院多位医护专家作为点评嘉宾，为参与者提供专业的医学知识和鼓励。问答结束后，医患携手开启“迈向完全缓解”主题健步走，以运动传递康复希望，凝聚医患同心的抗癌力量。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-13T23:56:49+00:00",
+  "sourceTextHash": "92ec40181b4befdb44d87139fe6f2bf3e4633af649a5d0788519ff6948eee361",
+  "aiStatus": "ok",
+  "aiSummary": "第六届“追光者”淋巴瘤健步走公益活动在成都举行，华西医院专家邹立群围绕淋巴瘤诊疗新进展开展健康宣教，指出淋巴瘤呈年轻化趋势，规范化诊疗和定期随访很重要，患者不必过分悲观。活动设置科普互动问答和健步走，医患携手传递康复希望。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-6-19-viewpoint",
+      "paragraphIndex": 0,
+      "start": 6,
+      "end": 19,
+      "text": "很多人第一反应就是“绝症”",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-28-39-exam_point",
+      "paragraphIndex": 0,
+      "start": 28,
+      "end": 39,
+      "text": "部分患者能获得治愈机会",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-54-59-term",
+      "paragraphIndex": 0,
+      "start": 54,
+      "end": 59,
+      "text": "功能性治愈",
+      "type": "term",
+      "explanation": "指经规范治疗后症状缓解、病情长期稳定，虽未必完全清除病灶，但患者可维持接近正常的生活状态。"
+    },
+    {
+      "id": "ai-1-6-24-exam_point",
+      "paragraphIndex": 1,
+      "start": 6,
+      "end": 24,
+      "text": "第六届“追光者”淋巴瘤健步走公益活动",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-104-113-exam_point",
+      "paragraphIndex": 1,
+      "start": 104,
+      "end": 113,
+      "text": "成都市抗癌协会主办",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-60-87-viewpoint",
+      "paragraphIndex": 2,
+      "start": 60,
+      "end": 87,
+      "text": "淋巴瘤多见于60岁以上的老年群体，但呈现出年轻化趋势。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-107-126-exam_point",
+      "paragraphIndex": 2,
+      "start": 107,
+      "end": 126,
+      "text": "规范化诊疗和定期随访对淋巴瘤患者很重要",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-74-93-exam_point",
+      "paragraphIndex": 3,
+      "start": 74,
+      "end": 93,
+      "text": "医患携手开启“迈向完全缓解”主题健步走",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-94-115-viewpoint",
+      "paragraphIndex": 3,
+      "start": 94,
+      "end": 115,
+      "text": "以运动传递康复希望，凝聚医患同心的抗癌力量",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

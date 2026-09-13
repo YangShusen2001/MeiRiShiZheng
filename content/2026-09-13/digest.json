@@ -1,0 +1,124 @@
+{
+  "date": "2026-09-13",
+  "title": "每日日报 · 2026-09-13（周日）",
+  "sections": [
+    {
+      "id": "essay",
+      "title": "申论精读",
+      "items": [
+        {
+          "title": "习近平出席金砖国家领导人第十八次会晤第二阶段会议并发表重要讲话",
+          "date": "09-13",
+          "sourceUrl": "https://www.qstheory.cn/20260913/b08352093ba2409cb009cff74c1b4683/c.html"
+        },
+        {
+          "title": "讲话全文",
+          "date": "09-13",
+          "sourceUrl": "https://www.qstheory.cn/20260913/16350a0dd3e64814bcf03e162c5baf84/c.html"
+        },
+        {
+          "title": "乡土新活力 振兴看一线",
+          "date": "09-13",
+          "sourceUrl": "https://www.news.cn/politics/20260913/56b2eb1a6b8341edbf1eed9f055ef07c/c.html"
+        }
+      ]
+    },
+    {
+      "id": "guangdong",
+      "title": "广东要闻动态",
+      "items": [
+        {
+          "title": "2026年广东省科普讲解大赛总决赛圆满收官",
+          "date": "09-13",
+          "sourceUrl": "https://news.dayoo.com/guangdong/202609/13/139996_55003086.htm"
+        },
+        {
+          "title": "习近平出席金砖国家领导人第十八次会晤第一阶段会议并发表重要讲话",
+          "date": "09-13",
+          "sourceUrl": "https://www.gd.gov.cn/gdywdt/xwdt/content/post_4954944.html",
+          "summary": "当地时间9月12日下午，国家主席习近平在新德里出席金砖国家领导人第十八次会晤第一阶段会议。"
+        },
+        {
+          "title": "习近平会见印度总理莫迪",
+          "date": "09-13",
+          "sourceUrl": "https://www.gd.gov.cn/gdywdt/xwdt/content/post_4954946.html",
+          "summary": "当地时间9月12日下午，国家主席习近平在印度新德里出席金砖国家领导人第十八次会晤期间会见印度总理莫迪。"
+        },
+        {
+          "title": "习近平抵达新德里出席金砖国家领导人第十八次会晤",
+          "date": "09-13",
+          "sourceUrl": "https://www.gd.gov.cn/gdywdt/xwdt/content/post_4954948.html",
+          "summary": "当地时间9月12日中午，国家主席习近平乘专机抵达新德里，应印度总理莫迪邀请，出席金砖国家领导人第十八次会晤。"
+        }
+      ]
+    },
+    {
+      "id": "sichuan",
+      "title": "四川要闻动态",
+      "items": [
+        {
+          "title": "医患携手追光，华西专家解读淋巴瘤诊疗新进展丨C视频",
+          "date": "09-13",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83321335.html"
+        },
+        {
+          "title": "流量变留量 绵阳北川石椅羌寨的振兴答卷丨天府石榴情",
+          "date": "09-13",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83321305.html"
+        },
+        {
+          "title": "AI岗位翻倍、新手村收窄：这届年轻人想进游戏圈，光会“用AI”已经不够了",
+          "date": "09-13",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83321304.html"
+        },
+        {
+          "title": "全省缺口5万余人！四川家居收纳整理考证通道全面开启",
+          "date": "09-13",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83321291.html"
+        },
+        {
+          "title": "便血3年以为是痔疮，24岁成都男子确诊肠多发癌！医生提醒丨健康科代表",
+          "date": "09-13",
+          "sourceUrl": "https://sichuan.scol.com.cn/ggxw/202609/83321290.html"
+        }
+      ]
+    },
+    {
+      "id": "jiangsu",
+      "title": "江苏要闻动态",
+      "items": [
+        {
+          "title": "2026（第二十六届）中国风险投资论坛在南京举办 郝明金出席并致辞",
+          "date": "09-13",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/9/13/art_84322_11829106.html"
+        },
+        {
+          "title": "信长星会见浦发银行董事长张为忠",
+          "date": "09-13",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/9/13/art_84322_11829105.html"
+        },
+        {
+          "title": "2026年中国—中东欧国家创新合作大会在南京闭幕",
+          "date": "09-13",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/9/13/art_84322_11829111.html"
+        },
+        {
+          "title": "第十四届“创业江苏”科技创业大赛收官，60个项目获奖 一片“土壤”与一群“种子”的相互成就",
+          "date": "09-13",
+          "sourceUrl": "http://www.jiangsu.gov.cn/art/2026/9/13/art_84322_11829131.html"
+        }
+      ]
+    },
+    {
+      "id": "south-review",
+      "title": "南方时评（南方网·广东申论素材）",
+      "items": [
+        {
+          "title": "头条",
+          "date": "09-13",
+          "sourceUrl": "https://opinion.southcn.com/node_87fa4020d8"
+        }
+      ]
+    }
+  ]
+}

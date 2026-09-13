@@ -1,0 +1,85 @@
+{
+  "id": "a31d9978de",
+  "date": "2026-09-13",
+  "title": "习近平抵达新德里出席金砖国家领导人第十八次会晤&nbsp;&nbsp;广东省人民政府门户网站",
+  "source": "广东省人民政府网",
+  "url": "https://www.gd.gov.cn/gdywdt/xwdt/content/post_4954948.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-13T23:56:43+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "当地时间9月12日中午，国家主席习近平乘专机抵达新德里，应印度总理莫迪邀请，出席金砖国家领导人第十八次会晤。习近平抵达新德里帕拉姆空军基地时，印度政府高级官员热情迎接。图片来源：新华网",
+    "当地时间9月12日中午，国家主席习近平乘专机抵达新德里，应印度总理莫迪邀请，出席金砖国家领导人第十八次会晤。",
+    "习近平抵达新德里帕拉姆空军基地时，印度政府高级官员热情迎接。礼兵分列红毯两侧致敬。",
+    "习近平乘车从机场赴下榻饭店途中，当地华侨华人和中资企业代表挥舞中印两国国旗，热烈欢迎习近平到访。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-13T23:56:44+00:00",
+  "sourceTextHash": "d8ea662244dac66505f347fada833461e88d25de0c4d009bc13e501f21691a7b",
+  "aiStatus": "ok",
+  "aiSummary": "当地时间9月12日中午，国家主席习近平乘专机抵达新德里，应印度总理莫迪邀请出席金砖国家领导人第十八次会晤。印度政府高级官员到帕拉姆空军基地热情迎接，礼兵分列红毯两侧致敬。赴下榻饭店途中，当地华侨华人和中资企业代表挥舞中印两国国旗热烈欢迎。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-28-53-exam_point",
+      "paragraphIndex": 0,
+      "start": 28,
+      "end": 53,
+      "text": "应印度总理莫迪邀请，出席金砖国家领导人第十八次会晤",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-12-27-viewpoint",
+      "paragraphIndex": 0,
+      "start": 12,
+      "end": 27,
+      "text": "国家主席习近平乘专机抵达新德里",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-40-53-term",
+      "paragraphIndex": 1,
+      "start": 40,
+      "end": 53,
+      "text": "金砖国家领导人第十八次会晤",
+      "type": "term",
+      "explanation": "金砖国家领导人第十八次会晤是金砖国家合作机制的重要会议，成员国领导人就合作与发展等议题进行讨论。"
+    },
+    {
+      "id": "ai-2-17-29-exam_point",
+      "paragraphIndex": 2,
+      "start": 17,
+      "end": 29,
+      "text": "印度政府高级官员热情迎接",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-30-40-exam_point",
+      "paragraphIndex": 2,
+      "start": 30,
+      "end": 40,
+      "text": "礼兵分列红毯两侧致敬",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-16-37-exam_point",
+      "paragraphIndex": 3,
+      "start": 16,
+      "end": 37,
+      "text": "当地华侨华人和中资企业代表挥舞中印两国国旗",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-38-47-viewpoint",
+      "paragraphIndex": 3,
+      "start": 38,
+      "end": 47,
+      "text": "热烈欢迎习近平到访",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

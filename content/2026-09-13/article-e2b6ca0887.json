@@ -1,0 +1,77 @@
+{
+  "id": "e2b6ca0887",
+  "date": "2026-09-13",
+  "title": "江苏省人民政府 要闻关注 信长星会见浦发银行董事长张为忠",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/13/art_84322_11829105.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-13T23:57:23+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月11日，省委书记信长星在南京会见浦发银行董事长张为忠。",
+    "信长星对张为忠一行来江苏考察交流、对接合作表示欢迎。他说，当前，长三角一体化发展战略深入实施，上海（长三角）国际科技创新中心加快建设，对创新链、产业链、资金链、人才链深度融合提出了更高要求。江苏正在深入学习贯彻习近平总书记关于金融工作的重要论述，加快推动金融高质量发展，提升金融服务实体经济质效，促进经济持续向新向优向好发展。我们愿与浦发银行一道，共同做好金融“五篇大文章”，努力实现互利共赢，更好服务国家发展大局。",
+    "张为忠表示，浦发银行将发挥自身优势，聚焦江苏发展所需，不断拓展合作领域，提供更多优质产品和服务，为江苏高质量发展贡献金融力量。",
+    "省领导马欣、陈忠伟，浦发银行副行长康杰、张健参加会见。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-13T23:57:24+00:00",
+  "sourceTextHash": "99194d145316623ee6f60023310ead89d4bc588c6f521d29a25c908ef467b3dd",
+  "aiStatus": "ok",
+  "aiSummary": "9月11日，江苏省委书记信长星在南京会见浦发银行董事长张为忠。信长星表示，江苏正推动金融高质量发展，愿与浦发银行共同做好金融“五篇大文章”，服务国家发展大局。张为忠表示将聚焦江苏所需，拓展合作，为江苏高质量发展贡献金融力量。省领导马欣、陈忠伟等参加会见。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-123-134-exam_point",
+      "paragraphIndex": 1,
+      "start": 123,
+      "end": 134,
+      "text": "加快推动金融高质量发展",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-178-187-term",
+      "paragraphIndex": 1,
+      "start": 178,
+      "end": 187,
+      "text": "金融“五篇大文章”",
+      "type": "term",
+      "explanation": "指科技金融、绿色金融、普惠金融、养老金融、数字金融五大重点领域，是当前金融工作的核心方向。"
+    },
+    {
+      "id": "ai-1-163-207-viewpoint",
+      "paragraphIndex": 1,
+      "start": 163,
+      "end": 207,
+      "text": "我们愿与浦发银行一道，共同做好金融“五篇大文章”，努力实现互利共赢，更好服务国家发展大局",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-32-46-exam_point",
+      "paragraphIndex": 1,
+      "start": 32,
+      "end": 46,
+      "text": "长三角一体化发展战略深入实施",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-135-147-exam_point",
+      "paragraphIndex": 1,
+      "start": 135,
+      "end": 147,
+      "text": "提升金融服务实体经济质效",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-48-62-viewpoint",
+      "paragraphIndex": 2,
+      "start": 48,
+      "end": 62,
+      "text": "为江苏高质量发展贡献金融力量",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}
