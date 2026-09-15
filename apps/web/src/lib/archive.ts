@@ -16,6 +16,12 @@ export interface ArchiveItem {
   importance: ArchiveImportance;
   topic: string;
   gist: string;
+  /**
+   * 关键数字（画布 3:382）：`·` 分隔的量化指标名，如「参保率 95% 以上 · 人均预期寿命 80 岁」。
+   * 由 scripts/curate-archive.py 搭同一次 AI 调用产出；空串 = 该文件没有可量化指标。
+   * 可选：2026-09-15 之前产出的档案没有这个字段，前端条件渲染（拿不到就不渲染）。
+   */
+  figures?: string;
   hasBody: boolean;
 }
 

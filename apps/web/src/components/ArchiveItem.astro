@@ -3,9 +3,8 @@
 // 顶行 = 来源标签（h24 胶囊）与发布日期两端对齐；标题 20/26 衬线；要点 14/24；
 // 底行 = 左「查看官方原文」+ 右「加入收藏」。
 //
-// ⚠️ 画布上还有一行 12px accent 的「关键数字」（如「关键数字：天然气产量目标 · 储气能力占消费量比重」），
-//    这里**不渲染** —— archive.json 里没有对应字段。拿不到就不编（与收藏卡「摘要」「出处说明」同一条原则），
-//    等 pipeline 产出该字段再补。
+// 关键数字（画布 3:382）：政策要点与底行之间那一行 12px accent 文本。
+// 数据由 scripts/curate-archive.py 搭同一次 AI 调用产出；老档案没有该字段 → 条件渲染，不补空行。
 // 「加入收藏」：`favoriteKindSchema` 已于 2026-09-15 补上 policy，这里**真的接上了**
 // （api.addFavorite / removeFavorite）。页面加载时拉一次收藏列表建索引、之后本地查表 ——
 // 政策档案一屏有十几张卡，不做「每卡一次请求」。
@@ -24,6 +23,7 @@ const { it } = Astro.props;
   </div>
   <h3 class="arc-card__title">{it.title}</h3>
   {it.gist && <p class="arc-card__gist">{it.gist}</p>}
+  {it.figures && <p class="arc-card__figures">关键数字：{it.figures}</p>}
   <div class="arc-card__foot">
     <a class="arc-card__link" href={it.url} target="_blank" rel="noopener">查看官方原文</a>
     <button class="arc-card__fav" type="button" data-url={it.url} data-title={it.title}>加入收藏</button>
@@ -137,6 +137,13 @@ const { it } = Astro.props;
     font-size: var(--font-meta);
     line-height: var(--line-ui);
     color: var(--sub);
+  }
+  /* 关键数字（画布 3:382）：12px · accent 色。内容已在管道侧收敛到「最多 3 件 / 整行 ≤60 字」，
+     所以这里不写 line-clamp —— 正常输入不该被截断，截了说明管道那边漏了。 */
+  .arc-card__figures {
+    font-size: var(--font-caption);
+    line-height: var(--line-ui);
+    color: var(--accent);
   }
   .arc-card__foot {
     display: flex;
