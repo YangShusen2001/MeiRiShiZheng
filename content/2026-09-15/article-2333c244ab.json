@@ -1,0 +1,23 @@
+{
+  "id": "2333c244ab",
+  "date": "2026-09-15",
+  "title": "江苏省人民政府 要闻关注 上市公司考察团来苏对接交流",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/15/art_84322_11829840.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-15T23:58:09+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月11日下午，省长刘小涛在南京会见由长三角、粤港澳大湾区16家上市公司组成的企业考察团。",
+    "刘小涛对企业考察团表示欢迎，并与福耀集团创始人曹德旺等企业家深入交流。省有关部门单位和设区市就企业家关心的问题诉求进行解答。企业家们表示，江苏产业链配套完善、创新场景丰富、科教资源汇聚、营商环境优良，是企业深耕布局、做大做强的热土。",
+    "刘小涛说，希望企业家们以本次交流考察为契机，深挖产业协同与投资合作机遇，持续加大项目、技术、资本等优质资源在苏布局力度，实现更高水平优势互补、互利共赢。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-15T23:58:09+00:00",
+  "sourceTextHash": "7fd16c071d0e9d0ede0122929ef17bc119a49cd7c5141c6491926494f8aaed9b",
+  "aiStatus": "error",
+  "aiAnnotations": [],
+  "aiError": "ai_provider:request_failed"
+}
