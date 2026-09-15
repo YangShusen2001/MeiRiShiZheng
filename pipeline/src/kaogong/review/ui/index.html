@@ -135,10 +135,11 @@
   .kg-panel__t { margin: 0; font-family: var(--kg-font-family-serif); font-size: var(--kg-font-title-s); font-weight: 700; color: var(--kg-ink); }
   .kg-panel__meta { font-size: var(--kg-font-caption); color: var(--kg-mut); }
   .kg-panel__acts { display: flex; flex-wrap: wrap; gap: 10px; }
-  /* 面板按钮（画布 3:1387–3:1391）：h36 · pad 0 16 · 圆角 8，三种底（品牌 / success / danger 描边） */
-  .kg-act { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: var(--kg-radius-sm); border: 0; font-family: inherit; font-size: var(--kg-font-caption); font-weight: 500; cursor: pointer; }
-  .kg-act--brand { background: var(--kg-brand); color: var(--kg-panel-strong); }
-  .kg-act--ok { background: var(--kg-success); color: var(--kg-panel-strong); }
+  /* 面板按钮（画布 3:1387–3:1391）：h36 · pad 0 16 · 圆角 8。
+     默认态是描边（次要动作如「刷新」「应用」），三种实底/危险变体见下 */
+  .kg-act { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: var(--kg-radius-sm); border: 1px solid var(--kg-line); background: var(--kg-surface); color: var(--kg-sub); font-family: inherit; font-size: var(--kg-font-caption); font-weight: 500; cursor: pointer; }
+  .kg-act--brand { border: 0; background: var(--kg-brand); color: var(--kg-panel-strong); }
+  .kg-act--ok { border: 0; background: var(--kg-success); color: var(--kg-panel-strong); }
   .kg-act--danger { background: transparent; border: 1px solid var(--kg-danger); color: var(--kg-danger); }
   .kg-act[disabled] { opacity: 0.55; cursor: default; }
   /* 判定行（画布 3:1395）：pad 14 · 圆角 10 · 底 surface-alt · gap 6 */
@@ -159,6 +160,43 @@
   .kg-diff { margin-top: 12px; padding: 14px; border-radius: var(--kg-radius-md); background: var(--kg-brand-soft); }
   .kg-diff__t { font-size: var(--kg-font-caption); font-weight: 500; color: var(--kg-brand-ink); }
   .kg-diff__row { display: flex; gap: 8px; margin-top: 8px; font-size: var(--kg-font-caption); color: var(--kg-brand-ink); }
+
+  /* ===== 14 屏：统计与配置（画布 3:1422）===== */
+  .kg-view__stack { display: flex; flex-direction: column; gap: 16px; }
+  /* 漏斗统计网格（3:1437）：wrap gap 16，卡 316 定宽 · pad 16 · gap 6 */
+  .kg-stats { display: flex; flex-wrap: wrap; gap: 16px; }
+  .kg-stat { width: 316px; max-width: 100%; display: flex; flex-direction: column; gap: 6px; padding: 16px; border-radius: var(--kg-radius-lg); background: var(--kg-surface); border: 1px solid var(--kg-line); }
+  /* 两张强调卡的底（进池 = brand-soft / 精选 = panel-raised） */
+  .kg-stat--pool { background: var(--kg-brand-soft); border: 0; }
+  .kg-stat--pick { background: var(--kg-panel-raised); border: 0; }
+  .kg-stat__n { font-family: var(--kg-font-family-serif); font-size: var(--kg-font-title-m); font-weight: 700; line-height: var(--kg-line-tight); color: var(--kg-ink); }
+  .kg-stat__l { font-size: var(--kg-font-caption); color: var(--kg-mut); }
+  .kg-stat--pool .kg-stat__n, .kg-stat--pool .kg-stat__l { color: var(--kg-brand-ink); }
+  .kg-stat--pick .kg-stat__n { color: var(--kg-panel-strong); }
+  .kg-stat--pick .kg-stat__l { color: var(--kg-panel-small); }
+  /* 卡内小标题（画布是 14 Medium，不是衬线） */
+  .kg-panel__t--s { font-family: inherit; font-size: var(--kg-font-meta); font-weight: 500; }
+  /* 门禁行（3:1454）：标签 h22 胶囊 + 说明 12；软底用标注绿，次要项用 sunken */
+  .kg-gate { display: flex; align-items: flex-start; gap: 10px; }
+  .kg-gate + .kg-gate { margin-top: 10px; }
+  .kg-gate__tag { flex: 0 0 auto; display: inline-flex; align-items: center; height: 22px; padding: 0 10px; border-radius: var(--kg-radius-full); font-size: var(--kg-font-caption); font-weight: 500; background: var(--kg-highlight-viewpoint); color: var(--kg-ink); }
+  .kg-gate__tag--soft { background: var(--kg-sunken); color: var(--kg-sub); }
+  .kg-gate__d { flex: 1 1 auto; min-width: 0; font-size: var(--kg-font-caption); color: var(--kg-sub); }
+  /* 邀请码行（3:1471）：码 240 定宽 · 剩余 120 · 总量 120 · 创建时间 */
+  .kg-inv { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--kg-line-soft); }
+  .kg-inv:last-child { border-bottom: 0; }
+  .kg-inv__code { flex: 0 0 240px; font-size: var(--kg-font-meta); font-weight: 500; color: var(--kg-ink); }
+  .kg-inv__left { flex: 0 0 120px; font-size: var(--kg-font-caption); color: var(--kg-success); }
+  .kg-inv__left--low { color: var(--kg-warning); }
+  .kg-inv__total { flex: 0 0 120px; font-size: var(--kg-font-caption); color: var(--kg-mut); }
+  .kg-inv__at { font-size: var(--kg-font-caption); color: var(--kg-mut); }
+  /* 视图内的表单件 */
+  .kg-panel__acts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .kg-field { display: flex; flex-direction: column; gap: 6px; font-size: var(--kg-font-caption); color: var(--kg-sub); }
+  .kg-textarea { width: 100%; padding: 8px; border: 1px solid var(--kg-line); border-radius: var(--kg-radius-sm); background: var(--kg-surface-alt); font-family: ui-monospace, monospace; font-size: var(--kg-font-caption); color: var(--kg-ink); resize: vertical; }
+  .kg-select { height: 32px; padding: 0 8px; border: 1px solid var(--kg-line); border-radius: var(--kg-radius-sm); background: var(--kg-surface-alt); font-family: inherit; font-size: var(--kg-font-caption); color: var(--kg-ink); }
+  .kg-checks { display: flex; flex-wrap: wrap; gap: 16px; }
+  .kg-check { display: flex; align-items: center; gap: 6px; font-size: var(--kg-font-caption); color: var(--kg-sub); }
 
   /* 画布的后台是**全宽**布局（1440 边到边，只留 24 内边距）—— 取消 Tabler 容器的居中限宽与默认外边距 */
   .page-wrapper { padding: 0; }
@@ -198,67 +236,9 @@
       <button class="kg-btn" id="fetch">抓取</button>
       <button class="kg-btn" id="reanalyze">补跑 AI</button>
         <button class="kg-btn kg-btn--primary" id="review-agent">AI 审核</button>
-        <div class="nav-dropdown" id="drop-fonts">
-          <button class="kg-btn" id="fonts">字体</button>
-          <div class="dropdown-panel font-panel" id="font-panel">
-            <h3>字体管理</h3>
-            <div class="row">
-              <input type="file" id="font-file" accept=".ttf,.otf,.woff2">
-              <button class="btn btn-primary" id="font-upload">上传并子集化</button>
-            </div>
-            <div class="row">
-              <label>Logo 字体<select id="font-logo"></select></label>
-              <label>导航字体<select id="font-nav"></select></label>
-            </div>
-            <div class="font-preview">
-              <div>Logo 预览：<span class="fp-logo" id="fp-logo">每日时政</span></div>
-              <div>导航预览：<span class="fp-nav" id="fp-nav">首页 搜索 收藏 每日一练 登录</span></div>
-            </div>
-            <div class="row">
-              <button class="btn btn-outline-secondary" id="font-apply">应用（重新构建发布后生效）</button>
-            </div>
-            <div id="font-msg"></div>
-          </div>
-        </div>
-        <div class="nav-dropdown" id="drop-config">
-          <button class="kg-btn" id="config">配置</button>
-          <div class="dropdown-panel config-panel" id="config-panel">
-            <h3>站点配置（新闻源 / 内容筛选 / 开关）</h3>
-            <label>新闻源（JSON，含 name/slot/page/href_re/mode/date_fn/limit 等）
-              <textarea id="cfg-sources" rows="10"></textarea>
-            </label>
-            <label>内容筛选关键词（每行一个）
-              <textarea id="cfg-noise" rows="4"></textarea>
-            </label>
-            <div class="row">
-              <label class="check"><input type="checkbox" id="cfg-carousel"> 首页轮播</label>
-              <label class="check"><input type="checkbox" id="cfg-banner"> AI 今日速览</label>
-            </div>
-            <div class="row">
-              <button class="btn btn-primary" id="cfg-save">保存配置</button>
-            </div>
-            <div id="cfg-msg"></div>
-          </div>
-        </div>
-        <div class="nav-dropdown" id="drop-stats">
-          <button class="kg-btn" id="stats">统计</button>
-          <div class="dropdown-panel config-panel" id="stats-panel">
-            <h3>数据统计</h3>
-            <div id="stats-body" style="max-height:420px;overflow:auto"></div>
-          </div>
-        </div>
-        <div class="nav-dropdown" id="drop-invite">
-          <button class="kg-btn" id="invite">邀请码</button>
-          <div class="dropdown-panel config-panel" id="invite-panel">
-            <h3>AI 解析邀请码（共享码，每码 100 次）</h3>
-            <div class="row">
-              <button class="btn btn-primary" id="invite-gen">生成新邀请码</button>
-              <button class="btn btn-outline-secondary" id="invite-refresh">刷新</button>
-            </div>
-            <div id="invite-body" style="max-height:320px;overflow:auto;margin-top:12px"></div>
-            <div id="invite-msg" style="font-size:13px;color:var(--tblr-muted);margin-top:8px"></div>
-          </div>
-        </div>
+        <button class="kg-btn" id="config">统计与配置</button>
+        <!-- 统计 / 邀请码 / 字体 / 站点配置 已并入「统计与配置」全屏视图（画布 14 / 3:1422）
+             —— 画布顶栏只留一个入口，四份内容收拢进一个视图，入口收成上面那颗「统计与配置」 -->
       <button class="kg-btn" id="preview">预览</button>
       <button class="kg-btn kg-btn--go" id="publish">发布到 CF</button>
     </div>
@@ -298,6 +278,100 @@
               <div class="kg-card__line"></div>
               <div id="review-body"></div>
               <div id="review-diff"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 14 屏：统计与配置（画布 3:1422）—— 顶栏「统计与配置」打开的全屏视图。
+             把原来散在四个 hover 下拉里的内容（统计 / 邀请码 / 站点配置 / 字体）收拢进来。
+             ⚠️ 原有 id 全部保留 —— stats-body / invite-body / invite-gen / invite-refresh / invite-msg /
+             font-file / font-upload / font-logo / font-nav / font-apply / font-msg /
+             cfg-sources / cfg-noise / cfg-carousel / cfg-banner / cfg-save / cfg-msg，JS 全靠它们。 -->
+        <section class="kg-view" id="kg-view-config" hidden>
+          <div class="kg-view__stack">
+            <!-- 漏斗统计网格（画布 3:1437）：wrap · gap 16 · 卡 316 定宽。内容由 loadStats 按真实字段填 -->
+            <div class="kg-stats" id="kg-stats"></div>
+
+            <!-- 质量门禁卡（画布 3:1450） -->
+            <div class="kg-card" id="kg-gate-card" hidden>
+              <div class="kg-panel">
+                <div class="kg-panel__head">
+                  <h2 class="kg-panel__t kg-panel__t--s">质量门禁 · <span id="kg-gate-date"></span></h2>
+                  <span class="kg-panel__meta" id="kg-gate-status"></span>
+                </div>
+                <div id="kg-gate-rows"></div>
+              </div>
+            </div>
+
+            <!-- 邀请码卡（画布 3:1466） -->
+            <div class="kg-card">
+              <div class="kg-panel">
+                <div class="kg-panel__head">
+                  <h2 class="kg-panel__t kg-panel__t--s">AI 解析邀请码（共享码，每码 100 次）</h2>
+                  <span class="kg-panel__acts">
+                    <button class="kg-act kg-act--brand" type="button" id="invite-gen">生成新邀请码</button>
+                    <button class="kg-act" type="button" id="invite-refresh">刷新</button>
+                  </span>
+                </div>
+                <div id="invite-body"></div>
+                <p class="kg-panel__meta" id="invite-msg"></p>
+              </div>
+            </div>
+
+            <!-- 历史趋势与逐日表格（画布没画，但这块「一眼看波动」的用途不可替代，留着） -->
+            <div class="kg-card">
+              <div class="kg-panel">
+                <div class="kg-panel__head">
+                  <h2 class="kg-panel__t kg-panel__t--s">历史趋势</h2>
+                </div>
+                <div id="stats-body"></div>
+              </div>
+            </div>
+
+            <!-- 站点配置（画布没画：这是每天改新闻源与开关的地方） -->
+            <div class="kg-card">
+              <div class="kg-panel">
+                <div class="kg-panel__head">
+                  <h2 class="kg-panel__t kg-panel__t--s">站点配置（新闻源 / 内容筛选 / 开关）</h2>
+                </div>
+                <label class="kg-field">新闻源（JSON，含 name/slot/page/href_re/mode/date_fn/limit 等）
+                  <textarea class="kg-textarea" id="cfg-sources" rows="10"></textarea>
+                </label>
+                <label class="kg-field">内容筛选关键词（每行一个）
+                  <textarea class="kg-textarea" id="cfg-noise" rows="4"></textarea>
+                </label>
+                <div class="kg-checks">
+                  <label class="kg-check"><input type="checkbox" id="cfg-carousel"> 首页轮播</label>
+                  <label class="kg-check"><input type="checkbox" id="cfg-banner"> AI 今日速览</label>
+                </div>
+                <div class="kg-panel__acts">
+                  <button class="kg-act kg-act--brand" type="button" id="cfg-save">保存配置</button>
+                </div>
+                <p class="kg-panel__meta" id="cfg-msg"></p>
+              </div>
+            </div>
+
+            <!-- 字体（画布没画；站名已改衬线，这里保留为备份入口） -->
+            <div class="kg-card">
+              <div class="kg-panel">
+                <div class="kg-panel__head">
+                  <h2 class="kg-panel__t kg-panel__t--s">字体管理</h2>
+                  <span class="kg-panel__acts">
+                    <input type="file" id="font-file" accept=".ttf,.otf,.woff2">
+                    <button class="kg-act kg-act--brand" type="button" id="font-upload">上传并子集化</button>
+                    <button class="kg-act" type="button" id="font-apply">应用（重新构建发布后生效）</button>
+                  </span>
+                </div>
+                <div class="kg-checks">
+                  <label class="kg-field">Logo 字体<select class="kg-select" id="font-logo"></select></label>
+                  <label class="kg-field">导航字体<select class="kg-select" id="font-nav"></select></label>
+                </div>
+                <div class="font-preview">
+                  <div>Logo 预览：<span class="fp-logo" id="fp-logo">每日时政</span></div>
+                  <div>导航预览：<span class="fp-nav" id="fp-nav">首页 搜索 收藏 每日一练 登录</span></div>
+                </div>
+                <p class="kg-panel__meta" id="font-msg"></p>
+              </div>
             </div>
           </div>
         </section>
@@ -800,6 +874,9 @@ async function loadFonts() {
 // 悬停下拉：首次悬停时懒加载数据（配合 CSS :hover 显示/收回）
 function lazyOnHover(wrapperId, loader) {
   const wrapper = document.getElementById(wrapperId);
+  // 字体 / 配置 / 统计 / 邀请码这四个下拉已并入「统计与配置」全屏视图（画布 14 / 3:1422），
+  // 包裹层不存在了 → 静默跳过；改为在视图打开时按需加载（见 $("config").onclick）。
+  if (!wrapper) return;
   let loaded = false;
   wrapper.addEventListener("mouseenter", () => {
     if (!loaded) { loaded = true; loader(); }
@@ -892,6 +969,45 @@ async function loadStats() {
   }).join("");
   $("stats-body").innerHTML = svg
     + `<table class="table table-sm table-vcenter"><thead><tr><th>日期</th><th>候选</th><th>文章</th><th>AI成功</th><th>AI失败</th><th>门禁</th></tr></thead><tbody>${rows || '<tr><td colspan="6">暂无报告</td></tr>'}</tbody></table>`;
+
+  // 漏斗统计卡（画布 3:1437）：**只用真有的字段** ——
+  // 画布上画了四张（候选 / 剪藏 / 进池 / 今日精选），但接口里没有「剪藏成功数」与「今日精选数」，
+  // 所以这里给三张真数据（候选 / 进池 / AI 成功），而不是编两个数字出来充数。
+  const last = all[all.length - 1];
+  if (!last) {
+    $("kg-stats").innerHTML = '<p class="kg-panel__meta">暂无统计数据</p>';
+    $("kg-gate-card").hidden = true;
+    return;
+  }
+  $("kg-stats").innerHTML =
+    `<div class="kg-stat">
+      <span class="kg-stat__n">${last.candidates ?? "-"}</span>
+      <span class="kg-stat__l">候选抓取（${esc(last.date)}）</span>
+    </div>
+    <div class="kg-stat kg-stat--pool">
+      <span class="kg-stat__n">${last.articles ?? "-"}</span>
+      <span class="kg-stat__l">进池（当日已发布）</span>
+    </div>
+    <div class="kg-stat kg-stat--pick">
+      <span class="kg-stat__n">${last.aiOk ?? "-"}</span>
+      <span class="kg-stat__l">AI 成功 · 失败 ${last.aiError ?? 0}</span>
+    </div>`;
+
+  // 质量门禁卡（画布 3:1450）：同样只给真有的口径。
+  // 门禁的细分项（schema / volume / curation）接口里只有汇总状态，所以这里给汇总 + 口径数字，
+  // 逐日明细在下面的表格里 —— 不编三行看起来很像但其实是假的子项。
+  const st = last.qualityStatus || "-";
+  $("kg-gate-card").hidden = false;
+  $("kg-gate-date").textContent = last.date;
+  const stEl = $("kg-gate-status");
+  stEl.textContent = `qualityStatus: ${st}`;
+  stEl.style.color = st === "ok" ? tok("success") : st === "degraded" ? tok("warning") : tok("danger");
+  const soft = st !== "ok";
+  $("kg-gate-rows").innerHTML =
+    `<div class="kg-gate"><span class="kg-gate__tag${soft ? " kg-gate__tag--soft" : ""}">门禁</span>` +
+    `<span class="kg-gate__d">本日门禁 ${esc(st)}${st === "ok" ? " —— 可发布" : " —— 发布会被拦截，先处理失败项"}</span></div>` +
+    `<div class="kg-gate"><span class="kg-gate__tag kg-gate__tag--soft">口径</span>` +
+    `<span class="kg-gate__d">候选 ${last.candidates ?? "-"} · 已发布 ${last.articles ?? "-"} · AI 成功 ${last.aiOk ?? "-"} / 失败 ${last.aiError ?? 0}</span></div>`;
 }
 lazyOnHover("drop-stats", loadStats);
 
@@ -900,11 +1016,19 @@ async function loadInvites() {
   try {
     const r = await j("/api/invite-codes");
     const rows = r.data || [];
+    // 画布 3:1471 的行式：码 240 定宽 · 剩余 · 总量 · 创建时间（原来是 Tabler 表格）
+    // 「剩余」在过半时就转 warning 色，扫一眼就知道哪个码快用完了
     $("invite-body").innerHTML = rows.length
-      ? '<table class="table table-sm table-vcenter"><thead><tr><th>邀请码</th><th>剩余</th><th>总量</th><th>创建时间</th></tr></thead><tbody>'
-        + rows.slice().reverse().map((c) => `<tr><td><code>${esc(c.code)}</code></td><td>${c.remaining}</td><td>${c.total}</td><td>${new Date(c.createdAt).toLocaleString()}</td></tr>`).join("")
-        + '</tbody></table>'
-      : '<p style="font-size:13px;color:var(--tblr-muted)">暂无邀请码</p>';
+      ? rows.slice().reverse().map((c) => {
+          const low = c.total > 0 && c.remaining <= c.total * 0.5;
+          return `<div class="kg-inv">
+            <span class="kg-inv__code">${esc(c.code)}</span>
+            <span class="kg-inv__left${low ? " kg-inv__left--low" : ""}">剩余 ${c.remaining}</span>
+            <span class="kg-inv__total">总量 ${c.total}</span>
+            <span class="kg-inv__at">${new Date(c.createdAt).toLocaleString()}</span>
+          </div>`;
+        }).join("")
+      : '<p class="kg-panel__meta">暂无邀请码</p>';
     $("invite-msg").textContent = "";
   } catch (e) {
     $("invite-body").innerHTML = "";
@@ -1065,17 +1189,33 @@ $("refresh").onclick = async () => {
   log(`已刷新 ${d}`);
 };
 
-// 13 屏：顶栏「AI 审核」改为打开**全屏视图**（画布 3:1367）。
-// 原来它是 hover 展开的 420px 下拉面板；画布把这屏画成独立视图，所以这里换成 toggle ——
-// 打开时藏起主工作区（过滤器行 + 两栏），再点一次回工作台。按钮文案跟着变，避免「怎么回去」的困惑。
-$("review-agent").onclick = () => {
-  const view = $("kg-view-review");
-  const show = view.hidden;
-  view.hidden = !show;
+// 后台的两个全屏视图：13 屏（AI 审核）/ 14 屏（统计与配置）。
+// 二者互斥 —— 打开一个时收起另一个；主工作区（过滤器行 + 两栏）在任一时都让位。
+// 按钮文案跟着切（「返回工作台」），免得出现「怎么回去」的困惑。
+let kgConfigLoaded = false;
+function kgShowView(which) {
+  const viewReview = $("kg-view-review");
+  const viewConfig = $("kg-view-config");
+  const target = which === "review" ? viewReview : viewConfig;
+  const other = which === "review" ? viewConfig : viewReview;
+  const show = target.hidden;
+  other.hidden = true;
+  target.hidden = !show;
   document.querySelector(".kg-filters").hidden = show;
   document.querySelector(".kg-body").hidden = show;
-  $("review-agent").textContent = show ? "返回工作台" : "AI 审核";
-};
+  $("review-agent").textContent = which === "review" && show ? "返回工作台" : "AI 审核";
+  $("config").textContent = which === "config" && show ? "返回工作台" : "统计与配置";
+  // 14 屏的内容原来散在四个 hover 下拉里、靠 lazyOnHover 懒加载；包裹层没了 → 改成开视图时加载一次
+  if (which === "config" && show && !kgConfigLoaded) {
+    kgConfigLoaded = true;
+    loadStats();
+    loadInvites();
+    loadSiteConfig();
+    loadFonts();
+  }
+}
+$("review-agent").onclick = () => kgShowView("review");
+$("config").onclick = () => kgShowView("config");
 
 (async () => {
   await loadDates();
