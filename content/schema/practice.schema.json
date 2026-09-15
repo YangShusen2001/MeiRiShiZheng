@@ -26,7 +26,13 @@
         "options": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 4, "maxItems": 4 },
         "answer": { "type": "integer", "minimum": 0, "maximum": 3 },
         "analysis": { "type": "string", "minLength": 1 },
-        "topic": { "type": "string", "minLength": 1 }
+        "topic": { "type": "string", "minLength": 1 },
+        "hint": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 60,
+          "description": "一句话提示（指向材料依据或关键区分点，不直接给出答案）。可选：画布 3:608「查看提示」按钮展开它；未生成时端上退回 topic，不编造"
+        }
       }
     }
   }

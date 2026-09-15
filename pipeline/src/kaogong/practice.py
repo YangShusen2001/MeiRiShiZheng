@@ -14,6 +14,11 @@ MAX_QUESTIONS = 30
 MIN_QUESTIONS = 3
 TARGET_QUESTIONS = 20  # 每日一练目标题量（服务考生）
 
+# 提示长度区间，与 content/schema/practice.schema.json 的 hint.minLength/maxLength
+# 一一对应（由 test_practice_hint_bounds_match_schema 守住，别只改一边）。
+HINT_MIN_LENGTH = 4
+HINT_MAX_LENGTH = 60
+
 ChatFn = Callable[..., str]
 
 
@@ -40,9 +45,11 @@ def build_system_prompt(n: int) -> str:
         "3. 答案必须能从材料中找到依据；材料没有的信息不要考；\n"
         "4. 解析不超过 100 字，说明材料依据；\n"
         "5. topic 给一个主题词（如 健康中国/科技/民生）；\n"
-        "6. 题目风格贴近国省考行测与事业单位/三支一扶真题，避免生硬罗列。\n"
+        "6. hint 给一句话提示（画布「查看提示」按钮展开它）：指向材料依据或关键区分点，"
+        "帮考生自己想到答案，**不得直接给出正确选项、答案字母或选项原文**；\n"
+        "7. 题目风格贴近国省考行测与事业单位/三支一扶真题，避免生硬罗列。\n"
         f'只输出 JSON：{{"questions":[{{"q":"题干","options":["A","B","C","D"],'
-        '"answer":0,"analysis":"解析","topic":"主题"}]}}'
+        '"answer":0,"analysis":"解析","topic":"主题","hint":"一句话提示"}]}}'
     )
 
 
@@ -74,14 +81,19 @@ def parse_questions(content: str, n: int | None = None) -> list[dict]:
             continue
         if not analysis:
             continue
-        out.append({
+        question = {
             "id": "q" + str(i + 1),
             "q": q[:200],
             "options": [s[:80] for s in opts],
             "answer": answer,
             "analysis": analysis[:200],
             "topic": str(item.get("topic") or "").strip()[:30],
-        })
+        }
+        # hint 可选：过短视为模型没给（宁可省略，让端上退回 topic），过长截断。
+        hint = str(item.get("hint") or "").strip()[:HINT_MAX_LENGTH]
+        if len(hint) >= HINT_MIN_LENGTH:
+            question["hint"] = hint
+        out.append(question)
     return out if len(out) >= MIN_QUESTIONS else []
 
 
@@ -90,7 +102,7 @@ def _build_user_prompt(digest_text: str, date: str, attempt: int, n: int) -> str
     if attempt > 1:
         user += (
             "\n\n【上次输出不合格】请严格按 JSON 模板输出 "
-            + str(n) + " 道题，每道题字段完整：q/options(4个)/answer(0-3)/analysis/topic。"
+            + str(n) + " 道题，每道题字段完整：q/options(4个)/answer(0-3)/analysis/topic/hint。"
         )
     return user
 

@@ -16,7 +16,8 @@
 //
 // ⚠️ 契约缺口：`WrongQuestion` 里没有「错因」字段，画布错题行右侧写的是「错因：漏读题干」，
 //    这里改渲染**真实有的**信息「你的 X → 正确 Y」，不编错因。
-// ⚠️ 「查看提示」：数据里没有 hint 字段，用它真有的 `topic` 当提示（「本题考点：民族宗教」）。
+// ⚠️ 「查看提示」：优先用管道生成的 hint（指向材料依据/关键区分点，不直接给答案）；
+//    老内容没有 hint 字段时退回真实存在的 `topic`（「本题考点：民族宗教」），不编提示。
 import Base from "../layouts/Base.astro";
 import { listPracticeSets } from "../lib/content";
 
@@ -84,7 +85,7 @@ const today = sets[0] ?? null;
 
   const LETTERS = ["A", "B", "C", "D"];
 
-  type Q = { id: string; q: string; options: string[]; answer: number; analysis: string; topic: string };
+  type Q = { id: string; q: string; options: string[]; answer: number; analysis: string; topic: string; hint?: string };
   type PracticeSet = { date: string; total: number; source?: string; questions: Q[] };
 
   const esc = (s: unknown): string =>
@@ -235,10 +236,12 @@ const today = sets[0] ?? null;
       else nextQuestion();
     });
 
-    // 「查看提示」= 说出这题考什么。用真实存在的 topic，不编一条提示。
+    // 「查看提示」（画布 3:608）：优先用管道生成的 hint（指向材料依据/关键区分点）；
+    // 老内容没有 hint 时退回真实存在的 topic，不编一条提示。
     btnTip?.addEventListener("click", () => {
       const q = questions[idx];
-      if (hint && q) hint.textContent = `本题考点：${q.topic}`;
+      if (!hint || !q) return;
+      hint.textContent = q.hint ? `提示：${q.hint}` : `本题考点：${q.topic}`;
     });
 
     document.getElementById("pr-go-wrong")?.addEventListener("click", () => setMode("wrong"));
