@@ -14,17 +14,22 @@
   /* 审核特定样式（Tabler 没有的） */
   .sec-title { font-weight: 700; margin: 14px 0 6px; font-size: 13px; color: var(--tblr-primary); }
   .sec-title:first-child { margin-top: 0; }
-  .art { display: flex; align-items: center; gap: 8px; padding: 7px 10px; min-height: var(--kg-size-touch-min); border-radius: 6px; cursor: pointer; color: inherit; }
-  .art:hover { background: var(--tblr-light); }
-  .art.on { background: var(--tblr-primary); color: var(--kg-on-brand); }
-  .art .num { flex: none; font-size: 12px; color: var(--tblr-muted); width: 22px; }
-  .art.on .num { color: rgba(255,255,255,.7); }
+  /* 队列行（画布 3:1321 / 3:1326 选中）：pad 16/12 · 选中 = brand-soft 底 + 墨字
+     ⚠️ 类名 `.art` 不能改 —— JS 的 renderAside() 直接拼这个类名，改样式才是安全做法 */
+  .art { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-radius: 0; cursor: pointer; color: inherit; }
+  .art:hover { background: var(--kg-surface-alt); }
+  .art.on { background: var(--kg-brand-soft); color: var(--kg-ink); }
+  .art .num { flex: none; font-size: var(--kg-font-caption); color: var(--kg-mut); width: 22px; }
+  .art.on .num { color: var(--kg-brand); }
   .art .t { flex: 1; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .empty { color: var(--tblr-muted); text-align: center; padding: 60px 0; }
   /* 0018：条目状态徽标 / 筛选器 / 状态面板 */
   .item-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-  .filter-btn { min-height: var(--kg-size-touch-min); padding: 0 12px; border: 1px solid var(--tblr-border-color); border-radius: 999px; background: transparent; color: var(--tblr-muted); font-family: inherit; font-size: 12px; cursor: pointer; }
-  .filter-btn.on { background: var(--tblr-primary); border-color: var(--tblr-primary); color: var(--kg-on-brand); }
+  /* 筛选胶囊（画布 3:1304）：h30 · pad 0 14 · 圆角 999；选中 = 品牌实底 + 暖白 Medium
+     ⚠️ 同样保留 `.filter-btn` 类名 —— JS 靠 `#item-filters .filter-btn` 切 `.on` */
+  .filter-btn { height: 30px; min-height: 0; padding: 0 14px; border: 1px solid var(--kg-line); border-radius: var(--kg-radius-full); background: transparent; color: var(--kg-sub); font-family: inherit; font-size: 12px; cursor: pointer; }
+  .filter-btn:hover { border-color: var(--kg-brand); color: var(--kg-brand); }
+  .filter-btn.on { background: var(--kg-brand); border-color: var(--kg-brand); color: var(--kg-panel-strong); font-weight: 500; }
   .badge-mini { flex: none; font-size: 11px; padding: 1px 7px; border-radius: 999px; color: var(--kg-on-brand); }
   .badge-ok { background: var(--kg-success); }
   .badge-clip-error { background: var(--kg-danger); }
@@ -68,6 +73,67 @@
   .config-panel .check { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--tblr-muted); }
   .font-panel #font-msg, .config-panel #cfg-msg { font-size: 13px; color: var(--tblr-muted); margin-top: 8px; min-height: 18px; }
   .font-preview { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--tblr-border-color); font-size: 13px; color: var(--tblr-muted); }
+
+  /* ===== 画布 12/13/14 的后台外壳（深色顶栏 + 过滤器行 + 两栏工作区）=====
+     原则：只换「壳」，不动 JS —— 所有 id 原样保留，Tabler 的组件类（btn/form-control 等）也留着
+     （面板内部大量内容由 JS 拼字符串生成，动类名等于动 JS）。 */
+  /* 顶栏（画布 3:1290）：h56 · pad 0 24 · 底 panel-deep · 站名 14 Medium 暖白 */
+  .kg-top { display: flex; align-items: center; justify-content: space-between; height: 56px; padding: 0 24px; background: var(--kg-panel-deep); }
+  .kg-top__brand { font-size: 14px; font-weight: 500; color: var(--kg-panel-strong); }
+  .kg-top__acts { display: flex; align-items: center; gap: 8px; }
+  /* 顶栏控件统一 h32 圆角 8（画布 3:1293–3:1302）：日期是实底 chip，其余是描边按钮 */
+  .kg-chip, .kg-btn {
+    display: inline-flex; align-items: center; height: 32px; padding: 0 12px;
+    border-radius: var(--kg-radius-sm); font-family: inherit; font-size: 12px; cursor: pointer;
+    border: 1px solid var(--kg-panel-mark); background: transparent; color: var(--kg-panel-body);
+  }
+  .kg-btn:hover { background: var(--kg-panel-chip); }
+  .kg-btn--primary { background: var(--kg-panel-raised); border-color: var(--kg-panel-raised); color: var(--kg-panel-strong); font-weight: 500; }
+  .kg-btn--primary:hover { background: var(--kg-panel-chip); }
+  /* 「发布到 CF」是全站唯一会真正影响线上的动作 → 用暖白实底做最强强调，与 AI 审核区分开 */
+  .kg-btn--go { background: var(--kg-panel-strong); border-color: var(--kg-panel-strong); color: var(--kg-panel-deep); font-weight: 500; }
+  #date.kg-chip { background: var(--kg-panel-chip); border-color: var(--kg-panel-chip); color: var(--kg-panel-body); font-weight: 500; }
+  .kg-top .dropdown-panel { top: calc(100% + 8px); }
+
+  /* 过滤器行（画布 3:1303）：pad 24/14 · 底 surface · 左胶囊组 + 右侧刷新 */
+  .kg-filters {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: 14px 24px; background: var(--kg-surface); border-bottom: 1px solid var(--kg-line);
+  }
+  .kg-filters__l { display: flex; flex-wrap: wrap; gap: 8px; }
+  /* 筛选胶囊（画布 3:1304）：h30 · pad 0 14 · 圆角 999；选中 = 品牌实底 + 暖白 Medium */
+  .kg-pill {
+    display: inline-flex; align-items: center; height: 30px; padding: 0 14px;
+    border: 1px solid var(--kg-line); border-radius: var(--kg-radius-full); background: transparent;
+    color: var(--kg-sub); font-family: inherit; font-size: 12px; cursor: pointer; white-space: nowrap;
+  }
+  .kg-pill:hover { border-color: var(--kg-brand); color: var(--kg-brand); }
+  .kg-pill.on { background: var(--kg-brand); border-color: var(--kg-brand); color: var(--kg-panel-strong); font-weight: 500; }
+
+  /* 工作区（画布 3:1315）：pad 16/24 · 两栏 gap 16 = 队列 620 定宽 + 预览填充 */
+  .kg-body { display: flex; align-items: flex-start; gap: 16px; padding: 16px 24px 32px; }
+  .kg-card { background: var(--kg-surface); border: 1px solid var(--kg-line); border-radius: var(--kg-radius-lg); overflow: hidden; }
+  .kg-queue { flex: 0 0 auto; width: 620px; max-width: 100%; }
+  .kg-preview { flex: 1 1 0; min-width: 0; }
+  .kg-card__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 14px 16px; }
+  .kg-card__t { margin: 0; font-size: 14px; font-weight: 600; color: var(--kg-ink); }
+  .kg-card__line { height: 1px; background: var(--kg-line); }
+  .kg-card__body { padding: 12px 16px; }
+  .kg-card__body--pad { padding: 16px 20px; }
+  /* 队列行（画布 3:1321 / 3:1326 选中）：pad 16/12 · gap 6；选中 = brand-soft 底 */
+  .kg-row { display: flex; flex-direction: column; gap: 6px; padding: 12px 16px; cursor: pointer; }
+  .kg-row:hover { background: var(--kg-surface-alt); }
+  .kg-row.on { background: var(--kg-brand-soft); }
+
+  /* 画布的后台是**全宽**布局（1440 边到边，只留 24 内边距）—— 取消 Tabler 容器的居中限宽与默认外边距 */
+  .page-wrapper { padding: 0; }
+  .page-body { margin: 0; padding: 0; }
+  .page-body .container-xl { max-width: none; padding: 0; }
+
+  @media (max-width: 1100px) {
+    .kg-body { flex-direction: column; }
+    .kg-queue { width: 100%; }
+  }
   .fp-logo { font-size: 28px; }
   .fp-nav { font-size: 17px; }
   /* AI 标注可视化 */
@@ -90,15 +156,14 @@
 </head>
 <body>
 <div class="page">
-  <header class="navbar navbar-expand-md d-print-none">
-    <div class="container-xl">
-      <div class="navbar-brand navbar-brand-autodark">每日时政 · 本地审核</div>
-      <div class="navbar-nav flex-row order-md-last ms-auto">
-        <div class="nav-item me-2"><input type="date" id="date" class="form-control"></div>
-        <div class="nav-item me-2"><button class="btn btn-outline-secondary" id="fetch">🔄 抓取</button></div>
-        <div class="nav-item me-2"><button class="btn btn-outline-secondary" id="reanalyze">♻️ 补跑 AI</button></div>
-        <div class="nav-item nav-dropdown me-2" id="drop-review">
-          <button class="btn btn-outline-secondary" id="review-agent">🤖 AI 审核</button>
+  <header class="kg-top">
+    <div class="kg-top__brand">每日时政 · 本地审核</div>
+    <div class="kg-top__acts">
+      <input type="date" id="date" class="kg-chip">
+      <button class="kg-btn" id="fetch">抓取</button>
+      <button class="kg-btn" id="reanalyze">补跑 AI</button>
+        <div class="nav-dropdown" id="drop-review">
+          <button class="kg-btn kg-btn--primary" id="review-agent">AI 审核</button>
           <div class="dropdown-panel config-panel" id="review-panel">
             <h3>AI 审核（判 + 改，可回退）</h3>
             <div class="row">
@@ -110,8 +175,8 @@
             <div id="review-diff" style="max-height:200px;overflow:auto;margin-top:12px"></div>
           </div>
         </div>
-        <div class="nav-item nav-dropdown me-2" id="drop-fonts">
-          <button class="btn btn-outline-secondary" id="fonts">🎨 字体</button>
+        <div class="nav-dropdown" id="drop-fonts">
+          <button class="kg-btn" id="fonts">字体</button>
           <div class="dropdown-panel font-panel" id="font-panel">
             <h3>字体管理</h3>
             <div class="row">
@@ -132,8 +197,8 @@
             <div id="font-msg"></div>
           </div>
         </div>
-        <div class="nav-item nav-dropdown me-2" id="drop-config">
-          <button class="btn btn-outline-secondary" id="config">⚙️ 配置</button>
+        <div class="nav-dropdown" id="drop-config">
+          <button class="kg-btn" id="config">配置</button>
           <div class="dropdown-panel config-panel" id="config-panel">
             <h3>站点配置（新闻源 / 内容筛选 / 开关）</h3>
             <label>新闻源（JSON，含 name/slot/page/href_re/mode/date_fn/limit 等）
@@ -152,15 +217,15 @@
             <div id="cfg-msg"></div>
           </div>
         </div>
-        <div class="nav-item nav-dropdown me-2" id="drop-stats">
-          <button class="btn btn-outline-secondary" id="stats">📊 统计</button>
+        <div class="nav-dropdown" id="drop-stats">
+          <button class="kg-btn" id="stats">统计</button>
           <div class="dropdown-panel config-panel" id="stats-panel">
             <h3>数据统计</h3>
             <div id="stats-body" style="max-height:420px;overflow:auto"></div>
           </div>
         </div>
-        <div class="nav-item nav-dropdown me-2" id="drop-invite">
-          <button class="btn btn-outline-secondary" id="invite">🔑 邀请码</button>
+        <div class="nav-dropdown" id="drop-invite">
+          <button class="kg-btn" id="invite">邀请码</button>
           <div class="dropdown-panel config-panel" id="invite-panel">
             <h3>AI 解析邀请码（共享码，每码 100 次）</h3>
             <div class="row">
@@ -171,35 +236,46 @@
             <div id="invite-msg" style="font-size:13px;color:var(--tblr-muted);margin-top:8px"></div>
           </div>
         </div>
-        <div class="nav-item me-2"><button class="btn btn-outline-secondary" id="preview">👁 预览</button></div>
-        <div class="nav-item"><button class="btn btn-warning" id="publish">🚀 发布到 CF</button></div>
-      </div>
+      <button class="kg-btn" id="preview">预览</button>
+      <button class="kg-btn kg-btn--go" id="publish">发布到 CF</button>
     </div>
   </header>
   <div class="page-wrapper">
     <div class="page-body">
       <div class="container-xl">
-        <div id="log" style="margin-bottom:16px"></div>
-        <div id="report-panel" style="display:none;margin-bottom:16px;background:var(--tblr-bg-surface);border:1px solid var(--tblr-border-color);border-radius:8px;padding:14px"></div>
-        <div class="row g-3">
-          <div class="col-12 col-md-4 col-lg-3">
-            <div class="card"><div class="card-body">
-              <div class="item-filters" id="item-filters">
-                <button type="button" class="filter-btn on" data-filter="all">全部</button>
-                <button type="button" class="filter-btn" data-filter="failed">仅失败</button>
-                <button type="button" class="filter-btn" data-filter="clip">剪藏失败</button>
-                <button type="button" class="filter-btn" data-filter="ai">AI 失败</button>
-                <button type="button" class="filter-btn" data-filter="excluded">已排除</button>
-              </div>
+        <div id="log" style="display:none"></div>
+        <div id="report-panel" style="display:none;margin:16px 0;background:var(--kg-surface);border:1px solid var(--kg-line);border-radius:8px;padding:14px"></div>
+
+        <!-- 过滤器行（画布 3:1303）：左胶囊组 + 右刷新。画布上是四项（全部 / 仅 AI 失败 / 已排除 / 剪藏失败） -->
+        <div class="kg-filters">
+          <div class="kg-filters__l" id="item-filters">
+            <button type="button" class="filter-btn on" data-filter="all">全部</button>
+            <button type="button" class="filter-btn" data-filter="ai">仅 AI 失败</button>
+            <button type="button" class="filter-btn" data-filter="excluded">已排除</button>
+            <button type="button" class="filter-btn" data-filter="clip">剪藏失败</button>
+          </div>
+          <button type="button" class="filter-btn" id="refresh">刷新</button>
+        </div>
+
+        <div class="kg-body">
+          <!-- 待审队列（画布 3:1316）：620 定宽 -->
+          <div class="kg-card kg-queue">
+            <div class="kg-card__head"><h2 class="kg-card__t">待审队列</h2></div>
+            <div class="kg-card__line"></div>
+            <div class="kg-card__body">
               <div style="display:flex;gap:6px;margin-bottom:10px">
-                <button type="button" class="btn btn--sm btn--line" id="retry-failed" style="flex:1">🔁 批量重试失败</button>
-                <button type="button" class="btn btn--sm btn--line" id="report-btn" style="flex:1">📋 质量报告</button>
+                <button type="button" class="filter-btn" id="retry-failed" style="flex:1">批量重试失败</button>
+                <button type="button" class="filter-btn" id="report-btn" style="flex:1">质量报告</button>
               </div>
               <div id="aside"></div>
-            </div></div>
+            </div>
           </div>
-          <div class="col-12 col-md-8 col-lg-9">
-            <div class="card"><div class="card-body">
+
+          <!-- 原文与编辑（画布 3:1341） -->
+          <div class="kg-card kg-preview">
+            <div class="kg-card__head"><h2 class="kg-card__t">原文与编辑</h2></div>
+            <div class="kg-card__line"></div>
+            <div class="kg-card__body kg-card__body--pad">
               <div class="empty">选择左侧文章进行编辑</div>
               <div id="edit-form" style="display:none">
                 <div class="item-status" id="item-status" hidden></div>
@@ -219,7 +295,7 @@
                   <div class="body" id="preview-body">暂无原文</div>
                 </div>
               </div>
-            </div></div>
+            </div>
           </div>
         </div>
       </div>
@@ -929,6 +1005,14 @@ $("review-rollback").onclick = async () => {
 $("preview").onclick = async () => {
   log("打开本地预览（若无前端服务则先启动）…");
   await j("/api/preview", { method: "POST" });
+};
+
+// 「刷新」（画布 3:1313）：重读当前日期的日报与条目视图 —— 不动数据，只是重新拉一遍
+$("refresh").onclick = async () => {
+  const d = $("date").value;
+  if (!d) return;
+  await loadDigest(d);
+  log(`已刷新 ${d}`);
 };
 
 (async () => {
