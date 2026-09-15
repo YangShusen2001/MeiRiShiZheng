@@ -1,59 +1,20 @@
 ---
-import Base from "../layouts/Base.astro";
+// 错题页（/wrong/）—— 立即前往练习页的「错题本」模式。
+//
+// 画布上没有独立的错题屏：练习页（3:532）把「今日练习 / 错题本 / 已掌握」做成了同一页的三个模式，
+// 顶栏那个「错题」入口就是切到其中的错题本模式。所以这里不再维护第二套列表视觉 ——
+// 否则「错题」在两个地方各长一套，改一边忘一边是迟早的事。
+//
+// ⚠️ 不用 Astro.redirect()：静态站的 redirect 页是 `<meta http-equiv="refresh" content="2;…">`，
+//    固定 2 秒延迟 —— 点一下要愣两秒才动，比手点还慢（实测确认）。这里直接吐一个 0 秒的页面，
+//    再加一层 JS 兜底（部分浏览器对 content="0" 仍会闪一下）。
+// 路由保留只为兼容既有链接；顶栏导航现在直接指向 /practice/#wrong，不再经过这里。
+const target = "/practice/#wrong";
+const html =
+  `<!doctype html><meta charset="utf-8"><title>正在前往错题本…</title>` +
+  `<meta http-equiv="refresh" content="0;url=${target}">` +
+  `<link rel="canonical" href="${target}"><meta name="robots" content="noindex">` +
+  `<script>location.replace(${JSON.stringify(target)})</script>` +
+  `<p>正在前往<a href="${target}">错题本</a>…</p>`;
+return new Response(html, { status: 200, headers: { "content-type": "text/html; charset=utf-8" } });
 ---
-<Base title="错题本 · 时政小助手">
-  <section class="card">
-    <h2>错题本</h2>
-    <p class="item-summary">复习答错的题目，掌握后点「掌握 ✓」移除。</p>
-    <div id="wrong-list"><p class="item-summary">加载中…</p></div>
-  </section>
-</Base>
-
-<script>
-  import { api } from "../lib/api";
-  import type { WrongQuestion } from "@kaogong/contracts";
-
-  const esc = (s: unknown): string =>
-    String(s ?? "").replace(/[&<>"']/g, (c) => {
-      const map: Record<string, string> = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
-      return map[c] ?? c;
-    });
-  const LETTERS = ["A", "B", "C", "D"];
-  const list = document.getElementById("wrong-list")!;
-
-  function render(items: WrongQuestion[]) {
-    if (!items.length) {
-      list.innerHTML = '<p class="item-summary">暂无错题，去做每日一练吧。</p>';
-      return;
-    }
-    list.innerHTML = items.map((w) => {
-      const opts = w.options.map((o, i) => {
-        const cls = i === w.answer ? "wq-opt is-correct" : i === w.chosen ? "wq-opt is-wrong" : "wq-opt";
-        return `<span class="${cls}">${LETTERS[i]}. ${esc(o)}</span>`;
-      }).join("");
-      return `
-        <div class="wq-item" data-id="${esc(w.id)}">
-          <div class="wq-head"><span class="wq-date">${esc(w.date)}</span><button type="button" class="wq-del">掌握 ✓</button></div>
-          <p class="wq-q">${esc(w.question)}</p>
-          <div class="wq-opts">${opts}</div>
-          <p class="wq-analysis">解析：${esc(w.analysis)}</p>
-        </div>`;
-    }).join("");
-
-    list.querySelectorAll<HTMLButtonElement>(".wq-del").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        const id = btn.closest<HTMLElement>(".wq-item")?.dataset.id || "";
-        await api.deleteWrongQuestion(id);
-        await load();
-      });
-    });
-  }
-
-  async function load() {
-    const env = await api.listWrongQuestions();
-    if (env.ok && env.data) render(env.data);
-    else list.innerHTML = '<p class="item-summary">错题加载失败，请刷新重试。</p>';
-  }
-
-  load();
-</script>

@@ -1,117 +1,451 @@
 ---
+// 每日一练（画布 05 / 3:532）。
+//
+// 结构照画布：页头（标题 + 说明 + 右侧三项统计）→ 模式胶囊（今日练习 / 错题本 / 已掌握）→
+// 主体（题卡 820 + 错题本预览 820）。
+//
+// ⚠️ 与旧版是**交互模型级**的差异，不是换样式：
+//    旧版 = 一屏把全部题目纵向铺开 + 点选即判 + 「历史刷题」折叠块；
+//    画布 = **单题卡推进**（「第 3 / 5 题」）+ **先选后提交**（有「提交答案」按钮）。
+//    按画布做：一次一题，选完点提交才判分，判完出解析、按钮变「下一题」。
+//    「历史刷题」画布上没有对应位置，本轮去掉（需要的话再加回来）。
+//
+// 数据：今日题集是构建期静态数据（content/<date>/practice.json），随页面注入 JSON；
+//       错题本走 API（需登录）；已掌握存本机 —— 点「掌握」时调 API 删除，同时本机留一份，
+//       否则服务端删掉之后「已掌握」永远是空的（契约里没有「已掌握列表」接口）。
+//
+// ⚠️ 契约缺口：`WrongQuestion` 里没有「错因」字段，画布错题行右侧写的是「错因：漏读题干」，
+//    这里改渲染**真实有的**信息「你的 X → 正确 Y」，不编错因。
+// ⚠️ 「查看提示」：数据里没有 hint 字段，用它真有的 `topic` 当提示（「本题考点：民族宗教」）。
 import Base from "../layouts/Base.astro";
 import { listPracticeSets } from "../lib/content";
 
 const sets = listPracticeSets();
-const [latest, ...history] = sets;
+const today = sets[0] ?? null;
 ---
-<Base title="每日一练 · 时政小助手">
-  {latest ? (
-    <section class="card practice-set" data-date={latest.date}>
-      <h2>每日一练 · {latest.date}</h2>
-      <p class="item-summary practice-progress">共 {latest.total} 题 · 点选作答</p>
-      <div class="questions">
-        {latest.questions.map((q, i) => (
-          <div class="question" data-answer={q.answer}>
-            <p class="q-text">{i + 1}. {q.q}</p>
-            <div class="q-options">
-              {q.options.map((opt, j) => (
-                <button type="button" class="q-opt" data-opt={j}>{opt}</button>
-              ))}
-            </div>
-            <p class="q-analysis" hidden>{q.analysis}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  ) : (
-    <section class="card"><p>还没有题目。</p></section>
-  )}
 
-  {history.length > 0 && (
-    <section class="card">
-      <h2>历史刷题</h2>
-      {history.map((s) => (
-        <details class="practice-set" data-date={s.date}>
-          <summary><span class="h-date">{s.date}</span><span class="h-total">{s.total} 题</span><span class="h-hint">点击展开</span></summary>
-          <p class="item-summary practice-progress">共 {s.total} 题 · 点选作答</p>
-          <div class="questions">
-            {s.questions.map((q, i) => (
-              <div class="question" data-answer={q.answer}>
-                <p class="q-text">{i + 1}. {q.q}</p>
-                <div class="q-options">
-                  {q.options.map((opt, j) => (
-                    <button type="button" class="q-opt" data-opt={j}>{opt}</button>
-                  ))}
-                </div>
-                <p class="q-analysis" hidden>{q.analysis}</p>
-              </div>
-            ))}
+<Base
+  title="每日一练 · 时政小助手"
+  description="从当日入选文章出题，每题都带出处与解析；答错自动进错题本。"
+  bleed
+>
+  <section class="pr-head">
+    <div class="pr-head__in">
+      <div class="pr-head__row">
+        <div class="pr-head__l">
+          <h1 class="pg-title">练习</h1>
+          <p class="pg-sub">卡片只从当日入选文章出题 · 每题都带出处，答错自动进错题本</p>
+        </div>
+        <div class="pg-stats">
+          <div class="pg-stat">
+            <span class="pg-stat__n" id="pr-prog">0 / 0</span>
+            <span class="pg-stat__l">今日进度</span>
           </div>
-        </details>
-      ))}
-    </section>
-  )}
+          <div class="pg-stat">
+            <span class="pg-stat__n pr-stat--ok" id="pr-rate">—</span>
+            <span class="pg-stat__l">本次正确率</span>
+          </div>
+          <div class="pg-stat">
+            <span class="pg-stat__n pr-stat--bad" id="pr-wrong-n">0 题</span>
+            <span class="pg-stat__l">错题待复习</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 模式胶囊（画布 3:570）：h34 · pad 0 16 · 圆角 999 · gap 8 */}
+      <div class="pr-tabs" role="tablist" aria-label="练习模式">
+        <button class="pr-tab on" type="button" role="tab" aria-selected="true" data-mode="today" id="pr-tab-today">
+          今日练习
+        </button>
+        <button class="pr-tab" type="button" role="tab" aria-selected="false" data-mode="wrong" id="pr-tab-wrong">
+          错题本
+        </button>
+        <button class="pr-tab" type="button" role="tab" aria-selected="false" data-mode="mastered" id="pr-tab-mastered">
+          已掌握
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="pr-body">
+    <div class="pr-body__in">
+      <div id="pr-panel-today"></div>
+      <div id="pr-panel-wrong" hidden></div>
+      <div id="pr-panel-mastered" hidden></div>
+    </div>
+  </section>
+
+  <script type="application/json" id="pr-data" set:html={JSON.stringify(today).replace(/</g, "\\u003c")} />
 </Base>
 
 <script>
   import { api } from "../lib/api";
-  import type { WrongQuestionInput } from "@kaogong/contracts";
-  import { springPop, countUp } from "../lib/motion";
+  import type { WrongQuestion, WrongQuestionInput } from "@kaogong/contracts";
 
-  // 每个题集（最新 + 历史）独立作答与交卷
-  document.querySelectorAll<HTMLElement>(".practice-set").forEach((set) => {
-    const date = set.dataset.date || "";
-    const questions = Array.from(set.querySelectorAll<HTMLElement>(".question"));
-    const progress = set.querySelector<HTMLElement>(".practice-progress");
-    let answered = 0;
-    let correct = 0;
-    const wrong: WrongQuestionInput[] = [];
+  const LETTERS = ["A", "B", "C", "D"];
+  const MASTERED_KEY = "kaogong.mastered.v1";
 
-    const qText = (q: HTMLElement) => (q.querySelector(".q-text")?.textContent ?? "").replace(/^\d+\.\s*/, "");
-    const qOptions = (q: HTMLElement) => Array.from(q.querySelectorAll<HTMLElement>(".q-opt")).map((b) => b.textContent ?? "");
-    const qAnalysis = (q: HTMLElement) => q.querySelector(".q-analysis")?.textContent ?? "";
+  type Q = { id: string; q: string; options: string[]; answer: number; analysis: string; topic: string };
+  type PracticeSet = { date: string; total: number; source?: string; questions: Q[] };
 
-    const update = () => {
-      if (progress) progress.textContent = `已答 ${answered}/${questions.length} · 答对 ${correct}`;
-    };
+  const esc = (s: unknown): string =>
+    String(s ?? "").replace(/[&<>"']/g, (c) => {
+      const map: Record<string, string> = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+      return map[c] ?? c;
+    });
 
-    async function submit() {
-      const env = await api.submitPractice({ date, correct, total: questions.length, wrong });
-      if (progress) {
-        if (env.ok) {
-          // P2 delight：交卷完成（稀有场景）→ spring 弹出 + 答对数数字滚动
-          progress.innerHTML = `交卷完成 · 答对 <b class="p-score">0</b>/${questions.length}`;
-          const score = progress.querySelector<HTMLElement>(".p-score");
-          if (score) {
-            springPop(progress);
-            countUp(score, correct);
-          }
-        } else {
-          progress.textContent = "交卷失败，记录未保存";
-        }
-      }
+  const readJson = <T,>(id: string, fallback: T): T => {
+    try {
+      const el = document.getElementById(id);
+      return JSON.parse(el?.textContent || "") as T;
+    } catch {
+      return fallback;
     }
+  };
 
-    questions.forEach((q) => {
-      const answer = Number(q.dataset.answer);
-      q.querySelectorAll<HTMLButtonElement>(".q-opt").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          if (btn.classList.contains("answered")) return; // 已作答
-          const chosen = Number(btn.dataset.opt);
-          const isCorrect = chosen === answer;
-          btn.classList.add(isCorrect ? "correct" : "wrong");
-          q.querySelector<HTMLButtonElement>(`.q-opt[data-opt="${answer}"]`)?.classList.add("correct");
-          q.querySelectorAll(".q-opt").forEach((b) => b.classList.add("answered"));
-          const analysis = q.querySelector<HTMLElement>(".q-analysis");
-          if (analysis) analysis.hidden = false;
-          answered += 1;
-          if (isCorrect) correct += 1;
-          else wrong.push({ question: qText(q), options: qOptions(q), answer, chosen, analysis: qAnalysis(q) });
-          update();
-          if (answered === questions.length) submit();
-        });
+  const set = readJson<PracticeSet | null>("pr-data", null);
+  const questions: Q[] = set?.questions ?? [];
+
+  const el = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+  const panelToday = el("pr-panel-today");
+  const panelWrong = el("pr-panel-wrong");
+  const panelMastered = el("pr-panel-mastered");
+  const statProg = el("pr-prog");
+  const statRate = el("pr-rate");
+  const statWrong = el("pr-wrong-n");
+  const tabToday = el("pr-tab-today");
+  const tabWrong = el("pr-tab-wrong");
+  const tabMastered = el("pr-tab-mastered");
+
+  // ── 作答状态 ──
+  let idx = 0;
+  let chosen: number | null = null;
+  let submitted = false;
+  let answered = 0;
+  let correct = 0;
+  let finished = false;
+  const wrongInputs: WrongQuestionInput[] = [];
+  let wrongList: WrongQuestion[] = [];
+  let wrongAvailable = true;
+
+  // ── 已掌握（本机） ──
+  function loadMastered(): WrongQuestion[] {
+    try {
+      return JSON.parse(localStorage.getItem(MASTERED_KEY) || "[]") as WrongQuestion[];
+    } catch {
+      return [];
+    }
+  }
+  function saveMastered(rows: WrongQuestion[]): void {
+    try {
+      localStorage.setItem(MASTERED_KEY, JSON.stringify(rows));
+    } catch {
+      /* 隐私模式写不进去 —— 不影响做题，静默即可 */
+    }
+  }
+
+  // ── 统计区（页头三项 + 三个胶囊的计数） ──
+  function renderStats(): void {
+    statProg.textContent = `${answered} / ${questions.length}`;
+    statRate.textContent = answered ? `${Math.round((correct / answered) * 100)}%` : "—";
+    statWrong.textContent = `${wrongList.length} 题`;
+    tabToday.textContent = `今日练习 ${questions.length}`;
+    tabWrong.textContent = `错题本 ${wrongList.length}`;
+    tabMastered.textContent = `已掌握 ${loadMastered().length}`;
+  }
+
+  // ── 题卡（画布 3:578） ──
+  function renderCard(): void {
+    if (!questions.length) {
+      panelToday.innerHTML = '<section class="pr-wrong"><p class="pr-empty">今天还没有题目。</p></section>';
+      return;
+    }
+    if (finished) {
+      renderFinished();
+      return;
+    }
+    const q = questions[idx];
+    const opts = q.options
+      .map(
+        (o, i) =>
+          `<button class="pr-opt" type="button" data-opt="${i}">` +
+          `<span class="pr-opt__l">${LETTERS[i]}</span><span class="pr-opt__t">${esc(o)}</span></button>`,
+      )
+      .join("");
+    panelToday.innerHTML =
+      `<article class="pr-card">` +
+      `<div class="pr-card__top">` +
+      `<div class="pr-card__top-l"><span class="pr-type">单选</span><span class="pr-topic">${esc(q.topic)}</span></div>` +
+      `<span class="pr-card__idx">第 ${idx + 1} / ${questions.length} 题</span>` +
+      `</div>` +
+      `<h2 class="pr-q">${esc(q.q)}</h2>` +
+      `<div class="pr-opts" id="pr-opts">${opts}</div>` +
+      `<p class="pr-analysis" id="pr-an" hidden></p>` +
+      `<div class="pr-card__foot">` +
+      `<span class="pr-hint" id="pr-hint">答错自动进错题本，明日同一时间再练</span>` +
+      `<div class="pr-acts">` +
+      `<button class="pr-btn pr-btn--solid" type="button" id="pr-submit" disabled>提交答案</button>` +
+      `<button class="pr-btn pr-btn--ghost" type="button" id="pr-tip">查看提示</button>` +
+      `</div></div></article>` +
+      `<div id="pr-preview">${wrongPreviewHtml()}</div>`;
+    bindCard();
+  }
+
+  /** 错题本预览（画布 3:610）：标题行 + 最多 2 条 + 「进入错题本」 */
+  function wrongPreviewHtml(): string {
+    const rows = wrongList
+      .slice(0, 2)
+      .map(
+        (w) =>
+          `<div class="pr-wrong__row"><span class="pr-dot"></span>` +
+          `<span class="pr-wrong__q">${esc(w.question)}</span>` +
+          `<span class="pr-wrong__why">你的 ${LETTERS[w.chosen] ?? "?"} → 正确 ${LETTERS[w.answer] ?? "?"}</span></div>`,
+      )
+      .join("");
+    return (
+      `<section class="pr-wrong">` +
+      `<div class="pr-wrong__hd">` +
+      `<h2 class="pr-wrong__t">错题本 · ${wrongList.length} 题待复习</h2>` +
+      `<button class="pr-wrong__go" type="button" id="pr-go-wrong">进入错题本</button>` +
+      `</div>` +
+      (rows || '<p class="pr-empty">还没有错题。答错的题会自动进来。</p>') +
+      `</section>`
+    );
+  }
+
+  /**
+   * 单独重绘错题本预览。
+   * ⚠️ 不能只在 renderCard 里画一次：错题列表是异步到的，首渲染时它还是空的，
+   *    预览会永远停在「还没有错题」——只重绘整个题卡又会把正在作答的状态冲掉。
+   */
+  function renderPreview(): void {
+    const box = document.getElementById("pr-preview");
+    if (!box) return;
+    box.innerHTML = wrongPreviewHtml();
+    document.getElementById("pr-go-wrong")?.addEventListener("click", () => setMode("wrong"));
+  }
+
+  function bindCard(): void {
+    const opts = document.getElementById("pr-opts");
+    const btnSubmit = document.getElementById("pr-submit") as HTMLButtonElement | null;
+    const btnTip = document.getElementById("pr-tip") as HTMLButtonElement | null;
+    const hint = document.getElementById("pr-hint");
+
+    opts?.querySelectorAll<HTMLButtonElement>(".pr-opt").forEach((b) => {
+      b.addEventListener("click", () => {
+        if (submitted) return;
+        chosen = Number(b.dataset.opt);
+        opts.querySelectorAll(".pr-opt").forEach((x) => x.classList.remove("on"));
+        b.classList.add("on");
+        if (btnSubmit) btnSubmit.disabled = false;
       });
     });
-  });
+
+    btnSubmit?.addEventListener("click", () => {
+      if (!submitted) submitAnswer();
+      else nextQuestion();
+    });
+
+    // 「查看提示」= 说出这题考什么。用真实存在的 topic，不编一条提示。
+    btnTip?.addEventListener("click", () => {
+      const q = questions[idx];
+      if (hint && q) hint.textContent = `本题考点：${q.topic}`;
+    });
+
+    document.getElementById("pr-go-wrong")?.addEventListener("click", () => setMode("wrong"));
+  }
+
+  function submitAnswer(): void {
+    const q = questions[idx];
+    if (submitted || chosen === null || !q) return;
+    submitted = true;
+    answered += 1;
+    const isOk = chosen === q.answer;
+    if (isOk) {
+      correct += 1;
+    } else {
+      wrongInputs.push({ question: q.q, options: q.options, answer: q.answer, chosen, analysis: q.analysis });
+    }
+
+    const opts = document.getElementById("pr-opts");
+    opts?.classList.add("locked");
+    opts?.querySelectorAll<HTMLButtonElement>(".pr-opt").forEach((b) => {
+      const i = Number(b.dataset.opt);
+      if (i === q.answer) b.classList.add("is-ok");
+      else if (i === chosen) b.classList.add("is-bad");
+    });
+
+    const an = document.getElementById("pr-an");
+    if (an) {
+      an.innerHTML = `<b>解析</b> · ${esc(q.analysis)}`;
+      an.hidden = false;
+    }
+
+    const btnSubmit = document.getElementById("pr-submit") as HTMLButtonElement | null;
+    if (btnSubmit) btnSubmit.textContent = idx + 1 >= questions.length ? "完成，交卷" : "下一题";
+    const btnTip = document.getElementById("pr-tip") as HTMLButtonElement | null;
+    if (btnTip) btnTip.hidden = true; // 已经判完了，提示没有意义
+
+    renderStats();
+  }
+
+  function nextQuestion(): void {
+    if (idx + 1 >= questions.length) {
+      finished = true;
+      void submitSet();
+      renderCard();
+      renderStats();
+      return;
+    }
+    idx += 1;
+    chosen = null;
+    submitted = false;
+    renderCard();
+  }
+
+  /** 交卷：同步本次成绩与错题（需登录；未登录时本机状态照常，只是不同步）。 */
+  async function submitSet(): Promise<void> {
+    if (!set) return;
+    await api.submitPractice({ date: set.date, correct, total: questions.length, wrong: wrongInputs });
+  }
+
+  function renderFinished(): void {
+    const rate = questions.length ? Math.round((correct / questions.length) * 100) : 0;
+    panelToday.innerHTML =
+      `<article class="pr-card">` +
+      `<div class="pr-card__top"><div class="pr-card__top-l"><span class="pr-type">本次成绩</span></div></div>` +
+      `<h2 class="pr-q">答对 ${correct} / ${questions.length} 题 · 正确率 ${rate}%</h2>` +
+      `<p class="pr-analysis">错题已进错题本${
+        wrongList.length ? `（共 ${wrongList.length} 题待复习）` : ""
+      }。明天同一时间再来一轮。</p>` +
+      `<div class="pr-card__foot">` +
+      `<span class="pr-hint">成绩与错题会同步到你的账号</span>` +
+      `<div class="pr-acts">` +
+      `<button class="pr-btn pr-btn--solid" type="button" id="pr-again">再练一轮</button>` +
+      `<button class="pr-btn pr-btn--ghost" type="button" id="pr-finish-wrong">看错题</button>` +
+      `</div></div></article>` +
+      `<div id="pr-preview">${wrongPreviewHtml()}</div>`;
+
+    document.getElementById("pr-again")?.addEventListener("click", () => {
+      idx = 0;
+      chosen = null;
+      submitted = false;
+      answered = 0;
+      correct = 0;
+      finished = false;
+      wrongInputs.length = 0;
+      renderCard();
+      renderStats();
+    });
+    document.getElementById("pr-finish-wrong")?.addEventListener("click", () => setMode("wrong"));
+    document.getElementById("pr-go-wrong")?.addEventListener("click", () => setMode("wrong"));
+  }
+
+  // ── 错题本 / 已掌握里的单条 ──
+  function wrongItemHtml(w: WrongQuestion, mastered: boolean): string {
+    const opts = w.options
+      .map((o, i) => {
+        const cls = i === w.answer ? "is-ok" : i === w.chosen ? "is-bad" : "";
+        return `<span class="pr-wq__opt ${cls}">${LETTERS[i]}. ${esc(o)}</span>`;
+      })
+      .join("");
+    const act = mastered
+      ? `<span class="pr-wq__date">已掌握</span>`
+      : `<button class="pr-wrong__go" type="button" data-master="${esc(w.id)}">掌握 ✓</button>`;
+    return (
+      `<div class="pr-wq">` +
+      `<div class="pr-wq__hd"><span class="pr-wq__date">${esc(w.date)}</span>${act}</div>` +
+      `<p class="pr-wq__q">${esc(w.question)}</p>` +
+      `<div class="pr-wq__opts">${opts}</div>` +
+      `<p class="pr-wq__an">解析：${esc(w.analysis)}</p>` +
+      `</div>`
+    );
+  }
+
+  function renderWrongPanel(): void {
+    if (!wrongAvailable) {
+      // 未登录 / 请求失败：不假装「你没错题」，说清是没取到
+      panelWrong.innerHTML =
+        `<section class="pr-wrong"><div class="pr-wrong__hd"><h2 class="pr-wrong__t">错题本</h2></div>` +
+        `<p class="pr-empty">错题本需要登录后同步 —— 未登录时答错的题仍会记在本次练习里，登录后自动同步。</p></section>`;
+      return;
+    }
+    panelWrong.innerHTML =
+      `<section class="pr-wrong">` +
+      `<div class="pr-wrong__hd"><h2 class="pr-wrong__t">错题本 · ${wrongList.length} 题待复习</h2></div>` +
+      (wrongList.length
+        ? wrongList.map((w) => wrongItemHtml(w, false)).join("")
+        : '<p class="pr-empty">还没有错题。去「今日练习」做几题，答错会自动进来。</p>') +
+      `</section>`;
+
+    panelWrong.querySelectorAll<HTMLButtonElement>("[data-master]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const id = btn.dataset.master || "";
+        const row = wrongList.find((w) => w.id === id);
+        // 调 API 删除（需登录）；无论成败都在本机留一份，否则「已掌握」永远是空的
+        await api.deleteWrongQuestion(id);
+        if (row) saveMastered([...loadMastered().filter((m) => m.id !== id), row]);
+        await loadWrong();
+        renderStats();
+      });
+    });
+  }
+
+  function renderMasteredPanel(): void {
+    const rows = loadMastered();
+    panelMastered.innerHTML =
+      `<section class="pr-wrong">` +
+      `<div class="pr-wrong__hd"><h2 class="pr-wrong__t">已掌握 · ${rows.length} 题</h2></div>` +
+      (rows.length
+        ? rows.map((w) => wrongItemHtml(w, true)).join("")
+        : '<p class="pr-empty">还没有标记为已掌握的题。在错题本里点「掌握 ✓」就会移到这里。</p>') +
+      `</section>`;
+  }
+
+  async function loadWrong(): Promise<void> {
+    const env = await api.listWrongQuestions();
+    if (env.ok && env.data) {
+      wrongList = env.data;
+      wrongAvailable = true;
+    } else {
+      wrongList = [];
+      wrongAvailable = false;
+    }
+    renderStats();
+    renderPreview();
+    renderWrongPanel();
+  }
+
+  // ── 模式切换 ──
+  function setMode(mode: "today" | "wrong" | "mastered"): void {
+    panelToday.hidden = mode !== "today";
+    panelWrong.hidden = mode !== "wrong";
+    panelMastered.hidden = mode !== "mastered";
+    const pairs: Array<[HTMLElement, string]> = [
+      [tabToday, "today"],
+      [tabWrong, "wrong"],
+      [tabMastered, "mastered"],
+    ];
+    for (const [tab, key] of pairs) {
+      const on = key === mode;
+      tab.classList.toggle("on", on);
+      tab.setAttribute("aria-selected", String(on));
+    }
+    if (mode === "wrong") renderWrongPanel();
+    if (mode === "mastered") renderMasteredPanel();
+    if (location.hash.slice(1) !== mode) {
+      history.replaceState(null, "", mode === "today" ? location.pathname : `#${mode}`);
+    }
+  }
+
+  tabToday.addEventListener("click", () => setMode("today"));
+  tabWrong.addEventListener("click", () => setMode("wrong"));
+  tabMastered.addEventListener("click", () => setMode("mastered"));
+
+  // 首渲染
+  renderCard();
+  renderStats();
+  void loadWrong();
+  // /wrong/ 会重定向到 #wrong，进入即定位到错题本模式
+  if (location.hash === "#wrong") setMode("wrong");
 </script>

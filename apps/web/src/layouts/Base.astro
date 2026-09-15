@@ -36,7 +36,9 @@ const NAV_ITEMS: { href: string; label: string }[] = [
   { href: "/policy/", label: "政策档案" },
   { href: "/favorites/", label: "收藏" },
   { href: "/practice/", label: "练习" },
-  { href: "/wrong/", label: "错题" },
+  // 错题 = 练习页的第 3 个模式，直接带 hash 过去（/wrong/ 仍保留为兼容入口）。
+  // 高亮会落在「练习」上 —— 语义正确：错题本就是练习页的一个模式。
+  { href: "/practice/#wrong", label: "错题" },
 ];
 /** 当前项：首页精确匹配，其余按前缀（/policy/2026-09 也算「政策档案」）。 */
 const HERE = Astro.url.pathname.replace(/\/+$/, "");
