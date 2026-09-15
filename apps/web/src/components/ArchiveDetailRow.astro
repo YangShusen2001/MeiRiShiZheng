@@ -1,0 +1,90 @@
+---
+// 细则行（画布 3:401）：h44 单行 · gap 12 = 日期（定宽 88）+ 标题（填充）+ 「展开」。
+//
+// 画布只画了折叠态，没说展开后是什么。这里用原生 <details> 实现「展开」二字的字面语义：
+// 展开体放该条目的要点（gist，已有字段）与官方原文链接 —— 不新增数据、不编内容。
+// 没有 gist 的条目展开后只有原文链接，不会出现空面板。
+//
+// 高度用 min-height 而不是 height：台账里的标题长度不可控，硬卡 44 会把长标题压成省略号，
+// 而这一屏的用途就是「让你把标题看全、决定要不要点进去」。
+import type { ArchiveItem as Item } from "../lib/archive";
+
+interface Props {
+  it: Item;
+}
+const { it } = Astro.props;
+---
+
+<details class="arc-line">
+  <summary class="arc-line__sum">
+    <span class="arc-line__date">{it.date}</span>
+    <span class="arc-line__title">{it.title}</span>
+    <span class="arc-line__act" aria-hidden="true">
+      <span class="arc-line__open-t">展开</span>
+      <span class="arc-line__close-t">收起</span>
+    </span>
+  </summary>
+  <div class="arc-line__body">
+    {it.gist && <p class="arc-line__gist">{it.gist}</p>}
+    <a class="arc-line__link" href={it.url} target="_blank" rel="noopener">查看官方原文</a>
+  </div>
+</details>
+
+<style>
+  /* 行与行之间靠内容列的 gap 24 分隔，不加分隔线 —— 画布上细则行是纯行（3:401 无 fills / 无 strokes） */
+
+  .arc-line__sum {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    min-height: 44px;
+    padding: 6px 8px;
+    margin: 0 -8px;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    list-style: none;
+    transition: background var(--dur-sm, 160ms) var(--ease-out, ease);
+  }
+  .arc-line__sum::-webkit-details-marker { display: none; }
+  .arc-line__sum:hover { background: var(--surface-2); }
+
+  /* 日期列定宽 88（画布 3:402），让标题起点在每一行都对齐 */
+  .arc-line__date {
+    flex: 0 0 88px;
+    font-size: var(--font-caption);
+    color: var(--mut);
+    font-variant-numeric: tabular-nums;
+  }
+  .arc-line__title {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: var(--font-meta);
+    color: var(--ink);
+  }
+  .arc-line__act {
+    flex: 0 0 auto;
+    font-size: var(--font-caption);
+    font-weight: 500;
+    color: var(--primary);
+    white-space: nowrap;
+  }
+  .arc-line__close-t { display: none; }
+  .arc-line[open] .arc-line__open-t { display: none; }
+  .arc-line[open] .arc-line__close-t { display: inline; }
+
+  /* 展开体与标题左对齐：日期列 88 + gap 12 */
+  .arc-line__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    padding: 0 8px 14px 100px;
+  }
+  .arc-line__gist { font-size: var(--font-meta); line-height: var(--line-ui); color: var(--sub); }
+  .arc-line__link { font-size: var(--font-caption); font-weight: 500; color: var(--primary); }
+  .arc-line__link:hover { text-decoration: underline; }
+
+  @media (max-width: 860px) {
+    .arc-line__body { padding-left: 8px; } /* 窄屏不再缩进，宽度不够 */
+    .arc-line__date { flex-basis: 76px; }
+  }
+</style>

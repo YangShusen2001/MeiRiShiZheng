@@ -1,5 +1,15 @@
 ---
+// 档案内容列（画布 3:365）：月份标题行 → 「核心考点」分组（卡片）→ 「了解 · 细则」分组（细则行）。
+// 列内一律 gap 24（画布结构如此，分组标签与卡片之间也是同一间距）。
+//
+// 分组是**两级**：核心考点 = importance「高」；了解 · 细则 = 「中」+「低」。
+// 旧版把「中」「低」拆成两个折叠块（了解即可 / 技术细则），画布上合成一组，
+// 分级信息退到细则行的 title 属性里，不再占版面。
+//
+// 「导出本月清单」：画布上的链接，线上原先没有对应能力。这里做成**真导出** ——
+// 数据本来就在这一页（items 全量渲染），前端拼 CSV 下载即可，不需要后端也不需要新的静态文件。
 import Item from "./ArchiveItem.astro";
+import DetailRow from "./ArchiveDetailRow.astro";
 import type { ArchiveMonth } from "../lib/archive";
 
 interface Props {
@@ -7,81 +17,180 @@ interface Props {
 }
 const { doc } = Astro.props;
 const [year, mon] = doc.month.split("-");
-const groups: Array<[string, string, typeof doc.items]> = [
-  ["高", "核心考点", doc.items.filter((x) => x.importance === "高")],
-  ["中", "了解即可", doc.items.filter((x) => x.importance === "中")],
-  ["低", "技术细则", doc.items.filter((x) => x.importance === "低")],
+
+const core = doc.items.filter((x) => x.importance === "高");
+const rest = doc.items.filter((x) => x.importance !== "高");
+
+// 来源构成按实际取值统计，不写死「国务院文件 / 部门文件」两个名字（数据里出现新来源也能对）
+const libCount = new Map<string, number>();
+for (const it of doc.items) {
+  const key = it.lib || "其他来源";
+  libCount.set(key, (libCount.get(key) ?? 0) + 1);
+}
+const summaryParts = [
+  ...[...libCount.entries()].map(([name, n]) => `${name} ${n} 份`),
+  `核心考点 ${core.length} 份`,
+  `了解细则 ${rest.length} 份`,
 ];
-const rank = (d: string) => d;
+
+// 导出用：只带台账需要的列，不带正文
+const exportRows = doc.items.map((it) => ({
+  date: it.date,
+  lib: it.lib,
+  topic: it.topic,
+  importance: it.importance,
+  title: it.title,
+  url: it.url,
+  gist: it.gist,
+}));
 ---
 
-<section class="archive-main">
-  <header class="arch-head">
-    <h1>{year} 年 {Number(mon)} 月 · 政策档案</h1>
-    <p class="arch-sub">
-      共 {doc.count} 份政策文件 ·
-      <span class="k">核心 {doc.high}</span> /
-      了解 {doc.medium} / 细则 {doc.low}
-    </p>
-  </header>
+<section class="arc-main">
+  <div class="arc-mhead">
+    <div class="arc-mhead__l">
+      <h2 class="arc-mtitle">{year} 年 {Number(mon)} 月</h2>
+      <p class="arc-msub">{summaryParts.join(" · ")}</p>
+    </div>
+    <button class="arc-export" id="arc-export" type="button" data-month={doc.month}>导出本月清单</button>
+  </div>
 
-  {groups.map(([imp, label, rows]) =>
-    rows.length === 0 ? null : imp === "高" ? (
-      <div class="grp">
-        <h2 class="grp-title">核心考点 <span class="cnt">{rows.length}</span></h2>
-        {rows.map((it) => <Item it={it} imp={imp} />)}
-      </div>
-    ) : (
-      <details class="grp-fold">
-        <summary>{label}（{rows.length}）</summary>
-        <div class="fold-body">
-          {rows.map((it) => <Item it={it} imp={imp} />)}
+  {
+    core.length > 0 && (
+      <>
+        <div class="arc-group">
+          <span class="arc-tag arc-tag--core">核心考点</span>
+          <span class="arc-group__n">
+            本月 {core.length} 份 · 建议优先通读，其余归入「了解 · 细则」
+          </span>
         </div>
-      </details>
+        {core.map((it) => (
+          <Item it={it} />
+        ))}
+      </>
     )
-  )}
+  }
+
+  {
+    rest.length > 0 && (
+      <>
+        <div class="arc-group">
+          <span class="arc-tag arc-tag--soft">了解 · 细则</span>
+          <span class="arc-group__n">本月 {rest.length} 份 · 有信息量但不成体系，按需查阅</span>
+        </div>
+        {rest.map((it) => (
+          <DetailRow it={it} />
+        ))}
+      </>
+    )
+  }
+
+  <script
+    type="application/json"
+    id="arc-export-rows"
+    set:html={JSON.stringify(exportRows).replace(/</g, "\\u003c")}
+  />
 </section>
 
 <script>
-  // 供卡片样式复用；无客户端行为，仅占位避免 bundler 警告
+  // 导出本月清单：数据已在页面上，拼 CSV 直接下载（带 BOM，Excel 打开不乱码）。
+  const btn = document.getElementById("arc-export");
+  btn?.addEventListener("click", () => {
+    const el = document.getElementById("arc-export-rows");
+    if (!el) return;
+    let rows: Array<Record<string, string>> = [];
+    try {
+      rows = JSON.parse(el.textContent || "[]") as Array<Record<string, string>>;
+    } catch {
+      return;
+    }
+    const head = ["日期", "来源", "考点", "分级", "标题", "要点", "原文链接"];
+    const cell = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+    const csv = [head, ...rows.map((r) => [r.date, r.lib, r.topic, r.importance, r.title, r.gist, r.url])]
+      .map((line) => line.map(cell).join(","))
+      .join("\r\n");
+
+    const month = btn.getAttribute("data-month") ?? "archive";
+    const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `${month}-政策清单.csv`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
 </script>
 
 <style>
-  .archive-main { min-width: 0; }
-  .arch-head { margin-bottom: 20px; }
-  .arch-head h1 { font-size: var(--font-title-m); margin: 0 0 6px; }
-  .arch-sub { color: var(--sub); font-size: 13.5px; margin: 0; font-variant-numeric: tabular-nums; }
-  .arch-sub .k { color: var(--primary); font-weight: 600; }
-  .grp { margin-bottom: 22px; }
-  .grp-title {
-    font-size: var(--font-meta);
-    margin: 0 0 12px;
+  .arc-main {
+    flex: 1 1 0;
+    min-width: 0;
     display: flex;
-    align-items: center;
-    gap: 8px;
+    flex-direction: column;
+    gap: var(--s-5);
   }
-  .grp-title .cnt {
-    font-size: var(--font-caption);
-    background: var(--primary-soft);
-    color: var(--primary);
-    border-radius: 20px;
-    padding: 1px 9px;
-    font-variant-numeric: tabular-nums;
+
+  /* 月份标题行（画布 3:366）：左「2026 年 9 月」28/34 衬线 + 14 统计行；右「导出本月清单」 */
+  .arc-mhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--s-4);
   }
-  .grp-fold {
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    background: var(--surface);
-    padding: 12px 16px;
-    margin-bottom: 16px;
+  .arc-mhead__l {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    min-width: 0;
   }
-  .grp-fold summary {
-    cursor: pointer;
+  .arc-mtitle {
+    font-family: var(--font-serif);
+    font-size: var(--font-title-l);
+    font-weight: 700;
+    line-height: var(--line-tight);
+    color: var(--ink);
+  }
+  .arc-msub {
     font-size: var(--font-meta);
     color: var(--sub);
-    min-height: 32px;
+    font-variant-numeric: tabular-nums;
+  }
+  /* ⚠️ 显式 background：<button> 的 UA 默认底色是白的 */
+  .arc-export {
+    flex: 0 0 auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--font-meta);
+    font-weight: 500;
+    color: var(--primary);
+    white-space: nowrap;
+  }
+  .arc-export:hover { text-decoration: underline; }
+
+  /* 分组标签行（画布 3:371 / 3:397）：h24 胶囊 + 12 说明。gap 10 —— 间距标尺里没有 10 这一档 */
+  .arc-group {
     display: flex;
     align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
   }
-  .fold-body { padding-top: 12px; }
+  .arc-tag {
+    display: inline-flex;
+    align-items: center;
+    height: 24px;
+    padding: 0 12px;
+    border-radius: var(--r-full);
+    font-size: var(--font-caption);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .arc-tag--core { background: var(--primary); color: var(--panel-strong); }
+  .arc-tag--soft { background: var(--sunken); color: var(--ink); }
+  .arc-group__n { font-size: var(--font-caption); color: var(--mut); }
+
+  @media (max-width: 860px) {
+    .arc-mhead { flex-direction: column; gap: var(--s-3); }
+    .arc-export { min-height: 44px; }
+  }
 </style>

@@ -1,5 +1,10 @@
 ---
-// 政策档案侧边栏：按年份分组的月份导航，每月标注文件数与核心考点数。
+// 政策档案侧边栏（画布 3:338）—— 按年份分组的月份导航。
+//
+// 画布上它不是一个整块大卡，而是**每年一张卡**（pad 16 · 圆角 14 · gap 4）：
+// 卡内第一行是年份头（年份 20 衬线 + 「N 个月 · M 份」两端对齐），
+// 其后是 h36 的月份行（左「2026-09」· 右「12 份」），当前月 = 品牌实底。
+// 旧版那套「整块卡 + .side-head 标题 + .side-foot 全站合计 + 月份胶囊」画布上没有，已撤。
 import type { ArchiveSummary } from "../lib/archive";
 
 interface Props {
@@ -9,124 +14,115 @@ interface Props {
 const { grouped, current } = Astro.props;
 const years = Object.keys(grouped).sort().reverse();
 const yearTotal = (rows: ArchiveSummary[]) => rows.reduce((n, r) => n + r.count, 0);
-const yearHigh = (rows: ArchiveSummary[]) => rows.reduce((n, r) => n + r.high, 0);
 ---
 
-<aside class="archive-side" aria-label="档案月份导航">
-  <div class="side-head">
-    <span class="side-title">政策档案</span>
-  </div>
+<aside class="arc-side" aria-label="档案月份导航">
   {
     years.map((year) => (
-      <div class="side-group">
-        <div class="side-year">
-          <span class="y-label">{year} 年</span>
-          <span class="y-meta">{grouped[year].length} 个月 · {yearTotal(grouped[year])} 份</span>
+      <div class="arc-year">
+        <div class="arc-year__hd">
+          <span class="arc-year__y">{year}</span>
+          <span class="arc-year__m">{grouped[year].length} 个月 · {yearTotal(grouped[year])} 份</span>
         </div>
         {grouped[year].map((row) => (
           <a
-            class:list={["side-month", { active: row.month === current }]}
+            class:list={["arc-month", { on: row.month === current }]}
             href={`/policy/${row.month}/`}
             aria-current={row.month === current ? "page" : undefined}
             title={`${row.count} 份文件，核心考点 ${row.high} 份`}
           >
-            <span class="m-label">{Number(row.month.slice(5, 7))} 月</span>
-            <span class="m-meta">
-              <span class="m-count">{row.count}</span>
-              {row.high > 0 && <span class="m-high">核心 {row.high}</span>}
-            </span>
+            <span class="arc-month__m">{row.month}</span>
+            <span class="arc-month__n">{row.count} 份</span>
           </a>
         ))}
       </div>
     ))
   }
-  <div class="side-foot">
-    全站合计 {years.reduce((n, y) => n + yearTotal(grouped[y]), 0)} 份 ·
-    核心 {years.reduce((n, y) => n + yearHigh(grouped[y]), 0)} 份
-  </div>
 </aside>
 
 <style>
-  .archive-side {
+  /* 粘性跟随：21 个月的长台账滚动时导航不丢；max-height 保证它自己不会顶出视口 */
+  .arc-side {
+    flex: 0 0 auto;
+    width: 240px;
     position: sticky;
     top: 76px;
-    align-self: start;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 14px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
     max-height: calc(100vh - 100px);
     overflow-y: auto;
-    box-shadow: var(--shadow-sm);
   }
-  .side-head { padding: 0 8px 10px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
-  .side-title { font-size: var(--font-meta); font-weight: 600; color: var(--sub); letter-spacing: 0.04em; }
-  .side-group { margin-bottom: 12px; }
-  .side-year {
+
+  /* 年份卡（画布 3:339 / 3:352）：pad 16 · gap 4 · 圆角 14 · 纸卡底 + 描边 */
+  .arc-year {
     display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+    padding: 16px;
+    border-radius: var(--r-lg);
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .arc-year__hd {
+    display: flex;
+    justify-content: space-between;
     align-items: baseline;
-    justify-content: space-between;
-    gap: 6px;
-    padding: 6px 8px 4px;
+    gap: var(--s-2);
+    margin-bottom: var(--s-1);
   }
-  .y-label { font-size: var(--font-meta); font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
-  .y-meta { font-size: var(--font-micro); color: var(--mut); font-variant-numeric: tabular-nums; }
-  .side-month {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    min-height: 38px;
-    padding: 0 10px;
-    border-radius: 8px;
+  .arc-year__y {
+    font-family: var(--font-serif);
+    font-size: var(--font-title-s);
+    font-weight: 700;
+    line-height: var(--line-heading);
     color: var(--ink);
-    text-decoration: none;
-    font-size: var(--font-meta);
-    transition: background var(--dur-sm, 160ms) var(--ease-out, ease);
-  }
-  .side-month:hover { background: var(--surface-2); }
-  .side-month.active { background: var(--primary-soft); color: var(--primary); }
-  .side-month:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-  .m-label { font-variant-numeric: tabular-nums; }
-  .m-meta { display: flex; align-items: center; gap: 6px; font-size: var(--font-micro); color: var(--mut); }
-  .side-month.active .m-meta { color: var(--primary); }
-  .m-count {
     font-variant-numeric: tabular-nums;
-    background: var(--surface-2);
-    border-radius: 20px;
-    padding: 0 6px;
-    min-width: 24px;
-    text-align: center;
   }
-  .side-month.active .m-count { background: #fff; }
-  .m-high { color: var(--green); font-weight: 600; white-space: nowrap; }
-  .side-foot {
-    border-top: 1px solid var(--line);
-    padding: 10px 8px 2px;
-    font-size: 11.5px;
+  .arc-year__m {
+    font-size: var(--font-caption);
     color: var(--mut);
     font-variant-numeric: tabular-nums;
   }
 
-  /* 窄屏：侧边栏变顶部横向滚动条，保证 ≥44px 触达高度 */
+  /* 月份行（画布 3:343）：h36 · pad 0 12 · 圆角 8；当前月 = 品牌实底 + 暖白字 */
+  .arc-month {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-2);
+    height: 36px;
+    padding: 0 12px;
+    border-radius: var(--r-sm);
+    color: var(--ink);
+    text-decoration: none;
+    transition: background var(--dur-sm, 160ms) var(--ease-out, ease);
+  }
+  .arc-month__m {
+    font-size: var(--font-meta);
+    font-variant-numeric: tabular-nums;
+  }
+  .arc-month__n {
+    font-size: var(--font-caption);
+    color: var(--mut);
+    font-variant-numeric: tabular-nums;
+  }
+  .arc-month:hover { background: var(--surface-2); }
+  .arc-month.on,
+  .arc-month.on:hover { background: var(--primary); }
+  /* 品牌底上的暖白用 --panel-strong（画布原值 #FFFDF6），份数用 panel-label —— 见 global.css 的命名债说明 */
+  .arc-month.on .arc-month__m { color: var(--panel-strong); font-weight: 500; }
+  .arc-month.on .arc-month__n { color: var(--panel-label); }
+  .arc-month:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
   @media (max-width: 860px) {
-    .archive-side {
+    .arc-side {
       position: static;
+      width: 100%;
       max-height: none;
-      display: flex;
-      gap: 6px;
-      align-items: center;
-      padding: 10px;
-      overflow-x: auto;
+      overflow: visible;
     }
-    .side-head, .side-foot, .side-year { display: none; }
-    .side-group { display: flex; gap: 6px; margin: 0; }
-    .side-month {
-      min-height: 44px;
-      white-space: nowrap;
-      border: 1px solid var(--line);
-      justify-content: center;
-      gap: 5px;
-    }
+    /* 触控目标：窄屏月份行抬到 44 */
+    .arc-month { height: auto; min-height: 44px; }
   }
 </style>

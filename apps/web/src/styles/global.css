@@ -1941,6 +1941,48 @@ summary:active,
 }
 .pg-note-p { font-size: var(--font-meta); line-height: var(--line-ui); color: var(--primary-text); }
 
+/* ===================================================================
+   政策档案（画布 03 / 3:293）—— 页面骨架
+   页头 pad 40/64 底 --surface-2（与收藏页同值；about/sources 那套是 44）；
+   页头内 gap 20 = 标题行（标题 + 说明 + 右侧三项统计）+ 搜索框 520×44。
+   主体 pad 40/64/72 · 横向 gap 32 = 240 定宽年份导航 + 吃满剩余的内容列。
+   内层 1440 居中 —— 与首页横带同一条规则。侧栏与内容列各自的样式在对应组件里。
+   =================================================================== */
+.arc-head { background: var(--surface-2); }
+.arc-head__in {
+  max-width: 1440px; margin: 0 auto; padding: 40px 64px;
+  display: flex; flex-direction: column; gap: var(--s-xl);
+}
+.arc-head__row { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s-4); }
+.arc-head__l { display: flex; flex-direction: column; gap: var(--s-2); min-width: 0; }
+
+/* 搜索框（画布 3:332）：520×44 · pad 0 14 · gap 8 · 圆角 8 · 纸卡底 + 描边 + 16 图标。
+   直接提交到 /search/ —— 它已经支持 ?q= 预填并当场出结果。 */
+.arc-search {
+  display: flex; align-items: center; gap: var(--s-2);
+  width: 520px; max-width: 100%; height: 44px; padding: 0 14px;
+  border-radius: var(--r-sm); background: var(--surface); border: 1px solid var(--line);
+}
+.arc-search__ic { flex: 0 0 auto; width: 16px; height: 16px; color: var(--mut); }
+.arc-search__in {
+  flex: 1 1 auto; min-width: 0; border: 0; background: none; outline: none;
+  font-family: inherit; font-size: var(--font-meta); color: var(--ink);
+}
+.arc-search__in::placeholder { color: var(--mut); }
+.arc-search:focus-within { border-color: var(--primary); }
+
+.arc-body { background: var(--bg); }
+.arc-body__in {
+  max-width: 1440px; margin: 0 auto; padding: 40px 64px 72px;
+  display: flex; align-items: flex-start; gap: 32px;
+}
+
+/* 窄屏：侧栏回到主内容上方（不折叠成横向滚动条 —— 年份卡里套月份行，横滚一次只露一个年份，反而更难用） */
+@media (max-width: 860px) {
+  .arc-head__in { padding: 28px 16px; }
+  .arc-body__in { padding: 24px 16px 56px; flex-direction: column; gap: var(--s-5); }
+}
+
 /* ── 设计规范页 ── */
 .spec-head { background: var(--panel-deep); }
 .spec-head__in {

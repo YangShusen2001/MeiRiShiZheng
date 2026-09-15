@@ -1,10 +1,14 @@
 ---
-// 政策档案：月份页（/policy/<YYYY-MM>/）。
-// 数据来自 content/archive/<月>/archive.json（scripts/ 三脚本产出）。
+// 政策档案：月份页（/policy/<YYYY-MM>/）。画布 03 / 3:293。
+//
+// 结构照画布：页头（标题 + 说明 + 右侧三项统计 + 520×44 搜索框）→
+// 主体（240 定宽年份导航 + 内容列：月份标题行 → 核心考察卡 → 了解 · 细则行）。
+// 页头的统计是全馆合计（21 个月 / 1175 份 / 121 份），不是本月的 —— 画布上这三个数就是全馆口径。
+// 数据来自 content/archive/<月>/archive.json（scripts/ 两个脚本产出）。
 import Base from "../../layouts/Base.astro";
 import ArchiveSidebar from "../../components/ArchiveSidebar.astro";
 import PolicyArchive from "../../components/PolicyArchive.astro";
-import { getArchive, groupArchiveSummary, listArchiveSummary } from "../../lib/archive";
+import { getArchive, groupArchiveSummary, listArchiveSummary, listArchiveTotals } from "../../lib/archive";
 
 export function getStaticPaths() {
   return listArchiveSummary().map((row) => ({
@@ -19,24 +23,60 @@ if (!doc) {
   throw new Error(`档案缺失：${month}`);
 }
 const grouped = groupArchiveSummary(listArchiveSummary());
+const totals = listArchiveTotals();
 const [year, mon] = month.split("-");
 ---
 
-<Base title={`${year} 年 ${Number(mon)} 月政策档案 · 时政小助手`}>
-  <div class="archive-layout">
-    <ArchiveSidebar grouped={grouped} current={month} />
-    <PolicyArchive doc={doc} />
-  </div>
-</Base>
+<Base
+  title={`${year} 年 ${Number(mon)} 月政策档案 · 时政小助手`}
+  description={`中国政府网政策文件库 ${year} 年 ${Number(mon)} 月台账：共 ${doc.count} 份文件，其中核心考点 ${doc.high} 份。`}
+  bleed
+>
+  <section class="arc-head">
+    <div class="arc-head__in">
+      <div class="arc-head__row">
+        <div class="arc-head__l">
+          <h1 class="pg-title">政策档案</h1>
+          <p class="pg-sub">中国政府网政策文件库 · 国务院文件与部门文件 · 按月成台账，只留核心</p>
+        </div>
+        <div class="pg-stats">
+          <div class="pg-stat">
+            <span class="pg-stat__n">{totals.months} 个月</span>
+            <span class="pg-stat__l">{totals.firstMonth} 起</span>
+          </div>
+          <div class="pg-stat">
+            <span class="pg-stat__n">{totals.files} 份</span>
+            <span class="pg-stat__l">政策文件</span>
+          </div>
+          <div class="pg-stat">
+            <span class="pg-stat__n pg-stat__n--brand">{totals.core} 份</span>
+            <span class="pg-stat__l">核心考点</span>
+          </div>
+        </div>
+      </div>
 
-<style>
-  .archive-layout {
-    display: grid;
-    grid-template-columns: 172px minmax(0, 1fr);
-    gap: 24px;
-    align-items: start;
-  }
-  @media (max-width: 860px) {
-    .archive-layout { grid-template-columns: 1fr; gap: 14px; }
-  }
-</style>
+      {/* 搜索行（画布 3:331）：直接提交到 /search/，它已支持 ?q= 预填并当场出结果 */}
+      <form class="arc-search" action="/search/" method="get" role="search">
+        <svg class="arc-search__ic" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"></circle>
+          <path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+        </svg>
+        <input
+          class="arc-search__in"
+          type="search"
+          name="q"
+          placeholder="搜政策标题或关键词，如：十五五、碳达峰"
+          aria-label="搜索政策"
+          autocomplete="off"
+        />
+      </form>
+    </div>
+  </section>
+
+  <section class="arc-body">
+    <div class="arc-body__in">
+      <ArchiveSidebar grouped={grouped} current={month} />
+      <PolicyArchive doc={doc} />
+    </div>
+  </section>
+</Base>

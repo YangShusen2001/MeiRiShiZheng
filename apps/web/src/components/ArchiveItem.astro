@@ -1,57 +1,127 @@
 ---
-import type { ArchiveItem } from "../lib/archive";
+// 核心考点卡（画布 3:375）：pad 20 · 圆角 14 · gap 12 · 纸卡底 + 描边。
+// 顶行 = 来源标签（h24 胶囊）与发布日期两端对齐；标题 20/26 衬线；要点 14/24；
+// 底行 = 左「查看官方原文」+ 右「加入收藏」。
+//
+// ⚠️ 画布上还有一行 12px accent 的「关键数字」（如「关键数字：天然气产量目标 · 储气能力占消费量比重」），
+//    这里**不渲染** —— archive.json 里没有对应字段。拿不到就不编（与收藏卡「摘要」「出处说明」同一条原则），
+//    等 pipeline 产出该字段再补。
+// ⚠️ 「加入收藏」：契约 `favoriteKindSchema` 目前只有 article/quote/term，**没有 policy**
+//    （见 favorites.astro 顶部注释）。按画布渲染按钮，但点击给出诚实提示、不伪装成功；
+//    补契约那一步换成真调用即可。
+import type { ArchiveItem as Item } from "../lib/archive";
 
 interface Props {
-  it: ArchiveItem;
-  imp: string;
+  it: Item;
 }
-const { it, imp } = Astro.props;
-const cls = imp === "高" ? "high" : imp === "中" ? "medium" : "low";
+const { it } = Astro.props;
 ---
 
-<article class:list={["ai", cls]}>
-  <div class="ai-row">
-    <span class="ai-date">{it.date.slice(5)}</span>
-    <span class="ai-lib">{it.lib}</span>
-    <span class="ai-topic">{it.topic}</span>
-    <a class="ai-link" href={it.url} target="_blank" rel="noopener">原文 ↗</a>
+<article class="arc-card">
+  <div class="arc-card__top">
+    <span class="arc-card__src" title={it.topic}>{it.lib}</span>
+    <span class="arc-card__date">{it.date} 发布</span>
   </div>
-  <h3 class="ai-title">{it.title}</h3>
-  {it.gist ? <p class="ai-gist">{it.gist}</p> : <p class="ai-gist mut">（要点待补）</p>}
+  <h3 class="arc-card__title">{it.title}</h3>
+  {it.gist && <p class="arc-card__gist">{it.gist}</p>}
+  <div class="arc-card__foot">
+    <a class="arc-card__link" href={it.url} target="_blank" rel="noopener">查看官方原文</a>
+    <button class="arc-card__fav" type="button">加入收藏</button>
+  </div>
+  <p class="arc-card__hint" hidden>政策收藏还没接入 —— 收藏类型里目前还没有「政策」这一类，补上契约后这里就能一键收藏。</p>
 </article>
 
+<script>
+  // 事件委托：一张页面有多个卡片，不需要逐个绑定。
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement | null;
+    const btn = target?.closest(".arc-card__fav");
+    if (!btn) return;
+    const hint = btn.closest(".arc-card")?.querySelector(".arc-card__hint");
+    if (!(hint instanceof HTMLElement)) return;
+    hint.hidden = false;
+    window.setTimeout(() => {
+      hint.hidden = true;
+    }, 5000);
+  });
+</script>
+
 <style>
-  .ai {
+  .arc-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    padding: 20px;
+    border-radius: var(--r-lg);
     background: var(--surface);
     border: 1px solid var(--line);
-    border-left: 4px solid var(--line);
-    border-radius: 12px;
-    padding: 13px 16px;
-    margin-bottom: 11px;
-    box-shadow: var(--shadow-sm);
   }
-  .ai.high { border-left-color: var(--green); }
-  .ai.medium { border-left-color: var(--accent); }
-  .ai.low { border-left-color: var(--line); opacity: 0.9; }
-  .ai-row {
+  .arc-card__top {
     display: flex;
-    gap: 8px;
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+  /* 来源标签（画布 3:377）：h24 · pad 0 10 · 圆角 999 · 品牌浅底 + 品牌深字 */
+  .arc-card__src {
+    display: inline-flex;
+    align-items: center;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: var(--r-full);
+    background: var(--primary-soft);
+    color: var(--primary-text);
     font-size: var(--font-caption);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .arc-card__date {
+    font-size: var(--font-caption);
+    color: var(--mut);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .arc-card__title {
+    font-family: var(--font-serif);
+    font-size: var(--font-title-s);
+    font-weight: 700;
+    line-height: var(--line-heading);
+    color: var(--ink);
+  }
+  .arc-card__gist {
+    font-size: var(--font-meta);
+    line-height: var(--line-ui);
     color: var(--sub);
-    margin-bottom: 6px;
   }
-  .ai-date { font-variant-numeric: tabular-nums; }
-  .ai-lib, .ai-topic {
+  .arc-card__foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+  }
+  .arc-card__link { font-size: var(--font-meta); font-weight: 500; color: var(--primary); }
+  .arc-card__link:hover { text-decoration: underline; }
+  /* ⚠️ <button> 的 UA 默认底色是白的 —— 透明按钮必须显式写 background，否则会出白块 */
+  .arc-card__fav {
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--font-meta);
+    color: var(--sub);
+  }
+  .arc-card__fav:hover { color: var(--primary); }
+  .arc-card__hint {
+    font-size: var(--font-caption);
+    line-height: var(--line-ui);
+    color: var(--mut);
     background: var(--surface-2);
-    border-radius: 5px;
-    padding: 1px 7px;
+    border-radius: var(--r-sm);
+    padding: 8px 10px;
   }
-  .ai-topic { color: var(--accent); background: var(--accent-soft); }
-  .ai-link { color: var(--primary); text-decoration: none; margin-left: auto; }
-  .ai-link:hover { text-decoration: underline; }
-  .ai-title { font-size: var(--font-meta); line-height: var(--line-ui); margin: 0 0 6px; font-weight: 600; }
-  .ai-gist { font-size: var(--font-meta); color: var(--sub); margin: 0; line-height: var(--line-ui); }
-  .ai-gist.mut { font-style: italic; color: var(--mut); }
+  @media (max-width: 640px) {
+    .arc-card__fav { min-height: 44px; } /* 触控目标 */
+  }
 </style>
