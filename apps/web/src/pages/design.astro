@@ -1,0 +1,204 @@
+---
+// 设计规范页（画布 06 / 3:638）。
+//
+// ⚠️ 这一页**不写任何数值**：色号、对比度、色相距离、字号/行高/间距/圆角/字重全部由
+// `lib/spec.ts` 从 packages/design-tokens/tokens.json 与 pipeline/config.json 实算。
+// 手抄一遍就是第二份真相——改令牌时页面会继续报旧值，而且没人会发现。
+//
+// 页内的色块用的是**解析后的色值**（不是 var(--color-x)）：这是一页「展示取值」的说明，
+// 深色那一行必须在浅色主题下也印出深色的值，用变量只会渲染成浅色值。
+import Base from "../layouts/Base.astro";
+import {
+  TOKENS,
+  kebab,
+  swatchGroups,
+  hueReport,
+  fontRows,
+  lineRows,
+  weightRows,
+  spaceRows,
+  radiusRows,
+  accessibilityRules,
+} from "../lib/spec";
+
+const groups = swatchGroups();
+const { brandHue, nearest } = hueReport();
+const fonts = fontRows();
+const lines = lineRows();
+const weights = weightRows();
+const spaces = spaceRows();
+const radii = radiusRows();
+const rules = accessibilityRules();
+
+const SECTIONS = ["色系统", "标尺", "间距与圆角", "组件规格", "无障碍硬约束"];
+
+// 字号/行高按画布顺序（大到小）；行高卡的示例文字就用该档行高排。
+// 字号示例的字体族跟真实角色一致：区块/卡片标题是衬线，正文与次级 UI 是无衬线。
+const SERIF_KEYS = new Set(["display", "titleL", "titleM", "titleS"]);
+
+const WEIGHT_CN: Record<number, string> = { 400: "常规", 500: "中等", 600: "半粗", 700: "粗体" };
+---
+
+<Base title="设计规范 · 每日时政" description="考公云三端统一设计系统的取值与硬约束，全部由设计令牌实算。" bleed>
+  <section class="spec-head">
+    <div class="spec-head__in">
+      <div class="spec-head__row">
+        <div class="spec-head__l">
+          <h1 class="spec-title">设计规范</h1>
+          <p class="spec-sub">
+            考公云 · 三端统一设计系统 · 唯一数值源 packages/design-tokens/tokens.json · 三端只统一值，不统一组件形态
+          </p>
+        </div>
+        <span class="spec-pill">{TOKENS.meta.version} · {TOKENS.meta.updated} · 提案态</span>
+      </div>
+      <div class="spec-toc">
+        {SECTIONS.map((name, i) => (
+          <span class={i === 0 ? "spec-toc__on" : ""}>{i > 0 ? "· " : ""}{name}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="spec-band" id="color">
+    <div class="spec-band__in">
+      <div class="spec-shead">
+        <div class="spec-shead__l">
+          <h2 class="spec-h2">色系统</h2>
+          <p class="spec-sub">
+            浅色基准：暖底 {TOKENS.color.light.bg} / 纸卡 {TOKENS.color.light.surface} · 比值按 WCAG 2.1 实算，正文全部达 AA
+          </p>
+        </div>
+        <span class="spec-note">品牌色相 {brandHue}° · 距最近语义色 {nearest.distance}°</span>
+      </div>
+
+      {groups.map((group) => (
+        <div class="spec-group">
+          <h3 class="spec-h3">{group.title}</h3>
+          <div class="spec-grid" style={`--cols: ${group.cols}`}>
+            {group.swatches.map((s) => (
+              <div class="spec-swatch" style={`background: ${s.hex}; color: ${s.text}`}>{s.label}</div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="spec-band spec-band--alt" id="scale">
+    <div class="spec-band__in">
+      <div class="spec-shead spec-shead--cx">
+        <h2 class="spec-h2">标尺</h2>
+        <p class="spec-sub">
+          字号 {fonts.length} 档按 1.2 比例 · 行高 {lines.length} 档 · 字重 {weights.length} 档 · 遗留值就近归并，不新增零散档位
+        </p>
+      </div>
+
+      <h3 class="spec-h3 spec-h3--brand">字号 · {fonts.length} 档</h3>
+      <div class="spec-fonts">
+        {fonts.map((row) => (
+          <div class="spec-font">
+            <span class={SERIF_KEYS.has(row.key) ? "spec-font__demo" : "spec-font__demo spec-font__demo--sans"} style={`font-size: var(--font-${kebab(row.key)})`}>{row.sample}</span>
+            <span class="spec-font__meta">{row.size} {row.key} · {row.role}</span>
+          </div>
+        ))}
+      </div>
+
+      <h3 class="spec-h3 spec-h3--brand">行高 · {lines.length} 档（存比值）与字重 · {weights.length} 档</h3>
+      <div class="spec-lines">
+        {lines.map((row) => (
+          <div class={`spec-line${row.highlight ? " spec-line--on" : ""}`} style={`line-height: var(--line-${row.key})`}>
+            {row.value} {row.cn} · {row.role}
+          </div>
+        ))}
+      </div>
+      <div class="spec-weights">
+        {weights.map((w) => (
+          <span style={`font-weight: ${w}`}>{w} {WEIGHT_CN[w] ?? ""} 时政</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="spec-band" id="space">
+    <div class="spec-band__in">
+      <div class="spec-shead spec-shead--cx">
+        <h2 class="spec-h2">间距与圆角</h2>
+        <p class="spec-sub">
+          间距 4 基线 {spaces.length} 档 · 圆角以鸿蒙为准（Web 原 12 / 18 收敛为 {TOKENS.radius.md} / {TOKENS.radius.lg}）
+        </p>
+      </div>
+
+      <h3 class="spec-h3 spec-h3--brand">间距 · {spaces.length} 档</h3>
+      <div class="spec-spaces">
+        {spaces.map((row) => (
+          <div class="spec-space">
+            <span class="spec-space__bar" style={`width: var(--space-${row.key})`}></span>
+            <span class="spec-space__meta">{row.key} · {row.value}{row.note ? `（${row.note}）` : ""}</span>
+          </div>
+        ))}
+      </div>
+
+      <h3 class="spec-h3 spec-h3--brand">圆角 · {radii.length} 档</h3>
+      <div class="spec-radii">
+        {radii.map((row) => (
+          <div class="spec-radius">
+            <span
+              class={`spec-radius__box${row.highlight ? " spec-radius__box--on" : ""}`}
+              style={`border-radius: var(--radius-${row.key})`}
+            ></span>
+            <span class="spec-radius__meta">{row.key} · {row.value}{row.note ? ` · ${row.note}` : ""}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="spec-band spec-band--alt" id="components">
+    <div class="spec-band__in">
+      <div class="spec-shead spec-shead--cx">
+        <h2 class="spec-h2">组件规格</h2>
+        <p class="spec-sub">只约规格与命名，不改各端布局 · 三端渲染同一套值后，差异只剩组件形态</p>
+      </div>
+
+      <div class="spec-comps">
+        <div class="spec-comp">
+          <span class="spec-btn spec-btn--primary">开始阅读</span>
+          <span class="spec-comp__spec">主按钮 · h40 · full 圆角</span>
+        </div>
+        <div class="spec-comp">
+          <span class="spec-btn">查看提示</span>
+          <span class="spec-comp__spec">次按钮 · h40 · line 描边</span>
+        </div>
+        <div class="spec-comp">
+          <span class="spec-chip">考点 3</span>
+          <span class="spec-comp__spec">胶囊标签 · h22 · micro 字</span>
+        </div>
+        <div class="spec-comp">
+          <span class="spec-input">搜索时政 / 政策</span>
+          <span class="spec-comp__spec">输入框 · h40 · sm 圆角</span>
+        </div>
+        <div class="spec-comp">
+          <span class="spec-card">分层分类社会救助体系</span>
+          <span class="spec-comp__spec">卡片 · radius lg + 单像素描边 + space l</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spec-rules" id="a11y">
+    <div class="spec-rules__in">
+      <h2 class="spec-h2 spec-h2--panel">无障碍硬约束</h2>
+      <ul class="spec-rules__list">
+        {rules.map((rule) => (
+          <li>
+            <svg class="spec-check" viewBox="0 0 14 14" aria-hidden="true">
+              <circle cx="7" cy="7" r="6.3" fill="none" stroke="currentColor" stroke-width="1.1"></circle>
+              <path d="M4.2 7.2l1.9 1.9 3.7-3.9" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>{rule.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>

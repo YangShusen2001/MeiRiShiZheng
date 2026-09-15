@@ -42,6 +42,7 @@ ANY_HEX = re.compile(r"#[0-9a-fA-F]{3,8}\b")
 
 _CSS_COMMENT = re.compile(r"/\*.*?\*/", re.S)
 _HTML_COMMENT = re.compile(r"<!--.*?-->", re.S)
+_JS_LINE_COMMENT = re.compile(r"//[^\n]*")
 
 
 def strip_comments(text: str) -> str:
@@ -49,7 +50,12 @@ def strip_comments(text: str) -> str:
 
     注释是文档：写清「这个值为什么是 #5A66A8，而不是 color-mix 派生出来的 #616A9C」，
     正是令牌迁移要留下的证据。把注释里的色号算成裸 hex，等于让门禁惩罚正当的说明。
+
+    行注释（`//`）也要剥：`.astro` 的 frontmatter 里会写「不是 var(--color-x)」这类说明，
+    不剥的话 CSS 变量检查会把它当成一次真实引用。
+    代价是同一行 `https://` 之后的文本也被切掉 —— 对字号/行高/色值这三项检查没有影响。
     """
+    text = _JS_LINE_COMMENT.sub("", text)
     return _HTML_COMMENT.sub("", _CSS_COMMENT.sub("", text))
 
 
@@ -292,36 +298,27 @@ def check_hue_ring(rep: Report, tokens: dict) -> None:
 
 
 def check_panel_invariance(rep: Report, tokens: dict) -> None:
-    """panel* / avatar_* 两族必须两套主题同值。
+    """panel* 面板色族必须两套主题同值。
 
     这条不变式是别的检查的前提：check_wcag 只跑一遍面板对比度（拿浅色代表），
     一旦有人为了「修深色」只改 dark 块里的 panel*，面板就会在深色下偷偷换色，
     而对比度断言仍在拿旧值算 —— 于是门禁静默失效。宁可直接失败。
-
-    avatar_* 的理由不同但同样硬：那是**用户自己挑的那一格**。切主题时换成另一种颜色，
-    等于把用户的选择抹掉。所以两族共用这一条检查，只是失败信息里的族名不同。
     """
-    families = {
-        "面板": tokens["audit"]["panelTokens"],
-        "头像": tokens["audit"]["avatarTokens"],
-    }
+    names = tokens["audit"]["panelTokens"]
     light, dark = tokens["color"]["light"], tokens["color"]["dark"]
     mismatched: list[dict[str, str]] = []
-    total = 0
-    for family, names in families.items():
-        total += len(names)
-        for key in names:
-            if key not in light or key not in dark:
-                rep.fail(f"[{family}] 令牌缺失：{key} 必须在 color.light 与 color.dark 同时存在")
-                continue
-            if light[key].upper() != dark[key].upper():
-                mismatched.append({"family": family, "token": key, "light": light[key], "dark": dark[key]})
-    rep.checks["panel_tokens"] = total
+    for key in names:
+        if key not in light or key not in dark:
+            rep.fail(f"[面板] 令牌缺失：{key} 必须在 color.light 与 color.dark 同时存在")
+            continue
+        if light[key].upper() != dark[key].upper():
+            mismatched.append({"token": key, "light": light[key], "dark": dark[key]})
+    rep.checks["panel_tokens"] = len(names)
     rep.checks["panel_invariance_violations"] = mismatched
     for item in mismatched:
         rep.fail(
-            f"[{item['family']}] {item['token']} 两套主题取值不同（{item['light']} / {item['dark']}）"
-            " —— 这一族不随主题翻转"
+            f"[面板] {item['token']} 两套主题取值不同（{item['light']} / {item['dark']}）"
+            " —— panel* 是品牌面，不随主题翻转"
         )
 
 
@@ -401,8 +398,12 @@ def check_scale(rep: Report, tokens: dict) -> None:
 # ─────────────────── 6b. CSS 变量引用可解析性（硬失败） ───────────────────
 
 
-CSS_VAR_DEF = re.compile(r"(--[a-z0-9][a-z0-9-]*)\s*:")
-CSS_VAR_USE = re.compile(r"var\(\s*(--[a-z0-9][a-z0-9-]*)\s*(,)?")
+# ⚠️ 名字必须**每一段都非空**（`--font-` 不算名字），且后面必须紧跟 `,` 或 `)`。
+# 页面里会用模板字符串拼变量名（`var(--font-${kebab(key)})`）：
+# 宽松的 `--[a-z0-9-]+` 会把 `--font-` 报成未定义变量，不要求闭合括号会把 `--radius` 也报出来。
+CSS_VAR_NAME = r"--[a-z0-9]+(?:-[a-z0-9]+)*"
+CSS_VAR_DEF = re.compile(rf"({CSS_VAR_NAME})\s*:")
+CSS_VAR_USE = re.compile(rf"var\(\s*({CSS_VAR_NAME})\s*(,|\))")
 
 
 def check_css_var_refs(rep: Report, tokens: dict) -> None:
@@ -429,8 +430,9 @@ def check_css_var_refs(rep: Report, tokens: dict) -> None:
     for path in sources:
         if not path.exists():
             continue
-        for name, fallback in CSS_VAR_USE.findall(strip_comments(path.read_text(encoding="utf-8"))):
-            if fallback or name in defined:
+        for name, terminator in CSS_VAR_USE.findall(strip_comments(path.read_text(encoding="utf-8"))):
+            # 第二个捕获组是 `,` 或 `)`：只有 `,` 才代表带了兜底值
+            if terminator == "," or name in defined:
                 continue
             missing.setdefault(name, set()).add(path.name)
 
@@ -587,7 +589,7 @@ def main() -> int:
     if href := rep.checks.get("admin_tokens_href"):
         print(f"后台接线    link href = {href}")
     print(
-        f"不翻转色族  {rep.checks.get('panel_tokens', 0)} 项主题不变"
+        f"面板色族    {rep.checks.get('panel_tokens', 0)} 项主题不变"
         f"（违例 {len(rep.checks.get('panel_invariance_violations') or [])}）"
     )
     for label in ("Web 全局样式", "后台页面"):

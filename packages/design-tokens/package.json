@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "exports": {
+    "./wcag.mjs": "./wcag.mjs",
+    "./tokens.json": "./tokens.json"
+  },
   "description": "考公云统一设计令牌 v3：唯一数值源（tokens.json）+ CSS 生成器 + 对比度测试向量",
   "scripts": {
     "generate": "node generate.mjs",

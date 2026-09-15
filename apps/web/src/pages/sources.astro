@@ -1,0 +1,73 @@
+---
+// 数据来源（画布 08 / 3:964）。
+//
+// ⚠️ 清单与统计全部来自 pipeline/config.json（真实采集配置），不是画布上那串示例数字。
+// 画布写的是「13 个官方来源 · 栏目级白名单 22 条」，实际 config 里是另一个数 ——
+// 照抄画布等于让这一页说假话，所以按真实配置生成。
+// 布局与排版仍严格按画布（页头 / 统计组 / 表格 / AI 说明卡）。
+import Base from "../layouts/Base.astro";
+import { sourceRows, sourceStats, kebab } from "../lib/spec";
+
+const rows = sourceRows();
+const stats = sourceStats();
+---
+
+<Base
+  title="数据来源 · 每日时政"
+  description={`${stats.sources} 个采集来源 · ${stats.rules} 条来源级过滤规则 · 抓取与筛选规则公开可查`}
+  bleed
+>
+  <section class="pg-head">
+    <div class="pg-head__in">
+      <div class="pg-head__row">
+        <div class="pg-head__l">
+          <h1 class="pg-title">数据来源</h1>
+          <p class="pg-sub">
+            {stats.sources} 个采集来源 · {stats.rules} 条来源级过滤规则 · 抓取与筛选规则公开可查
+          </p>
+        </div>
+        <div class="pg-stats">
+          <div class="pg-stat">
+            <span class="pg-stat__n">{stats.sources} 个</span>
+            <span class="pg-stat__l">采集来源</span>
+          </div>
+          <div class="pg-stat">
+            <span class="pg-stat__n pg-stat__n--brand">{stats.rules} 条</span>
+            <span class="pg-stat__l">来源级过滤规则</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pg-body">
+    <div class="pg-body__in">
+      <h2 class="pg-list-title">来源清单（栏目级判定，不按来源一刀切）</h2>
+
+      <div class="pg-table">
+        <div class="pg-tr pg-tr--head">
+          <span class="pg-td pg-td--name">来源</span>
+          <span class="pg-td pg-td--kind">去向（栏目槽位）</span>
+          <span class="pg-td pg-td--use">采用情况（栏目级判定）</span>
+        </div>
+        {rows.map((row) => (
+          <div class="pg-tr">
+            <span class="pg-td pg-td--name">{row.name}</span>
+            <span class="pg-td pg-td--kind">{row.kind}</span>
+            <span class="pg-td pg-td--use">{row.usage}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="pg-note-card">
+        <h2 class="pg-note-title">AI 在这条链路里只做两件事</h2>
+        <p class="pg-note-p">
+          一是写一段 60-150 字的概括；二是标出考点、观点、术语并给出段落位置。所有输出都要求能在原文中定位，定位不到就丢弃——不编造。
+        </p>
+        <p class="pg-note-p">
+          调用失败时文章仍以原文发布，并写入失败原因、进入重试与报告；不会静默发布，也不会用程序兜底编造内容。
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

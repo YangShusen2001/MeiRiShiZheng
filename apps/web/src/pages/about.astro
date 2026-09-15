@@ -1,0 +1,73 @@
+---
+// 关于本站（画布 07 / 3:897）。
+//
+// 版号与日期从令牌的 meta 读，不写死 —— 画布上那句「内容与设计规范 v3 · 2026-09-12」
+// 就是 meta.version / meta.updated，手抄会跟令牌脱钩。
+import Base from "../layouts/Base.astro";
+import { TOKENS } from "../lib/spec";
+
+// 反馈入口：仓库里没有任何 issue/邮箱地址，所以**不编造链接**。
+// 填上真实地址（如 mailto: 或 issue 页）即自动变成可点链接。
+const FEEDBACK_HREF = "";
+
+const ITEMS: Array<{ title: string; body: string }> = [
+  {
+    title: "我们做什么",
+    body: "从官方来源抓取原文，先过四道纯规则筛选——栏目白名单、标题簇去重、信息密度、每日配额；再让 AI 只做两件事：写一段 60-150 字的概括，标出考点、观点、术语。所有 AI 输出都要求能在原文中定位，定位不到就丢弃。",
+  },
+  {
+    title: "我们不做什么",
+    body: "不生成事实、不写评论、不搬运没有出处的内容。AI 概括失败的文章照样发原文，并把失败原因写进内容状态。不做信息流推荐，不做无上限的翻页瀑布。",
+  },
+  {
+    title: "怎么保证可信",
+    body: "每篇都保留来源媒体、发布时间和官方原文链接，一键可核。原文里划的每一条考点都对应一个具体段落，点击即可跳到该段；AI 概括只做压缩，不做补充。",
+  },
+];
+---
+
+<Base title="关于本站 · 每日时政" description="一个只做「少而准」的时政阅读站：每天 2-5 篇，每篇都保留官方原文出处。" bleed>
+  <section class="pg-head">
+    <div class="pg-head__in">
+      <div class="pg-head__row">
+        <div class="pg-head__l">
+          <h1 class="pg-title">关于本站</h1>
+          <p class="pg-sub">一个只做「少而准」的时政阅读站 · 每天 2-5 篇 · 每篇都保留官方原文出处</p>
+        </div>
+        <span class="pg-pill">内容与设计规范 {TOKENS.meta.version} · {TOKENS.meta.updated}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="pg-body">
+    <div class="pg-body__in">
+      <div class="pg-col">
+        <p class="pg-lede">
+          这个站点解决的是一个很具体的问题：时政信息每天都有，但真正值得读、值得记的很少。所以它不做信息流——每天只挑 2-5 篇，每篇都能在原文里找到出处，每篇都标出可以出题的地方。
+        </p>
+
+        {ITEMS.map((item) => (
+          <div class="pg-item">
+            <h2 class="pg-h2">{item.title}</h2>
+            <p class="pg-p">{item.body}</p>
+          </div>
+        ))}
+
+        <figure class="pg-quote">
+          <div class="pg-quote__in">
+            <blockquote>宁可一天只推两篇，也不凑够十条。</blockquote>
+            <figcaption>—— 本站的选材原则</figcaption>
+          </div>
+        </figure>
+
+        <div class="pg-card">
+          <h2 class="pg-h2">反馈与纠错</h2>
+          <p class="pg-p">发现内容错误、来源失效或表述有误，欢迎直接指出；核实后会修正或下架该篇。</p>
+          {FEEDBACK_HREF
+            ? <a class="pg-link" href={FEEDBACK_HREF}>提交反馈</a>
+            : <span class="pg-link pg-link--plain">提交反馈（联系渠道待填）</span>}
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
