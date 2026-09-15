@@ -2241,6 +2241,144 @@ summary:active,
   .lg-card { padding: 20px; }
 }
 
+/* ===================================================================
+   搜索页（结果 10 / 3:1132 · 空态 11 / 3:1220）
+   搜索区 pad 40/64/32 底 --surface-2：搜索框 720×44 + 「搜索」按钮 h44 pad 0 24 + 计数行 + 筛选胶囊 h34。
+   结果区 pad 32/64/56 底 --bg：结果行 pad 18 圆角 10 gap 8；空态卡 820 定宽 pad 48 圆角 14，内容居中。
+   ⚠️ 这页的 DOM 由脚本渲染 → 样式放全局（scoped style 不会作用于动态插入的节点）。
+   =================================================================== */
+.sr-head { background: var(--surface-2); }
+.sr-head__in {
+  max-width: 1440px; margin: 0 auto; padding: 40px 64px 32px;
+  display: flex; flex-direction: column; gap: var(--s-4);
+}
+.sr-bar { display: flex; align-items: center; gap: var(--s-3); }
+.sr-input {
+  flex: 0 1 720px; min-width: 0; height: 44px; padding: 0 14px;
+  display: flex; align-items: center; gap: var(--s-2);
+  border-radius: var(--r-sm); background: var(--surface); border: 1px solid var(--line);
+}
+.sr-input__ic { flex: 0 0 auto; width: 16px; height: 16px; color: var(--mut); }
+.sr-input__f {
+  flex: 1 1 auto; min-width: 0; border: 0; background: none; outline: none;
+  font-family: inherit; font-size: var(--font-meta); color: var(--ink);
+}
+.sr-input__f::placeholder { color: var(--mut); }
+.sr-input:focus-within { border-color: var(--primary); }
+/* ⚠️ 显式 background —— <button> 的 UA 默认底色是白的 */
+.sr-go {
+  flex: 0 0 auto; height: 44px; padding: 0 24px; border: 0; border-radius: var(--r-full);
+  background: var(--primary); color: var(--panel-strong);
+  font-family: inherit; font-size: var(--font-meta); font-weight: 500; cursor: pointer;
+}
+.sr-go:hover { background: var(--primary-deep); }
+
+.sr-count {
+  display: flex; justify-content: space-between; align-items: center; gap: var(--s-3);
+  font-size: var(--font-caption); color: var(--mut);
+}
+
+.sr-filters { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.sr-filter {
+  display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 16px;
+  border-radius: var(--r-full); border: 1px solid var(--line); background: var(--surface);
+  color: var(--sub); font-family: inherit; font-size: var(--font-meta); font-weight: 400;
+  cursor: pointer; white-space: nowrap;
+}
+.sr-filter:hover { border-color: var(--primary); color: var(--primary); }
+.sr-filter.on {
+  background: var(--primary); border-color: var(--primary);
+  color: var(--panel-strong); font-weight: 500;
+}
+/* 计数跟着胶囊的字重走 —— 画布上「全部 27」和胶囊文字同字重，不要 <b> 的加粗 */
+.sr-filter b { font-weight: inherit; }
+
+.sr-body { background: var(--bg); }
+.sr-body__in {
+  max-width: 1440px; margin: 0 auto; padding: 32px 64px 56px;
+  display: flex; flex-direction: column; gap: var(--s-3);
+}
+.sr-list { display: flex; flex-direction: column; gap: var(--s-3); }
+
+/* 结果行（画布 3:1176）：pad 18 · 圆角 10 · gap 8 · 纸卡底 + 描边 */
+.sr-row {
+  display: flex; flex-direction: column; gap: var(--s-2);
+  padding: 18px; border-radius: var(--r-md);
+  background: var(--surface); border: 1px solid var(--line);
+}
+.sr-row:hover { border-color: var(--primary); }
+.sr-row__top { display: flex; align-items: center; }
+/* 类型标签（画布 3:1178）：h22 · pad 0 10 · 圆角 999 · 11 Medium。
+   画布这里是 gap 0，但标签有底色、紧贴来源文字会糊成一块 → 给 8px 视觉间距。 */
+.sr-badge {
+  display: inline-flex; align-items: center; height: 22px; padding: 0 10px;
+  border-radius: var(--r-full); background: var(--primary-soft); color: var(--primary-text);
+  font-size: var(--font-micro); font-weight: 500; white-space: nowrap;
+}
+.sr-meta { margin-left: var(--s-2); font-size: var(--font-caption); color: var(--mut); }
+.sr-title {
+  font-family: var(--font-serif); font-size: var(--font-title-s);
+  font-weight: 700; line-height: var(--line-heading); color: var(--ink);
+}
+/* 命中高亮（画布 3:1183）：底 --hl-yellow · 圆角 3 · pad 0 2 */
+.sr-hit { background: var(--hl-yellow); border-radius: 3px; padding: 0 2px; color: var(--ink); }
+.sr-sum { font-size: var(--font-meta); line-height: var(--line-ui); color: var(--sub); }
+
+.sr-more { display: flex; justify-content: center; padding-top: var(--s-2); }
+/* ⚠️ flex 容器的 `hidden` 属性敌不过 `display:flex` —— 本文件已有 14 处同类补丁，
+   这两处漏了：空态时「加载更多（还有 74 条）」照样露在空态卡上方。凡 display:flex + hidden 都要补一条。 */
+.sr-more[hidden] { display: none; }
+.sr-more__btn {
+  height: 40px; padding: 0 24px; border-radius: var(--r-full);
+  border: 1px solid var(--line); background: var(--surface); color: var(--primary);
+  font-family: inherit; font-size: var(--font-meta); font-weight: 500; cursor: pointer;
+}
+.sr-more__btn:hover { border-color: var(--primary); }
+
+/* 空态（画布 3:1255）：820 定宽 · pad 48 · 圆角 14 · gap 14 · 内容居中 */
+.sr-empty { display: flex; flex-direction: column; gap: var(--s-4); }
+.sr-empty[hidden] { display: none; }
+.sr-empty__card {
+  width: 820px; max-width: 100%;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 48px; border-radius: var(--r-lg);
+  background: var(--surface); border: 1px solid var(--line);
+}
+.sr-empty__ic { width: 48px; height: 48px; color: var(--line); }
+/* 放大镜里的那道横线用 mut 色（画布 3:1259）—— 靠 stroke="currentColor" 取 path 自己的 color */
+.sr-empty__ic-x { color: var(--mut); }
+.sr-empty__t {
+  font-family: var(--font-serif); font-size: var(--font-title-m);
+  font-weight: 700; line-height: var(--line-tight); color: var(--ink); text-align: center;
+}
+.sr-empty__d { font-size: var(--font-meta); line-height: var(--line-ui); color: var(--sub); text-align: center; }
+.sr-empty__sug { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.sr-sug {
+  display: inline-flex; align-items: center; height: 34px; padding: 0 16px;
+  border-radius: var(--r-full); background: var(--surface-2); color: var(--ink);
+  font-size: var(--font-meta); text-decoration: none;
+}
+.sr-sug:hover { background: var(--primary-soft); color: var(--primary-text); }
+
+/* 彩蛋入口行（画布 3:1269）：12px 品牌字 + 12×12 箭头，gap 6 */
+.sr-egg {
+  width: 820px; max-width: 100%;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: var(--font-caption); color: var(--primary);
+}
+.sr-egg:hover { text-decoration: underline; }
+.sr-egg__ic { width: 12px; height: 12px; color: var(--primary); }
+
+@media (max-width: 860px) {
+  .sr-head__in { padding: 24px 16px; }
+  .sr-body__in { padding: 24px 16px 56px; }
+  .sr-bar { flex-direction: column; align-items: stretch; }
+  .sr-input { flex: 0 1 auto; }
+  .sr-go { min-height: 44px; }
+  .sr-filter { min-height: 44px; }
+  .sr-empty__card { padding: 28px 20px; }
+}
+
 /* ── 设计规范页 ── */
 .spec-head { background: var(--panel-deep); }
 .spec-head__in {

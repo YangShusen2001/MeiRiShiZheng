@@ -1,67 +1,254 @@
 ---
+// 搜索页（画布 10 结果 / 3:1132 · 11 空态 / 3:1220 —— 同一路由的两种状态）。
+//
+// 搜索区：搜索框 720×44 + 「搜索」按钮 + 计数行 + 类型筛选胶囊（全部 / 文章 / 政策）。
+// 结果区：结果行（类型标签 + 日期栏目 + 标题命中高亮 + 要点）+ 「加载更多结果（还有 N 条）」。
+// 空态：820 定宽卡（居中：图标 / 标题 / 说明 / 三个建议胶囊）+ 一行彩蛋入口。
+//
+// 与旧版是结构级差异：旧版是一个 .card 里 h2 + 输入框 + 裸 day-row 列表，没有筛选、没有分页、
+// 没有空态卡、没有命中高亮。
+//
+// 三处按「画布这么画，就得真有对应的东西」补的实现：
+//   ① 类型筛选的两个计数来自真实索引（article / policy 两类）；
+//   ② 「按相关度排序」——旧版是 `includes` 的原序，这里真的按 标题 > 要点 > 栏目 > 正文 排；
+//   ③ 「命中处加黄底标出」——标题里的命中片段包 <mark>（画布 3:1183 的黄底）。
 import Base from "../layouts/Base.astro";
 import { buildSearchIndex } from "../lib/search";
 
 const entries = buildSearchIndex();
+const counts = {
+  all: entries.length,
+  article: entries.filter((e) => e.type === "article").length,
+  policy: entries.filter((e) => e.type === "policy").length,
+};
+const latestDate = entries.map((e) => e.date).sort().reverse()[0] ?? "";
 ---
-<Base title="搜索 · 时政小助手">
-  <section class="card">
-    <h2>搜索</h2>
-    <input
-      id="search-input"
-      class="search-input"
-      type="search"
-      placeholder="输入关键词，如 高质量发展 / 乡村振兴…"
-      autocomplete="off"
-    />
-    <p id="search-count" class="item-summary">共 {entries.length} 条材料，输入关键词检索</p>
-    <div id="search-results"></div>
+
+<Base title="搜索 · 时政小助手" description="检索每日时政文章与政策档案。" bleed>
+  <section class="sr-head">
+    <div class="sr-head__in">
+      <form class="sr-bar" id="sr-form" role="search" action="/search/" method="get">
+        <div class="sr-input">
+          <svg class="sr-input__ic" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"></circle>
+            <path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+          </svg>
+          <input
+            id="sr-q"
+            class="sr-input__f"
+            type="search"
+            name="q"
+            placeholder="输入关键词，如 高质量发展 / 乡村振兴…"
+            aria-label="搜索关键词"
+            autocomplete="off"
+          />
+        </div>
+        <button class="sr-go" type="submit">搜索</button>
+      </form>
+
+      <div class="sr-count">
+        <span id="sr-count-l">共 {entries.length} 条材料，输入关键词检索</span>
+        <span id="sr-count-r">按相关度排序</span>
+      </div>
+
+      <div class="sr-filters" role="group" aria-label="结果类型筛选">
+        <button class="sr-filter on" type="button" data-type="all">全部 <b>{counts.all}</b></button>
+        <button class="sr-filter" type="button" data-type="article">文章 <b>{counts.article}</b></button>
+        <button class="sr-filter" type="button" data-type="policy">政策 <b>{counts.policy}</b></button>
+      </div>
+    </div>
   </section>
+
+  <section class="sr-body">
+    <div class="sr-body__in">
+      <div class="sr-list" id="sr-list"></div>
+
+      <div class="sr-more" id="sr-more" hidden>
+        <button class="sr-more__btn" type="button" id="sr-more-btn">加载更多结果</button>
+      </div>
+
+      <div class="sr-empty" id="sr-empty" hidden>
+        <div class="sr-empty__card">
+          <svg class="sr-empty__ic" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <circle cx="21" cy="21" r="13" stroke="currentColor" stroke-width="2.4"></circle>
+            <path d="M30.5 30.5l9 9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path>
+            <path class="sr-empty__ic-x" d="M14 20h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+            ></path>
+          </svg>
+          <h2 class="sr-empty__t">没有找到相关材料</h2>
+          <p class="sr-empty__d">换个关键词，或者从这些地方开始：</p>
+          <div class="sr-empty__sug">
+            <a class="sr-sug" href="/policy/">政策档案</a>
+            <a class="sr-sug" href="/">今日精选</a>
+            {latestDate && <a class="sr-sug" href={`/daily/${latestDate}/`}>按日期回看</a>}
+          </div>
+        </div>
+        <a class="sr-egg" href="/design/">
+          不过，这里藏了一个东西
+          <svg class="sr-egg__ic" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path
+              d="M4.5 3l3 3-3 3"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="sr-data" set:html={JSON.stringify(entries).replace(/</g, "\\u003c")} />
 </Base>
 
-<!-- define:vars 会把脚本当内联 JS（不能写 TS），所以这里是纯 JS -->
-<script define:vars={{ entries }}>
-  const input = document.getElementById("search-input");
-  const results = document.getElementById("search-results");
-  const count = document.getElementById("search-count");
+<script>
+  type Entry = {
+    date: string;
+    section: string;
+    title: string;
+    summary: string;
+    href: string;
+    external: boolean;
+    body: string;
+    type: "article" | "policy";
+  };
+  type Filter = "all" | "article" | "policy";
 
-  const esc = (s) =>
+  const entries = (() => {
+    try {
+      return JSON.parse(document.getElementById("sr-data")?.textContent || "[]") as Entry[];
+    } catch {
+      return [] as Entry[];
+    }
+  })();
+
+  const PAGE = 20;
+  let filter: Filter = "all";
+  let shown = PAGE;
+
+  const qEl = document.getElementById("sr-q") as HTMLInputElement;
+  const listEl = document.getElementById("sr-list") as HTMLElement;
+  const moreEl = document.getElementById("sr-more") as HTMLElement;
+  const moreBtn = document.getElementById("sr-more-btn") as HTMLButtonElement;
+  const emptyEl = document.getElementById("sr-empty") as HTMLElement;
+  const countL = document.getElementById("sr-count-l") as HTMLElement;
+  const countR = document.getElementById("sr-count-r") as HTMLElement;
+  const filterBtns = Array.from(document.querySelectorAll<HTMLButtonElement>(".sr-filter"));
+
+  const esc = (s: unknown): string =>
     String(s ?? "").replace(/[&<>"']/g, (c) => {
-      const map = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+      const map: Record<string, string> = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
       return map[c] ?? c;
     });
 
-  function run() {
-    const q = input.value.trim().toLowerCase();
-    if (!q) {
-      results.innerHTML = "";
-      count.textContent = `共 ${entries.length} 条材料，输入关键词检索`;
-      return;
+  /** 命中高亮：标题里匹配到的每一段包成 <mark>（画布 3:1183 的黄底） */
+  function highlight(title: string, q: string): string {
+    if (!q) return esc(title);
+    const lower = title.toLowerCase();
+    let out = "";
+    let i = 0;
+    while (i < title.length) {
+      const at = lower.indexOf(q, i);
+      if (at < 0) {
+        out += esc(title.slice(i));
+        break;
+      }
+      out += esc(title.slice(i, at));
+      out += `<mark class="sr-hit">${esc(title.slice(at, at + q.length))}</mark>`;
+      i = at + q.length;
     }
-    const hits = entries.filter((e) => `${e.title} ${e.section} ${e.summary} ${e.body}`.toLowerCase().includes(q));
-    const MAX_HITS = 100;
-    const shown = hits.slice(0, MAX_HITS);
-    count.textContent = hits.length > MAX_HITS
-      ? `共 ${hits.length} 条结果，显示前 ${MAX_HITS} 条`
-      : `共 ${hits.length} 条结果`;
-    results.innerHTML = shown
-      .map(
-        (e) => `
-      <div class="day-row">
-        <a href="${esc(e.href)}"${e.external ? ' target="_blank" rel="noopener"' : ""} style="flex:1">${esc(e.title)}</a>
-        <span class="item-date">${e.date.slice(5)} · ${esc(e.section)}</span>
-      </div>`,
-      )
-      .join("");
+    return out;
   }
 
-  input.addEventListener("input", run);
+  /** 朴素相关度：标题命中 > 要点命中 > 栏目命中 > 正文命中。同分保持索引原序。 */
+  function score(e: Entry, q: string): number {
+    if (e.title.toLowerCase().includes(q)) return 0;
+    if (e.summary.toLowerCase().includes(q)) return 1;
+    if (e.section.toLowerCase().includes(q)) return 2;
+    return 3;
+  }
 
-  // 顶栏搜索框是 GET 表单（画布 3:16 把搜索放在那里），带 ?q= 跳进来时直接出结果，
-  // 否则用户看到的是「输入关键词检索」，会以为搜索没生效。
+  function hits(q: string): Entry[] {
+    return entries
+      .filter((e) => (filter === "all" ? true : e.type === filter))
+      .filter((e) => `${e.title} ${e.section} ${e.summary} ${e.body}`.toLowerCase().includes(q))
+      .map((e, i) => ({ e, i, s: score(e, q) }))
+      // 同分时新的在前（检索新闻要的时间维度），再同则保持索引原序
+      .sort((a, b) => a.s - b.s || b.e.date.localeCompare(a.e.date) || a.i - b.i)
+      .map((x) => x.e);
+  }
+
+  function rowHtml(e: Entry, q: string): string {
+    const badge = e.type === "policy" ? "政策" : e.external ? "原文" : "文章";
+    const tag = e.external ? ' target="_blank" rel="noopener"' : "";
+    return (
+      `<article class="sr-row">` +
+      `<div class="sr-row__top">` +
+      `<span class="sr-badge">${badge}</span>` +
+      `<span class="sr-meta">${esc(e.date)} · ${esc(e.section)}</span>` +
+      `</div>` +
+      `<a class="sr-title" href="${esc(e.href)}"${tag}>${highlight(e.title, q)}</a>` +
+      (e.summary ? `<p class="sr-sum">${esc(e.summary)}</p>` : "") +
+      `</article>`
+    );
+  }
+
+  function render(reset: boolean): void {
+    const raw = qEl.value.trim();
+    const q = raw.toLowerCase();
+    if (!q) {
+      listEl.innerHTML = "";
+      moreEl.hidden = true;
+      emptyEl.hidden = true;
+      countL.textContent = `共 ${entries.length} 条材料，输入关键词检索`;
+      countR.textContent = "按相关度排序";
+      return;
+    }
+    if (reset) shown = PAGE;
+
+    const all = hits(q);
+    const slice = all.slice(0, shown);
+    listEl.innerHTML = slice.map((e) => rowHtml(e, q)).join("");
+
+    countL.textContent = all.length ? `共 ${all.length} 条结果 · 命中处加黄底标出` : "共 0 条结果";
+    countR.textContent = "按相关度排序";
+
+    const rest = all.length - slice.length;
+    moreEl.hidden = rest <= 0;
+    if (rest > 0) moreBtn.textContent = `加载更多结果（还有 ${rest} 条）`;
+
+    emptyEl.hidden = all.length > 0;
+  }
+
+  // 输入即搜（沿用旧版的行为）；URL 同步 ?q= 便于分享与回退
+  qEl.addEventListener("input", () => {
+    render(true);
+    const q = qEl.value.trim();
+    history.replaceState(null, "", q ? `?q=${encodeURIComponent(q)}` : location.pathname);
+  });
+
+  document.getElementById("sr-form")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    render(true);
+  });
+
+  for (const btn of filterBtns) {
+    btn.addEventListener("click", () => {
+      filter = (btn.dataset.type as Filter) ?? "all";
+      for (const b of filterBtns) b.classList.toggle("on", b === btn);
+      render(true);
+    });
+  }
+
+  moreBtn.addEventListener("click", () => {
+    shown += PAGE;
+    render(false);
+  });
+
+  // 顶栏搜索框 / 政策档案页搜索框都是 GET 带 ?q= 跳进来，直接出结果
   const initial = new URLSearchParams(location.search).get("q");
   if (initial) {
-    input.value = initial;
-    run();
+    qEl.value = initial;
+    render(true);
   }
 </script>
