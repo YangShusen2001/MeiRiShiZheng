@@ -157,6 +157,23 @@ export const subscriptions = sqliteTable("subscriptions", {
   updatedAt: integer("updated_at").notNull(),
 });
 
+/**
+ * 通知与提醒设置（画布 25 / 3:2062 那三行：每日精选 / 错题复习 / AI 额度不足）。
+ *
+ * 以 **owner** 为键 —— 与错题本、收藏一致，未登录的 device 身份也能设；
+ * 邮件类提醒真正发出时再看这个 owner 有没有已验证邮箱。
+ * 默认**全关**：提醒是打扰性能力，不主动替用户打开。
+ */
+export const notificationSettings = sqliteTable("notification_settings", {
+  ownerId: text("owner_id").primaryKey(),
+  dailyEnabled: integer("daily_enabled", { mode: "boolean" }).notNull().default(false),
+  dailyAt: text("daily_at").notNull().default("08:30"),
+  reviewEnabled: integer("review_enabled", { mode: "boolean" }).notNull().default(false),
+  reviewAt: text("review_at").notNull().default("09:00"),
+  quotaEnabled: integer("quota_enabled", { mode: "boolean" }).notNull().default(false),
+  updatedAt: integer("updated_at").notNull(),
+});
+
 export const newsletterIssues = sqliteTable("newsletter_issues", {
   id: text("id").primaryKey(),
   issueDate: text("issue_date").notNull().unique(),

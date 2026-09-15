@@ -148,6 +148,13 @@
       "when": 1789462183161,
       "tag": "0020_sturdy_corsair",
       "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "6",
+      "when": 1789463244920,
+      "tag": "0021_gifted_kitty_pryde",
+      "breakpoints": true
     }
   ]
 }

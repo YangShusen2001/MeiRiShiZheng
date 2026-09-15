@@ -225,6 +225,26 @@ export const subscriptionResponseSchema = z.object({
 });
 export type SubscriptionResponse = z.infer<typeof subscriptionResponseSchema>;
 
+// —— 通知与提醒（画布 25 / 3:2062）——
+/** "HH:MM" 24 小时制。 */
+const clockSchema = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, "时间格式应为 HH:MM");
+
+export const notificationSettingsSchema = z.object({
+  /** 每日精选提醒（画布那行写「开 · 08:30」）。 */
+  dailyEnabled: z.boolean(),
+  dailyAt: clockSchema,
+  /** 错题复习提醒（画布「开 · 09:00」）—— 依赖错题本里有待复习的题。 */
+  reviewEnabled: z.boolean(),
+  reviewAt: clockSchema,
+  /** AI 额度不足提醒（画布「关」）—— 依赖邀请码共享额度。 */
+  quotaEnabled: z.boolean(),
+});
+export type NotificationSettings = z.infer<typeof notificationSettingsSchema>;
+
+/** 局部更新：只传要改的那几项。 */
+export const notificationSettingsUpdateSchema = notificationSettingsSchema.partial();
+export type NotificationSettingsUpdate = z.input<typeof notificationSettingsUpdateSchema>;
+
 // —— AI 解释邀请码 ——
 // 共享码：一个码有多条激活记录（owner = user:<id> 或 device:<id>），剩余次数为全局共享额度。
 export const inviteActivateSchema = z.object({

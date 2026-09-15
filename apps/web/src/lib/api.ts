@@ -9,6 +9,8 @@ import type {
   Favorite,
   FavoriteCreate,
   InviteStatus,
+  NotificationSettings,
+  NotificationSettingsUpdate,
   PracticeRecord,
   PracticeSubmit,
   Profile,
@@ -83,6 +85,10 @@ export function createApi(base: string, deviceId: () => string) {
     getSubscription: () => request<SubscriptionResponse>("/api/subscription"),
     updateSubscription: (body: Subscription) =>
       request<SubscriptionResponse>("/api/subscription", { method: "POST", body: JSON.stringify(body) }),
+    /** 通知与提醒（画布 25 / 3:2062）。没设置过时服务端返回「全关」的默认值。 */
+    getNotifications: () => request<NotificationSettings>("/api/notifications"),
+    updateNotifications: (body: NotificationSettingsUpdate) =>
+      request<NotificationSettings>("/api/notifications", { method: "POST", body: JSON.stringify(body) }),
     getReviewState: () => request<ReviewStateResponse>("/api/review/state"),
     gradeReview: (body: ReviewGrade) =>
       request<ReviewGradeResponse>("/api/review/grade", { method: "POST", body: JSON.stringify(body) }),

@@ -5,12 +5,12 @@
 // 主体两列（左 620 定宽：账户卡 + 个人资料卡；右列填充：每日摘要卡）。
 // 资料与订阅都走 API，所以这页的 DOM 由脚本渲染。
 //
-// ⚠️ 画布右列还有「通知与提醒」「数据与隐私」两张卡，**本轮没有渲染** ——
-//    不是漏了，是线上没有任何数据源与能力支撑：
-//    · 「通知与提醒」里的复习提醒 / 额度提醒只存在于手机端（画布 24 通知设置），Web 没有对应接口；
-//    · 「数据与隐私」里的导出、注销账号同样没有接口。
+// ⚠️ 画布右列还有「数据与隐私」一张卡，**本轮没有渲染** —— 不是漏了：
+//    · 里面的导出、注销账号线上都没有接口。
 //    摆上去只能编一个「1 台设备 · 已同步」加两个点了没反应的按钮 ——
 //    与项目「不摆假按钮占位」的既定做法相悖。接口就位再补（已记进契约缺口）。
+// ✅ 「通知与提醒」卡已于 2026-09-15 补上（第二批 B2）：新表 `notification_settings` +
+//    `GET/POST /api/notifications`。画布上是只读样式，这里保留观感但整行可点（切换开/关）。
 // ✅ 账户行那句「加入 2026-08-20」已于 2026-09-15 接上：`Profile.createdAt` 补进契约，
 //    值取 `users.created_at`（列本来就有，只是没回传）。
 import Base from "../layouts/Base.astro";
@@ -42,6 +42,7 @@ import Base from "../layouts/Base.astro";
 <script>
   import { api } from "../lib/api";
   import { AVATAR_COUNT, AVATAR_MARK, avatarIndex, avatarVar } from "../lib/avatar";
+  import type { NotificationSettings } from "@kaogong/contracts";
 
   const esc = (s: unknown): string =>
     String(s ?? "").replace(/[&<>"']/g, (c) => {
@@ -57,7 +58,11 @@ import Base from "../layouts/Base.astro";
     location.href = "/";
   });
 
-  const [profileResult, subscriptionResult] = await Promise.all([api.getProfile(), api.getSubscription()]);
+  const [profileResult, subscriptionResult, notifyResult] = await Promise.all([
+    api.getProfile(),
+    api.getSubscription(),
+    api.getNotifications(),
+  ]);
 
   if (!profileResult.ok || !profileResult.data) {
     left.innerHTML =
@@ -130,7 +135,10 @@ import Base from "../layouts/Base.astro";
       `<button class="pf-btn pf-btn--line" type="button" id="p-sub-save"${subDisabled ? " disabled" : ""}>保存订阅设置</button>` +
       `</div>` +
       `<p class="pf-msg" id="p-sub-msg" role="status" aria-live="polite"></p>` +
-      `</section>`;
+      `</section>` +
+      // 通知与提醒（画布 3:2062）：三行「标签 + 取值」。画布上是只读样式 ——
+      // 这里保留那个视觉，但整行可点（点了切换开/关），否则这张卡摆上去只能看不能改。
+      `<section class="pf-card" id="pf-notify-card"></section>`;
 
     // 头像选择（画布 3:2042）：选中 = 2px 品牌描边
     document.querySelectorAll<HTMLButtonElement>(".pf-av").forEach((b) => {
@@ -203,6 +211,57 @@ import Base from "../layouts/Base.astro";
         subBtn.disabled = false;
       }
       subBtn.textContent = "保存订阅设置";
+    });
+
+    // —— 通知与提醒（画布 3:2062）——
+    // 默认**全关**（服务端 DEFAULTS）：画布上那两行「开 · 08:30」是设计示意，不是默认值 ——
+    // 提醒是打扰性能力，不该替用户打开。
+    const notify: NotificationSettings =
+      notifyResult.ok && notifyResult.data
+        ? notifyResult.data
+        : { dailyEnabled: false, dailyAt: "08:30", reviewEnabled: false, reviewAt: "09:00", quotaEnabled: false };
+
+    type NotifyKey = "dailyEnabled" | "reviewEnabled" | "quotaEnabled";
+    const NOTIFY_ROWS: Array<[string, NotifyKey]> = [
+      ["每日精选提醒", "dailyEnabled"],
+      ["错题复习提醒", "reviewEnabled"],
+      ["AI 额度不足提醒", "quotaEnabled"],
+    ];
+
+    const notifyValue = (key: NotifyKey): string => {
+      if (key === "dailyEnabled") return notify.dailyEnabled ? `开 · ${notify.dailyAt}` : "关";
+      if (key === "reviewEnabled") return notify.reviewEnabled ? `开 · ${notify.reviewAt}` : "关";
+      return notify.quotaEnabled ? "开" : "关";
+    };
+
+    function renderNotify(): void {
+      const box = document.getElementById("pf-notify-card");
+      if (!box) return;
+      box.innerHTML =
+        `<h2 class="pf-card__t">通知与提醒</h2>` +
+        NOTIFY_ROWS.map(([label, key]) => {
+          const on = notify[key];
+          return (
+            `<button class="pf-line pf-line--btn" type="button" data-notify="${key}" aria-pressed="${on}">` +
+            `<span class="pf-line__l">${esc(label)}</span>` +
+            `<span class="pf-line__v${on ? " pf-line__v--ok" : ""}">${esc(notifyValue(key))}</span>` +
+            `</button>`
+          );
+        }).join("") +
+        `<p class="pf-note">点一行即可开关；提醒时间与手机端共用同一份设置。</p>`;
+    }
+    renderNotify();
+
+    // 监听器挂在右列容器上（用委托）：卡片重绘后不会丢
+    right.addEventListener("click", async (e) => {
+      const btn = (e.target as HTMLElement | null)?.closest<HTMLButtonElement>("[data-notify]");
+      if (!btn || btn.disabled) return;
+      const key = btn.dataset.notify as NotifyKey;
+      btn.disabled = true;
+      const r = await api.updateNotifications({ [key]: !notify[key] });
+      if (r.ok && r.data) Object.assign(notify, r.data);
+      btn.disabled = false;
+      renderNotify(); // 无论成败都按服务端现状重绘 —— 失败时不会假装切换成功
     });
   }
 </script>

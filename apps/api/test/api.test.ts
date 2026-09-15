@@ -1,4 +1,4 @@
-import type { Favorite, HighlightParagraphListItem, HighlightParagraphResponse, PracticeRecord, WrongQuestion } from "@kaogong/contracts";
+import type { Favorite, HighlightParagraphListItem, HighlightParagraphResponse, NotificationSettings, PracticeRecord, WrongQuestion } from "@kaogong/contracts";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { headers, json, makeApp, readJson } from "./helpers";
 
@@ -287,6 +287,42 @@ describe("practice", () => {
     expect(masteredData).toHaveLength(1);
     expect(masteredData![0]?.id).toBe(data![0]!.id);
     expect(masteredData![0]?.question).toBe("题干");
+  });
+});
+
+describe("通知与提醒", () => {
+  it("没设置过时返回全关的默认值（提醒不该替用户打开）", async () => {
+    const app = makeApp();
+    const res = await app.request("/api/notifications", { headers: headers() });
+    const data = (await readJson<NotificationSettings>(res)).data;
+    expect(data).toEqual({
+      dailyEnabled: false,
+      dailyAt: "08:30",
+      reviewEnabled: false,
+      reviewAt: "09:00",
+      quotaEnabled: false,
+    });
+  });
+
+  it("局部更新只改传进来的项，其余保留", async () => {
+    const app = makeApp();
+    await app.request("/api/notifications", json("POST", { dailyEnabled: true, dailyAt: "07:15" }));
+    await app.request("/api/notifications", json("POST", { quotaEnabled: true }));
+    const res = await app.request("/api/notifications", { headers: headers() });
+    const data = (await readJson<NotificationSettings>(res)).data;
+    expect(data).toEqual({
+      dailyEnabled: true, // 第二次没传 → 保留第一次的值
+      dailyAt: "07:15",
+      reviewEnabled: false,
+      reviewAt: "09:00",
+      quotaEnabled: true,
+    });
+  });
+
+  it("时间格式非法时拒绝", async () => {
+    const app = makeApp();
+    const res = await app.request("/api/notifications", json("POST", { dailyAt: "25:99" }));
+    expect(res.status).toBe(400);
   });
 });
 

@@ -2475,6 +2475,14 @@ summary:active,
 
 /* 信息行（3:2064 / 3:2075）：pad 6 上下 · 标签 14 + 取值 12 */
 .pf-line { display: flex; align-items: center; gap: var(--s-3); padding: 6px 0; }
+/* 可点行（通知与提醒）：保住「标签 + 取值」的只读观感，但整行是按钮 —— 点了切换开/关 */
+.pf-line--btn {
+  width: 100%; margin: 0 -8px; padding: 6px 8px; text-align: left;
+  border: 0; background: none; border-radius: var(--r-sm); font: inherit; cursor: pointer;
+}
+.pf-line--btn:hover { background: var(--surface-2); }
+.pf-line--btn[disabled] { opacity: 0.6; cursor: default; }
+.pf-line--btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 .pf-line__l { flex: 1 1 auto; min-width: 0; font-size: var(--font-meta); color: var(--ink); }
 .pf-line__v { flex: 0 0 auto; font-size: var(--font-caption); color: var(--mut); }
 .pf-line__v--ok { color: var(--green); font-weight: 500; }
