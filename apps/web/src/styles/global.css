@@ -125,70 +125,64 @@ h1, h2, h3 { line-height: var(--line-heading); font-weight: 600; margin: 0; }
 h1, h2 { font-family: var(--font-serif); }
 p { margin: 0; }
 
-/* ===== 顶栏 ===== */
+/* ===== 顶栏（画布 3:2 / 3:434）：64 高 · pad 0 64 · 白底 · 下沿一条分隔线 =====
+   左区 gap 28 = 28×28 标识 + 20px 站名 + gap 24 的纯文字主导航（无图标）；
+   右区 gap 12 = 搜索框 220×36 + 登录胶囊。
+   原先那套「50px 书法体大字 → 下滑缩成小字、导航淡出」的画布上不存在，整段撤掉。 */
 .top {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: transparent;
-  border-bottom: none;
   height: 64px;
-  padding: 0 24px;
+  padding: 0 64px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  transition: height var(--dur-md) var(--ease-out), background-color var(--dur-md) var(--ease-out), box-shadow var(--dur-md) var(--ease-out);
-}
-.top.scrolled {
-  background-color: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: saturate(180%) blur(12px);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
-  box-shadow: 0 1px 0 var(--line);
-}
-.top-in {
-  display: flex;
-  align-items: center;
+  justify-content: space-between;
   gap: var(--s-4);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  transition: box-shadow var(--dur-md) var(--ease-out);
 }
-.logo {
-  position: absolute;
-  left: 24px;
-  top: 7px;
-  z-index: 60;
-  display: flex;
-  align-items: center;
-  color: var(--ink);
-  transition: top var(--dur-md) var(--ease-out);
-}
-.top.scrolled .logo { top: 18px; }
+.top.scrolled { box-shadow: var(--shadow-sm); }
+.top-l { display: flex; align-items: center; gap: 28px; min-width: 0; }
+.top-r { display: flex; align-items: center; gap: var(--s-3); }
+.logo { display: flex; align-items: center; gap: var(--s-2); color: var(--ink); }
+/* 标识方块（画布 3:5）：底 #3A4785、字形 #F5F1E8。
+   ⚠️ #F5F1E8 现有令牌里只有 --panel-on-btn 与 --bg 同值，缺「压在品牌面上的暖白」这个名字，
+   先用 panel-on-btn —— 命名债记在 .workbuddy/memory 里。 */
+.logo-mark { width: 28px; height: 28px; flex: 0 0 auto; }
+.logo-mark rect { fill: var(--primary); }
+.logo-mark path { stroke: var(--panel-on-btn); }
+/* 站名（画布 3:8）：20px 衬线 700。 */
 .logo-text {
-  font-family: var(--font-logo);
-  font-size: 50px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  line-height: 1;
-  transition: font-size var(--dur-md) var(--ease-out);
-}
-.top.scrolled .logo-text { font-size: var(--font-title-l); }
-.logo-mark {
-  width: 30px;
-  height: 30px;
-  border-radius: var(--r-sm);
-  background: var(--primary-deep);
-  color: var(--color-on-brand);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   font-family: var(--font-serif);
+  font-size: var(--font-title-s);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
 }
-.nav { display: flex; gap: var(--s-1); transition: opacity var(--dur-md) var(--ease-out), transform var(--dur-md) var(--ease-out); }
-.nav a {
+/* 主导航（画布 3:9）：纯文字 14px、gap 24。没有图标，也没有胶囊底。 */
+.nav { display: flex; align-items: center; gap: var(--s-5); }
+.nav a,
+.nav .nav-btn {
   color: var(--sub);
-  padding: 6px 14px;
-  border-radius: var(--r-full);
-  transition: background 0.15s, color 0.15s;
+  font-family: inherit;
+  font-size: var(--font-meta);
+  font-weight: 400;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--dur-md) var(--ease-out);
 }
-.nav a:hover { background: var(--surface-2); color: var(--ink); }
+.nav a:hover,
+.nav .nav-btn:hover { color: var(--ink); }
+/* 当前项（画布 3:10：「首页」= #3A4785 + Medium）。画布上没有胶囊底，只换颜色与字重。 */
+.nav a[aria-current="page"] { color: var(--primary); font-weight: 500; }
+.nav a:focus-visible,
+.nav .nav-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
 
 .nav-toggle {
   display: none;
@@ -196,9 +190,8 @@ p { margin: 0; }
   background: transparent;
   color: var(--sub);
   border-radius: var(--r-sm);
-  width: 44px;
-  height: 44px;
-  font-size: var(--font-title-s);
+  width: 36px;
+  height: 36px;
   cursor: pointer;
   align-items: center;
   justify-content: center;
@@ -219,18 +212,36 @@ p { margin: 0; }
   white-space: nowrap;
 }
 .theme-toggle:hover { border-color: var(--primary); color: var(--primary); }
-.top.collapsed .nav {
-  opacity: 0;
-  transform: translateX(10px);
-  pointer-events: none;
+
+/* 顶栏搜索框（画布 3:16）：220×36 · pad 0 12 · gap 8 · 底 #F0EADD · 描边 #E4DCCB · 圆角 8。
+   画布把「搜索」放在这里而不是导航项里，所以它得是真能打字、能提交的。 */
+.top-search {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  width: 220px;
+  height: 36px;
+  padding: 0 var(--s-3);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
 }
-.top.collapsed .nav-toggle { display: flex; }
-.top.collapsed:hover .nav {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
+.top-search svg { width: 14px; height: 14px; flex: 0 0 auto; color: var(--mut); }
+.top-search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: var(--font-meta);
 }
-.top.collapsed:hover .nav-toggle { display: none; }
+.top-search input::placeholder { color: var(--mut); }
+.top-search input:focus { outline: none; }
+.top-search:focus-within { border-color: var(--primary); }
+/* search 类型自带 UA 清除按钮，与 36px 的盒子不搭，去掉 */
+.top-search input::-webkit-search-cancel-button { display: none; }
 
 .wrap { max-width: 80%; margin: 0 auto; padding: var(--s-5) var(--s-4) var(--s-6); }
 /* 首页走画布的全幅横带版式：每条横带自带底色与 64px 内边距，不套 .wrap 的居中窄栏 */
@@ -669,7 +680,25 @@ p { margin: 0; }
 .search-input:focus { outline: 2px solid var(--primary); border-color: transparent; }
 
 /* ===== 登录 / 顶栏账号 ===== */
-.nav-auth { display: inline-flex; align-items: center; gap: var(--s-1); color: var(--sub); }
+.nav-auth { display: inline-flex; align-items: center; gap: var(--s-2); color: var(--sub); }
+/* 登录按钮（画布 3:21）：h36 · pad 0 18 · 圆角 999 · 底 #3A4785 · 字 14 Medium #FFFDF6。
+   ⚠️ 前台压在品牌底上的暖白这里用 --panel-strong（#FFFDF6，与画布同值），
+   而不是 --color-on-brand（#FFFFFF）—— 同一角色两个令牌、两个值，是设计系统的重复，
+   记为命名债（见 .workbuddy/memory）。 */
+.nav-login {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 18px;
+  border-radius: var(--r-full);
+  background: var(--primary);
+  color: var(--panel-strong);
+  font-size: var(--font-meta);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background var(--dur-md) var(--ease-out);
+}
+.nav-login:hover { background: var(--primary-deep); }
 .nav-invite { font-size: var(--font-meta); color: var(--sub); white-space: nowrap; }
 /* 登录态头像（画布 3:2027）：品牌字形 + 身份底色圆，不用 emoji。
    emoji 是彩色位图 —— 跟不了令牌、切主题不跟随、三端形状还不一样。 */
@@ -1194,17 +1223,23 @@ blockquote {
 }
 
 @media (max-width: 640px) {
+  /* 画布没画移动 Web（它的 390 屏是鸿蒙 App），这一层只为「别把功能藏起来」而存在：
+     搜索框留在顶栏，其余入口全进汉堡菜单。 */
   .top {
-    height: 72px;
+    height: 56px;
     padding: 0 var(--s-4);
-    background: var(--bg);
   }
-  .logo { left: var(--s-4); top: 11px; }
-  .logo-text { font-size: 50px; }
+  .top-l { gap: var(--s-2); }
+  .top-r { flex: 1 1 auto; justify-content: flex-end; gap: var(--s-2); min-width: 0; }
+  .logo-text { font-size: var(--font-body); }
+  .top-search { flex: 1 1 auto; width: auto; min-width: 0; }
+  /* 登录态收进菜单——顶栏在 390 宽放不下搜索框 + 汉堡 + 账号三样。
+     未登录时底导「我的」与 /profile/ 都能到登录页。 */
+  .nav-auth { display: none; }
   .nav-toggle { display: inline-flex; }
   .nav {
     position: absolute;
-    top: 56px;
+    top: 52px;
     left: var(--s-4);
     right: var(--s-4);
     display: none;
@@ -1217,17 +1252,13 @@ blockquote {
     background: var(--surface);
     box-shadow: var(--shadow);
   }
-  /* P3 补项：底部 Tab 已有 首页/搜索/收藏/每日一练，顶部菜单只留 错题本/我的/登录 */
-  .nav .nav-tab { display: none; }
+  /* 菜单里给全部入口：底导只有 首页/复习/收藏/我的，政策档案与错题只能从这里进 */
   .nav .nav-mobile-only { display: flex; }
-  .top.mobile-open .nav { display: flex; opacity: 1; transform: none; pointer-events: auto; }
-  .top.collapsed:hover .nav { display: none; }
-  .top.collapsed.mobile-open:hover .nav { display: flex; }
-  .nav a { padding: var(--s-2) var(--s-3); border-radius: var(--r-sm); }
-  .nav-auth { align-items: center; justify-content: space-between; padding: var(--s-1) var(--s-3); }
-  .nav-auth > a { padding: var(--s-1) 0; }
-  /* P3 补漏：触控目标 ≥44px */
-  .nav-logout { min-height: 44px; padding: var(--s-1) var(--s-2); }
+  .top.mobile-open .nav { display: flex; }
+  .nav a,
+  .nav .nav-btn { padding: var(--s-2) var(--s-3); border-radius: var(--r-sm); text-align: left; }
+  .nav a:hover,
+  .nav .nav-btn:hover { background: var(--surface-2); color: var(--ink); }
   .theme-toggle { min-height: 44px; }
   .note-actions button { min-height: 44px; }
   .ai-node { min-height: 44px; }
@@ -1542,19 +1573,6 @@ summary:active,
   padding: var(--s-1) var(--s-2);
 }
 .review-skip:hover { color: var(--sub); }
-
-/* 导航里的「复习」按钮：对齐 .nav a */
-.nav .nav-btn {
-  color: var(--sub);
-  padding: 6px 14px;
-  border-radius: var(--r-full);
-  border: none;
-  background: none;
-  font: inherit;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-}
-.nav .nav-btn:hover { background: var(--surface-2); color: var(--ink); }
 
 /* 移动端：全屏卡片 */
 @media (max-width: 640px) {

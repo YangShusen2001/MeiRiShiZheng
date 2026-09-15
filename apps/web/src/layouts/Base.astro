@@ -19,15 +19,33 @@ const {
   bleed = false,
 } = Astro.props;
 
+// 主导航（画布 3:9）：五项纯文字。画布把「搜索」放进了右区搜索框，不占导航位。
+const NAV_ITEMS: { href: string; label: string }[] = [
+  { href: "/", label: "首页" },
+  { href: "/policy/", label: "政策档案" },
+  { href: "/favorites/", label: "收藏" },
+  { href: "/practice/", label: "练习" },
+  { href: "/wrong/", label: "错题" },
+];
+/** 当前项：首页精确匹配，其余按前缀（/policy/2026-09 也算「政策档案」）。 */
+const HERE = Astro.url.pathname.replace(/\/+$/, "");
+const isActive = (href: string): boolean => {
+  const base = href.replace(/\/+$/, "");
+  return base === "" ? HERE === "" : HERE === base || HERE.startsWith(`${base}/`);
+};
+
 // 字体配置：本地审核后台上传/选择后写入 src/font-config.json，构建时注入 @font-face 与变量。
 let fontCss = "";
 try {
   const cfgPath = path.join(process.cwd(), "src", "font-config.json");
   const cfg = JSON.parse(fs.readFileSync(cfgPath, "utf-8")) as { logo?: string | null; nav?: string | null };
-  if (cfg.logo) {
-    fontCss += `@font-face{font-family:"UserLogoFont";src:url("/fonts/uploads/${cfg.logo}") format("woff2");font-display:swap;}`
-      + `.logo-text{font-family:"UserLogoFont","STXingkai","华文行楷","KaiTi",cursive !important;}`;
-  }
+  // ⚠️ 站名的自定义字体（cfg.logo）先停用：上传过的是书法体，那是配原先 50px 大 Logo 的；
+  // 画布 3:8 的站名是 20px 衬线 700，书法体在这个字号下糊成一团（实测截图确认）。
+  // 要恢复「大字书法体 Logo」，把下面这段放回来即可 —— font-config.json 与上传流程都没动。
+  // if (cfg.logo) {
+  //   fontCss += `@font-face{font-family:"UserLogoFont";src:url("/fonts/uploads/${cfg.logo}") format("woff2");font-display:swap;}`
+  //     + `.logo-text{font-family:"UserLogoFont","STXingkai","华文行楷","KaiTi",cursive !important;}`;
+  // }
   if (cfg.nav) {
     fontCss += `@font-face{font-family:"UserNavFont";src:url("/fonts/uploads/${cfg.nav}") format("woff2");font-display:swap;}`
       + `.nav a,.nav-auth a{font-family:"UserNavFont",var(--font) !important;}`;
@@ -59,21 +77,45 @@ const reviewCardsJson = JSON.stringify(listCards());
   <body>
     <script type="application/json" id="review-cards-data" set:html={reviewCardsJson.replace(/</g, "\\u003c")}></script>
     <header class="top" id="top">
-      <a class="logo" href="/" aria-label="每日时政">
-        <span class="logo-text">每日时政</span>
-      </a>
-      <div class="top-in">
-        <nav class="nav" id="nav">
-          <a href="/" class="nav-tab">首页</a>
-          <a href="/search/" class="nav-tab">搜索</a>
-          <a href="/policy/" class="nav-tab">政策档案</a>
-          <a href="/favorites/" class="nav-tab">收藏</a>
-          <a href="/practice/" class="nav-tab">每日一练</a>
-          <a href="/wrong/">错题本</a>
+      <div class="top-l">
+        <a class="logo" href="/" aria-label="每日时政">
+          <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <rect width="24" height="24" rx="6"></rect>
+            <path d="M12 7L8.8 16.4M12.1 13.7L16.4 15.6" fill="none" stroke-width="1.9" stroke-linecap="round"></path>
+          </svg>
+          <span class="logo-text">每日时政</span>
+        </a>
+        {/* 主导航（画布 3:9）：纯文字五项，没有图标。搜索不占导航位——
+            画布把它放在右区搜索框里。当前项由 aria-current 标记，样式只换字重与颜色。 */}
+        <nav class="nav" id="nav" aria-label="主导航">
+          {NAV_ITEMS.map((item) => (
+            <a
+              href={item.href}
+              class="nav-tab"
+              aria-current={isActive(item.href) ? "page" : undefined}
+            >{item.label}</a>
+          ))}
+          {/* 复习遮罩的入口。画布 Web 导航里没有它（手机端才把「复习」放底导），
+              为了不把功能藏起来，放在导航末尾，样式与导航项一致。 */}
           <button type="button" class="nav-tab nav-btn" id="review-entry">复习</button>
-          <a href="/profile/" class="nav-mobile-only">我的</a>
-          <span class="nav-auth" id="kg-auth"><a href="/login/">登录</a></span>
+          <a href="/profile/" class="nav-tab nav-mobile-only">我的</a>
         </nav>
+      </div>
+      <div class="top-r">
+        <form class="top-search" action="/search/" method="get" role="search">
+          <svg viewBox="0 0 14 14" aria-hidden="true">
+            <circle cx="6" cy="6" r="4.2" fill="none" stroke="currentColor" stroke-width="1.4"></circle>
+            <path d="M9.6 9.6l3.4 3.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+          </svg>
+          <input
+            id="top-q"
+            name="q"
+            type="search"
+            placeholder="搜索时政 / 政策"
+            aria-label="搜索时政 / 政策"
+            autocomplete="off"
+          />
+        </form>
         <button type="button" class="nav-toggle" id="nav-toggle" aria-label="打开菜单" aria-controls="nav" aria-expanded="false">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M4 7h16M4 12h16M4 17h16"></path>
@@ -82,6 +124,7 @@ const reviewCardsJson = JSON.stringify(listCards());
         {/* 深色主题排在迁移最后一步（规范 §8）：届时把下面这行放回来，
             阴影/深色令牌产物已经就绪，不需要改样式。 */}
         {/* <button type="button" class="theme-toggle" id="theme-toggle" title="切换主题">主题</button> */}
+        <span class="nav-auth" id="kg-auth"><a href="/login/" class="nav-login">登录</a></span>
       </div>
     </header>
     <main class={bleed ? "wrap wrap--bleed" : "wrap"}><slot /></main>
@@ -222,7 +265,8 @@ const reviewCardsJson = JSON.stringify(listCards());
         }
       }
 
-      // 下滑收起导航，悬停展开（rAF 节流：滚动一帧只处理一次，避免 layout 抖动）
+      // 顶栏：滚动时只加一层阴影（画布没有「下滑收起导航」这套，故 collapsed 已撤），
+      // 汉堡按钮只在窄屏出现（rAF 节流：滚动一帧只处理一次，避免 layout 抖动）。
       const topEl = document.getElementById("top");
       if (topEl) {
         const navToggle = document.getElementById("nav-toggle") as HTMLButtonElement | null;
@@ -238,7 +282,6 @@ const reviewCardsJson = JSON.stringify(listCards());
           requestAnimationFrame(() => {
             scrollTick = false;
             topEl.classList.toggle("scrolled", window.scrollY > 8);
-            topEl.classList.toggle("collapsed", window.scrollY > 140);
           });
         };
         window.addEventListener("scroll", onScroll, { passive: true });
