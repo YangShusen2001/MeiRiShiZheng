@@ -14,8 +14,9 @@
 //       错题本走 API（需登录）；已掌握存本机 —— 点「掌握」时调 API 删除，同时本机留一份，
 //       否则服务端删掉之后「已掌握」永远是空的（契约里没有「已掌握列表」接口）。
 //
-// ⚠️ 契约缺口：`WrongQuestion` 里没有「错因」字段，画布错题行右侧写的是「错因：漏读题干」，
-//    这里改渲染**真实有的**信息「你的 X → 正确 Y」，不编错因。
+// ✅ 错因（画布 3:617「错因：漏读题干」）：管道出题时**预生成** `traps`（4 个选项各自的典型误因，
+//    正确项固定空串），随错题一起落 D1，这里直接取 `traps[chosen]`。
+//    老错题（迁移前入的）没有该字段 → 退回「你的 X → 正确 Y」，不编错因。
 // ⚠️ 「查看提示」：优先用管道生成的 hint（指向材料依据/关键区分点，不直接给答案）；
 //    老内容没有 hint 字段时退回真实存在的 `topic`（「本题考点：民族宗教」），不编提示。
 import Base from "../layouts/Base.astro";
@@ -85,7 +86,17 @@ const today = sets[0] ?? null;
 
   const LETTERS = ["A", "B", "C", "D"];
 
-  type Q = { id: string; q: string; options: string[]; answer: number; analysis: string; topic: string; hint?: string };
+  type Q = {
+    id: string;
+    q: string;
+    options: string[];
+    answer: number;
+    analysis: string;
+    topic: string;
+    hint?: string;
+    /** 4 选项各自典型误因，与 options 同下标；正确项空串（画布 3:617） */
+    traps?: string[];
+  };
   type PracticeSet = { date: string; total: number; source?: string; questions: Q[] };
 
   const esc = (s: unknown): string =>
@@ -181,6 +192,17 @@ const today = sets[0] ?? null;
     bindCard();
   }
 
+  /**
+   * 错因文案（画布 3:617「错因：漏读题干」）。
+   * 优先取题目侧预生成的 `traps[chosen]`；老错题（迁移前入的）没有该字段时，
+   * 退回**真实有的**信息「你的 X → 正确 Y」，不编错因。
+   */
+  function whyText(w: WrongQuestion): string {
+    const trap = w.traps?.[w.chosen];
+    if (trap) return `错因：${trap}`;
+    return `你的 ${LETTERS[w.chosen] ?? "?"} → 正确 ${LETTERS[w.answer] ?? "?"}`;
+  }
+
   /** 错题本预览（画布 3:610）：标题行 + 最多 2 条 + 「进入错题本」 */
   function wrongPreviewHtml(): string {
     const rows = wrongList
@@ -189,7 +211,7 @@ const today = sets[0] ?? null;
         (w) =>
           `<div class="pr-wrong__row"><span class="pr-dot"></span>` +
           `<span class="pr-wrong__q">${esc(w.question)}</span>` +
-          `<span class="pr-wrong__why">你的 ${LETTERS[w.chosen] ?? "?"} → 正确 ${LETTERS[w.answer] ?? "?"}</span></div>`,
+          `<span class="pr-wrong__why">${esc(whyText(w))}</span></div>`,
       )
       .join("");
     return (
@@ -256,7 +278,15 @@ const today = sets[0] ?? null;
     if (isOk) {
       correct += 1;
     } else {
-      wrongInputs.push({ question: q.q, options: q.options, answer: q.answer, chosen, analysis: q.analysis });
+      // traps 随错题一起提交（画布 3:617 的「错因」数据源）；老内容没有该字段就不带
+      wrongInputs.push({
+        question: q.q,
+        options: q.options,
+        answer: q.answer,
+        chosen,
+        analysis: q.analysis,
+        ...(q.traps ? { traps: q.traps } : {}),
+      });
     }
 
     const opts = document.getElementById("pr-opts");
@@ -344,11 +374,16 @@ const today = sets[0] ?? null;
     const act = mastered
       ? `<span class="pr-wq__date">已掌握</span>`
       : `<button class="pr-wrong__go" type="button" data-master="${esc(w.id)}">掌握 ✓</button>`;
+    // 错因（画布 3:617）：只有管道预生成过才渲染。
+    // 条目里选项已经标了红/绿，再写「你的 X → 正确 Y」是冗余 —— 所以无 traps 就整行不出现。
+    const trap = w.traps?.[w.chosen];
+    const why = trap ? `<p class="pr-wq__why">错因：${esc(trap)}</p>` : "";
     return (
       `<div class="pr-wq">` +
       `<div class="pr-wq__hd"><span class="pr-wq__date">${esc(w.date)}</span>${act}</div>` +
       `<p class="pr-wq__q">${esc(w.question)}</p>` +
       `<div class="pr-wq__opts">${opts}</div>` +
+      why +
       `<p class="pr-wq__an">解析：${esc(w.analysis)}</p>` +
       `</div>`
     );

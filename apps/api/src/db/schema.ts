@@ -70,6 +70,17 @@ export const wrongQuestions = sqliteTable(
     answer: integer("answer").notNull(),
     chosen: integer("chosen").notNull(),
     analysis: text("analysis").notNull(),
+    /**
+     * 4 个选项各自的典型误因（JSON 数组，与 options 同下标；正确项固定空串）。
+     *
+     * 2026-09-15：这是**题目侧预生成**的数据（管道 `practice.py` 写进
+     * `content/<date>/practice.json` 的 `traps`），随错题一起落库，
+     * 端上直接取 `traps[chosen]` 显示「错因：漏读题干」（画布 3:617）。
+     *
+     * 不是用户标注 —— 用户作答数据不出域，运行期不做任何 AI 推断。
+     * 老数据（本次迁移之前入的错题）为 null → 端上退回「你的 X → 正确 Y」。
+     */
+    traps: text("traps"),
     createdAt: integer("created_at").notNull(),
     /**
      * 标记「已掌握」的时间（unix 毫秒）。null = 仍在错题本里。

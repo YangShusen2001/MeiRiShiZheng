@@ -1,0 +1,1 @@
+ALTER TABLE `wrong_questions` ADD `traps` text;

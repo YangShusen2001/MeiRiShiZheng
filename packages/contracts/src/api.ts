@@ -115,6 +115,17 @@ export const practiceRecordSchema = z.object({
 export type PracticeRecord = z.infer<typeof practiceRecordSchema>;
 
 // —— 错题本 ——
+/**
+ * 错因（traps）：4 个选项各自的典型误因，与 options **同下标**；正确项固定空串。
+ *
+ * 画布 3:617 端上写的是「错因：漏读题干」——取的就是 `traps[chosen]`。
+ * 这是**题目侧预生成**的内容（管道 `practice.py` 产出，随 practice.json 发布），
+ * 不是运行期对用户作答做的 AI 推断：pipeline 是唯一 AI 入口，用户作答数据不出域。
+ *
+ * 可选：2026-09-15 之前入的错题没有这一列，端上退回「你的 X → 正确 Y」。
+ */
+const trapsField = z.array(z.string()).optional();
+
 export const wrongQuestionSchema = z.object({
   id: z.string(),
   date: z.string(),
@@ -123,6 +134,7 @@ export const wrongQuestionSchema = z.object({
   answer: z.number().int().min(0).max(3),
   chosen: z.number().int().min(0).max(3),
   analysis: z.string(),
+  traps: trapsField,
 });
 export type WrongQuestion = z.infer<typeof wrongQuestionSchema>;
 
@@ -132,6 +144,8 @@ export const wrongQuestionInputSchema = z.object({
   answer: z.number().int().min(0).max(3),
   chosen: z.number().int().min(0).max(3),
   analysis: z.string().max(500),
+  // 入参严格 4 项：内容侧 schema 已锁死 minItems/maxItems=4，这里再卡一次防契约漂移
+  traps: z.array(z.string()).length(4).optional(),
 });
 export type WrongQuestionInput = z.infer<typeof wrongQuestionInputSchema>;
 

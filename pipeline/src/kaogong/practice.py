@@ -19,6 +19,12 @@ TARGET_QUESTIONS = 20  # 每日一练目标题量（服务考生）
 HINT_MIN_LENGTH = 4
 HINT_MAX_LENGTH = 60
 
+# 错因标签长度区间，对应 practice.schema.json 的 traps.items.maxLength
+# （由 test_practice_trap_bounds_match_schema 守住）。2 字起 —— 「选错」这种两字标签
+# 已经能说明问题，再短就没有信息量了。
+TRAP_MIN_LENGTH = 2
+TRAP_MAX_LENGTH = 12
+
 ChatFn = Callable[..., str]
 
 
@@ -47,10 +53,57 @@ def build_system_prompt(n: int) -> str:
         "5. topic 给一个主题词（如 健康中国/科技/民生）；\n"
         "6. hint 给一句话提示（画布「查看提示」按钮展开它）：指向材料依据或关键区分点，"
         "帮考生自己想到答案，**不得直接给出正确选项、答案字母或选项原文**；\n"
-        "7. 题目风格贴近国省考行测与事业单位/三支一扶真题，避免生硬罗列。\n"
+        "7. traps 给 4 个选项各配一个「典型误因」短标签（2-12 字、口语化），"
+        "写选这个选项的人通常错在哪；**正确选项那一项必须给空字符串**；"
+        "三个错误选项的误因**必须互不相同** —— 要针对该选项本身的内容写，"
+        "严禁三个选项复用同一个标签（如全是「张冠李戴」）——"
+        "「错因」是给考生看「我错在哪」的，同质标签等于没写。"
+        "可选标签示例：张冠李戴、数字记混、时间错位、对象混淆、以偏概全、过度引申、"
+        "漏读题干、概念混淆、偷换主体、答非所问、因果倒置、绝对化；\n"
+        "8. 题目风格贴近国省考行测与事业单位/三支一扶真题，避免生硬罗列。\n"
         f'只输出 JSON：{{"questions":[{{"q":"题干","options":["A","B","C","D"],'
-        '"answer":0,"analysis":"解析","topic":"主题","hint":"一句话提示"}]}}'
+        '"answer":0,"analysis":"解析","topic":"主题","hint":"一句话提示",'
+        '"traps":["误因A","误因B","误因C","误因D"]}]}}'
     )
+
+
+def _parse_traps(raw: object, answer: int) -> list[str]:
+    """把 AI 返回的 traps 收敛成「4 项、正确项空串」的形状（画布 3:617 的错因标签）。
+
+    不合法（不是数组 / 长度不是 4）→ 返回空列表，让端上退回「你的 X → 正确 Y」。
+    单项过短视为模型没给（留空串），过长截断 —— 与 hint 同一套「宁可省略，不编造」原则。
+    四项全空同样返回空列表，不留一个全是空串的字段。
+    """
+    if not isinstance(raw, list) or len(raw) != 4:
+        return []
+    out: list[str] = []
+    for i, value in enumerate(raw):
+        if i == answer:
+            out.append("")  # 正确项没有「错因」
+            continue
+        text = str(value or "").strip()[:TRAP_MAX_LENGTH]
+        out.append(text if len(text) >= TRAP_MIN_LENGTH else "")
+    return out if any(out) else []
+
+
+def duplicate_trap_count(questions: list[dict]) -> int:
+    """有多少道题的「错误项误因」出现了重复标签。
+
+    实测（2026-09-15）：不加约束时 AI 会把三个干扰项都写成同一个标签（如全是「张冠李戴」）——
+    103 题里 79% 有重复、57% 三项全同。这种「错因」只是在描述干扰项设计，
+    对考生「我错在哪」零信息量，等于没写。
+
+    提示词已要求三个错误项互不相同；这个函数是那条约束的**可测形式**，
+    回填脚本据它决定要不要重问（拿不到更好的就保留原结果，不倒退）。
+    """
+    n = 0
+    for q in questions or []:
+        if not isinstance(q, dict):
+            continue
+        traps = [t for t in (q.get("traps") or []) if t]
+        if len(set(traps)) < len(traps):
+            n += 1
+    return n
 
 
 def parse_questions(content: str, n: int | None = None) -> list[dict]:
@@ -93,6 +146,10 @@ def parse_questions(content: str, n: int | None = None) -> list[dict]:
         hint = str(item.get("hint") or "").strip()[:HINT_MAX_LENGTH]
         if len(hint) >= HINT_MIN_LENGTH:
             question["hint"] = hint
+        # traps 可选：与 options 等长、正确项空串；拿不到就让端上退回「你的 X → 正确 Y」
+        traps = _parse_traps(item.get("traps"), answer)
+        if traps:
+            question["traps"] = traps
         out.append(question)
     return out if len(out) >= MIN_QUESTIONS else []
 
@@ -102,7 +159,7 @@ def _build_user_prompt(digest_text: str, date: str, attempt: int, n: int) -> str
     if attempt > 1:
         user += (
             "\n\n【上次输出不合格】请严格按 JSON 模板输出 "
-            + str(n) + " 道题，每道题字段完整：q/options(4个)/answer(0-3)/analysis/topic/hint。"
+            + str(n) + " 道题，每道题字段完整：q/options(4个)/answer(0-3)/analysis/topic/hint/traps。"
         )
     return user
 

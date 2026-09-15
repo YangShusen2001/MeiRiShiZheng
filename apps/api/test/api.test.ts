@@ -267,13 +267,18 @@ describe("practice", () => {
     const app = makeApp();
     await app.request("/api/practice", json("POST", {
       date: "2026-08-12", correct: 1, total: 2,
-      wrong: [{ question: "题干", options: ["A", "B", "C", "D"], answer: 0, chosen: 1, analysis: "解析" }],
+      wrong: [{
+        question: "题干", options: ["A", "B", "C", "D"], answer: 0, chosen: 1, analysis: "解析",
+        traps: ["", "漏读题干", "数字记混", "概念混淆"],
+      }],
     }));
     const list = await app.request("/api/practice/wrong", { headers: headers() });
     const data = (await readJson<WrongQuestion[]>(list)).data;
     expect(data).toHaveLength(1);
     expect(data![0]?.chosen).toBe(1);
     expect(data![0]?.options).toEqual(["A", "B", "C", "D"]);
+    // 错因（画布 3:617）：题目侧预生成，端上取 traps[chosen] → 「错因：漏读题干」
+    expect(data![0]?.traps).toEqual(["", "漏读题干", "数字记混", "概念混淆"]);
 
     const del = await app.request(`/api/practice/wrong/${data![0]!.id}`, { method: "DELETE", headers: headers() });
     expect((await readJson<null>(del)).ok).toBe(true);
@@ -287,6 +292,32 @@ describe("practice", () => {
     expect(masteredData).toHaveLength(1);
     expect(masteredData![0]?.id).toBe(data![0]!.id);
     expect(masteredData![0]?.question).toBe("题干");
+    // 软删除不该丢错因
+    expect(masteredData![0]?.traps).toEqual(["", "漏读题干", "数字记混", "概念混淆"]);
+  });
+
+  it("错因可选：不带 traps 的错题照常入库，读出时不出现该字段（老错题降级）", async () => {
+    const app = makeApp();
+    await app.request("/api/practice", json("POST", {
+      date: "2026-08-13", correct: 1, total: 2,
+      wrong: [{ question: "老题干", options: ["A", "B", "C", "D"], answer: 0, chosen: 2, analysis: "解析" }],
+    }));
+    const list = await app.request("/api/practice/wrong", { headers: headers() });
+    const data = (await readJson<WrongQuestion[]>(list)).data;
+    expect(data).toHaveLength(1);
+    expect(data![0]?.traps).toBeUndefined();
+  });
+
+  it("traps 项数不是 4 时返回 400（防契约漂移）", async () => {
+    const app = makeApp();
+    const res = await app.request("/api/practice", json("POST", {
+      date: "2026-08-14", correct: 1, total: 2,
+      wrong: [{
+        question: "题干", options: ["A", "B", "C", "D"], answer: 0, chosen: 1, analysis: "解析",
+        traps: ["漏读题干", "数字记混"],
+      }],
+    }));
+    expect(res.status).toBe(400);
   });
 });
 

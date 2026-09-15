@@ -27,6 +27,7 @@ const MIGRATIONS = [
   "0019_kind_wolverine",
   "0020_sturdy_corsair", // 2026-09-15：wrong_questions 加 mastered_at（「已掌握」改软删除）
   "0021_gifted_kitty_pryde", // 2026-09-15：notification_settings 建表（通知与提醒）
+  "0022_good_chamber", // 2026-09-15：wrong_questions 加 traps（错因，画布 3:617）
 ] as const;
 
 const snapshotSchema = z.object({

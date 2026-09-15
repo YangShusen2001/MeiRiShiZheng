@@ -44,6 +44,8 @@ export function practiceRoutes(db: DB, config: AppConfig) {
         answer: w.answer,
         chosen: w.chosen,
         analysis: w.analysis,
+        // 错因（画布 3:617）：题目侧预生成，没有就存 null，端上退回「你的 X → 正确 Y」
+        traps: w.traps ? JSON.stringify(w.traps) : null,
         createdAt: Date.now(),
       }).run();
     }
@@ -53,15 +55,35 @@ export function practiceRoutes(db: DB, config: AppConfig) {
 
   // —— 错题本 / 已掌握 ——
   // 两个列表共用同一套行映射，区别只在 mastered_at 为 null（待复习）还是非 null（已掌握）
-  const toWrong = (row: typeof wrongQuestions.$inferSelect): WrongQuestion => ({
-    id: row.id,
-    date: row.date,
-    question: row.question,
-    options: JSON.parse(row.options) as string[],
-    answer: row.answer,
-    chosen: row.chosen,
-    analysis: row.analysis,
-  });
+
+  /**
+   * 库里的 traps 是 JSON 文本；坏值**不抛错**——退回 undefined，端上走降级渲染。
+   * 错题本不该因为一行错因数据坏掉就整页打不开。
+   */
+  const parseTraps = (raw: string | null): string[] | undefined => {
+    if (!raw) return undefined;
+    try {
+      const parsed = JSON.parse(raw) as unknown;
+      if (!Array.isArray(parsed) || parsed.length !== 4) return undefined;
+      return parsed.map((v) => String(v ?? ""));
+    } catch {
+      return undefined;
+    }
+  };
+
+  const toWrong = (row: typeof wrongQuestions.$inferSelect): WrongQuestion => {
+    const base: WrongQuestion = {
+      id: row.id,
+      date: row.date,
+      question: row.question,
+      options: JSON.parse(row.options) as string[],
+      answer: row.answer,
+      chosen: row.chosen,
+      analysis: row.analysis,
+    };
+    const traps = parseTraps(row.traps);
+    return traps ? { ...base, traps } : base;
+  };
 
   r.get("/wrong", async (c) => {
     const owner = await resolveOwnerId(c, db);

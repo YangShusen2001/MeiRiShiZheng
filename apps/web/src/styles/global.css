@@ -2132,6 +2132,8 @@ summary:active,
 .pr-wq__date { font-size: var(--font-caption); color: var(--mut); font-variant-numeric: tabular-nums; }
 .pr-wq__q { font-size: var(--font-meta); color: var(--ink); }
 .pr-wq__opts { display: flex; flex-direction: column; gap: 6px; }
+/* 错因（画布 3:617）：12px / --mut，与预览行同一套色阶 */
+.pr-wq__why { font-size: var(--font-caption); line-height: var(--line-ui); color: var(--mut); }
 .pr-wq__opt { font-size: var(--font-meta); color: var(--sub); }
 .pr-wq__opt.is-ok { color: var(--green); font-weight: 500; }
 .pr-wq__opt.is-bad { color: var(--red); }

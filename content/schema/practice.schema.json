@@ -32,6 +32,13 @@
           "minLength": 4,
           "maxLength": 60,
           "description": "一句话提示（指向材料依据或关键区分点，不直接给出答案）。可选：画布 3:608「查看提示」按钮展开它；未生成时端上退回 topic，不编造"
+        },
+        "traps": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "type": "string", "maxLength": 12 },
+          "description": "4 个选项各自的典型误因，与 options 同下标；正确项固定空串（画布 3:617「错因：漏读题干」那一行取 traps[chosen]）。可选：未生成时端上退回「你的 X → 正确 Y」，不编造"
         }
       }
     }
