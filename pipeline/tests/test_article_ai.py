@@ -137,6 +137,49 @@ def test_semantic_validation_rejects_annotation_type_above_maximum(kind, count):
     assert errors == [f"annotation_count_{kind}"]
 
 
+def test_semantic_validation_accepts_legacy_density_from_before_tightening():
+    # Given: an article generated under the pre-tightening limits (viewpoint 5,
+    # exam_point 8, term 5) — content/ holds 189 such files across 6 dates.
+    article = _article()
+    article["paragraphs"] = ["高质量发展"]
+    article.update({
+        "sourceTextHash": source_text_hash(article["paragraphs"]),
+        "aiAnnotations": [
+            {"id": f"{kind}-{index}", "paragraphIndex": 0, "start": 0, "end": 5,
+             "text": "高质量发展", "type": kind}
+            for kind, count in (("viewpoint", 5), ("exam_point", 8), ("term", 5))
+            for index in range(count)
+        ],
+    })
+
+    # When: semantic validation runs.
+    errors = validate_article_ai(article)
+
+    # Then: legacy density stays valid. The validation bound must not be lowered
+    # with the generation caps — quality_gate fails a date when semanticErrors is
+    # non-empty (pipeline.py), which would retroactively fail those 6 dates.
+    assert errors == []
+
+
+def test_generation_maxima_stay_within_validation_bound():
+    # Given: the two density constants answer different questions (what to produce
+    # vs. what to accept on disk), so they must never be collapsed into one.
+    from kaogong.article_ai import (
+        ANNOTATION_GENERATION_MAXIMA,
+        ANNOTATION_MAXIMA,
+        ANNOTATION_PER_PARAGRAPH_MAX,
+        ANNOTATION_TOTAL_MAX,
+    )
+
+    # Then: generation caps are stricter per type, and the whole-article cap is
+    # tighter than the sum of per-type caps (otherwise it would never bind).
+    assert set(ANNOTATION_GENERATION_MAXIMA) == set(ANNOTATION_MAXIMA)
+    for kind, generation_max in ANNOTATION_GENERATION_MAXIMA.items():
+        assert 0 < generation_max <= ANNOTATION_MAXIMA[kind], kind
+    assert ANNOTATION_TOTAL_MAX <= sum(ANNOTATION_GENERATION_MAXIMA.values())
+    assert ANNOTATION_PER_PARAGRAPH_MAX >= 1
+
+
 def test_semantic_validation_allows_zero_annotations():
     # Given: a successful AI article has no locatable annotations.
     article = _article()
@@ -212,10 +255,10 @@ def test_analyze_article_truncates_annotation_over_maximum():
 
     result = analyze_article(article, {"deepseek_api_key": "k"}, call=lambda *a, **k: json.dumps(payload, ensure_ascii=False))
 
-    # Then: 考点超上限(8)时截断保留前 8 个，而不是整篇标 error。
+    # Then: 三层截断 —— 每类上限(exam_point=5) + 每段上限(2)：同段的 10 个考点只保留前 2 个。
     assert result["aiStatus"] == "ok"
-    assert len(result["aiAnnotations"]) == 8
-    assert [a["text"] for a in result["aiAnnotations"]] == keywords[:8]
+    assert len(result["aiAnnotations"]) == 2
+    assert [a["text"] for a in result["aiAnnotations"]] == keywords[:2]
 
 
 def test_summary_length_correction_retry():

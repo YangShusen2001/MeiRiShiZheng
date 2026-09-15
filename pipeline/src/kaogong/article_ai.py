@@ -13,9 +13,42 @@ from typing import TypedDict
 
 from .deepseek import DEFAULT_MODEL, chat
 
-PROMPT_VERSION = "article-analysis-v2"
+# v3：标注密度收紧（生成侧）。v2 产物是「段段带标注」的密集代，v3 起为稀疏点缀；
+# 升版是为了让两代产物可区分（schema 只要求 aiPromptVersion 为非空字符串，不锁枚举）。
+PROMPT_VERSION = "article-analysis-v3"
 ALLOWED_TYPES = {"viewpoint", "exam_point", "term", "figure"}
+# ⚠️ 标注密度有两个用途不同的常量，切勿合并成一个。
+#
+# 1) ANNOTATION_MAXIMA —— 「**校验上界**」，由 validate_article_ai 使用。
+#    它回答的是「这个文件是否已损坏」，因此必须容纳按旧上限生成的历史内容。
+#    实测 content/ 内有 189 篇 / 6 个日期（08-17、08-19、08-20、08-21、09-11、
+#    09-12）超过下面的新生成上限、但不超本上界。一旦下调它，等于**回溯宣告存量
+#    非法**：quality_gate 会把那些日期刷成 failed 并回写 _reports（违反项目纪律
+#    「质量报告只收集不降级旧文章」）。要改的是生成侧，不是这里。
 ANNOTATION_MAXIMA = {"viewpoint": 5, "exam_point": 8, "term": 5, "figure": 10}
+
+# 2) ANNOTATION_GENERATION_RANGE —— 「**生成侧密度约束**」，用于提示词 + 截断。
+#    画布 02/25 上标注是「短语级稀疏点缀」。旧值 viewpoint 5 / exam_point 8 /
+#    term 5 / figure 10 极端合计 28 处，实测出现「9 段正文 9 段带标注、单条覆盖
+#    整句」的条纹纸效果，故全面收紧。每项 (最少, 最多)：最少只进提示词，最多用于截断。
+ANNOTATION_GENERATION_RANGE = {
+    "viewpoint": (2, 3), "exam_point": (2, 5), "term": (1, 3), "figure": (1, 4),
+}
+ANNOTATION_GENERATION_MAXIMA = {
+    kind: high for kind, (_, high) in ANNOTATION_GENERATION_RANGE.items()
+}
+ANNOTATION_LABELS = {
+    "viewpoint": "观点", "exam_point": "考点", "term": "术语", "figure": "数字/指标",
+}
+# 全篇标注总上限：超过按「先到先得」截断（模型输出顺序 ≈ 段落顺序）。
+ANNOTATION_TOTAL_MAX = 12
+# 每段最多几条：防「段段带标注」。
+ANNOTATION_PER_PARAGRAPH_MAX = 2
+# 单条片段的 utf16 长度上限：超过视为整句而非短语，直接丢弃。
+# 提示词要求 30 字（ANNOTATION_TEXT_PROMPT_MAX），此处放宽到 40 作容错——
+# 宁可保留略长的合格短语，也不因模型多写两字就把整条丢掉。
+ANNOTATION_TEXT_PROMPT_MAX = 30
+ANNOTATION_TEXT_MAX = 40
 
 
 class RawAnnotation(TypedDict, total=False):
@@ -257,13 +290,21 @@ def _messages(title: str, paragraphs: list[str], *, rewrite: bool = False, corre
     length = "将 summary 重写为 80-120 个中文字符。" if rewrite else "summary 必须为 80-120 个中文字符。"
     if correction:
         length += " " + correction
+    # 密度句由 ANNOTATION_GENERATION_RANGE 派生，避免「改了常量忘了改提示词」的漂移。
+    density = "、".join(
+        f"{ANNOTATION_LABELS[kind]} {low}-{high} 处"
+        for kind, (low, high) in ANNOTATION_GENERATION_RANGE.items()
+    )
     return [
         {"role": "system", "content": (
             "你是公务员考试时政内容编辑。只返回 JSON，不得返回 Markdown/HTML。"
             "不得补充原文没有的事实。annotations 每项只返回 paragraphIndex、text、type、explanation；"
             "text 必须是对应段落中的连续原文且在该段唯一。type 只能是 viewpoint、exam_point、term、figure；"
             "仅 term 可有 explanation，释义 30-80 个中文字符。"
-            "观点 2-5 处、考点 3-8 处、术语 1-5 处、数字/指标 1-10 处；"
+            f"{density}，全部标注合计不超过 {ANNOTATION_TOTAL_MAX} 条，"
+            f"且同一段落最多 {ANNOTATION_PER_PARAGRAPH_MAX} 处；"
+            f"标注片段必须是短语（不超过 {ANNOTATION_TEXT_PROMPT_MAX} 个中文字符），不要选整句或长句"
+            " —— 标注是稀疏点缀，宁少勿多；"
             "figure 用于标注纯数字/指标值（增速、总额、覆盖率、时间节点等），不写 explanation；"
             "数字/指标考点不生成卡片，由 figure 标注在原文中高亮记忆。"
             "focus（段落聚焦）：整篇均有精读价值或均无价值时输出 null；"
@@ -329,6 +370,9 @@ def analyze_article(
                 snippet, kind = str(raw["text"]).strip(), str(raw["type"])
                 if kind not in ALLOWED_TYPES or not 0 <= index < len(paragraphs) or not snippet:
                     raise ValueError("标注字段非法")
+                # 片段过长 = 整句而非短语（画布要求稀疏点缀）→ 直接丢弃，不定位
+                if _utf16_len(snippet) > ANNOTATION_TEXT_MAX:
+                    raise ValueError("标注片段过长")
                 start, end, matched = _locate(paragraphs[index], snippet)
                 annotation = {
                     "id": f"ai-{index}-{start}-{end}-{kind}", "paragraphIndex": index,
@@ -340,14 +384,22 @@ def analyze_article(
                 annotations.append(annotation)
             except (KeyError, TypeError, ValueError):
                 location_errors += 1
-        # 超上限截断（保留前 N 个，按模型输出顺序），而不是整篇标 error
+        # 超上限截断（保留前 N 个，按模型输出顺序 ≈ 段落顺序），而不是整篇标 error。
+        # 三层约束：每类上限 + 全篇总上限 + 每段上限（防「段段带标注」）。
         truncated: list[dict] = []
         counts: dict[str, int] = {}
+        per_paragraph: dict[int, int] = {}
         for ann in annotations:
             kind = str(ann["type"])
-            if counts.get(kind, 0) >= ANNOTATION_MAXIMA[kind]:
+            para = int(ann["paragraphIndex"])
+            if counts.get(kind, 0) >= ANNOTATION_GENERATION_MAXIMA[kind]:
                 continue
+            if per_paragraph.get(para, 0) >= ANNOTATION_PER_PARAGRAPH_MAX:
+                continue
+            if len(truncated) >= ANNOTATION_TOTAL_MAX:
+                break
             counts[kind] = counts.get(kind, 0) + 1
+            per_paragraph[para] = per_paragraph.get(para, 0) + 1
             truncated.append(ann)
         annotations = truncated
         # v2.1 §7.3：段落聚焦持久化（仅 ok 态；范围非法时静默丢弃，不标 error）
