@@ -2379,6 +2379,133 @@ summary:active,
   .sr-empty__card { padding: 28px 20px; }
 }
 
+/* ===================================================================
+   个人中心（画布 25 / 3:1993）
+   页头 pad 44/64 底 --surface-2（标题 + 说明 + 右侧「退出登录」描边按钮 h40 pad 0 20）。
+   主体 pad 32/64/40 · 横向 gap 24 = 左列 620 定宽 + 右列吃满剩余；两列内部 gap 16。
+   卡：pad 20 · 圆角 14 · 纸卡底 + 描边；卡标题 18px → 按标尺归并到 17（字阶里没有 18，
+   与设计规范页同一处理）；账户行头像 64、头像选择器 44×44、开关 44×26。
+   ⚠️ 这页 DOM 由脚本渲染（资料/订阅都来自 API）→ 样式放全局。
+   =================================================================== */
+.pf-head { background: var(--surface-2); }
+.pf-head__in {
+  max-width: 1440px; margin: 0 auto; padding: 44px 64px;
+  display: flex; flex-direction: column; gap: var(--s-4);
+}
+.pf-head__row { display: flex; justify-content: space-between; align-items: center; gap: var(--s-4); }
+.pf-head__l { display: flex; flex-direction: column; gap: var(--s-2); min-width: 0; }
+/* ⚠️ 显式 background —— <button> 的 UA 默认底色是白的 */
+.pf-logout {
+  flex: 0 0 auto; height: 40px; padding: 0 20px; border-radius: var(--r-full);
+  border: 1px solid var(--line); background: var(--surface); color: var(--sub);
+  font-family: inherit; font-size: var(--font-meta); font-weight: 500; cursor: pointer;
+}
+.pf-logout:hover { border-color: var(--primary); color: var(--primary); }
+
+.pf-body { background: var(--bg); }
+.pf-body__in {
+  max-width: 1440px; margin: 0 auto; padding: 32px 64px 40px;
+  display: flex; align-items: flex-start; gap: var(--s-5);
+}
+.pf-left { flex: 0 0 auto; width: 620px; display: flex; flex-direction: column; gap: var(--s-4); }
+.pf-right { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: var(--s-4); }
+
+.pf-card {
+  display: flex; flex-direction: column; gap: var(--s-3);
+  padding: 20px; border-radius: var(--r-lg);
+  background: var(--surface); border: 1px solid var(--line);
+}
+.pf-card--form { gap: var(--s-4); }
+.pf-card__t {
+  font-family: var(--font-serif); font-size: var(--font-body);
+  font-weight: 700; line-height: var(--line-heading); color: var(--ink);
+}
+
+/* 账户行（3:2026）：头像 64 + 邮箱/状态，gap 14 */
+.pf-account { display: flex; align-items: center; gap: 14px; }
+.pf-avatar-lg {
+  flex: 0 0 auto; width: 64px; height: 64px; border-radius: var(--r-full);
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--av, var(--primary-soft)); color: var(--primary);
+}
+.pf-avatar-lg svg { width: 30px; height: 30px; }
+.pf-acc { display: flex; flex-direction: column; gap: var(--s-1); min-width: 0; }
+.pf-acc__email {
+  font-size: var(--font-body); font-weight: 500; color: var(--ink);
+  overflow: hidden; text-overflow: ellipsis;
+}
+.pf-acc__state { font-size: var(--font-caption); color: var(--mut); }
+
+/* 字段（3:2036）：标签 12 Medium + 输入框 h40 pad 0 14 圆角 8 底 --surface-2 */
+.pf-field { display: flex; flex-direction: column; gap: var(--s-2); }
+.pf-field__l { font-size: var(--font-caption); font-weight: 500; color: var(--sub); }
+.pf-input {
+  width: 100%; height: 40px; padding: 0 14px;
+  border-radius: var(--r-sm); border: 1px solid var(--line); background: var(--surface-2);
+  font-family: inherit; font-size: var(--font-meta); color: var(--ink);
+}
+.pf-input::placeholder { color: var(--mut); }
+.pf-input:focus { outline: none; border-color: var(--primary); }
+
+/* 头像选择器（3:2042）：6 个 44×44 圆，选中 = 2px 品牌描边；其余 1px --line */
+.pf-avatars { display: flex; flex-wrap: wrap; gap: 10px; }
+.pf-av {
+  width: 44px; height: 44px; padding: 0; cursor: pointer;
+  border-radius: var(--r-full); border: 1px solid var(--line); background: var(--av);
+}
+.pf-av.on { border: 2px solid var(--primary); }
+.pf-av:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+/* 订阅开关行（3:2055）：标签 14 Medium + 开关 44×26（滑块 20，开时右移 18） */
+.pf-switchrow { display: flex; align-items: center; gap: 10px; }
+.pf-switchrow__l { flex: 1 1 auto; font-size: var(--font-meta); font-weight: 500; color: var(--ink); }
+.pf-switch {
+  position: relative; flex: 0 0 auto; width: 44px; height: 26px;
+  padding: 0; border: 0; border-radius: var(--r-full); background: var(--line); cursor: pointer;
+  transition: background var(--dur-md, 250ms) var(--ease-out, ease);
+}
+.pf-switch.on { background: var(--primary); }
+.pf-switch::after {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px;
+  border-radius: var(--r-full); background: var(--surface);
+  transition: transform var(--dur-md, 250ms) var(--ease-out, ease);
+}
+.pf-switch.on::after { transform: translateX(18px); }
+.pf-switch[disabled] { opacity: 0.55; cursor: default; }
+
+/* 信息行（3:2064 / 3:2075）：pad 6 上下 · 标签 14 + 取值 12 */
+.pf-line { display: flex; align-items: center; gap: var(--s-3); padding: 6px 0; }
+.pf-line__l { flex: 1 1 auto; min-width: 0; font-size: var(--font-meta); color: var(--ink); }
+.pf-line__v { flex: 0 0 auto; font-size: var(--font-caption); color: var(--mut); }
+.pf-line__v--ok { color: var(--green); font-weight: 500; }
+
+/* 按钮（3:2049 / 3:2060）：h40 · pad 0 22 · 圆角 999 */
+.pf-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 40px; padding: 0 22px; border-radius: var(--r-full);
+  font-family: inherit; font-size: var(--font-meta); font-weight: 500; cursor: pointer;
+}
+.pf-btn--solid { border: 0; background: var(--primary); color: var(--panel-strong); }
+.pf-btn--solid:hover { background: var(--primary-deep); }
+.pf-btn--line { border: 1px solid var(--primary); background: var(--surface); color: var(--primary); }
+.pf-btn--line:hover { background: var(--primary-soft); }
+.pf-btn[disabled] { opacity: 0.6; cursor: default; }
+.pf-actions { display: flex; gap: var(--s-3); flex-wrap: wrap; }
+.pf-note { font-size: var(--font-caption); line-height: var(--line-ui); color: var(--mut); }
+.pf-msg { font-size: var(--font-caption); line-height: var(--line-ui); color: var(--green); }
+.pf-msg--bad { color: var(--red); }
+
+@media (max-width: 1140px) {
+  .pf-body__in { flex-direction: column; }
+  .pf-left { width: 100%; }
+}
+@media (max-width: 860px) {
+  .pf-head__in { padding: 28px 16px; }
+  .pf-body__in { padding: 24px 16px 56px; }
+  .pf-logout { min-height: 44px; }
+  .pf-av { width: 48px; height: 48px; } /* 触控目标 */
+}
+
 /* ── 设计规范页 ── */
 .spec-head { background: var(--panel-deep); }
 .spec-head__in {

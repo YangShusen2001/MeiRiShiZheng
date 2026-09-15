@@ -1,10 +1,39 @@
 ---
+// 个人中心（画布 25 / 3:1993）。
+//
+// 结构照画布：页头（标题 34/42 衬线 + 说明 + 右侧「退出登录」描边按钮）→
+// 主体两列（左 620 定宽：账户卡 + 个人资料卡；右列填充：每日摘要卡）。
+// 资料与订阅都走 API，所以这页的 DOM 由脚本渲染。
+//
+// ⚠️ 画布右列还有「通知与提醒」「数据与隐私」两张卡，**本轮没有渲染** ——
+//    不是漏了，是线上没有任何数据源与能力支撑：
+//    · 「通知与提醒」里的复习提醒 / 额度提醒只存在于手机端（画布 24 通知设置），Web 没有对应接口；
+//    · 「数据与隐私」里的导出、注销账号同样没有接口。
+//    摆上去只能编一个「1 台设备 · 已同步」加两个点了没反应的按钮 ——
+//    与项目「不摆假按钮占位」的既定做法相悖。接口就位再补（已记进契约缺口）。
 import Base from "../layouts/Base.astro";
 ---
-<Base title="个人中心 · 每日时政">
-  <section class="card auth-card">
-    <h2>个人中心</h2>
-    <div id="profile-box"><p class="item-summary" role="status" aria-live="polite">加载中…</p></div>
+
+<Base title="个人中心 · 每日时政" description="账号资料、每日摘要订阅与数据管理。" bleed>
+  <section class="pf-head">
+    <div class="pf-head__in">
+      <div class="pf-head__row">
+        <div class="pf-head__l">
+          <h1 class="pg-title">个人中心</h1>
+          <p class="pg-sub">账号资料 · 每日摘要订阅 · 通知与提醒 · 数据与隐私</p>
+        </div>
+        <button class="pf-logout" type="button" id="pf-logout">退出登录</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="pf-body">
+    <div class="pf-body__in">
+      <div class="pf-left" id="pf-left">
+        <section class="pf-card"><p class="pf-note" role="status" aria-live="polite">加载中…</p></section>
+      </div>
+      <div class="pf-right" id="pf-right"></div>
+    </div>
   </section>
 </Base>
 
@@ -12,108 +41,162 @@ import Base from "../layouts/Base.astro";
   import { api } from "../lib/api";
   import { AVATAR_COUNT, AVATAR_MARK, avatarIndex, avatarVar } from "../lib/avatar";
 
-  const esc = (s: string): string =>
-    String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] ?? c));
-  const box = document.getElementById("profile-box")!;
+  const esc = (s: unknown): string =>
+    String(s ?? "").replace(/[&<>"']/g, (c) => {
+      const map: Record<string, string> = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+      return map[c] ?? c;
+    });
 
-  const [profileResult, subscriptionResult] = await Promise.all([
-    api.getProfile(),
-    api.getSubscription(),
-  ]);
+  const left = document.getElementById("pf-left") as HTMLElement;
+  const right = document.getElementById("pf-right") as HTMLElement;
+
+  document.getElementById("pf-logout")?.addEventListener("click", async () => {
+    await api.logout();
+    location.href = "/";
+  });
+
+  const [profileResult, subscriptionResult] = await Promise.all([api.getProfile(), api.getSubscription()]);
+
   if (!profileResult.ok || !profileResult.data) {
-    box.innerHTML = '<p role="alert">未登录，请先 <a href="/login/">登录</a>。</p>';
+    left.innerHTML =
+      `<section class="pf-card"><p class="pf-note" role="alert">未登录，请先 <a href="/login/">登录</a>。</p></section>`;
+    right.innerHTML = "";
   } else {
     const p = profileResult.data;
-    // 头像（画布 3:2027）：身份底色圆 + 品牌字形。存的 avatar-N 优先，老 emoji 数据走邮箱哈希。
     const currentAvatar = avatarIndex(p.avatar, p.email);
-    const subscription = subscriptionResult.ok ? subscriptionResult.data : null;
-    const subscribed = subscription?.subscribed ?? p.subscribed;
-    const deliveryAvailable = subscription?.deliveryAvailable ?? false;
-    const subscriptionDisabled = !subscription || (!deliveryAvailable && !subscribed);
-    box.innerHTML = `
-      <div class="profile-head">
-        <span class="profile-avatar" style="--av: ${avatarVar(currentAvatar)}">${AVATAR_MARK}</span>
-        <div><b>${esc(p.email)}</b><p class="item-summary">已验证 QQ 邮箱</p></div>
-      </div>
-      <div class="auth-form">
-        <label>姓名<input id="p-name" value="${esc(p.name)}" maxlength="32" /></label>
-        <label>头像
-          <div class="avatar-picker">${Array.from({ length: AVATAR_COUNT }, (_, i) => {
-            const on = i === currentAvatar;
-            return `<button type="button" class="avatar-opt${on ? " on" : ""}" style="--av: ${avatarVar(i)}" data-a="avatar-${i + 1}" aria-label="头像配色 ${i + 1}" aria-pressed="${on}">${AVATAR_MARK}</button>`;
-          }).join("")}</div>
-        </label>
-        <div class="auth-actions"><button type="button" class="btn btn--solid" id="p-save">保存个人资料</button></div>
-        <p id="p-msg" class="item-summary" role="status" aria-live="polite"></p>
-        <div class="subscription-panel">
-          <h3>每日摘要</h3>
-          <label class="sub-row"><input type="checkbox" id="p-sub" aria-describedby="p-sub-availability" ${subscribed ? "checked" : ""} ${subscriptionDisabled ? "disabled" : ""} /> 订阅 QQ 邮箱通知</label>
-          <p id="p-sub-availability" class="item-summary">${
-            !subscription
-              ? "订阅状态加载失败，请刷新后重试。"
-              : deliveryAvailable
-                ? "每日时政摘要将发送到已验证的 QQ 邮箱。"
-                : subscribed
-                  ? "摘要邮件暂不可用；你仍可退订现有订阅。"
-                  : "摘要邮件暂不可用，恢复投递后才能订阅。"
-          }</p>
-          <div class="auth-actions"><button type="button" class="btn btn--line" id="p-sub-save" ${subscriptionDisabled ? "disabled" : ""}>保存订阅设置</button></div>
-          <p id="p-sub-msg" class="item-summary" role="status" aria-live="polite"></p>
-        </div>
-      </div>
-    `;
-    box.querySelectorAll(".avatar-opt").forEach((b) => {
+    const sub = subscriptionResult.ok ? subscriptionResult.data : null;
+    const subscribed = sub?.subscribed ?? p.subscribed;
+    const deliveryAvailable = sub?.deliveryAvailable ?? false;
+    const subDisabled = !sub || (!deliveryAvailable && !subscribed);
+
+    const availabilityText = (): string =>
+      !sub
+        ? "订阅状态加载失败，请刷新后重试。"
+        : deliveryAvailable
+          ? "每日时政摘要将发送到已验证的 QQ 邮箱；邮件暂不可用时可退订，不影响站内阅读。"
+          : subscribed
+            ? "摘要邮件暂不可用；你仍可退订现有订阅。"
+            : "摘要邮件暂不可用，恢复投递后才能订阅。";
+
+    // 账户状态文案用真实字段拼（画布上那句「加入 2026-08-20」契约里没有创建时间，就不写）
+    const stateText = `已验证 QQ 邮箱 · ${subscribed ? "每日摘要已订阅" : "每日摘要未订阅"}`;
+
+    left.innerHTML =
+      `<section class="pf-card">` +
+      `<div class="pf-account">` +
+      `<span class="pf-avatar-lg" style="--av: ${avatarVar(currentAvatar)}">${AVATAR_MARK}</span>` +
+      `<div class="pf-acc">` +
+      `<span class="pf-acc__email">${esc(p.email)}</span>` +
+      `<span class="pf-acc__state">${esc(stateText)}</span>` +
+      `</div></div></section>` +
+      `<section class="pf-card pf-card--form">` +
+      `<h2 class="pf-card__t">个人资料</h2>` +
+      `<label class="pf-field">` +
+      `<span class="pf-field__l">姓名</span>` +
+      `<input class="pf-input" id="p-name" maxlength="32" value="${esc(p.name)}" placeholder="怎么称呼你" />` +
+      `</label>` +
+      `<div class="pf-field">` +
+      `<span class="pf-field__l">头像</span>` +
+      `<div class="pf-avatars" id="p-avatars">` +
+      Array.from({ length: AVATAR_COUNT }, (_, i) => {
+        const on = i === currentAvatar;
+        return (
+          `<button type="button" class="pf-av${on ? " on" : ""}" style="--av: ${avatarVar(i)}" ` +
+          `data-a="avatar-${i + 1}" aria-label="头像配色 ${i + 1}" aria-pressed="${on}"></button>`
+        );
+      }).join("") +
+      `</div></div>` +
+      `<div class="pf-actions"><button class="pf-btn pf-btn--solid" type="button" id="p-save">保存个人资料</button></div>` +
+      `<p class="pf-msg" id="p-msg" role="status" aria-live="polite"></p>` +
+      `</section>`;
+
+    right.innerHTML =
+      `<section class="pf-card">` +
+      `<h2 class="pf-card__t">每日摘要订阅</h2>` +
+      `<p class="pf-note">把当天精选的概括与关键词发到已验证的 QQ 邮箱，正文与出处仍在站内。</p>` +
+      `<div class="pf-switchrow">` +
+      `<span class="pf-switchrow__l">订阅 QQ 邮箱通知</span>` +
+      `<button class="pf-switch${subscribed ? " on" : ""}" type="button" id="p-sub" role="switch" ` +
+      `aria-checked="${subscribed}" aria-label="订阅 QQ 邮箱通知"${subDisabled ? " disabled" : ""}></button>` +
+      `</div>` +
+      `<p class="pf-note" id="p-sub-availability">${availabilityText()}</p>` +
+      `<div class="pf-actions">` +
+      `<button class="pf-btn pf-btn--line" type="button" id="p-sub-save"${subDisabled ? " disabled" : ""}>保存订阅设置</button>` +
+      `</div>` +
+      `<p class="pf-msg" id="p-sub-msg" role="status" aria-live="polite"></p>` +
+      `</section>`;
+
+    // 头像选择（画布 3:2042）：选中 = 2px 品牌描边
+    document.querySelectorAll<HTMLButtonElement>(".pf-av").forEach((b) => {
       b.addEventListener("click", () => {
-        box.querySelectorAll(".avatar-opt").forEach((x) => {
+        for (const x of document.querySelectorAll(".pf-av")) {
           x.classList.remove("on");
           x.setAttribute("aria-pressed", "false");
-        });
+        }
         b.classList.add("on");
         b.setAttribute("aria-pressed", "true");
       });
     });
-    const profileButton = document.getElementById("p-save") as HTMLButtonElement;
-    const profileMessage = document.getElementById("p-msg") as HTMLElement;
-    profileButton.addEventListener("click", async () => {
+
+    const saveBtn = document.getElementById("p-save") as HTMLButtonElement;
+    const msg = document.getElementById("p-msg") as HTMLElement;
+    saveBtn.addEventListener("click", async () => {
       const name = (document.getElementById("p-name") as HTMLInputElement).value.trim();
-      const avatar = box.querySelector(".avatar-opt.on")?.getAttribute("data-a") || `avatar-${currentAvatar + 1}`;
-      profileButton.disabled = true;
-      profileButton.textContent = "正在保存…";
-      profileMessage.textContent = "";
+      const avatar =
+        document.querySelector(".pf-av.on")?.getAttribute("data-a") || `avatar-${currentAvatar + 1}`;
+      saveBtn.disabled = true;
+      saveBtn.textContent = "正在保存…";
+      msg.textContent = "";
       const result = await api.updateProfile({ name, avatar });
-      profileMessage.textContent = result.ok ? "个人资料已保存" : (result.error?.message ?? "个人资料保存失败");
-      profileButton.textContent = "保存个人资料";
-      profileButton.disabled = false;
+      msg.textContent = result.ok ? "个人资料已保存" : (result.error?.message ?? "个人资料保存失败");
+      msg.classList.toggle("pf-msg--bad", !result.ok);
+      saveBtn.textContent = "保存个人资料";
+      saveBtn.disabled = false;
     });
 
-    const subscriptionInput = document.getElementById("p-sub") as HTMLInputElement;
-    const subscriptionButton = document.getElementById("p-sub-save") as HTMLButtonElement;
-    const subscriptionMessage = document.getElementById("p-sub-msg") as HTMLElement;
-    const subscriptionAvailability = document.getElementById("p-sub-availability") as HTMLElement;
-    subscriptionButton.addEventListener("click", async () => {
-      if (!deliveryAvailable && subscriptionInput.checked) {
-        subscriptionMessage.textContent = "摘要邮件暂不可用，当前不能订阅。";
+    // 订阅开关（画布 3:2057）：44×26 胶囊 + 20 滑块
+    const sw = document.getElementById("p-sub") as HTMLButtonElement;
+    const subBtn = document.getElementById("p-sub-save") as HTMLButtonElement;
+    const subMsg = document.getElementById("p-sub-msg") as HTMLElement;
+    const subAvail = document.getElementById("p-sub-availability") as HTMLElement;
+
+    sw.addEventListener("click", () => {
+      const on = !sw.classList.contains("on");
+      sw.classList.toggle("on", on);
+      sw.setAttribute("aria-checked", String(on));
+    });
+
+    subBtn.addEventListener("click", async () => {
+      const want = sw.classList.contains("on");
+      if (!deliveryAvailable && want) {
+        subMsg.textContent = "摘要邮件暂不可用，当前不能订阅。";
+        subMsg.classList.add("pf-msg--bad");
         return;
       }
-      subscriptionButton.disabled = true;
-      subscriptionButton.textContent = "正在保存…";
-      subscriptionMessage.textContent = "";
-      const result = await api.updateSubscription({ subscribed: subscriptionInput.checked });
+      subBtn.disabled = true;
+      subBtn.textContent = "正在保存…";
+      subMsg.textContent = "";
+      const result = await api.updateSubscription({ subscribed: want });
       if (result.ok && result.data) {
-        subscriptionInput.checked = result.data.subscribed;
-        subscriptionInput.disabled = !result.data.deliveryAvailable && !result.data.subscribed;
-        subscriptionButton.disabled = !result.data.deliveryAvailable && !result.data.subscribed;
-        subscriptionAvailability.textContent = result.data.deliveryAvailable
-          ? "每日时政摘要将发送到已验证的 QQ 邮箱。"
-          : result.data.subscribed
+        const d = result.data;
+        sw.classList.toggle("on", d.subscribed);
+        sw.setAttribute("aria-checked", String(d.subscribed));
+        const disabled = !d.deliveryAvailable && !d.subscribed;
+        sw.disabled = disabled;
+        subBtn.disabled = disabled;
+        subAvail.textContent = d.deliveryAvailable
+          ? "每日时政摘要将发送到已验证的 QQ 邮箱；邮件暂不可用时可退订，不影响站内阅读。"
+          : d.subscribed
             ? "摘要邮件暂不可用；你仍可退订现有订阅。"
             : "摘要邮件暂不可用，恢复投递后才能订阅。";
-        subscriptionMessage.textContent = result.data.subscribed ? "订阅设置已保存" : "已退订每日摘要";
+        subMsg.textContent = d.subscribed ? "订阅设置已保存" : "已退订每日摘要";
+        subMsg.classList.remove("pf-msg--bad");
       } else {
-        subscriptionMessage.textContent = result.error?.message ?? "订阅设置保存失败";
-        subscriptionButton.disabled = false;
+        subMsg.textContent = result.error?.message ?? "订阅设置保存失败";
+        subMsg.classList.add("pf-msg--bad");
+        subBtn.disabled = false;
       }
-      subscriptionButton.textContent = "保存订阅设置";
+      subBtn.textContent = "保存订阅设置";
     });
   }
 </script>
