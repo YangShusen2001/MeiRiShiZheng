@@ -1,4 +1,12 @@
 ---
+// 我的收藏（画布 04 / 3:433）。
+//
+// 结构照画布：页头（标题 + 说明 + 同步按钮）→ 类型筛选（5 个胶囊）→ 648×188 卡网格（wrap gap 16）。
+// 卡片由客户端渲染（数据来自 API 或本机），所以卡片的 DOM 在脚本里拼。
+//
+// ⚠️ 画布定义了**四类**：文章 / 术语 / 金句 / 政策。契约 `favoriteKindSchema` 目前只有
+// `["article", "quote", "term"]` —— **没有 policy**。所以「政策」这一格照画布渲染，
+// 但必然走空态，并在空态里说清原因；补契约时一起加。见页面底部注释。
 import Base from "../layouts/Base.astro";
 import { listArticles } from "../lib/content";
 
@@ -8,43 +16,49 @@ for (const a of listArticles()) {
   articleIdByUrl[a.url] = a.id;
 }
 ---
-<Base title="我的收藏 · 时政小助手">
-  <section class="card">
-    <h2>我的收藏</h2>
-    <div class="fav-filters" id="fav-filters">
-      <button type="button" class="fav-filter on" data-filter="term">术语解析</button>
-      <button type="button" class="fav-filter" data-filter="article">文章收藏</button>
-      <button type="button" class="fav-filter" data-filter="quote">金句收藏</button>
+
+<Base title="我的收藏 · 每日时政" description="文章 / 术语 / 金句 / 政策 四类归集；未登录时保存在本机，登录后自动同步。" bleed>
+  <section class="fav-head">
+    <div class="fav-head__in">
+      <div class="fav-head__row">
+        <div class="fav-head__l">
+          <h1 class="pg-title">我的收藏</h1>
+          <p class="pg-sub">文章 / 术语 / 金句 / 政策 四类归集 · 未登录时保存在本机，登录后自动同步</p>
+        </div>
+        <a class="fav-sync" id="fav-sync" href="/login/">登录后同步到云端</a>
+      </div>
     </div>
-    <div id="fav-list"><p class="item-summary">加载中…</p></div>
+  </section>
+
+  <section class="fav-body">
+    <div class="fav-body__in">
+      {/* 类型筛选（画布 3:464）：h34 · pad 0 16 · 圆角 999 · gap 8；选中 = 品牌实底 + 白字 */}
+      <div class="fav-tabs" id="fav-tabs" role="tablist" aria-label="收藏类型"></div>
+      <div class="fav-grid" id="fav-list"><p class="fav-empty">加载中…</p></div>
+    </div>
   </section>
   <script type="application/json" id="article-id-map" set:html={JSON.stringify(articleIdByUrl).replace(/</g, "\\u003c")}></script>
 </Base>
 
 <style>
-  /* 术语解析行：流式连排（术语/释义 → 来源 → 追问 → 删除），不做左右两端分板块 */
-  .term-row { position: relative; flex-wrap: wrap; }
-  .term-main { flex: 0 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-  .term-name { font-weight: 700; color: var(--primary); font-family: var(--font-serif); font-size: var(--font-meta); }
-  .term-expl { color: var(--sub); font-size: var(--font-meta); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 320px; }
-  .term-side { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
-  .term-src { font-size: var(--font-caption); color: var(--mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; text-decoration: none; }
-  .term-src:hover { color: var(--primary); }
-  .term-actions { display: flex; gap: 6px; }
-  .term-ask-panel { flex-basis: 100%; margin-top: 8px; padding: 10px 12px; background: var(--surface-2); border-radius: var(--r-sm); }
-  @media (max-width: 640px) {
-    .term-actions button { min-height: 44px; } /* 触控目标 */
-    .term-src { max-width: 100%; }
+  /* 追问面板只在这页用：留在组件内，不污染全局样式表 */
+  .fav-ask-panel { flex-basis: 100%; margin-top: 12px; padding: 12px; background: var(--surface-2); border-radius: var(--r-sm); }
+  .fav-suggest { display: flex; flex-direction: column; gap: 6px; }
+  .fav-q {
+    text-align: left; border: 1px solid var(--line); background: var(--surface); color: var(--primary);
+    border-radius: var(--r-sm); padding: 6px 10px; font-size: var(--font-meta); cursor: pointer; font-family: inherit;
   }
-  .term-suggest { display: flex; flex-direction: column; gap: 6px; }
-  .term-q { text-align: left; border: 1px solid var(--line); background: var(--surface); color: var(--primary);
-    border-radius: var(--r-sm); padding: 6px 10px; font-size: var(--font-meta); cursor: pointer; font-family: inherit; }
-  .term-q:hover { border-color: var(--primary); }
-  .term-input-row { display: flex; gap: 8px; margin-top: 8px; }
-  .term-input { flex: 1; border: 1px solid var(--line); border-radius: var(--r-sm); padding: 7px 10px;
-    font-family: inherit; font-size: var(--font-meta); background: var(--surface); color: var(--ink); }
-  .term-input:focus { outline: 2px solid var(--primary); border-color: transparent; }
-  .term-answer { margin-top: 8px; font-size: var(--font-meta); line-height: var(--line-reading); color: var(--ink); }
+  .fav-q:hover { border-color: var(--primary); }
+  .fav-ask-row { display: flex; gap: 8px; margin-top: 8px; }
+  .fav-ask-input {
+    flex: 1; border: 1px solid var(--line); border-radius: var(--r-sm); padding: 7px 10px;
+    font-family: inherit; font-size: var(--font-meta); background: var(--surface); color: var(--ink);
+  }
+  .fav-ask-input:focus { outline: 2px solid var(--primary); border-color: transparent; }
+  .fav-answer { margin-top: 8px; font-size: var(--font-meta); line-height: var(--line-reading); color: var(--ink); }
+  @media (max-width: 640px) {
+    .fav-ask, .fav-remove, .fav-q { min-height: 44px; } /* 触控目标 */
+  }
 </style>
 
 <script>
@@ -58,143 +72,201 @@ for (const a of listArticles()) {
       const map: Record<string, string> = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
       return map[c] ?? c;
     });
+
+  type Kind = "article" | "term" | "quote" | "policy";
+  type Filter = "all" | Kind;
+
+  /** 画布 3:464 的五个胶囊。政策在契约里还没有对应 kind（见文件头注释）。 */
+  const TABS: Array<{ key: Filter; label: string }> = [
+    { key: "all", label: "全部" },
+    { key: "article", label: "文章" },
+    { key: "term", label: "术语" },
+    { key: "quote", label: "金句" },
+    { key: "policy", label: "政策" },
+  ];
+
+  /** 类型标签（画布 3:478/3:488/3:498/3:508）：文章与政策用品牌浅底，术语用 term 色，金句用 sunken。 */
+  const BADGE: Record<Kind, string> = {
+    article: "fav-badge--brand",
+    term: "fav-badge--term",
+    quote: "fav-badge--quote",
+    policy: "fav-badge--brand",
+  };
+
+  /** 底行主链接的措辞（画布逐卡指定，不统一成一个词）。 */
+  const OPEN_LABEL: Record<Kind, string> = {
+    article: "查看官方原文",
+    term: "查看出处段落",
+    quote: "回到原文",
+    policy: "查看官方原文",
+  };
+
   const list = document.getElementById("fav-list")!;
+  const tabsEl = document.getElementById("fav-tabs")!;
+  const syncEl = document.getElementById("fav-sync") as HTMLAnchorElement | null;
   const articleIdByUrl = JSON.parse(document.getElementById("article-id-map")?.textContent ?? "{}") as Record<string, string>;
 
-  let activeFilter: "term" | "article" | "quote" = "term";
+  let activeFilter: Filter = "all";
   let favorites: Favorite[] = [];
 
-  function rowHtml(f: Favorite): string {
-    const articleId = articleIdByUrl[f.url];
-    const href = articleId ? `/read/${articleId}/` : f.url;
-    const externalAttr = articleId ? "" : ' target="_blank" rel="noopener"';
-    const main = f.kind === "quote" ? (f.quote || f.title) : f.title;
-    const sub = f.kind === "quote" ? `—— ${f.title}` : (f.source || "官方来源");
-    return `
-      <div class="day-row fav-row">
-        <a href="${esc(href)}"${externalAttr} class="fav-link" style="flex:1">
-          <span class="fav-main">${esc(main)}</span>
-          ${sub ? `<span class="fav-sub">${esc(sub)}</span>` : ""}
-        </a>
-        <button type="button" class="btn btn--line btn--sm fav-del" data-id="${esc(f.id)}">删除</button>
-      </div>`;
-  }
+  // 契约里 `createdAt` 是 epoch 毫秒（不是 ISO 串）；本地收藏也是同一套。
+  // 按**本地时区**格式化，不走 toISOString —— 后者会因时差把日期算早一天。
+  const day = (t: number | string): string => {
+    if (typeof t !== "number") return String(t ?? "").slice(0, 10);
+    const d = new Date(t);
+    const pad = (n: number): string => String(n).padStart(2, "0");
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  };
+  const kindOf = (f: Favorite): Kind => (f.kind as Kind) ?? "article";
 
-  // —— 术语解析（0018 改版）：只显示「被收藏的术语」（kind=term），UI 对齐「文章收藏」day-row ——
-  function termCardHtml(f: Favorite): string {
+  function link(f: Favorite): { href: string; external: string } {
     const articleId = f.articleId || articleIdByUrl[f.url] || "";
     const href = articleId ? `/read/${articleId}/` : f.url;
-    return `
-      <div class="day-row term-row">
-        <div class="term-main">
-          <span class="term-name">「${esc(f.termText || f.title)}」</span>
-          <span class="term-expl" title="${esc(f.termExplanation || "")}">${esc(f.termExplanation || "")}</span>
-        </div>
-        <div class="term-side">
-          <a class="term-src" href="${esc(href)}" title="${esc(f.title)}">${esc(f.title)} ↗</a>
-          <div class="term-actions">
-            <button type="button" class="btn btn--line btn--sm term-ask" data-term="${esc(f.termText || "")}" data-expl="${esc(f.termExplanation || "")}">追问</button>
-            <button type="button" class="btn btn--line btn--sm term-del" data-id="${esc(f.id)}" data-url="${esc(f.url)}" data-term="${esc(f.termText || "")}">删除</button>
-          </div>
-        </div>
-        <div class="term-ask-panel" hidden></div>
-      </div>`;
+    return { href, external: articleId ? "" : ' target="_blank" rel="noopener"' };
   }
 
-  function openAskPanel(btn: HTMLButtonElement): void {
-    const panel = btn.closest<HTMLElement>(".term-row")!.querySelector<HTMLElement>(".term-ask-panel")!;
-    if (!panel.hidden) { panel.hidden = true; return; }
-    const term = btn.dataset.term || "";
-    const expl = btn.dataset.expl || "";
-    panel.hidden = false;
-    panel.innerHTML = '<p class="item-summary">生成建议问题中…</p>';
+  /** 顶行右侧那句：文章/金句/政策给「来源 · 日期」，术语给「收录于 N 篇 · 日期」。 */
+  function metaText(f: Favorite): string {
+    const kind = kindOf(f);
+    const date = day(f.createdAt);
+    if (kind === "term") {
+      // N = 收藏里含同一术语的条数 —— 这是能如实算出来的，不编造文章总数
+      const n = favorites.filter((x) => x.termText && x.termText === f.termText).length || 1;
+      return `收录于 ${n} 篇 · ${date}`;
+    }
+    if (kind === "quote") return `${f.source || f.title || "官方来源"} · ${date}`;
+    return `${f.source || "官方来源"} · ${date}`;
+  }
 
-    void api.termAsk({ term, explanation: expl }).then((env) => {
-      if (!env.ok || !env.data) {
-        panel.innerHTML = `<p class="item-summary">${esc(env.error?.message ?? "生成失败")}（<a href="/login/">登录</a>或填写邀请码后可追问）</p>`;
-        return;
-      }
-      const suggestions = env.data.suggestions ?? [];
-      panel.innerHTML = `
-        <div class="term-suggest">
-          ${suggestions.length
-            ? suggestions.map((s, i) => `<button type="button" class="term-q" data-q="${esc(s)}">${i + 1}. ${esc(s)}</button>`).join("")
-            : '<p class="item-summary">暂未生成建议问题，可直接输入。</p>'}
+  function cardHtml(f: Favorite): string {
+    const kind = kindOf(f);
+    const { href, external } = link(f);
+    const title = kind === "term" ? (f.termText || f.title)
+      : kind === "quote" ? (f.quote || f.title)
+        : f.title;
+    const body = kind === "term" ? (f.termExplanation || "")
+      : kind === "quote" ? (f.title ? `出自《${f.title}》` : "")
+        : (f.note || "");
+    // 金句卡在画布上用 Medium（其余用 Bold）—— 金句是要被读出来的一句话，不需要加重
+    const titleCls = kind === "quote" ? "fav-card__title fav-card__title--medium" : "fav-card__title";
+    const ask = kind === "term"
+      ? `<button type="button" class="fav-ask" data-term="${esc(f.termText || "")}" data-expl="${esc(f.termExplanation || "")}">追问</button>`
+      : "";
+    return `
+      <article class="fav-card">
+        <div class="fav-card__top">
+          <span class="fav-badge ${BADGE[kind]}">${TABS.find((t) => t.key === kind)?.label ?? "文章"}</span>
+          <span class="fav-card__meta">${esc(metaText(f))}</span>
         </div>
-        <div class="term-input-row">
-          <input type="text" class="term-input" placeholder="输入你的追问…（如：为什么要设置六张网，而不是七张网？）" />
-          <button type="button" class="btn btn--solid btn--sm term-go">提问</button>
+        <a class="${titleCls}" href="${esc(href)}"${external}>${esc(title)}</a>
+        ${body ? `<p class="fav-card__body">${esc(body)}</p>` : ""}
+        <div class="fav-card__foot">
+          <span class="fav-card__acts">
+            <a class="fav-open" href="${esc(href)}"${external}>${OPEN_LABEL[kind]}</a>
+            ${ask}
+          </span>
+          <button type="button" class="fav-remove" data-id="${esc(f.id)}" data-url="${esc(f.url)}" data-term="${esc(f.termText || "")}" data-kind="${kind}">移出收藏</button>
         </div>
-        <div class="term-answer"></div>`;
+        ${kind === "term" ? '<div class="fav-ask-panel" hidden></div>' : ""}
+      </article>`;
+  }
 
-      const answerEl = panel.querySelector<HTMLElement>(".term-answer")!;
-      const doAsk = (q: string): void => {
-        answerEl.innerHTML = '<p class="item-summary">AI 思考中…</p>';
-        void api.termAsk({ term, explanation: expl, question: q }).then((env2) => {
-          if (env2.ok && env2.data?.answer) answerEl.innerHTML = renderMarkdown(env2.data.answer);
-          else answerEl.innerHTML = `<p class="item-summary">${esc(env2.error?.message ?? "追问失败")}</p>`;
-        });
-      };
-      panel.querySelectorAll<HTMLButtonElement>(".term-q").forEach((b) => {
-        b.addEventListener("click", () => doAsk(b.dataset.q || ""));
-      });
-      panel.querySelector<HTMLButtonElement>(".term-go")!.addEventListener("click", () => {
-        const input = panel.querySelector<HTMLInputElement>(".term-input")!;
-        const q = input.value.trim();
-        if (q) doAsk(q);
+  function renderTabs(): void {
+    tabsEl.innerHTML = TABS.map((t) => {
+      const n = t.key === "all" ? favorites.length : favorites.filter((f) => kindOf(f) === t.key).length;
+      const on = t.key === activeFilter;
+      return `<button type="button" role="tab" class="fav-tab${on ? " on" : ""}" data-filter="${t.key}" aria-selected="${on}">${t.label} ${n}</button>`;
+    }).join("");
+    tabsEl.querySelectorAll<HTMLButtonElement>(".fav-tab").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        activeFilter = (btn.dataset.filter as Filter) ?? "all";
+        renderTabs();
+        renderList();
       });
     });
   }
 
-  function renderTerms(): void {
-    const entries = favorites.filter((f) => f.kind === "term");
-    if (!entries.length) {
-      list.innerHTML = '<p class="item-summary">还没有收藏术语——阅读页点正文中的 AI 术语即可收藏（👻→😃）。</p>';
+  const EMPTY: Record<Kind, string> = {
+    article: "还没有收藏文章——阅读页点「收藏本文」即可。",
+    term: "还没有收藏术语——阅读页点正文里的 AI 术语即可收藏。",
+    quote: "还没有收藏金句——阅读页的「金句」分组里可以逐条收藏。",
+    // 如实说明：不是「你还没收藏」，而是这条链路还没接
+    policy: "政策收藏还没接入：收藏契约目前只有 文章 / 术语 / 金句 三类，缺少 policy。",
+  };
+
+  function renderList(): void {
+    const localHint = localMode ? "（未登录，收藏保存在本机）" : "";
+    if (!favorites.length) {
+      list.innerHTML = `<p class="fav-empty">还没有任何收藏。阅读页点「收藏本文」、点正文里的 AI 术语，或在「金句」分组里逐条收藏。${localHint}</p>`;
       return;
     }
-    list.innerHTML = entries.map(termCardHtml).join("");
-    list.querySelectorAll<HTMLButtonElement>(".term-ask").forEach((btn) => {
-      btn.addEventListener("click", () => openAskPanel(btn));
-    });
-    list.querySelectorAll<HTMLButtonElement>(".term-del").forEach((btn) => {
+    const items = activeFilter === "all" ? favorites : favorites.filter((f) => kindOf(f) === activeFilter);
+    if (!items.length) {
+      list.innerHTML = `<p class="fav-empty">${EMPTY[activeFilter as Kind] ?? "该分类暂无收藏。"}${localHint}</p>`;
+      return;
+    }
+    list.innerHTML = items.map(cardHtml).join("");
+
+    list.querySelectorAll<HTMLButtonElement>(".fav-remove").forEach((btn) => {
       btn.addEventListener("click", async () => {
-        const id = btn.getAttribute("data-id") || "";
-        const url = btn.getAttribute("data-url") || "";
-        const term = btn.getAttribute("data-term") || "";
+        const id = btn.dataset.id || "";
+        const url = btn.dataset.url || "";
+        const term = btn.dataset.term || "";
         if (localMode) {
-          removeLocalTermFavorite(url, term); // 本地：只删该术语
+          if (btn.dataset.kind === "term") removeLocalTermFavorite(url, term);
+          else removeLocalFavorite(id);
         } else {
           await api.removeFavorite(id);
         }
         await load();
       });
     });
+    list.querySelectorAll<HTMLButtonElement>(".fav-ask").forEach((btn) => {
+      btn.addEventListener("click", () => openAskPanel(btn));
+    });
   }
 
-  function renderList(): void {
-    if (!favorites.length) {
-      list.innerHTML = localMode
-        ? '<p class="item-summary">还没有本机收藏，去阅读页「👻 收藏本文」添加。</p>'
-        : '<p class="item-summary">还没有收藏，去日报页或阅读页「👻 收藏本文」添加。</p>';
-      return;
-    }
-    if (activeFilter === "term") { renderTerms(); return; }
-    const filtered = favorites.filter((f) => f.kind === activeFilter);
-    if (!filtered.length) {
-      list.innerHTML = '<p class="item-summary">该分类暂无收藏。</p>';
-      return;
-    }
-    list.innerHTML = filtered.map(rowHtml).join("");
-    list.querySelectorAll("button[data-id]").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        const id = btn.getAttribute("data-id") || "";
-        if (localMode) {
-          removeLocalFavorite(id); // 本地收藏 id = url
-          await load();
-        } else {
-          await api.removeFavorite(id);
-          await load();
-        }
+  function openAskPanel(btn: HTMLButtonElement): void {
+    const panel = btn.closest<HTMLElement>(".fav-card")!.querySelector<HTMLElement>(".fav-ask-panel")!;
+    if (!panel.hidden) { panel.hidden = true; return; }
+    const term = btn.dataset.term || "";
+    const expl = btn.dataset.expl || "";
+    panel.hidden = false;
+    panel.innerHTML = '<p class="fav-card__body">生成建议问题中…</p>';
+
+    void api.termAsk({ term, explanation: expl }).then((env) => {
+      if (!env.ok || !env.data) {
+        panel.innerHTML = `<p class="fav-card__body">${esc(env.error?.message ?? "生成失败")}（<a href="/login/">登录</a>或填写邀请码后可追问）</p>`;
+        return;
+      }
+      const suggestions = env.data.suggestions ?? [];
+      panel.innerHTML = `
+        <div class="fav-suggest">
+          ${suggestions.length
+            ? suggestions.map((s, i) => `<button type="button" class="fav-q" data-q="${esc(s)}">${i + 1}. ${esc(s)}</button>`).join("")
+            : '<p class="fav-card__body">暂未生成建议问题，可直接输入。</p>'}
+        </div>
+        <div class="fav-ask-row">
+          <input type="text" class="fav-ask-input" placeholder="输入你的追问…" />
+          <button type="button" class="btn btn--solid btn--sm fav-go">提问</button>
+        </div>
+        <div class="fav-answer"></div>`;
+
+      const answerEl = panel.querySelector<HTMLElement>(".fav-answer")!;
+      const doAsk = (q: string): void => {
+        answerEl.innerHTML = '<p class="fav-card__body">AI 思考中…</p>';
+        void api.termAsk({ term, explanation: expl, question: q }).then((env2) => {
+          if (env2.ok && env2.data?.answer) answerEl.innerHTML = renderMarkdown(env2.data.answer);
+          else answerEl.innerHTML = `<p class="fav-card__body">${esc(env2.error?.message ?? "追问失败")}</p>`;
+        });
+      };
+      panel.querySelectorAll<HTMLButtonElement>(".fav-q").forEach((b) => {
+        b.addEventListener("click", () => doAsk(b.dataset.q || ""));
+      });
+      panel.querySelector<HTMLButtonElement>(".fav-go")!.addEventListener("click", () => {
+        const input = panel.querySelector<HTMLInputElement>(".fav-ask-input")!;
+        const q = input.value.trim();
+        if (q) doAsk(q);
       });
     });
   }
@@ -204,7 +276,6 @@ for (const a of listArticles()) {
   async function load(): Promise<void> {
     const env = await api.listFavorites();
     if (!env.ok) {
-      // 未登录/网络失败：回退到本机收藏（仅文章收藏，登录后自动回到云端列表）
       const local = loadLocalFavorites();
       if (local.length) {
         favorites = local.map((f) => ({
@@ -219,28 +290,23 @@ for (const a of listArticles()) {
           termExplanation: f.termExplanation ?? "",
           articleId: f.articleId ?? "",
           createdAt: f.createdAt,
-        }));
+        })) as Favorite[];
         localMode = true;
-        renderList();
-        return;
+      } else {
+        favorites = [];
+        localMode = true;
       }
-      list.innerHTML = env.error?.code === "AUTH_REQUIRED"
-        ? '<p class="item-summary">未登录，收藏保存在本机。还没有本机收藏，去阅读页「👻 收藏本文」添加。</p>'
-        : '<p class="item-summary">收藏加载失败，请刷新重试。未登录时收藏保存在本机。</p>';
+      renderTabs();
+      renderList();
       return;
     }
     favorites = env.data ?? [];
     localMode = false;
+    // 登录后收藏走云端，顶栏那个「登录后同步到云端」按钮就该收起来
+    if (syncEl) syncEl.hidden = true;
+    renderTabs();
     renderList();
   }
-
-  document.querySelectorAll<HTMLElement>(".fav-filter").forEach((tab) => {
-    tab.addEventListener("click", () => {
-      activeFilter = (tab.dataset.filter as "term" | "article" | "quote") ?? "term";
-      document.querySelectorAll(".fav-filter").forEach((t) => t.classList.toggle("on", t === tab));
-      renderList();
-    });
-  });
 
   load();
 </script>

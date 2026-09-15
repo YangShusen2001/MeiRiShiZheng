@@ -1171,21 +1171,6 @@ mark.hl-flash { animation: hl-flash 0.45s ease-in-out 2; }
   color: var(--color-on-brand);
 }
 .fav-group-title { margin: var(--s-4) 0 var(--s-2); font-size: var(--font-meta); color: var(--sub); }
-.fav-main { display: block; font-weight: 600; }
-.fav-sub { display: block; color: var(--mut); font-size: var(--font-meta); margin-top: 2px; }
-.fav-filters { display: flex; gap: var(--s-2); margin-bottom: var(--s-3); flex-wrap: wrap; }
-.fav-filter {
-  min-height: 44px; /* P3 触控目标 ≥44px */
-  padding: 0 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-full);
-  background: transparent;
-  color: var(--sub);
-  cursor: pointer;
-  font-family: inherit;
-  font-size: var(--font-meta);
-}
-.fav-filter.on { background: var(--primary); border-color: var(--primary); color: var(--color-on-brand); }
 blockquote {
   margin: var(--s-2) 0 0;
   padding: var(--s-3) var(--s-4);
@@ -1209,9 +1194,6 @@ blockquote {
 }
 /* hover 门控见 P0 动效区（@media (hover: hover) and (pointer: fine)） */
 /* 收藏列表：整行可点（stretched-link 模式，P3）；删除按钮触控 ≥44px */
-.fav-row { position: relative; }
-.fav-row .fav-link::after { content: ""; position: absolute; inset: 0; }
-.fav-row .fav-del { position: relative; z-index: 1; min-height: 44px; }
 .item-sec {
   flex: none;
   font-size: var(--font-caption);
@@ -1429,7 +1411,7 @@ summary:active,
 }
 
 /* 交互元素统一过渡（状态指示：border/color/背景/阴影 160ms ease-out） */
-.q-opt, .fav-filter, .theme-toggle, .read-fav, .fav-btn, .wq-del,
+.q-opt, .theme-toggle, .read-fav, .fav-btn, .wq-del,
 .ai-node, .ai-quota-action, .nav-logout, .day-row, .reader-mode button,
 .note-actions button {
   transition: transform var(--dur-sm) var(--ease-out), border-color var(--dur-sm) var(--ease-out),
@@ -1976,4 +1958,105 @@ summary:active,
   .spec-spaces { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .spec-font { flex-direction: column; align-items: flex-start; gap: var(--s-1); }
   .spec-font__demo { white-space: normal; }
+}
+
+/* ===== 我的收藏（画布 04 / 3:433）=====
+   页头 pad 64/40（比 about/sources 的 44 少 4）；主体 pad 64/32/64/72；
+   卡 648×188 · 圆角 14 · 内距 20 · 卡内垂直 gap 10；网格 wrap gap 16。 */
+.fav-head { background: var(--surface-2); }
+.fav-head__in { max-width: 1440px; margin: 0 auto; padding: 40px 64px; display: flex; flex-direction: column; gap: 20px; }
+.fav-head__row { display: flex; justify-content: space-between; align-items: center; gap: var(--s-4); }
+.fav-head__l { display: flex; flex-direction: column; gap: var(--s-2); min-width: 0; }
+/* 同步按钮（画布 3:461）：h40 · pad 0 20 · 圆角 999 · 品牌实底 */
+.fav-sync {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: var(--r-full);
+  background: var(--primary);
+  color: var(--panel-strong);
+  font-size: var(--font-meta);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.fav-sync:hover { background: var(--primary-deep); }
+
+.fav-body { background: var(--bg); }
+.fav-body__in { max-width: 1440px; margin: 0 auto; padding: 32px 64px 72px; display: flex; flex-direction: column; gap: 24px; }
+
+/* 类型筛选胶囊（画布 3:465）：h34 · pad 0 16 · 圆角 999 */
+.fav-tabs { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.fav-tab {
+  height: 34px;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--surface);
+  color: var(--sub);
+  font-family: inherit;
+  font-size: var(--font-meta);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.fav-tab:hover { border-color: var(--primary); color: var(--primary); }
+.fav-tab.on { background: var(--primary); border-color: var(--primary); color: var(--panel-strong); font-weight: 500; }
+
+.fav-grid { display: flex; flex-wrap: wrap; gap: var(--s-4); }
+.fav-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 0 1 648px;
+  min-width: 0;
+  min-height: 188px;
+  padding: 20px;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.fav-card__top { display: flex; justify-content: space-between; align-items: center; gap: var(--s-3); }
+.fav-badge {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: var(--r-full);
+  font-size: var(--font-caption);
+  font-weight: 500;
+}
+/* 画布 3:478/3:488/3:498/3:508 —— 文章与政策用品牌浅底、术语用 term 色、金句用 sunken */
+.fav-badge--brand { background: var(--primary-soft); color: var(--primary-text); }
+.fav-badge--term { background: var(--highlight-term); color: var(--ink); }
+.fav-badge--quote { background: var(--color-sunken); color: var(--ink); }
+.fav-card__meta { font-size: var(--font-caption); color: var(--mut); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fav-card__title {
+  font-family: var(--font-serif);
+  font-size: var(--font-title-s);
+  font-weight: 700;
+  line-height: var(--line-heading);
+  color: var(--ink);
+}
+.fav-card__title--medium { font-weight: 500; }
+.fav-card__title:hover { color: var(--primary); }
+.fav-card__body { font-size: var(--font-meta); line-height: var(--line-ui); color: var(--sub); }
+/* 底行贴卡底（卡高固定 188，内容多寡不影响操作行位置） */
+/* 底行贴卡底（min-height 188）。**不要再加 padding-top** —— 卡内已有 gap 10，
+   多一层内距会把典型卡片顶到 201，比画布的 188 高 13。 */
+.fav-card__foot { display: flex; justify-content: space-between; align-items: center; gap: var(--s-3); margin-top: auto; }
+.fav-card__acts { display: flex; align-items: center; gap: var(--s-4); min-width: 0; }
+.fav-open { font-size: var(--font-meta); font-weight: 500; color: var(--primary); white-space: nowrap; }
+.fav-ask,
+.fav-remove { border: 0; background: none; padding: 0; font-family: inherit; font-size: var(--font-meta); cursor: pointer; white-space: nowrap; }
+.fav-ask { font-weight: 500; color: var(--primary); }
+.fav-remove { color: var(--sub); }
+.fav-remove:hover { color: var(--red); }
+.fav-empty { font-size: var(--font-meta); color: var(--sub); }
+
+@media (max-width: 640px) {
+  .fav-head__in, .fav-body__in { padding-left: var(--s-4); padding-right: var(--s-4); }
+  .fav-head__row { flex-direction: column; align-items: flex-start; gap: var(--s-3); }
+  .fav-card { flex: 1 1 auto; min-height: 0; }
 }
