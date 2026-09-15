@@ -15,10 +15,24 @@ T01-T04 验收：
 5. 当日真实数据过 fetch 层闸门后 8/8 IN 存活（含被 v2 配额误杀的政绩观/塞上江南/琴澳）；
 6. T04：8/8 IN 在「栏目 → 簇 → 密度 → 配额/CAPS」全链路存活，当日 40 → ≤15（纯规则链）。
 
-黄金样本/当日数据未入库时自动跳过（_review/ 与 content/20*/ 均为本地资产，后者被 gitignore）。
+**Fixture 纪律（2026-09-15 修复）**：尺子的三份输入全部入库冻结，测试完全自洽（hermetic），
+不依赖任何本地/网络资产；原先两个 T04 验收类上的 skipif 已移除，尺子在任何一次 clone 上
+都真正执行（文件内剩余两处 skipif 只守已入库的 GOLD，实际不会触发）。
+
+| 输入 | 文件 | 原状态 |
+|---|---|---|
+| 40 条人工标注 | `_review/gold-2026-09-11.json` | 入库（不变） |
+| 40 条候选样本 | `_review/sample-40.json` | 入库（不变） |
+| 40 条剪藏正文 | `_review/gold-day-clips.json` | **本次冻结入库** |
+
+修复前的缺陷（两处，同源）：测试读 `content/2026-09-11/digest.json` 与 `article-*.json`，
+而 `content/20*/` 被 `.gitignore:59` 忽略。后果有二——① **静默跳过**：任何一次干净 clone
+上 `content/2026-09-11/` 不存在，本文件两个 T04 验收类直接 skip，尺子从未被真正执行；
+② **可被覆写**：该 digest 于 09-12 16:55 被后续 pipeline 重跑覆写（40 → 31 条，national
+10 → 1），而硬断言 `len(items) == 40` 写在被测代码执行**之前**，于是红灯与任何闸门回归无关，
+纯属 fixture 漂移。冻结后尺子与代码同生命周期，红灯只会由代码回归引起。
 """
 import datetime as dt
-import hashlib
 import json
 from pathlib import Path
 from urllib.parse import urlparse
@@ -32,8 +46,19 @@ from kaogong.sources import DEFAULT_SOURCES, _column_ok, is_noise_title
 
 _REPO = Path(__file__).resolve().parents[2]
 GOLD = _REPO / "_review" / "gold-2026-09-11.json"
-DAY_DIR = _REPO / "content" / "2026-09-11"
-DIGEST = DAY_DIR / "digest.json"
+SAMPLE = _REPO / "_review" / "sample-40.json"
+CLIPS = _REPO / "_review" / "gold-day-clips.json"
+
+# sample-40.json 存的是中文栏目名（旧管道产物），而 CAPS 槽位由分节 id 决定
+# （_slot_of）：guangdong/sichuan 必须原样保留 id 才能命中 _LEGACY_ESSAY_SECTIONS
+# → essay 槽位（v2.1 拍板⑧：地方栏目统一进申论精读）。SECTION_SLUG 已清理这两个
+# 死映射，故此处显式补齐，不得依赖 slug 回退（回退会得到 pol 槽位，CAPS 行为改变）。
+_SECTION_NAME_TO_ID = {
+    "全国时政要闻": "national",
+    "申论精读": "essay",
+    "广东要闻动态": "guangdong",
+    "四川要闻动态": "sichuan",
+}
 
 _BY_NAME = {s.name: s for s in DEFAULT_SOURCES}
 # 标注 host（及 www 变体）→ Source 配置；无配置的 host 只过 noiseTitle
@@ -55,16 +80,39 @@ def _labels() -> list[dict]:
     return json.loads(GOLD.read_text(encoding="utf-8"))["labels"]
 
 
+def _sample_items() -> list[dict]:
+    """黄金日 40 条候选（冻结入库副本），归一到回放所需的最小形状。
+
+    返回项含 title/url/section(id)，与旧 digest.json 的分节条目等价；
+    section 由中文栏目名经 _SECTION_NAME_TO_ID 还原为旧分节 id。
+    """
+    out = []
+    for it in json.loads(SAMPLE.read_text(encoding="utf-8")):
+        section = _SECTION_NAME_TO_ID.get(it["section"])
+        assert section, f"sample-40 出现未登记栏目名：{it['section']!r}"
+        out.append({"title": it["title"], "url": it["url"], "section": section})
+    return out
+
+
+_CLIPS_CACHE: dict[str, list[str]] | None = None
+
+
+def _clips() -> dict[str, list[str]]:
+    """url → 剪藏正文段（冻结入库副本），模块级缓存避免逐条重读 126 KB。"""
+    global _CLIPS_CACHE
+    if _CLIPS_CACHE is None:
+        _CLIPS_CACHE = json.loads(CLIPS.read_text(encoding="utf-8"))["clips"]
+    return _CLIPS_CACHE
+
+
 def _paragraphs_for(url: str) -> list[str] | None:
-    """按 sourceUrl 读当日真实剪藏正文（零网络）；文件缺失返回 None。"""
-    aid = hashlib.md5(url.encode("utf-8")).hexdigest()[:10]
-    path = DAY_DIR / f"article-{aid}.json"
-    if not path.exists():
-        return None
-    try:
-        return list(json.loads(path.read_text(encoding="utf-8")).get("paragraphs") or [])
-    except (ValueError, OSError):
-        return None
+    """按 url 读黄金日剪藏正文（冻结副本，零网络）；未冻结的条目返回 None。
+
+    4 条非 IN 条目当日即无剪藏，故 None 是正常取值——调用方按「保守放行」处理
+    （paragraphs 为空 → total_chars=0，配额降序下最先让位），与冻结前行为一致。
+    """
+    paras = _clips().get(url)
+    return list(paras) if paras else None
 
 
 def _source_for(url_or_host: str) -> object | None:
@@ -128,7 +176,25 @@ class TestGoldClusterDedupe:
         assert len(out) == 34          # 40 - 遂宁 6 条，无其他误合并
 
 
-@pytest.mark.skipif(not DIGEST.exists(), reason="当日数据 content/2026-09-11 被 gitignore（本地资产）")
+class TestGoldFixtureIntegrity:
+    """尺子自身的完整性：三份冻结输入必须描述同一组 40 篇，且无脏键。
+
+    这是防 fixture 再次漂移的第一道闸——任何一份被单独重生成（只换 sample-40、
+    只补剪藏、或标注与样本对不上），本类立即报错，而不是让下游验收给出
+    似是而非的绿灯。2026-09-15 的红灯正是「输入之间失去同步」这一类。
+    """
+
+    def test_sample_and_labels_describe_same_articles(self):
+        assert {it["url"] for it in _sample_items()} == {lab["url"] for lab in _labels()}
+
+    def test_clips_keys_belong_to_the_gold_day(self):
+        assert set(_clips()) <= {lab["url"] for lab in _labels()}
+
+    def test_clips_cover_every_in_article(self):
+        in_urls = {lab["url"] for lab in _labels() if lab["verdict"] == "in"}
+        assert in_urls <= set(_clips()), "密度回放依赖 8 篇 IN 的剪藏正文"
+
+
 class TestTodayDigestReplay:
     """验收 5（v2.1 口径）：当日 40 条过 fetch 层闸门（栏目 → 簇 → MAX_PRECLIP），
     8/8 IN 存活——含被 v2 fetch 层配额误杀的政绩观（news.cn 第 5）/塞上江南
@@ -140,15 +206,14 @@ class TestTodayDigestReplay:
     """
 
     def test_fetch_layer_keeps_all_in_articles_alive(self):
-        data = json.loads(DIGEST.read_text(encoding="utf-8"))
-        items = [it for sec in data["sections"] for it in sec["items"]]
+        items = _sample_items()
         assert len(items) == 40
 
         cands = []
         for it in items:
-            src = _source_for(it["sourceUrl"])
+            src = _source_for(it["url"])
             cands.append(Candidate(
-                title=it["title"], url=it["sourceUrl"], date=dt.date(2026, 9, 11),
+                title=it["title"], url=it["url"], date=dt.date(2026, 9, 11),
                 slot=src.slot if src is not None else "pol",
                 source_name=src.name if src is not None else "",
             ))
@@ -177,42 +242,38 @@ class TestTodayDigestReplay:
         assert all(("新思想自习室" in t) or ("天府新视界" in t) for t in scol_titles)
 
 
-@pytest.mark.skipif(not DIGEST.exists(), reason="当日数据 content/2026-09-11 被 gitignore（本地资产）")
 class TestTodayFullChainReplay:
     """验收 6（T04 附录 B 全链路硬断言）：栏目 → 簇 → 密度门禁 → 配额/CAPS。
 
     - 8/8 IN 在全链路存活（含配额阶段——total_chars 降序下深度长文胜出，
       v2 fetch 层列表序配额误杀 3 篇 IN 的缺陷由后移配额修正）；
     - 当日 40 → ≤15（纯规则链，零 AI）；
-    - 密度门禁用当日真实剪藏正文回放（零网络；缺文件的条目保守放行进配额阶段）。
+    - 密度门禁用冻结剪藏正文回放（零网络）；未冻结的 4 条保守放行进配额阶段。
     """
 
     def test_full_chain_keeps_all_in_alive_and_within_15(self):
         from kaogong.density import density_gate
         from kaogong.pipeline import _apply_quota_and_caps
 
-        data = json.loads(DIGEST.read_text(encoding="utf-8"))
-        items = [it for sec in data["sections"] for it in sec["items"]]
+        items = _sample_items()
         assert len(items) == 40
-        section_by_url = {
-            it["sourceUrl"]: sec["id"] for sec in data["sections"] for it in sec["items"]
-        }
+        section_by_url = {it["url"]: it["section"] for it in items}
 
         # 1) 栏目 + 噪声（与 TestTodayDigestReplay 同口径）
-        alive = [it for it in items if _column_gate(it["title"], it["sourceUrl"])]
+        alive = [it for it in items if _column_gate(it["title"], it["url"])]
         assert len(alive) == 21  # 40 - 18 scol ggxw - 1 消费券
 
-        # 2) 密度门禁：真实剪藏正文；缺文件的条目保守放行（total_chars=0，配额下最先让位）
+        # 2) 密度门禁：冻结剪藏正文；未冻结条目保守放行（paragraphs 空 → total_chars=0）
         passed: list[dict] = []
         density_killed: list[tuple[str, str]] = []
         for it in alive:
-            paras = _paragraphs_for(it["sourceUrl"])
+            paras = _paragraphs_for(it["url"])
             if paras is None:
-                passed.append({"url": it["sourceUrl"], "title": it["title"], "paragraphs": []})
+                passed.append({"url": it["url"], "title": it["title"], "paragraphs": []})
                 continue
             reason = density_gate(paras)
             if reason is None:
-                passed.append({"url": it["sourceUrl"], "title": it["title"], "paragraphs": paras})
+                passed.append({"url": it["url"], "title": it["title"], "paragraphs": paras})
             else:
                 density_killed.append((it["title"], reason))
 
