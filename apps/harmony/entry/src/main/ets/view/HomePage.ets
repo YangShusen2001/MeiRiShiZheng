@@ -483,22 +483,29 @@ export struct HomePage {
 
   @Builder
   summaryCard() {
+    // 画布 3:1492：今日速览是**深靛面板卡**（不是浅色卡）——
+    // 标签与关键词都是 panelChip 胶囊，文字走 panelStrong/panelSmall。
+    // 深底在这屏是刻意的：它是首屏唯一的「品牌面」，与下面的纸卡形成层次。
     Column() {
       Text('今日速览')
         .fontSize(KFont.caption())
-        .fontColor(KColor.sub())
+        .fontWeight(FontWeight.Medium)
+        .fontColor(KColor.panelStrong())
+        .backgroundColor(KColor.panelChip())
+        .borderRadius(KRadius.FULL)
+        .padding({ left: KSpace.M, right: KSpace.M, top: KSpace.XS, bottom: KSpace.XS })
       Text(this.summaryText)
         .fontSize(KFont.body())
         .lineHeight(KLine.normal())
-        .fontColor(KColor.ink())
+        .fontColor(KColor.panelStrong())
         .margin({ top: KSpace.S })
         .width('100%')
       Flex({ wrap: FlexWrap.Wrap }) {
         ForEach(this.keywords, (keyword: string) => {
           Text(keyword)
             .fontSize(KFont.caption())
-            .fontColor(KColor.primaryText())
-            .backgroundColor(KColor.primarySoft())
+            .fontColor(KColor.panelSmall())
+            .backgroundColor(KColor.panelChip())
             .borderRadius(KRadius.FULL)
             .padding({ left: KSpace.M, right: KSpace.M, top: KSpace.XS, bottom: KSpace.XS })
             .margin({ right: KSpace.S, top: KSpace.S })
@@ -510,7 +517,7 @@ export struct HomePage {
     .alignItems(HorizontalAlign.Start)
     .width('100%')
     .padding(KSpace.L)
-    .backgroundColor(KColor.surface())
+    .backgroundColor(KColor.panelDeep())
     .borderRadius(KRadius.L)
   }
 

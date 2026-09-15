@@ -37,7 +37,7 @@ struct Index {
     Navigation(this.navStack) {
       HomePage()
     }
-    .title('考公云')
+    .title('每日时政')
     .titleMode(NavigationTitleMode.Mini)
     .mode(NavigationMode.Stack)
     .hideBackButton(true)

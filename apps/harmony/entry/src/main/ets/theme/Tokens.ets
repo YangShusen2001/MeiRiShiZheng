@@ -80,6 +80,40 @@ export class KColor {
     return KColor.isDark() ? '#252843' : '#E4E7F5';
   }
 
+  // —— 品牌深底面板族（与 Web 的 --color-panel-* 同源，值取 packages/design-tokens/tokens.json）——
+  // ⚠️ 这三项**两套主题同值**：它是「品牌面」而不是主题色 —— 深色下若翻成浅靛，
+  //    深底浅字会变成浅底深字，那是另一套还没设计的东西（规范 §8 第 4 步）。
+  //    Web 端早有这族（首页 Hero / 页脚 / 深底按钮），鸿蒙端此前缺 —— 属「漂移待对齐」，不是新增色值。
+  /** 面板底：首页速览卡、页脚。 */
+  static panelDeep(): string {
+    return '#232C5C';
+  }
+
+  /** 面板上抬层：深底上的实底按钮、被填充的块。 */
+  static panelRaised(): string {
+    return '#3A4785';
+  }
+
+  /** 面板内的胶囊底：比面板底浅一档，用来在深底上分层（标签 / 关键词）。 */
+  static panelChip(): string {
+    return '#434C79';
+  }
+
+  /** 面板上的主文字（暖白，不用纯白，避免眩光）。 */
+  static panelStrong(): string {
+    return '#FFFDF6';
+  }
+
+  /** 面板上的次要文字（浅靛白）。 */
+  static panelSmall(): string {
+    return '#DDE1F4';
+  }
+
+  /** 面板上的更弱文字（速度更快地退到背景）。 */
+  static panelMeta(): string {
+    return '#AEB6D8';
+  }
+
   // —— 语义色 ——
   static danger(): string {
     return KColor.isDark() ? '#F0A0A0' : '#AF2F26';
