@@ -6,9 +6,9 @@
 // ⚠️ 画布上还有一行 12px accent 的「关键数字」（如「关键数字：天然气产量目标 · 储气能力占消费量比重」），
 //    这里**不渲染** —— archive.json 里没有对应字段。拿不到就不编（与收藏卡「摘要」「出处说明」同一条原则），
 //    等 pipeline 产出该字段再补。
-// ⚠️ 「加入收藏」：契约 `favoriteKindSchema` 目前只有 article/quote/term，**没有 policy**
-//    （见 favorites.astro 顶部注释）。按画布渲染按钮，但点击给出诚实提示、不伪装成功；
-//    补契约那一步换成真调用即可。
+// 「加入收藏」：`favoriteKindSchema` 已于 2026-09-15 补上 policy，这里**真的接上了**
+// （api.addFavorite / removeFavorite）。页面加载时拉一次收藏列表建索引、之后本地查表 ——
+// 政策档案一屏有十几张卡，不做「每卡一次请求」。
 import type { ArchiveItem as Item } from "../lib/archive";
 
 interface Props {
@@ -26,24 +26,69 @@ const { it } = Astro.props;
   {it.gist && <p class="arc-card__gist">{it.gist}</p>}
   <div class="arc-card__foot">
     <a class="arc-card__link" href={it.url} target="_blank" rel="noopener">查看官方原文</a>
-    <button class="arc-card__fav" type="button">加入收藏</button>
+    <button class="arc-card__fav" type="button" data-url={it.url} data-title={it.title}>加入收藏</button>
   </div>
-  <p class="arc-card__hint" hidden>政策收藏还没接入 —— 收藏类型里目前还没有「政策」这一类，补上契约后这里就能一键收藏。</p>
+  <p class="arc-card__hint" hidden></p>
 </article>
 
 <script>
-  // 事件委托：一张页面有多个卡片，不需要逐个绑定。
-  document.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement | null;
-    const btn = target?.closest(".arc-card__fav");
-    if (!btn) return;
+  import { api } from "../lib/api";
+  import type { Favorite } from "@kaogong/contracts";
+
+  /** 已收藏的政策：url → favorite id。一次列表请求建索引，卡片多了也不炸。 */
+  const favByUrl = new Map<string, string>();
+  let loaded = false;
+
+  function paint(btn: HTMLButtonElement): void {
+    const on = favByUrl.has(btn.dataset.url || "");
+    btn.textContent = on ? "已收藏" : "加入收藏";
+    btn.classList.toggle("is-on", on);
+    btn.setAttribute("aria-pressed", String(on));
+  }
+
+  function say(btn: HTMLButtonElement, text: string): void {
     const hint = btn.closest(".arc-card")?.querySelector(".arc-card__hint");
     if (!(hint instanceof HTMLElement)) return;
-    hint.hidden = false;
-    window.setTimeout(() => {
-      hint.hidden = true;
-    }, 5000);
+    hint.textContent = text;
+    hint.hidden = !text;
+    if (text) window.setTimeout(() => { hint.hidden = true; }, 5000);
+  }
+
+  async function loadIndex(): Promise<void> {
+    const env = await api.listFavorites();
+    if (env.ok && env.data) {
+      for (const f of env.data as Favorite[]) {
+        if (f.kind === "policy") favByUrl.set(f.url, f.id);
+      }
+      loaded = true;
+    }
+    for (const btn of document.querySelectorAll<HTMLButtonElement>(".arc-card__fav")) paint(btn);
+  }
+
+  // 事件委托：一屏十几张卡，不逐个绑定
+  document.addEventListener("click", async (e) => {
+    const btn = (e.target as HTMLElement | null)?.closest<HTMLButtonElement>(".arc-card__fav");
+    if (!btn || btn.disabled) return;
+    const url = btn.dataset.url || "";
+    if (!url) return;
+    const title = btn.dataset.title || "";
+    const existing = favByUrl.get(url);
+    btn.disabled = true;
+    say(btn, "");
+    if (existing) {
+      const r = await api.removeFavorite(existing);
+      if (r.ok) favByUrl.delete(url);
+      else say(btn, r.error?.message ?? "取消收藏失败，请重试");
+    } else {
+      const r = await api.addFavorite({ url, title, source: "政策档案", kind: "policy" });
+      if (r.ok && r.data) favByUrl.set(url, r.data.id);
+      else say(btn, r.error?.message ?? "收藏失败，请重试");
+    }
+    btn.disabled = false;
+    paint(btn);
   });
+
+  void loadIndex();
 </script>
 
 <style>
@@ -113,6 +158,8 @@ const { it } = Astro.props;
     color: var(--sub);
   }
   .arc-card__fav:hover { color: var(--primary); }
+  /* 已收藏态：品牌色 + Medium（再点一次是取消收藏） */
+  .arc-card__fav.is-on { color: var(--primary); font-weight: 500; }
   .arc-card__hint {
     font-size: var(--font-caption);
     line-height: var(--line-ui);

@@ -14,7 +14,10 @@ export const apiErrorSchema = z.object({
 export type ApiError = z.infer<typeof apiErrorSchema>;
 
 // —— 收藏 ——
-export const favoriteKindSchema = z.enum(["article", "quote", "term"]);
+// ⚠️ policy 是 2026-09-15 补的：画布 04 定义了**四类**收藏（文章/术语/金句/政策），
+//    政策档案页每张卡片的「加入收藏」也依赖它 —— 缺这一项时那两处只能走空态/提示。
+//    favorites.kind 在 D1 里是自由 text，加枚举值**不需要迁移**。
+export const favoriteKindSchema = z.enum(["article", "quote", "term", "policy"]);
 export type FavoriteKind = z.infer<typeof favoriteKindSchema>;
 
 export const favoriteSchema = z.object({
@@ -23,7 +26,7 @@ export const favoriteSchema = z.object({
   title: z.string(),
   source: z.string(),
   note: z.string(),
-  /** 收藏类型：article=整篇文章，quote=金句（存选中文本），term=AI 术语（存术语+释义）。 */
+  /** 收藏类型：article=整篇文章，quote=金句（存选中文本），term=AI 术语（存术语+释义），policy=政策文件（存官方原文链接）。 */
   kind: favoriteKindSchema,
   /** 金句文本，仅 kind=quote 使用；其余恒为空串。 */
   quote: z.string(),
@@ -177,9 +180,16 @@ export const emailCodeVerifySchema = z.object({
 });
 export type EmailCodeVerify = z.infer<typeof emailCodeVerifySchema>;
 
+/**
+ * 已登录用户的最小身份。
+ * ⚠️ `avatar` 是 2026-09-15 补的：顶栏头像原本拿不到用户挑的那一格，只能拿邮箱哈希兜底 ——
+ * 用户在个人中心换了头像，顶栏却不变。`users.avatar` 列本来就有，只是没回传。
+ * 老会话/未设头像时是空串（前端继续走哈希兜底）。
+ */
 export const authUserSchema = z.object({
   id: z.string(),
   email: qqEmailSchema,
+  avatar: z.string().default(""),
 });
 export type AuthUser = z.infer<typeof authUserSchema>;
 
@@ -194,6 +204,8 @@ export const profileSchema = z.object({
   email: qqEmailSchema,
   avatar: z.string(),
   subscribed: z.boolean(),
+  /** 账号创建时间（unix 毫秒，`users.created_at`）。个人中心账户行显示「加入 YYYY-MM-DD」。 */
+  createdAt: z.number(),
 });
 export type Profile = z.infer<typeof profileSchema>;
 

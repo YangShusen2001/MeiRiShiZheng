@@ -190,7 +190,7 @@ export function authRoutes(db: DB, config: AppConfig) {
       httpOnly: true, secure: config.secureCookies !== false, sameSite: "Lax",
       path: "/", maxAge: SESSION_TTL / 1000,
     });
-    return c.json({ ok: true, data: { user: { id: user.id, email: user.email } } });
+    return c.json({ ok: true, data: { user: { id: user.id, email: user.email, avatar: user.avatar } } });
   });
 
   r.get("/session", async (c) => {
@@ -198,7 +198,8 @@ export function authRoutes(db: DB, config: AppConfig) {
     if (!id) return fail(c, 401, "AUTH_REQUIRED", "未登录");
     const user = await db.select().from(users).where(eq(users.id, id)).get();
     if (!user) return fail(c, 401, "AUTH_REQUIRED", "用户不存在");
-    return c.json({ ok: true, data: { id: user.id, email: user.email } });
+    // avatar 一并回传：顶栏头像要用用户自己挑的那一格，而不是邮箱哈希兜底
+    return c.json({ ok: true, data: { id: user.id, email: user.email, avatar: user.avatar } });
   });
 
   r.post("/logout", async (c) => {

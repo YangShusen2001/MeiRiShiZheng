@@ -11,6 +11,8 @@
 //    · 「数据与隐私」里的导出、注销账号同样没有接口。
 //    摆上去只能编一个「1 台设备 · 已同步」加两个点了没反应的按钮 ——
 //    与项目「不摆假按钮占位」的既定做法相悖。接口就位再补（已记进契约缺口）。
+// ✅ 账户行那句「加入 2026-08-20」已于 2026-09-15 接上：`Profile.createdAt` 补进契约，
+//    值取 `users.created_at`（列本来就有，只是没回传）。
 import Base from "../layouts/Base.astro";
 ---
 
@@ -78,8 +80,12 @@ import Base from "../layouts/Base.astro";
             ? "摘要邮件暂不可用；你仍可退订现有订阅。"
             : "摘要邮件暂不可用，恢复投递后才能订阅。";
 
-    // 账户状态文案用真实字段拼（画布上那句「加入 2026-08-20」契约里没有创建时间，就不写）
-    const stateText = `已验证 QQ 邮箱 · ${subscribed ? "每日摘要已订阅" : "每日摘要未订阅"}`;
+    // 账户状态三段都是真实字段拼的。日期按**本地时区**格式化 —— toISOString 会因时差把日期算早一天
+    const joined = new Date(p.createdAt);
+    const pad2 = (n: number): string => String(n).padStart(2, "0");
+    const joinedText = `${joined.getFullYear()}-${pad2(joined.getMonth() + 1)}-${pad2(joined.getDate())}`;
+    const stateText =
+      `已验证 QQ 邮箱 · ${subscribed ? "每日摘要已订阅" : "每日摘要未订阅"} · 加入 ${joinedText}`;
 
     left.innerHTML =
       `<section class="pf-card">` +

@@ -250,12 +250,11 @@ const reviewCardsJson = JSON.stringify(listCards());
         if (session.ok && session.data) {
           box.textContent = "";
           // 头像（画布 3:2027）：身份底色圆 + 品牌字形，不用 emoji。
-          // ⚠️ `/api/auth/session` 目前只回 { id, email }，拿不到用户挑的那一格，
-          // 所以顶栏走邮箱哈希（确定性：同一邮箱永远得同一格）。
-          // 想让它跟随「我的」里选的色，得给 session 契约补 `avatar` —— 归到接 API 那一步。
+          // session 契约已于 2026-09-15 补上 `avatar` → 顶栏跟随用户在「我的」里挑的那一格；
+          // 老会话 / 未设头像时它是空串，avatarIndex 会退回邮箱哈希（同一邮箱永远得同一格）。
           const avatar = document.createElement("span");
           avatar.className = "nav-avatar";
-          avatar.style.setProperty("--av", avatarVar(avatarIndex(null, session.data.email)));
+          avatar.style.setProperty("--av", avatarVar(avatarIndex(session.data.avatar, session.data.email)));
           avatar.innerHTML = AVATAR_MARK;
           avatar.setAttribute("aria-hidden", "true");
           const link = document.createElement("a");

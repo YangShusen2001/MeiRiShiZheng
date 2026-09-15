@@ -4,9 +4,9 @@
 // 结构照画布：页头（标题 + 说明 + 同步按钮）→ 类型筛选（5 个胶囊）→ 648×188 卡网格（wrap gap 16）。
 // 卡片由客户端渲染（数据来自 API 或本机），所以卡片的 DOM 在脚本里拼。
 //
-// ⚠️ 画布定义了**四类**：文章 / 术语 / 金句 / 政策。契约 `favoriteKindSchema` 目前只有
-// `["article", "quote", "term"]` —— **没有 policy**。所以「政策」这一格照画布渲染，
-// 但必然走空态，并在空态里说清原因；补契约时一起加。见页面底部注释。
+// 画布定义的**四类**：文章 / 术语 / 金句 / 政策。
+// policy 已于 2026-09-15 补进 `favoriteKindSchema`（favorites.kind 是自由 text，无需迁移）——
+// 政策档案页每张卡片的「加入收藏」现在真的能把政策收进这一格。
 import Base from "../layouts/Base.astro";
 import { listArticles } from "../lib/content";
 
@@ -190,8 +190,7 @@ for (const a of listArticles()) {
     article: "还没有收藏文章——阅读页点「收藏本文」即可。",
     term: "还没有收藏术语——阅读页点正文里的 AI 术语即可收藏。",
     quote: "还没有收藏金句——阅读页的「金句」分组里可以逐条收藏。",
-    // 如实说明：不是「你还没收藏」，而是这条链路还没接
-    policy: "政策收藏还没接入：收藏契约目前只有 文章 / 术语 / 金句 三类，缺少 policy。",
+    policy: "还没有收藏政策——政策档案页每张卡片的「加入收藏」都能收进来。",
   };
 
   function renderList(): void {

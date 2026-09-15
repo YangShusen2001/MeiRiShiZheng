@@ -12,6 +12,8 @@ function toProfile(row: typeof users.$inferSelect, subscribed: boolean): Profile
     email: row.email,
     avatar: row.avatar,
     subscribed,
+    // 个人中心账户行要显示「加入 YYYY-MM-DD」—— 列本来就在，只是没回传
+    createdAt: row.createdAt,
   };
 }
 
