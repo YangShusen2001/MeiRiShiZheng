@@ -263,7 +263,7 @@ describe("practice", () => {
     expect(res.status).toBe(400);
   });
 
-  it("提交错题并能在错题本列出、删除", async () => {
+  it("提交错题 → 错题本列出 → 掌握后进「已掌握」（软删除）", async () => {
     const app = makeApp();
     await app.request("/api/practice", json("POST", {
       date: "2026-08-12", correct: 1, total: 2,
@@ -279,6 +279,14 @@ describe("practice", () => {
     expect((await readJson<null>(del)).ok).toBe(true);
     const list2 = await app.request("/api/practice/wrong", { headers: headers() });
     expect((await readJson<WrongQuestion[]>(list2)).data).toHaveLength(0);
+
+    // 「掌握 ✓」是**软删除**（打 mastered_at）：错题本里消失，但「已掌握」查得到 —— 2026-09-15 起。
+    // 原来是真删，删完再也查不回来，所以那时「已掌握」只能靠本机 localStorage 顶着（换设备就没了）。
+    const mastered = await app.request("/api/practice/mastered", { headers: headers() });
+    const masteredData = (await readJson<WrongQuestion[]>(mastered)).data;
+    expect(masteredData).toHaveLength(1);
+    expect(masteredData![0]?.id).toBe(data![0]!.id);
+    expect(masteredData![0]?.question).toBe("题干");
   });
 });
 

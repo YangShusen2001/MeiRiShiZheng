@@ -83,7 +83,6 @@ const today = sets[0] ?? null;
   import type { WrongQuestion, WrongQuestionInput } from "@kaogong/contracts";
 
   const LETTERS = ["A", "B", "C", "D"];
-  const MASTERED_KEY = "kaogong.mastered.v1";
 
   type Q = { id: string; q: string; options: string[]; answer: number; analysis: string; topic: string };
   type PracticeSet = { date: string; total: number; source?: string; questions: Q[] };
@@ -127,22 +126,12 @@ const today = sets[0] ?? null;
   const wrongInputs: WrongQuestionInput[] = [];
   let wrongList: WrongQuestion[] = [];
   let wrongAvailable = true;
-
-  // ── 已掌握（本机） ──
-  function loadMastered(): WrongQuestion[] {
-    try {
-      return JSON.parse(localStorage.getItem(MASTERED_KEY) || "[]") as WrongQuestion[];
-    } catch {
-      return [];
-    }
-  }
-  function saveMastered(rows: WrongQuestion[]): void {
-    try {
-      localStorage.setItem(MASTERED_KEY, JSON.stringify(rows));
-    } catch {
-      /* 隐私模式写不进去 —— 不影响做题，静默即可 */
-    }
-  }
+  /**
+   * 已掌握：走服务端（2026-09-15 起）。
+   * 原先存本机 localStorage —— 换台设备这一格就空了，而且服务端那侧「掌握 ✓」是真删，
+   * 删完再也查不回来。现在服务端改成软删除（打 `mastered_at`），这个列表才有真数据源。
+   */
+  let masteredList: WrongQuestion[] = [];
 
   // ── 统计区（页头三项 + 三个胶囊的计数） ──
   function renderStats(): void {
@@ -151,7 +140,7 @@ const today = sets[0] ?? null;
     statWrong.textContent = `${wrongList.length} 题`;
     tabToday.textContent = `今日练习 ${questions.length}`;
     tabWrong.textContent = `错题本 ${wrongList.length}`;
-    tabMastered.textContent = `已掌握 ${loadMastered().length}`;
+    tabMastered.textContent = `已掌握 ${masteredList.length}`;
   }
 
   // ── 题卡（画布 3:578） ──
@@ -381,10 +370,10 @@ const today = sets[0] ?? null;
     panelWrong.querySelectorAll<HTMLButtonElement>("[data-master]").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const id = btn.dataset.master || "";
-        const row = wrongList.find((w) => w.id === id);
-        // 调 API 删除（需登录）；无论成败都在本机留一份，否则「已掌握」永远是空的
+        if (!id) return;
+        btn.disabled = true;
+        // 服务端**软删除**（打 mastered_at），随后两个列表一起刷新 —— 因为是软删除，「已掌握」查得到
         await api.deleteWrongQuestion(id);
-        if (row) saveMastered([...loadMastered().filter((m) => m.id !== id), row]);
         await loadWrong();
         renderStats();
       });
@@ -392,7 +381,7 @@ const today = sets[0] ?? null;
   }
 
   function renderMasteredPanel(): void {
-    const rows = loadMastered();
+    const rows = masteredList;
     panelMastered.innerHTML =
       `<section class="pr-wrong">` +
       `<div class="pr-wrong__hd"><h2 class="pr-wrong__t">已掌握 · ${rows.length} 题</h2></div>` +
@@ -402,15 +391,17 @@ const today = sets[0] ?? null;
       `</section>`;
   }
 
+  /** 错题本 + 已掌握一起拉：两者是同一张表的两个方向（mastered_at 为空 / 非空） */
   async function loadWrong(): Promise<void> {
-    const env = await api.listWrongQuestions();
-    if (env.ok && env.data) {
-      wrongList = env.data;
+    const [w, m] = await Promise.all([api.listWrongQuestions(), api.listMasteredQuestions()]);
+    if (w.ok && w.data) {
+      wrongList = w.data;
       wrongAvailable = true;
     } else {
       wrongList = [];
       wrongAvailable = false;
     }
+    masteredList = m.ok && m.data ? m.data : [];
     renderStats();
     renderPreview();
     renderWrongPanel();

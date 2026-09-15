@@ -25,6 +25,7 @@ const MIGRATIONS = [
   "0017_vengeful_shatterstar",
   "0018_term_favorites",
   "0019_kind_wolverine",
+  "0020_sturdy_corsair", // 2026-09-15：wrong_questions 加 mastered_at（「已掌握」改软删除）
 ] as const;
 
 const snapshotSchema = z.object({

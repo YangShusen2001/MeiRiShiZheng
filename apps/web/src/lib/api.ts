@@ -60,6 +60,9 @@ export function createApi(base: string, deviceId: () => string) {
     submitPractice: (body: PracticeSubmit) =>
       request<PracticeRecord>("/api/practice", { method: "POST", body: JSON.stringify(body) }),
     listWrongQuestions: () => request<WrongQuestion[]>("/api/practice/wrong"),
+    /** 已掌握：点过「掌握 ✓」的题。服务端软删除（2026-09-15 起），换设备也还在。 */
+    listMasteredQuestions: () => request<WrongQuestion[]>("/api/practice/mastered"),
+    /** 「掌握 ✓」= 服务端打上 mastered_at（软删除），不是真删 —— 真删会让「已掌握」永远是空的 */
     deleteWrongQuestion: (id: string) => request<null>(`/api/practice/wrong/${id}`, { method: "DELETE" }),
     explain: (text: string) =>
       request<ExplainResponse>("/api/explain", { method: "POST", body: JSON.stringify({ text }) }),

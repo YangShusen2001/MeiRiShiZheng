@@ -71,6 +71,14 @@ export const wrongQuestions = sqliteTable(
     chosen: integer("chosen").notNull(),
     analysis: text("analysis").notNull(),
     createdAt: integer("created_at").notNull(),
+    /**
+     * 标记「已掌握」的时间（unix 毫秒）。null = 仍在错题本里。
+     *
+     * 2026-09-15：原来「掌握 ✓」是**真删**，删掉之后这一题再也查不到 ——
+     * 于是练习页的「已掌握」模式只能靠本机 localStorage 顶着，换设备就没了。
+     * 改成软删除：错题本查 `mastered_at IS NULL`，「已掌握」查 `IS NOT NULL`。
+     */
+    masteredAt: integer("mastered_at"),
   },
   (t) => ({
     ownerIdx: index("wrong_questions_owner_idx").on(t.ownerId),

@@ -141,6 +141,13 @@
       "when": 1787243986984,
       "tag": "0019_kind_wolverine",
       "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "6",
+      "when": 1789462183161,
+      "tag": "0020_sturdy_corsair",
+      "breakpoints": true
     }
   ]
 }
