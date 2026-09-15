@@ -2150,6 +2150,97 @@ summary:active,
   .pr-wrong__why { display: none; } /* 窄屏放不下「错因」列 */
 }
 
+/* ===================================================================
+   登录页（画布 09 / 3:1058）—— 两张 500 定宽卡并排
+   登录区 pad 56/64/72 底 --bg；卡片行横向 gap 24。
+   卡：pad 28 · 圆角 14 · gap 18 · 纸卡底 + 描边；字段 = 标签 12 Medium + 输入框 h44（底 --surface-2）。
+   主按钮 h44 品牌实底圆角 999；次按钮 h44 描边品牌（无底）。
+   ⚠️ `.lg-field` 是 flex 容器，`hidden` 属性敌不过 `display:flex` → 必须显式写 [hidden] 规则，
+      否则「邮箱验证码」那一格从一开始就露出来（画布画的是已发送态，不是初始态）。
+   =================================================================== */
+.lg-body { background: var(--bg); }
+.lg-body__in { max-width: 1440px; margin: 0 auto; padding: 56px 64px 72px; }
+.lg-cards { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--s-5); }
+
+.lg-card {
+  width: 500px; max-width: 100%;
+  display: flex; flex-direction: column; gap: 18px;
+  padding: 28px; border-radius: var(--r-lg);
+  background: var(--surface); border: 1px solid var(--line);
+}
+.lg-brand { display: flex; align-items: center; gap: 10px; }
+.lg-brand .logo-mark { width: 28px; height: 28px; }
+.lg-brand__name {
+  font-family: var(--font-serif); font-size: var(--font-title-s);
+  font-weight: 700; color: var(--ink);
+}
+/* 画布 3:1090 是 24/30 —— 恰好 1.25，也就是 --line-tight（不是 heading 的 1.3，那会算出 31.2） */
+.lg-title {
+  font-family: var(--font-serif); font-size: var(--font-title-m);
+  font-weight: 700; line-height: var(--line-tight); color: var(--ink);
+}
+.lg-desc { font-size: var(--font-meta); line-height: var(--line-ui); color: var(--sub); }
+
+.lg-form { display: flex; flex-direction: column; gap: 18px; }
+.lg-field { display: flex; flex-direction: column; gap: var(--s-2); }
+.lg-field[hidden] { display: none; }
+.lg-field__l { font-size: var(--font-caption); font-weight: 500; color: var(--sub); }
+.lg-input {
+  width: 100%; height: 44px; padding: 0 14px;
+  border-radius: var(--r-sm); border: 1px solid var(--line); background: var(--surface-2);
+  font-family: inherit; font-size: var(--font-meta); color: var(--ink);
+}
+.lg-input::placeholder { color: var(--mut); }
+.lg-input:focus { outline: none; border-color: var(--primary); }
+.lg-input[readonly] { color: var(--sub); }
+
+/* 验证码行（画布 3:1098）：输入框 + 「重新发送 Ns」，gap 10 */
+.lg-coderow { display: flex; align-items: center; gap: 10px; }
+.lg-resend {
+  flex: 0 0 auto; padding: 0; border: 0; background: none; cursor: pointer;
+  font-family: inherit; font-size: var(--font-caption); color: var(--mut); white-space: nowrap;
+}
+.lg-resend:hover { color: var(--primary); }
+.lg-resend[disabled] { cursor: default; color: var(--mut); }
+
+.lg-error { font-size: var(--font-caption); line-height: var(--line-ui); color: var(--red); }
+.lg-status { font-size: var(--font-caption); line-height: var(--line-ui); color: var(--green); }
+
+/* ⚠️ 两个按钮都必须显式写 background —— <button> 的 UA 默认底色是白的 */
+.lg-submit {
+  height: 44px; border: 0; border-radius: var(--r-full);
+  background: var(--primary); color: var(--panel-strong);
+  font-family: inherit; font-size: var(--font-meta); font-weight: 500; cursor: pointer;
+}
+.lg-submit:hover { background: var(--primary-deep); }
+.lg-submit[disabled] { opacity: 0.6; cursor: default; }
+.lg-submit[disabled]:hover { background: var(--primary); }
+
+.lg-activate {
+  height: 44px; border: 1px solid var(--primary); border-radius: var(--r-full);
+  background: var(--surface); color: var(--primary);
+  font-family: inherit; font-size: var(--font-meta); font-weight: 500; cursor: pointer;
+}
+.lg-activate:hover { background: var(--primary-soft); }
+.lg-activate[disabled] { opacity: 0.6; cursor: default; }
+
+.lg-foot { font-size: var(--font-caption); line-height: var(--line-ui); color: var(--mut); }
+/* 额度提示（画布 3:1114）：pad 14/12 · 圆角 10 · 底 --surface-2 · 字 12 */
+.lg-quota {
+  padding: 12px 14px; border-radius: var(--r-md);
+  background: var(--surface-2); font-size: var(--font-caption);
+  line-height: var(--line-ui); color: var(--sub);
+}
+.lg-quota[hidden] { display: none; }
+
+@media (max-width: 1140px) {
+  .lg-card { width: 100%; } /* 两张 500 并排要 1024+，窄一点就上下堆 */
+}
+@media (max-width: 860px) {
+  .lg-body__in { padding: 32px 16px 56px; }
+  .lg-card { padding: 20px; }
+}
+
 /* ── 设计规范页 ── */
 .spec-head { background: var(--panel-deep); }
 .spec-head__in {

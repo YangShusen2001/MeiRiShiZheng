@@ -1,40 +1,145 @@
 ---
+// 登录页（画布 09 / 3:1058）。
+//
+// 结构照画布：登录区（pad 56/64/72）里并排两张 500 定宽卡 ——
+// 主卡 = 品牌行 + 「QQ 邮箱验证码登录」+ 说明 + 邮箱字段 + 验证码字段（含「重新发送 Ns」）+ 主按钮 + 脚注；
+// 次卡 = 「使用 AI 解析邀请码」+ 说明 + 邀请码字段 + 描边按钮 + 额度提示。
+// 原来的实现是两张 .card 直接铺在默认容器里，没有这块版式。
+//
+// 登录链路（发码 → 验证并登录）与邀请码激活逻辑原样保留，只换了承载它的 DOM 与样式。
+// 两处是画布要求、线上原先没有的：
+//   ① 「重新发送 56s」—— 做成真的 60 秒倒计时（发完码起算，倒计时内不可重复点）。
+//   ② 额度提示「当前设备剩余 N 次」—— 用 api.inviteStatus() 的真值；拿不到就**不渲染**，不编数字。
 import Base from "../layouts/Base.astro";
 ---
-<Base title="QQ 邮箱登录 · 时政小助手">
-  <section class="card auth-card">
-    <h2>QQ 邮箱验证码登录</h2>
-    <form id="auth-form" class="auth-form">
-      <label>QQ 邮箱<input id="email" type="email" inputmode="email" autocomplete="email" placeholder="123456@qq.com" required /></label>
-      <label id="code-row" hidden>验证码<input id="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" disabled required /></label>
-      <p id="auth-error" class="auth-error" role="alert" hidden></p>
-      <button type="submit" class="btn btn--solid" id="auth-submit">发送验证码</button>
-      <p id="auth-status" class="item-summary" role="status" aria-live="polite"></p>
-      <p class="item-summary">首次验证成功会自动创建账号。登录后，你的<span class="text-unit">收藏</span>、划线和练习记录可随账号同步。</p>
-    </form>
-  </section>
 
-  <section class="card auth-card">
-    <h2>使用 AI 解析邀请码</h2>
-    <p class="item-summary">不登录也能用 AI 解析：填写邀请码后绑定到当前设备，在共享额度内按次扣减。</p>
-    <form id="invite-form" class="auth-form">
-      <label>邀请码<input id="invite-code" type="text" autocomplete="off" spellcheck="false" placeholder="请输入邀请码" required /></label>
-      <p id="invite-error" class="auth-error" role="alert" hidden></p>
-      <button type="submit" class="btn btn--solid" id="invite-submit">激活邀请码</button>
-      <p id="invite-status" class="item-summary" role="status" aria-live="polite"></p>
-    </form>
+<Base
+  title="QQ 邮箱登录 · 时政小助手"
+  description="QQ 邮箱验证码登录，不设密码；也可以用邀请码免登录体验 AI 解析。"
+  bleed
+>
+  <section class="lg-body">
+    <div class="lg-body__in">
+      <div class="lg-cards">
+        <section class="lg-card">
+          <div class="lg-brand">
+            <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+              <rect width="24" height="24" rx="6"></rect>
+              <path d="M12 7L8.8 16.4M12.1 13.7L16.4 15.6" fill="none" stroke-width="1.9" stroke-linecap="round"
+              ></path>
+            </svg>
+            <span class="lg-brand__name">每日时政</span>
+          </div>
+          <h1 class="lg-title">QQ 邮箱验证码登录</h1>
+          <p class="lg-desc">不设密码。首次验证成功会自动创建账号，收藏、划线与练习记录随账号同步。</p>
+
+          <form id="auth-form" class="lg-form">
+            <label class="lg-field">
+              <span class="lg-field__l">QQ 邮箱</span>
+              <input
+                id="email"
+                class="lg-input"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="123456@qq.com"
+                required
+              />
+            </label>
+
+            <div class="lg-field" id="code-field" hidden>
+              <span class="lg-field__l">邮箱验证码</span>
+              <div class="lg-coderow">
+                <input
+                  id="code"
+                  class="lg-input"
+                  inputmode="numeric"
+                  autocomplete="one-time-code"
+                  pattern="[0-9]{6}"
+                  maxlength="6"
+                  placeholder="6 位数字"
+                  disabled
+                  required
+                />
+                <button type="button" class="lg-resend" id="resend" hidden>重新发送</button>
+              </div>
+            </div>
+
+            <p id="auth-error" class="lg-error" role="alert" hidden></p>
+            <button type="submit" class="lg-submit" id="auth-submit">发送验证码</button>
+            <p id="auth-status" class="lg-status" role="status" aria-live="polite"></p>
+            <p class="lg-foot">邮箱仅用于账号验证与每日摘要订阅，不发营销邮件。</p>
+          </form>
+        </section>
+
+        <section class="lg-card">
+          <h2 class="lg-title">使用 AI 解析邀请码</h2>
+          <p class="lg-desc">不登录也能用：填写邀请码后绑定到当前设备，在共享额度内按次扣减。</p>
+
+          <form id="invite-form" class="lg-form">
+            <label class="lg-field">
+              <span class="lg-field__l">邀请码</span>
+              <input
+                id="invite-code"
+                class="lg-input"
+                type="text"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="请输入邀请码"
+                required
+              />
+            </label>
+            <p id="invite-error" class="lg-error" role="alert" hidden></p>
+            <button type="submit" class="lg-activate" id="invite-submit">激活邀请码</button>
+            <p id="invite-status" class="lg-status" role="status" aria-live="polite"></p>
+          </form>
+
+          <p class="lg-quota" id="lg-quota" hidden></p>
+        </section>
+      </div>
+    </div>
   </section>
 </Base>
+
 <script>
   import { api } from "../lib/api";
+
   const form = document.getElementById("auth-form") as HTMLFormElement;
   const email = document.getElementById("email") as HTMLInputElement;
   const code = document.getElementById("code") as HTMLInputElement;
-  const codeRow = document.getElementById("code-row") as HTMLElement;
+  const codeField = document.getElementById("code-field") as HTMLElement;
+  const resend = document.getElementById("resend") as HTMLButtonElement;
   const submit = document.getElementById("auth-submit") as HTMLButtonElement;
   const error = document.getElementById("auth-error") as HTMLElement;
   const status = document.getElementById("auth-status") as HTMLElement;
   let sent = false;
+
+  // 「重新发送 Ns」（画布 3:1101）：60 秒倒计时，期间不可重复点
+  const RESEND_SECONDS = 60;
+  let cooldown = 0;
+  let timer = 0;
+
+  function renderResend(): void {
+    if (cooldown > 0) {
+      resend.disabled = true;
+      resend.textContent = `重新发送 ${cooldown}s`;
+    } else {
+      resend.disabled = false;
+      resend.textContent = "重新发送";
+    }
+  }
+
+  function startCooldown(): void {
+    cooldown = RESEND_SECONDS;
+    renderResend();
+    window.clearInterval(timer);
+    timer = window.setInterval(() => {
+      cooldown -= 1;
+      renderResend();
+      if (cooldown <= 0) window.clearInterval(timer);
+    }, 1000);
+  }
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     error.hidden = true;
@@ -45,11 +150,13 @@ import Base from "../layouts/Base.astro";
       const result = await api.requestEmailCode({ email: email.value.trim() });
       if (result.ok) {
         sent = true;
-        codeRow.hidden = false;
+        codeField.hidden = false;
         code.disabled = false;
         submit.textContent = "验证并登录";
         email.readOnly = true;
         status.textContent = result.data?.message ?? "验证码已发送";
+        resend.hidden = false;
+        startCooldown();
         code.focus();
       } else {
         submit.textContent = "发送验证码";
@@ -59,8 +166,9 @@ import Base from "../layouts/Base.astro";
     } else {
       submit.textContent = "正在验证…";
       const result = await api.verifyEmailCode({ email: email.value.trim(), code: code.value.trim() });
-      if (result.ok) location.href = "/";
-      else {
+      if (result.ok) {
+        location.href = "/";
+      } else {
         submit.textContent = "验证并登录";
         error.textContent = result.error?.message ?? "验证失败，请重试";
         error.hidden = false;
@@ -69,12 +177,29 @@ import Base from "../layouts/Base.astro";
     submit.disabled = false;
   });
 
+  resend.addEventListener("click", async () => {
+    if (cooldown > 0) return;
+    resend.disabled = true;
+    const result = await api.requestEmailCode({ email: email.value.trim() });
+    if (result.ok) {
+      status.textContent = result.data?.message ?? "验证码已重新发送";
+      error.hidden = true;
+      startCooldown();
+    } else {
+      error.textContent = result.error?.message ?? "发送失败，请重试";
+      error.hidden = false;
+      renderResend();
+    }
+  });
+
   // —— 邀请码激活（绑定到当前设备） ——
   const inviteForm = document.getElementById("invite-form") as HTMLFormElement;
   const inviteCode = document.getElementById("invite-code") as HTMLInputElement;
   const inviteError = document.getElementById("invite-error") as HTMLElement;
   const inviteStatus = document.getElementById("invite-status") as HTMLElement;
   const inviteSubmit = document.getElementById("invite-submit") as HTMLButtonElement;
+  const quota = document.getElementById("lg-quota") as HTMLElement;
+
   inviteForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     inviteError.hidden = true;
@@ -84,10 +209,24 @@ import Base from "../layouts/Base.astro";
     if (result.ok && result.data?.active) {
       inviteStatus.textContent = `激活成功，剩余 ${result.data.remaining} 次。现在可返回阅读页使用 AI 解析。`;
       inviteCode.value = "";
+      renderQuota(result.data.remaining);
     } else {
       inviteError.textContent = result.error?.message ?? "激活失败，请重试";
       inviteError.hidden = false;
     }
     inviteSubmit.disabled = false;
   });
+
+  /** 额度提示（画布 3:1114）：拿不到就不渲染，不编一个「剩余 N 次」 */
+  function renderQuota(remaining: number): void {
+    quota.textContent = `当前设备剩余 ${remaining} 次 · 每次 AI 解释扣 1 次`;
+    quota.hidden = false;
+  }
+
+  void (async () => {
+    const st = await api.inviteStatus();
+    if (st.ok && st.data?.active && typeof st.data.remaining === "number") {
+      renderQuota(st.data.remaining);
+    }
+  })();
 </script>
