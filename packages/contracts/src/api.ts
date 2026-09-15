@@ -245,6 +245,34 @@ export type NotificationSettings = z.infer<typeof notificationSettingsSchema>;
 export const notificationSettingsUpdateSchema = notificationSettingsSchema.partial();
 export type NotificationSettingsUpdate = z.input<typeof notificationSettingsUpdateSchema>;
 
+// —— 账号数据导出与注销（画布 25 / 3:2073「数据与隐私」）——
+/**
+ * 导出内容结构**刻意宽松**：各表原样带出，前端只负责下载，不做二次建模。
+ * 收紧它只会让「以后多一张表」变成契约破坏性变更。
+ */
+export const accountExportSchema = z.object({
+  exportedAt: z.number(),
+  owner: z.string(),
+  profile: z.record(z.string(), z.unknown()).nullable(),
+  subscription: z.record(z.string(), z.unknown()).nullable(),
+  notifications: z.record(z.string(), z.unknown()).nullable(),
+  favorites: z.array(z.record(z.string(), z.unknown())),
+  highlights: z.array(z.record(z.string(), z.unknown())),
+  practice: z.array(z.record(z.string(), z.unknown())),
+  wrongQuestions: z.array(z.record(z.string(), z.unknown())),
+  reviewCards: z.array(z.record(z.string(), z.unknown())),
+});
+export type AccountExport = z.infer<typeof accountExportSchema>;
+
+/**
+ * 注销确认：必须原样传「注销账号」四个字。
+ * 不可逆操作不能只靠前端一个 `confirm()` —— 那是给手滑留的门。
+ */
+export const accountDeleteSchema = z.object({
+  confirm: z.literal("注销账号"),
+});
+export type AccountDelete = z.input<typeof accountDeleteSchema>;
+
 // —— AI 解释邀请码 ——
 // 共享码：一个码有多条激活记录（owner = user:<id> 或 device:<id>），剩余次数为全局共享额度。
 export const inviteActivateSchema = z.object({

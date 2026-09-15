@@ -1,5 +1,6 @@
 // 类型化 API 客户端：自动带 X-Device-Id 头，响应类型来自 @kaogong/contracts。
 import type {
+  AccountExport,
   ApiError,
   AuthResponse,
   AuthUser,
@@ -89,6 +90,11 @@ export function createApi(base: string, deviceId: () => string) {
     getNotifications: () => request<NotificationSettings>("/api/notifications"),
     updateNotifications: (body: NotificationSettingsUpdate) =>
       request<NotificationSettings>("/api/notifications", { method: "POST", body: JSON.stringify(body) }),
+    /** 导出账号数据（各表原样带出，前端只负责下载）。 */
+    exportAccount: () => request<AccountExport>("/api/account/export"),
+    /** 注销账号并删除数据 —— **不可逆**，必须原样传确认词「注销账号」。 */
+    deleteAccount: (confirm: string) =>
+      request<null>("/api/account", { method: "DELETE", body: JSON.stringify({ confirm }) }),
     getReviewState: () => request<ReviewStateResponse>("/api/review/state"),
     gradeReview: (body: ReviewGrade) =>
       request<ReviewGradeResponse>("/api/review/grade", { method: "POST", body: JSON.stringify(body) }),

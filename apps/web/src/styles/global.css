@@ -2483,6 +2483,22 @@ summary:active,
 .pf-line--btn:hover { background: var(--surface-2); }
 .pf-line--btn[disabled] { opacity: 0.6; cursor: default; }
 .pf-line--btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+/* ⚠️ 这两条写在 .pf-line__l / .pf-line__v **基础规则之前**，同优先级时后写的赢 ——
+   单类会被基础规则的 color 整段盖掉（这次实测踩到了：注销标签没变红、导出取值没变品牌色）。
+   用双类把特异性抬上去，就不依赖书写顺序了。 */
+.pf-line .pf-line__l--danger { color: var(--red); }
+.pf-line .pf-line__v--link { color: var(--primary); font-weight: 500; }
+/* 注销确认区：包住说明 + 确认输入 + 两个按钮 */
+.pf-danger {
+  display: flex; flex-direction: column; gap: var(--s-3);
+  margin-top: var(--s-2); padding: 14px;
+  border-radius: var(--r-md); background: var(--surface-2);
+}
+.pf-danger[hidden] { display: none; } /* ⚠️ flex 容器的 hidden 敌不过 display:flex */
+.pf-danger b { color: var(--red); font-weight: 500; }
+/* 危险按钮 = 品牌按钮的 danger 版 */
+.pf-btn--danger { border: 0; background: var(--red); color: var(--surface); }
+.pf-btn--danger[disabled] { opacity: 0.5; cursor: default; }
 .pf-line__l { flex: 1 1 auto; min-width: 0; font-size: var(--font-meta); color: var(--ink); }
 .pf-line__v { flex: 0 0 auto; font-size: var(--font-caption); color: var(--mut); }
 .pf-line__v--ok { color: var(--green); font-weight: 500; }

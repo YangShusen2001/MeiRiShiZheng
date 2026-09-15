@@ -18,6 +18,7 @@ import { newsletterRoutes, subscriptionRoutes } from "./routes/subscription";
 import { webhookRoutes } from "./routes/webhooks";
 import { reviewRoutes } from "./routes/review";
 import { notificationRoutes } from "./routes/notifications";
+import { accountRoutes } from "./routes/account";
 
 export type DB = BetterSQLite3Database<typeof schema> | DrizzleD1Database<typeof schema>;
 
@@ -71,5 +72,6 @@ export function createApp(db: DB, config: AppConfig = {}) {
   app.route("/api/webhooks", webhookRoutes(db, config));
   app.route("/api/review", reviewRoutes(db, config));
   app.route("/api/notifications", notificationRoutes(db, config));
+  app.route("/api/account", accountRoutes(db, config));
   return app;
 }

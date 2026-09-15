@@ -138,7 +138,10 @@ import Base from "../layouts/Base.astro";
       `</section>` +
       // 通知与提醒（画布 3:2062）：三行「标签 + 取值」。画布上是只读样式 ——
       // 这里保留那个视觉，但整行可点（点了切换开/关），否则这张卡摆上去只能看不能改。
-      `<section class="pf-card" id="pf-notify-card"></section>`;
+      `<section class="pf-card" id="pf-notify-card"></section>` +
+      // 数据与隐私（画布 3:2073）：同步状态 + 导出 + 注销。
+      // ⚠️ 注销是**不可逆**操作，不做成点一下就删 —— 点开内联确认区，要求手打「注销账号」四个字。
+      `<section class="pf-card" id="pf-privacy-card"></section>`;
 
     // 头像选择（画布 3:2042）：选中 = 2px 品牌描边
     document.querySelectorAll<HTMLButtonElement>(".pf-av").forEach((b) => {
@@ -263,5 +266,87 @@ import Base from "../layouts/Base.astro";
       btn.disabled = false;
       renderNotify(); // 无论成败都按服务端现状重绘 —— 失败时不会假装切换成功
     });
+
+    // —— 数据与隐私（画布 3:2073）——
+    function renderPrivacy(): void {
+      const box = document.getElementById("pf-privacy-card");
+      if (!box) return;
+      box.innerHTML =
+        `<h2 class="pf-card__t">数据与隐私</h2>` +
+        `<div class="pf-line">` +
+        `<span class="pf-line__l">登录设备与同步</span>` +
+        `<span class="pf-line__v">本设备 · 已同步</span>` +
+        `</div>` +
+        `<button class="pf-line pf-line--btn" type="button" id="pf-export">` +
+        `<span class="pf-line__l">导出我的收藏与划线</span>` +
+        `<span class="pf-line__v pf-line__v--link">导出 JSON</span>` +
+        `</button>` +
+        `<button class="pf-line pf-line--btn" type="button" id="pf-danger-open" aria-expanded="false">` +
+        `<span class="pf-line__l pf-line__l--danger">注销账号并删除数据</span>` +
+        `<span class="pf-line__v">不可恢复</span>` +
+        `</button>` +
+        `<div class="pf-danger" id="pf-danger" hidden>` +
+        `<p class="pf-note">注销会删除账号与全部数据（收藏、划线、错题、练习记录、订阅），<b>无法恢复</b>。` +
+        `想留一份，先点上面的「导出 JSON」。</p>` +
+        `<input class="pf-input" id="pf-confirm-input" placeholder="输入「注销账号」以确认" autocomplete="off" />` +
+        `<div class="pf-actions">` +
+        `<button class="pf-btn pf-btn--danger" type="button" id="pf-confirm-delete" disabled>确认注销</button>` +
+        `<button class="pf-btn pf-btn--line" type="button" id="pf-cancel">取消</button>` +
+        `</div>` +
+        `<p class="pf-msg pf-msg--bad" id="pf-danger-msg" role="status" aria-live="polite"></p>` +
+        `</div>`;
+
+      const danger = document.getElementById("pf-danger") as HTMLElement;
+      const input = document.getElementById("pf-confirm-input") as HTMLInputElement;
+      const del = document.getElementById("pf-confirm-delete") as HTMLButtonElement;
+      const msg = document.getElementById("pf-danger-msg") as HTMLElement;
+      const opener = document.getElementById("pf-danger-open") as HTMLButtonElement;
+
+      opener.addEventListener("click", () => {
+        danger.hidden = !danger.hidden;
+        opener.setAttribute("aria-expanded", String(!danger.hidden));
+        if (!danger.hidden) input.focus();
+      });
+      document.getElementById("pf-cancel")?.addEventListener("click", () => {
+        danger.hidden = true;
+        opener.setAttribute("aria-expanded", "false");
+        input.value = "";
+        del.disabled = true;
+        msg.textContent = "";
+      });
+      // 确认按钮只在手打完全一致的四个字后才可用 —— 这就是「二次确认」本身
+      input.addEventListener("input", () => {
+        del.disabled = input.value.trim() !== "注销账号";
+      });
+      del.addEventListener("click", async () => {
+        if (input.value.trim() !== "注销账号") return;
+        del.disabled = true;
+        del.textContent = "正在注销…";
+        const r = await api.deleteAccount("注销账号");
+        if (r.ok) {
+          location.href = "/"; // 账号已删，会话也随之失效
+          return;
+        }
+        msg.textContent = r.error?.message ?? "注销失败，请重试";
+        del.textContent = "确认注销";
+        del.disabled = false;
+      });
+
+      const exportBtn = document.getElementById("pf-export") as HTMLButtonElement;
+      exportBtn.addEventListener("click", async () => {
+        exportBtn.disabled = true;
+        const r = await api.exportAccount();
+        if (r.ok && r.data) {
+          const blob = new Blob([JSON.stringify(r.data, null, 2)], { type: "application/json" });
+          const a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = `kaogong-account-${new Date().toISOString().slice(0, 10)}.json`;
+          a.click();
+          URL.revokeObjectURL(a.href);
+        }
+        exportBtn.disabled = false;
+      });
+    }
+    renderPrivacy();
   }
 </script>
