@@ -10,76 +10,159 @@ const { article } = Astro.props;
 const aiAnnotations = article.aiStatus === "ok" ? article.aiAnnotations ?? [] : [];
 const aiSummary = article.aiStatus === "ok" ? article.aiSummary?.trim() ?? "" : "";
 const keySentences = article.keySentences ?? [];
-const annotationGroups = [
-  { type: "exam_point", label: "考点", icon: "🎯" },
-  { type: "viewpoint", label: "观点", icon: "📌" },
-  { type: "term", label: "术语", icon: "📖" },
-]
+
+/**
+ * 标注分组（画布 3:223 / 3:227 / 3:231 / 3:235）。
+ * 画布上的组标签是**纯文字胶囊 + 条数**（「考点 3」），不是图标——
+ * 原先是 🎯📌📖，那是 emoji，跟不了令牌也做不了主题翻转，已按画布去掉。
+ * 标签底色直接用 highlight 令牌本身：考点 #FFE7A0 / 观点 #C9E7CE / 术语 #B9DEE6，
+ * 与正文里同类型标注片段是同一个色，读者一眼能把「速览里的这行」和「正文里的那块」对上。
+ */
+const ANNOTATION_GROUPS: Array<{ type: string; label: string; tag: string }> = [
+  { type: "exam_point", label: "考点", tag: "exam" },
+  { type: "viewpoint", label: "观点", tag: "view" },
+  { type: "term", label: "术语", tag: "term" },
+];
+const annotationGroups = ANNOTATION_GROUPS
   .map((g) => ({ ...g, items: aiAnnotations.filter((a) => a.type === g.type) }))
   .filter((g) => g.items.length > 0);
 const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.length);
+
+// 来源行（画布 3:195「新华社 · 2026-09-12 · 原文 1610 字 · 阅读约 6 分钟」）。
+// 字数与时长构建期实算，不写死：中文按 300 字/分钟估，向上取整（宁可说多一分钟）。
+const charCount = article.paragraphs.reduce((n, p) => n + p.length, 0);
+const readMinutes = Math.max(1, Math.ceil(charCount / 300));
+// 读完卡（画布 3:269）的说明文案：条数同样实算。
+const annotationCount = aiAnnotations.length;
 ---
-<Base title={`${article.title} · 时政小助手`}>
-  <div class="reading-head">
-    <p class="item-summary">{article.source} · {article.date} · <a href={article.url} target="_blank" rel="noopener">查看原文 ↗</a></p>
-    <h1 class="reading-title">{article.title}</h1>
-    <div class="read-actions">
-      <button type="button" class="read-fav" id="read-fav" data-title={article.title} data-url={article.url}>👻 收藏本文</button>
-      <div class="reader-mode" role="group" aria-label="阅读模式">
-        <button type="button" id="mode-original" class="on" aria-pressed="true">原文模式</button>
-        <button type="button" id="mode-ai" aria-pressed="false" disabled>AI 标注模式</button>
+<Base title={`${article.title} · 时政小助手`} variant="reading" bleed>
+  {/* ===== 文章头（画布 3:192）：pad 64/48/32，内容列 820 定宽 =====
+      画布上是**无卡片**的版式——没有底色、没有描边、没有圆角，直接坐在页面底色上。
+      原先那套「白卡 + 居中 + 20px 内距」跟画布不是一回事，已换掉。 */}
+  <div class="rd-head">
+    <div class="rd-head__in">
+      <div class="rd-col">
+        {/* 来源行（画布 3:194）：gap 12，右侧「查看官方原文」+ 12×12 外链图标（矢量，不是 ↗ 字符） */}
+        <div class="rd-src">
+          <span class="rd-src__info">{article.source} · {article.date} · 原文 {charCount} 字 · 阅读约 {readMinutes} 分钟</span>
+          <a class="rd-src__link" href={article.url} target="_blank" rel="noopener">
+            <span>查看官方原文</span>
+            <svg class="rd-src__ic" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M7.2 2.4h2.4v2.4M9.4 2.6 5.6 6.4M9 7.6v1.8H2.6v-6h1.8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </a>
+        </div>
+        <h1 class="rd-title">{article.title}</h1>
+        {/* 操作栏（画布 3:202）：wrap · gap 10，三个胶囊等宽同行
+            1) 收藏本文（h40 · pad 0 18 · 圆角 999 · 白底 + 描边）
+            2) 阅读模式切换（h40 · pad 4 · 底 sunken · 内含两段 h32）
+            3) 阅读工具条（h40 · pad 0 16 · gap 16 · 白底 + 描边，五项纯文字）
+            「全屏」不在画布上——浏览器本身就支持，不再占一个按钮位。 */}
+        <div class="rd-acts">
+          <button
+            type="button"
+            class="rd-fav"
+            id="read-fav"
+            data-fav-toggle
+            data-title={article.title}
+            data-url={article.url}
+          >收藏本文</button>
+          <div class="rd-mode" role="group" aria-label="阅读模式">
+            <button type="button" id="mode-original" class="on" aria-pressed="true">原文模式</button>
+            <button type="button" id="mode-ai" aria-pressed="false" disabled>AI 标注模式</button>
+          </div>
+          <div class="rd-tools">
+            <button type="button" class="rd-tool-strong" id="font-minus" title="缩小字号">A-</button>
+            <button type="button" class="rd-tool-strong" id="font-plus" title="放大字号">A+</button>
+            <button type="button" id="font-cycle" title="切换字体：默认 / 宋体 / 楷体 / 黑体 / 瘦金">字体：默认</button>
+            <button type="button" id="immersive" title="隐藏顶栏与页脚">沉浸阅读</button>
+            <button type="button" id="link-mode" title="显示论证连线（LiquidText 式）" disabled>论证连线</button>
+          </div>
+        </div>
+        {/* AI 额度（画布 3:216）：12px 的次级说明，前缀是固定的 */}
+        <div class="rd-quota">
+          <span class="rd-quota__k">AI 解析额度：</span>
+          <span class="rd-quota__v" id="ai-quota-text">加载中…</span>
+          <button type="button" class="rd-quota__act" id="ai-quota-action" hidden>输入邀请码</button>
+        </div>
+        {/* AI 标注不可用时的说明。放在内容列里而不是外层 —— 它是文章头的一部分，
+            挂在外层就只能自己再算一遍 820 列与 64px 内距。 */}
+        <p class="ai-mode-status" id="ai-mode-status" hidden></p>
       </div>
-      <div class="read-toolbar">
-        <button type="button" id="font-minus" title="缩小字体">A−</button>
-        <button type="button" id="font-plus" title="放大字体">A＋</button>
-        <select id="font-select" title="字体">
-          <option value="default">默认</option>
-          <option value="serif">宋体</option>
-          <option value="kai">楷体</option>
-          <option value="hei">黑体</option>
-          <option value="shoujin">瘦金简体</option>
-        </select>
-        <button type="button" id="immersive" title="沉浸式阅读">沉浸</button>
-        <button type="button" id="link-mode" title="显示论证连线（LiquidText 式）" disabled>连线</button>
-        <button type="button" id="fullscreen" title="全屏">⛶</button>
-      </div>
-    </div>
-    <div class="ai-quota" id="ai-quota">
-      <span class="ai-quota-text" id="ai-quota-text">AI 解析加载中…</span>
-      <button type="button" class="ai-quota-action" id="ai-quota-action" hidden>输入邀请码</button>
     </div>
   </div>
 
-  <p class="ai-mode-status" id="ai-mode-status" hidden></p>
-
-  {hasBrief && (
-    <details class="ai-brief" id="ai-brief">
-      <summary>AI 速览<span class="ai-brief-hint">展开查看考点 / 观点 / 术语 / 金句</span></summary>
-      <div class="ai-brief-body">
-        {aiSummary && <p class="ai-brief-summary">{aiSummary}</p>}
-        {annotationGroups.map((g) => (
-          <div class="ai-group">
-            <div class="ai-group-title">{g.icon} {g.label}</div>
-            {g.items.map((a) => (
-              <button type="button" class="ai-node" data-para={a.paragraphIndex} title={a.explanation}>{a.text}</button>
+  {/* ===== 正文区（画布 3:217）：pad 64/8/72，内容列 820 ===== */}
+  <div class="rd-body">
+    <div class="rd-body__in">
+      <div class="rd-col">
+        {/* AI 速览卡（画布 3:218）：820 · 圆角 14 · pad 20 · gap 14 · 白底 + 描边。
+            画布上是**展开的卡**（不是折叠的 <details>）——它把「考点/观点/术语/金句」
+            四组直接摊开，右上角写「点击条目跳到对应段落」。所以折叠壳撤掉。
+            组内多条排成连贯的一行、用「·」分隔（画布 3:226/3:230/3:234 就是这么排的），
+            但每一条仍是独立可点的按钮——「跳到对应段落」这个能力不能因为合并成行就丢掉。 */}
+        {hasBrief && (
+          <section class="ai-brief" id="ai-brief">
+            <div class="ai-brief__head">
+              <h2 class="ai-brief__title">AI 速览</h2>
+              <span class="ai-brief__hint">点击条目跳到对应段落</span>
+            </div>
+            {aiSummary && <p class="ai-brief__sum">{aiSummary}</p>}
+            {annotationGroups.map((g) => (
+              <div class="ai-group">
+                <span class={`ai-tag ai-tag--${g.tag}`}>{g.label} {g.items.length}</span>
+                <div class="ai-group__body">
+                  {g.items.map((a, i) => (
+                    <>
+                      {i > 0 && <span class="ai-sep" aria-hidden="true">·</span>}
+                      <button type="button" class="ai-item" data-para={a.paragraphIndex} title={a.explanation}>{a.text}</button>
+                    </>
+                  ))}
+                </div>
+              </div>
             ))}
-          </div>
-        ))}
-        {keySentences.length > 0 && (
-          <div class="ai-group">
-            <div class="ai-group-title">💡 金句</div>
-            {keySentences.map((k) => <div class="ai-node ai-node-static">{k}</div>)}
-          </div>
+            {keySentences.length > 0 && (
+              <div class="ai-group">
+                <span class="ai-tag ai-tag--quote">金句 {keySentences.length}</span>
+                <div class="ai-group__body">
+                  {keySentences.map((k, i) => (
+                    <>
+                      {i > 0 && <span class="ai-sep" aria-hidden="true">·</span>}
+                      {/* 金句在画布上是**衬线 Medium**（3:238），与其他三组的无衬线正文区分开 */}
+                      <span class="ai-item ai-item--quote">{k}</span>
+                    </>
+                  ))}
+                </div>
+              </div>
+            )}
+          </section>
         )}
-      </div>
-    </details>
-  )}
 
-  <article class="reading" id="article" data-id={article.id} data-ai-status={article.aiStatus ?? "legacy"}>
-    {article.keySentences?.length > 0 && <blockquote>{article.keySentences[0]}</blockquote>}
-    {article.paragraphs.map((p) => <p class="reading-para">{p}</p>)}
-    <div class="relation-overlay" aria-hidden="true"><svg></svg></div>
-  </article>
+        <article class="reading" id="article" data-id={article.id} data-ai-status={article.aiStatus ?? "legacy"}>
+          {/* 金句引文（画布 3:240）：820 × min-h 100 · 圆角 10 · 底 sunken ·
+              左侧 3px accent 竖线 · 内距 16/20/16/17 · 20px 衬线 Medium / 32 行高 */}
+          {keySentences.length > 0 && (
+            <div class="rd-quote"><blockquote>{keySentences[0]}</blockquote></div>
+          )}
+          {article.paragraphs.map((p) => <p class="reading-para">{p}</p>)}
+          {/* 读完操作卡（画布 3:269）：圆角 14 · pad 20 · gap 14 · 底 sunken。
+              第二个按钮画布写的是「生成摘录卡」——线上没有这个能力（要生成卡片得先有
+              导出/合成那套），不摆假按钮占位，换成真实有用的「回到顶部」。 */}
+          <div class="rd-done">
+            <p class="rd-done__text">
+              读完了 · 本文 {annotationCount} 处标注、{keySentences.length} 句金句可同步到收藏
+            </p>
+            <div class="rd-done__acts">
+              <button type="button" class="rd-fav rd-fav--solid" data-fav-toggle>收藏本文</button>
+              <a class="rd-top" href="#top">回到顶部</a>
+            </div>
+          </div>
+          <div class="relation-overlay" aria-hidden="true"><svg></svg></div>
+        </article>
+      </div>
+    </div>
+  </div>
+
   <script type="application/json" id="ai-annotations" set:html={JSON.stringify(aiAnnotations).replace(/</g, "\\u003c")}></script>
   {(article.aiRelations?.length ?? 0) > 0 && (
     <script type="application/json" id="ai-relations" set:html={JSON.stringify(article.aiRelations).replace(/</g, "\\u003c")}></script>
@@ -117,7 +200,7 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
 
 <script>
   import { api } from "../../lib/api";
-  import { isLocalFavorite, toggleLocalFavorite, loadLocalFavorites, isLocalTermFavorite, toggleLocalTermFavorite } from "../../lib/local-favorites";
+  import { isLocalFavorite, toggleLocalFavorite, loadLocalFavorites, toggleLocalTermFavorite } from "../../lib/local-favorites";
   import {
     createHighlight, removeHighlight, removeRangeFromHighlight, highlightAt, flattenRanges,
     relocateHighlight, migrateV1ToV2,
@@ -134,7 +217,7 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
   const paraEls = Array.from(articleEl.querySelectorAll<HTMLElement>(".reading-para"));
 
   // AI 速览：点击考点/观点/术语节点跳转到对应段落
-  document.querySelectorAll<HTMLButtonElement>(".ai-node[data-para]").forEach((node) => {
+  document.querySelectorAll<HTMLButtonElement>(".ai-item[data-para]").forEach((node) => {
     node.addEventListener("click", () => {
       const idx = Number(node.dataset.para);
       const para = paraEls[idx];
@@ -184,7 +267,7 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
       : "这篇文章暂时没有 AI 标注，当前显示完整原文。";
   }
 
-  // ===== 字体 / 沉浸 / 全屏 =====
+  // ===== 字体 / 沉浸 =====
   const FONT_SIZE_KEY = "kaogong.read.fontsize";
   const FONT_NAME_KEY = "kaogong.read.font";
   const FONTS: Record<string, string> = {
@@ -194,6 +277,13 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     hei: '"SimHei", "黑体", "Microsoft YaHei", sans-serif',
     shoujin: '"瘦金简体", "汉仪瘦金书简", "ShouJinTi", "STKaiti", serif',
   };
+  // 工具条里的字体项是**纯文字**（画布 3:213「字体：默认」），不是 <select>：
+  // 画布的阅读工具条是一排等高的文字项，塞一个下拉框会破坏这一行的节奏。
+  // 点一次换下一种，标签跟着变（「字体：宋体」），顺序即 FONT_ORDER。
+  const FONT_LABELS: Record<string, string> = {
+    default: "默认", serif: "宋体", kai: "楷体", hei: "黑体", shoujin: "瘦金",
+  };
+  const FONT_ORDER = ["default", "serif", "kai", "hei", "shoujin"];
 
   let fontSize = Number(localStorage.getItem(FONT_SIZE_KEY)) || 17;
   function setFontSize(n: number) {
@@ -203,37 +293,56 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
   }
   setFontSize(fontSize);
 
+  const fontCycle = document.getElementById("font-cycle") as HTMLButtonElement;
   function setFont(name: string) {
     articleEl.style.fontFamily = FONTS[name] || FONTS.default!;
     localStorage.setItem(FONT_NAME_KEY, name);
+    fontCycle.textContent = `字体：${FONT_LABELS[name] ?? FONT_LABELS.default}`;
   }
   const savedFont = localStorage.getItem(FONT_NAME_KEY);
-  if (savedFont) {
-    (document.getElementById("font-select") as HTMLSelectElement).value = savedFont;
-    setFont(savedFont);
-  }
+  setFont(savedFont && FONTS[savedFont] ? savedFont : "default");
 
   document.getElementById("font-minus")!.addEventListener("click", () => setFontSize(fontSize - 1));
   document.getElementById("font-plus")!.addEventListener("click", () => setFontSize(fontSize + 1));
-  document.getElementById("font-select")!.addEventListener("change", (e) => setFont((e.target as HTMLSelectElement).value));
-  document.getElementById("immersive")!.addEventListener("click", (e) => {
+  fontCycle.addEventListener("click", () => {
+    const next = FONT_ORDER[(FONT_ORDER.indexOf(localStorage.getItem(FONT_NAME_KEY) ?? "default") + 1) % FONT_ORDER.length]!;
+    setFont(next);
+  });
+  const immersiveBtn = document.getElementById("immersive") as HTMLButtonElement;
+  immersiveBtn.addEventListener("click", () => {
     document.body.classList.toggle("immersive");
-    (e.target as HTMLButtonElement).textContent = document.body.classList.contains("immersive") ? "退出" : "沉浸";
+    immersiveBtn.textContent = document.body.classList.contains("immersive") ? "退出沉浸" : "沉浸阅读";
   });
-  document.getElementById("fullscreen")!.addEventListener("click", () => {
-    if (document.fullscreenElement) document.exitFullscreen();
-    else document.documentElement.requestFullscreen();
-  });
+  // 「全屏」按钮撤掉（画布 3:210 的工具条只有五项，没有它）：浏览器自带 F11 / ⌃⌘F，
+  // 页面里再放一个只会占掉工具条一格。
 
   // 收藏：登录 → 云端；未登录 → 本地 localStorage（都支持 toggle，刷新不丢失）
-  const favBtn = document.getElementById("read-fav") as HTMLButtonElement;
+  // 页面上有两个收藏入口（文章头的胶囊 + 读完卡的实底按钮），状态必须联动，
+  // 所以状态改由 setFavState 统一写，两个按钮只是长相不同。
+  const favBtns = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-fav-toggle]"));
+  const favBtn = favBtns[0]!;
   let favId: string | null = null; // 云端收藏 id（登录态）
 
-  // —— 术语收藏（0018）：正文 AI 术语整个可点击收藏（👻/😃 + 金色高亮）——
+  function setFavState(saved: boolean) {
+    for (const b of favBtns) {
+      b.textContent = saved ? "已收藏" : "收藏本文";
+      b.classList.toggle("on", saved);
+    }
+  }
+  function setFavBusy(busy: boolean) {
+    for (const b of favBtns) b.disabled = busy;
+  }
+
+  // —— 术语收藏（0018）：正文 AI 术语整个可点击收藏（笔画加深 + 书签标记）——
   const termFavs = new Set<string>();          // 已收藏术语文本（文章内唯一）
   const termFavIds = new Map<string, string>(); // 登录态：术语文本 → 云端收藏 id
   const articleUrl = favBtn.dataset.url || "";
   const articleTitle = favBtn.dataset.title || "";
+
+  // 已收藏标记（画布对图形的态度：矢量，不用 emoji）。
+  // 形状取自底导「收藏」那一格的矢量（3:1523，9.2×13 描边书签），同源缩到 11px，
+  // 颜色继承 currentColor，所以在任何底色上都能跟着文字色走。
+  const BOOKMARK_ICON = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5.4 3.6h9.2v13L10 13.2l-4.6 3.4z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path></svg>';
 
   function applyTermFavMarks() {
     paraEls.forEach((para) => {
@@ -242,27 +351,19 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
         const faved = termFavs.has(t);
         el.classList.toggle("term-faved", faved);
         let badge = el.querySelector<HTMLElement>(".term-fav-badge");
-        if (!badge) {
+        if (faved && !badge) {
           badge = document.createElement("span");
           badge.className = "term-fav-badge";
           badge.setAttribute("aria-hidden", "true");
+          badge.innerHTML = BOOKMARK_ICON;
           el.appendChild(badge);
+        } else if (!faved && badge) {
+          // 取消收藏后标记整个移除：画布上未收藏的术语就是一段带底色的原文，
+          // 没有角标（原先留一个 👻 是为了提示「这里能点」，现在点击态有 hover 兜底）。
+          badge.remove();
         }
-        badge.textContent = faved ? "😃" : "👻";
       });
     });
-  }
-
-  async function loadTermFavState() {
-    // 已由 refreshFavState 合并加载（一次 ?url= 请求）；本函数仅兜底本地模式刷新
-    if (!favLoggedIn) {
-      termFavs.clear();
-      termFavIds.clear();
-      for (const f of loadLocalFavorites()) {
-        if (f.kind === "term" && f.url === articleUrl && f.termText) termFavs.add(f.termText);
-      }
-      applyTermFavMarks();
-    }
   }
 
   async function toggleTermFavorite(termText: string, explanation: string) {
@@ -309,6 +410,8 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     if (t) void toggleTermFavorite(t, expl);
   });
 
+  let favLoggedIn = false;
+
   async function refreshFavState() {
     const url = favBtn.dataset.url || "";
     const me = await api.me();
@@ -334,55 +437,53 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
       }
     }
     const saved = favLoggedIn ? favId : isLocalFavorite(url);
-    favBtn.textContent = saved ? "😃 已收藏" : "👻 收藏本文";
-    favBtn.classList.toggle("on", Boolean(saved));
-    favBtn.disabled = false;
+    setFavState(Boolean(saved));
+    setFavBusy(false);
     applyTermFavMarks();
   }
-  let favLoggedIn = false;
 
-  favBtn.addEventListener("click", async () => {
-    if (favBtn.disabled) return;
-    favBtn.disabled = true;
-    const url = favBtn.dataset.url || "";
-    const title = favBtn.dataset.title || "";
-    // 收藏速度优化：不再每次点击查登录态（页面加载时已缓存 favLoggedIn）
-    if (!favLoggedIn) {
-      // 未登录：本地收藏（toggle）
-      const now = toggleLocalFavorite(url, title);
-      favBtn.textContent = now ? "😃 已收藏" : "👻 收藏本文";
-      favBtn.classList.toggle("on", now);
-      toast(now ? "已收藏到本机（登录后可同步到云端）" : "已取消本机收藏");
-      favBtn.disabled = false;
-      return;
-    }
-    const favError = (env: { ok: boolean; error?: { code?: string } }) =>
-      env.error?.code === "AUTH_REQUIRED" ? "请先登录后再收藏"
-        : env.error?.code === "NETWORK" ? "网络错误：请确认后端地址可访问"
-        : "收藏失败，请重试";
-    if (favId) {
-      const env = await api.removeFavorite(favId);
-      if (env.ok) {
-        favId = null;
-        favBtn.textContent = "👻 收藏本文";
-        favBtn.classList.remove("on");
-        toast("已取消收藏");
-      } else {
-        toast(favError(env));
+  // 两个收藏入口绑同一套逻辑（state 由 setFavState 统一刷新，点击哪个都一样）
+  for (const btn of favBtns) {
+    btn.addEventListener("click", async () => {
+      if (btn.disabled) return;
+      setFavBusy(true);
+      const url = btn.dataset.url || favBtn.dataset.url || "";
+      const title = btn.dataset.title || favBtn.dataset.title || "";
+      // 收藏速度优化：不再每次点击查登录态（页面加载时已缓存 favLoggedIn）
+      if (!favLoggedIn) {
+        // 未登录：本地收藏（toggle）
+        const now = toggleLocalFavorite(url, title);
+        setFavState(now);
+        toast(now ? "已收藏到本机（登录后可同步到云端）" : "已取消本机收藏");
+        setFavBusy(false);
+        return;
       }
-    } else {
-      const env = await api.addFavorite({ url, title });
-      if (env.ok && env.data) {
-        favId = env.data.id;
-        favBtn.textContent = "😃 已收藏";
-        favBtn.classList.add("on");
-        toast("已收藏");
+      const favError = (env: { ok: boolean; error?: { code?: string } }) =>
+        env.error?.code === "AUTH_REQUIRED" ? "请先登录后再收藏"
+          : env.error?.code === "NETWORK" ? "网络错误：请确认后端地址可访问"
+          : "收藏失败，请重试";
+      if (favId) {
+        const env = await api.removeFavorite(favId);
+        if (env.ok) {
+          favId = null;
+          setFavState(false);
+          toast("已取消收藏");
+        } else {
+          toast(favError(env));
+        }
       } else {
-        toast(favError(env));
+        const env = await api.addFavorite({ url, title });
+        if (env.ok && env.data) {
+          favId = env.data.id;
+          setFavState(true);
+          toast("已收藏");
+        } else {
+          toast(favError(env));
+        }
       }
-    }
-    favBtn.disabled = false;
-  });
+      setFavBusy(false);
+    });
+  }
   void refreshFavState();
 
   // ===== 划线：对象模型（v2，提案 0019 方案 B）=====
@@ -437,7 +538,7 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
   linkModeButton.disabled = !(aiAvailable && validRel.length > 0);
   linkModeButton.addEventListener("click", () => {
     linkMode = !linkMode;
-    linkModeButton.textContent = linkMode ? "退出连线" : "连线";
+    linkModeButton.textContent = linkMode ? "退出连线" : "论证连线";
     linkModeButton.setAttribute("aria-pressed", String(linkMode));
     redrawRelations();
   });
@@ -718,10 +819,10 @@ const hasBrief = Boolean(aiSummary || annotationGroups.length || keySentences.le
     }
     const status = await api.inviteStatus();
     if (status.ok && status.data?.active) {
-      quotaText.textContent = `剩余 ${status.data.remaining} 次`;
+      quotaText.textContent = `邀请码已激活 · 剩余 ${status.data.remaining} 次`;
       quotaAction.textContent = "更换邀请码";
     } else {
-      quotaText.textContent = "需登录或邀请码";
+      quotaText.textContent = "未登录 · 需邀请码";
       quotaAction.textContent = "输入邀请码";
     }
     quotaAction.hidden = false;

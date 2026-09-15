@@ -12,12 +12,23 @@ interface Props {
   description?: string;
   /** 首页用：横向不套 .wrap 的居中窄栏，改由各条横带自带底色与内边距（画布版式）。 */
   bleed?: boolean;
+  /**
+   * 顶栏形态。`reading` = 阅读页专用的「专注态」（画布 3:175）：主导航与搜索框都不出现，
+   * 左区换成「返回今日精选」，右区换成滚动进度，顶栏下沿多一条 2px 阅读进度条（画布 3:190）。
+   *
+   * 为什么值得单开一个形态而不是只在文章头加个返回链接：画布 02 通篇没有主导航和搜索框，
+   * 那是刻意的阅读态设计——读长文时导航是干扰项，真正要的是「回哪去」和「读到哪了」。
+   * 直接照搬常态顶栏会把这两件事都丢掉。
+   */
+  variant?: "default" | "reading";
 }
 const {
   title,
   description = "每天整理全国时政、申论精读与政策解读，来源均为官方原文。",
   bleed = false,
+  variant = "default",
 } = Astro.props;
+const isReading = variant === "reading";
 
 // 主导航（画布 3:9）：五项纯文字。画布把「搜索」放进了右区搜索框，不占导航位。
 const NAV_ITEMS: { href: string; label: string }[] = [
@@ -76,7 +87,7 @@ const reviewCardsJson = JSON.stringify(listCards());
   </head>
   <body>
     <script type="application/json" id="review-cards-data" set:html={reviewCardsJson.replace(/</g, "\\u003c")}></script>
-    <header class="top" id="top">
+    <header class={isReading ? "top top--reading" : "top"} id="top">
       <div class="top-l">
         <a class="logo" href="/" aria-label="每日时政">
           <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
@@ -85,37 +96,54 @@ const reviewCardsJson = JSON.stringify(listCards());
           </svg>
           <span class="logo-text">每日时政</span>
         </a>
-        {/* 主导航（画布 3:9）：纯文字五项，没有图标。搜索不占导航位——
-            画布把它放在右区搜索框里。当前项由 aria-current 标记，样式只换字重与颜色。 */}
-        <nav class="nav" id="nav" aria-label="主导航">
-          {NAV_ITEMS.map((item) => (
-            <a
-              href={item.href}
-              class="nav-tab"
-              aria-current={isActive(item.href) ? "page" : undefined}
-            >{item.label}</a>
-          ))}
-          {/* 复习遮罩的入口。画布 Web 导航里没有它（手机端才把「复习」放底导），
-              为了不把功能藏起来，放在导航末尾，样式与导航项一致。 */}
-          <button type="button" class="nav-tab nav-btn" id="review-entry">复习</button>
-          <a href="/profile/" class="nav-tab nav-mobile-only">我的</a>
-        </nav>
+        {isReading ? (
+          /* 阅读态左区（画布 3:182）：标识 + 站名 + 返回链接（14×14 左箭头 + 14px Medium 品牌色），gap 4。
+             返回目标是首页——画布写「返回今日精选」，首页的头条横带正是今日精选。 */
+          <a class="rd-back" href="/">
+            <svg class="rd-back__ic" viewBox="0 0 14 14" aria-hidden="true">
+              <path d="M8.6 3.1 4.9 7l3.7 3.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>返回今日精选</span>
+          </a>
+        ) : (
+          <>
+            {/* 主导航（画布 3:9）：纯文字五项，没有图标。搜索不占导航位——
+                画布把它放在右区搜索框里。当前项由 aria-current 标记，样式只换字重与颜色。 */}
+            <nav class="nav" id="nav" aria-label="主导航">
+              {NAV_ITEMS.map((item) => (
+                <a
+                  href={item.href}
+                  class="nav-tab"
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                >{item.label}</a>
+              ))}
+              {/* 复习遮罩的入口。画布 Web 导航里没有它（手机端才把「复习」放底导），
+                  为了不把功能藏起来，放在导航末尾，样式与导航项一致。 */}
+              <button type="button" class="nav-tab nav-btn" id="review-entry">复习</button>
+              <a href="/profile/" class="nav-tab nav-mobile-only">我的</a>
+            </nav>
+          </>
+        )}
       </div>
       <div class="top-r">
-        <form class="top-search" action="/search/" method="get" role="search">
-          <svg viewBox="0 0 14 14" aria-hidden="true">
-            <circle cx="6" cy="6" r="4.2" fill="none" stroke="currentColor" stroke-width="1.4"></circle>
-            <path d="M9.6 9.6l3.4 3.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
-          </svg>
-          <input
-            id="top-q"
-            name="q"
-            type="search"
-            placeholder="搜索时政 / 政策"
-            aria-label="搜索时政 / 政策"
-            autocomplete="off"
-          />
-        </form>
+        {!isReading && (
+          <form class="top-search" action="/search/" method="get" role="search">
+            <svg viewBox="0 0 14 14" aria-hidden="true">
+              <circle cx="6" cy="6" r="4.2" fill="none" stroke="currentColor" stroke-width="1.4"></circle>
+              <path d="M9.6 9.6l3.4 3.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+            </svg>
+            <input
+              id="top-q"
+              name="q"
+              type="search"
+              placeholder="搜索时政 / 政策"
+              aria-label="搜索时政 / 政策"
+              autocomplete="off"
+            />
+          </form>
+        )}
+        {/* 阅读态右区（画布 3:187）：滚动进度。数值由脚本实时写，初始 0%。 */}
+        {isReading && <span class="rd-read" id="rd-read">已读 0%</span>}
         <button type="button" class="nav-toggle" id="nav-toggle" aria-label="打开菜单" aria-controls="nav" aria-expanded="false">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M4 7h16M4 12h16M4 17h16"></path>
@@ -126,6 +154,9 @@ const reviewCardsJson = JSON.stringify(listCards());
         {/* <button type="button" class="theme-toggle" id="theme-toggle" title="切换主题">主题</button> */}
         <span class="nav-auth" id="kg-auth"><a href="/login/" class="nav-login">登录</a></span>
       </div>
+      {/* 阅读进度条（画布 3:190）：轨道铺满 2px，已读部分品牌色。放在顶栏底沿，
+          滚动时常驻可见——画布是静态稿看不出粘性，但进度条不粘就没有意义。 */}
+      {isReading && <span class="rd-bar" id="rd-bar" aria-hidden="true"></span>}
     </header>
     <main class={bleed ? "wrap wrap--bleed" : "wrap"}><slot /></main>
     {/* 页脚（画布 3:158）：深靛面板 + 标识 + 三个入口 + 分隔线 + 说明/回到顶部 */}
@@ -263,6 +294,31 @@ const reviewCardsJson = JSON.stringify(listCards());
             box.append(label, loginLink);
           }
         }
+      }
+
+      // 阅读进度（画布 3:187「已读 37%」+ 3:190 进度条）：按滚动比例算，rAF 节流。
+      // 用 scrollHeight - innerHeight 作分母，而不是整页高度：读到页面最底就是 100%，
+      // 否则最后屏永远差一截（用户会觉得进度条卡住）。
+      const rdBar = document.getElementById("rd-bar");
+      if (rdBar) {
+        const rdRead = document.getElementById("rd-read");
+        let rdTick = false;
+        const updateProgress = () => {
+          rdTick = false;
+          const doc = document.documentElement;
+          const max = doc.scrollHeight - window.innerHeight;
+          const pct = max > 0 ? Math.min(100, Math.max(0, Math.round((window.scrollY / max) * 100))) : 100;
+          rdBar.style.width = `${pct}%`;
+          if (rdRead) rdRead.textContent = `已读 ${pct}%`;
+        };
+        const onScrollProgress = () => {
+          if (rdTick) return;
+          rdTick = true;
+          requestAnimationFrame(updateProgress);
+        };
+        window.addEventListener("scroll", onScrollProgress, { passive: true });
+        window.addEventListener("resize", onScrollProgress);
+        updateProgress();
       }
 
       // 顶栏：滚动时只加一层阴影（画布没有「下滑收起导航」这套，故 collapsed 已撤），

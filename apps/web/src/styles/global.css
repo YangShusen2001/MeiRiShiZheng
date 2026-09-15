@@ -41,7 +41,6 @@
   --hl-green: var(--highlight-viewpoint);
   --hl-term: var(--highlight-term);
   --hl-figure: var(--highlight-figure);
-  --hl-glow: color-mix(in srgb, var(--highlight-exam-point) 82%, transparent);
 
   /* 立面三档 */
   --shadow: var(--shadow-card);
@@ -799,104 +798,265 @@ p { margin: 0; }
 }
 .subscription-panel h3 { margin: 0; font: 600 var(--font-title-s)/var(--line-heading) var(--font-serif); }
 
-/* ===== 阅读页 ===== */
-.reading-head {
-  max-width: 100%;
-  margin: var(--s-5) auto 0;
-  padding: var(--s-5) var(--s-6) var(--s-4);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  text-align: center;
-}
-.read-toolbar {
+/* ===== 阅读页（画布 02 / 3:174）=====
+   版式：页底 --bg；顶栏 64 + 2px 进度条；文章头 pad 48/64/32、正文区 pad 8/64/72，
+   两区共用同一条 820 的内容列。正文**不是白卡** —— 它直接坐在页底色上，
+   只有 AI 速览卡 / 金句引文 / 读完卡三块有自己的底色。 */
+
+/* --- 顶栏阅读态（画布 3:175 / 3:182 / 3:187）---
+   阅读页刻意不给主导航、也不给搜索框：进来是为了读完一篇，导航位让给「返回今日精选」，
+   搜索位让给滚动进度。这不是「少画了两样东西」，是刻意的阅读专注态，
+   所以走 Base 的 variant="reading"，而不是在文章头里塞一个返回链接了事。 */
+/* 画布把顶栏下沿那条 1px 分隔线换成了 2px 进度条轨道，所以这里把边框去掉 ——
+   留着的话 1px 线 + 2px 轨道会叠成 3px。 */
+.top--reading { border-bottom: 0; }
+.top--reading .top-l { gap: var(--s-xl); } /* 画布 3:176 = 20 */
+/* 返回链接（画布 3:182）：14×14 左箭头 + 14px Medium 品牌色，gap 4 */
+.rd-back {
   display: inline-flex;
-  gap: var(--s-2);
   align-items: center;
-  justify-content: center;
-  padding: var(--s-2);
-  margin: 0;
-  background: var(--surface-2);
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-}
-.read-toolbar button {
-  border: 1px solid var(--line);
-  background: transparent;
-  color: var(--sub);
-  border-radius: var(--r-sm);
-  padding: 4px 10px;
+  gap: var(--s-1);
+  color: var(--primary);
   font-size: var(--font-meta);
-  cursor: pointer;
-  font-family: inherit;
+  font-weight: 500;
+  white-space: nowrap;
 }
-.read-toolbar button:hover { border-color: var(--primary); color: var(--primary); }
-.read-toolbar select {
-  border: 1px solid var(--line);
-  background: var(--surface-2);
-  color: var(--ink);
-  border-radius: var(--r-sm);
-  padding: 4px 6px;
-  font-size: var(--font-meta);
-  font-family: inherit;
+.rd-back__ic { width: 14px; height: 14px; flex: 0 0 auto; }
+/* 滚动进度数值（画布 3:188）：12px 次级 */
+.rd-read { font-size: var(--font-caption); color: var(--mut); white-space: nowrap; }
+/* 阅读态不渲染主导航，汉堡留着只会点开一个空面板 */
+.top--reading .nav-toggle { display: none; }
+/* 进度条（画布 3:190）：轨道铺满 2px 贴在顶栏底沿，已读部分品牌色、宽度由脚本写。
+   轨道放在 64px 盒子**之外**（bottom: -2px）而不是里面：放里面会盖掉页眉最后 2px，
+   而画布上它们本来就是相邻的两条。 */
+.top--reading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--line);
+}
+.rd-bar {
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 0;
+  background: var(--primary);
+  transition: width var(--dur-sm) linear;
 }
 
-.read-actions {
-  display: flex;
-  gap: var(--s-4);
+/* --- 文章头（画布 3:192）与正文区（画布 3:217）---
+   两区内边距不同（48/64/32 与 8/64/72），但共用同一条 820 的内容列。 */
+.rd-head { padding: 48px 64px 32px; }
+.rd-body { padding: 8px 64px 72px; }
+.rd-head__in,
+.rd-body__in { display: flex; justify-content: center; }
+.rd-col { display: flex; flex-direction: column; width: 820px; max-width: 100%; min-width: 0; }
+.rd-head .rd-col { gap: var(--s-4); } /* 画布 3:193 gap 16 */
+.rd-body .rd-col { gap: 28px; } /* 画布 3:217 gap 28 */
+
+/* 来源行（画布 3:194 / 3:196）：gap 12，12px 次级信息 + 品牌色「查看官方原文」+ 12×12 外链图标 */
+.rd-src { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s-3); }
+.rd-src__info { font-size: var(--font-caption); color: var(--mut); }
+.rd-src__link {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: var(--s-3);
+  gap: var(--s-1);
+  color: var(--primary);
+  font-size: var(--font-caption);
+  font-weight: 500;
 }
-.read-fav {
+.rd-src__ic { width: 12px; height: 12px; flex: 0 0 auto; }
+
+/* 文章标题（画布 3:201）：34 / 42 衬线 Bold。
+   42.5 = 34 × --line-tight，与画布差 0.5px —— 不为半个像素再塞一个比例档。 */
+.rd-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--font-display);
+  font-weight: 700;
+  line-height: var(--line-tight);
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+/* 操作栏（画布 3:202）：wrap · gap 10，三个胶囊并排同行，窄屏自己折行 */
+.rd-acts { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+
+/* 收藏胶囊（画布 3:203）：h40 · pad 0 18 · 圆角 999 · 白底 + 描边 · 14 Medium 品牌色。
+   ⚠️ <button> 的 UA 默认底色是 ButtonFace(白)：底色与描边都必须显式写，
+   否则换主题时它不跟随（这是踩过的坑）。 */
+.rd-fav {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 18px;
   border: 1px solid var(--line);
-  background: var(--surface-2);
-  color: var(--sub);
-  border-radius: var(--r-md);
-  padding: 6px 14px;
-  cursor: pointer;
+  border-radius: var(--r-full);
+  background: var(--surface);
+  color: var(--primary);
   font-family: inherit;
   font-size: var(--font-meta);
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
 }
-.read-fav:hover { border-color: var(--accent); color: var(--accent); }
-.read-fav[disabled] { opacity: 0.6; cursor: default; }
-/* 已收藏状态：金色高亮（P1 收藏体验） */
-.read-fav.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 600; }
-.reader-mode {
+.rd-fav:hover { border-color: var(--primary); }
+.rd-fav.on { border-color: var(--primary); background: var(--primary-soft); }
+.rd-fav[disabled] { opacity: 0.6; cursor: default; }
+/* 读完卡的实底版（画布 3:273）：h40 · pad 0 20 · 品牌实底 + 暖白字。
+   暖白用 --panel-strong（与 .nav-login 同一处命名债：压在品牌面上的暖白还没有独立令牌） */
+.rd-fav--solid {
+  padding: 0 20px;
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--panel-strong);
+}
+.rd-fav--solid:hover { background: var(--primary-deep); border-color: var(--primary-deep); }
+.rd-fav--solid.on { background: var(--primary-deep); border-color: var(--primary-deep); }
+
+/* 阅读模式切换（画布 3:205 / 3:206 / 3:208）：h40 · pad 4 · 圆角 999 · sunken 底，内含两段 h32 */
+.rd-mode {
   display: inline-flex;
-  padding: 3px;
-  border: 1px solid var(--line);
+  gap: var(--s-1);
+  height: 40px;
+  padding: 4px;
   border-radius: var(--r-full);
   background: var(--surface-2);
 }
-.reader-mode button {
+.rd-mode button {
+  height: 32px;
+  padding: 0 14px;
   border: 0;
   border-radius: var(--r-full);
-  padding: 6px 13px;
   background: transparent;
   color: var(--sub);
-  cursor: pointer;
   font-family: inherit;
+  font-size: var(--font-meta);
+  font-weight: 400;
+  white-space: nowrap;
+  cursor: pointer;
 }
-.reader-mode button.on { background: var(--surface); color: var(--primary); box-shadow: var(--shadow-sm); }
-.reader-mode button:disabled { color: var(--mut); cursor: not-allowed; opacity: 0.65; }
-.ai-mode-status { margin: var(--s-3) auto 0; color: var(--sub); text-align: center; font-size: var(--font-meta); }
+/* 当前段：白底 + 品牌色 Medium（画布 3:208 的 AI 段就是这个长相） */
+.rd-mode button.on { background: var(--surface); color: var(--primary); font-weight: 500; }
+.rd-mode button:disabled { color: var(--mut); cursor: not-allowed; }
 
-/* AI 速览卡片（阅读页顶部，可折叠结构树） */
-.ai-brief { margin: var(--s-3) auto 0; max-width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); }
-.ai-brief > summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3) var(--s-4); font-weight: 600; color: var(--primary); }
-.ai-brief > summary::-webkit-details-marker { display: none; }
-.ai-brief-hint { margin-left: auto; color: var(--mut); font-size: var(--font-caption); font-weight: 400; }
-.ai-brief-body { padding: 0 var(--s-4) var(--s-4); }
-.ai-brief-summary { margin: 0 0 var(--s-3); color: var(--ink); line-height: var(--line-ui); }
-.ai-group { margin-bottom: var(--s-3); }
-.ai-group:last-child { margin-bottom: 0; }
-.ai-group-title { font-size: var(--font-meta); font-weight: 600; color: var(--sub); margin-bottom: var(--s-2); }
-.ai-node { display: block; width: 100%; text-align: left; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface-2); color: var(--ink); padding: 6px 12px; margin-bottom: var(--s-1); font-size: var(--font-meta); cursor: pointer; font-family: inherit; }
-.ai-node:hover { border-color: var(--primary); color: var(--primary); }
-.ai-node-static { cursor: default; }
-.ai-node-static:hover { border-color: var(--line); color: var(--ink); }
+/* 阅读工具条（画布 3:210）：h40 · pad 0 16 · gap 16 · 圆角 999 · 白底 + 描边，五项纯文字。
+   画布上它是一横排文字条、不是一组下拉框 —— 所以字体选择是「点一次换下一种」而不是 <select>。 */
+.rd-tools {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-4);
+  height: 40px;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--surface);
+}
+.rd-tools button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--sub);
+  font-family: inherit;
+  font-size: var(--font-meta);
+  font-weight: 400;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.rd-tools button:hover { color: var(--primary); }
+.rd-tools button:disabled { color: var(--mut); cursor: not-allowed; }
+/* A- / A+ 在画布上是 Medium（3:211 / 3:212），其余三项 Regular（3:213-3:215） */
+.rd-tools .rd-tool-strong { font-weight: 500; }
+
+/* AI 额度（画布 3:216）：12px 次级说明，前缀固定、与值连成一句，所以不设 flex gap */
+.rd-quota { font-size: var(--font-caption); color: var(--mut); }
+.rd-quota__act {
+  margin-left: var(--s-2);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--primary);
+  font-family: inherit;
+  font-size: var(--font-caption);
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* AI 速览卡（画布 3:218）：820 · 圆角 14 · pad 20 · gap 14 · 白底 + 描边。
+   画布上是**摊开的卡**：四组直接展开、右上角写「点击条目跳到对应段落」，不做折叠壳。 */
+.ai-brief {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  padding: var(--s-xl);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+}
+.ai-brief__head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+.ai-brief__title { margin: 0; font-family: var(--font-serif); font-size: var(--font-title-s); font-weight: 700; color: var(--ink); }
+.ai-brief__hint { font-size: var(--font-caption); color: var(--mut); white-space: nowrap; }
+.ai-brief__sum { margin: 0; font-size: var(--font-meta); line-height: var(--line-ui); color: var(--sub); }
+
+/* 一「组」= 标签 + 条目行（画布 3:223）：gap 10，两者都顶对齐 */
+.ai-group { display: flex; align-items: flex-start; gap: 10px; }
+/* 组标签（画布 3:224）：h22 · pad 0 10 · 圆角 999 · 11px Medium。
+   底色直接用该类型的 highlight 令牌 —— 与正文里同类型标注片段同一个色，
+   读者一眼能把「速览里的这行」和「正文里的那块」对上。
+   字色取 --highlight-on-highlight：它就是为「压在标注色上」准备的那一支（浅色 #2A2723 / 深色 #EDE8DE）。 */
+.ai-tag {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: var(--r-full);
+  font-size: var(--font-micro);
+  font-weight: 500;
+  color: var(--highlight-on-highlight);
+}
+.ai-tag--exam { background: var(--hl-yellow); }
+.ai-tag--view { background: var(--hl-green); }
+.ai-tag--term { background: var(--hl-term); }
+/* 金句标签的底色在画布上就是分隔线色 #E4DCCB（3:236），没有更贴切的语义名 */
+.ai-tag--quote { background: var(--line); }
+/* 条目行（画布 3:226）：一整行连排、用「·」分隔。每条仍是**独立可点**的按钮 ——
+   「跳到对应段落」这个能力不能因为并成一行就丢掉。 */
+.ai-group__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  font-size: var(--font-meta);
+  line-height: var(--line-ui);
+}
+.ai-item {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: var(--font-meta);
+  line-height: var(--line-ui);
+  text-align: left;
+  cursor: pointer;
+}
+.ai-item:hover { color: var(--primary); }
+/* 金句条目是衬线 Medium（画布 3:238），与另外三组的无衬线正文区分开；它不可点，故不写 pointer */
+.ai-item--quote { font-family: var(--font-serif); font-weight: 500; cursor: default; }
+.ai-item--quote:hover { color: var(--ink); }
+/* 「·」左右各留 4px：并成一行后靠它撑开间距；
+   间距挂在分隔符上而不是条目上，折行时才不会在行首多出一段空白。 */
+.ai-sep { padding: 0 var(--s-1); color: var(--mut); }
+
+/* AI 标注不可用时的说明行（画布上没有，是为了不把功能藏起来补的） */
+.ai-mode-status { margin: var(--s-3) 0 0; color: var(--sub); font-size: var(--font-caption); }
 @keyframes ai-jump-flash { 0%, 100% { background: transparent; } 50% { background: var(--accent-soft); } }
 .ai-jump-flash { animation: ai-jump-flash 0.75s ease-in-out 2; }
 
@@ -905,45 +1065,88 @@ body.immersive .top { display: none; }
 body.immersive .foot { display: none; }
 body.immersive .wrap { max-width: 100%; padding-left: var(--s-3); padding-right: var(--s-3); }
 
+/* 正文（画布 3:239）：820 列，块间 gap 22 → 24（近档，刚好与页内其他块间距同一档）。
+   它不再是白卡 —— 画布上正文直接坐在页底色上，只有引文 / 速览 / 读完卡三块有底色。
+   块间距交给 flex gap 之后，段落自己不再带下边距（否则末段会多出一份 24px）。 */
 .reading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  position: relative;
   max-width: 100%;
-  margin: var(--s-4) auto var(--s-5);
-  padding: var(--s-6);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
   font-size: var(--font-body); /* 默认字号；JS 通过内联样式覆盖 */
 }
-.reading-title {
-  font-size: var(--font-title-l);
-  margin: var(--s-3) 0 var(--s-4);
-  line-height: var(--line-heading);
-  text-align: center;
-  letter-spacing: 0.01em; /* 编辑部气质：标题微加字距 */
+.reading-para { margin: 0; line-height: var(--line-reading); text-indent: 2em; }
+/* 金句引文（画布 3:240）：min-h 100 · 圆角 10 · sunken 底 · 左 3px accent 竖线 ·
+   内距 16/20/16/17（竖线自己占 3px，所以文字离左边缘仍是 20）· 20px 衬线 Medium。
+   行高 34 = 20 × --line-ui，与画布的固定 32 差 2px —— 不为这一处再塞一个比例档。 */
+.rd-quote {
+  display: flex;
+  min-height: 100px;
+  border-radius: var(--r-md);
+  background: var(--surface-2);
 }
-.reading-para { margin: 0 0 var(--s-4); line-height: var(--line-reading); text-indent: 2em; }
-.reading blockquote {
-  margin: var(--s-3) 0;
-  padding: var(--s-3) var(--s-4);
-  background: var(--accent-soft);
+.rd-quote blockquote {
+  margin: 0;
+  padding: 16px 20px 16px 17px;
   border-left: 3px solid var(--accent);
-  border-radius: 0 var(--r-sm) var(--r-sm) 0;
-  color: var(--sub);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: var(--font-title-s);
+  font-weight: 500;
+  line-height: var(--line-ui);
 }
+/* 读完卡（画布 3:269）：圆角 14 · pad 20 · sunken 底；
+   画布把它排成「说明在左、按钮组在右」的一行，窄屏自然折成两行。 */
+.rd-done {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-xl);
+  border-radius: var(--r-lg);
+  background: var(--surface-2);
+}
+.rd-done__text { margin: 0; font-size: var(--font-meta); line-height: var(--line-ui); color: var(--sub); }
+.rd-done__acts { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+/* 「回到顶部」是 <a>，与旁边的收藏胶囊并排；不给它同一套高度会明显错位 */
+.rd-top {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--surface);
+  color: var(--primary);
+  font-size: var(--font-meta);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.rd-top:hover { border-color: var(--primary); }
 
 mark { background: transparent; color: inherit; border-radius: 2px; padding: 0 2px; }
 mark.hl-yellow { background: var(--hl-yellow); }
 mark.hl-green { background: var(--hl-green); }
 mark.hl-underline { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 mark.hl-bold { font-weight: 700; }
-.ai-viewpoint { font-weight: 700; }
-.ai-exam-point {
-  background-image: linear-gradient(transparent 56%, var(--hl-glow) 56%);
-}
+/* 标注片段三色（画布 3:254 / 3:257 / 3:260 考点、3:263 术语）：
+   三者在画布上是**同一种做法** —— 整块底色（与该组标签同一个色）+ 圆角 3 +
+   上下 4px、左右 2px 内距。原先线上是三套不同做法（考点半高荧光笔、观点只加粗、
+   术语一道下划线），跟画布根本不是一回事，所以这里整段改写。
+   字色取 --highlight-on-highlight：「压在标注色上」的那一支。 */
+.ai-exam-point,
+.ai-viewpoint,
 .ai-term {
   position: relative;
-  box-shadow: inset 0 -2px var(--primary);
+  padding: 4px 2px;
+  border-radius: 3px;
+  color: var(--highlight-on-highlight);
 }
+.ai-exam-point { background: var(--hl-yellow); }
+.ai-viewpoint { background: var(--hl-green); }
+.ai-term { background: var(--hl-term); }
 /* 关系标注（LiquidText 式：中心句 [ ] + 双模式箭头，阅读页「连线」开关控制，默认关闭）
    overlay 向左扩 64px 作为连线走廊；默认只显示淡括号，hover/点击中心句时该簇加深并显示箭头 */
 .reading { position: relative; }
@@ -970,14 +1173,23 @@ span.rel-flash { background: var(--accent-soft); border-radius: 3px; }
   text-underline-offset: 2px;
 }
 .ai-term[data-explanation] { cursor: help; outline-offset: 3px; }
-/* 术语收藏（0018）：整个术语可点击；收藏后金色高亮 + 👻/😃 状态 */
+/* 术语收藏（0018）：整个术语可点击。底色已经在承载「这是术语」，
+   收藏态就只在下面加一道 accent 实线，不再换底色 ——
+   换底色会让「这是术语」和「这是我收的」两个信号互相打架。 */
 [data-term-text] { cursor: pointer; }
-.ai-term.term-faved {
-  background: var(--accent-soft);
-  box-shadow: inset 0 -2px var(--accent);
-  border-radius: 3px;
+.ai-term.term-faved { box-shadow: inset 0 -2px var(--accent); }
+/* 收藏角标：内联书签矢量（形状取自画布底导收藏格 3:1523，同源缩到 0.7em）。
+   currentColor 继承文字色，所以压在哪个底色上都跟着走。
+   原先这里是个 emoji —— 彩色位图跟不了令牌、切主题不跟随、三端形状还不一样。 */
+.term-fav-badge {
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  margin-left: 3px;
+  vertical-align: baseline;
+  color: var(--accent);
 }
-.term-fav-badge { font-size: 0.72em; margin-left: 2px; font-style: normal; }
+.term-fav-badge svg { display: block; width: 100%; height: 100%; }
 
 /* 带注释/解释的片段：悬停出释义 tooltip（不再显示 ⭐ 角标，2026-08-20 去掉） */
 [data-explanation] {
@@ -1051,33 +1263,39 @@ mark.hl-flash { animation: hl-flash 0.45s ease-in-out 2; }
   50% { opacity: 0.35; }
 }
 
+/* 划选工具条（画布 3:246）：h34 · pad 0 14 · gap 14 · 圆角 999 · 白底 + 描边 · 12px 纯文字。
+   画布上它是一枚细长的文字胶囊，不是一块按钮面板 —— 所以去掉按钮自己的底色与描边，
+   只剩文字本身（hover 换色即可）。 */
 .hl-toolbar {
   position: fixed;
   z-index: 100;
   display: flex;
-  gap: 2px;
-  padding: 4px;
+  align-items: center;
+  gap: var(--s-4);
+  height: 34px;
+  padding: 0 14px;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--r-md);
+  border-radius: var(--r-full);
   box-shadow: var(--shadow);
   max-width: calc(100vw - 16px);
   overflow-x: auto;
 }
 .hl-toolbar[hidden] { display: none; }
 .hl-toolbar button {
-  min-height: 44px;
-  padding: 0 10px;
+  padding: 0;
   border: none;
   background: transparent;
-  border-radius: var(--r-sm);
+  border-radius: var(--r-xs);
   cursor: pointer;
-  font-size: var(--font-meta);
+  font-size: var(--font-caption);
   font-family: inherit;
   color: var(--sub);
   white-space: nowrap;
 }
-.hl-toolbar button:hover { background: var(--surface-2); }
+.hl-toolbar button:hover { color: var(--primary); }
+/* 「AI 解释」是品牌色 Medium（画布 3:250），其余项次级色 Regular（3:251） */
+.hl-toolbar button[data-act="explain"] { color: var(--primary); font-weight: 500; }
 
 .explain-pop {
   position: fixed;
@@ -1243,8 +1461,6 @@ blockquote {
   .nav .nav-btn:hover { background: var(--surface-2); color: var(--ink); }
   .theme-toggle { min-height: 44px; }
   .note-actions button { min-height: 44px; }
-  .ai-node { min-height: 44px; }
-  .ai-quota-action { min-height: 44px; }
   .wrap { max-width: 100%; }
   /* 首页横带：移动端收窄内边距；头条/次级卡与月份卡改为单列 */
   .home-hero__in, .band, .foot-in { padding: var(--s-5) var(--s-4); }
@@ -1255,53 +1471,44 @@ blockquote {
   .month-card { flex: 1 1 100%; min-height: 0; }
   .hist-date { width: 84px; }
   .hist-title { font-size: var(--font-meta); }
-  .reading-head, .reading { padding: var(--s-4); }
-  .reading-title { font-size: var(--font-title-m); }
-  .read-actions { gap: var(--s-2); }
-  /* P3：阅读高频操作沉底（单手可达）；tabbar 上方两行 */
-  .read-toolbar {
+  /* 阅读页：64px 的左右内边距在 390 上留不下内容宽度，收到 16（与其他 __in 一致）；
+     820 的定宽列本来就是 max-width:100%，不用另改。 */
+  .rd-head,
+  .rd-body { padding-left: var(--s-4); padding-right: var(--s-4); }
+  .rd-title { font-size: var(--font-title-m); }
+  .ai-brief,
+  .rd-done { padding: var(--s-4); }
+  /* 速览条目并在一行里，是 inline 流的点击目标。给它加竖向内距把可点区撑到 40px 左右 ——
+     画布上这些条目也是纯文字，但画布是鼠标环境，手指需要更大的靶子。 */
+  .ai-item { padding: var(--s-2) 0; }
+  /* 工具条在窄屏沉到 Tab 栏上方（Tab 栏 56 + 自身 40 = 96）；
+     读长文时不用滚回顶部改字号。桌面不这样做 —— 画布上三个胶囊是一行并排的。 */
+  .rd-tools {
     position: fixed;
-    left: 8px;
-    right: 8px;
+    left: var(--s-2);
+    right: var(--s-2);
     bottom: calc(64px + env(safe-area-inset-bottom));
     z-index: 80;
-    margin: 0;
+    max-width: 100%;
     overflow-x: auto;
-    flex-wrap: nowrap;
     justify-content: flex-start;
     box-shadow: var(--shadow);
   }
-  .reader-mode {
+  .rd-mode {
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
     bottom: calc(112px + env(safe-area-inset-bottom));
     z-index: 80;
   }
-  .read-toolbar { max-width: 100%; }
+  /* 悬浮工具条在窄屏要够手指点，画布上的 34px 是桌面尺寸 */
+  .hl-toolbar { height: auto; }
+  .hl-toolbar button { min-height: 44px; }
+  /* 正文给沉底的工具条让位（工具条底 64 + 高 40 + 一点间隙），
+     否则滚到底时读完卡会被压在工具条下面。 */
+  .rd-body { padding-bottom: calc(104px + var(--s-5) + env(safe-area-inset-bottom)); }
   .annotation-tip { left: 16px; right: 16px; max-width: none; }
 }
-
-/* ===== AI 解析额度指示器（阅读页常驻）===== */
-.ai-quota {
-  display: flex;
-  align-items: center;
-  gap: var(--s-2);
-  margin-top: var(--s-3);
-  font-size: var(--font-meta);
-  color: var(--sub);
-}
-.ai-quota-action {
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--primary);
-  border-radius: var(--r-full);
-  padding: 3px 12px;
-  font-size: var(--font-caption);
-  cursor: pointer;
-  font-family: inherit;
-}
-.ai-quota-action:hover { border-color: var(--primary); }
 
 /* ===== 邀请码弹窗 ===== */
 .invite-modal {
@@ -1404,15 +1611,16 @@ a.pick-lead:active,
 a.pick-card:active,
 a.month-card:active,
 a.hist-row:active,
+a.rd-top:active,
+a.rd-back:active,
 summary:active,
-.q-opt:active:not(.answered),
-.ai-node:active:not(.ai-node-static) {
+.q-opt:active:not(.answered) {
   transform: scale(0.97);
 }
 
 /* 交互元素统一过渡（状态指示：border/color/背景/阴影 160ms ease-out） */
-.q-opt, .theme-toggle, .read-fav, .fav-btn, .wq-del,
-.ai-node, .ai-quota-action, .nav-logout, .day-row, .reader-mode button,
+.q-opt, .theme-toggle, .rd-fav, .fav-btn, .wq-del,
+.ai-item, .rd-quota__act, .rd-mode button, .nav-logout, .day-row,
 .note-actions button {
   transition: transform var(--dur-sm) var(--ease-out), border-color var(--dur-sm) var(--ease-out),
     color var(--dur-sm) var(--ease-out), background-color var(--dur-sm) var(--ease-out),

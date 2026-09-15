@@ -64,7 +64,7 @@ test("阅读模式切换展示三类 AI 标注并支持术语 hover/focus", asyn
   await expect(term).toHaveAttribute("data-explanation", explanation);
   await term.hover();
   await expect.poll(() => term.evaluate((element) => getComputedStyle(element, "::after").visibility)).toBe("visible");
-  await page.locator(".reading-title").hover();
+  await page.locator(".rd-title").hover();
   await expect.poll(() => term.evaluate((element) => getComputedStyle(element, "::after").visibility)).toBe("hidden");
   await term.focus();
   await expect(term).toBeFocused();
