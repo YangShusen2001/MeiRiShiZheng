@@ -125,6 +125,41 @@
   .kg-row:hover { background: var(--kg-surface-alt); }
   .kg-row.on { background: var(--kg-brand-soft); }
 
+  /* ===== 13 屏：AI 审核与回退（画布 3:1367）===== */
+  /* 视图容器：面板区 pad 24/24/32 */
+  .kg-view { padding: 24px 24px 32px; }
+  .kg-view[hidden] { display: none; }
+  /* 面板（画布 3:1382）：pad 24 · 圆角 14 · gap 16 */
+  .kg-panel { display: flex; flex-direction: column; gap: 16px; padding: 24px; }
+  .kg-panel__head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .kg-panel__t { margin: 0; font-family: var(--kg-font-family-serif); font-size: var(--kg-font-title-s); font-weight: 700; color: var(--kg-ink); }
+  .kg-panel__meta { font-size: var(--kg-font-caption); color: var(--kg-mut); }
+  .kg-panel__acts { display: flex; flex-wrap: wrap; gap: 10px; }
+  /* 面板按钮（画布 3:1387–3:1391）：h36 · pad 0 16 · 圆角 8，三种底（品牌 / success / danger 描边） */
+  .kg-act { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: var(--kg-radius-sm); border: 0; font-family: inherit; font-size: var(--kg-font-caption); font-weight: 500; cursor: pointer; }
+  .kg-act--brand { background: var(--kg-brand); color: var(--kg-panel-strong); }
+  .kg-act--ok { background: var(--kg-success); color: var(--kg-panel-strong); }
+  .kg-act--danger { background: transparent; border: 1px solid var(--kg-danger); color: var(--kg-danger); }
+  .kg-act[disabled] { opacity: 0.55; cursor: default; }
+  /* 判定行（画布 3:1395）：pad 14 · 圆角 10 · 底 surface-alt · gap 6 */
+  .kg-judge { display: flex; flex-direction: column; gap: 6px; padding: 14px; border-radius: var(--kg-radius-md); background: var(--kg-surface-alt); }
+  .kg-judge + .kg-judge { margin-top: 12px; }
+  .kg-judge__top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .kg-judge__src { font-size: var(--kg-font-caption); color: var(--kg-mut); }
+  .kg-judge__tag { display: inline-flex; align-items: center; height: 22px; padding: 0 10px; border-radius: var(--kg-radius-full); font-size: var(--kg-font-caption); font-weight: 500; }
+  /* 判定色调：全部取**已评审的标注色**，不新增色值 */
+  .kg-judge__tag--ok { background: var(--kg-highlight-viewpoint); color: var(--kg-ink); }
+  .kg-judge__tag--warn { background: var(--kg-highlight-exam-point); color: var(--kg-ink); }
+  .kg-judge__tag--bad { background: var(--kg-highlight-figure); color: var(--kg-ink); }
+  .kg-judge__tag--info { background: var(--kg-highlight-term); color: var(--kg-ink); }
+  .kg-judge__tag--muted { background: var(--kg-sunken); color: var(--kg-sub); }
+  .kg-judge__title { font-size: var(--kg-font-meta); font-weight: 500; color: var(--kg-ink); }
+  .kg-judge__why { font-size: var(--kg-font-caption); line-height: 20px; color: var(--kg-sub); }
+  /* 「已应用的改动」（画布 3:1416）：pad 14 · 圆角 10 · 底 brand-soft */
+  .kg-diff { margin-top: 12px; padding: 14px; border-radius: var(--kg-radius-md); background: var(--kg-brand-soft); }
+  .kg-diff__t { font-size: var(--kg-font-caption); font-weight: 500; color: var(--kg-brand-ink); }
+  .kg-diff__row { display: flex; gap: 8px; margin-top: 8px; font-size: var(--kg-font-caption); color: var(--kg-brand-ink); }
+
   /* 画布的后台是**全宽**布局（1440 边到边，只留 24 内边距）—— 取消 Tabler 容器的居中限宽与默认外边距 */
   .page-wrapper { padding: 0; }
   .page-body { margin: 0; padding: 0; }
@@ -162,19 +197,7 @@
       <input type="date" id="date" class="kg-chip">
       <button class="kg-btn" id="fetch">抓取</button>
       <button class="kg-btn" id="reanalyze">补跑 AI</button>
-        <div class="nav-dropdown" id="drop-review">
-          <button class="kg-btn kg-btn--primary" id="review-agent">AI 审核</button>
-          <div class="dropdown-panel config-panel" id="review-panel">
-            <h3>AI 审核（判 + 改，可回退）</h3>
-            <div class="row">
-              <button class="btn btn-primary" id="review-run">开始 AI 审核</button>
-              <button class="btn btn-success" id="review-apply">应用审核结果</button>
-              <button class="btn btn-outline-danger" id="review-rollback">回退</button>
-            </div>
-            <div id="review-body" style="max-height:320px;overflow:auto;margin-top:12px"></div>
-            <div id="review-diff" style="max-height:200px;overflow:auto;margin-top:12px"></div>
-          </div>
-        </div>
+        <button class="kg-btn kg-btn--primary" id="review-agent">AI 审核</button>
         <div class="nav-dropdown" id="drop-fonts">
           <button class="kg-btn" id="fonts">字体</button>
           <div class="dropdown-panel font-panel" id="font-panel">
@@ -256,6 +279,28 @@
           </div>
           <button type="button" class="filter-btn" id="refresh">刷新</button>
         </div>
+
+        <!-- 13 屏：AI 审核与回退（画布 3:1367）—— 顶栏「AI 审核」打开的全屏视图。
+             原来它是顶栏里的 hover 下拉（420px 宽的面板），画布把这屏画成独立视图。
+             ⚠️ 原有 id（review-run / review-apply / review-rollback / review-body / review-diff）一个不改 —— JS 全靠它们。 -->
+        <section class="kg-view" id="kg-view-review" hidden>
+          <div class="kg-card">
+            <div class="kg-panel">
+              <div class="kg-panel__head">
+                <h2 class="kg-panel__t">AI 审核（判 + 改，可回退）</h2>
+                <span class="kg-panel__meta" id="review-meta"></span>
+              </div>
+              <div class="kg-panel__acts">
+                <button class="kg-act kg-act--brand" type="button" id="review-run">开始 AI 审核</button>
+                <button class="kg-act kg-act--ok" type="button" id="review-apply">应用审核结果</button>
+                <button class="kg-act kg-act--danger" type="button" id="review-rollback">回退</button>
+              </div>
+              <div class="kg-card__line"></div>
+              <div id="review-body"></div>
+              <div id="review-diff"></div>
+            </div>
+          </div>
+        </section>
 
         <div class="kg-body">
           <!-- 待审队列（画布 3:1316）：620 定宽 -->
@@ -888,29 +933,31 @@ $("invite-gen").onclick = async () => {
 };
 
 // —— AI 审核（Phase 1：只判不改，后台线程 + 轮询）——
-const VERDICT_LABEL = { keep: "✅ 保留", rewrite: "✏️ 建议改写", drop: "🗑️ 建议删除", rerun: "🔁 建议补跑", needs_human: "⚠️ 待人工" };
-const VERDICT_BADGE = { keep: "bg-success", rewrite: "bg-warning", drop: "bg-danger", rerun: "bg-info", needs_human: "bg-secondary" };
+// 判定标签按 verdict 取**已评审的标注色**做软底（不新增色值）：keep 绿 / rewrite 黄 / drop 粉 / rerun 蓝 / 其余米。
+// 顺带去掉原来的 emoji —— 画布上后台一个 emoji 都没有。
+const VERDICT_LABEL = { keep: "保留", rewrite: "建议改写", drop: "建议删除", rerun: "建议补跑", needs_human: "待人工" };
+const VERDICT_TONE = { keep: "ok", rewrite: "warn", drop: "bad", rerun: "info", needs_human: "muted" };
 
 function renderReview(report) {
   const rows = (report.decisions || []).map((d) => {
-    const badge = VERDICT_BADGE[d.verdict] || "bg-secondary";
+    const tone = VERDICT_TONE[d.verdict] || "muted";
     const label = VERDICT_LABEL[d.verdict] || d.verdict;
     let extra = "";
     if (d.verdict === "rewrite") {
-      if (d.newTitle) extra += `<div style="font-size:12px;color:var(--tblr-primary);margin-top:2px">新标题：${esc(d.newTitle)}</div>`;
-      if (d.newSummary) extra += `<div style="font-size:12px;color:var(--tblr-primary);margin-top:2px">新摘要：${esc(d.newSummary)}</div>`;
+      if (d.newTitle) extra += `<div class="kg-judge__why">新标题：${esc(d.newTitle)}</div>`;
+      if (d.newSummary) extra += `<div class="kg-judge__why">新摘要：${esc(d.newSummary)}</div>`;
     }
-    return `<div style="padding:8px 0;border-bottom:1px solid var(--tblr-border-color)">
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="badge ${badge}">${label}</span>
-        <span class="badge bg-light text-dark">${d.score} 分</span>
+    return `<div class="kg-judge">
+      <div class="kg-judge__top">
+        <span class="kg-judge__src">${esc(d.source || d.section || "")}</span>
+        <span class="kg-judge__tag kg-judge__tag--${tone}">${label} · ${d.score} 分</span>
       </div>
-      <div style="font-size:13px;margin-top:4px">${esc(d.title)}</div>
-      <div style="font-size:12px;color:var(--tblr-muted);margin-top:2px">${esc(d.reason)}</div>
+      <div class="kg-judge__title">${esc(d.title)}</div>
+      <div class="kg-judge__why">理由：${esc(d.reason)}</div>
       ${extra}
     </div>`;
   }).join("");
-  $("review-body").innerHTML = rows || '<p style="font-size:13px;color:var(--tblr-muted)">暂无判定结果</p>';
+  $("review-body").innerHTML = rows || '<p class="kg-judge__why">暂无判定结果</p>';
 }
 
 $("review-run").onclick = async () => {
@@ -949,21 +996,24 @@ $("review-run").onclick = async () => {
 function renderDiff(changes) {
   const rows = (changes || []).map((c) => {
     if (c.verdict === "drop") {
-      return `<div style="font-size:12px;color:var(--tblr-danger);padding:4px 0;border-bottom:1px dashed var(--tblr-border-color)">🗑️ 已删除：${esc(c.title)}（${esc(c.reason)}）</div>`;
+      return `<div class="kg-diff__row">已删除：${esc(c.title)}（${esc(c.reason)}）</div>`;
     }
     if (c.verdict === "rewrite") {
-      let line = `<div style="font-size:12px;padding:4px 0;border-bottom:1px dashed var(--tblr-border-color)">✏️ 改写：${esc(c.title)}`;
+      let line = `<div class="kg-diff__row">改写：${esc(c.title)}`;
       if (c.before.title !== c.after.title) {
-        line += `<div style="color:var(--tblr-danger)">旧标题：${esc(c.before.title)}</div><div style="color:var(--tblr-primary)">新标题：${esc(c.after.title)}</div>`;
+        line += `<span>旧标题 ${esc(c.before.title)} → 新标题 ${esc(c.after.title)}</span>`;
       }
       if (c.before.summary !== c.after.summary) {
-        line += `<div style="color:var(--tblr-danger)">旧摘要：${esc(c.before.summary)}</div><div style="color:var(--tblr-primary)">新摘要：${esc(c.after.summary)}</div>`;
+        line += `<span>旧摘要 ${esc(c.before.summary)} → 新摘要 ${esc(c.after.summary)}</span>`;
       }
       return line + "</div>";
     }
     return "";
   }).join("");
-  $("review-diff").innerHTML = rows ? '<h3 style="font-size:13px;margin:0 0 8px">已应用的改动</h3>' + rows : "";
+  // 「已应用的改动」（画布 3:1416）：整块 brand-soft 底，块内是若干改动行
+  $("review-diff").innerHTML = rows
+    ? `<div class="kg-diff"><div class="kg-diff__t">已应用的改动（可整批回退）</div>${rows}</div>`
+    : "";
 }
 
 $("review-apply").onclick = async () => {
@@ -1013,6 +1063,18 @@ $("refresh").onclick = async () => {
   if (!d) return;
   await loadDigest(d);
   log(`已刷新 ${d}`);
+};
+
+// 13 屏：顶栏「AI 审核」改为打开**全屏视图**（画布 3:1367）。
+// 原来它是 hover 展开的 420px 下拉面板；画布把这屏画成独立视图，所以这里换成 toggle ——
+// 打开时藏起主工作区（过滤器行 + 两栏），再点一次回工作台。按钮文案跟着变，避免「怎么回去」的困惑。
+$("review-agent").onclick = () => {
+  const view = $("kg-view-review");
+  const show = view.hidden;
+  view.hidden = !show;
+  document.querySelector(".kg-filters").hidden = show;
+  document.querySelector(".kg-body").hidden = show;
+  $("review-agent").textContent = show ? "返回工作台" : "AI 审核";
 };
 
 (async () => {
