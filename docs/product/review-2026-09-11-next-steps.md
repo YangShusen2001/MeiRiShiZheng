@@ -234,6 +234,10 @@
 
 **结论：`REL-PRODUCTION-DEPLOYMENT` 现在就补证据关闭；`REL-NEWSLETTER-PROVIDER` 应降级/移出当前发布门禁。**
 
+> **✅ 已落地（2026-09-16）**：`REL-PRODUCTION-DEPLOYMENT` 已实测通过并 `closed`（证据 `docs/release-verification-2026-09-16.md`）；`REL-NEWSLETTER-PROVIDER` 已由 `high` 降为 `medium`，`status` 仍 `open`、`closeEvidence` 仍 `null`（不伪造证据）。`pnpm release:check` 现 exit 0，`daily.yml` 的构建与 Pages 部署步骤恢复执行。
+>
+> 落地时另发现并修复了一处**独立缺陷**：`scripts/smoke-release.mjs` 硬要求首页含 `/read/` 链接，而零选日首页按设计没有 —— 会让 `daily.yml` 最后一步（部署后冒烟）在零选日必红。已改为首页无链接时退回 `/daily/<日期>/` 取链接，并补了三条 fixture 测试。
+
 - **依据**（`docs/release-readiness.json` + `scripts/release-gate.mjs`）：
   - 门禁逻辑：`status==open` 的 high/critical 直接失败；`closed` 但 `closeEvidence` 不完整也失败（`verifiedAt/verifiedBy/evidence` 三字段缺一不可）。
   - `REL-PRODUCTION-DEPLOYMENT`：生产**实测可用**（`www.meirishizheng.cn` / `api.meirishizheng.cn` 在线），`closeCriteria` 是"记录可审计证据"。**这是"账没记"，不是"事没做"** → 正确处置：跑一遍冒烟（`pnpm run test:smoke`）+ 部署记录，回填 `closeEvidence`，关闭。
@@ -281,7 +285,7 @@
 | # | 事项 | 我的推荐 | 理由 |
 |---|---|---|---|
 | P1 | **是否接受"先打穿管道产能、暂缓一切端功能"？** | ✅ **接受**（端侧首页改动除外，可与迭代 1 并行） | 卡池 54 张按每天 5 张约 10–11 天用尽；端功能再多也服务不了会枯竭的数据源。但首页改动是**减项**且**不白屏**，无需为它设硬门槛 |
-| P2 | **`REL-NEWSLETTER-PROVIDER` 处置** | 降级为 medium / 移出当前 release | 不在关键路径，不该阻塞主干 |
+| P2 | **`REL-NEWSLETTER-PROVIDER` 处置** | 降级为 medium / 移出当前 release | 不在关键路径，不该阻塞主干 · **✅ 2026-09-16 已按此落地** |
 | P3 | **"每日 2–5 篇"的取舍尺度** | 取 **2 篇**（非 5 篇），宁少勿多 | 自诊断 §7.3"录取率 2.13% 的考试里'更多'是负价值"；2 篇更贴合"午休 25 分钟"场景 |
 | P4 | **App vs Web 工程投入比** | 定位 App 主力，**工程验证留在 Web/管道** | 端侧 CLI 签名不可用，迭代慢循环不适合做策略试验 |
 | P5 | **地域切口是否投入** | **暂不**，先用埋点收集数据 | 无数据支撑，避免过早收窄 |

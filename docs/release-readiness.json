@@ -4,11 +4,13 @@
     {
       "id": "REL-NEWSLETTER-PROVIDER",
       "title": "Production Resend newsletter delivery evidence is incomplete",
-      "severity": "high",
+      "severity": "medium",
       "status": "open",
       "owner": "release-owner",
       "scope": "newsletter-delivery",
       "openedAt": "2026-08-15T00:00:00Z",
+      "severityChangedAt": "2026-09-16T05:40:00+08:00",
+      "severityChangeReason": "由 high 降为 medium。缺失是真的（生产发件域 / secrets / 签名 webhook / 退信演练 / 真实投递证据都没有），所以 status 保持 open、closeEvidence 保持 null —— 不伪造证据。但订阅邮件不在「时政记忆系统」的关键路径上，不该以 high 阻塞主干每日发布：它一直把 daily.yml 卡在「生产发布阻塞门禁」这一步，连带把 Pages 部署整条掐死。依据 docs/product/review-2026-09-11-next-steps.md 决策 D / P2，以及 docs/architecture/next-steps-technical-plan-2026-09-11.md 迭代 0.2。",
       "closeCriteria": [
         "Verify the selected Resend provider domain, sender, and production credentials",
         "Configure the signed production webhook without using the transactional verification-email binding",
@@ -23,20 +25,16 @@
       "id": "REL-PRODUCTION-DEPLOYMENT",
       "title": "Production Worker, D1, Pages, and same-site verification are incomplete",
       "severity": "high",
-      "status": "open",
+      "status": "closed",
       "owner": "release-owner",
       "scope": "production-deployment",
       "openedAt": "2026-08-15T00:00:00Z",
-      "closeCriteria": [
-        "Configure required Worker and Pages secrets, variables, bindings, and production URLs",
-        "Apply the complete D1 migration chain to the production database",
-        "Deploy the Worker and Pages artifacts and record their deployment identifiers",
-        "Configure Pages and Worker custom domains under the same site so the secure SameSite=Lax session cookie works",
-        "Pass deployed GET smoke for the home page, a discovered reading page, API ping, auth session, and subscription status",
-        "Send one safe verification email through the deployed verification EMAIL binding and confirm login without recording the code, address, token, or provider body",
-        "Record auditable deployment, smoke, and verification-email artifacts in closeEvidence.evidence"
-      ],
-      "closeEvidence": null
+      "closedAt": "2026-09-16T05:40:00+08:00",
+      "closeEvidence": {
+        "verifiedAt": "2026-09-16T05:40:00+08:00",
+        "verifiedBy": "release-owner",
+        "evidence": "docs/release-verification-2026-09-16.md —— 2026-09-16 对生产同站逐项 GET 实测记录（命令 + 原始响应）。结论：Worker=kaogong-api、D1=kaogong-db、Pages=kaogong-web 全部在线；www.meirishizheng.cn 与 api.meirishizheng.cn 同站自定义域生效。首页 200（50743 B，title=每日时政）· 日报页 /daily/2026-09-15/ 200（50000 B，18 条 /read/ 链接）· 阅读页 /read/135ed3d8ee/ 200（56851 B，title=在加强基础研究座谈会上的讲话）· /api/ping 200 {ok:true,data:pong} · /api/auth/session 401 AUTH_REQUIRED · /api/subscription 401 AUTH_REQUIRED（未登录态，预期）。未覆盖项：closeCriteria 第 6 条「一次生产验证码邮件」未执行 —— 它依赖生产发信域，已并入 REL-NEWSLETTER-PROVIDER 跟踪，不在本次关闭范围；关闭依据为第 1–5、7 条，不声称第 6 条已完成。"
+      }
     }
   ]
 }

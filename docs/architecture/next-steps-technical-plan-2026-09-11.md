@@ -255,7 +255,7 @@ def _observing_call(items, captured):
 | 目标 | 文件/操作 | 验收 | 成本 | 需用户？ |
 |---|---|---|---|---|
 | 0.1 推送 56 个提交 | `git push origin public-release` | `git log origin/public-release..HEAD` 为 0 | 5 min | ✅ |
-| 0.2 修 release 门禁 | `docs/release-readiness.json`（`REL-NEWSLETTER-PROVIDER` 降 medium/移出；`REL-PRODUCTION-DEPLOYMENT` 补 `closeEvidence` 三字段） | `pnpm release:check` exit 0 | 0.5 天 | 部分 |
+| ✅ 0.2 修 release 门禁（**2026-09-16 完成**） | `docs/release-readiness.json`（`REL-NEWSLETTER-PROVIDER` 降 medium/移出；`REL-PRODUCTION-DEPLOYMENT` 补 `closeEvidence` 三字段） | `pnpm release:check` exit 0 | 0.5 天 | 部分 |
 | 0.3 清 `_tmp_*` 残留 | 删根目录 3 个 `_tmp_*`（**已实测存在**） | `ls -d _tmp_*` 无输出；`pnpm -r test` 假失败清零 | 10 min | 否 |
 | 0.4 修 README 失效截图 | `README.md:26,30` 引用的 `docs/screenshots/*.png`（**实测目录不存在**）→ 删引用或补图 | README 无失效引用 | 15 min | 否 |
 | 0.5 预防 | `.gitignore` 加 `_tmp_*/` | 下次残留不进 `git status` | 5 min | 否 |
@@ -492,7 +492,7 @@ classDiagram
 | U6 | 卡片形态改造批次位置 | **独立于 P0，T02 产出样本后启动** | 契约变更会打断 P0 修复测试基线（§4.4） |
 | U7 | 存量 54 张卡处置 | ✅ **双轨保留，标 `kind='qa'`** | 人工策展资产有价值；调优期作兜底 |
 | U8 | `relation_ai.py` 是否补契约测试 | ❌ **不做** | 该能力已于 2026-08-22 停用（`curation.py:422-423`） |
-| U9 | `REL-NEWSLETTER-PROVIDER` 处置 | **降级 medium / 移出当前门禁** | 不在关键路径，不该阻塞主干 |
+| U9 | `REL-NEWSLETTER-PROVIDER` 处置 | **降级 medium / 移出当前门禁** | 不在关键路径，不该阻塞主干 · **✅ 2026-09-16 已按此落地** |
 
 ---
 

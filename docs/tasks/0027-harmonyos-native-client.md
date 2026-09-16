@@ -120,6 +120,14 @@ GitHub `main` 的每日内容是 **ADR 0007 已退役的自动聚合管道**输�
 - 关闭方式（需用户操作，本机 git 协议不通且无 GitHub token，无法代做）：
   GitHub 仓库 → Actions → 左侧 `daily` → **Disable workflow**。
 
+> **2026-09-16 更新：未关闭该工作流，改为修门禁（更优解）。**
+> 上面的结论「从未真正部署过」需修正：`daily.yml` 此前是**正常部署过**的，只是自 2026-09-11 起被
+> `release:check` 卡住。关掉它等于放弃自动发布，所以改为处置阻塞源：`REL-PRODUCTION-DEPLOYMENT`
+> 实测通过并 `closed`、`REL-NEWSLETTER-PROVIDER` 降为 `medium`（`status` 仍 `open`，不伪造证据）。
+> 现已 `pnpm release:check` exit 0，构建与 Pages 部署步骤恢复。详见 `docs/release-verification-2026-09-16.md`。
+> 另：本次还修了 `scripts/smoke-release.mjs` 的一处判据缺陷 —— 它硬要求首页含 `/read/` 链接，
+> 而零选日首页按设计没有，会让 `daily.yml` 最后一步在零选日必红。
+
 **③ 未提交工作归属 —— 已处置：拆成两个提交入库。**
 
 - 处置前：工作树有 **35 个已跟踪文件的修改 + 大量未跟踪资源**（185 支箭头 SVG、`vendor/`、
@@ -242,6 +250,10 @@ release gate blocked:
 
 **凭据情况**：本机 wrangler 已登录（OAuth，账号 `e006b675…`），权限含 **`pages (write)`**，
 技术上可代执行部署；但生产发布按项目规范需先过 `release:check` 或由用户明确授权，故未擅自执行。
+
+> **2026-09-16 更新**：上述门禁阻塞已解除（见本文件前面的更新说明与 `docs/release-verification-2026-09-16.md`）。
+> 线上现状实测为 **2026-09-15 内容**（`/daily/2026-09-15/` 200、`/read/135ed3d8ee/` 200），
+> 而 `origin/main` 已有 `每日更新 2026-09-16` 提交 —— 印证「内容已入库、发布被门禁掐住」这一判断。
 
 ### preview 验证结果：内容通道**服务端已通过**（2026-09-11）
 
