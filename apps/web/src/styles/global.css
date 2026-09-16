@@ -42,6 +42,22 @@
   --hl-term: var(--highlight-term);
   --hl-figure: var(--highlight-figure);
 
+  /* 标注**软底**（AI 标注正文用）：只降 AI 标注的呈现饱和度，不动上面四个原令牌。
+     理由：AI 标注是机器生成的**密集**标记（实测 9 段正文 9 段带标注），
+     满饱和底色会让正文发花；而用户自己的划线（mark.hl-*）是手动、稀疏的主动动作，
+     该保持醒目 ——「机器淡、人工重」这个层级差是有意的，别把两者合并。
+     值不在这里推导，取 tokens.json 的 highlightSoft（保色相、彩度 ×0.55、亮度反解对底 1.18）。
+     ⚠️ 曾用 color-mix 就地混色，锚色取 --surface 比正文底 --bg 更亮 →
+     混出来的底比正文底还亮 1%，标注等于消失。降饱和动的是**彩度**轴，亮度轴得单独解，
+     所以这四个值必须是令牌，不能是混色表达式。 */
+  --hl-yellow-soft: var(--highlight-soft-exam-point);
+  --hl-green-soft: var(--highlight-soft-viewpoint);
+  --hl-term-soft: var(--highlight-soft-term);
+  /* 数字标注（.ai-figure）当前走「左竖条 + 点下划线」而非底色，所以这一支暂时没有使用点。
+     保留是为了四类软底成组（tokens.json 里是一组值、审计四类一起校验、规范页四格一起展示），
+     别当成漏用删掉 —— 手绘化（规范 §8 C 阶段）后它大概率要接上。 */
+  --hl-figure-soft: var(--highlight-soft-figure);
+
   /* 立面三档 */
   --shadow: var(--shadow-card);
   --shadow-sm: var(--shadow-hair);
@@ -572,12 +588,16 @@ p { margin: 0; }
 }
 .card > h2 { font-size: var(--font-title-m); margin-bottom: var(--s-4); }
 
-.section { margin-bottom: var(--s-5); }
+.section { margin-bottom: var(--s-6); }
 .section:last-child { margin-bottom: 0; }
+/* 栏目名。模板渲染的是 <h2>，而这条规则原先只写 h3 → 栏目名一点样式都没吃到，
+   和条目文字长得一模一样（用户 2026-09-16 反馈「文章的划分不是很清晰」）。
+   同时列出 h2/h3：两种标签都命中，避免再因标签改名而静默失效。 */
+.section > h2,
 .section h3 {
   font-size: var(--font-title-s);
   font-family: var(--font-serif);
-  color: var(--ink);
+  color: var(--primary);
   margin-bottom: var(--s-3);
   padding-left: var(--s-3);
   border-left: 3px solid var(--primary);
@@ -585,10 +605,46 @@ p { margin: 0; }
 .section > summary { cursor: pointer; list-style: none; user-select: none; display: flex; align-items: center; gap: var(--s-2); }
 .section > summary::-webkit-details-marker { display: none; }
 .section > summary h3 { display: inline-block; flex: 1; }
-.item { margin-bottom: var(--s-4); }
-.item a { color: var(--ink); font-weight: 500; }
-.item a:hover { color: var(--primary); }
-.item-date { margin-left: var(--s-2); font-size: var(--font-meta); color: var(--mut); }
+
+/* ===== 日报条目（画布：每日日报）=====
+   一条一卡：白底 + 描边 + 圆角。原先条目之间只有空隙、没有任何边界，
+   标题/日期/摘要又是同一色系，整屏看下来是一团文字。
+   样式全部收在 `.section .item` 作用域下 —— `.item-summary` 在阅读页的
+   邀请码弹窗里也在用，不加作用域会连带改掉那边。 */
+.section .item {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: var(--s-4);
+  margin-bottom: var(--s-3);
+  transition: border-color var(--dur-sm) var(--ease-out);
+}
+.section .item:last-child { margin-bottom: 0; }
+.section .item:hover { border-color: var(--primary); }
+.section .item-head { display: flex; align-items: baseline; gap: var(--s-3); }
+.section .item-title { flex: 1 1 auto; min-width: 0; color: var(--ink); font-weight: 500; }
+.section .item-title:hover { color: var(--primary); }
+/* 日期做成胶囊标签：右对齐、下沉底，与标题拉开层级 */
+.section .item-date {
+  flex: 0 0 auto;
+  margin-left: 0;
+  padding: 2px 8px;
+  border-radius: var(--r-sm);
+  background: var(--sunken);
+  color: var(--mut);
+  font-size: var(--font-meta);
+  font-variant-numeric: tabular-nums;
+}
+/* 摘要：左侧细线引导，明确它是标题的从属说明 */
+.section .item-summary {
+  margin: var(--s-3) 0 0;
+  padding-left: var(--s-3);
+  border-left: 2px solid var(--line);
+  color: var(--sub);
+  font-size: var(--font-meta);
+  line-height: var(--line-ui);
+}
+/* 基础 .item-summary 保留给阅读页邀请码弹窗（上面那条是 .section 作用域的日报版） */
 .item-summary { margin: var(--s-1) 0 0; color: var(--sub); font-size: var(--font-meta); }
 .fav-btn {
   border: 1px solid var(--line);
@@ -1132,10 +1188,16 @@ mark.hl-green { background: var(--hl-green); }
 mark.hl-underline { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 mark.hl-bold { font-weight: 700; }
 /* 标注片段三色（画布 3:254 / 3:257 / 3:260 考点、3:263 术语）：
-   三者在画布上是**同一种做法** —— 整块底色（与该组标签同一个色）+ 圆角 3 +
-   上下 4px、左右 2px 内距。原先线上是三套不同做法（考点半高荧光笔、观点只加粗、
-   术语一道下划线），跟画布根本不是一回事，所以这里整段改写。
-   字色取 --highlight-on-highlight：「压在标注色上」的那一支。 */
+   三者在画布上是**同一种做法** —— 整块底色 + 圆角 3 + 上下 4px、左右 2px 内距。
+   原先线上是三套不同做法（考点半高荧光笔、观点只加粗、术语一道下划线），
+   跟画布根本不是一回事，所以这里整段改写。
+   字色取 --highlight-on-highlight：「压在标注色上」的那一支。
+
+   底色改用**软底**而非满饱和令牌（2026-09-16 用户反馈「饱和度不要这么高，尽量和背景贴切」）：
+   AI 标注由机器批量生成、密度高（实测 9 段正文 9 段带标注），满饱和底色会在正文里连成片、
+   把字压得发花。软底 = 保色相、彩度压到原值 55%、亮度反解到「对正文底 --bg 对比度 1.18」，
+   四个值都在 tokens.json 的 highlightSoft 里（生成器出 --highlight-soft-*）。
+   ⚠️ 用户划线 mark.hl-* **仍用原令牌**，两者刻意不共用这个软底：机器淡、人工重。 */
 .ai-exam-point,
 .ai-viewpoint,
 .ai-term {
@@ -1144,9 +1206,9 @@ mark.hl-bold { font-weight: 700; }
   border-radius: 3px;
   color: var(--highlight-on-highlight);
 }
-.ai-exam-point { background: var(--hl-yellow); }
-.ai-viewpoint { background: var(--hl-green); }
-.ai-term { background: var(--hl-term); }
+.ai-exam-point { background: var(--hl-yellow-soft); }
+.ai-viewpoint { background: var(--hl-green-soft); }
+.ai-term { background: var(--hl-term-soft); }
 /* 关系标注（LiquidText 式：中心句 [ ] + 双模式箭头，阅读页「连线」开关控制，默认关闭）
    overlay 向左扩 64px 作为连线走廊；默认只显示淡括号，hover/点击中心句时该簇加深并显示箭头 */
 .reading { position: relative; }
@@ -1172,7 +1234,20 @@ span.rel-flash { background: var(--accent-soft); border-radius: 3px; }
   text-decoration: underline dotted var(--accent) 1.5px;
   text-underline-offset: 2px;
 }
-.ai-term[data-explanation] { cursor: help; outline-offset: 3px; }
+/* 「有 AI 解析的术语」加粗（2026-09-16 用户要求）。
+   `explanation` 在契约里是 **term 独有**字段（contracts/content.ts「仅 term 使用」），
+   所以 `.ai-term` + `[data-explanation]` 两个条件叠起来恰好等于「这个词有 AI 解析」。
+   刻意**只认 data-explanation**（就是 tooltip 的同一个触发器），
+   让「加粗」与「能悬停看释义」永远是同一个信号 —— 不会出现「粗了却点不出释义」。
+   用户自己划线的备注（mark[data-explanation]，不带 ai-term）不加粗：机器淡、人工重。
+   取 600 而非 700：正文 17px/1.8、标注密度高，700 会在整页里结出黑斑。
+   ⚠️ Windows 的 Microsoft YaHei 只有 Regular/Bold，600 会落到 Bold；
+   macOS 的 PingFang SC 有真 Semibold —— 两端都算「加粗」，只是字形略异，可接受。 */
+.ai-term[data-explanation] {
+  cursor: help;
+  outline-offset: 3px;
+  font-weight: 600;
+}
 /* 术语收藏（0018）：整个术语可点击。底色已经在承载「这是术语」，
    收藏态就只在下面加一道 accent 实线，不再换底色 ——
    换底色会让「这是术语」和「这是我收的」两个信号互相打架。 */
@@ -1662,7 +1737,9 @@ summary:active,
 .invite-modal.closing { opacity: 0; }
 .invite-modal.closing .invite-modal-card { opacity: 0; transform: scale(0.96); }
 
-/* ===== 考点卡片复习遮罩（软闸门） ===== */
+/* ===== 今日复习：4 选 1 选择题（形态变更理由见 src/lib/review.ts 顶部注释） =====
+   原先的「翻转卡 + 4 档自评」已换成选择题。选择项用 <button>，
+   **必须显式写 background** —— UA 默认底色是白，只写 border 会在深色主题下露白底。 */
 .review-overlay {
   position: fixed;
   inset: 0;
@@ -1680,7 +1757,9 @@ summary:active,
 .review-overlay[hidden] { display: none; }
 
 .review-card {
-  width: min(560px, 100%);
+  width: min(620px, 100%);
+  max-height: min(86vh, 760px);
+  overflow-y: auto;
   background: var(--surface);
   color: var(--ink);
   border: 1px solid var(--line);
@@ -1705,53 +1784,138 @@ summary:active,
 .review-count { font-variant-numeric: tabular-nums; }
 
 .review-body {
-  min-height: 140px;
   display: flex;
   flex-direction: column;
   gap: var(--s-3);
 }
-.review-question { font-size: var(--font-title-s); line-height: var(--line-ui); font-weight: 600; }
-.review-answer {
-  font-size: var(--font-body);
+
+/* 考点标签：这道题考的是哪一类考点 */
+.review-topic {
+  align-self: flex-start;
+  margin: 0;
+  padding: 2px var(--s-2);
+  border-radius: var(--r-full);
+  background: var(--primary-soft);
+  color: var(--primary-text);
+  font-size: var(--font-caption);
+  line-height: 1.7;
+}
+.review-topic[hidden] { display: none; }
+
+.review-question {
+  font-size: var(--font-title-s);
   line-height: var(--line-ui);
-  color: var(--sub);
-  padding: var(--s-3);
-  background: var(--surface-2);
-  border-radius: var(--r-sm);
+  font-weight: 600;
 }
 
-.review-actions { display: flex; flex-direction: column; gap: var(--s-3); }
-.review-flip {
+/* 提示：点「查看提示」后原地展开在题干下方，不做浮层 */
+.review-hint-text {
+  margin: 0;
+  padding: var(--s-2) var(--s-3);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  background: var(--accent-soft);
+  color: var(--sub);
+  font-size: var(--font-meta);
+  line-height: var(--line-ui);
+}
+.review-hint-text[hidden] { display: none; }
+
+/* —— 选项 —— */
+.review-options { display: flex; flex-direction: column; gap: var(--s-2); }
+
+.review-opt {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
   width: 100%;
   padding: var(--s-3);
-  border: none;
-  border-radius: var(--r-sm);
-  background: var(--primary);
-  color: var(--color-on-brand);
-  font-size: var(--font-meta);
-  cursor: pointer;
-  transition: background 0.15s;
-}
-.review-flip:hover { background: var(--primary-deep); }
-.review-flip[hidden] { display: none; }
-
-.review-grade { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-2); }
-.review-grade[hidden] { display: none; }
-.review-grade button {
-  padding: var(--s-3) var(--s-2);
   border: 1px solid var(--line);
   border-radius: var(--r-sm);
-  background: var(--surface);
+  background: var(--surface); /* 显式写：<button> UA 默认底色是白 */
   color: var(--ink);
+  font-family: inherit;
+  font-size: var(--font-meta);
+  line-height: var(--line-ui);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.review-opt:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-soft); }
+.review-opt:disabled { cursor: default; }
+
+.review-opt__k {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-full);
+  background: var(--sunken);
+  color: var(--sub);
+  font-size: var(--font-caption);
+  font-weight: 600;
+}
+.review-opt__t { flex: 1 1 auto; min-width: 0; }
+
+/* 判定态：正确项恒标绿，选错的那项标红 —— 答错时也要能看见正确答案在哪 */
+.review-opt.is-correct { border-color: var(--green); background: var(--green-soft); }
+.review-opt.is-correct .review-opt__k { background: var(--green); color: var(--color-on-brand); }
+.review-opt.is-wrong { border-color: var(--red); background: var(--red-soft); }
+.review-opt.is-wrong .review-opt__k { background: var(--red); color: var(--color-on-brand); }
+
+/* —— 判题反馈 —— */
+.review-feedback {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-3);
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+}
+.review-feedback[hidden] { display: none; }
+
+.review-verdict {
+  margin: 0;
+  color: var(--green);
+  font-size: var(--font-meta);
+  font-weight: 600;
+}
+.review-verdict.is-wrong { color: var(--red); }
+
+.review-trap,
+.review-analysis {
+  margin: 0;
+  color: var(--sub);
+  font-size: var(--font-meta);
+  line-height: var(--line-ui);
+}
+.review-trap { color: var(--red); }
+.review-trap[hidden] { display: none; }
+
+/* —— 底部动作 —— */
+.review-actions { display: flex; flex-direction: column; gap: var(--s-3); }
+
+.review-hint,
+.review-next {
+  width: 100%;
+  padding: var(--s-3);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  background: var(--surface); /* 同上：显式底色 */
+  color: var(--primary);
+  font-family: inherit;
   font-size: var(--font-meta);
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
-.review-grade button:hover { border-color: var(--primary); color: var(--primary); }
-.review-grade button[data-rating="again"] { color: var(--red); }
-.review-grade button[data-rating="again"]:hover { border-color: var(--red); background: var(--red-soft); }
-.review-grade button[data-rating="easy"] { color: var(--green); }
-.review-grade button[data-rating="easy"]:hover { border-color: var(--green); background: var(--green-soft); }
+.review-hint { border-color: var(--line); color: var(--sub); }
+.review-hint:hover { border-color: var(--primary); color: var(--primary); }
+.review-hint[hidden],
+.review-next[hidden] { display: none; }
+
+.review-next { background: var(--primary); color: var(--color-on-brand); }
+.review-next:hover { background: var(--primary-deep); }
 
 .review-skip {
   align-self: center;
@@ -1764,17 +1928,65 @@ summary:active,
 }
 .review-skip:hover { color: var(--sub); }
 
+/* —— 顶部复习提示条（替代原先的自动弹窗）——
+   刻意**不做 sticky**：顶栏 .top 已是 sticky top:0 / z-index:50，
+   再来一个 sticky 会叠层打架，还要随阅读态高度变化调 top，得不偿失。
+   静态置于顶栏之上，首屏可见即可；滚动后仍可点顶栏常驻的「复习」进入。 */
+.review-notice {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-2) var(--s-5);
+  background: var(--primary-soft);
+  color: var(--primary-text);
+  border-bottom: 1px solid var(--line-soft);
+  font-size: var(--font-meta);
+}
+.review-notice[hidden] { display: none; }
+.review-notice__text { flex: 1 1 auto; min-width: 0; }
+.review-notice__go {
+  flex: none;
+  padding: var(--s-1) var(--s-3);
+  border: 1px solid transparent;
+  border-radius: var(--r-full);
+  background: var(--primary); /* <button> UA 默认底色是白，必须显式写 */
+  color: var(--color-on-brand);
+  font-family: inherit;
+  font-size: var(--font-caption);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.review-notice__go:hover { background: var(--primary-deep); }
+.review-notice__x {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: var(--r-full);
+  background: none;
+  color: var(--primary-text);
+  font-family: inherit;
+  font-size: var(--font-body);
+  line-height: 1;
+  cursor: pointer;
+}
+.review-notice__x:hover { background: var(--primary-soft); }
+
 /* 移动端：全屏卡片 */
 @media (max-width: 640px) {
   .review-overlay { padding: 0; }
   .review-card {
     width: 100%;
     height: 100%;
+    max-height: none;
     border-radius: 0;
     border: none;
     justify-content: center;
     padding: var(--s-6) var(--s-5);
   }
+  .review-notice { padding: var(--s-2) var(--s-4); }
 }
 
 /* ===== 无障碍：尊重系统「减少动效」偏好 ===== */

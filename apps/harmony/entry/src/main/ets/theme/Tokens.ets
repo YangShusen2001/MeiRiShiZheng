@@ -190,6 +190,47 @@ export function annotationBg(type: string): string {
   return '';
 }
 
+/**
+ * 政策档案分级 → 标签底色。
+ *
+ * 取值字面量（'高' / '中' / '低'）在这里出现是**刻意的**：本文件就是视觉唯一事实源，
+ * 色值映射属于视觉规则，必须和色值放在一起；页面侧一律走 `ArchiveTier` 常量。
+ * 未知分级返回空串（不猜颜色）——构建期门禁已保证数据里不会出现第四档。
+ */
+export function archiveTagBg(importance: string): string {
+  if (importance === '高') {
+    return KColor.primary();
+  }
+  if (importance === '中') {
+    return KColor.neutralSoft();
+  }
+  if (importance === '低') {
+    return KColor.surfaceAlt();
+  }
+  return '';
+}
+
+/**
+ * 政策档案分级 → 标签文字色（与 `archiveTagBg` 成对使用）。
+ *
+ * 对比度已实算（WCAG 2.1 相对亮度，按 `KColor` 实际取值）：
+ * 高 = primary/surface 浅 8.53 · 深 5.90；中 = neutralSoft/ink 浅 11.73 · 深 10.76；
+ * 低 = surfaceAlt/sub 浅 6.16 · 深 6.79 —— 双主题全部过 AA。
+ * 改这里的色值必须重算，别凭眼睛。
+ */
+export function archiveTagInk(importance: string): string {
+  if (importance === '高') {
+    return KColor.surface();
+  }
+  if (importance === '中') {
+    return KColor.ink();
+  }
+  if (importance === '低') {
+    return KColor.sub();
+  }
+  return KColor.ink();
+}
+
 /** 间距标尺：4 的倍数。原实现出现 2/6/10/13/14/18/21/26 等编外值，已全部归位。 */
 export class KSpace {
   static readonly HAIR: number = 2;

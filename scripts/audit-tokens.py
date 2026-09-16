@@ -263,6 +263,93 @@ def check_wcag(rep: Report, tokens: dict) -> None:
     )
 
 
+def check_highlight_soft(rep: Report, tokens: dict) -> None:
+    """标注软底（AI 标注正文用）的五条不变式。
+
+    这个检查存在的理由：软底一旦「比页面底还亮」，标注就在页面上消失，
+    而 WCAG 文字对比度**查不出来** —— 文字压在软底上依然 11:1 达标。
+    2026-09-16 真发生过一次：用 color-mix 朝 --surface(#FFFDF6) 混色，
+    而正文底是 --bg(#F5F1E8)，混出来的底比正文底还亮 1%，标注等于没画。
+    """
+    soft, base = tokens["highlightSoft"], tokens["highlight"]
+    keys = ("exam_point", "viewpoint", "term", "figure")
+    text_min, visibility_min = 4.5, 1.6
+    for theme in ("light", "dark"):
+        bg = tokens["color"][theme]["bg"]
+        surface = tokens["color"][theme]["surface"]
+        on_hl = base[theme]["onHighlight"]
+        ratios: list[float] = []
+        for k in keys:
+            s = soft[theme][k]
+            r = contrast(s, bg)
+            ratios.append(r)
+            if r < 1.10:
+                rep.fail(f"[标注软底] {theme} {k} 对页面底 {r:.3f} < 1.10，标注会看不见（{s} on {bg}）")
+            t = contrast(on_hl, s)
+            if t < text_min:
+                rep.fail(f"[标注软底] {theme} {k} 上的标注文字 {t:.2f} < {text_min}（{on_hl} on {s}）")
+            # 彩度必须真的降下来。用通道极差代理 OKLCh 彩度，避免再写第三份色彩空间实现。
+            d_base = max(parse_hex(base[theme][k])) - min(parse_hex(base[theme][k]))
+            d_soft = max(parse_hex(s)) - min(parse_hex(s))
+            if d_soft > d_base * 0.75:
+                rep.fail(f"[标注软底] {theme} {k} 彩度没降下来：通道极差 {d_soft} vs 原 {d_base}（应 ≤75%）")
+            drift = hue_distance(hue(base[theme][k]), hue(s))
+            if drift > 20:
+                rep.fail(f"[标注软底] {theme} {k} 色相漂移 {drift:.1f}° > 20°，四类将难区分")
+        spread = max(ratios) - min(ratios)
+        if spread > 0.06:
+            rep.fail(f"[标注软底] {theme} 四类对底不齐：极差 {spread:.3f} > 0.06 {[round(r, 3) for r in ratios]}")
+        if theme == "dark":
+            for k in keys:
+                r = contrast(soft[theme][k], surface)
+                if r < visibility_min:
+                    rep.fail(f"[标注软底] 深色 {k} 对深卡面可见度 {r:.2f} < {visibility_min}")
+        rep.checks[f"highlight_soft_{theme}_to_bg"] = [round(r, 3) for r in ratios]
+
+
+# ─────────────────────── 3b. 标注可读性（解释型术语加粗） ───────────────────────
+
+
+def check_annotation_affordance(rep: Report, tokens: dict) -> None:
+    """「有 AI 解析的术语必须比正文更重」这条信号，不能被样式侧悄悄取消。
+
+    为什么单独立一条：契约里 `explanation` 是 **term 独有**字段（contracts/content.ts），
+    阅读页把同一个 `data-explanation` 既当 tooltip 触发器、又当加粗标记 ——
+    一个属性承载两个信号。TS 侧有测试兜底（highlights.test.ts 断言它被输出），
+    但样式侧如果哪天只剩 `cursor: help`，加粗就无声消失，而页面「看着仍然正常」。
+    所以把字重区间钉死：必须严于正文 regular，且不得越过 bold。
+
+    2026-09-16 用户要求：「有 AI 解析的词语，可以加粗」。
+    """
+    weight_scale = tokens["weight"]
+    base = int(weight_scale["regular"])
+    ceiling = int(weight_scale["bold"])
+    path = REPO / tokens["audit"]["webConsumer"]
+    if not path.exists():
+        return
+    css = strip_comments(path.read_text(encoding="utf-8"))
+    rule = re.search(r"\.ai-term\[data-explanation\]\s*\{([^}]*)\}", css)
+    if not rule:
+        rep.fail(
+            "[标注可读性] global.css 里找不到 `.ai-term[data-explanation]` 规则"
+            " —— 有 AI 解析的术语将失去视觉区分（只剩 tooltip，用户看不见可悬停）"
+        )
+        return
+    declared = re.search(r"font-weight:\s*(\d{3})", rule.group(1))
+    if not declared:
+        rep.fail("[标注可读性] `.ai-term[data-explanation]` 未声明 font-weight —— 加粗失效")
+        return
+    value = int(declared.group(1))
+    rep.checks["annotation_explained_weight"] = {"declared": value, "body": base, "ceiling": ceiling}
+    if value <= base:
+        rep.fail(f"[标注可读性] 解释型术语字重 {value} ≤ 正文 {base}，与普通术语无区别")
+    if value > ceiling:
+        rep.fail(
+            f"[标注可读性] 解释型术语字重 {value} 超过 bold 档 {ceiling}"
+            " —— 正文 17px/1.8、标注密度高，过重会结黑斑"
+        )
+
+
 # ─────────────────────────── 4. 色相环间距 ───────────────────────────
 
 
@@ -541,6 +628,8 @@ def main() -> int:
     check_fingerprint(rep, tokens_text, tokens)
     check_vectors(rep)
     check_wcag(rep, tokens)
+    check_highlight_soft(rep, tokens)
+    check_annotation_affordance(rep, tokens)
     check_hue_ring(rep, tokens)
     check_panel_invariance(rep, tokens)
     check_admin_wiring(rep, tokens)

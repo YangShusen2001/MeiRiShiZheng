@@ -49,6 +49,10 @@ function themeVars(theme, { colorPrefix, generalPrefix }) {
   for (const [k, v] of Object.entries(tokens.highlight[theme])) {
     out.push([`--${generalPrefix}highlight-${kebab(k)}`, v]);
   }
+  // 标注软底（AI 标注正文用）：与 highlight 分开发，两者刻意不共用值 ——「机器淡、人工重」。
+  for (const [k, v] of Object.entries(tokens.highlightSoft[theme])) {
+    out.push([`--${generalPrefix}highlight-soft-${kebab(k)}`, v]);
+  }
   for (const [k, v] of Object.entries(tokens.shadow[theme])) out.push([`--${generalPrefix}shadow-${kebab(k)}`, v]);
   return out;
 }
