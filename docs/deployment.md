@@ -147,3 +147,30 @@ cd apps/web && PUBLIC_API_BASE=http://127.0.0.1:8787 npx astro dev
 每日内容更新走本地审核服务（无 GitHub Actions）：`启动审核.bat` → 「抓取」→ 「AI 审核」→ 「发布到 CF」。
 
 生产部署 blocker 关闭必须同时满足：所需配置存在、全部 D1 迁移已应用、Worker 和 Pages 均有部署记录、同站点自定义域生效、线上 GET smoke 通过，并完成一次不泄露敏感信息的验证码事务邮件验证。
+
+### 7.1 「发布到 CF」的三步与前置（2026-09-16 补）
+
+`pipeline/src/kaogong/review/server.py` 的 `_publish_worker` 依次跑三步，**cwd 各不相同**：
+
+| 步 | 命令 | cwd |
+|---|---|---|
+| 1 | `pnpm exec wrangler deploy` | `apps/api` |
+| 2 | `pnpm build` | `apps/web` |
+| 3 | `pnpm exec wrangler pages deploy dist --project-name kaogong-web --branch=main` | `apps/web` |
+
+⚠️ **第 1 步需要 `apps/api/wrangler.toml`，而该文件被 `.gitignore` 忽略**（仓库只跟踪 `wrangler.toml.example`）：
+
+```sh
+cp apps/api/wrangler.toml.example apps/api/wrangler.toml    # 再把占位值换成真实值
+```
+
+缺它时 wrangler 日志里记的是 `configFileType: none`，它会退化成「自动探测前端框架」，
+最终抛出 **`Could not detect a directory containing static files (e.g. .html, css and js) for the project`**
+—— 这行报错跟真实原因（**缺配置文件**）毫无关系，别顺着它去查静态目录。
+诊断依据是那次运行同时写下的 `%USERPROFILE%\.wrangler\logs\wrangler-<时间>.log`。
+
+⚠️ 第 1 步会**真的改生产**（不是干跑）。只验证配置是否可用：
+
+```sh
+cd apps/api && pnpm exec wrangler deploy --dry-run
+```
