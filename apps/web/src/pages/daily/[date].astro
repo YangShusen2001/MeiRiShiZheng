@@ -22,12 +22,16 @@ const clipMap = new Map(listArticles().map((a) => [a.url, a.id]));
         <h2>{s.title}</h2>
         {s.items.map((it) => (
           <div class="item">
-            {clipMap.has(it.sourceUrl) ? (
-              <a href={`/read/${clipMap.get(it.sourceUrl)}/`}>{it.title}</a>
-            ) : (
-              <a href={it.sourceUrl} target="_blank" rel="noopener">{it.title}</a>
-            )}
-            <span class="item-date">{it.date}</span>
+            {/* 标题与日期拆成一行（标题 flex 撑满、日期靠右成胶囊）。
+                原先两者是 inline 混排，日期紧贴在标题尾部，读起来像标题的一部分。 */}
+            <div class="item-head">
+              {clipMap.has(it.sourceUrl) ? (
+                <a class="item-title" href={`/read/${clipMap.get(it.sourceUrl)}/`}>{it.title}</a>
+              ) : (
+                <a class="item-title" href={it.sourceUrl} target="_blank" rel="noopener">{it.title}</a>
+              )}
+              <span class="item-date">{it.date}</span>
+            </div>
             {it.summary && <p class="item-summary">{it.summary}</p>}
             {it.quotes?.map((q) => (
               <div class="quote-item">

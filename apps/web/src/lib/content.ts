@@ -173,6 +173,54 @@ export function listArticles(): ClippedArticle[] {
   return out;
 }
 
+/** 剥掉抓取残留的来源后缀（「…的通知_国务院部门文件」）。仅作清单缺失时的兜底。 */
+function stripArchiveTitleSuffix(title: string): string {
+  return title.replace(/_(国务院部门文件|国务院文件|中国政府网|国家发展改革委)$/, "").trim();
+}
+
+/**
+ * 列出**政策档案正文**（`content/archive/<YYYY-MM>/article-*.json`）。
+ *
+ * 与 `listArticles()` 同构——政策正文的字段就是 `ClippedArticle` 的形状，
+ * 所以它**直接走 `/read/<id>/` 阅读页**，不另建一套渲染。
+ * 正文原先是 gitignore 的（"站点只用 gist、不渲染正文"），该前提已被
+ * 「档案页的查看原文改指站内」推翻，2026-09-15 起入库。
+ *
+ * 两点以文件/清单为准，避免出现「点进去 404」或「标题变样」：
+ * 1. **id 用文件名**——`/read/<id>/` 是按 `article-<id>.json` 解析的，
+ *    万一内容里的 `id` 与文件名不一致，用内容值会让页面 404；
+ * 2. **标题用清单**（同目录 archive.json，按 url 对齐）——正文标题带着
+ *    抓取残留的来源后缀，清单里是策展后的干净标题；同一屏从档案页点进
+ *    阅读页，标题不该变样。清单缺该 url 时才退回剥后缀。
+ *
+ * id 由 `scripts/fetch-archive.py` 生成 = `md5(url)[:10]`（确定性），
+ * 与剪藏文章 id 实测零冲突（241 篇 ↔ 1137 篇，交集为空）。
+ */
+export function listArchiveArticles(): ClippedArticle[] {
+  const archiveDir = join(CONTENT_DIR, "archive");
+  if (!existsSync(archiveDir)) return [];
+  const out: ClippedArticle[] = [];
+  for (const month of readdirSync(archiveDir).filter((m) => /^\d{4}-\d{2}$/.test(m)).sort()) {
+    const dir = join(archiveDir, month);
+    if (!statSync(dir).isDirectory()) continue;
+    const cleanTitle = new Map<string, string>();
+    const monthDoc = loadJson<{ items?: Array<{ url: string; title: string }> }>(join(dir, "archive.json"));
+    for (const it of monthDoc?.items ?? []) cleanTitle.set(it.url, it.title);
+
+    for (const f of readdirSync(dir)) {
+      if (!f.startsWith("article-") || !f.endsWith(".json")) continue;
+      const a = loadArticle(join(dir, f));
+      if (!a) continue;
+      out.push({
+        ...a,
+        id: f.slice("article-".length, -".json".length),
+        title: cleanTitle.get(a.url) ?? stripArchiveTitleSuffix(a.title),
+      });
+    }
+  }
+  return out;
+}
+
 /**
  * 列出所有考点卡片。
  *

@@ -5,7 +5,9 @@ import "../styles/tokens.generated.css";
 import "../styles/global.css";
 import fs from "node:fs";
 import path from "node:path";
-import { listCards } from "../lib/content";
+import { listPracticeSets } from "../lib/content";
+import { toReviewQuestions, type ReviewQuestion } from "../lib/review";
+import { listArchiveMonths } from "../lib/archive";
 
 interface Props {
   title: string;
@@ -31,9 +33,20 @@ const {
 const isReading = variant === "reading";
 
 // 主导航（画布 3:9）：五项纯文字。画布把「搜索」放进了右区搜索框，不占导航位。
-const NAV_ITEMS: { href: string; label: string }[] = [
+//
+// 「政策档案」直指**最新月份**，不再走 `/policy/` 那个跳转壳：静态构建下
+// `/policy/` 会先出一页 Astro 自带跳转页（页面上有可见的
+// 「Redirecting from /policy/ to /policy/2026-09/」），点进来会闪一下
+// （用户 2026-09-16 反馈）。内容层每天重建，月份在构建期就是确定的，烘死没问题。
+// `/policy/` 仍保留为旧书签的静默兜底。
+const LATEST_ARCHIVE_MONTH = listArchiveMonths()[0] ?? "";
+const POLICY_HREF = LATEST_ARCHIVE_MONTH ? `/policy/${LATEST_ARCHIVE_MONTH}/` : "/policy/";
+
+const NAV_ITEMS: { href: string; label: string; match?: string }[] = [
   { href: "/", label: "首页" },
-  { href: "/policy/", label: "政策档案" },
+  // match：高亮判据与链接目标分开。链接指向最新月，但看**任意**月份时
+  // 「政策档案」都该是当前项，所以高亮仍按 /policy 前缀算。
+  { href: POLICY_HREF, label: "政策档案", match: "/policy" },
   { href: "/favorites/", label: "收藏" },
   { href: "/practice/", label: "练习" },
   // 错题 = 练习页的第 3 个模式，直接带 hash 过去（/wrong/ 仍保留为兼容入口）。
@@ -42,8 +55,8 @@ const NAV_ITEMS: { href: string; label: string }[] = [
 ];
 /** 当前项：首页精确匹配，其余按前缀（/policy/2026-09 也算「政策档案」）。 */
 const HERE = Astro.url.pathname.replace(/\/+$/, "");
-const isActive = (href: string): boolean => {
-  const base = href.replace(/\/+$/, "");
+const isActive = (href: string, match?: string): boolean => {
+  const base = (match ?? href).replace(/\/+$/, "");
   return base === "" ? HERE === "" : HERE === base || HERE.startsWith(`${base}/`);
 };
 
@@ -65,8 +78,13 @@ try {
   }
 } catch { /* 无配置则用默认字体 */ }
 
-// 考点卡片：构建时读 content/cards，注入到客户端供复习遮罩使用
-const reviewCardsJson = JSON.stringify(listCards());
+// 今日复习：构建时把每日一练的题集拍平成复习题，注入客户端。
+// 复习用**练习题**而不是考点卡 —— 理由见 src/lib/review.ts 顶部注释
+// （考点卡答案是长整句、同组高度重叠，当选项会多解）。
+const REVIEW_QUESTIONS: ReviewQuestion[] = listPracticeSets().flatMap((set) =>
+  toReviewQuestions(set.date, set.questions),
+);
+const reviewJson = JSON.stringify(REVIEW_QUESTIONS);
 ---
 <!doctype html>
 <html lang="zh-CN">
@@ -88,7 +106,18 @@ const reviewCardsJson = JSON.stringify(listCards());
     {fontCss && <style set:html={fontCss} />}
   </head>
   <body>
-    <script type="application/json" id="review-cards-data" set:html={reviewCardsJson.replace(/</g, "\\u003c")}></script>
+    <script type="application/json" id="review-data" set:html={reviewJson.replace(/</g, "\\u003c")}></script>
+
+    {/* 复习提示条（替代原先的自动弹窗）。
+        默认 hidden —— 由 review.ts 在有到期题目、且当天没被关掉时才显出来。
+        阅读页不显示：读长文时顶部多一条提示是干扰，与顶栏「专注态」的取舍一致。 */}
+    {!isReading && (
+      <div class="review-notice" id="review-notice" hidden>
+        <span class="review-notice__text" id="review-notice-text"></span>
+        <button type="button" class="review-notice__go" id="review-notice-start">前往复习</button>
+        <button type="button" class="review-notice__x" id="review-notice-close" aria-label="今天不再提示">×</button>
+      </div>
+    )}
     <header class={isReading ? "top top--reading" : "top"} id="top">
       <div class="top-l">
         <a class="logo" href="/" aria-label="每日时政">
@@ -116,7 +145,7 @@ const reviewCardsJson = JSON.stringify(listCards());
                 <a
                   href={item.href}
                   class="nav-tab"
-                  aria-current={isActive(item.href) ? "page" : undefined}
+                  aria-current={isActive(item.href, item.match) ? "page" : undefined}
                 >{item.label}</a>
               ))}
               {/* 复习遮罩的入口。画布 Web 导航里没有它（手机端才把「复习」放底导），
@@ -356,13 +385,14 @@ const reviewCardsJson = JSON.stringify(listCards());
         }
       }
 
-      // 考点卡片复习：读构建时注入的卡片数据，挂载复习遮罩（软闸门）
-      const reviewCardsData = document.getElementById("review-cards-data");
-      if (reviewCardsData?.textContent) {
+      // 今日复习：读构建时注入的题目数据，挂载复习遮罩。
+      // 不自动弹（原先的每日软闸门已撤）—— 是否提示由 review.ts 里的提示条决定。
+      const reviewData = document.getElementById("review-data");
+      if (reviewData?.textContent) {
         try {
-          initReview(JSON.parse(reviewCardsData.textContent), api);
+          initReview(JSON.parse(reviewData.textContent), api);
         } catch (err) {
-          console.error("[kaogong] 复习卡片初始化失败", err);
+          console.error("[kaogong] 复习初始化失败", err);
         }
       }
     </script>

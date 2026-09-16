@@ -259,7 +259,9 @@ const historyRows = digests.slice(0, 6).map((d) => {
             <h2 class="band-title">政策档案</h2>
             <p class="band-sub">{archiveSubtitle}</p>
           </div>
-          <a class="band-link" href="/policy/">全部档案 →</a>
+          {/* 直指最新月，不走 /policy/ 跳转壳（否则会闪一下「Redirecting from …」）。
+              archiveCards 已是倒序，[0] 就是最新月。 */}
+          <a class="band-link" href={`/policy/${archiveCards[0]!.month}/`}>全部档案 →</a>
         </div>
         <div class="month-grid">
           {archiveCards.map((m, i) => (

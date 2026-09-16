@@ -112,6 +112,20 @@ export function swatchGroups(): SwatchGroup[] {
     text: l.ink,
   }));
 
+  // 标注软底（AI 标注正文用）：彩度压到原值 55%、亮度反解到「对正文底 1.18」。
+  // 挂上对底对比度 —— 这组值最容易出的错就是「混得比正文底还亮」，标注直接消失，
+  // 而文字对比度查不出来（文字压在软底上照样 11:1）。
+  const highlightSoft: Swatch[] = HIGHLIGHTS.map(([key, cn]) => {
+    const hex = TOKENS.highlightSoft.light[key];
+    const sw: Swatch = {
+      label: `${cn} ${key} · ${hex} · 底 ${contrast(hex, l.bg).toFixed(2)}`,
+      hex,
+      text: l.ink,
+    };
+    sw.contrastOnBase = round(contrast(hex, l.bg), 2);
+    return sw;
+  });
+
   const darkRow: Swatch[] = DARK_ROW.map(([label, key]) => {
     const hex = d[key];
     // 画布 3:725/3:727 用 dark mut，3:729 用 light ink，3:731 用 panelDeep
@@ -123,7 +137,8 @@ export function swatchGroups(): SwatchGroup[] {
   return [
     { title: "品牌与语义", cols: 6, swatches: brand },
     { title: "中性暖墨阶（色相 34–37°，低饱和）", cols: 6, swatches: neutral },
-    { title: "标注四色（正文划考点用，深色下另有取值）", cols: 4, swatches: highlight },
+    { title: "标注四色（用户划线用，深色下另有取值）", cols: 4, swatches: highlight },
+    { title: "标注软底（AI 标注正文用：彩度 ×0.55，对正文底 1.18）", cols: 4, swatches: highlightSoft },
     { title: "深色（深暖灰，独立取值，不做反色）", cols: 4, swatches: darkRow },
   ];
 }
@@ -334,6 +349,7 @@ interface Tokens {
   meta: { version: string; updated: string; spec: string };
   color: { light: Record<string, string>; dark: Record<string, string> };
   highlight: { light: Record<string, string>; dark: Record<string, string> };
+  highlightSoft: { light: Record<string, string>; dark: Record<string, string> };
   space: Record<string, number>;
   radius: Record<string, number>;
   font: Record<string, number>;

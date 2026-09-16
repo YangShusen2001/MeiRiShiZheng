@@ -1,0 +1,86 @@
+---
+// 404 页（补画布外的缺口）。
+//
+// 为什么必须有：`dist/` 里没有 `404.html` 时，Cloudflare Pages 会用 `index.html`
+// 兜底**并返回 200** —— 于是任何不存在的路径都变成「首页 + 200」，也就是软 404。
+// 两个后果：① 搜索引擎会把无效 URL 索引成首页；② 验收时「200」不再是有效判据
+// （2026-09-16 复验实测：`/reader/`、`/read/`、`/随便一串/` 与首页**字节完全相同**，都是 51765）。
+// 产出 `dist/404.html` 后，Pages 才会对不存在的路径回真正的 404。
+//
+// Astro 会把 `src/pages/404.astro` 直接烘成 `dist/404.html`，无需额外配置。
+import Base from "../layouts/Base.astro";
+
+// 出口：用户走错路时，真正可能想去的四站。不摆一堆链接，只给最常用的。
+const LINKS: Array<{ href: string; label: string; desc: string }> = [
+  { href: "/", label: "首页", desc: "今日精选与每日日报" },
+  { href: "/policy/", label: "政策档案", desc: "按月归档的官方文件与核心考点" },
+  { href: "/search/", label: "搜索", desc: "按关键词找文章与政策" },
+  { href: "/practice/", label: "练习", desc: "每日一练、错题本与复习" },
+];
+---
+
+<Base title="页面不存在 · 每日时政" description="这个地址没有对应的内容。">
+  <section class="pg-head">
+    <div class="pg-head__in">
+      <div class="pg-head__row">
+        <div class="pg-head__l">
+          <h1 class="pg-title">这个页面不存在</h1>
+          <p class="pg-sub">地址可能拼错了，或者这条内容已经被移走。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pg-body">
+    <div class="pg-body__in">
+      <div class="pg-col">
+        <p class="pg-lede">换个入口继续：</p>
+        <nav class="nf-links" aria-label="常用入口">
+          {LINKS.map((l) => (
+            <a class="nf-link" href={l.href}>
+              <span class="nf-link__label">{l.label}</span>
+              <span class="nf-link__desc">{l.desc}</span>
+            </a>
+          ))}
+        </nav>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* 局部样式：404 的出口列表只此一处用，不往 global.css 里加通用类。 */
+  .nf-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-3);
+  }
+  .nf-link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+    padding: var(--s-4);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--surface);
+    text-decoration: none;
+    transition: border-color var(--dur-sm) var(--ease-out);
+  }
+  .nf-link:hover {
+    border-color: var(--primary);
+  }
+  .nf-link__label {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .nf-link__desc {
+    color: var(--mut);
+    font-size: var(--font-meta);
+    line-height: var(--line-ui);
+  }
+  @media (max-width: 720px) {
+    .nf-links {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,12 +1,25 @@
 ---
 import Base from "../../layouts/Base.astro";
-import { listArticles } from "../../lib/content";
+import { listArticles, listArchiveArticles } from "../../lib/content";
+import type { ClippedArticle } from "@kaogong/contracts";
 
+// 剪藏文章 + 政策档案正文**共用同一条** /read/<id>/ 路由。
+// 两者是同一个 ClippedArticle 形状（政策正文多几个 archive* 字段，不影响渲染），
+// id 空间实测零冲突（241 篇 ↔ 1137 篇，交集为空），所以直接拼、不加前缀。
 export function getStaticPaths() {
-  return listArticles().map((a) => ({ params: { id: a.id }, props: { article: a } }));
+  return [...listArticles(), ...listArchiveArticles()].map((a) => ({
+    params: { id: a.id },
+    props: { article: a },
+  }));
 }
 
-const { article } = Astro.props;
+const { article } = Astro.props as { article: ClippedArticle };
+// 政策正文带 archiveMonth（剪藏文章没有）——用它区分来源。
+// 这个区分**必须**传给收藏：档案页收政策用 kind=policy，阅读页若用 article，
+// 同一篇政策会存成两条不同 kind 的记录，收藏页的「政策」格就永远收不到阅读页收的那条。
+const archiveMonth = (article as ClippedArticle & { archiveMonth?: string }).archiveMonth;
+const isPolicy = Boolean(archiveMonth);
+const favKind = isPolicy ? "policy" : "article";
 const aiAnnotations = article.aiStatus === "ok" ? article.aiAnnotations ?? [] : [];
 const aiSummary = article.aiStatus === "ok" ? article.aiSummary?.trim() ?? "" : "";
 const keySentences = article.keySentences ?? [];
@@ -66,6 +79,7 @@ const annotationCount = aiAnnotations.length;
             data-fav-toggle
             data-title={article.title}
             data-url={article.url}
+            data-fav-kind={favKind}
           >收藏本文</button>
           <div class="rd-mode" role="group" aria-label="阅读模式">
             <button type="button" id="mode-original" class="on" aria-pressed="true">原文模式</button>
@@ -424,7 +438,9 @@ const annotationCount = aiAnnotations.length;
     if (favLoggedIn) {
       const list = await api.listFavorites(url);
       for (const f of list.ok ? list.data || [] : []) {
-        if (f.kind === "article") favId = f.id;
+        // 整篇收藏认两种 kind：政策正文走 /read/ 后收的是 policy，
+        // 只认 article 会让政策阅读页的按钮永远显示「未收藏」。
+        if (f.kind === "article" || f.kind === "policy") favId = f.id;
         else if (f.kind === "term" && f.termText) {
           termFavs.add(f.termText);
           termFavIds.set(f.termText, f.id);
@@ -449,6 +465,9 @@ const annotationCount = aiAnnotations.length;
       setFavBusy(true);
       const url = btn.dataset.url || favBtn.dataset.url || "";
       const title = btn.dataset.title || favBtn.dataset.title || "";
+      // 收藏类型：政策正文收成 policy（与档案页一致），剪藏文章仍是 article。
+      // 第二个收藏入口（读完卡）没写 data-fav-kind，从文章头那个按钮兜底。
+      const kind = (btn.dataset.favKind || favBtn.dataset.favKind || "article") as "article" | "policy";
       // 收藏速度优化：不再每次点击查登录态（页面加载时已缓存 favLoggedIn）
       if (!favLoggedIn) {
         // 未登录：本地收藏（toggle）
@@ -472,7 +491,13 @@ const annotationCount = aiAnnotations.length;
           toast(favError(env));
         }
       } else {
-        const env = await api.addFavorite({ url, title });
+        const env = await api.addFavorite({
+          url,
+          title,
+          kind,
+          // 政策收藏带上站内 id，收藏页的「政策」格才能直接跳回阅读页而不是官方外链
+          articleId: kind === "policy" ? articleId : "",
+        });
         if (env.ok && env.data) {
           favId = env.data.id;
           setFavState(true);

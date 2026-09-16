@@ -8,11 +8,14 @@
 // policy 已于 2026-09-15 补进 `favoriteKindSchema`（favorites.kind 是自由 text，无需迁移）——
 // 政策档案页每张卡片的「加入收藏」现在真的能把政策收进这一格。
 import Base from "../layouts/Base.astro";
-import { listArticles } from "../lib/content";
+import { listArticles, listArchiveArticles } from "../lib/content";
 
-// url → article id 映射：收藏点击跳转到阅读页，而非原文外链。
+// url → 阅读页 id 映射：收藏点击跳转到阅读页，而非原文外链。
+// 政策正文也在其中 —— 它在 /read/ 有自己的页（与剪藏文章共用同一条路由），
+// 而历史政策收藏只存了官方 url、没存 articleId，只能靠这张表回推。
+// 体积实测约 105 KB（1378 条）、gzip 后约 25 KB（url 前缀高度重复），可接受。
 const articleIdByUrl: Record<string, string> = {};
-for (const a of listArticles()) {
+for (const a of [...listArticles(), ...listArchiveArticles()]) {
   articleIdByUrl[a.url] = a.id;
 }
 ---
