@@ -5,7 +5,7 @@
   "source": "半月谈",
   "url": "http://www.banyuetan.org/jrt/detail/20260916/1000200033135231789522796249602169_1.html",
   "pubDate": "",
-  "fetchedAt": "2026-09-16T06:22:13+00:00",
+  "fetchedAt": "2026-09-16T06:41:05+00:00",
   "status": "ok",
   "paragraphs": [
     "面对复杂严峻的国内外环境，今年以来我国制造业顶压前行，现代化产业体系建设蹄疾步稳，经济动能向新、结构向优，有力夯实高质量发展根基。",
@@ -83,58 +83,18 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-09-16T06:22:15+00:00",
+  "aiGeneratedAt": "2026-09-16T06:41:10+00:00",
   "sourceTextHash": "bc9745847390ce03cd40eba8b0448237b7cdbdec38658bc54956cde142719fa5",
   "aiStatus": "ok",
-  "aiSummary": "习近平总书记把制造业高质量发展置于突出位置，指引我国加快向制造强国迈进。文章从战略定位、创新驱动、产业布局、改革开放等方面，展现先进制造业发展的实践与成效，强调以先进制造业为骨干构建现代化产业体系，为中国式现代化夯实物质技术基础。",
+  "aiSummary": "习近平总书记把制造业高质量发展置于突出位置，指引我国加快向制造强国迈进。面对复杂环境，我国制造业顶压前行，重大技术装备成果频出，增加值占全球近三成并连续16年居首。总书记阐明先进制造业是实体经济关键，强调创新驱动、自主可控，系统布局现代化产业体系，推动产业向新向优，为中国式现代化夯实物质技术根基。",
   "aiAnnotations": [
     {
-      "id": "ai-1-40-70-viewpoint",
+      "id": "ai-1-46-70-viewpoint",
       "paragraphIndex": 1,
-      "start": 40,
+      "start": 46,
       "end": 70,
-      "text": "习近平总书记把制造业高质量发展置于党和国家发展全局的突出位置",
+      "text": "把制造业高质量发展置于党和国家发展全局的突出位置",
       "type": "viewpoint"
-    },
-    {
-      "id": "ai-6-0-38-viewpoint",
-      "paragraphIndex": 6,
-      "start": 0,
-      "end": 38,
-      "text": "先进制造业是实体经济的重要支柱，现代化产业体系是中国式现代化的物质技术基础。",
-      "type": "viewpoint"
-    },
-    {
-      "id": "ai-10-0-31-viewpoint",
-      "paragraphIndex": 10,
-      "start": 0,
-      "end": 31,
-      "text": "发展先进制造业，是固本培元的现实选择，更是突围制胜的关键路径。",
-      "type": "viewpoint"
-    },
-    {
-      "id": "ai-28-0-31-viewpoint",
-      "paragraphIndex": 28,
-      "start": 0,
-      "end": 31,
-      "text": "建设制造强国，要做强先进制造业；抓先进制造业，首要就是抓创新。",
-      "type": "viewpoint"
-    },
-    {
-      "id": "ai-52-0-25-viewpoint",
-      "paragraphIndex": 52,
-      "start": 0,
-      "end": 25,
-      "text": "实践表明，实体经济强是我国发展优势所在、根基所在。",
-      "type": "viewpoint"
-    },
-    {
-      "id": "ai-1-72-91-exam_point",
-      "paragraphIndex": 1,
-      "start": 72,
-      "end": 91,
-      "text": "构建以先进制造业为骨干的现代化产业体系",
-      "type": "exam_point"
     },
     {
       "id": "ai-5-0-24-exam_point",
@@ -143,6 +103,47 @@
       "end": 24,
       "text": "中国制造业增加值占全球近三成，连续16年稳居首位",
       "type": "exam_point"
+    },
+    {
+      "id": "ai-7-35-61-viewpoint",
+      "paragraphIndex": 7,
+      "start": 35,
+      "end": 61,
+      "text": "必须发展实体经济，不断推进工业现代化、提高制造业水平",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-8-28-51-exam_point",
+      "paragraphIndex": 8,
+      "start": 28,
+      "end": 51,
+      "text": "制造业尤其是先进制造业，已成为国际竞争的主战场",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-9-23-41-exam_point",
+      "paragraphIndex": 9,
+      "start": 23,
+      "end": 41,
+      "text": "制造业“大而不强”的问题尚未根本扭转",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-13-26-41-viewpoint",
+      "paragraphIndex": 13,
+      "start": 26,
+      "end": 41,
+      "text": "先进制造业是实体经济的一个关键",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-17-52-61-term",
+      "paragraphIndex": 17,
+      "start": 52,
+      "end": 61,
+      "text": "以先进制造业为骨干",
+      "type": "term",
+      "explanation": "指现代化产业体系中先进制造业发挥骨干支撑作用，体现其牵系全局、事关长远的战略地位。"
     },
     {
       "id": "ai-18-44-62-exam_point",
@@ -161,19 +162,36 @@
       "type": "exam_point"
     },
     {
-      "id": "ai-35-54-66-exam_point",
-      "paragraphIndex": 35,
-      "start": 54,
-      "end": 66,
-      "text": "充分发挥新型举国体制优势",
+      "id": "ai-29-12-33-viewpoint",
+      "paragraphIndex": 29,
+      "start": 12,
+      "end": 33,
+      "text": "制造业的核心就是创新，就是掌握关键核心技术",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-33-67-84-exam_point",
+      "paragraphIndex": 33,
+      "start": 67,
+      "end": 84,
+      "text": "突破‘卡脖子’关键核心技术刻不容缓",
       "type": "exam_point"
     },
     {
-      "id": "ai-39-9-33-exam_point",
+      "id": "ai-35-58-64-term",
+      "paragraphIndex": 35,
+      "start": 58,
+      "end": 64,
+      "text": "新型举国体制",
+      "type": "term",
+      "explanation": "指发挥国家制度优势，集中力量协同攻关关键核心技术的组织机制。"
+    },
+    {
+      "id": "ai-39-11-33-exam_point",
       "paragraphIndex": 39,
-      "start": 9,
+      "start": 11,
       "end": 33,
-      "text": "打造自主可控、安全可靠、竞争力强的现代化产业体系",
+      "text": "自主可控、安全可靠、竞争力强的现代化产业体系",
       "type": "exam_point"
     },
     {
@@ -185,48 +203,21 @@
       "type": "exam_point"
     },
     {
-      "id": "ai-67-42-53-exam_point",
+      "id": "ai-56-88-108-viewpoint",
+      "paragraphIndex": 56,
+      "start": 88,
+      "end": 108,
+      "text": "要保持制造业合理比重、大力发展先进制造业",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-67-42-53-term",
       "paragraphIndex": 67,
       "start": 42,
       "end": 53,
       "text": "综合整治“内卷式”竞争",
-      "type": "exam_point"
-    },
-    {
-      "id": "ai-0-27-34-term",
-      "paragraphIndex": 0,
-      "start": 27,
-      "end": 34,
-      "text": "现代化产业体系",
       "type": "term",
-      "explanation": "指以先进制造业为骨干、实体经济为支撑，各产业协同发展的产业系统，是中国式现代化的物质技术基础。"
-    },
-    {
-      "id": "ai-18-71-76-term",
-      "paragraphIndex": 18,
-      "start": 71,
-      "end": 76,
-      "text": "新质生产力",
-      "type": "term",
-      "explanation": "由技术革命性突破、生产要素创新性配置、产业深度转型升级而催生的先进生产力质态。"
-    },
-    {
-      "id": "ai-35-58-64-term",
-      "paragraphIndex": 35,
-      "start": 58,
-      "end": 64,
-      "text": "新型举国体制",
-      "type": "term",
-      "explanation": "指发挥国家作为重大科技创新组织者的作用，集中力量攻克关键核心技术、实现科技自立自强的制度安排。"
-    },
-    {
-      "id": "ai-40-82-86-term",
-      "paragraphIndex": 40,
-      "start": 82,
-      "end": 86,
-      "text": "专精特新",
-      "type": "term",
-      "explanation": "指中小企业具备专业化、精细化、特色化、新颖化特征，是增强产业链供应链韧性的重要力量。"
+      "explanation": "指通过制度供给矫正低水平重复建设和恶性竞争，引导产业良性有序发展。"
     }
   ],
   "aiQuality": {

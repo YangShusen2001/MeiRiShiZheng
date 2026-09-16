@@ -5,7 +5,7 @@
   "source": "中国政府网",
   "url": "http://www.jiangsu.gov.cn/art/2026/9/16/art_84322_11830416.html",
   "pubDate": "",
-  "fetchedAt": "2026-09-16T06:21:52+00:00",
+  "fetchedAt": "2026-09-16T06:40:40+00:00",
   "status": "ok",
   "paragraphs": [
     "9月14日，省政府召开“6+6”产业（第六代移动通信）高质量发展专题推进会，深入学习贯彻习近平总书记关于发展新质生产力的重要论述和对江苏工作重要讲话精神，围绕培育壮大6G产业听取意见建议，安排部署相关工作。省长刘小涛主持会议。",
@@ -16,7 +16,7 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-09-16T06:21:52+00:00",
+  "aiGeneratedAt": "2026-09-16T06:40:41+00:00",
   "sourceTextHash": "1398d0d2f8e07b4ebf9c8acb0ee952a0701276b0fd57b9a2c1ec342bc58e8a50",
   "aiStatus": "error",
   "aiAnnotations": [],

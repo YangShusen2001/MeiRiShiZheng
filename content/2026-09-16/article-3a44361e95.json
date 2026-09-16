@@ -5,7 +5,7 @@
   "source": "中国政府网",
   "url": "http://www.jiangsu.gov.cn/art/2026/9/16/art_84322_11830419.html",
   "pubDate": "",
-  "fetchedAt": "2026-09-16T06:22:02+00:00",
+  "fetchedAt": "2026-09-16T06:40:55+00:00",
   "status": "ok",
   "paragraphs": [
     "今年是金砖合作机制成立20周年。据南京海关统计，今年前8个月，江苏对其他金砖国家成员国进出口5352.2亿元，同比增长4.4%。",
@@ -16,10 +16,10 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-09-16T06:22:03+00:00",
+  "aiGeneratedAt": "2026-09-16T06:40:56+00:00",
   "sourceTextHash": "8eb923015258bce8cc77f961f2e3b042016ab1de7441671b041736ebc1033288",
   "aiStatus": "ok",
-  "aiSummary": "今年是金砖合作机制成立20周年。据南京海关统计，前8个月江苏对其他金砖国家进出口5352.2亿元，同比增长4.4%。光伏材料、国产汽车、断路器等技术密集型产品出口增长明显，金砖国家已成为江苏企业重要的增量市场。",
+  "aiSummary": "今年是金砖合作机制成立20周年。据南京海关统计，前8个月江苏对其他金砖国家成员国进出口5352.2亿元，同比增长4.4%。常州光伏材料、国产汽车、断路器等技术产品出口增长明显，金砖国家已成为江苏企业重要的增量市场。",
   "aiAnnotations": [
     {
       "id": "ai-0-0-15-exam_point",
@@ -30,12 +30,29 @@
       "type": "exam_point"
     },
     {
-      "id": "ai-0-16-63-exam_point",
+      "id": "ai-0-31-63-exam_point",
       "paragraphIndex": 0,
-      "start": 16,
+      "start": 31,
       "end": 63,
-      "text": "据南京海关统计，今年前8个月，江苏对其他金砖国家成员国进出口5352.2亿元，同比增长4.4%",
+      "text": "江苏对其他金砖国家成员国进出口5352.2亿元，同比增长4.4%",
       "type": "exam_point"
+    },
+    {
+      "id": "ai-0-3-9-term",
+      "paragraphIndex": 0,
+      "start": 3,
+      "end": 9,
+      "text": "金砖合作机制",
+      "type": "term",
+      "explanation": "金砖国家间的合作机制，成员包括中国、俄罗斯、印度、巴西、南非等新兴市场国家。"
+    },
+    {
+      "id": "ai-1-37-50-viewpoint",
+      "paragraphIndex": 1,
+      "start": 37,
+      "end": 50,
+      "text": "与金砖国家能源转型高度契合",
+      "type": "viewpoint"
     },
     {
       "id": "ai-1-166-194-viewpoint",
@@ -46,27 +63,44 @@
       "type": "viewpoint"
     },
     {
-      "id": "ai-2-0-30-viewpoint",
+      "id": "ai-1-75-77-term",
+      "paragraphIndex": 1,
+      "start": 75,
+      "end": 77,
+      "text": "银浆",
+      "type": "term",
+      "explanation": "光伏电池制造中的关键导电材料，用于收集和传导电池产生的电流。"
+    },
+    {
+      "id": "ai-2-7-30-viewpoint",
       "paragraphIndex": 2,
-      "start": 0,
+      "start": 7,
       "end": 30,
-      "text": "除光伏材料外，国产汽车成为江苏对其他金砖国家出口的重要增长点",
+      "text": "国产汽车成为江苏对其他金砖国家出口的重要增长点",
       "type": "viewpoint"
     },
     {
-      "id": "ai-2-117-152-exam_point",
+      "id": "ai-2-124-152-exam_point",
       "paragraphIndex": 2,
-      "start": 117,
+      "start": 124,
       "end": 152,
-      "text": "今年前8个月，太仓口岸出口其他金砖国家汽车超27万台，同比增长约58%",
+      "text": "太仓口岸出口其他金砖国家汽车超27万台，同比增长约58%",
       "type": "exam_point"
     },
     {
-      "id": "ai-3-136-184-exam_point",
+      "id": "ai-2-83-87-term",
+      "paragraphIndex": 2,
+      "start": 83,
+      "end": 87,
+      "text": "滚装航线",
+      "type": "term"
+    },
+    {
+      "id": "ai-3-143-184-exam_point",
       "paragraphIndex": 3,
-      "start": 136,
+      "start": 143,
       "end": 184,
-      "text": "今年前8个月，该企业对沙特阿拉伯、巴西、阿联酋等其他金砖国家出口约1.3亿元，同比增长50%以上",
+      "text": "该企业对沙特阿拉伯、巴西、阿联酋等其他金砖国家出口约1.3亿元，同比增长50%以上",
       "type": "exam_point"
     }
   ],

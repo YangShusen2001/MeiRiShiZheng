@@ -5,7 +5,7 @@
   "source": "中国政府网",
   "url": "http://www.jiangsu.gov.cn/art/2026/9/16/art_84322_11830417.html",
   "pubDate": "",
-  "fetchedAt": "2026-09-16T06:21:42+00:00",
+  "fetchedAt": "2026-09-16T06:40:32+00:00",
   "status": "ok",
   "paragraphs": [
     "9月15日，省委举行学习报告会，深入学习贯彻习近平文化思想，认真学习领会习近平总书记关于文化遗产保护传承的重要论述，扎实推进文化强省建设，为中国式现代化江苏新实践提供坚强思想保证、强大精神力量、有利文化条件。省委书记信长星主持报告会。省长刘小涛出席。",
@@ -16,10 +16,10 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-09-16T06:21:44+00:00",
+  "aiGeneratedAt": "2026-09-16T06:40:34+00:00",
   "sourceTextHash": "45cc0684081fc863c2596045083306e49747f073ad125dd4a5a26053f6373bab",
   "aiStatus": "ok",
-  "aiSummary": "9月15日，江苏省委举行学习报告会，深入学习贯彻习近平文化思想及文化遗产保护传承重要论述，推进文化强省建设。省委书记信长星主持，省长刘小涛出席。刘曙光作专题辅导，信长星强调保护第一、合理利用和最小干预原则，扎实做好文化遗产保护传承工作。",
+  "aiSummary": "9月15日，江苏省委举行学习报告会，深入学习贯彻习近平文化思想，领会文化遗产保护传承重要论述，推进文化强省建设。信长星主持，刘小涛出席。刘曙光作专题辅导。信长星强调，要敬畏历史、保护第一，系统保护长江、大运河等文化遗产，压实各级责任，营造全社会共同参与氛围。",
   "aiAnnotations": [
     {
       "id": "ai-0-16-29-exam_point",
@@ -27,14 +27,6 @@
       "start": 16,
       "end": 29,
       "text": "深入学习贯彻习近平文化思想",
-      "type": "exam_point"
-    },
-    {
-      "id": "ai-0-36-57-exam_point",
-      "paragraphIndex": 0,
-      "start": 36,
-      "end": 57,
-      "text": "习近平总书记关于文化遗产保护传承的重要论述",
       "type": "exam_point"
     },
     {
@@ -46,21 +38,13 @@
       "type": "exam_point"
     },
     {
-      "id": "ai-0-69-103-viewpoint",
-      "paragraphIndex": 0,
-      "start": 69,
-      "end": 103,
-      "text": "为中国式现代化江苏新实践提供坚强思想保证、强大精神力量、有利文化条件",
-      "type": "viewpoint"
-    },
-    {
       "id": "ai-1-61-74-term",
       "paragraphIndex": 1,
       "start": 61,
       "end": 74,
       "text": "习近平文化思想的原创性贡献",
       "type": "term",
-      "explanation": "指习近平文化思想在理论上的创新性贡献，包括对文化建设的规律性认识等。"
+      "explanation": "指习近平文化思想在理论上的创新突破，包括对文化自信、文化强国等重大命题的系统阐述。"
     },
     {
       "id": "ai-2-13-40-viewpoint",
@@ -71,36 +55,12 @@
       "type": "viewpoint"
     },
     {
-      "id": "ai-2-73-90-exam_point",
-      "paragraphIndex": 2,
-      "start": 73,
-      "end": 90,
-      "text": "开辟了马克思主义文化理论发展新境界",
-      "type": "exam_point"
-    },
-    {
       "id": "ai-2-223-241-exam_point",
       "paragraphIndex": 2,
       "start": 223,
       "end": 241,
       "text": "坚持保护第一、合理利用和最小干预原则",
       "type": "exam_point"
-    },
-    {
-      "id": "ai-2-242-271-viewpoint",
-      "paragraphIndex": 2,
-      "start": 242,
-      "end": 271,
-      "text": "以敬畏历史、热爱文化之心，把文化遗产保护好、传承好、利用好",
-      "type": "viewpoint"
-    },
-    {
-      "id": "ai-2-289-302-term",
-      "paragraphIndex": 2,
-      "start": 289,
-      "end": 302,
-      "text": "赓续中华文脉、坚定文化自信",
-      "type": "term"
     },
     {
       "id": "ai-2-406-434-exam_point",
@@ -119,12 +79,21 @@
       "type": "exam_point"
     },
     {
-      "id": "ai-2-559-573-exam_point",
+      "id": "ai-2-559-573-viewpoint",
       "paragraphIndex": 2,
       "start": 559,
       "end": 573,
       "text": "压实全省各级党委政府主体责任",
-      "type": "exam_point"
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-574-586-term",
+      "paragraphIndex": 2,
+      "start": 574,
+      "end": 586,
+      "text": "完善共保共建共治共享机制",
+      "type": "term",
+      "explanation": "指文化遗产保护中多方参与、共同建设、协同治理、成果共享的工作机制。"
     }
   ],
   "aiQuality": {

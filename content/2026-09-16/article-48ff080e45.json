@@ -5,7 +5,7 @@
   "source": "sichuan.scol.com.cn",
   "url": "https://sichuan.scol.com.cn/ggxw/202609/83325018.html",
   "pubDate": "",
-  "fetchedAt": "2026-09-16T06:21:20+00:00",
+  "fetchedAt": "2026-09-16T06:39:59+00:00",
   "status": "ok",
   "paragraphs": [
     "长期以来，小微企业主在融资过程中面临两道坎——有需求没门路和融资成本偏高。9月16日，由四川省人民政府新闻办公室主办、四川日报全媒体承办的《发言人在现场》栏目走进企业一线，针对上述问题，省发展改革委副主任梁武湖进行了解答。",
@@ -20,87 +20,9 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-09-16T06:21:21+00:00",
+  "aiGeneratedAt": "2026-09-16T06:40:03+00:00",
   "sourceTextHash": "fb1b012d81c3b52d2f4092f8c7a127b8aa71f8b8dcc5767045735e9d532926e4",
-  "aiStatus": "ok",
-  "aiSummary": "四川针对小微企业融资难，打出机制搭平台、增信破瓶颈、贴息降成本组合拳。通过千企万户大走访形成申报和推荐清单，精准推送金融机构；构建四端协同增信体系，推出担保产品和信用评价；配合贴息政策，实现走访摸排、银行授信、贴息支持一体贯通。截至8月，累计授信2.85万亿元，贷款利率降至3.88%。",
-  "aiAnnotations": [
-    {
-      "id": "ai-0-23-36-viewpoint",
-      "paragraphIndex": 0,
-      "start": 23,
-      "end": 36,
-      "text": "有需求没门路和融资成本偏高",
-      "type": "viewpoint"
-    },
-    {
-      "id": "ai-1-75-92-exam_point",
-      "paragraphIndex": 1,
-      "start": 75,
-      "end": 92,
-      "text": "机制搭平台、增信破瓶颈、贴息降成本",
-      "type": "exam_point"
-    },
-    {
-      "id": "ai-1-114-124-viewpoint",
-      "paragraphIndex": 1,
-      "start": 114,
-      "end": 124,
-      "text": "银行敢贷、愿贷、快贷",
-      "type": "viewpoint"
-    },
-    {
-      "id": "ai-2-6-13-term",
-      "paragraphIndex": 2,
-      "start": 6,
-      "end": 13,
-      "text": "千企万户大走访",
-      "type": "term",
-      "explanation": "指四川省开展的针对小微企业等经营主体的上门走访活动，旨在摸排融资需求，形成申报和推荐清单，精准推送给金融机构。"
-    },
-    {
-      "id": "ai-3-106-111-exam_point",
-      "paragraphIndex": 3,
-      "start": 106,
-      "end": 111,
-      "text": "3.88%",
-      "type": "exam_point"
-    },
-    {
-      "id": "ai-4-45-47-term",
-      "paragraphIndex": 4,
-      "start": 45,
-      "end": 47,
-      "text": "四端",
-      "type": "term",
-      "explanation": "指金融、政府、企业、社会四个端，协同构建小微企业增信体系，共同提升企业信用水平。"
-    },
-    {
-      "id": "ai-5-176-180-exam_point",
-      "paragraphIndex": 5,
-      "start": 176,
-      "end": 180,
-      "text": "精准画像",
-      "type": "exam_point"
-    },
-    {
-      "id": "ai-6-25-34-exam_point",
-      "paragraphIndex": 6,
-      "start": 25,
-      "end": 34,
-      "text": "机制摸排+财政贴息",
-      "type": "exam_point"
-    },
-    {
-      "id": "ai-7-35-53-viewpoint",
-      "paragraphIndex": 7,
-      "start": 35,
-      "end": 53,
-      "text": "走访摸排、银行授信、贴息支持一体贯通",
-      "type": "viewpoint"
-    }
-  ],
-  "aiQuality": {
-    "locationErrors": 1
-  }
+  "aiStatus": "error",
+  "aiAnnotations": [],
+  "aiError": "ai_semantic:summary_length"
 }

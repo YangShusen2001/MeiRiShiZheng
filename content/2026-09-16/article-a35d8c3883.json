@@ -5,7 +5,7 @@
   "source": "广东省人民政府网",
   "url": "https://www.gd.gov.cn/gdywdt/xwdt/content/post_4956026.html",
   "pubDate": "",
-  "fetchedAt": "2026-09-16T06:20:51+00:00",
+  "fetchedAt": "2026-09-16T06:39:25+00:00",
   "status": "ok",
   "paragraphs": [
     "在加强基础研究座谈会上的讲话（2026年4月30日）习近平",
@@ -33,128 +33,9 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-09-16T06:20:53+00:00",
+  "aiGeneratedAt": "2026-09-16T06:39:28+00:00",
   "sourceTextHash": "be1a07634e5375b909759073400600969ac055fe32700d916fc90681200403a9",
-  "aiStatus": "ok",
-  "aiSummary": "习近平在加强基础研究座谈会上强调，基础研究是科学体系源头和科技竞争前沿，要提升原始创新能力，打牢科技强国根基。讲话围绕认识重要性紧迫性、优化系统布局、壮大人才队伍、加强支持保障、拓展国际合作五方面作出部署，要求全党全社会共同努力，加快实现高水平科技自立自强。",
-  "aiAnnotations": [
-    {
-      "id": "ai-1-27-37-exam_point",
-      "paragraphIndex": 1,
-      "start": 27,
-      "end": 37,
-      "text": "提升我国原始创新能力",
-      "type": "exam_point"
-    },
-    {
-      "id": "ai-1-52-65-exam_point",
-      "paragraphIndex": 1,
-      "start": 52,
-      "end": 65,
-      "text": "加快实现高水平科技自立自强",
-      "type": "exam_point"
-    },
-    {
-      "id": "ai-3-21-60-viewpoint",
-      "paragraphIndex": 3,
-      "start": 21,
-      "end": 60,
-      "text": "基础研究是整个科学体系的源头，是所有技术问题的总机关，是全球科技竞争的前沿阵地",
-      "type": "viewpoint"
-    },
-    {
-      "id": "ai-5-45-76-viewpoint",
-      "paragraphIndex": 5,
-      "start": 45,
-      "end": 76,
-      "text": "基础研究是打基础、利长远的事业，既不能急功近利，也不可消极无为",
-      "type": "viewpoint"
-    },
-    {
-      "id": "ai-7-27-31-term",
-      "paragraphIndex": 7,
-      "start": 27,
-      "end": 31,
-      "text": "四个面向",
-      "type": "term",
-      "explanation": "指面向世界科技前沿、面向经济主战场、面向国家重大需求、面向人民生命健康，是科技创新的战略导向。"
-    },
-    {
-      "id": "ai-8-31-37-term",
-      "paragraphIndex": 8,
-      "start": 31,
-      "end": 37,
-      "text": "新型举国体制",
-      "type": "term",
-      "explanation": "指在社会主义市场经济条件下，发挥国家作为重大科技创新组织者作用，集聚力量协同攻关的制度安排。"
-    },
-    {
-      "id": "ai-10-14-28-viewpoint",
-      "paragraphIndex": 10,
-      "start": 14,
-      "end": 28,
-      "text": "基础研究归根结底靠高水平人才",
-      "type": "viewpoint"
-    },
-    {
-      "id": "ai-11-66-80-exam_point",
-      "paragraphIndex": 11,
-      "start": 66,
-      "end": 80,
-      "text": "拔尖计划、强基计划、英才计划",
-      "type": "exam_point"
-    },
-    {
-      "id": "ai-12-10-23-viewpoint",
-      "paragraphIndex": 12,
-      "start": 10,
-      "end": 23,
-      "text": "青年人才是基础研究的生力军",
-      "type": "viewpoint"
-    },
-    {
-      "id": "ai-15-8-61-exam_point",
-      "paragraphIndex": 15,
-      "start": 8,
-      "end": 61,
-      "text": "目前我国基础研究经费在全社会研发投入中的占比超过7%，但与世界科技强国15%至20%的比重相比仍有不小差距",
-      "type": "exam_point"
-    },
-    {
-      "id": "ai-17-10-27-exam_point",
-      "paragraphIndex": 17,
-      "start": 10,
-      "end": 27,
-      "text": "健全符合基础研究特点的分类评价体系",
-      "type": "exam_point"
-    },
-    {
-      "id": "ai-18-99-114-term",
-      "paragraphIndex": 18,
-      "start": 99,
-      "end": 114,
-      "text": "唯论文、唯顶刊、唯帽子、唯奖项",
-      "type": "term",
-      "explanation": "指科研评价中片面依赖论文、顶刊、人才帽子、奖项等量化指标的倾向，是科技体制改革着力扭转的问题。"
-    },
-    {
-      "id": "ai-19-151-171-exam_point",
-      "paragraphIndex": 19,
-      "start": 151,
-      "end": 171,
-      "text": "牵头发起和加入国际大科学计划、大科学工程",
-      "type": "exam_point"
-    },
-    {
-      "id": "ai-20-0-18-viewpoint",
-      "paragraphIndex": 20,
-      "start": 0,
-      "end": 18,
-      "text": "加强基础研究，需要全党全社会共同努力",
-      "type": "viewpoint"
-    }
-  ],
-  "aiQuality": {
-    "locationErrors": 1
-  }
+  "aiStatus": "error",
+  "aiAnnotations": [],
+  "aiError": "ai_semantic:annotation_count_viewpoint"
 }

@@ -5,7 +5,7 @@
   "source": "sichuan.scol.com.cn",
   "url": "https://sichuan.scol.com.cn/ggxw/202609/83325015.html",
   "pubDate": "",
-  "fetchedAt": "2026-09-16T06:21:33+00:00",
+  "fetchedAt": "2026-09-16T06:40:21+00:00",
   "status": "ok",
   "paragraphs": [
     "中小微企业常常因缺乏抵押物、贷款成本高而陷入“贷款难”。如何破解这一痛点？",
@@ -22,7 +22,7 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-09-16T06:21:35+00:00",
+  "aiGeneratedAt": "2026-09-16T06:40:25+00:00",
   "sourceTextHash": "1310673186f3917e15e2f905a5c822061935f72d3de4bb35f71ecc03d71dd9ba",
   "aiStatus": "error",
   "aiAnnotations": [],

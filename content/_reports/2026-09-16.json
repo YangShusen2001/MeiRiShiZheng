@@ -4,15 +4,23 @@
   "sourceErrors": [],
   "candidates": 18,
   "articles": 18,
-  "aiOk": 12,
-  "aiError": 6,
+  "aiOk": 11,
+  "aiError": 7,
   "aiFailures": [
     {
-      "articleId": "0b56eeee8c",
+      "articleId": "da104aeb9f",
       "reason": "ai_semantic:summary_length"
     },
     {
-      "articleId": "da104aeb9f",
+      "articleId": "a35d8c3883",
+      "reason": "ai_semantic:annotation_count_viewpoint"
+    },
+    {
+      "articleId": "64a208116b",
+      "reason": "ai_semantic:summary_length"
+    },
+    {
+      "articleId": "48ff080e45",
       "reason": "ai_semantic:summary_length"
     },
     {
@@ -26,13 +34,9 @@
     {
       "articleId": "74f11dec27",
       "reason": "ai_semantic:summary_length"
-    },
-    {
-      "articleId": "b93a9ea47d",
-      "reason": "ai_semantic:annotation_count_exam_point"
     }
   ],
-  "locationErrors": 6,
+  "locationErrors": 4,
   "schemaErrors": [],
   "semanticErrors": [],
   "volumeErrors": [],

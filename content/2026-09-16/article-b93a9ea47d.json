@@ -5,7 +5,7 @@
   "source": "中国政府网",
   "url": "http://www.jiangsu.gov.cn/art/2026/9/16/art_84322_11830418.html",
   "pubDate": "",
-  "fetchedAt": "2026-09-16T06:21:59+00:00",
+  "fetchedAt": "2026-09-16T06:40:47+00:00",
   "status": "ok",
   "paragraphs": [
     "近日，江苏省“人工智能+医疗健康”系列主题沙龙在南京举办。本次沙龙聚焦人工智能赋能医学科研，医疗机构管理者、高校专家、三甲医院医务工作者、生物医药领域专家齐聚，立足江苏数字医疗建设根基，探寻AI驱动医学科研高质量发展的实践路径。",
@@ -27,9 +27,103 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-09-16T06:21:59+00:00",
+  "aiGeneratedAt": "2026-09-16T06:40:48+00:00",
   "sourceTextHash": "eecb8169d87691e6be8b6f62e995b2544a0ba6a8dd554a5cc60aaee6c7bb482d",
-  "aiStatus": "error",
-  "aiAnnotations": [],
-  "aiError": "ai_semantic:annotation_count_exam_point"
+  "aiStatus": "ok",
+  "aiSummary": "江苏省举办\"人工智能+医疗健康\"主题沙龙，聚焦AI赋能医学科研。全省已汇聚覆盖1.77亿人的医疗健康数据1612亿条，建成21个专病高质量数据集和13个专病专科垂类大模型。AI正重构科研范式，渗透诊断、治疗、新药研发全链条，江苏将持续打通产学研医用链条，为健康江苏注入数智力量。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-1-54-viewpoint",
+      "paragraphIndex": 1,
+      "start": 1,
+      "end": 54,
+      "text": "人工智能赋能医学科研，绝不只是多了一件工具，而是科研组织方式的深刻变革，是科研生产力和生产关系的一次重构。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-68-95-exam_point",
+      "paragraphIndex": 2,
+      "start": 68,
+      "end": 95,
+      "text": "全省现已汇聚覆盖1.77亿人的医疗健康数据1612亿条",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-145-183-exam_point",
+      "paragraphIndex": 2,
+      "start": 145,
+      "end": 183,
+      "text": "全省目前建成21个专病高质量数据集，同时建成13个专病专科垂类大模型和智能体",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-33-37-term",
+      "paragraphIndex": 2,
+      "start": 33,
+      "end": 37,
+      "text": "人工智能",
+      "type": "term",
+      "explanation": "研究、开发用于模拟和扩展人类智能的理论、方法、技术及应用系统的一门新技术科学。"
+    },
+    {
+      "id": "ai-6-3-37-viewpoint",
+      "paragraphIndex": 6,
+      "start": 3,
+      "end": 37,
+      "text": "AI正在打破传统医学科研“单兵作战”模式，催生“有组织科研”全新范式",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-7-10-33-exam_point",
+      "paragraphIndex": 7,
+      "start": 10,
+      "end": 33,
+      "text": "临床提需求、平台供数据、各方建模型、多方来答题",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-10-38-76-viewpoint",
+      "paragraphIndex": 10,
+      "start": 38,
+      "end": 76,
+      "text": "从靶点发现到分子设计，从临床前研究到临床转化，AI已深度渗透新药研发全链条。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-12-61-93-viewpoint",
+      "paragraphIndex": 12,
+      "start": 61,
+      "end": 93,
+      "text": "目前最大的痛点是人才短缺，既懂人工智能又懂生命科学的人才太少了。",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-13-138-166-exam_point",
+      "paragraphIndex": 13,
+      "start": 138,
+      "end": 166,
+      "text": "全省已遴选80个“人工智能+医疗健康”典型场景向各地推广",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-13-89-98-term",
+      "paragraphIndex": 13,
+      "start": 89,
+      "end": 98,
+      "text": "医院出题、企业答题",
+      "type": "term",
+      "explanation": "指医院提出临床需求和医学标准，企业发挥技术攻关主体作用，联合开展AI医疗产品研发的模式。"
+    },
+    {
+      "id": "ai-14-4-51-exam_point",
+      "paragraphIndex": 14,
+      "start": 4,
+      "end": 51,
+      "text": "江苏将持续打通产学研医用链条，促成更多务实合作，让人工智能真正成为医学科研高质量发展的强劲引擎",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
 }

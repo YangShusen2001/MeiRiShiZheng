@@ -5,7 +5,7 @@
   "source": "news.dayoo.com",
   "url": "https://news.dayoo.com/guangdong/202609/16/139996_55003994.htm",
   "pubDate": "",
-  "fetchedAt": "2026-09-16T06:20:38+00:00",
+  "fetchedAt": "2026-09-16T06:39:15+00:00",
   "status": "ok",
   "paragraphs": [
     "9月15日，广州市发展和改革委员会发布公告，《广清一体化发展“十五五”规划（征求意见稿）》（以下简称《规划》）即日起至10月15日面向社会公开征求意见。《规划》首次提出构建四大分区格局，并明确打造“广货北上、资源南下”的省际合作枢纽。",
@@ -25,17 +25,17 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-09-16T06:20:39+00:00",
+  "aiGeneratedAt": "2026-09-16T06:39:16+00:00",
   "sourceTextHash": "c03e70c972e3285adb15f52d9d8784b93fc45d87db71555431f97e7d68ff1cc7",
   "aiStatus": "ok",
-  "aiSummary": "广州发布广清一体化“十五五”规划征求意见稿，首次提出四大分区格局，明确打造“广货北上、资源南下”省际合作枢纽，涵盖产业、交通、民生等十章内容，目标到2030年基本成型。",
+  "aiSummary": "广州发布广清一体化“十五五”规划征求意见稿，首提四大分区格局，明确打造“广货北上、资源南下”省际合作枢纽。规划涵盖产业、交通、生态、民生等10章，提出2030年同城化格局基本成型，并部署轨道交通、港口物流、产业共建及公共服务共享等重点任务。",
   "aiAnnotations": [
     {
-      "id": "ai-0-80-92-exam_point",
+      "id": "ai-0-76-92-exam_point",
       "paragraphIndex": 0,
-      "start": 80,
+      "start": 76,
       "end": 92,
-      "text": "首次提出构建四大分区格局",
+      "text": "《规划》首次提出构建四大分区格局",
       "type": "exam_point"
     },
     {
@@ -61,7 +61,7 @@
       "end": 19,
       "text": "融入内联外拓的区域发展格局",
       "type": "term",
-      "explanation": "指广清一体化中对接国内国际双循环、强化跨区域协作的发展布局，是规划首要任务。"
+      "explanation": "指广清一体化中对接国内国际双循环、强化跨区域协作的发展布局，是规划十项任务中的首要任务。"
     },
     {
       "id": "ai-4-8-21-term",
@@ -70,7 +70,15 @@
       "end": 21,
       "text": "百县千镇万村高质量发展工程",
       "type": "term",
-      "explanation": "广东省推动县镇村高质量发展的重大工程，旨在促进城乡区域协调发展。"
+      "explanation": "广东省推动县镇村高质量发展的重点工程，旨在兴业强县富民，提升县城综合承载能力。"
+    },
+    {
+      "id": "ai-5-36-46-viewpoint",
+      "paragraphIndex": 5,
+      "start": 36,
+      "end": 46,
+      "text": "高水平共建广州都市圈",
+      "type": "viewpoint"
     },
     {
       "id": "ai-6-84-105-viewpoint",
@@ -81,13 +89,29 @@
       "type": "viewpoint"
     },
     {
+      "id": "ai-6-43-76-exam_point",
+      "paragraphIndex": 6,
+      "start": 43,
+      "end": 76,
+      "text": "广清同城化实践区、产业同城化特色区、江海联动开放区、山海协作联动区",
+      "type": "exam_point"
+    },
+    {
       "id": "ai-7-24-33-term",
       "paragraphIndex": 7,
       "start": 24,
       "end": 33,
       "text": "广州总部+清远基地",
       "type": "term",
-      "explanation": "广清产业共建模式之一，广州设总部、清远建基地，实现产业协同发展。"
+      "explanation": "广清产业共建模式之一，指企业总部设在广州、生产基地落户清远，实现两地产业协同发展。"
+    },
+    {
+      "id": "ai-7-87-96-exam_point",
+      "paragraphIndex": 7,
+      "start": 87,
+      "end": 96,
+      "text": "“3+3”为核心区",
+      "type": "exam_point"
     },
     {
       "id": "ai-8-32-49-exam_point",
@@ -106,12 +130,21 @@
       "type": "viewpoint"
     },
     {
+      "id": "ai-10-65-82-exam_point",
+      "paragraphIndex": 10,
+      "start": 65,
+      "end": 82,
+      "text": "共建“广州—清远”多式联运核心枢纽",
+      "type": "exam_point"
+    },
+    {
       "id": "ai-11-86-97-term",
       "paragraphIndex": 11,
       "start": 86,
       "end": 97,
       "text": "研发‑中试‑场景‑转化",
-      "type": "term"
+      "type": "term",
+      "explanation": "广清产业协同中构建的成果转化闭环，涵盖研发、中试、应用场景到产业化的完整链条。"
     },
     {
       "id": "ai-12-120-134-exam_point",

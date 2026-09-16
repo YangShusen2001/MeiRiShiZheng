@@ -5,7 +5,7 @@
   "source": "news.dayoo.com",
   "url": "https://news.dayoo.com/guangdong/202609/16/139996_55004044.htm",
   "pubDate": "",
-  "fetchedAt": "2026-09-16T06:20:46+00:00",
+  "fetchedAt": "2026-09-16T06:39:20+00:00",
   "status": "ok",
   "paragraphs": [
     "你的梦想有多具体？也许是你手上的简历，是你身旁的有轨电车，又或许是你灵光一现的想法。9月16日至20日，“百万英才汇南粤”2026年N城联动秋季招聘活动走进上海、南京、杭州三地，用5天时间举办17场校园招聘会。在此，我们借这“一镜到底”的城市邀约，接住你的梦想。&nbsp;",
@@ -14,7 +14,7 @@
   "keySentences": [],
   "aiModel": "deepseek-chat",
   "aiPromptVersion": "article-analysis-v1",
-  "aiGeneratedAt": "2026-09-16T06:20:48+00:00",
+  "aiGeneratedAt": "2026-09-16T06:39:21+00:00",
   "sourceTextHash": "b2f04d5b67fe7dbf398483d9bcfe6ba7b031f43acaad0d3f8df924b42cc383f0",
   "aiStatus": "ok",
   "aiSummary": "9月16日至20日，“百万英才汇南粤”2026年N城联动秋季招聘活动走进上海、南京、杭州，5天举办17场校园招聘会，以城市邀约接住你的梦想。",
@@ -42,7 +42,7 @@
       "end": 76,
       "text": "“百万英才汇南粤”2026年N城联动秋季招聘活动",
       "type": "term",
-      "explanation": "广东省面向高校毕业生组织的大规模跨城联动秋季招聘活动，旨在吸引人才赴粤就业创业。"
+      "explanation": "广东面向高校毕业生开展的跨城联动秋季招聘活动，2026年走进上海、南京、杭州三地。"
     },
     {
       "id": "ai-0-78-88-exam_point",
