@@ -71,13 +71,23 @@ jobs:
           PUBLIC_API_BASE: ${{ secrets.PUBLIC_API_BASE }}
         run: pnpm --filter @kaogong/web build
 
+      # ⚠️ workingDirectory 是必须的，不是可选优化。
+      # wrangler-action 会以 workingDirectory 作为 cwd，去执行
+      # `pnpm exec wrangler --version` 以及真正的部署命令。
+      # 省略它则 cwd = 仓库根，而根 package.json 没有任何依赖、根 node_modules/.bin
+      # 里没有 wrangler（它只声明在 apps/api 的 devDependencies）→ action 判定
+      # "Wrangler not found"，转而走自动兜底 `pnpm add wrangler@4`，该命令在 pnpm
+      # workspace 下被 ERR_PNPM_ADDING_TO_ROOT 拒绝（需 -w），部署步骤必红。
+      # 指向 apps/api 后，版本检测与部署命令都在该包内解析，两处都不再依赖根。
       - name: 部署到 Cloudflare Pages
         id: pages-deploy
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy apps/web/dist --project-name kaogong-web --branch=main
+          workingDirectory: apps/api
+          # 相对 apps/api 解析 → 即 apps/web/dist
+          command: pages deploy ../web/dist --project-name kaogong-web --branch=main
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 记录 Pages 部署地址

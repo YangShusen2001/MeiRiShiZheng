@@ -160,7 +160,7 @@ cd apps/web && PUBLIC_API_BASE=http://127.0.0.1:8787 npx astro dev
 3. 如果失败在“提交当日内容”，先处理 Git 并发或内容冲突；此时 Cloudflare 部署尚未执行。
 4. 如果失败在“生产发布阻塞门禁”，查看 `docs/release-readiness.json`；不得绕过或伪造 close evidence。
 5. 如果失败在“构建前端”，本地运行 `pnpm --filter @kaogong/web build`。
-6. 如果失败在“部署到 Cloudflare Pages”，检查 GitHub Secrets 和 `npx wrangler@4 pages deployment list --project-name kaogong-web`。
+6. 如果失败在“部署到 Cloudflare Pages”，先看日志里有没有 `Command "wrangler" not found` / `ERR_PNPM_ADDING_TO_ROOT` —— 那是 `workingDirectory` 缺失（见上节），不是 Secrets 问题；否则检查 GitHub Secrets 和 `npx wrangler@4 pages deployment list --project-name kaogong-web`。
 7. 如果失败在“部署后只读冒烟”，从 job summary 获取 `PUBLIC_SITE_URL`，复现 `pnpm test:smoke`；不要把失败脚本重试描述为线上通过。
 
 生产部署 blocker 关闭必须同时满足：所需配置存在、全部 D1 迁移已应用、Worker 和 Pages 均有部署记录、同站点自定义域生效、线上 GET smoke 通过，并完成一次不泄露敏感信息的验证码事务邮件验证。
