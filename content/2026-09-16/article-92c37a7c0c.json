@@ -1,0 +1,84 @@
+{
+  "id": "92c37a7c0c",
+  "date": "2026-09-16",
+  "title": "平陆运河 正式通航|翔子来啦",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83325025.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-16T06:21:16+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "四川在线记者&nbsp;陈旻翔&nbsp;赵丹&nbsp;黄潇&nbsp;钦州报道",
+    "9月16日上午，新中国第一条通江达海的运河——平陆运河正式通航！第一批船已经通过马道枢纽船闸，向南边的北部湾开去。从此以后，云贵川渝还有广西，通过这条134.2公里的运河，拥有了自己新的出海通道。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-16T06:21:18+00:00",
+  "sourceTextHash": "c13e432407081e15fc6d4b9e5ddaee4cc9fbec8dc7dd8795c44349b33107b098",
+  "aiStatus": "ok",
+  "aiSummary": "9月16日上午，新中国第一条通江达海的运河平陆运河正式通航，首批船舶通过马道枢纽船闸驶向北部湾。云贵川渝及广西由此获得新的出海通道，运河全长134.2公里，标志着西南地区水运格局的重要变化。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-8-21-exam_point",
+      "paragraphIndex": 1,
+      "start": 8,
+      "end": 21,
+      "text": "新中国第一条通江达海的运河",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-23-31-exam_point",
+      "paragraphIndex": 1,
+      "start": 23,
+      "end": 31,
+      "text": "平陆运河正式通航",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-40-46-term",
+      "paragraphIndex": 1,
+      "start": 40,
+      "end": 46,
+      "text": "马道枢纽船闸",
+      "type": "term",
+      "explanation": "平陆运河三大枢纽之一，位于钦江干流，是船舶由内河驶向北部湾的重要通航建筑物。"
+    },
+    {
+      "id": "ai-1-51-54-term",
+      "paragraphIndex": 1,
+      "start": 51,
+      "end": 54,
+      "text": "北部湾",
+      "type": "term",
+      "explanation": "位于中国南海西北部，是中国西南地区最近的出海海湾，也是平陆运河向南入海的终点。"
+    },
+    {
+      "id": "ai-1-62-70-exam_point",
+      "paragraphIndex": 1,
+      "start": 62,
+      "end": 70,
+      "text": "云贵川渝还有广西",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-75-82-exam_point",
+      "paragraphIndex": 1,
+      "start": 75,
+      "end": 82,
+      "text": "134.2公里",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-86-97-viewpoint",
+      "paragraphIndex": 1,
+      "start": 86,
+      "end": 97,
+      "text": "拥有了自己新的出海通道",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "id": "64a208116b",
+  "date": "2026-09-16",
+  "title": "前8月四川锂离子电池产量同比增长80.5%",
+  "source": "sichuan.scol.com.cn",
+  "url": "https://sichuan.scol.com.cn/ggxw/202609/83325041.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-16T06:21:00+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月16日，省统计局发布2026年1—8月四川省国民经济主要指标数据。前8月，全省规模以上工业增加值同比增长6.7%，高于全国1.4个百分点。锂离子电池、集成电路产量增长强劲，同比分别增长80.5%、20.1%。",
+    "分行业看，41个大类行业中34个行业增加值同比实现增长，其中，电气机械和器材制造业增加值同比增长13.9%，计算机、通信和其他电子设备制造业同比增长11.6%，化学原料和化学制品制造业同比增长8.4%，医药制造业同比增长8.0%，电力、热力生产和供应业同比增长7.9%。",
+    "新动能加快成长，产业含“新”量、含“智”量、含“绿”量持续提升，相关产品产量较快增长。其中，锂离子电池产量同比增长80.5%，集成电路同比增长20.1%，智能电视同比增长12.3%，工业机器人同比增长5.3%。",
+    "固定资产投资情况方面，前8月，全省固定资产投资（不含农户）同比下降2.7%。",
+    "分产业看，第一产业投资同比下降7.1%；第二产业投资同比增长7.0%，其中工业投资同比增长7.0%；第三产业投资同比下降6.8%。",
+    "消费品市场情况方面，前8月，全省实现社会消费品零售总额19100.4亿元，同比增长1.8%。从热点商品看，限额以上企业（单位）文化办公用品类零售额同比增长18.0%，粮油、食品类同比增长11.4%，烟酒类同比增长11.4%，通讯器材类同比增长6.5%。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-16T06:21:02+00:00",
+  "sourceTextHash": "557d6fa8b0ad1305691201bbc0cef251a4e22313c7a2bd062be1f277346f4b0e",
+  "aiStatus": "ok",
+  "aiSummary": "四川省统计局发布2026年1—8月主要经济数据：规模以上工业增加值同比增长6.7%，高于全国1.4个百分点，锂离子电池产量增长80.5%，集成电路增长20.1%，新动能加快成长。固定资产投资同比下降2.7%，社会消费品零售总额19100.4亿元，同比增长1.8%。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-71-87-viewpoint",
+      "paragraphIndex": 0,
+      "start": 71,
+      "end": 87,
+      "text": "锂离子电池、集成电路产量增长强劲",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-59-70-exam_point",
+      "paragraphIndex": 0,
+      "start": 59,
+      "end": 70,
+      "text": "高于全国1.4个百分点",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-41-50-term",
+      "paragraphIndex": 0,
+      "start": 41,
+      "end": 50,
+      "text": "规模以上工业增加值",
+      "type": "term",
+      "explanation": "指年主营业务收入2000万元及以上的工业企业在一定时期内生产活动的最终成果，是反映工业经济运行的重要指标。"
+    },
+    {
+      "id": "ai-2-0-7-viewpoint",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 7,
+      "text": "新动能加快成长",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-8-31-viewpoint",
+      "paragraphIndex": 2,
+      "start": 8,
+      "end": 31,
+      "text": "产业含“新”量、含“智”量、含“绿”量持续提升",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-91-104-exam_point",
+      "paragraphIndex": 2,
+      "start": 91,
+      "end": 104,
+      "text": "工业机器人同比增长5.3%",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-17-37-exam_point",
+      "paragraphIndex": 3,
+      "start": 17,
+      "end": 37,
+      "text": "固定资产投资（不含农户）同比下降2.7%",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-18-36-exam_point",
+      "paragraphIndex": 5,
+      "start": 18,
+      "end": 36,
+      "text": "社会消费品零售总额19100.4亿元",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-37-45-exam_point",
+      "paragraphIndex": 5,
+      "start": 37,
+      "end": 45,
+      "text": "同比增长1.8%",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-18-27-term",
+      "paragraphIndex": 5,
+      "start": 18,
+      "end": 27,
+      "text": "社会消费品零售总额",
+      "type": "term",
+      "explanation": "指企业（单位、个体户）通过交易直接售给个人、社会集团非生产、非经营用的实物商品金额，以及提供餐饮服务所取得的收入金额。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

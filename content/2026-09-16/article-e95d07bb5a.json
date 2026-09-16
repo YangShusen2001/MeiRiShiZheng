@@ -1,0 +1,92 @@
+{
+  "id": "e95d07bb5a",
+  "date": "2026-09-16",
+  "title": "江苏省人民政府 要闻关注 第四届种业知识产权保护与运用推进行动在徐州举行",
+  "source": "中国政府网",
+  "url": "http://www.jiangsu.gov.cn/art/2026/9/16/art_84322_11830420.html",
+  "pubDate": "",
+  "fetchedAt": "2026-09-16T06:22:08+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "9月15日，第四届种业知识产权保护与运用推进行动在徐州举行，以专家解读、沙龙研讨、专题培训、田间观摩等系列活动，全面系统宣传贯彻实施实质性派生品种（EDV）制度，推进农业植物品种保护由“数量扩张”向“质量提升”转型。",
+    "截至2025年底，我国农业植物新品种权累计申请量达10.9万件，授权量达4.3万件，申请量连续9年位居世界第一，已成为品种保护大国。今年6月，农业农村部公布第一批农业植物EDV制度实施目录，涵盖水稻、小麦、棉花等10种作物，配套发布判定指南、判定阈值、鉴定机构条件，标志着我国EDV制度从法律规定迈向实施阶段。",
+    "记者了解到，江苏始终把加强种业知识产权保护作为加快种业振兴、高水平建设农业强省的关键一环。目前，江苏种质资源“家底”更加厚实，高质量完成农业种质资源普查任务，育成扬麦53等一批突破性重大品种，选育畜禽、水产新品种数均居全国前列，种业企业综合竞争力稳步提升，2家企业进入全国销售20强。"
+  ],
+  "keySentences": [],
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v1",
+  "aiGeneratedAt": "2026-09-16T06:22:08+00:00",
+  "sourceTextHash": "103a2ffecc74db1c8ff3e98d88ad304ab66afb2a1a5f8ecceb8ebcc415c0137b",
+  "aiStatus": "ok",
+  "aiSummary": "9月15日，第四届种业知识产权保护与运用推进行动在徐州举行，宣传贯彻实质性派生品种制度，推动品种保护由数量扩张向质量提升转型。我国新品种权申请量连续9年世界第一，EDV制度已进入实施阶段。江苏将种业知识产权保护作为种业振兴关键一环，育成扬麦53等突破性品种，种业企业竞争力稳步提升。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-56-80-exam_point",
+      "paragraphIndex": 0,
+      "start": 56,
+      "end": 80,
+      "text": "全面系统宣传贯彻实施实质性派生品种（EDV）制度",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-81-107-viewpoint",
+      "paragraphIndex": 0,
+      "start": 81,
+      "end": 107,
+      "text": "推进农业植物品种保护由“数量扩张”向“质量提升”转型",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-66-80-term",
+      "paragraphIndex": 0,
+      "start": 66,
+      "end": 80,
+      "text": "实质性派生品种（EDV）制度",
+      "type": "term",
+      "explanation": "对由原始品种派生而来、与原始品种有特定遗传差异的品种进行保护的制度，旨在防止修饰性育种搭便车。"
+    },
+    {
+      "id": "ai-1-42-55-exam_point",
+      "paragraphIndex": 1,
+      "start": 42,
+      "end": 55,
+      "text": "申请量连续9年位居世界第一",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-133-154-viewpoint",
+      "paragraphIndex": 1,
+      "start": 133,
+      "end": 154,
+      "text": "标志着我国EDV制度从法律规定迈向实施阶段",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-78-94-exam_point",
+      "paragraphIndex": 1,
+      "start": 78,
+      "end": 94,
+      "text": "第一批农业植物EDV制度实施目录",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-6-44-viewpoint",
+      "paragraphIndex": 2,
+      "start": 6,
+      "end": 44,
+      "text": "江苏始终把加强种业知识产权保护作为加快种业振兴、高水平建设农业强省的关键一环",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-79-95-exam_point",
+      "paragraphIndex": 2,
+      "start": 79,
+      "end": 95,
+      "text": "育成扬麦53等一批突破性重大品种",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}
