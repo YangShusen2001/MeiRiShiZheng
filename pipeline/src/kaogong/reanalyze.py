@@ -8,7 +8,7 @@ import re
 from pathlib import Path
 
 from .article_ai import analyze_article, normalize_article
-from .deepseek import load_config
+from .deepseek import Cfg, load_config
 
 MAX_AI_FAILURES = 50
 
@@ -54,7 +54,7 @@ def reanalyze_content(
     target: dt.date,
     content_dir: Path,
     *,
-    cfg: dict[str, str] | None = None,
+    cfg: Cfg | None = None,
     force_ai: bool = False,
 ) -> int:
     """补跑当日文章：已成功的只清洗正文并重定位标注；未成功的用干净正文重新分析。

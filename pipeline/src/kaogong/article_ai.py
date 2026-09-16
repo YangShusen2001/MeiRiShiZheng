@@ -11,7 +11,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import TypedDict
 
-from .deepseek import DEFAULT_MODEL, chat
+from .deepseek import Cfg, DEFAULT_MODEL, chat
 
 # v3：标注密度收紧（生成侧）。v2 产物是「段段带标注」的密集代，v3 起为稀疏点缀；
 # 升版是为了让两代产物可区分（schema 只要求 aiPromptVersion 为非空字符串，不锁枚举）。
@@ -321,7 +321,7 @@ def _messages(title: str, paragraphs: list[str], *, rewrite: bool = False, corre
 
 def analyze_article(
     article: dict,
-    cfg: dict[str, str],
+    cfg: Cfg,
     *,
     call: Callable[..., str] = chat,
     attempts: int = 2,
@@ -353,8 +353,20 @@ def analyze_article(
             raise ArticleAiError("ai_provider:no_output")
         summary = payload["summary"].strip()
         if not 60 <= len(summary) <= 150:
-            # 纠错重试：把具体长度错误反馈给模型重写一次
-            correction = f"你上次的摘要长度为 {len(summary)} 字，不符合 80-120 字要求，请重写。"
+            # 纠错重试：把具体长度错误反馈给模型重写一次。
+            # ⚠️ 只报「长度不符合」不够 —— 实测模型会连续吐 161~181 字。
+            # 2026-09-16 A/B（短新闻 799 字样本，各 6 次采样）：
+            #   只说「不符合 80-120 字要求」→ 3/6 达标（162/181/161 超上限）
+            #   补上「太长了 + 压到 120 字以内 + 宁短勿长 + 具体删什么」→ 6/6 达标（93~103）
+            # 长文样本（4270 字）两种说法均 6/6，无回归。
+            # 方向词是关键：模型擅长删减，不擅长自行判断该往哪边调。
+            if len(summary) > 120:
+                correction = (
+                    f"你上次的摘要长度为 {len(summary)} 字，太长了。必须压到 120 字以内，宁短勿长："
+                    "只保留最重要的一件事 + 一个数字，删掉次要背景与并列细节。"
+                )
+            else:
+                correction = f"你上次的摘要长度为 {len(summary)} 字，不符合 80-120 字要求，请重写。"
             payload = _json_object(call(
                 _messages(str(article.get("title", "")), paragraphs, rewrite=True, correction=correction),
                 cfg, max_tokens=1800, temperature=0.2,

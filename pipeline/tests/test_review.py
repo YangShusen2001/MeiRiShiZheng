@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-"""本地审核服务测试：北京时间日期、参数校验、补跑 AI 守卫、发布拦截。"""
+"""本地审核服务测试：北京时间日期、参数校验、补跑 AI 守卫、发布拦截、界面纪律。"""
 import datetime as dt
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -325,4 +326,158 @@ def test_admin_index_links_tokens_after_pinned_tabler(client: TestClient):
     assert tokens_at != -1, "未引入 tokens.css"
     assert "@tabler/core@latest" not in html, "Tabler 未锁版本（规范 §7 债务 2）"
     assert tabler_at < tokens_at, "tokens.css 必须置于 Tabler 之后，否则覆盖不生效"
+
+
+# ─────────── AI 审核结果的日期归属（2026-09-15 修复）───────────
+#
+# `_review_state` 是模块级全局单例，只保存「最近一次」审核结果；
+# `apply_decisions` 又是**按位置下标**逐条套用的，不做任何 id 匹配。
+# 二者叠加 → 对 A 日跑完审核、把日期切到 B 日再点「应用」，
+# A 日的 drop/rewrite 判定会被套到 B 日的条目上（误删误改，且只能整批回退）。
+
+
+def _stub_review_state(reviewed_date: str, decisions: list[dict]) -> dict:
+    return {
+        "running": False, "step": "", "log": "", "done": True, "ok": True,
+        "report": {
+            "date": reviewed_date,
+            "agent": "review-agent-v1",
+            "decisions": decisions,
+            "summary": {},
+        },
+    }
+
+
+def test_review_apply_rejects_mismatched_date(client, tmp_path, monkeypatch):
+    """跨日期应用必须被拒绝，且目标日报必须原封不动。"""
+    monkeypatch.setattr(server, "CONTENT", tmp_path)
+    _write_day(tmp_path, "2026-09-14", [{"title": "甲", "sourceUrl": "https://x/14"}])
+    _write_day(tmp_path, "2026-09-15", [{"title": "乙", "sourceUrl": "https://x/15"}])
+    monkeypatch.setattr(server, "_review_state", _stub_review_state(
+        "2026-09-14",
+        [{"verdict": "drop", "articleId": "a1", "title": "甲", "reason": "不相关"}],
+    ))
+
+    body = client.post("/api/review-agent/apply", json={"date": "2026-09-15"}).json()
+
+    assert body["ok"] is False
+    assert body["step"] == "日期不一致"
+    assert "2026-09-14" in body["log"] and "2026-09-15" in body["log"]
+
+    # 09-15 的日报必须未被触碰，也不该留下可被 rollback 误用的 .bak
+    digest = json.loads((tmp_path / "2026-09-15" / "digest.json").read_text(encoding="utf-8"))
+    assert len(digest["sections"][0]["items"]) == 1
+    assert digest["sections"][0]["items"][0]["title"] == "乙"
+    assert not (tmp_path / "2026-09-15" / "digest.json.bak").exists()
+
+
+def test_review_apply_accepts_matching_date(client, tmp_path, monkeypatch):
+    """同日期应用照常工作（守卫不能把正常路径一起拦掉）。"""
+    monkeypatch.setattr(server, "CONTENT", tmp_path)
+    _write_day(tmp_path, "2026-09-15", [
+        {"title": "甲", "sourceUrl": "https://x/15a"},
+        {"title": "乙", "sourceUrl": "https://x/15b"},
+    ])
+    _write_report_file(tmp_path, "2026-09-15", {"date": "2026-09-15"})
+    monkeypatch.setattr(server, "_review_state", _stub_review_state(
+        "2026-09-15",
+        [
+            {"verdict": "drop", "articleId": "a1", "title": "甲", "reason": "不相关"},
+            {"verdict": "keep", "articleId": "a2", "title": "乙", "score": 90},
+        ],
+    ))
+
+    body = client.post("/api/review-agent/apply", json={"date": "2026-09-15"}).json()
+
+    assert body["ok"] is True
+    assert body["appliedCount"] == 1
+    digest = json.loads((tmp_path / "2026-09-15" / "digest.json").read_text(encoding="utf-8"))
+    items = digest["sections"][0]["items"]
+    assert [it["title"] for it in items] == ["乙"]
+    assert (tmp_path / "2026-09-15" / "digest.json.bak").exists(), "应用前必须留备份供回退"
+
+
+def test_review_apply_without_result_is_rejected(client, tmp_path, monkeypatch):
+    """没跑过审核时给可执行提示，而不是套用一份空判定。"""
+    monkeypatch.setattr(server, "CONTENT", tmp_path)
+    _write_day(tmp_path, "2026-09-15", [{"title": "甲", "sourceUrl": "https://x/15"}])
+    monkeypatch.setattr(server, "_review_state", {
+        "running": False, "step": "", "log": "", "done": False, "ok": False, "report": None,
+    })
+
+    body = client.post("/api/review-agent/apply", json={"date": "2026-09-15"}).json()
+
+    assert body["ok"] is False
+    assert "开始 AI 审核" in body["log"]
+
+
+# ─────────── 审核端界面纪律（三端统一，2026-09-15）───────────
+#
+# 三条纪律：
+#   1. **界面控件层零 emoji** —— Web 构建产物与鸿蒙 UI 实测都是 0；审核端此前有 20+ 处
+#      （🤖🔁📌🗑↩✅❌⚠️）。例外只有 `#log`：它是等价的命令行输出，✅/❌ 用于长日志定位成败行。
+#   2. **编辑器必须有入口** —— /editor/{article_id} 是一整页，曾零引用（只能手敲 URL）。
+#   3. **死代码不得回流** —— 见 test_review_ui_has_no_dead_helpers 的清单。
+
+# 界面层 emoji 黑名单（只查标记段，不查 <script>）
+_UI_EMOJI = "🤖🔁📌🗑↩✅❌⚠️"
+
+
+def _strip_comments(text: str) -> str:
+    """剥掉 HTML 注释与 /* */ 块注释——注释里出现 ⚠️ 不算界面 emoji。"""
+    text = re.sub(r"<!--.*?-->", "", text, flags=re.S)
+    return re.sub(r"/\*.*?\*/", "", text, flags=re.S)
+
+
+def test_review_ui_markup_has_no_emoji():
+    """标记段（<script> 之前）零 emoji：状态一律纯文字 + 颜色强化，不靠颜色单独表意。"""
+    html = _strip_comments(server.UI.read_text(encoding="utf-8"))
+    markup = html.split("<script>", 1)[0]
+    offenders = [e for e in _UI_EMOJI if e in markup]
+    assert not offenders, f"审核端标记段出现 emoji：{offenders}"
+
+
+def test_review_ui_dropped_emoji_strings_stay_dropped():
+    """已被清掉的界面文案不得回流（这些字符串直接进 DOM，不是日志）。"""
+    html = _strip_comments(server.UI.read_text(encoding="utf-8"))
+    for bad in ("🤖 AI 速览与标注", "🔁 重试", "📌 强制收录", "🗑 排除", "↩ 恢复",
+                "❌ 剪藏失败", "✅ 已剪藏", "⚠️ AI 失败", "✅ AI 成功",
+                "✅ 已上传", "❌ 上传失败", "✅ 新邀请码", "❌ 生成失败"):
+        assert bad not in html, f"界面文案又带上了 emoji：{bad!r}"
+
+
+def test_review_ui_exposes_relation_editor_entry():
+    """关系标注编辑器必须有入口。
+
+    `/editor/{article_id}`（editor.html：荧光笔 → 吸附 → 箭头素材库 → 样式面板）是一整页，
+    但 index.html 里一度零引用 —— 只能手敲 URL 才到得了，等于功能不存在。
+    """
+    html = _strip_comments(server.UI.read_text(encoding="utf-8"))
+    assert 'data-act="editor"' in html, "状态面板里没有关系标注入口按钮"
+    assert "/editor/" in html, "入口没有指向 /editor/{id}"
+
+
+def test_review_ui_has_no_dead_helpers():
+    """防回归：已删除的死代码不得被重新引入。
+
+    断言前剥注释 —— 否则「解释为什么删掉它」的注释本身会把测试打红。
+    """
+    html = _strip_comments(server.UI.read_text(encoding="utf-8"))
+    # articleIdOf 永远 return null（前端算不出后端那份 MD5）；clipMap 建完从不被读；
+    # lazyOnHover 的四个包裹层在画布 14 收拢视图时就不存在了 → 纯 no-op。
+    for token in ("function articleIdOf", "function buildClipMap", "function lazyOnHover"):
+        assert token not in html, f"死代码 {token} 又回来了"
+
+
+def test_review_ui_empty_state_selector_is_scoped():
+    """`.empty` 必须按 id 取。
+
+    队列区（#aside）在 DOM 上排在预览区之前，且会在「当前筛选下无条目」时动态插一个 .empty；
+    `document.querySelector(".empty")` 会命中队列那个 —— 选中文章时会隐藏错元素。
+    """
+    html = _strip_comments(server.UI.read_text(encoding="utf-8"))
+    assert 'id="preview-empty"' in html, "预览区空态缺少 id"
+    assert 'querySelector(".empty")' not in html, "又出现了不收敛的 .empty 全局选择器"
+
+
 

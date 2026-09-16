@@ -10,7 +10,7 @@ from collections.abc import Callable
 from typing import TypedDict
 
 from .article_ai import _locate
-from .deepseek import DEFAULT_MODEL, chat
+from .deepseek import Cfg, DEFAULT_MODEL, chat
 
 PROMPT_VERSION = "card-refinement-v1"
 
@@ -226,7 +226,7 @@ def validate_cards(cards: list[dict], paragraphs: list[str], article_id: str) ->
 
 def refine_cards(
     article: dict,
-    cfg: dict[str, str],
+    cfg: Cfg,
     *,
     call: Callable[..., str] = chat,
     attempts: int = 2,

@@ -1,5 +1,5 @@
 /* 自动生成，请勿手改：packages/design-tokens/generate.mjs → pipeline/src/kaogong/review/ui/tokens.css */
-/* SOURCE_SHA256:7c9d18d7c69ff92f4d88c21292632119c3995fd41af2c7ca780d35600322f0a5 */
+/* SOURCE_SHA256:3eab5ee1be2d6acd6b0eca8bb0ae55095f2e3b9893fa5b73ee63b0888198b490 */
 /* 规范 docs/design/design-system-v3.md · v3 · 2026-09-12 */
 
 /* 必须置于 Tabler CDN <link> 之后：既有类名自动换肤，布局零改动 */
@@ -42,6 +42,10 @@
   --kg-highlight-term: #B9DEE6;
   --kg-highlight-figure: #F8C8D8;
   --kg-highlight-on-highlight: #2A2723;
+  --kg-highlight-soft-exam-point: #EBDFB9;
+  --kg-highlight-soft-viewpoint: #D3E4D6;
+  --kg-highlight-soft-term: #CFE3E7;
+  --kg-highlight-soft-figure: #F3D8E1;
   --kg-shadow-hair: 0 1px 2px rgba(92, 58, 26, 0.06);
   --kg-shadow-card: 0 1px 2px rgba(92, 58, 26, 0.06), 0 6px 24px rgba(92, 58, 26, 0.09);
   --kg-shadow-float: 0 2px 4px rgba(92, 58, 26, 0.08), 0 12px 32px rgba(92, 58, 26, 0.14);

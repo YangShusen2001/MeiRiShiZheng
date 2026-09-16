@@ -101,14 +101,6 @@
     padding: 14px 24px; background: var(--kg-surface); border-bottom: 1px solid var(--kg-line);
   }
   .kg-filters__l { display: flex; flex-wrap: wrap; gap: 8px; }
-  /* 筛选胶囊（画布 3:1304）：h30 · pad 0 14 · 圆角 999；选中 = 品牌实底 + 暖白 Medium */
-  .kg-pill {
-    display: inline-flex; align-items: center; height: 30px; padding: 0 14px;
-    border: 1px solid var(--kg-line); border-radius: var(--kg-radius-full); background: transparent;
-    color: var(--kg-sub); font-family: inherit; font-size: 12px; cursor: pointer; white-space: nowrap;
-  }
-  .kg-pill:hover { border-color: var(--kg-brand); color: var(--kg-brand); }
-  .kg-pill.on { background: var(--kg-brand); border-color: var(--kg-brand); color: var(--kg-panel-strong); font-weight: 500; }
 
   /* 工作区（画布 3:1315）：pad 16/24 · 两栏 gap 16 = 队列 620 定宽 + 预览填充 */
   .kg-body { display: flex; align-items: flex-start; gap: 16px; padding: 16px 24px 32px; }
@@ -120,10 +112,6 @@
   .kg-card__line { height: 1px; background: var(--kg-line); }
   .kg-card__body { padding: 12px 16px; }
   .kg-card__body--pad { padding: 16px 20px; }
-  /* 队列行（画布 3:1321 / 3:1326 选中）：pad 16/12 · gap 6；选中 = brand-soft 底 */
-  .kg-row { display: flex; flex-direction: column; gap: 6px; padding: 12px 16px; cursor: pointer; }
-  .kg-row:hover { background: var(--kg-surface-alt); }
-  .kg-row.on { background: var(--kg-brand-soft); }
 
   /* ===== 13 屏：AI 审核与回退（画布 3:1367）===== */
   /* 视图容器：面板区 pad 24/24/32 */
@@ -395,7 +383,10 @@
             <div class="kg-card__head"><h2 class="kg-card__t">原文与编辑</h2></div>
             <div class="kg-card__line"></div>
             <div class="kg-card__body kg-card__body--pad">
-              <div class="empty">选择左侧文章进行编辑</div>
+              <!-- ⚠️ 必须带 id：`document.querySelector(".empty")` 会命中 DOM 里**第一个** .empty，
+                   而队列区（#aside）在 DOM 上排在预览区之前 —— 队列为空时会隐藏错的那个。
+                   选择器已全部收窄为 #preview-empty。 -->
+              <div class="empty" id="preview-empty">选择左侧文章进行编辑</div>
               <div id="edit-form" style="display:none">
                 <div class="item-status" id="item-status" hidden></div>
                 <label class="form-label">标题<input id="f-title" class="form-control"></label>
@@ -405,7 +396,7 @@
                   <div class="col-auto d-flex align-items-center"><label class="check"><input type="checkbox" id="f-del" class="form-check-input"> 本期不发布（删除）</label></div>
                 </div>
                 <details class="preview" id="ai-brief-box" hidden>
-                  <summary>🤖 AI 速览与标注 <span id="ai-ann-count" style="color:var(--tblr-muted);font-weight:400"></span></summary>
+                  <summary>AI 速览与标注 <span id="ai-ann-count" style="color:var(--tblr-muted);font-weight:400"></span></summary>
                   <div id="ai-summary"></div>
                   <div id="ai-annotations"></div>
                 </details>
@@ -432,13 +423,20 @@ let digest = null;            // 当前日报 JSON
 let selected = null;          // {si, ii} 选中的文章
 let items = [];               // 0018：/api/items 统一视图
 let itemByUrl = {};           // sourceUrl -> item 视图（不用手写 MD5，避免不一致）
-const clipMap = {};           // url -> article id
 
 async function j(url, opts) {
   const r = await fetch(url, opts);
   return r.json();
 }
 
+/**
+ * 操作日志（终端式输出框）。
+ *
+ * ⚠️ emoji 边界（2026-09-15 统一）：**界面控件层零 emoji** —— Web 产物与鸿蒙 UI 都是 0，
+ * 审核端原先 20+ 处（🤖🔁📌🗑↩✅❌⚠️）已清理，状态改用纯文字 + 颜色强化。
+ * 只有这里例外：`#log` 是等价的命令行输出，✅/❌/⚠️ 用于在长日志里快速定位成败行。
+ * 新增界面文案请勿加 emoji；写进 log() 的可以。
+ */
 function log(msg) {
   const el = $("log");
   el.style.display = "block";
@@ -462,25 +460,16 @@ async function loadDigest(date) {
   // 按 sourceUrl 映射（不手写 MD5：后端 id 只用于 API 调用，视图匹配用 URL 最可靠）
   itemByUrl = {};
   for (const it of items) if (it.sourceUrl) itemByUrl[it.sourceUrl] = it;
-  buildClipMap();
   renderAside();
   selected = null;
   $("edit-form").style.display = "none";
-  document.querySelector(".empty").style.display = "block";
+  $("preview-empty").style.display = "block";
 }
 
-// —— clipMap：url -> article id，按 MD5(url)[:10] 稳定映射 ——
-function articleIdOf(url) {
-  // 与后端 hashlib.md5(url)[:10] 对齐：纯 JS 算不出，但审核服务会按 id 直接返回；
-  // 这里通过 /api/article-by-url?url=... 让后端解析，前端不重复算。
-  return null;
-}
-
-function buildClipMap() {
-  for (const s of digest.sections) for (const it of s.items) {
-    if (it.sourceUrl && !(it.sourceUrl in clipMap)) clipMap[it.sourceUrl] = null;
-  }
-}
+// —— clipMap / articleIdOf 已删除（2026-09-15）——
+// 原先维护一份前端 `url -> MD5(url)[:10]` 映射，但纯 JS 算不出后端那份 MD5：
+// `articleIdOf()` 永远 return null，`clipMap` 建完从不被读。视图匹配早已改用 sourceUrl
+// （见 itemByUrl），id 只在调 API 时由后端视图给出 —— 整块删掉，不留"看着像有用"的死代码。
 
 // —— 0018：条目状态（徽标 / 筛选 / 操作）——
 const STATUS_LABEL = { ok: "正常", clip_error: "剪藏失败", ai_error: "AI失败", excluded: "已排除", unknown: "未剪藏" };
@@ -497,7 +486,6 @@ function statusOf(it) {
 function itemMatchesFilter(it, filter) {
   const st = statusOf(it);
   if (filter === "all") return true;
-  if (filter === "failed") return st === "clip_error" || st === "ai_error";
   if (filter === "clip") return st === "clip_error";
   if (filter === "ai") return st === "ai_error";
   if (filter === "excluded") return st === "excluded";
@@ -557,7 +545,7 @@ function select(si, ii, row) {
   document.querySelectorAll(".art").forEach((a) => a.classList.remove("on"));
   row.classList.add("on");
   const it = digest.sections[si].items[ii];
-  document.querySelector(".empty").style.display = "none";
+  $("preview-empty").style.display = "none";
   $("edit-form").style.display = "block";
   $("f-title").value = it.title;
   $("f-summary").value = it.summary || "";
@@ -574,15 +562,22 @@ async function renderItemStatus(sourceUrl) {
   if (!view) { box.innerHTML = ""; box.hidden = true; return; }
   const id = view.id || "";
   box.hidden = false;
-  const clipText = view.excluded ? "已排除" : view.clipStatus === "clip_error" ? "❌ 剪藏失败" : view.clipStatus === "ok" ? "✅ 已剪藏" : "—";
-  const aiText = view.excluded ? "—" : view.aiStatus === "error" ? "⚠️ AI 失败" : view.aiStatus === "ok" ? "✅ AI 成功" : "—";
+  // 状态文字一律**纯文字**：界面控件层不用 emoji（三端统一 —— Web 产物与鸿蒙 UI 都是 0 emoji），
+  // 失败/成功靠文字本身 + 颜色强化表达，不靠颜色单独表意。
+  const clipText = view.excluded ? "已排除" : view.clipStatus === "clip_error" ? "剪藏失败" : view.clipStatus === "ok" ? "已剪藏" : "—";
+  const aiText = view.excluded ? "—" : view.aiStatus === "error" ? "AI 失败" : view.aiStatus === "ok" ? "AI 成功" : "—";
   const acts = (view.actions || []).map((a) => {
-    if (a === "retry") return `<button type="button" class="primary" data-act="retry">🔁 重试</button>`;
-    if (a === "force-include") return `<button type="button" class="primary" data-act="force-include">📌 强制收录</button>`;
-    if (a === "exclude") return `<button type="button" class="danger" data-act="exclude">🗑 排除</button>`;
-    if (a === "restore") return `<button type="button" data-act="restore">↩ 恢复</button>`;
+    if (a === "retry") return `<button type="button" class="primary" data-act="retry">重试</button>`;
+    if (a === "force-include") return `<button type="button" class="primary" data-act="force-include">强制收录</button>`;
+    if (a === "exclude") return `<button type="button" class="danger" data-act="exclude">排除</button>`;
+    if (a === "restore") return `<button type="button" data-act="restore">恢复</button>`;
     return "";
   }).join("");
+  // 关系标注编辑器入口（/editor/{id}）：原先是孤儿页——只能手敲 URL 才到得了。
+  // 只有剪藏成功（有正文）的条目才有意义：编辑器要在 paragraphs 上画关系。
+  const editorEntry = view.clipStatus === "ok" && !view.excluded
+    ? `<button type="button" data-act="editor">关系标注编辑器</button>`
+    : "";
   box.innerHTML = `
     <div class="st-row"><span class="st-label">剪藏</span><span>${clipText}</span></div>
     <div class="st-row"><span class="st-label">AI</span><span>${aiText}</span></div>
@@ -590,8 +585,16 @@ async function renderItemStatus(sourceUrl) {
     ${view.aiError ? `<div class="st-row" style="color:var(--tblr-muted)">${esc(String(view.aiError).split(" ")[0])}</div>` : ""}
     ${view.excludeReason ? `<div class="st-row" style="color:var(--tblr-muted)">排除原因：${esc(view.excludeReason)}</div>` : ""}
     <div class="st-act">${acts}</div>
+    ${editorEntry ? `<div class="st-act">${editorEntry}</div>` : ""}
     <div class="st-hist" id="st-hist"></div>`;
   box.querySelectorAll("button[data-act]").forEach((btn) => {
+    if (btn.dataset.act === "editor") {
+      btn.addEventListener("click", () => {
+        // 新窗口打开：编辑器是独立页面（/editor/{article_id}），不要挤掉工作台
+        window.open(`/editor/${encodeURIComponent(id)}`, "_blank", "noopener");
+      });
+      return;
+    }
     btn.addEventListener("click", () => runItemAction(btn.dataset.act, id));
   });
   // 操作历史（Phase C）
@@ -621,7 +624,7 @@ async function runItemAction(act, id) {
   await loadDigest(date);
   // 恢复选中（exclude/restore 后条目位置变化）
   if (act === "exclude" || act === "restore") {
-    document.querySelector(".empty").style.display = "block";
+    $("preview-empty").style.display = "block";
     $("edit-form").style.display = "none";
   }
 }
@@ -766,7 +769,7 @@ $("save").onclick = async () => {
   });
   await loadDigest($("date").value);
   $("edit-form").style.display = "none";
-  document.querySelector(".empty").style.display = "block";
+  $("preview-empty").style.display = "block";
   selected = null;
   log("已保存");
 };
@@ -871,18 +874,10 @@ async function loadFonts() {
   applyPreview(config.logo || "", $("fp-logo"));
   applyPreview(config.nav || "", $("fp-nav"));
 }
-// 悬停下拉：首次悬停时懒加载数据（配合 CSS :hover 显示/收回）
-function lazyOnHover(wrapperId, loader) {
-  const wrapper = document.getElementById(wrapperId);
-  // 字体 / 配置 / 统计 / 邀请码这四个下拉已并入「统计与配置」全屏视图（画布 14 / 3:1422），
-  // 包裹层不存在了 → 静默跳过；改为在视图打开时按需加载（见 $("config").onclick）。
-  if (!wrapper) return;
-  let loaded = false;
-  wrapper.addEventListener("mouseenter", () => {
-    if (!loaded) { loaded = true; loader(); }
-  });
-}
-lazyOnHover("drop-fonts", loadFonts);
+// lazyOnHover 已删除（2026-09-15）：字体 / 配置 / 统计 / 邀请码四个 hover 下拉
+// 早在画布 14（3:1422）收拢进「统计与配置」全屏视图时就没了包裹层，
+// 四处在视图打开时按需加载（见 kgShowView）。留着这个函数 + 4 次调用全是 no-op。
+
 $("font-upload").onclick = async () => {
   const f = $("font-file").files[0];
   if (!f) { $("font-msg").textContent = "请先选择字体文件"; return; }
@@ -898,13 +893,13 @@ $("font-upload").onclick = async () => {
     let data;
     try { data = JSON.parse(text); } catch { data = { detail: text || "上传失败" }; }
     if (data.ok) {
-      $("font-msg").textContent = `✅ 已上传 ${data.file}，请在下拉选择后点「应用」`;
+      $("font-msg").textContent = `已上传 ${data.file}，请在下拉选择后点「应用」`;
       await loadFonts();
     } else {
-      $("font-msg").textContent = `❌ ${data.detail || "上传/子集化失败"}`;
+      $("font-msg").textContent = `上传失败：${data.detail || "子集化失败"}`;
     }
   } catch (e) {
-    $("font-msg").textContent = `❌ 上传失败：${e}`;
+    $("font-msg").textContent = `上传失败：${e}`;
   } finally {
     btn.disabled = false;
     btn.textContent = "上传并子集化";
@@ -924,7 +919,6 @@ async function loadSiteConfig() {
   $("cfg-carousel").checked = !!cfg.carousel;
   $("cfg-banner").checked = !!cfg.aiBanner;
 }
-lazyOnHover("drop-config", loadSiteConfig);
 $("cfg-save").onclick = async () => {
   try {
     const sources = JSON.parse($("cfg-sources").value);
@@ -1009,7 +1003,6 @@ async function loadStats() {
     `<div class="kg-gate"><span class="kg-gate__tag kg-gate__tag--soft">口径</span>` +
     `<span class="kg-gate__d">候选 ${last.candidates ?? "-"} · 已发布 ${last.articles ?? "-"} · AI 成功 ${last.aiOk ?? "-"} / 失败 ${last.aiError ?? 0}</span></div>`;
 }
-lazyOnHover("drop-stats", loadStats);
 
 // —— 邀请码管理（转发到生产 Worker admin API，需后端 JOB_SECRET）——
 async function loadInvites() {
@@ -1035,7 +1028,6 @@ async function loadInvites() {
     $("invite-msg").textContent = "加载失败：" + e;
   }
 }
-lazyOnHover("drop-invite", loadInvites);
 $("invite-refresh").onclick = loadInvites;
 $("invite-gen").onclick = async () => {
   const btn = $("invite-gen");
@@ -1044,13 +1036,13 @@ $("invite-gen").onclick = async () => {
   try {
     const r = await j("/api/invite-codes", { method: "POST" });
     if (r.ok && r.data) {
-      $("invite-msg").textContent = `✅ 新邀请码：${r.data.code}（${r.data.total} 次）`;
+      $("invite-msg").textContent = `新邀请码：${r.data.code}（${r.data.total} 次）`;
       await loadInvites();
     } else {
-      $("invite-msg").textContent = "❌ " + (r.detail || JSON.stringify(r));
+      $("invite-msg").textContent = "生成失败：" + (r.detail || JSON.stringify(r));
     }
   } catch (e) {
-    $("invite-msg").textContent = "❌ 生成失败：" + e;
+    $("invite-msg").textContent = "生成失败：" + e;
   } finally {
     btn.disabled = false;
   }

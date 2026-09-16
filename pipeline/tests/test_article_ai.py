@@ -275,6 +275,47 @@ def test_summary_length_correction_retry():
     assert result["aiSummary"] == SUMMARY
 
 
+def test_summary_length_correction_prompt_states_direction_and_cap():
+    """超长摘要的纠错语必须给出方向 + 硬上限。
+
+    只说「不符合 80-120 字要求」时，模型实测连续吐 161~181 字（6 次采样仅 3 次达标）；
+    补上「太长了 / 压到 120 字以内」后 6/6 达标。此测试锁住这两个关键信息。
+    """
+    too_long = "长" * 170
+    prompts: list[str] = []
+
+    def fake_call(messages, cfg, **kwargs):
+        prompts.append(messages[1]["content"])
+        if len(prompts) <= 2:
+            return json.dumps({"summary": too_long, "annotations": []}, ensure_ascii=False)
+        return json.dumps({"summary": SUMMARY, "annotations": []}, ensure_ascii=False)
+
+    result = analyze_article(_article(), {"deepseek_api_key": "k"}, call=fake_call)
+
+    assert result["aiStatus"] == "ok"
+    correction = prompts[-1]
+    assert "太长了" in correction
+    assert "120 字以内" in correction
+    assert "170" in correction
+
+
+def test_summary_length_correction_prompt_not_misrouted_when_too_short():
+    """偏短摘要不能收到「太长了」的纠错语 —— 方向说反会把模型推得更远。"""
+    too_short = "短"
+    prompts: list[str] = []
+
+    def fake_call(messages, cfg, **kwargs):
+        prompts.append(messages[1]["content"])
+        if len(prompts) <= 2:
+            return json.dumps({"summary": too_short, "annotations": []}, ensure_ascii=False)
+        return json.dumps({"summary": SUMMARY, "annotations": []}, ensure_ascii=False)
+
+    result = analyze_article(_article(), {"deepseek_api_key": "k"}, call=fake_call)
+
+    assert result["aiStatus"] == "ok"
+    assert "太长了" not in prompts[-1]
+
+
 def test_analyze_article_rejects_invalid_model_shape_without_leaking_payload():
     # Given: malformed model JSON containing article-like sensitive text.
     sensitive = "SECRET-ARTICLE-BODY"

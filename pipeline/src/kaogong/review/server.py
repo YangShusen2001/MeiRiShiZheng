@@ -1007,11 +1007,27 @@ def api_review_agent_status() -> dict:
 
 @app.post("/api/review-agent/apply")
 def api_review_agent_apply(body: ReviewAgentBody) -> dict:
-    """应用最近一次 AI 审核结果：rewrite 改标题/摘要、drop 移除条目，并备份原文件供回退。"""
+    """应用最近一次 AI 审核结果：rewrite 改标题/摘要、drop 移除条目，并备份原文件供回退。
+
+    ⚠️ **必须校验日期**（2026-09-15 修复）：`_review_state` 是模块级全局单例，只保存
+    「最近一次」审核结果。`apply_decisions` 是**按位置下标**逐条套用的，不做任何 id 匹配。
+    所以「对 A 日跑完审核 → 把日期切到 B 日 → 点应用」会把 A 日的 drop/rewrite 判定
+    按顺序套到 B 日的条目上，**误删误改当日文章**，且只能整批回退。
+    这里显式比对 report 自带的日期，不一致直接拒绝，而不是静默套错。
+    """
     report = _review_state.get("report")
     if not report or not report.get("decisions"):
         return {"ok": False, "log": "还没有 AI 审核结果，请先点「开始 AI 审核」。"}
     target = _parse_target(body.date)
+    reviewed = str(report.get("date") or "")
+    if reviewed != target.isoformat():
+        return {
+            "ok": False,
+            "step": "日期不一致",
+            "log": f"当前审核结果属于 {reviewed or '（未知日期）'}，而日期选择器是 {target.isoformat()}。\n"
+                   f"判定是按下标逐条套用的，跨日期应用会改错条目。\n"
+                   f"请先对该日期点「开始 AI 审核」，或把日期切回 {reviewed} 再应用。",
+        }
     day = CONTENT / target.isoformat()
     digest_path = day / "digest.json"
     if not digest_path.exists():

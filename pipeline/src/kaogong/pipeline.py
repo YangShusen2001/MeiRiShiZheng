@@ -22,7 +22,7 @@ from pathlib import Path
 
 import httpx
 from .build import build_digest
-from .deepseek import load_config
+from .deepseek import Cfg, load_config
 from .density import density_gate, total_chars
 from .models import Candidate
 from .practice import generate_practice, practice_set_json
@@ -149,7 +149,7 @@ def _preclip_ceiling(cands: list[Candidate], ceiling: int = MAX_PRECLIP) -> list
 
 def fetch_candidates(
     target: dt.date, *, client: httpx.Client | None = None, report: dict | None = None,
-    config: dict | None = None, cfg: dict[str, str] | None = None,
+    config: dict | None = None, cfg: Cfg | None = None,
 ) -> list[Candidate]:
     """跑全部源（来源可后台配置），只保留 target 当日的候选，过 MAX_PRECLIP 安全阀。
 
@@ -218,7 +218,7 @@ def build_content(target: dt.date, content_dir: Path, *, client: httpx.Client | 
 
 def clip_content(
     target: dt.date, content_dir: Path, *, client: httpx.Client | None = None,
-    cfg: dict[str, str] | None = None,
+    cfg: Cfg | None = None,
 ) -> int:
     """两阶段剪藏（v2.1 §3.4）：pass-1 全量剪藏 → 密度门禁 → 配额/CAPS →
     重写 digest.json → pass-2 仅对存活者做 AI 分析。返回最终落盘文章数。

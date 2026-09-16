@@ -11,7 +11,7 @@ import re
 from collections.abc import Callable
 from typing import TypedDict
 
-from .deepseek import DEFAULT_MODEL, chat
+from .deepseek import Cfg, DEFAULT_MODEL, chat
 
 PROMPT_VERSION = "relation-analysis-v1"
 
@@ -164,7 +164,7 @@ def enforce_locks(existing: list[dict], generated: list[dict], article_generated
 
 def generate_relations(
     article: dict,
-    cfg: dict[str, str],
+    cfg: Cfg,
     *,
     call: Callable[..., str] = chat,
     attempts: int = 2,

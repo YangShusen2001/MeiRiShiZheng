@@ -21,7 +21,7 @@ from collections.abc import Callable
 from typing import Literal, TypedDict
 
 from .card_ai import route_card_variant
-from .deepseek import DEFAULT_MODEL, chat
+from .deepseek import Cfg, DEFAULT_MODEL, chat
 
 GRADES = ("S", "A", "B", "C")
 AUTHORITY_HIGH = 1.0
@@ -248,7 +248,7 @@ def _program_fallback(article: dict) -> _Graded:
 def assign_grades(
     articles: list[dict],
     lines: list[dict],
-    cfg: dict[str, str],
+    cfg: Cfg,
     *,
     call: Callable[..., str] = chat,
 ) -> list[_Graded]:
@@ -406,7 +406,7 @@ def assign_slots(graded: list[_Graded], *, limit: int = MAX_PICKS) -> dict:
 def build_picks(
     articles: list[dict],
     lines: list[dict],
-    cfg: dict[str, str],
+    cfg: Cfg,
     *,
     target: dt.date,
     call: Callable[..., str] = chat,
@@ -512,7 +512,7 @@ def card_budget_for(remaining_quota: int, remaining_articles: int) -> int:
 def curate_content(
     target: dt.date,
     content_dir,
-    cfg: dict[str, str] | None = None,
+    cfg: Cfg | None = None,
     *,
     call: Callable[..., str] = chat,
 ) -> dict:

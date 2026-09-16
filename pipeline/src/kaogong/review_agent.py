@@ -12,7 +12,7 @@ import re
 from collections.abc import Callable
 from pathlib import Path
 
-from .deepseek import chat
+from .deepseek import Cfg, chat
 
 PROMPT_VERSION = "review-judge-v1"
 VERDICTS = {"keep", "rewrite", "drop", "rerun"}
@@ -104,7 +104,7 @@ def _parse(raw: str) -> dict:
 def judge_item(
     item: dict,
     article: dict | None,
-    cfg: dict[str, str],
+    cfg: Cfg,
     *,
     call: Callable[..., str] = chat,
     attempts: int = 2,
@@ -142,7 +142,7 @@ def judge_item(
     return base
 
 
-def review_date(target, content_dir: Path, cfg: dict[str, str]) -> list[dict]:
+def review_date(target, content_dir: Path, cfg: Cfg) -> list[dict]:
     """判定某日 digest 里的全部条目，返回 decisions 列表（Phase 1：只判不改）。"""
     day = content_dir / target.isoformat()
     digest_path = day / "digest.json"
