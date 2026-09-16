@@ -57,7 +57,8 @@
   .preview { margin-top: 16px; border-top: 1px dashed var(--tblr-border-color); padding-top: 14px; }
   .preview h3 { font-size: 14px; margin: 0 0 8px; color: var(--tblr-muted); }
   .preview summary { cursor: pointer; font-size: 14px; color: var(--tblr-muted); user-select: none; }
-  .preview .body { max-height: 360px; overflow: auto; line-height: 1.9; font-size: 14px; }
+  /* 原文预览：不封顶 —— 全文铺开、交给页面滚动阅读（原先 360px 的小窗只看得到开头） */
+  .preview .body { line-height: 1.9; font-size: 14px; }
   .preview .body p { text-indent: 2em; margin: 0 0 10px; }
   .check { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--tblr-danger); cursor: pointer; }
   #log { margin-top: 16px; padding: 12px; background: var(--kg-ink); color: var(--kg-bg); border-radius: 6px; font-family: monospace; font-size: 12px; white-space: pre-wrap; max-height: 200px; overflow: auto; display: none; }
@@ -102,11 +103,49 @@
   }
   .kg-filters__l { display: flex; flex-wrap: wrap; gap: 8px; }
 
-  /* 工作区（画布 3:1315）：pad 16/24 · 两栏 gap 16 = 队列 620 定宽 + 预览填充 */
-  .kg-body { display: flex; align-items: flex-start; gap: 16px; padding: 16px 24px 32px; }
+  /* 工作区（画布 3:1315）：队列栏冻在视口内 + 可拖隔条 + 预览填充 */
+  .kg-body { display: flex; align-items: flex-start; gap: 0; padding: 16px 24px 32px; --kg-queue-w: 620px; }
   .kg-card { background: var(--kg-surface); border: 1px solid var(--kg-line); border-radius: var(--kg-radius-lg); overflow: hidden; }
-  .kg-queue { flex: 0 0 auto; width: 620px; max-width: 100%; }
+  /* 队列栏：sticky 粘住视口 + 内部独立滚动 —— 滚正文时队伍始终「随时查看」 */
+  .kg-queue {
+    flex: 0 0 auto;
+    width: var(--kg-queue-w);
+    min-width: 260px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 16px;
+    align-self: flex-start;
+    max-height: calc(100vh - 32px);
+  }
+  .kg-queue > .kg-card__body { flex: 1 1 auto; min-height: 0; overflow: auto; overscroll-behavior: contain; }
   .kg-preview { flex: 1 1 0; min-width: 0; }
+  /* 隔条：拖动改队列栏宽（键盘 ←/→ 微调，双击复位）。touch-action 必须禁掉，
+     否则触控/笔输入会被滚动吞掉 pointermove */
+  .kg-split {
+    flex: 0 0 auto;
+    width: 20px;
+    height: calc(100vh - 32px);
+    position: sticky;
+    top: 16px;
+    align-self: flex-start;
+    display: flex;
+    justify-content: center;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: col-resize;
+    touch-action: none;
+  }
+  .kg-split::before {
+    content: "";
+    width: 2px;
+    border-radius: 2px;
+    background: var(--kg-line);
+    transition: background 0.15s, width 0.15s;
+  }
+  .kg-split:hover::before, .kg-split.on::before { width: 4px; background: var(--kg-brand); }
+  .kg-split:focus-visible { outline: 2px solid var(--kg-brand); outline-offset: 2px; border-radius: 4px; }
   .kg-card__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 14px 16px; }
   .kg-card__t { margin: 0; font-size: 14px; font-weight: 600; color: var(--kg-ink); }
   .kg-card__line { height: 1px; background: var(--kg-line); }
@@ -210,9 +249,18 @@
   .ai-ann-expl { width: 100%; color: var(--tblr-muted); font-size: 12px; line-height: 1.6; }
   .ai-ann-empty { color: var(--tblr-muted); font-size: 13px; }
   /* 原文内联高亮：三类标注三色 */
-  .preview .body mark.ai-viewpoint { background: transparent; font-weight: 700; padding: 0; }
-  .preview .body mark.ai-exam-point { background: var(--kg-highlight-exam-point); padding: 0 1px; }
-  .preview .body mark.ai-term { background: transparent; box-shadow: inset 0 -2px color-mix(in srgb, var(--kg-highlight-term) 45%, var(--kg-ink)); padding: 0 1px; }
+  /* 标注三色：底色走 **软底** 令牌（highlightSoft，AI 标注专用；原色 highlight-* 留给用户划线，
+     「机器淡、人工重」），与官网阅读页 global.css 的 .ai-* 保持一致。
+     底色之外再压一道同色系深边 —— 既让「标注在哪」一眼看得见，也让三类各有形状通道，
+     不靠颜色单独传达信息（设计规范 §372）。 */
+  /* ⚠️ color 必须显式写：不写就落到 Tabler 的 mark 默认文字色 rgb(107,114,128)，
+     压在淡底上只有 3.6:1（低于 AA）；设计系统为此专门定义了 onHighlight。 */
+  .preview .body mark { border-radius: 2px; padding: 0 1px; color: var(--kg-highlight-on-highlight); }
+  .preview .body mark.ai-viewpoint { background: var(--kg-highlight-soft-viewpoint); font-weight: 700; box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--kg-highlight-viewpoint) 60%, var(--kg-ink)); }
+  .preview .body mark.ai-exam-point { background: var(--kg-highlight-soft-exam-point); box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--kg-highlight-exam-point) 60%, var(--kg-ink)); }
+  .preview .body mark.ai-term { background: var(--kg-highlight-soft-term); box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--kg-highlight-term) 45%, var(--kg-ink)); }
+  /* ⚠️ 第 4 类 figure 此前**完全没有规则**（既没底色也没边线 = 标注看不见），补齐四类齐全 */
+  .preview .body mark.ai-figure { background: var(--kg-highlight-soft-figure); box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--kg-highlight-figure) 60%, var(--kg-ink)); }
 </style>
 </head>
 <body>
@@ -378,6 +426,11 @@
             </div>
           </div>
 
+          <!-- 可拖动隔条：调整「待审队列」栏宽（键盘 ←/→ 微调，双击复位） -->
+          <div class="kg-split" id="kg-split" role="separator" aria-orientation="vertical"
+               aria-label="拖动调整待审队列宽度" aria-valuemin="260" aria-valuemax="1200" aria-valuenow="420"
+               tabindex="0" title="拖动调整宽度 · 双击复位"></div>
+
           <!-- 原文与编辑（画布 3:1341） -->
           <div class="kg-card kg-preview">
             <div class="kg-card__head"><h2 class="kg-card__t">原文与编辑</h2></div>
@@ -503,6 +556,10 @@ $("item-filters").addEventListener("click", (e) => {
 
 function renderAside() {
   const aside = $("aside");
+  // 队列「冻结」：重渲染会清空子节点、把滚动位置打回顶部 ⇒ 先记后还。
+  // 不还的话每点一次条目队伍就跳回开头，长队列根本没法连续过稿。
+  const scroller = aside.closest(".kg-card__body");
+  const keepTop = scroller ? scroller.scrollTop : 0;
   aside.innerHTML = "";
   let n = 0;
   let shown = 0;
@@ -537,7 +594,65 @@ function renderAside() {
     empty.textContent = "当前筛选下无条目";
     aside.appendChild(empty);
   }
+  if (scroller) scroller.scrollTop = keepTop;
 }
+
+/* —— 可拖动隔条：调整「待审队列」栏宽 ——
+   宽度写在 .kg-body 的 --kg-queue-w 上；localStorage 记住上次的宽度；
+   键盘 ←/→ 微调（Shift 加速步长）、Home 复位，双击也复位。 */
+(() => {
+  const split = $("kg-split");
+  const body = document.querySelector(".kg-body");
+  if (!split || !body) return;
+  const MIN = 260;
+  const DEFAULT = 620;   // 与改动前的队列栏宽一致，免得「只是加个隔条」却顺手改了默认视觉
+  const KEY = "kg-queue-w";
+  const maxW = () => Math.max(MIN, Math.min(1200, window.innerWidth - 420));
+  const read = () => parseFloat(getComputedStyle(body).getPropertyValue("--kg-queue-w")) || DEFAULT;
+  const store = (v) => { try { localStorage.setItem(KEY, String(v)); } catch (e) { /* 隐私模式等，忽略 */ } };
+  const apply = (w) => {
+    const v = Math.max(MIN, Math.min(maxW(), Math.round(w)));
+    body.style.setProperty("--kg-queue-w", v + "px");
+    split.setAttribute("aria-valuenow", String(v));
+    return v;
+  };
+
+  let saved = NaN;
+  try { saved = parseFloat(localStorage.getItem(KEY) || ""); } catch (e) { /* ignore */ }
+  apply(Number.isFinite(saved) ? saved : DEFAULT);
+  // 窗口变窄时把过宽的栏收回可视范围
+  window.addEventListener("resize", () => apply(read()));
+
+  split.addEventListener("pointerdown", (ev) => {
+    if (ev.button !== 0) return;
+    ev.preventDefault();
+    split.setPointerCapture(ev.pointerId);
+    split.classList.add("on");
+    document.body.style.userSelect = "none";
+    const x0 = ev.clientX;
+    const w0 = read();
+    const onMove = (e) => apply(w0 + (e.clientX - x0));
+    const onUp = () => {
+      split.classList.remove("on");
+      document.body.style.userSelect = "";
+      split.removeEventListener("pointermove", onMove);
+      split.removeEventListener("pointerup", onUp);
+      split.removeEventListener("pointercancel", onUp);
+      store(read());
+    };
+    split.addEventListener("pointermove", onMove);
+    split.addEventListener("pointerup", onUp);
+    split.addEventListener("pointercancel", onUp);
+  });
+
+  split.addEventListener("dblclick", () => store(apply(DEFAULT)));
+  split.addEventListener("keydown", (ev) => {
+    const step = ev.shiftKey ? 48 : 16;
+    if (ev.key === "ArrowLeft") { store(apply(read() - step)); ev.preventDefault(); }
+    else if (ev.key === "ArrowRight") { store(apply(read() + step)); ev.preventDefault(); }
+    else if (ev.key === "Home") { store(apply(DEFAULT)); ev.preventDefault(); }
+  });
+})();
 
 // 与后端 _article_id 对齐：MD5(sourceUrl)[:10]（已废弃——视图匹配改用 sourceUrl，见 itemByUrl）
 function select(si, ii, row) {
