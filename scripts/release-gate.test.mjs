@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { mkdtempSync, writeFileSync } from "node:fs";
+import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -117,12 +117,25 @@ test("blocks each open high-risk blocker independently", () => {
   assert.doesNotMatch(deploymentOnly.stderr, /REL-TEST-NEWSLETTER/);
 });
 
-test("keeps the newsletter provider and production deployment blockers open", () => {
+test("passes on the real registry after the 2026-09-16 triage", () => {
   const result = spawnSync(process.execPath, [gatePath, realRegistryPath], {
     encoding: "utf8",
   });
 
-  assert.notEqual(result.status, 0);
-  assert.match(result.stderr, /REL-NEWSLETTER-PROVIDER/);
-  assert.match(result.stderr, /REL-PRODUCTION-DEPLOYMENT/);
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /release gate passed/i);
+});
+
+test("keeps the downgraded newsletter blocker honest: medium + open + no fabricated evidence", () => {
+  // 降级是为了不阻塞主干，不是「已解决」。这三条断言防止有人靠改 status
+  // 或补假 evidence 让它彻底消失 —— 账必须还是欠着的。
+  const registry = JSON.parse(readFileSync(realRegistryPath, "utf8"));
+  const newsletter = registry.blockers.find((blocker) => blocker.id === "REL-NEWSLETTER-PROVIDER");
+
+  assert.ok(newsletter, "REL-NEWSLETTER-PROVIDER must stay in the registry");
+  assert.equal(newsletter.severity, "medium");
+  assert.equal(newsletter.status, "open");
+  assert.equal(newsletter.closeEvidence, null);
+  assert.equal(typeof newsletter.severityChangeReason, "string");
+  assert.ok(newsletter.severityChangeReason.length > 0);
 });

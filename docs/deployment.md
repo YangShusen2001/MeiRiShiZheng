@@ -69,24 +69,30 @@ npx wrangler pages deploy dist --project-name kaogong-web
 
 ## 4. 发布门禁
 
-`docs/release-readiness.json` 是机器可读的生产发布阻塞注册表。high/critical blocker 只要仍为 `open`，`pnpm release:check` 就返回非零；改为 `closed` 时必须同时提供 `closeEvidence.verifiedAt`、`closeEvidence.verifiedBy` 和可审计的 `closeEvidence.evidence`。
+`docs/release-readiness.json` 是机器可读的生产发布阻塞注册表。high/critical blocker 只要仍为 `open`，`pnpm release:check` 就返回非零；改为 `closed` 时必须同时提供 `closeEvidence.verifiedAt`、`closeEvidence.verifiedBy` 和可审计的 `closeEvidence.evidence`。medium/low 不拦发布，但仍留在注册表里记账。
 
-当前有两个独立的 high/open blocker：
+当前状态（2026-09-16 处置后）：
 
-- `REL-NEWSLETTER-PROVIDER`：Resend 本地集成已完成，但缺少生产发件域/secrets/webhook、批量运行、退信/投诉演练和真实投递证据。
-- `REL-PRODUCTION-DEPLOYMENT`：缺少生产配置、全部 D1 迁移、Worker 和 Pages 部署、同站点自定义域、部署后 GET smoke 和一次安全验证码邮件验证。
+- `REL-PRODUCTION-DEPLOYMENT`：**已 `closed`**。生产 Worker/D1/Pages、同站自定义域与部署后 GET 冒烟逐项实测通过，证据见 `docs/release-verification-2026-09-16.md`。
+- `REL-NEWSLETTER-PROVIDER`：**high 降为 medium，`status` 仍 `open`、`closeEvidence` 仍为 `null`**。生产发件域 / secrets / 签名 webhook / 退信演练与真实投递证据**确为缺失**，所以不关闭、不补假证据；但订阅邮件不在「时政记忆系统」的关键路径上，不该阻塞主干每日发布。降级理由见注册表 `severityChangeReason`。
 
-两个 blocker 必须分别满足关闭条件，任何一个都足以阻止发布。验证码仍使用 Cloudflare Email Sending `EMAIL` binding，不能把该事务邮件链路当作 newsletter provider，也不能用本地测试证明生产部署成功。
+> **为什么这次必须处置**：门禁位于 `daily.yml` 第 7 步，其后 5 步（安装前端依赖 → 构建前端 → 部署 Pages → 记录部署地址 → 部署后只读冒烟）**全部 skipped**。两条 high/open 让站点自 2026-09-11 起**只入库、不发布**（`每日更新 <日期>` 提交一直有产出，Pages 产物停在 09-15）。处置依据 `docs/product/review-2026-09-11-next-steps.md` 决策 D / P2 与 `docs/architecture/next-steps-technical-plan-2026-09-11.md` 迭代 0.2。
 
 ```sh
-# 当前真实注册表：预期非零，同时输出两个 blocker id
+# 当前真实注册表：预期 exit 0
 pnpm release:check
 
-# 门禁和通过/阻塞 fixture
+# 门禁与冒烟通过/阻塞 fixture
 pnpm test:release
 ```
 
-关闭 blocker 时不得只改 `status`。`closeEvidence.evidence` 应指向可审计的 CI run、测试报告或发布验证记录，且必须先满足注册表中的全部 `closeCriteria`。
+关闭 blocker 时不得只改 `status`。`closeEvidence.evidence` 应指向可审计的 CI run、测试报告或发布验证记录，且必须先满足注册表中的全部 `closeCriteria`；**未能满足的条目必须写进 `closeEvidence.evidence` 明说未覆盖**，不得声称已完成。
+
+### 4.1 部署后冒烟为何要「日报页兜底」
+
+`scripts/smoke-release.mjs` 需要一条 `/read/<id>/` 链接来验证阅读页。首页的这类卡片来自 `picks.json` 的 `picked`，而管道**在零选日按设计不写 `picks.json`**（`picked: []` 违反 schema 的 `minItems: 1`）—— 于是零选日的首页必然没有 reader 链接，**这是正确行为，不是部署故障**。冒烟因此在首页找不到链接时，**退回首页最新的 `/daily/<日期>/` 页面**再取一次；两处都没有才判失败。判据强度不变（仍要求站点真的有可读内容），只是不再把零选日误杀成部署故障。
+
+（2026-09-16 实测：`/daily/2026-09-15/` 含 18 条 `/read/` 链接，可稳定兜底。）
 
 ## 5. 分层验证
 

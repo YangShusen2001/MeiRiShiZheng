@@ -41,4 +41,4 @@
 - [x] 同一用户同一期日报最多发送一次（本地幂等测试）。
 - [x] 支持退订、失败记录和重试（本地 provider contract 测试）。
 
-> 以上勾选表示仓库本地实现和测试通过，不代表 newsletter provider 或生产部署已完成。两个生产 blocker 见 `docs/release-readiness.json`。
+> 以上勾选表示仓库本地实现和测试通过，不代表 newsletter provider 或生产部署已完成。生产部署已于 2026-09-16 实测验证并关闭（`docs/release-verification-2026-09-16.md`）；newsletter provider 仍未完成，已降为 medium 记账、不阻塞发布。两个 blocker 见 `docs/release-readiness.json`。

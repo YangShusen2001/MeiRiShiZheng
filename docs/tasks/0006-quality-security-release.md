@@ -66,6 +66,10 @@ pnpm release:check
 - 定向证据为 highlights 20/20、account merge 16/16、newsletter 24/24、scheduled boundary 3/3。
 - Web 单元 16/16、Playwright 27/27、构建 39 页和 workspace typecheck 已在最终验收中通过；账号页双轮视觉 PASS 仍为当前视觉证据。
 - `pnpm test:release` 和 `pnpm release:check` 的本次结果记录在 TASK-0008。真实 gate 必须同时报告 `REL-NEWSLETTER-PROVIDER` 与 `REL-PRODUCTION-DEPLOYMENT`。
+
+> **2026-09-16 更新**：上条是当时的验收要求，现已不再成立 —— `REL-PRODUCTION-DEPLOYMENT` 实测通过并 `closed`，
+> `REL-NEWSLETTER-PROVIDER` 降为 `medium`。`pnpm release:check` 现 exit 0，不再输出任何 blocker。
+> 现状以 `docs/release-readiness.json` 与 `docs/deployment.md` §4 为准。
 - API 以脱敏结构化事件记录认证 Session/限流、newsletter issue/投递/重试/失败和 AI explain 失败；Pipeline 在 `content/_reports/` 写入源错误、Schema、AI 定位和 `qualityStatus`，相关日志与报告有自动化测试。
 - 账号页六张移动/平板/桌面截图均无横向溢出，并通过两轮独立视觉评审。
 - 未运行生产 Worker/Pages 冒烟，未运行已部署环境的验证码事务邮件，未发送真实 newsletter。
