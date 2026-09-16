@@ -1,0 +1,64 @@
+{
+  "id": "9b04b63c4d",
+  "date": "2026-04-03",
+  "title": "工业和信息化部等十部门关于印发《人工智能科技伦理审查与服务办法（试行）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202604/content_7064646.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:57+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部等十部门关于印发《人工智能科技伦理审查与服务办法（试行）》的通知工信部联科〔2026〕75号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化、发展改革、教育、科技、农业农村、卫生健康、网信主管部门、科协，中国人民银行上海总部，各省、自治区、直辖市及计划单列市分行，中国科学院院属各单位，各有关单位：",
+    "现将《人工智能科技伦理审查与服务办法（试行）》印发给你们，请结合实际认真抓好落实。",
+    "工业和信息化部国家发展改革委教育部科技部农业农村部国家卫生健康委中国人民银行国家网信办中国科学院中国科协2026年3月20日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-04",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部等十部门 关于印发《人工智能科技伦理审查与服务办法（试行）》的通知 工信部联科〔2026〕75号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化、发展改革、教育、科技、农...",
+  "sourceTextHash": "d27d524375809fbec25cf1f225b6908482054d516381ce21a3297f66b0c4cdda",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:13:48+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部等十部门于2026年3月20日联合印发《人工智能科技伦理审查与服务办法（试行）》，通知发至各地工信、发改、教育、科技、农业农村、卫生健康、网信主管部门、科协及相关单位，要求结合实际认真抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-16-35-term",
+      "paragraphIndex": 0,
+      "start": 16,
+      "end": 35,
+      "text": "人工智能科技伦理审查与服务办法（试行）",
+      "type": "term"
+    },
+    {
+      "id": "ai-0-39-53-figure",
+      "paragraphIndex": 0,
+      "start": 39,
+      "end": 53,
+      "text": "工信部联科〔2026〕75号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-29-40-exam_point",
+      "paragraphIndex": 2,
+      "start": 29,
+      "end": 40,
+      "text": "请结合实际认真抓好落实",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-52-62-figure",
+      "paragraphIndex": 3,
+      "start": 52,
+      "end": 62,
+      "text": "2026年3月20日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

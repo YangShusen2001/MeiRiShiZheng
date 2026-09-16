@@ -1,0 +1,64 @@
+{
+  "id": "ff781c8e4b",
+  "date": "2025-01-20",
+  "title": "关于印发《美丽乡村建设实施方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_7000084.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:26+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发《美丽乡村建设实施方案》的通知环土壤〔2025〕5号",
+    "各省、自治区、直辖市生态环境厅（局）、农业农村（农牧）厅（局、委）、发展改革委、财政厅（局）、自然资源主管部门、住房和城乡建设厅（局、委）、水利（水务）厅（局）、市场监管局（厅、委）、林业和草原主管部门，新疆生产建设兵团生态环境局、农业农村局、发展改革委、财政局、自然资源局、住房和城乡建设局、水利局、市场监管局、林业和草原主管部门：",
+    "为贯彻落实《中共中央 国务院关于全面推进美丽中国建设的意见》，全面加强农业农村生态环境保护，推进美丽乡村建设，我们组织制定了《美丽乡村建设实施方案》。现印发给你们，请认真组织落实。",
+    "生态环境部农业农村部国家发展改革委财政部自然资源部住房城乡建设部水利部市场监管总局国家林草局2025年1月14日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\城乡建设（含住房）",
+  "officialSummary": "关于印发《美丽乡村建设实施方案》的通知 环土壤〔2025〕5号 各省、自治区、直辖市生态环境厅（局）、农业农村（农牧）厅（局、委）、发展改革委、财政厅（局）、自然资源主管部门、住房和城乡建设厅（局、委...",
+  "sourceTextHash": "05af66dd8dd1b75b2ccb44a1277f10525b05a2c4bcb938a63b5182b7947351a3",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:55:41+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "生态环境部等九部门联合印发《美丽乡村建设实施方案》（环土壤〔2025〕5号），要求各省区市及新疆生产建设兵团相关部门贯彻落实美丽中国建设意见，加强农业农村生态环境保护，认真组织落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-31-45-viewpoint",
+      "paragraphIndex": 2,
+      "start": 31,
+      "end": 45,
+      "text": "全面加强农业农村生态环境保护",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-46-54-viewpoint",
+      "paragraphIndex": 2,
+      "start": 46,
+      "end": 54,
+      "text": "推进美丽乡村建设",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-19-30-figure",
+      "paragraphIndex": 0,
+      "start": 19,
+      "end": 30,
+      "text": "环土壤〔2025〕5号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-3-46-56-figure",
+      "paragraphIndex": 3,
+      "start": 46,
+      "end": 56,
+      "text": "2025年1月14日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

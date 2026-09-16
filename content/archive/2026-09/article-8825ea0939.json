@@ -1,0 +1,65 @@
+{
+  "id": "8825ea0939",
+  "date": "2026-09-12",
+  "title": "工业和信息化部等九部门关于印发《智能网联新能源汽车产业发展“十五五”规划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202609/content_7080845.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:55:09+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部等九部门关于印发《智能网联新能源汽车产业发展“十五五”规划》的通知工信部联规函〔2026〕305号",
+    "各省、自治区、直辖市、计划单列市及新疆生产建设兵团工业和信息化、发展改革、公安、交通运输、商务、自然资源、住房和城乡建设、市场监管、网信主管部门：",
+    "现将《智能网联新能源汽车产业发展“十五五”规划》印发给你们，请结合实际，认真贯彻实施。",
+    "工业和信息化部国家发展改革委公安部交通运输部商务部自然资源部住房和城乡建设部市场监管总局国家网信办2026年9月9日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-09",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部等九部门关于印发 《智能网联新能源汽车产业发展“十五五”规划》的通知 工信部联规函〔2026〕305号 各省、自治区、直辖市、计划单列市及新疆生产建设兵团工业和信息化、发展改革、公安、交...",
+  "sourceTextHash": "403e330d5adfbbbd6d40cc346ffc30bcadcb17a5bf2b95ad1bfe327a72170621",
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T19:19:10+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部等九部门于2026年9月9日联合印发《智能网联新能源汽车产业发展“十五五”规划》通知，要求各省区市及新疆生产建设兵团相关主管部门结合实际认真贯彻实施。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-16-36-term",
+      "paragraphIndex": 0,
+      "start": 16,
+      "end": 36,
+      "text": "智能网联新能源汽车产业发展“十五五”规划",
+      "type": "term",
+      "explanation": "指面向2026至2030年智能网联新能源汽车产业发展的国家级专项规划"
+    },
+    {
+      "id": "ai-0-40-56-figure",
+      "paragraphIndex": 0,
+      "start": 40,
+      "end": 56,
+      "text": "工信部联规函〔2026〕305号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-30-42-exam_point",
+      "paragraphIndex": 2,
+      "start": 30,
+      "end": 42,
+      "text": "请结合实际，认真贯彻实施",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-49-58-figure",
+      "paragraphIndex": 3,
+      "start": 49,
+      "end": 58,
+      "text": "2026年9月9日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

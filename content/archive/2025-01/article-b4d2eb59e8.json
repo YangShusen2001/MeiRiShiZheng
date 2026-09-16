@@ -1,0 +1,60 @@
+{
+  "id": "b4d2eb59e8",
+  "date": "2025-01-07",
+  "title": "交通运输部办公厅关于印发《城市轨道交通全自动运行系统运营技术和管理规范（试行）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_6996681.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "交通运输部办公厅关于印发《城市轨道交通全自动运行系统运营技术和管理规范（试行）》的通知交办运〔2024〕70号",
+    "经交通运输部同意，现将《城市轨道交通全自动运行系统运营技术和管理规范（试行）》印发给你们，请遵照执行。",
+    "城市轨道交通全自动运行系统运营技术和管理规范（试行）.docx"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "交通运输部办公厅关于印发《城市轨道交通全自动运行系统运营技术和管理规范（试行）》的通知 交办运〔2024〕70号 各省、自治区、直辖市交通运输厅（委）： 经交通运输部同意，现将《城市轨道交通全自动运行...",
+  "sourceTextHash": "5caf81262b9601395ac936e07f653812cdc446481ca97be880e3fe39311e7395",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:54:48+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "交通运输部办公厅印发《城市轨道交通全自动运行系统运营技术和管理规范（试行）》通知，文号交办运〔2024〕70号，要求各地遵照执行。该规范为试行文件，以附件形式随通知发布，旨在为城市轨道交通全自动运行系统的运营技术和管理提供规范依据。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-43-55-figure",
+      "paragraphIndex": 0,
+      "start": 43,
+      "end": 55,
+      "text": "交办运〔2024〕70号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-45-50-exam_point",
+      "paragraphIndex": 1,
+      "start": 45,
+      "end": 50,
+      "text": "请遵照执行",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-12-38-term",
+      "paragraphIndex": 1,
+      "start": 12,
+      "end": 38,
+      "text": "城市轨道交通全自动运行系统运营技术和管理规范（试行）",
+      "type": "term",
+      "explanation": "指针对城市轨道交通全自动运行系统的运营技术与管理要求制定的试行规范性文件。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 0,
+    "to": 1
+  }
+}

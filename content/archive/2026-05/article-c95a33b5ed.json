@@ -1,0 +1,57 @@
+{
+  "id": "c95a33b5ed",
+  "date": "2026-05-11",
+  "title": "工业和信息化部等五部门关于印发《纺织服装卓越品牌培育行动方案（2026—2028年）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202605/content_7068369.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:55:02+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部等五部门关于印发《纺织服装卓越品牌培育行动方案（2026—2028年）》的通知工信部联消费〔2026〕98号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、人力资源社会保障厅（局）、市场监管局（厅、委）、广播电视主管部门、知识产权局：",
+    "现将《纺织服装卓越品牌培育行动方案（2026—2028年）》印发给你们，请结合实际抓好贯彻落实。",
+    "工业和信息化部人力资源社会保障部市场监管总局广电总局国家知识产权局2026年4月30日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-05",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\轻工纺织",
+  "officialSummary": "工业和信息化部等五部门关于印发《纺织服装卓越品牌培育行动方案（2026—2028年）》的通知 工信部联消费〔2026〕98号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、人...",
+  "sourceTextHash": "e4ec104a1d849ee613378974a5ae04a80b33d7cf0c8278aee5400f0a4abb0f8a",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:12:37+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部等五部门联合印发《纺织服装卓越品牌培育行动方案（2026—2028年）》，要求各地结合实际抓好贯彻落实，推动纺织服装行业品牌建设。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-16-42-term",
+      "paragraphIndex": 0,
+      "start": 16,
+      "end": 42,
+      "text": "纺织服装卓越品牌培育行动方案（2026—2028年）",
+      "type": "term",
+      "explanation": "指面向纺织服装行业制定的品牌培育专项方案，明确2026至2028年目标任务与实施举措。"
+    },
+    {
+      "id": "ai-0-31-41-figure",
+      "paragraphIndex": 0,
+      "start": 31,
+      "end": 41,
+      "text": "2026—2028年",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-36-47-exam_point",
+      "paragraphIndex": 2,
+      "start": 36,
+      "end": 47,
+      "text": "请结合实际抓好贯彻落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

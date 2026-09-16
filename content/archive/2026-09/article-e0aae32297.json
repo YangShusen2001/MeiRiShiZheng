@@ -1,0 +1,48 @@
+{
+  "id": "e0aae32297",
+  "date": "2026-09-08",
+  "title": "农业农村部关于印发《全国渔业发展“十五五”规划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202609/content_7080453.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:55:10+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "农业农村部关于印发《全国渔业发展“十五五”规划》的通知农渔发〔2026〕17号",
+    "各省、自治区、直辖市农业农村（农牧）、渔业厅（局、委），新疆生产建设兵团农业农村局：",
+    "现将《全国渔业发展“十五五”规划》印发给你们，请结合实际认真贯彻落实。",
+    "附件：农业农村部关于印发《全国渔业发展“十五五”规划》的通知"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-09",
+  "archiveLib": "bm",
+  "topic": "农业、林业、水利\\农业、畜牧业、渔业",
+  "officialSummary": "农业农村部关于印发《全国渔业发展“十五五”规划》的通知 农渔发〔2026〕17号 各省、自治区、直辖市农业农村（农牧）、渔业厅（局、委），新疆生产建设兵团农业农村局： 现将《全国渔业发展“十五五”规划...",
+  "sourceTextHash": "7c62e33bf2aba59d4ca432c029c1f80dc1aa910454b48a12167446cc3c160e5c",
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T19:19:25+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "农业农村部印发《全国渔业发展“十五五”规划》通知，文号农渔发〔2026〕17号，发至各省、自治区、直辖市农业农村（农牧）、渔业厅（局、委）及新疆生产建设兵团农业农村局，要求结合实际认真贯彻落实，通知含附件。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-27-39-figure",
+      "paragraphIndex": 0,
+      "start": 27,
+      "end": 39,
+      "text": "农渔发〔2026〕17号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-23-34-exam_point",
+      "paragraphIndex": 2,
+      "start": 23,
+      "end": 34,
+      "text": "请结合实际认真贯彻落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

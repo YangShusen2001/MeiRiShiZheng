@@ -1,0 +1,50 @@
+{
+  "id": "d95e1fb561",
+  "date": "2025-12-25",
+  "title": "国家药监局关于发布医疗器械出口销售证明管理规定的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7052743.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:51+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家药监局关于发布医疗器械出口销售证明管理规定的公告2025年第126号",
+    "为支持医疗器械出口贸易，规范药品监督管理部门出具医疗器械出口销售证明的服务性事项办理，国家药监局修订发布《医疗器械出口销售证明管理规定》，该规定自2026年5月1日起施行，原国家食品药品监督管理总局《关于发布医疗器械产品出口销售证明管理规定的通告》（2015年第18号）同时废止。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\医药管理",
+  "officialSummary": "国家药监局关于发布医疗器械出口销售证明管理规定的公告 2025年第126号 为支持医疗器械出口贸易，规范药品监督管理部门出具医疗器械出口销售证明的服务性事项办理，国家药监局修订发布《医疗器械出口销售证...",
+  "sourceTextHash": "9c63facdad221733f19e2adcedb592760fee83871d0351a1cda7a7be1a3802fa",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:23:36+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家药监局发布2025年第126号公告，修订出台《医疗器械出口销售证明管理规定》，以支持医疗器械出口贸易并规范药监部门出具出口销售证明的服务性事项办理，新规自2026年5月1日起施行，原2015年第18号通告同时废止。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-0-11-viewpoint",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 11,
+      "text": "为支持医疗器械出口贸易",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-48-68-exam_point",
+      "paragraphIndex": 1,
+      "start": 48,
+      "end": 68,
+      "text": "修订发布《医疗器械出口销售证明管理规定》",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 1
+  }
+}

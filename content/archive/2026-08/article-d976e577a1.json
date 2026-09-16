@@ -1,0 +1,56 @@
+{
+  "id": "d976e577a1",
+  "date": "2026-08-11",
+  "title": "关于印发《生态保护“十五五”规划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202608/content_7077908.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:44:33+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发《生态保护“十五五”规划》的通知环生态〔2026〕47号",
+    "各省、自治区、直辖市及新疆生产建设兵团生态环境厅（局）、自然资源主管部门、住房城乡建设厅（委、管委、局）、水利（水务）厅（局）、农业农村（农牧）厅（局、委）、林草局：",
+    "为贯彻落实党中央、国务院决策部署，全面加强“十五五”时期全国生态保护工作，我们联合编制了《生态保护“十五五”规划》。现印发给你们，请结合实际，认真贯彻落实。",
+    "生态环境部自然资源部住房城乡建设部水利部农业农村部国家林草局2026年8月6日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-08",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\环境监测、保护与治理",
+  "officialSummary": "关于印发《生态保护“十五五”规划》的通知 环生态〔2026〕47号 各省、自治区、直辖市及新疆生产建设兵团生态环境厅（局）、自然资源主管部门、住房城乡建设厅（委、管委、局）、水利（水务）厅（局）、农业...",
+  "sourceTextHash": "96528dea073580e7379694765f4f70a614cf5f844df6fa9497cba88f0b6c27c5",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:07:11+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "生态环境部等六部门联合印发《生态保护“十五五”规划》，要求各省区市及新疆生产建设兵团相关部门结合实际认真贯彻落实，全面加强“十五五”时期全国生态保护工作。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-17-36-viewpoint",
+      "paragraphIndex": 2,
+      "start": 17,
+      "end": 36,
+      "text": "全面加强“十五五”时期全国生态保护工作",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-65-77-exam_point",
+      "paragraphIndex": 2,
+      "start": 65,
+      "end": 77,
+      "text": "请结合实际，认真贯彻落实",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-30-39-figure",
+      "paragraphIndex": 3,
+      "start": 30,
+      "end": 39,
+      "text": "2026年8月6日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

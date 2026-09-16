@@ -1,0 +1,56 @@
+{
+  "id": "e41c5ad646",
+  "date": "2026-09-07",
+  "title": "国家版权局关于印发《版权工作“十五五”规划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202609/content_7080386.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:55:10+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家版权局关于印发《版权工作“十五五”规划》的通知国版发〔2026〕3号",
+    "各省、自治区、直辖市版权局，北京市、天津市、上海市、重庆市文化市场综合执法部门，中央军委政治工作部宣传局，中国版权协会，各著作权集体管理组织，各版权相关单位：",
+    "现将《版权工作“十五五”规划》印发给你们，请结合实际认真贯彻落实。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-09",
+  "archiveLib": "bm",
+  "topic": "文化、广电、新闻出版\\新闻出版",
+  "officialSummary": "国家版权局关于印发《版权工作“十五五”规划》的通知 国版发〔2026〕3号 各省、自治区、直辖市版权局，北京市、天津市、上海市、重庆市文化市场综合执法部门，中央军委政治工作部宣传局，中国版权协会，各著...",
+  "sourceTextHash": "05851ace7f6a776efc0938a3a8a6a870570a0487b1e26bf0a8e71681119976c5",
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T19:19:28+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家版权局印发《版权工作“十五五”规划》通知，文号国版发〔2026〕3号，发至各省区市版权局、文化市场综合执法部门、中央军委政治工作部宣传局、中国版权协会、著作权集体管理组织及版权相关单位，要求结合实际认真贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-25-36-figure",
+      "paragraphIndex": 0,
+      "start": 25,
+      "end": 36,
+      "text": "国版发〔2026〕3号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-53-59-term",
+      "paragraphIndex": 1,
+      "start": 53,
+      "end": 59,
+      "text": "中国版权协会",
+      "type": "term",
+      "explanation": "全国性版权行业社会团体，开展版权保护、宣传培训与行业自律等工作。"
+    },
+    {
+      "id": "ai-2-21-32-exam_point",
+      "paragraphIndex": 2,
+      "start": 21,
+      "end": 32,
+      "text": "请结合实际认真贯彻落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

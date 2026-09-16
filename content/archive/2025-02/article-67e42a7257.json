@@ -1,0 +1,59 @@
+{
+  "id": "67e42a7257",
+  "date": "2025-02-25",
+  "title": "自然资源部办公厅关于印发《海草床生态修复手册》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202502/content_7005576.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:39+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "自然资源部办公厅关于印发《海草床生态修复手册》的通知自然资办函〔2025〕236号",
+    "沿海省、自治区、直辖市及计划单列市自然资源主管部门，上海市海洋局、山东省海洋局、广西壮族自治区海洋局、大连市海洋发展局、青岛市海洋发展局、深圳市海洋发展局：",
+    "为进一步加强对海草床生态修复工作的技术指导，提高海草床生态修复的科学化水平，我们组织编制了《海草床生态修复手册》。现将该手册印发给你们，请在组织开展海草床生态修复工作时参考执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-02",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\环境监测、保护与治理",
+  "officialSummary": "自然资源部办公厅关于印发《海草床生态修复手册》的通知 自然资办函〔2025〕236号 沿海省、自治区、直辖市及计划单列市自然资源主管部门，上海市海洋局、山东省海洋局、广西壮族自治区海洋局、大连市海洋发...",
+  "sourceTextHash": "043b602447a421107ed2c0389fbf26dd050a1cf2de9998a3ea2b85c94e2e5cd4",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:50:24+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "自然资源部办公厅以自然资办函〔2025〕236号印发《海草床生态修复手册》，组织编制旨在加强对海草床生态修复工作的技术指导，提高修复科学化水平，要求沿海省区市及计划单列市自然资源、海洋主管部门在组织开展海草床生态修复工作时参考执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-26-41-figure",
+      "paragraphIndex": 0,
+      "start": 26,
+      "end": 41,
+      "text": "自然资办函〔2025〕236号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-4-21-viewpoint",
+      "paragraphIndex": 2,
+      "start": 4,
+      "end": 21,
+      "text": "加强对海草床生态修复工作的技术指导",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-22-37-viewpoint",
+      "paragraphIndex": 2,
+      "start": 22,
+      "end": 37,
+      "text": "提高海草床生态修复的科学化水平",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

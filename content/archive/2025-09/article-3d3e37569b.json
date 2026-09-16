@@ -1,0 +1,48 @@
+{
+  "id": "3d3e37569b",
+  "date": "2025-09-12",
+  "title": "三部门关于印发《电力装备行业稳增长工作方案（2025-2026年）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202509/content_7040298.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:56+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部 市场监管总局 国家能源局关于印发《电力装备行业稳增长工作方案（2025-2026年）》的通知工信部联重装〔2025〕178号",
+    "各省、自治区、直辖市及新疆生产建设兵团工业和信息化、市场监管、能源主管部门，有关中央企业：",
+    "现将《电力装备行业稳增长工作方案（2025－2026年）》印发给你们，请结合实际抓好落实。",
+    "工业和信息化部市场监管总局国家能源局2025年8月6日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-09",
+  "archiveLib": "bm",
+  "topic": "国土资源、能源\\电力",
+  "officialSummary": "工业和信息化部 市场监管总局 国家能源局关于印发《电力装备行业稳增长工作方案（2025-2026年）》的通知 工信部联重装〔2025〕178号 各省、自治区、直辖市及新疆生产建设兵团工业和信息化、市场...",
+  "sourceTextHash": "4cf71e11a38dcf94804b78cdccc59bd1d3683b1b735678166e4392a261847ca4",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:29:38+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工信部、市场监管总局、国家能源局联合印发《电力装备行业稳增长工作方案（2025-2026年）》，并于2025年8月6日发文，要求各地工信、市场监管、能源主管部门及有关中央企业结合实际抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-35-44-exam_point",
+      "paragraphIndex": 2,
+      "start": 35,
+      "end": 44,
+      "text": "请结合实际抓好落实",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-18-27-figure",
+      "paragraphIndex": 3,
+      "start": 18,
+      "end": 27,
+      "text": "2025年8月6日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

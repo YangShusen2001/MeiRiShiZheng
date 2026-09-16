@@ -1,0 +1,54 @@
+{
+  "id": "84997e2554",
+  "date": "2025-04-10",
+  "title": "国家药监局关于发布《化妆品安全风险监测与评价管理办法》的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7017983.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:12+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家药监局关于发布《化妆品安全风险监测与评价管理办法》的公告2025年第37号",
+    "为加强化妆品监督管理，规范化妆品安全风险监测与评价工作，根据《化妆品监督管理条例》等法规，国家药监局组织制定了《化妆品安全风险监测与评价管理办法》，现予公布，自2025年8月1日起施行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\医药管理",
+  "officialSummary": "国家药监局关于发布《化妆品安全风险监测与评价管理办法》的公告 2025年第37号 为加强化妆品监督管理，规范化妆品安全风险监测与评价工作，根据《化妆品监督管理条例》等法规，国家药监局组织制定了《化妆品...",
+  "sourceTextHash": "a0b0c0a4d9cf6a9981a31f74061cf2537e4f9ae718186e255cd9f56e16decf0e",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:44:26+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家药监局发布2025年第37号公告，公布《化妆品安全风险监测与评价管理办法》。该办法依据《化妆品监督管理条例》等法规制定，旨在加强化妆品监督管理、规范化妆品安全风险监测与评价工作，自2025年8月1日起施行，为化妆品安全监管提供制度依据。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-30-39-figure",
+      "paragraphIndex": 0,
+      "start": 30,
+      "end": 39,
+      "text": "2025年第37号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-1-10-viewpoint",
+      "paragraphIndex": 1,
+      "start": 1,
+      "end": 10,
+      "text": "加强化妆品监督管理",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-11-27-viewpoint",
+      "paragraphIndex": 1,
+      "start": 11,
+      "end": 27,
+      "text": "规范化妆品安全风险监测与评价工作",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

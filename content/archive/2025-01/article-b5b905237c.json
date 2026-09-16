@@ -1,0 +1,40 @@
+{
+  "id": "b5b905237c",
+  "date": "2025-01-24",
+  "title": "关于印发流行性感冒诊疗方案（2025年版）的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_7000939.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:23+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发流行性感冒诊疗方案（2025年版）的通知国卫办医急函〔2025〕26号",
+    "各省、自治区、直辖市及新疆生产建设兵团卫生健康委、中医药局：",
+    "为进一步指导各级各类医疗机构做好流行性感冒医疗救治工作，提高规范化、同质化诊疗水平，我们组织制定了流行性感冒诊疗方案（2025年版）。现印发给你们，请参照执行。",
+    "国家卫生健康委办公厅国家中医药局综合司2025年1月20日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\卫生",
+  "officialSummary": "关于印发流行性感冒诊疗方案（2025年版）的通知 国卫办医急函〔2025〕26号 各省、自治区、直辖市及新疆生产建设兵团卫生健康委、中医药局： 为进一步指导各级各类医疗机构做好流行性感冒医疗救治工作，...",
+  "sourceTextHash": "5f39b714b2d318307682e73613b830978410b23a57b97873f7ac4d87ce2341ae",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:54:49+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家卫生健康委办公厅、国家中医药局综合司联合印发流感诊疗方案（2025年版），要求各级医疗机构参照执行，以提高流感诊疗规范化、同质化水平。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-28-41-viewpoint",
+      "paragraphIndex": 2,
+      "start": 28,
+      "end": 41,
+      "text": "提高规范化、同质化诊疗水平",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -19,7 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "pipeline" / "src"))
 
-from kaogong.deepseek import chat, load_config  # noqa: E402
+from kaogong.deepseek import Cfg, chat, load_config  # noqa: E402
 
 PARTY_LIB = "党中央文件"
 SYSTEM = (
@@ -29,7 +29,7 @@ SYSTEM = (
 )
 
 
-def _ai_gist(art: dict, cfg: dict[str, str]) -> str:
+def _ai_gist(art: dict, cfg: Cfg) -> str:
     excerpt = "".join(art.get("paragraphs") or [])[:2500]
     messages = [
         {"role": "system", "content": SYSTEM},

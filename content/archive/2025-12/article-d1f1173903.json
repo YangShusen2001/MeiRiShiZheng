@@ -1,0 +1,59 @@
+{
+  "id": "d1f1173903",
+  "date": "2025-12-16",
+  "title": "国家发展改革委关于印发铁路专项中央预算内投资管理办法的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7051830.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:54+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委关于印发铁路专项中央预算内投资管理办法的通知发改基础规〔2025〕1516号",
+    "中国国家铁路集团有限公司，各省、自治区、直辖市、新疆生产建设兵团发展改革委：",
+    "为贯彻落实党中央、国务院决策部署，统筹当前及“十五五”铁路建设需要，更好发挥中央预算内投资引导带动作用，进一步加强投资计划管理和资金监管，现将《铁路专项中央预算内投资管理办法》印发给你们，请按照执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\铁路",
+  "officialSummary": "国家发展改革委关于印发铁路专项中央预算内投资管理办法的通知 发改基础规〔2025〕1516号 中国国家铁路集团有限公司，各省、自治区、直辖市、新疆生产建设兵团发展改革委： 为贯彻落实党中央、国务院决策...",
+  "sourceTextHash": "6857accaa3105b9e257a62037d1bbda34c13398e6e37e046ea3b8fc42acfaad9",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:23:30+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委印发《铁路专项中央预算内投资管理办法》，文号发改基础规〔2025〕1516号，发给国铁集团及各省区市、新疆生产建设兵团发展改革委。文件旨在贯彻党中央、国务院决策部署，统筹当前及“十五五”铁路建设需要，发挥中央预算内投资引导带动作用，加强投资计划管理和资金监管。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-29-45-figure",
+      "paragraphIndex": 0,
+      "start": 29,
+      "end": 45,
+      "text": "发改基础规〔2025〕1516号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-17-33-exam_point",
+      "paragraphIndex": 2,
+      "start": 17,
+      "end": 33,
+      "text": "统筹当前及“十五五”铁路建设需要",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-34-51-viewpoint",
+      "paragraphIndex": 2,
+      "start": 34,
+      "end": 51,
+      "text": "更好发挥中央预算内投资引导带动作用",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

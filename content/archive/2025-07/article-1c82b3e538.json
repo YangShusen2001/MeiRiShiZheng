@@ -1,0 +1,51 @@
+{
+  "id": "1c82b3e538",
+  "date": "2025-07-08",
+  "title": "国务院办公厅关于印发《“高效办成一件事”2025年度第二批重点事项清单》的通知_国务院文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202507/content_7031053.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:37+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国务院办公厅关于印发《“高效办成一件事”2025年度第二批重点事项清单》的通知",
+    "各省、自治区、直辖市人民政府，国务院各部委、各直属机构：",
+    "《“高效办成一件事”2025年度第二批重点事项清单》已经国务院同意，现印发给你们，请结合实际认真组织实施。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-07",
+  "archiveLib": "gw",
+  "topic": "综合政务\\电子政务",
+  "officialSummary": "国务院办公厅关于印发《“高效办成一件事” 2025年度第二批重点事项清单》的通知 国办函〔2025〕70号 各省、自治区、直辖市人民政府，国务院各部委、各直属机构： 《“高效办成一件事”2025年度第...",
+  "sourceTextHash": "50704661fe28cd74dfb0ed86cb27090c8bf2b44064a1cbc28f5b5c3c2a3f5dc1",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:34:49+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国务院办公厅印发《“高效办成一件事”2025年度第二批重点事项清单》通知，要求各省、自治区、直辖市人民政府及国务院各部委、各直属机构结合实际认真组织实施。清单已经国务院同意，聚焦政务服务高效办理，推动重点事项落地见效。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-26-33-exam_point",
+      "paragraphIndex": 2,
+      "start": 26,
+      "end": 33,
+      "text": "已经国务院同意",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-46-52-viewpoint",
+      "paragraphIndex": 2,
+      "start": 46,
+      "end": 52,
+      "text": "认真组织实施",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

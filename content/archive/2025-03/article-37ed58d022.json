@@ -1,0 +1,46 @@
+{
+  "id": "37ed58d022",
+  "date": "2025-03-04",
+  "title": "市场监管总局 国家消防救援局关于对消防安全标志不再实施强制性产品认证管理的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202503/content_7009921.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:00+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "市场监管总局 国家消防救援局关于对消防安全标志不再实施强制性产品认证管理的公告2025年第10号",
+    "根据《中华人民共和国消防法》《中华人民共和国认证认可条例》有关规定，自本公告发布之日起，对强制性产品认证目录中的消防安全标志（属于避难逃生产品类别）不再实施强制性产品认证管理，相关指定认证机构应注销已出具的强制性产品认证证书。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-03",
+  "archiveLib": "bm",
+  "topic": "市场监管、安全生产监管\\其他",
+  "officialSummary": "市场监管总局 国家消防救援局关于对 消防安全标志不再实施强制性 产品认证管理的公告 2025年第10号 根据《中华人民共和国消防法》《中华人民共和国认证认可条例》有关规定，自本公告发布之日起，对强制性...",
+  "sourceTextHash": "e2c5b985939af4c5c927be246a9baf669841c8bef57fd5572769a5f18ab0872e",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:46:46+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "市场监管总局、国家消防救援局发布2025年第10号公告，依据消防法和认证认可条例，自发布之日起对强制性产品认证目录中的消防安全标志不再实施强制性产品认证管理，相关指定认证机构应注销已出具的认证证书。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-34-43-figure",
+      "paragraphIndex": 1,
+      "start": 34,
+      "end": 43,
+      "text": "自本公告发布之日起",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-74-87-exam_point",
+      "paragraphIndex": 1,
+      "start": 74,
+      "end": 87,
+      "text": "不再实施强制性产品认证管理",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "id": "e66eab5174",
+  "date": "2026-04-02",
+  "title": "国务院关于同意在广东省暂时调整实施有关行政法规规定的批复_国务院文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202604/content_7064503.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:58+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国务院关于同意在广东省暂时调整实施有关行政法规规定的批复",
+    "你们关于对符合条件的澳门机动车经横琴粤澳深度合作区暂时入出广东省其他区域实行免担保政策并在广东省暂时调整实施有关行政法规规定的请示收悉。现批复如下：",
+    "一、为推进横琴粤澳深度合作区建设，深化粤港澳大湾区合作，同意自即日起在广东省暂时调整实施《中华人民共和国海关事务担保条例》的有关规定（目录附后），对符合条件的澳门机动车经横琴粤澳深度合作区暂时入出广东省其他区域（以下称横琴粤澳深度合作区“澳门单牌车北上”）实行免担保政策。",
+    "二、广东省人民政府、海关总署等有关部门要根据上述调整，按职责分工推进落实横琴粤澳深度合作区“澳门单牌车北上”政策，及时对本省、本部门制定的规章和规范性文件作相应调整，建立相适应的管理制度，在确保有效防控免担保风险的前提下实施。",
+    "三、国务院将根据有关政策在广东省的实施情况，适时对本批复的内容进行调整。",
+    "附件：国务院决定在广东省暂时调整实施的有关行政法规规定目录"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-04",
+  "archiveLib": "gw",
+  "topic": "公安、安全、司法\\司法",
+  "officialSummary": "国务院关于同意在广东省暂时调整实施 有关行政法规规定的批复 国函〔2026〕25号 广东省人民政府，司法部、海关总署、国务院港澳办： 你们关于对符合条件的澳门机动车经横琴粤澳深度合作区暂时入出广东省其...",
+  "sourceTextHash": "f80d3669569c0ffb4466cf4361752559568bba49a948775113b712f1d429fc35",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:14:40+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国务院批复同意在广东省暂时调整实施《海关事务担保条例》，对符合条件的澳门机动车经横琴粤澳深度合作区入出广东其他区域实行免担保，即“澳门单牌车北上”。要求粤方与海关总署等落实并建章立制、防控风险，国务院将视实施情况适时调整。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-10-15-term",
+      "paragraphIndex": 1,
+      "start": 10,
+      "end": 15,
+      "text": "澳门机动车",
+      "type": "term",
+      "explanation": "指在澳门登记并符合条件的机动车辆，可依政策经横琴进入广东省其他区域行驶。"
+    },
+    {
+      "id": "ai-2-30-34-figure",
+      "paragraphIndex": 2,
+      "start": 30,
+      "end": 34,
+      "text": "自即日起",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-38-44-exam_point",
+      "paragraphIndex": 2,
+      "start": 38,
+      "end": 44,
+      "text": "暂时调整实施",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-27-36-viewpoint",
+      "paragraphIndex": 3,
+      "start": 27,
+      "end": 36,
+      "text": "按职责分工推进落实",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-83-93-exam_point",
+      "paragraphIndex": 3,
+      "start": 83,
+      "end": 93,
+      "text": "建立相适应的管理制度",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-22-24-exam_point",
+      "paragraphIndex": 4,
+      "start": 22,
+      "end": 24,
+      "text": "适时",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 3
+  }
+}

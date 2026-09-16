@@ -1,0 +1,59 @@
+{
+  "id": "5368afe2e6",
+  "date": "2025-03-09",
+  "title": "国家林业和草原局关于印发《国家储备林建设管理办法》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202503/content_7013513.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:59+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家林业和草原局关于印发《国家储备林建设管理办法》的通知林规规〔2025〕1号",
+    "各省、自治区、直辖市林业和草原主管部门，新疆生产建设兵团林业和草原局，大兴安岭林业集团：",
+    "为进一步加强国家储备林建设管理，推动国家储备林高质量发展，我局对2023年3月8日印发的《国家储备林建设管理办法（试行）》（林工规〔2023〕2号）进行了修订，现印发给你们，请遵照执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-03",
+  "archiveLib": "bm",
+  "topic": "农业、林业、水利\\林业",
+  "officialSummary": "国家林业和草原局关于印发《国家储备林建设管理办法》的通知 林规规〔2025〕1号 各省、自治区、直辖市林业和草原主管部门，新疆生产建设兵团林业和草原局，大兴安岭林业集团： 为进一步加强国家储备林建设管...",
+  "sourceTextHash": "514ed0a1b39f037214a898d05a50a2430009924140ab0bd48c565c69928e4306",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:46:57+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家林业和草原局印发林规规〔2025〕1号通知，对2023年3月8日印发的《国家储备林建设管理办法（试行）》（林工规〔2023〕2号）进行修订，以进一步加强国家储备林建设管理、推动高质量发展，要求各省区市林草主管部门等遵照执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-28-39-figure",
+      "paragraphIndex": 0,
+      "start": 28,
+      "end": 39,
+      "text": "林规规〔2025〕1号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-1-15-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 15,
+      "text": "进一步加强国家储备林建设管理",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-16-28-viewpoint",
+      "paragraphIndex": 2,
+      "start": 16,
+      "end": 28,
+      "text": "推动国家储备林高质量发展",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "8bc561b636",
+  "date": "2025-04-28",
+  "title": "关于明确部分货物、物品不再按进出境特殊物品监管的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7062830.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:04+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于明确部分货物、物品不再按进出境特殊物品监管的公告海关总署公告2025年第65号",
+    "根据新修订的《中华人民共和国国境卫生检疫法》第二十二条规定，海关对纳入药品、兽药、医疗器械管理的货物、物品，以及进出口环保用微生物菌剂不再按进出境特殊物品进行监管。",
+    "海关总署关于明确部分货物、物品不再按进出境特殊物品监管的公告.doc",
+    "海关总署关于明确部分货物、物品不再按进出境特殊物品监管的公告.pdf"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "商贸、海关、旅游\\海关",
+  "officialSummary": "关于明确部分货物、物品不再按进出境特殊物品监管的公告 海关总署公告2025年第65号 根据新修订的《中华人民共和国国境卫生检疫法》第二十二条规定，海关对纳入药品、兽药、医疗器械管理的货物、物品，以及进...",
+  "sourceTextHash": "574b4c8374e07bcdbe725a295309c3fea32eb87e45c0ba77cef123b5ed042fec",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:44:28+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "海关总署发布2025年第65号公告，依据新修订的《中华人民共和国国境卫生检疫法》第二十二条，明确对纳入药品、兽药、医疗器械管理的货物、物品，以及进出口环保用微生物菌剂，不再按进出境特殊物品进行监管，并附公告的doc与pdf文档。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-6-27-exam_point",
+      "paragraphIndex": 1,
+      "start": 6,
+      "end": 27,
+      "text": "《中华人民共和国国境卫生检疫法》第二十二条",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-30-53-viewpoint",
+      "paragraphIndex": 1,
+      "start": 30,
+      "end": 53,
+      "text": "海关对纳入药品、兽药、医疗器械管理的货物、物品",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-32-41-figure",
+      "paragraphIndex": 0,
+      "start": 32,
+      "end": 41,
+      "text": "2025年第65号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

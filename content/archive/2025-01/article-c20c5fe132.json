@@ -1,0 +1,74 @@
+{
+  "id": "c20c5fe132",
+  "date": "2025-01-16",
+  "title": "关于优化进境非食用动物产品风险级别及检验检疫监管措施的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_7062846.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:29+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于优化进境非食用动物产品风险级别及检验检疫监管措施的公告海关总署公告2024年第208号",
+    "按照《进出境非食用动物产品检验检疫监督管理办法》的规定，根据风险分析结果，海关总署对进境非食用动物产品风险级别及检验检疫监管措施进行了优化，现予以公布（见附件）。",
+    "本公告自发布之日起实施。原国家质检总局公告2015年第41号同时废止。原国家质检总局公告2017年第97号与本公告不一致的，以本公告为准。",
+    "进境非食用动物产品风险级别及检验检疫监管措施清单.docx",
+    "公告正文下载链接： 海关总署关于优化进境非食用动物产品风险级别及检验检疫监管措施的公告.doc 海关总署关于优化进境非食用动物产品风险级别及检验检疫监管措施的公告.pdf"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "商贸、海关、旅游\\海关",
+  "officialSummary": "关于优化进境非食用动物产品风险级别及检验检疫监管措施的公告 海关总署公告2024年第208号 按照《进出境非食用动物产品检验检疫监督管理办法》的规定，根据风险分析结果，海关总署对进境非食用动物产品风险...",
+  "sourceTextHash": "b1c9b95e7a1c650c65a839d4bd5fed92253a19e72f2e7389f7e016ea41ea3434",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:54:56+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "海关总署发布2024年第208号公告，依据《进出境非食用动物产品检验检疫监督管理办法》和风险分析结果，优化进境非食用动物产品风险级别及检验检疫监管措施。公告自发布之日起实施，原2015年第41号公告废止，2017年第97号公告与本公告不一致的以本公告为准。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-35-45-figure",
+      "paragraphIndex": 0,
+      "start": 35,
+      "end": 45,
+      "text": "2024年第208号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-2-24-term",
+      "paragraphIndex": 1,
+      "start": 2,
+      "end": 24,
+      "text": "《进出境非食用动物产品检验检疫监督管理办法》",
+      "type": "term",
+      "explanation": "海关总署规章，规范进出境非食用动物产品的检验检疫和监督管理工作。"
+    },
+    {
+      "id": "ai-1-30-36-viewpoint",
+      "paragraphIndex": 1,
+      "start": 30,
+      "end": 36,
+      "text": "风险分析结果",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-3-11-exam_point",
+      "paragraphIndex": 2,
+      "start": 3,
+      "end": 11,
+      "text": "自发布之日起实施",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-21-30-figure",
+      "paragraphIndex": 2,
+      "start": 21,
+      "end": 30,
+      "text": "2015年第41号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

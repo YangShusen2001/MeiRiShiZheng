@@ -1,0 +1,65 @@
+{
+  "id": "5784c2764d",
+  "date": "2025-09-29",
+  "title": "工业和信息化部等六部门关于印发《机械行业稳增长工作方案（2025—2026年）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202509/content_7042847.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:49+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部等六部门关于印发《机械行业稳增长工作方案（2025—2026年）》的通知工信部联通装〔2025〕205号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化、农业农村、商务、市场监管主管部门，中国人民银行上海总部，各省、自治区、直辖市及计划单列市分行，海关总署广东分署，海关总署驻天津、上海特派办，各直属海关：",
+    "现将《机械行业稳增长工作方案（2025—2026年）》印发给你们，请结合实际认真抓好落实。",
+    "工业和信息化部农业农村部商务部中国人民银行海关总署市场监管总局2025年9月18日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-09",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\机械制造与重工业",
+  "officialSummary": "工业和信息化部等六部门关于印发 《机械行业稳增长工作方案（2025—2026年）》的通知 工信部联通装〔2025〕205号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化、农业农村、商...",
+  "sourceTextHash": "f4633dc398de3758a40d51f3acda15ac60ebbbdf3b843ef1f71f0e48431d0ad1",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:30:02+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部等六部门联合印发《机械行业稳增长工作方案（2025—2026年）》，文号工信部联通装〔2025〕205号，要求各地工信、农业农村、商务、市场监管部门及人民银行、海关等单位结合实际抓好落实，文件落款日期为2025年9月18日。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-16-39-term",
+      "paragraphIndex": 0,
+      "start": 16,
+      "end": 39,
+      "text": "机械行业稳增长工作方案（2025—2026年）",
+      "type": "term",
+      "explanation": "针对机械行业制定的稳增长专项政策文件，明确2025至2026年行业发展目标与重点任务"
+    },
+    {
+      "id": "ai-0-43-59-figure",
+      "paragraphIndex": 0,
+      "start": 43,
+      "end": 59,
+      "text": "工信部联通装〔2025〕205号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-33-44-viewpoint",
+      "paragraphIndex": 2,
+      "start": 33,
+      "end": 44,
+      "text": "请结合实际认真抓好落实",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-31-41-figure",
+      "paragraphIndex": 3,
+      "start": 31,
+      "end": 41,
+      "text": "2025年9月18日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

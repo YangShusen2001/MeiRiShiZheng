@@ -1,0 +1,69 @@
+{
+  "id": "c6fb7beec7",
+  "date": "2025-03-26",
+  "title": "市场监管总局办公厅关于印发《中介合同（示范文本）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202503/content_7015671.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:52+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "市场监管总局办公厅关于印发《中介合同（示范文本）》的通知市监网监发〔2025〕18号",
+    "各省、自治区、直辖市和新疆生产建设兵团市场监管局（厅、委）：",
+    "为落实《中华人民共和国民法典》有关规定，提升合同示范文本的专业性和规范性，市场监管总局对原工商总局制订的《居间合同（示范文本）》（GF—2000—1201）进行了修订。根据《中华人民共和国民法典》的最新表述，将原《居间合同（示范文本）》变更为《中介合同（示范文本）》。",
+    "现将修订后的《中介合同（示范文本）》（GF—2025—2613）印发给你们，供社会公众参照使用。修订之前的原合同示范文本同时废止。",
+    "附件：《中介合同（示范文本）》（GF—2025—2613）"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-03",
+  "archiveLib": "bm",
+  "topic": "市场监管、安全生产监管\\标准",
+  "officialSummary": "市场监管总局办公厅关于印发《中介合同（示范文本）》的通知 市监网监发〔2025〕18号 各省、自治区、直辖市和新疆生产建设兵团市场监管局（厅、委）： 为落实《中华人民共和国民法典》有关规定，提升合同示...",
+  "sourceTextHash": "211ff235eaba23501119cc2806e3106208f6b1263e76b0b52fe019a5fa8dbbe9",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:48:41+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "市场监管总局办公厅印发通知，为落实民法典规定，对原《居间合同（示范文本）》进行修订，名称变更为《中介合同（示范文本）》，编号为GF—2025—2613，供社会公众参照使用，原文本同时废止，附件同步印发。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-1-19-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 19,
+      "text": "落实《中华人民共和国民法典》有关规定",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-104-133-exam_point",
+      "paragraphIndex": 2,
+      "start": 104,
+      "end": 133,
+      "text": "将原《居间合同（示范文本）》变更为《中介合同（示范文本）》",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-19-31-figure",
+      "paragraphIndex": 3,
+      "start": 19,
+      "end": 31,
+      "text": "GF—2025—2613",
+      "type": "figure"
+    },
+    {
+      "id": "ai-3-48-64-exam_point",
+      "paragraphIndex": 3,
+      "start": 48,
+      "end": 64,
+      "text": "修订之前的原合同示范文本同时废止",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 3
+  }
+}

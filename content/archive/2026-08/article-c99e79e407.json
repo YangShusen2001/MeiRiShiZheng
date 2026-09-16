@@ -1,0 +1,64 @@
+{
+  "id": "c99e79e407",
+  "date": "2026-08-28",
+  "title": "关于印发《物流网建设实施方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202608/content_7079397.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:44:30+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委 交通运输部关于印发《物流网建设实施方案》的通知发改经贸〔2026〕1241号",
+    "各省、自治区、直辖市人民政府，国务院各部委、各直属机构：",
+    "《物流网建设实施方案》已经国务院同意，现印发给你们，请认真贯彻执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-08",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "国家发展改革委 交通运输部关于印发《物流网建设实施方案》的通知 发改经贸〔2026〕1241号 各省、自治区、直辖市人民政府，国务院各部委、各直属机构： 《物流网建设实施方案》已经国务院同意，现印发给...",
+  "sourceTextHash": "ce1164f320e600f1f9d2ca59edf4accc7d997e5fd7c17c5b7d0a6799a608dd46",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:07:03+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委、交通运输部联合印发《物流网建设实施方案》通知，经国务院同意，要求各省区市政府及国务院各部门、直属机构认真贯彻执行，方案聚焦物流网络体系建设。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-18-27-term",
+      "paragraphIndex": 0,
+      "start": 18,
+      "end": 27,
+      "text": "物流网建设实施方案",
+      "type": "term",
+      "explanation": "指国家层面统筹规划物流基础设施网络建设的政策文件，旨在完善物流运行体系。"
+    },
+    {
+      "id": "ai-0-31-46-figure",
+      "paragraphIndex": 0,
+      "start": 31,
+      "end": 46,
+      "text": "发改经贸〔2026〕1241号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-11-18-exam_point",
+      "paragraphIndex": 2,
+      "start": 11,
+      "end": 18,
+      "text": "已经国务院同意",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-26-33-viewpoint",
+      "paragraphIndex": 2,
+      "start": 26,
+      "end": 33,
+      "text": "请认真贯彻执行",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

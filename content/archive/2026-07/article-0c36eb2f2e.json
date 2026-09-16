@@ -1,0 +1,55 @@
+{
+  "id": "0c36eb2f2e",
+  "date": "2026-07-17",
+  "title": "关于印发《海水淡化产业发展行动方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202607/content_7075851.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:44:26+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委、自然资源部、水利部关于印发《海水淡化产业发展行动方案》的通知发改环资〔2026〕1062号",
+    "各省、自治区、直辖市、新疆生产建设兵团发展改革委、自然资源主管部门、水利（水务）厅（局），上海市海洋局、浙江省海洋经济发展厅、福建省海洋与渔业局、山东省海洋局、广西壮族自治区海洋局、海南省海洋厅：",
+    "为加快推进海水淡化产业高质量发展，促进海水淡化规模化利用，国家发展改革委、自然资源部、水利部联合有关部门组织编制了《海水淡化产业发展行动方案》，现予印发。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-07",
+  "archiveLib": "bm",
+  "topic": "国土资源、能源\\海洋",
+  "officialSummary": "国家发展改革委、自然资源部、水利部关于印发《海水淡化产业发展行动方案》的通知 发改环资〔2026〕1062号 各省、自治区、直辖市、新疆生产建设兵团发展改革委、自然资源主管部门、水利（水务）厅（局），...",
+  "sourceTextHash": "6d490b48a62b63cce7aff2bceed6eceaff78152c025591d1dc9bd6a1ce0e5356",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:07:59+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委、自然资源部、水利部联合印发《海水淡化产业发展行动方案》，明确加快推进海水淡化产业高质量发展、促进规模化利用，为沿海缺水地区水资源保障提供产业支撑。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-38-53-figure",
+      "paragraphIndex": 0,
+      "start": 38,
+      "end": 53,
+      "text": "发改环资〔2026〕1062号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-1-16-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 16,
+      "text": "加快推进海水淡化产业高质量发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-17-28-exam_point",
+      "paragraphIndex": 2,
+      "start": 17,
+      "end": 28,
+      "text": "促进海水淡化规模化利用",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

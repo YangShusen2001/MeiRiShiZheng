@@ -15,6 +15,10 @@
     {
       "name": "reason_internet",
       "value": "读取时政文章与 AI 标注"
+    },
+    {
+      "name": "reason_network_info",
+      "value": "显示离线状态与网络恢复提示"
     }
   ]
 }

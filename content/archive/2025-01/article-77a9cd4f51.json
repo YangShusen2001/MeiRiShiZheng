@@ -1,0 +1,103 @@
+{
+  "id": "77a9cd4f51",
+  "date": "2025-01-06",
+  "title": "关于设备更新贷款财政贴息政策有关事项的补充通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_6996576.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于设备更新贷款财政贴息政策有关事项的补充通知财金〔2024〕155号",
+    "各省、自治区、直辖市、计划单列市财政厅（局），新疆生产建设兵团财政局，财政部各地监管局，有关金融机构：",
+    "为加强财政货币政策协同，发挥财政贴息政策引导放大作用，进一步加力支持设备更新和技术改造，根据《财政部 国家发展改革委 中国人民银行 金融监管总局关于实施设备更新贷款财政贴息政策的通知》（财金〔2024〕54号）、《国家发展改革委 财政部印发〈关于加力支持大规模设备更新和消费品以旧换新的若干措施〉的通知》（发改环资〔2024〕1104号）等规定，现就设备更新贷款财政贴息政策有关事项补充通知如下：",
+    "一、对于2024年3月7日前签订贷款合同、设备购置或更新改造服务采购合同，3月7日后发放的符合条件的设备更新贷款，纳入财政贴息政策支持范围。",
+    "二、延长设备更新贷款财政贴息政策实施期限，至中国人民银行设备更新相关再贷款额度用完为止。",
+    "三、财政贴息的具体操作按照财金〔2024〕54号、发改环资〔2024〕1104号等文件执行。",
+    "四、各级财政部门要加强与发展改革、行业主管部门和中国人民银行分支机构的协同联动，建立贴息工作月度台账，定期调度推进相关工作，汇聚形成工作合力，支持金融机构加大贷款投放。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\财政",
+  "officialSummary": "关于设备更新贷款财政贴息政策有关事项的补充通知 财金〔2024〕155号 各省、自治区、直辖市、计划单列市财政厅（局），新疆生产建设兵团财政局，财政部各地监管局，有关金融机构： 为加强财政货币政策协同...",
+  "sourceTextHash": "3df8a861171755ece1e8d0b3342b8761feba56c8bec017f14ad3ea3194c90fab",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:53:22+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "本通知是对设备更新贷款财政贴息政策的补充，明确2024年3月7日前签约、之后发放的合格贷款纳入贴息范围，并将政策实施期限延长至央行相关再贷款额度用完为止，具体操作按原文件执行，同时要求各级财政部门加强协同联动、建立月度台账推进工作。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-1-11-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 11,
+      "text": "加强财政货币政策协同",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-12-26-viewpoint",
+      "paragraphIndex": 2,
+      "start": 12,
+      "end": 26,
+      "text": "发挥财政贴息政策引导放大作用",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-4-14-figure",
+      "paragraphIndex": 3,
+      "start": 4,
+      "end": 14,
+      "text": "2024年3月7日前",
+      "type": "figure"
+    },
+    {
+      "id": "ai-3-57-69-exam_point",
+      "paragraphIndex": 3,
+      "start": 57,
+      "end": 69,
+      "text": "纳入财政贴息政策支持范围",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-2-20-exam_point",
+      "paragraphIndex": 4,
+      "start": 2,
+      "end": 20,
+      "text": "延长设备更新贷款财政贴息政策实施期限",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-21-43-exam_point",
+      "paragraphIndex": 4,
+      "start": 21,
+      "end": 43,
+      "text": "至中国人民银行设备更新相关再贷款额度用完为止",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-40-50-exam_point",
+      "paragraphIndex": 6,
+      "start": 40,
+      "end": 50,
+      "text": "建立贴息工作月度台账",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-71-83-viewpoint",
+      "paragraphIndex": 6,
+      "start": 71,
+      "end": 83,
+      "text": "支持金融机构加大贷款投放",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 6
+  }
+}

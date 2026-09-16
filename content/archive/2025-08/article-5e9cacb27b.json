@@ -1,0 +1,57 @@
+{
+  "id": "5e9cacb27b",
+  "date": "2025-08-05",
+  "title": "工业和信息化部等八部门关于印发《机械工业数字化转型实施方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202508/content_7035233.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:47+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部等八部门关于印发《机械工业数字化转型实施方案》的通知工信部联通装〔2025〕152号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、人力资源社会保障、住房城乡建设、交通运输、农业农村、卫生健康、应急管理、市场监管主管部门，国家矿山安监局各省级局：",
+    "现将《机械工业数字化转型实施方案》印发给你们，请结合实际认真抓好落实。",
+    "工业和信息化部人力资源社会保障部住房城乡建设部交通运输部农业农村部国家卫生健康委应急管理部市场监管总局2025年7月2日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-08",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\机械制造与重工业",
+  "officialSummary": "工业和信息化部等八部门关于印发《机械工业数字化转型实施方案》的通知 工信部联通装〔2025〕152号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、人力资源社会保障、住房城乡...",
+  "sourceTextHash": "11457d7d6d8f7df807416f1ccc764a4759640befa63b09df4651259f0bcb8bf9",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:33:16+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部等八部门于2025年7月2日联合印发《机械工业数字化转型实施方案》的通知，要求各省区市及新疆生产建设兵团相关主管部门结合实际认真抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-16-29-term",
+      "paragraphIndex": 0,
+      "start": 16,
+      "end": 29,
+      "text": "机械工业数字化转型实施方案",
+      "type": "term",
+      "explanation": "指推动机械工业与数字技术深度融合、提升智能化水平的专项政策方案"
+    },
+    {
+      "id": "ai-3-51-60-figure",
+      "paragraphIndex": 3,
+      "start": 51,
+      "end": 60,
+      "text": "2025年7月2日",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-23-34-exam_point",
+      "paragraphIndex": 2,
+      "start": 23,
+      "end": 34,
+      "text": "请结合实际认真抓好落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

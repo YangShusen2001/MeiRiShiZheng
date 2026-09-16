@@ -1,0 +1,56 @@
+{
+  "id": "adeca1c23f",
+  "date": "2025-04-24",
+  "title": "关于印发《市场准入负面清单（2025年版）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7020718.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:07+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委 商务部 市场监管总局关于印发《市场准入负面清单（2025年版）》的通知发改体改规〔2025〕466号",
+    "各省、自治区、直辖市人民政府，新疆生产建设兵团，中央和国家机关有关部门：",
+    "《市场准入负面清单（2025年版）》已经党中央、国务院批准，自即日起印发实施，请结合实际认真贯彻落实。2022年3月12日发布的《市场准入负面清单（2022年版）》（发改体改规〔2022〕397号）同时废止。",
+    "国家发展改革委商务部市场监管总局2025年4月16日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "市场监管、安全生产监管\\其他",
+  "officialSummary": "国家发展改革委 商务部 市场监管总局关于印发《市场准入负面清单（2025年版）》的通知 发改体改规〔2025〕466号 各省、自治区、直辖市人民政府，新疆生产建设兵团，中央和国家机关有关部门： 《市场...",
+  "sourceTextHash": "1269bccb9d7a563e4125920b6cee8f32a3aa2d01ff26a2a4f29781566422af10",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:44:56+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委、商务部、市场监管总局联合印发《市场准入负面清单（2025年版）》通知，经党中央、国务院批准，自即日起实施，2022年版同时废止，要求各地各部门结合实际认真贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-18-29-viewpoint",
+      "paragraphIndex": 2,
+      "start": 18,
+      "end": 29,
+      "text": "已经党中央、国务院批准",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-39-50-exam_point",
+      "paragraphIndex": 2,
+      "start": 39,
+      "end": 50,
+      "text": "请结合实际认真贯彻落实",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-16-26-figure",
+      "paragraphIndex": 3,
+      "start": 16,
+      "end": 26,
+      "text": "2025年4月16日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

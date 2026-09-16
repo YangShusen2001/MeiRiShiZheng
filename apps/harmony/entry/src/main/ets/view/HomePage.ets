@@ -1,4 +1,4 @@
-import { ContentManifest, DailyDigest, DigestItem, DigestSection, TodaySummary } from '../model/Content';
+import { ContentArchiveScale, ContentManifest, DailyDigest, DigestItem, DigestSection, TodaySummary } from '../model/Content';
 import { ContentService, Loaded } from '../service/ContentService';
 import { HttpError, STATUS_LOCAL_FAILURE } from '../service/Http';
 import { Net } from '../service/Net';
@@ -48,6 +48,10 @@ export struct HomePage {
   @State cachedAt: number = 0;
   /** 今日待复习卡片数。让"必须回来"这件事在首页可见。 */
   @State dueCount: number = 0;
+  /** 政策档案规模（取自 manifest.archive，不额外发请求）。 */
+  @State archiveMonths: number = 0;
+  @State archiveFiles: number = 0;
+  @State archiveCore: number = 0;
 
   /** 骨架屏占位行。 */
   private skeletonRows: number[] = [0, 1, 2, 3, 4];
@@ -151,6 +155,15 @@ export struct HomePage {
     }
     this.searchHits = hits;
     this.dates = manifest.days.map((day) => day.date);
+    // ⚠️ 必须容忍缺字段：缓存里存的是**上一版构建**的 manifest，
+    // 而 `archive` 是 2026-09-15 才加进分发层的。老版本装过 app 的用户升级后，
+    // 首次冷启动走的是 paintFromCache —— 这里直接读 manifest.archive.months 会崩成白屏。
+    const scale: ContentArchiveScale | undefined = manifest.archive;
+    if (scale !== undefined) {
+      this.archiveMonths = scale.months;
+      this.archiveFiles = scale.files;
+      this.archiveCore = scale.core;
+    }
   }
 
   private loadLatest(): void {
@@ -481,6 +494,58 @@ export struct HomePage {
     })
   }
 
+  /**
+   * 政策档案入口。
+   *
+   * 放在日报之后而不是顶部：本产品的"今天该做什么"是日报与复习，
+   * 档案是**历史存量**（21 个月台账），属于"读完了再往深处走"的第二落点。
+   * 三个统计直接取 manifest.archive，不发额外请求。
+   *
+   * 没有档案数据时（老缓存、或档案尚未上线）**整卡不渲染** ——
+   * 显示一个"0 个月 / 0 份"的入口比不显示更糟。
+   */
+  @Builder
+  archiveEntry() {
+    if (this.archiveMonths > 0) {
+      Row() {
+        Column() {
+          Text('政策档案')
+            .fontSize(KFont.body())
+            .fontWeight(FontWeight.Medium)
+            .fontColor(KColor.ink())
+          Text(`${this.archiveMonths} 个月 · ${this.archiveFiles} 份 · 核心考点 ${this.archiveCore} 份`)
+            .fontSize(KFont.caption())
+            .fontColor(KColor.sub())
+            .margin({ top: KSpace.HAIR })
+        }
+        .alignItems(HorizontalAlign.Start)
+        .layoutWeight(1)
+
+        Text('查看')
+          .fontSize(KFont.meta())
+          .fontWeight(FontWeight.Medium)
+          .fontColor(KColor.primaryText())
+          .height(KSize.TOUCH_MIN)
+          .padding({ left: KSpace.L, right: KSpace.L })
+          .textAlign(TextAlign.Center)
+          .borderRadius(KRadius.S)
+          .borderWidth(1)
+          .borderColor(KColor.primary())
+      }
+      .width('100%')
+      .alignItems(VerticalAlign.Center)
+      .padding(KSpace.L)
+      .backgroundColor(KColor.surface())
+      .borderRadius(KRadius.L)
+      .borderWidth(1)
+      .borderColor(KColor.line())
+      .margin({ top: KSpace.M })
+      .onClick(() => {
+        this.navStack.pushPathByName('archive', '');
+      })
+    }
+  }
+
   @Builder
   summaryCard() {
     // 画布 3:1492：今日速览是**深靛面板卡**（不是浅色卡）——
@@ -667,6 +732,9 @@ export struct HomePage {
           this.sectionBlock(section)
         }, (section: DigestSection) => `${this.selectedDate}-${section.id}`)
       }
+
+      // 档案入口常驻在末尾：它不依赖当日内容（日报加载失败时也该能进档案）
+      this.archiveEntry()
     }
     .width('100%')
     .alignItems(HorizontalAlign.Start)

@@ -1,0 +1,69 @@
+{
+  "id": "6f95195142",
+  "date": "2025-02-14",
+  "title": "农业农村部关于印发《全国农业科技创新重点领域（2024–2028年）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202502/content_7003703.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:44+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "农业农村部关于印发《全国农业科技创新重点领域（2024–2028年）》的通知农科教发〔2024〕8号",
+    "各省、自治区、直辖市农业农村（农牧）厅（局、委），新疆生产建设兵团农业农村局，各有关单位：",
+    "为深入贯彻落实党中央关于科技创新的重大决策部署，加快推进高水平农业科技自立自强，在紧盯世界科技前沿、坚持产业急需导向的基础上，我部组织制定了《全国农业科技创新重点领域（2024—2028年）》，现印发你们，请结合本地区、本单位实际，在工作中推动落实。",
+    "附件：全国农业科技创新重点领域（2024–2028年）.wps"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-02",
+  "archiveLib": "bm",
+  "topic": "农业、林业、水利\\农业、畜牧业、渔业",
+  "officialSummary": "农业农村部关于印发《全国农业科技创新重点领域（2024–2028年）》的通知 农科教发〔2024〕8号 各省、自治区、直辖市农业农村（农牧）厅（局、委），新疆生产建设兵团农业农村局，各有关单位： 为深...",
+  "sourceTextHash": "fa7b175c0ed4bf02f70a384ba39eb75d15bb3eda76127c44067d8e8d776076a5",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:50:28+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "农业农村部印发《全国农业科技创新重点领域（2024—2028年）》通知，要求各省区市农业农村部门及有关单位结合实际推动落实。文件旨在贯彻党中央科技创新部署，加快高水平农业科技自立自强，紧盯世界科技前沿、坚持产业急需导向，为未来五年农业科技创新明确重点方向。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-24-39-viewpoint",
+      "paragraphIndex": 2,
+      "start": 24,
+      "end": 39,
+      "text": "加快推进高水平农业科技自立自强",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-41-49-viewpoint",
+      "paragraphIndex": 2,
+      "start": 41,
+      "end": 49,
+      "text": "紧盯世界科技前沿",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-38-50-exam_point",
+      "paragraphIndex": 0,
+      "start": 38,
+      "end": 50,
+      "text": "农科教发〔2024〕8号",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-10-34-term",
+      "paragraphIndex": 0,
+      "start": 10,
+      "end": 34,
+      "text": "全国农业科技创新重点领域（2024–2028年）",
+      "type": "term",
+      "explanation": "农业农村部制定的政策文件，明确2024至2028年农业科技创新重点方向和任务。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 0,
+    "to": 2
+  }
+}

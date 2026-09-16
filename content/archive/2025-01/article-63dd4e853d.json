@@ -1,0 +1,56 @@
+{
+  "id": "63dd4e853d",
+  "date": "2025-01-16",
+  "title": "四部门关于公布工业产品碳足迹核算规则团体标准推荐清单（第一批）的通告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_6998964.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:29+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部 生态环境部 国家发展改革委 市场监管总局关于公布工业产品碳足迹核算规则团体标准推荐清单（第一批）的通告",
+    "为加快提升工业产品碳足迹管理水平，建立健全碳足迹管理体系，促进工业绿色低碳转型，经相关标准化机构推荐、专家评审、网上公示等程序，工业和信息化部、生态环境部、国家发展改革委、市场监管总局确定了15项工业产品碳足迹核算规则团体标准推荐清单（第一批），现予以公布。",
+    "附件：工业产品碳足迹核算规则团体标准推荐清单（第一批）",
+    "工业和信息化部生态环境部国家发展改革委市场监管总局2025年1月15日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\环境监测、保护与治理",
+  "officialSummary": "工业和信息化部 生态环境部 国家发展改革委 市场监管总局关于公布工业产品碳足迹核算规则团体标准推荐清单（第一批）的通告 工信部联节函〔2025〕13号 为加快提升工业产品碳足迹管理水平，建立健全碳足迹...",
+  "sourceTextHash": "ac17f938ab871bc4efed7410d279a1bde6b227e0ade402a8e60b002c5d4446d2",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:52:55+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "四部门联合通告，经标准化机构推荐、专家评审和网上公示等程序，确定15项工业产品碳足迹核算规则团体标准推荐清单（第一批），旨在加快提升工业产品碳足迹管理水平，建立健全碳足迹管理体系，促进工业绿色低碳转型，并于2025年1月15日公布。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-1-16-viewpoint",
+      "paragraphIndex": 1,
+      "start": 1,
+      "end": 16,
+      "text": "加快提升工业产品碳足迹管理水平",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-29-39-viewpoint",
+      "paragraphIndex": 1,
+      "start": 29,
+      "end": 39,
+      "text": "促进工业绿色低碳转型",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-25-35-figure",
+      "paragraphIndex": 3,
+      "start": 25,
+      "end": 35,
+      "text": "2025年1月15日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

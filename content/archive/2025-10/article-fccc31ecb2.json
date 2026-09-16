@@ -1,0 +1,55 @@
+{
+  "id": "fccc31ecb2",
+  "date": "2025-10-17",
+  "title": "上市公司治理准则_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202510/content_7044852.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:36+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "上市公司治理准则中国证券监督管理委员会公告〔2025〕18号",
+    "现公布《上市公司治理准则》，自2026年1月1日起施行。",
+    "附件1.上市公司治理准则 附件2.《上市公司治理准则》修订说明"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-10",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\证券",
+  "officialSummary": "上市公司治理准则 中国证券监督管理委员会公告〔2025〕18号 现公布《上市公司治理准则》，自2026年1月1日起施行。 中国证监会 2025年10月16日 　　附件1.上市公司治理准则 　　附件2....",
+  "sourceTextHash": "9d361bd6130a0a4f8641d1bf5ef7749086d9fdee93fb8d049848f77889205574",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:28:36+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "中国证监会发布公告〔2025〕18号，公布修订后的《上市公司治理准则》，自2026年1月1日起施行。文件由准则正文和修订说明两部分组成，属国务院部门文件，旨在规范上市公司治理结构与运作机制，是证券监管领域的重要制度安排。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-8-30-figure",
+      "paragraphIndex": 0,
+      "start": 8,
+      "end": 30,
+      "text": "中国证券监督管理委员会公告〔2025〕18号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-14-27-figure",
+      "paragraphIndex": 1,
+      "start": 14,
+      "end": 27,
+      "text": "自2026年1月1日起施行",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-0-13-exam_point",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 13,
+      "text": "现公布《上市公司治理准则》",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

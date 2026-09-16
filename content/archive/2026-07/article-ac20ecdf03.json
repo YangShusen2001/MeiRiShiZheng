@@ -1,0 +1,60 @@
+{
+  "id": "ac20ecdf03",
+  "date": "2026-07-16",
+  "title": "关于印发《生态环境监测“十五五”规划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202607/content_7075670.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:44:26+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发《生态环境监测“十五五”规划》的通知环监测〔2026〕37号",
+    "各省、自治区、直辖市及新疆生产建设兵团生态环境厅（局）、发展改革委，生态环境部各流域(海域)生态环境监督管理局，各直属单位：",
+    "为贯彻落实党中央、国务院决策部署，加快建立现代化生态环境监测体系，推动生态环境监测事业高质量发展，生态环境部、国家发展改革委会同有关部门编制了《生态环境监测“十五五”规划》。现印发给你们，请结合实际，认真贯彻执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-07",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\环境监测、保护与治理",
+  "officialSummary": "关于印发《生态环境监测“十五五”规划》的通知 环监测〔2026〕37号 各省、自治区、直辖市及新疆生产建设兵团生态环境厅（局）、发展改革委，生态环境部各流域(海域)生态环境监督管理局，各直属单位： 为...",
+  "sourceTextHash": "3d9274fd1d49ea147f75c1724dea8f8fad55d5a0831b2b07d69dfebca426562e",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:09:16+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "生态环境部、国家发展改革委联合编制《生态环境监测“十五五”规划》并印发各省区市及兵团生态环境、发展改革部门等单位，要求贯彻落实党中央、国务院决策部署，加快建立现代化生态环境监测体系，推动生态环境监测事业高质量发展，并结合实际认真贯彻执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-11-19-term",
+      "paragraphIndex": 1,
+      "start": 11,
+      "end": 19,
+      "text": "新疆生产建设兵团",
+      "type": "term",
+      "explanation": "新疆维吾尔自治区内的特殊行政组织，兼具党政军企职能，实行党政合一体制。"
+    },
+    {
+      "id": "ai-2-49-62-figure",
+      "paragraphIndex": 2,
+      "start": 49,
+      "end": 62,
+      "text": "生态环境部、国家发展改革委",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-68-86-exam_point",
+      "paragraphIndex": 2,
+      "start": 68,
+      "end": 86,
+      "text": "编制了《生态环境监测“十五五”规划》",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

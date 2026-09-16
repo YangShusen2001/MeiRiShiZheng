@@ -1,0 +1,68 @@
+{
+  "id": "afe83fc3fa",
+  "date": "2026-03-22",
+  "title": "市场监管总局关于发布《特种设备使用管理规则》的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202603/content_7063427.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:50+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "市场监管总局关于发布《特种设备使用管理规则》的公告2026年第6号",
+    "为贯彻落实《特种设备使用单位落实使用安全主体责任监督管理规定》（国家市场监督管理总局令第74号），进一步加强特种设备使用单位监管，市场监管总局对《特种设备使用管理规则》（TSG08－2017）进行了修订，现予以发布，自2026年5月1日起施行。",
+    "附件下载： TSG 08—2026 特种设备使用管理规则"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-03",
+  "archiveLib": "bm",
+  "topic": "市场监管、安全生产监管\\其他",
+  "officialSummary": "市场监管总局关于发布《特种设备使用管理规则》的公告 2026年第6号 为贯彻落实《特种设备使用单位落实使用安全主体责任监督管理规定》（国家市场监督管理总局令第74号），进一步加强特种设备使用单位监管，...",
+  "sourceTextHash": "f80fa8dd8354fa1d0293e88ec16dfe0138302ac3b8143a1af62f02ab86c731d0",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:15:36+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "市场监管总局发布修订后的《特种设备使用管理规则》（TSG 08—2026），自2026年5月1日起施行，旨在贯彻落实总局令第74号，进一步加强特种设备使用单位监管，规则全文见附件下载。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-25-33-figure",
+      "paragraphIndex": 0,
+      "start": 25,
+      "end": 33,
+      "text": "2026年第6号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-5-31-term",
+      "paragraphIndex": 1,
+      "start": 5,
+      "end": 31,
+      "text": "《特种设备使用单位落实使用安全主体责任监督管理规定》",
+      "type": "term",
+      "explanation": "市场监管总局令第74号，明确特种设备使用单位落实使用安全主体责任及监督管理要求。"
+    },
+    {
+      "id": "ai-1-49-64-exam_point",
+      "paragraphIndex": 1,
+      "start": 49,
+      "end": 64,
+      "text": "进一步加强特种设备使用单位监管",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-6-17-figure",
+      "paragraphIndex": 2,
+      "start": 6,
+      "end": 17,
+      "text": "TSG 08—2026",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 1
+  }
+}

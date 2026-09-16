@@ -1,0 +1,52 @@
+{
+  "id": "e390dcd546",
+  "date": "2026-04-17",
+  "title": "教育部关于发布《中国青少年阅读素养框架》教育行业标准的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202604/content_7066139.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:54+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "教育部关于发布《中国青少年阅读素养框架》教育行业标准的通知教语信函〔2026〕1号",
+    "各省、自治区、直辖市教育厅（教委），新疆生产建设兵团教育局：",
+    "为深入贯彻习近平总书记关于“爱读书、读好书、善读书”的重要指示精神，全面落实党和国家对深化全民阅读活动的战略部署，推动《全民阅读促进条例》的科学实施，我部研究制定了教育行业标准JY/T 0663—2026《中国青少年阅读素养框架》，经全国教育装备标准化技术委员会审查通过，现予以发布，并自发布之日起施行。",
+    "附件：JY/T 0663—2026《中国青少年阅读素养框架》"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-04",
+  "archiveLib": "bm",
+  "topic": "科技、教育\\教育",
+  "officialSummary": "教育部关于发布《中国青少年阅读素养框架》教育行业标准的通知 教语信函〔2026〕1号 各省、自治区、直辖市教育厅（教委），新疆生产建设兵团教育局： 为深入贯彻习近平总书记关于“爱读书、读好书、善读书”...",
+  "sourceTextHash": "847bf4052c12555cc71b23b3426a57d1109a88216db24c4b1480df625d80b3ed",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:14:38+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "教育部发布教育行业标准JY/T 0663—2026《中国青少年阅读素养框架》，经全国教育装备标准化技术委员会审查通过，自发布之日起施行。通知要求深入贯彻习近平总书记关于阅读的重要指示精神，落实全民阅读战略部署，推动《全民阅读促进条例》科学实施。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-14-25-viewpoint",
+      "paragraphIndex": 2,
+      "start": 14,
+      "end": 25,
+      "text": "爱读书、读好书、善读书",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-43-56-viewpoint",
+      "paragraphIndex": 2,
+      "start": 43,
+      "end": 56,
+      "text": "深化全民阅读活动的战略部署",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

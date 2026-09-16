@@ -1,0 +1,59 @@
+{
+  "id": "dd840cc984",
+  "date": "2025-11-11",
+  "title": "中华人民共和国农业农村部公告 第964号_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202511/content_7047761.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:43+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "为落实《中华人民共和国畜牧法》、《种畜禽生产经营许可管理办法》等有关规定，加强种畜禽生产经营许可评审管理，规范种畜禽生产经营许可行为，农业农村部制定了《种畜禽生产经营许可审查规范》，现予公布，自发布之日起施行。",
+    "附件：农业农村部公告964号-种畜禽生产经营许可审查规范"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-11",
+  "archiveLib": "bm",
+  "topic": "农业、林业、水利\\农业、畜牧业、渔业",
+  "officialSummary": "中华人民共和国农业农村部公告 第964号 为落实《中华人民共和国畜牧法》、《种畜禽生产经营许可管理办法》等有关规定，加强种畜禽生产经营许可评审管理，规范种畜禽生产经营许可行为，农业农村部制定了《种畜禽...",
+  "sourceTextHash": "665061b2831d54fff14231bd0940da41a07c9037eee9a92b33f762ff7a851363",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:26:02+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "农业农村部为落实畜牧法和种畜禽生产经营许可管理办法等规定，加强种畜禽生产经营许可评审管理、规范许可行为，制定了《种畜禽生产经营许可审查规范》并予公布，自发布之日起施行。公告另附农业农村部公告964号——种畜禽生产经营许可审查规范文件。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-75-90-term",
+      "paragraphIndex": 0,
+      "start": 75,
+      "end": 90,
+      "text": "《种畜禽生产经营许可审查规范》",
+      "type": "term",
+      "explanation": "农业农村部制定的规范种畜禽生产经营许可审查工作的部门规范性文件"
+    },
+    {
+      "id": "ai-0-37-52-exam_point",
+      "paragraphIndex": 0,
+      "start": 37,
+      "end": 52,
+      "text": "加强种畜禽生产经营许可评审管理",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-15-28-term",
+      "paragraphIndex": 1,
+      "start": 15,
+      "end": 28,
+      "text": "种畜禽生产经营许可审查规范",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 0,
+    "to": 0
+  }
+}

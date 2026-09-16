@@ -1,0 +1,64 @@
+{
+  "id": "4c78d21538",
+  "date": "2025-10-21",
+  "title": "市场监管总局关于发布《蛋制品生产许可审查细则（2025版）》的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202510/content_7045334.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "市场监管总局关于发布《蛋制品生产许可审查细则（2025版）》的公告国家市场监督管理总局公告2025年第35号",
+    "为了严格规范蛋制品生产许可，加强蛋制品质量安全监管，根据《中华人民共和国食品安全法》《中华人民共和国食品安全法实施条例》《食品生产许可管理办法》（市场监管总局令第24号）等法律法规，市场监管总局组织制定了《蛋制品生产许可审查细则（2025版）》，现予发布，自2026年1月1日起施行。",
+    "附件下载：市场监管总局关于发布《蛋制品生产许可审查细则（2025版）》的公告"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-10",
+  "archiveLib": "bm",
+  "topic": "市场监管、安全生产监管\\食品药品监管",
+  "officialSummary": "市场监管总局关于发布《蛋制品生产许可审查细则（2025版）》的公告 国家市场监督管理总局公告2025年第35号 为了严格规范蛋制品生产许可，加强蛋制品质量安全监管，根据《中华人民共和国食品安全法》《中...",
+  "sourceTextHash": "b8b7daf1d47ad267078c262ec958a436a795e971a1f088bd0d2308fe07a1e7ba",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:27:01+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "市场监管总局发布2025年第35号公告，依据食品安全法及实施条例、食品生产许可管理办法等法律法规，组织制定《蛋制品生产许可审查细则（2025版）》，现予发布，自2026年1月1日起施行，以严格规范蛋制品生产许可、加强质量安全监管。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-0-33-term",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 33,
+      "text": "市场监管总局关于发布《蛋制品生产许可审查细则（2025版）》的公告",
+      "type": "term",
+      "explanation": "市场监管总局发布的规范蛋制品生产许可审查的规范性文件，2025版替代旧版细则。"
+    },
+    {
+      "id": "ai-0-33-54-figure",
+      "paragraphIndex": 0,
+      "start": 33,
+      "end": 54,
+      "text": "国家市场监督管理总局公告2025年第35号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-2-13-viewpoint",
+      "paragraphIndex": 1,
+      "start": 2,
+      "end": 13,
+      "text": "严格规范蛋制品生产许可",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-14-25-viewpoint",
+      "paragraphIndex": 1,
+      "start": 14,
+      "end": 25,
+      "text": "加强蛋制品质量安全监管",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "id": "113efe8765",
+  "date": "2025-11-26",
+  "title": "工业和信息化部 国家发展改革委 商务部 文化和旅游部 中国人民银行 市场监管总局印发《关于增强消费品供需适配性进一步促进消费的实施方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202511/content_7049567.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:40+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部 国家发展改革委 商务部 文化和旅游部 中国人民银行 市场监管总局印发《关于增强消费品供需适配性进一步促进消费的实施方案》的通知工信部联消费〔2025〕252号",
+    "为贯彻落实党中央、国务院关于大力提振消费的决策部署，工业和信息化部等六部门制定了《关于增强消费品供需适配性进一步促进消费的实施方案》，经国务院同意，现予印发，请认真组织实施。",
+    "工业和信息化部国家发展改革委商务部文化和旅游部中国人民银行市场监管总局2025年11月25日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-11",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部 国家发展改革委 商务部 文化和旅游部 中国人民银行 市场监管总局印发《关于增强消费品供需适配性进一步促进消费的实施方案》的通知 工信部联消费〔2025〕252号 各省、自治区、直辖市人...",
+  "sourceTextHash": "84768e6c6f895228082fe0a00a735a3ff56d9f2b7ded0a65fb6983b00fd5e419",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:23:57+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工信部等六部门联合印发《关于增强消费品供需适配性进一步促进消费的实施方案》，经国务院同意，要求认真组织实施，旨在贯彻落实党中央、国务院关于大力提振消费的决策部署，从供需适配角度进一步促进消费。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-45-62-term",
+      "paragraphIndex": 0,
+      "start": 45,
+      "end": 62,
+      "text": "增强消费品供需适配性进一步促进消费",
+      "type": "term",
+      "explanation": "指通过优化消费品供给结构，使供给更好匹配居民消费需求，从而释放消费潜力、扩大消费规模的政策思路。"
+    },
+    {
+      "id": "ai-1-14-20-viewpoint",
+      "paragraphIndex": 1,
+      "start": 14,
+      "end": 20,
+      "text": "大力提振消费",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-67-73-exam_point",
+      "paragraphIndex": 1,
+      "start": 67,
+      "end": 73,
+      "text": "经国务院同意",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-77-87-figure",
+      "paragraphIndex": 0,
+      "start": 77,
+      "end": 87,
+      "text": "〔2025〕252号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-35-46-figure",
+      "paragraphIndex": 2,
+      "start": 35,
+      "end": 46,
+      "text": "2025年11月25日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 1
+  }
+}

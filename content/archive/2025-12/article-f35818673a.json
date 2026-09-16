@@ -1,0 +1,55 @@
+{
+  "id": "f35818673a",
+  "date": "2025-12-26",
+  "title": "国家发展改革委关于印发《低空经济及其核心产业统计分类（试行）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7052866.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:50+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委关于印发《低空经济及其核心产业统计分类（试行）》的通知发改低空〔2025〕1676号",
+    "中央和国家机关有关部门，中央军委机关有关部门，各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委：",
+    "为明确低空经济概念和范畴，明晰产业边界，根据低空经济阶段性特征和重点领域、重点环节，按照统计工作相关规定，编制形成《低空经济及其核心产业统计分类（试行）》。现印发你们，请按此执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "国家发展改革委关于印发《低空经济及其核心产业统计分类（试行）》的通知 发改低空〔2025〕1676号 中央和国家机关有关部门，中央军委机关有关部门，各省、自治区、直辖市及计划单列市、新疆生产建设兵团发...",
+  "sourceTextHash": "9728a7991cf8fbfa85f9ad75be04b121cc7342e3690a6e64cd75027f89f88035",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:23:50+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委印发《低空经济及其核心产业统计分类（试行）》，旨在明确低空经济概念和范畴，明晰产业边界，依据低空经济发展阶段性特征及重点领域、重点环节，按照统计工作相关规定编制而成，要求有关部门和各地发展改革委按此执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-1-12-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 12,
+      "text": "明确低空经济概念和范畴",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-13-19-viewpoint",
+      "paragraphIndex": 2,
+      "start": 13,
+      "end": 19,
+      "text": "明晰产业边界",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-38-49-figure",
+      "paragraphIndex": 0,
+      "start": 38,
+      "end": 49,
+      "text": "〔2025〕1676号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

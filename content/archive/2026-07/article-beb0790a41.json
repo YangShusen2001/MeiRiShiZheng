@@ -1,0 +1,56 @@
+{
+  "id": "beb0790a41",
+  "date": "2026-07-22",
+  "title": "体育总局关于印发《体育强国建设“十五五”规划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202607/content_7076303.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:44:25+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "体育总局关于印发《体育强国建设“十五五”规划》的通知体发字〔2026〕1号",
+    "各省、自治区、直辖市人民政府，新疆生产建设兵团，国务院有关部委、有关直属机构：",
+    "《体育强国建设“十五五”规划》已经国务院同意，现印发给你们，请认真贯彻实施。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-07",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\体育",
+  "officialSummary": "体育总局关于印发《体育强国建设“十五五”规划》的通知 体发字〔2026〕1号 各省、自治区、直辖市人民政府，新疆生产建设兵团，国务院有关部委、有关直属机构： 《体育强国建设“十五五”规划》已经国务院同...",
+  "sourceTextHash": "d8bb5d81447b846549b92845840f8e8e9307be4a5ae0b7bd1f2b244b0e314988",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:09:19+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "体育总局印发《体育强国建设“十五五”规划》，文号体发字〔2026〕1号。该规划已获国务院同意，现下发各省、自治区、直辖市人民政府，新疆生产建设兵团及国务院有关部委、有关直属机构，要求认真贯彻实施。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-9-22-term",
+      "paragraphIndex": 0,
+      "start": 9,
+      "end": 22,
+      "text": "体育强国建设“十五五”规划",
+      "type": "term",
+      "explanation": "体育总局制定的“十五五”时期体育事业发展五年规划，明确阶段目标任务。"
+    },
+    {
+      "id": "ai-0-26-37-figure",
+      "paragraphIndex": 0,
+      "start": 26,
+      "end": 37,
+      "text": "体发字〔2026〕1号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-15-22-exam_point",
+      "paragraphIndex": 2,
+      "start": 15,
+      "end": 22,
+      "text": "已经国务院同意",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

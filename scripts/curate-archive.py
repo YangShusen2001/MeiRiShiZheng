@@ -25,7 +25,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "pipeline" / "src"))
 
-from kaogong.deepseek import chat, load_config  # noqa: E402
+from kaogong.deepseek import Cfg, chat, load_config  # noqa: E402
 
 # 关键数字的形状上限（画布 3:382）：单件 8-12 字、整行一两件。
 # 这里挡的是 AI 走形——件数超限、单件写成整句、整行超长；宁可少显示，也不截出半个指标名。
@@ -149,7 +149,7 @@ def _json_object(text: str) -> dict:
     return value if isinstance(value, dict) else {}
 
 
-def curate_month(month: str, cfg: dict[str, str], batch: int, dry: bool = False) -> dict:
+def curate_month(month: str, cfg: Cfg, batch: int, dry: bool = False) -> dict:
     items, bodies = _load_month(month)
     rows: list[dict] = []
     for it in items:
@@ -249,7 +249,7 @@ def curate_month(month: str, cfg: dict[str, str], batch: int, dry: bool = False)
 
 
 def fill_figures(
-    month: str, cfg: dict[str, str], batch: int, dry: bool = False, refill: bool = False
+    month: str, cfg: Cfg, batch: int, dry: bool = False, refill: bool = False
 ) -> int:
     """只补 figures，不动已有的 importance / topic / gist。
 

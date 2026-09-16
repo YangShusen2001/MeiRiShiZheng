@@ -1,0 +1,73 @@
+{
+  "id": "4d651726e6",
+  "date": "2026-02-25",
+  "title": "关于发布国家生态环境标准《环境空气质量指数（AQI）技术规定》《环境空气质量评价技术规范》的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202602/content_7059328.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:43+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于发布国家生态环境标准《环境空气质量指数（AQI）技术规定》《环境空气质量评价技术规范》的公告〔2026〕14号",
+    "为贯彻《中华人民共和国环境保护法》和《中华人民共和国大气污染防治法》，保护和改善生态环境，保障公众健康，向公众提供健康指引，规范环境空气质量监测和评价工作，现批准《环境空气质量指数（AQI）技术规定》《环境空气质量评价技术规范》两项标准为国家生态环境标准，并予发布。",
+    "一、《环境空气质量指数（AQI）技术规定》（HJ 633—2026）",
+    "二、《环境空气质量评价技术规范》（HJ 663—2026）",
+    "以上标准自2026年3月1日起实施。自标准实施之日起，《环境空气质量指数（AQI）技术规定（试行）》（HJ 633—2012）和《环境空气质量评价技术规范（试行）》（HJ 663—2013）废止。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-02",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\环境监测、保护与治理",
+  "officialSummary": "关于发布国家生态环境标准《环境空气质量指数（AQI）技术规定》《环境空气质量评价技术规范》的公告 〔2026〕14号 为贯彻《中华人民共和国环境保护法》和《中华人民共和国大气污染防治法》，保护和改善生...",
+  "sourceTextHash": "d8fa9d87b59e041bf5e539e2c9c30fc6a0ca4218580cc3bcd49b36ec1ec54aa6",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:16:33+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "生态环境部批准发布《环境空气质量指数（AQI）技术规定》（HJ 633—2026）和《环境空气质量评价技术规范》（HJ 663—2026）两项国家生态环境标准，旨在贯彻环境保护法和大气污染防治法，保障公众健康，规范空气质量监测评价。两项标准自2026年3月1日起实施，届时旧版试行标准同时废止。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-45-51-viewpoint",
+      "paragraphIndex": 1,
+      "start": 45,
+      "end": 51,
+      "text": "保障公众健康",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-62-77-viewpoint",
+      "paragraphIndex": 1,
+      "start": 62,
+      "end": 77,
+      "text": "规范环境空气质量监测和评价工作",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-5-14-figure",
+      "paragraphIndex": 4,
+      "start": 5,
+      "end": 14,
+      "text": "2026年3月1日",
+      "type": "figure"
+    },
+    {
+      "id": "ai-4-51-62-figure",
+      "paragraphIndex": 4,
+      "start": 51,
+      "end": 62,
+      "text": "HJ 633—2012",
+      "type": "figure"
+    },
+    {
+      "id": "ai-0-48-57-figure",
+      "paragraphIndex": 0,
+      "start": 48,
+      "end": 57,
+      "text": "〔2026〕14号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

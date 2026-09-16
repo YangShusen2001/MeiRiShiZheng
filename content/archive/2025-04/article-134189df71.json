@@ -1,0 +1,39 @@
+{
+  "id": "134189df71",
+  "date": "2025-04-25",
+  "title": "中国证券监督管理委员会公告〔2025〕8号_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7021027.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:06+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "现公布《上市公司信息披露暂缓与豁免管理规定》，自2025年7月1日起施行。",
+    "附件1：上市公司信息披露暂缓与豁免管理规定.pdf",
+    "附件2：《上市公司信息披露暂缓与豁免管理规定》立法说明.pdf"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\证券",
+  "officialSummary": "中国证券监督管理委员会公告 〔2025〕8号 现公布《上市公司信息披露暂缓与豁免管理规定》，自2025年7月1日起施行。 中国证监会 2025年4月7日 附件1：上市公司信息披露暂缓与豁免管理规定.p...",
+  "sourceTextHash": "55a61a66cedfae01916b9fbff3fa1ac64d93a2521ea583460cfa12bb112a7c73",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:42:43+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "中国证券监督管理委员会公告〔2025〕8号公布《上市公司信息披露暂缓与豁免管理规定》，自2025年7月1日起施行。公告同时附有规定全文及立法说明两份PDF文件，供查阅。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-23-36-figure",
+      "paragraphIndex": 0,
+      "start": 23,
+      "end": 36,
+      "text": "自2025年7月1日起施行",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

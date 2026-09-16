@@ -1,0 +1,61 @@
+{
+  "id": "a49612df79",
+  "date": "2025-12-01",
+  "title": "农业农村部办公厅关于印发互联网经营农药专项治理行动方案的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7049983.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:58+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "农业农村部办公厅关于印发互联网经营农药专项治理行动方案的通知农办农〔2025〕22号",
+    "各省、自治区、直辖市农业农村（农牧）厅（局、委），新疆生产建设兵团农业农村局：",
+    "为贯彻落实新修改的《农药经营许可管理办法》，进一步加强互联网经营农药管理，制定《2026年互联网经营农药专项治理行动方案》，现印发你们，请结合实际抓好落实。",
+    "附件：《2026年互联网经营农药专项治理行动方案》"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "bm",
+  "topic": "农业、林业、水利\\农业、畜牧业、渔业",
+  "officialSummary": "农业农村部办公厅关于印发互联网经营农药专项治理行动方案的通知 农办农〔2025〕22号 各省、自治区、直辖市农业农村（农牧）厅（局、委），新疆生产建设兵团农业农村局： 为贯彻落实新修改的《农药经营许可...",
+  "sourceTextHash": "e14a3bb40100290ac1f652997ba534b15b379ad8ea69d6dc15df45d4e4982e0d",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:22:56+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "农业农村部办公厅印发通知，贯彻新修改的《农药经营许可管理办法》，加强互联网经营农药管理，制定《2026年互联网经营农药专项治理行动方案》，要求各地农业农村部门结合实际抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-30-42-figure",
+      "paragraphIndex": 0,
+      "start": 30,
+      "end": 42,
+      "text": "农办农〔2025〕22号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-5-21-term",
+      "paragraphIndex": 2,
+      "start": 5,
+      "end": 21,
+      "text": "新修改的《农药经营许可管理办法》",
+      "type": "term",
+      "explanation": "规范农药经营许可审批与监管的部门规章，新修改后强化互联网经营农药监管要求。"
+    },
+    {
+      "id": "ai-2-39-61-exam_point",
+      "paragraphIndex": 2,
+      "start": 39,
+      "end": 61,
+      "text": "《2026年互联网经营农药专项治理行动方案》",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 3
+  }
+}

@@ -23,6 +23,17 @@ export interface ArchiveItem {
    */
   figures?: string;
   hasBody: boolean;
+  /**
+   * 该条目对应的**站内阅读页** id（`/read/<id>/`）；没有正文时为空串。
+   *
+   * 由 `getArchive()` 按同目录 `article-*.json` 的 url 对齐后填入——
+   * 正文文件名就是 id（`fetch-archive.py` 用 `md5(url)[:10]` 生成），
+   * 所以不需要读正文内容，扫文件名 + 一条 url 即可。
+   *
+   * ⚠️ 实测 `hasBody` 与正文文件存在性 **100% 一致**（1175 条 = 1137 有正文 + 38 无正文），
+   * 但链接判断仍以本字段为准而不是 `hasBody`：文件才是路由能否成立的事实源。
+   */
+  readId: string;
 }
 
 export interface ArchiveMonth {
@@ -61,11 +72,45 @@ export function listArchiveSummary(): ArchiveSummary[] {
   });
 }
 
+/**
+ * 某月的「官方 URL → 站内阅读页 id」索引。
+ *
+ * 只为**有正文**的条目存在（38 条 hasBody=false 的没有正文文件）。
+ * 模块级缓存：`getArchive()` 会被首页月份卡、月页、详情页反复调用，
+ * 不缓存就会把同一个月几十个正文文件反复解析。
+ */
+const readIndexCache = new Map<string, Map<string, string>>();
+
+function monthReadIndex(month: string): Map<string, string> {
+  const cached = readIndexCache.get(month);
+  if (cached) return cached;
+  const idx = new Map<string, string>();
+  const dir = join(ARCHIVE_DIR, month);
+  if (existsSync(dir)) {
+    for (const f of readdirSync(dir)) {
+      if (!f.startsWith("article-") || !f.endsWith(".json")) continue;
+      try {
+        const doc = JSON.parse(readFileSync(join(dir, f), "utf-8")) as { url?: string };
+        // id 取**文件名**：路由 /read/<id>/ 就是按 article-<id>.json 解析的
+        if (doc.url) idx.set(doc.url, f.slice("article-".length, -".json".length));
+      } catch {
+        /* 单个正文损坏不该让整月档案加载失败 */
+      }
+    }
+  }
+  readIndexCache.set(month, idx);
+  return idx;
+}
+
 export function getArchive(month: string): ArchiveMonth | null {
   const p = join(ARCHIVE_DIR, month, "archive.json");
   if (!existsSync(p)) return null;
   const doc = JSON.parse(readFileSync(p, "utf-8")) as ArchiveMonth;
-  return { ...doc, items: doc.items ?? [] };
+  const idx = monthReadIndex(month);
+  return {
+    ...doc,
+    items: (doc.items ?? []).map((it) => ({ ...it, readId: idx.get(it.url) ?? "" })),
+  };
 }
 
 /** 按年份分组（侧边栏用）：{ "2026": ["2026-09", "2026-08", ...] }。 */

@@ -1,0 +1,60 @@
+{
+  "id": "cbb448c718",
+  "date": "2025-03-12",
+  "title": "关于印发紧密型县域医共体信息化功能指引的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202503/content_7013125.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:59+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发紧密型县域医共体信息化功能指引的通知国卫办规划函〔2025〕63号",
+    "各省、自治区、直辖市及新疆生产建设兵团卫生健康委、中医药局、疾控局，委（局）机关各司局：",
+    "为贯彻落实国务院办公厅《关于推进医疗联合体建设和发展的指导意见》（国办发〔2017〕32号）、国家卫生健康委等10部门印发的《关于全面推进紧密型县域医疗卫生共同体建设的指导意见》（国卫基层发〔2023〕41号）等文件精神，国家卫生健康委、国家中医药局、国家疾控局研究制定了《紧密型县域医共体信息化功能指引》，现印发给你们，请参照执行，积极推进紧密型县域医共体信息化的标准化、规范化建设。",
+    "国家卫生健康委办公厅 国家中医药局综合司国家疾控局综合司2025年2月20日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-03",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\卫生",
+  "officialSummary": "关于印发紧密型县域医共体信息化功能指引的通知 国卫办规划函〔2025〕63号 各省、自治区、直辖市及新疆生产建设兵团卫生健康委、中医药局、疾控局，委（局）机关各司局： 为贯彻落实国务院办公厅《关于推进...",
+  "sourceTextHash": "7a4981f0133cc18a5660ac1b12b8bcd2c4556ce2fb2d91c8e06ec4899bb61f44",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:48:46+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家卫生健康委等三部门于2025年2月印发《紧密型县域医共体信息化功能指引》，要求各地参照执行，推进医共体信息化标准化、规范化建设。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-137-152-term",
+      "paragraphIndex": 2,
+      "start": 137,
+      "end": 152,
+      "text": "紧密型县域医共体信息化功能指引",
+      "type": "term"
+    },
+    {
+      "id": "ai-2-183-192-exam_point",
+      "paragraphIndex": 2,
+      "start": 183,
+      "end": 192,
+      "text": "标准化、规范化建设",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-28-38-figure",
+      "paragraphIndex": 3,
+      "start": 28,
+      "end": 38,
+      "text": "2025年2月20日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

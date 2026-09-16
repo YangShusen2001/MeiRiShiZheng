@@ -1,0 +1,63 @@
+{
+  "id": "8d9ac3ca4f",
+  "date": "2026-02-28",
+  "title": "商务部等7部门公告2026年第8号公布《鼓励进口服务目录》_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202602/content_7059989.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:43+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "商务部等7部门公告2026年第8号公布《鼓励进口服务目录》商务部公告2026年第8号",
+    "为贯彻落实党中央、国务院关于主动扩大优质服务进口的有关决策部署，商务部、国家发展改革委、工业和信息化部、生态环境部、住房城乡建设部、国家卫生健康委、国家知识产权局等部门调整了《鼓励进口服务目录》，现予以公布。商务部、国家发展改革委、财政部、生态环境部、国家知识产权局2019年第14号公告同时废止。",
+    "商务部 国家发展改革委 工业和信息化部生态环境部 住房城乡建设部国家卫生健康委 国家知识产权局2026年2月10日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-02",
+  "archiveLib": "bm",
+  "topic": "商贸、海关、旅游\\对外经贸合作",
+  "officialSummary": "商务部等7部门公告2026年第8号公布《鼓励进口服务目录》 商务部公告2026年第8号 为贯彻落实党中央、国务院关于主动扩大优质服务进口的有关决策部署，商务部、国家发展改革委、工业和信息化部、生态环境...",
+  "sourceTextHash": "c36dcc0166f3e6de8f48e1629be19b3b4fbd16e9d7ea34cb1ae3e9ce611e6916",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:17:12+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "商务部等7部门公告2026年第8号公布调整后的《鼓励进口服务目录》，落实党中央、国务院主动扩大优质服务进口决策部署，同时废止2019年第14号公告，公告日期为2026年2月10日。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-14-24-viewpoint",
+      "paragraphIndex": 1,
+      "start": 14,
+      "end": 24,
+      "text": "主动扩大优质服务进口",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-84-97-exam_point",
+      "paragraphIndex": 1,
+      "start": 84,
+      "end": 97,
+      "text": "调整了《鼓励进口服务目录》",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-9-17-figure",
+      "paragraphIndex": 0,
+      "start": 9,
+      "end": 17,
+      "text": "2026年第8号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-47-57-figure",
+      "paragraphIndex": 2,
+      "start": 47,
+      "end": 57,
+      "text": "2026年2月10日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

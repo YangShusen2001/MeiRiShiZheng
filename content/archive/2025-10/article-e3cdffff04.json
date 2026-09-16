@@ -1,0 +1,46 @@
+{
+  "id": "e3cdffff04",
+  "date": "2025-10-10",
+  "title": "国家医保局办公室 国家中医药局综合司关于开展中医优势病种按病种付费试点工作的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202510/content_7043780.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:38+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家医保局办公室 国家中医药局综合司关于开展中医优势病种按病种付费试点工作的通知 医保办函〔2025〕75号",
+    "文件下载链接：国家医保局办公室国家中医药局综合司关于开展中医优势病种按病种付费试点工作的通知"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-10",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\其他",
+  "officialSummary": "国家医保局办公室 国家中医药局综合司关于开展中医优势病种按病种付费试点工作的通知  医保办函〔2025〕75号 文件下载链接：国家医保局办公室国家中医药局综合司关于开展中医优势病种按病种付费试点工作的...",
+  "sourceTextHash": "098b261837795828526eb0fcf0c50ecb777ba35c89aff003d34de77d3783b331",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:28:19+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家医保局办公室与国家中医药局综合司联合印发医保办函〔2025〕75号通知，部署开展中医优势病种按病种付费试点工作，并附文件下载链接，供各地区、各有关单位贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-22-35-exam_point",
+      "paragraphIndex": 0,
+      "start": 22,
+      "end": 35,
+      "text": "中医优势病种按病种付费试点",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-41-54-figure",
+      "paragraphIndex": 0,
+      "start": 41,
+      "end": 54,
+      "text": "医保办函〔2025〕75号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

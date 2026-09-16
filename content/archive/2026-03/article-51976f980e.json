@@ -1,0 +1,65 @@
+{
+  "id": "51976f980e",
+  "date": "2026-03-31",
+  "title": "工业和信息化部等九部门关于印发《推动物联网产业创新发展行动方案（2026—2028年）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202603/content_7064281.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:47+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部等九部门关于印发《推动物联网产业创新发展行动方案（2026—2028年）》的通知工信部联科〔2026〕65号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、党委网信办、发展改革委、教育厅（教委）、生态环境厅（局）、住房城乡建设厅（委、管委、局）、卫生健康委、市场监管局（厅、委）、数据管理部门，各有关单位：",
+    "现将《推动物联网产业创新发展行动方案（2026—2028年）》印发给你们，请结合实际认真抓好落实。",
+    "工业和信息化部中央网信办国家发展改革委教育部生态环境部住房城乡建设部国家卫生健康委市场监管总局国家数据局2026年3月16日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-03",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部等九部门关于印发《推动物联网产业创新发展行动方案（2026—2028年）》的通知 工信部联科〔2026〕65号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、党...",
+  "sourceTextHash": "c2c73317ef70a4746c388337ac62a21e0e8cb99f28c5f8c1509f6d6efb621b3a",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:15:02+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部等九部门联合印发《推动物联网产业创新发展行动方案（2026—2028年）》，发文时间为2026年3月16日，要求各省区市及有关部门结合实际抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-16-43-term",
+      "paragraphIndex": 0,
+      "start": 16,
+      "end": 43,
+      "text": "推动物联网产业创新发展行动方案（2026—2028年）",
+      "type": "term",
+      "explanation": "九部门联合印发的物联网产业三年行动方案，规划2026至2028年创新发展任务"
+    },
+    {
+      "id": "ai-0-8-11-figure",
+      "paragraphIndex": 0,
+      "start": 8,
+      "end": 11,
+      "text": "九部门",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-37-48-exam_point",
+      "paragraphIndex": 2,
+      "start": 37,
+      "end": 48,
+      "text": "请结合实际认真抓好落实",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-52-62-figure",
+      "paragraphIndex": 3,
+      "start": 52,
+      "end": 62,
+      "text": "2026年3月16日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "aeaacddd24",
+  "date": "2025-03-12",
+  "title": "工业和信息化部关于印发《卫星网络国内协调管理办法（暂行）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202503/content_7013119.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:59+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部关于印发《卫星网络国内协调管理办法（暂行）》的通知工信部无〔2025〕52号",
+    "现将《卫星网络国内协调管理办法（暂行）》印发给你们，请遵照执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-03",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\航天、航空",
+  "officialSummary": "工业和信息化部关于印发《卫星网络国内协调管理办法（暂行）》的通知 工信部无〔2025〕52号 各卫星操作单位： 现将《卫星网络国内协调管理办法（暂行）》印发给你们，请遵照执行。 工业和信息化部 202...",
+  "sourceTextHash": "0a089ae80ea48aca4e736aa54a37eb24de1f147e6e4b74ff5526397ede7fd6c7",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:48:28+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部印发《卫星网络国内协调管理办法（暂行）》，文号工信部无〔2025〕52号。通知要求各有关单位遵照执行。该办法属卫星网络管理领域的规范性文件，旨在规范卫星网络国内协调工作，为相关卫星网络操作单位提供制度依据。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-12-28-term",
+      "paragraphIndex": 0,
+      "start": 12,
+      "end": 28,
+      "text": "卫星网络国内协调管理办法（暂行）",
+      "type": "term"
+    },
+    {
+      "id": "ai-0-32-45-figure",
+      "paragraphIndex": 0,
+      "start": 32,
+      "end": 45,
+      "text": "工信部无〔2025〕52号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

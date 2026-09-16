@@ -1,0 +1,50 @@
+{
+  "id": "dc5471782a",
+  "date": "2025-05-07",
+  "title": "中国人民银行关于下调个人住房公积金贷款利率的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202505/content_7022708.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:20+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "中国人民银行上海总部，各省、自治区、直辖市及计划单列市分行；各政策性银行、国有商业银行，中国邮政储蓄银行，各股份制商业银行：",
+    "中国人民银行决定，自2025年5月8日起，下调个人住房公积金贷款利率0.25个百分点，5年以下（含5年）和5年以上首套个人住房公积金贷款利率分别调整为2.1%和2.6%，5年以下（含5年）和5年以上第二套个人住房公积金贷款利率分别调整为不低于2.525%和3.075%。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-05",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\银行",
+  "officialSummary": "中国人民银行关于下调个人住房公积金贷款利率的通知 中国人民银行上海总部，各省、自治区、直辖市及计划单列市分行；各政策性银行、国有商业银行，中国邮政储蓄银行，各股份制商业银行： 中国人民银行决定，自20...",
+  "sourceTextHash": "4be4079eff7e41a22581b6a130038a1e2d7fd5d158221ffc9f511d35840a489d",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:41:53+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "中国人民银行发布通知，决定自2025年5月8日起下调个人住房公积金贷款利率0.25个百分点。调整后，首套5年以下（含5年）和5年以上利率分别降至2.1%和2.6%；第二套分别调整为不低于2.525%和3.075%。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-21-42-exam_point",
+      "paragraphIndex": 1,
+      "start": 21,
+      "end": 42,
+      "text": "下调个人住房公积金贷款利率0.25个百分点",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-10-19-figure",
+      "paragraphIndex": 1,
+      "start": 10,
+      "end": 19,
+      "text": "2025年5月8日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 1
+  }
+}

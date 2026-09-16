@@ -1,0 +1,64 @@
+{
+  "id": "3a6b45367c",
+  "date": "2025-12-16",
+  "title": "民航局关于印发民航空管基本服务收费清算管理办法的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7051834.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:54+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "民航局关于印发民航空管基本服务收费清算管理办法的通知民航发〔2025〕26号",
+    "民航各地区管理局，各运输（通用）航空公司，空管局、运行监控中心、清算中心：",
+    "现将《民航空管基本服务收费清算管理办法》印发给你们，请遵照执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\民航",
+  "officialSummary": "民航局关于印发民航空管基本服务收费清算管理办法的通知 民航发〔2025〕26号 民航各地区管理局，各运输（通用）航空公司，空管局、运行监控中心、清算中心： 现将《民航空管基本服务收费清算管理办法》印发...",
+  "sourceTextHash": "66ae28ea53d4f82981a996f6ece54eb48963a6e522a5d1cc31e710224c442107",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:21:25+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "民航局印发《民航空管基本服务收费清算管理办法》（民航发〔2025〕26号），通知对象为民航各地区管理局、各运输（通用）航空公司、空管局、运行监控中心、清算中心。文件明确要求上述单位遵照执行该办法，属于民航收费清算领域的规范性文件。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-7-23-term",
+      "paragraphIndex": 0,
+      "start": 7,
+      "end": 23,
+      "text": "民航空管基本服务收费清算管理办法",
+      "type": "term",
+      "explanation": "规范民航空管基本服务收费清算工作的部门规章，用以明确收费与资金清算要求。"
+    },
+    {
+      "id": "ai-1-9-20-exam_point",
+      "paragraphIndex": 1,
+      "start": 9,
+      "end": 20,
+      "text": "各运输（通用）航空公司",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-26-38-figure",
+      "paragraphIndex": 0,
+      "start": 26,
+      "end": 38,
+      "text": "民航发〔2025〕26号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-26-31-viewpoint",
+      "paragraphIndex": 2,
+      "start": 26,
+      "end": 31,
+      "text": "请遵照执行",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

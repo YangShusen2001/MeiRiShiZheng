@@ -1,0 +1,59 @@
+{
+  "id": "1899b5ac33",
+  "date": "2025-01-02",
+  "title": "农业农村部办公厅 国家发展改革委办公厅关于印发《和美乡村建设项目管理导则》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_6995978.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:37+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "农业农村部办公厅 国家发展改革委办公厅关于印发《和美乡村建设项目管理导则》的通知",
+    "为深入贯彻落实习近平总书记关于建设宜居宜业和美乡村的重要指示批示精神，加快补齐和美乡村基础设施短板，指导和规范和美乡村建设项目谋划、申报、审核、实施、监管等活动，起草本导则。现印发你们，请结合实际抓好落实。",
+    "农业农村部办公厅 国家发展改革委办公厅2024年12月30日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "农业、林业、水利\\其他",
+  "officialSummary": "农业农村部办公厅 国家发展改革委办公厅关于印发《和美乡村建设项目管理导则》的通知 为深入贯彻落实习近平总书记关于建设宜居宜业和美乡村的重要指示批示精神，加快补齐和美乡村基础设施短板，指导和规范和美乡村...",
+  "sourceTextHash": "ce4015aa1bb60c9f40dab36f242ec6b450ccd918d9543843a87f5e838ec33419",
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T19:23:09+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "农业农村部办公厅、国家发展改革委办公厅联合印发《和美乡村建设项目管理导则》，旨在贯彻习近平总书记关于建设宜居宜业和美乡村的重要指示批示精神，补齐基础设施短板，指导和规范项目谋划、申报、审核、实施、监管等活动，要求结合实际抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-15-25-viewpoint",
+      "paragraphIndex": 1,
+      "start": 15,
+      "end": 25,
+      "text": "建设宜居宜业和美乡村",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-37-49-exam_point",
+      "paragraphIndex": 1,
+      "start": 37,
+      "end": 49,
+      "text": "补齐和美乡村基础设施短板",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-19-30-figure",
+      "paragraphIndex": 2,
+      "start": 19,
+      "end": 30,
+      "text": "2024年12月30日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 1
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "8ef026ed36",
+  "date": "2025-01-21",
+  "title": "国家发展改革委 国家数据局关于印发《公共数据资源登记管理暂行办法》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_7000192.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:26+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委 国家数据局关于印发《公共数据资源登记管理暂行办法》的通知发改数据规〔2025〕26号",
+    "中央有关部门，国务院各部委、各直属机构，最高人民法院，最高人民检察院，有关人民团体，各省、自治区、直辖市、新疆生产建设兵团发展改革委、数据管理部门，有关中央企业：",
+    "为贯彻落实《中共中央办公厅、国务院办公厅关于加快公共数据资源开发利用的意见》，规范公共数据资源登记工作，构建全国一体化公共数据资源登记体系，促进公共数据资源合规高效开发利用，我们制定了《公共数据资源登记管理暂行办法》。现印发给你们，请遵照执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "国民经济管理、国有资产监管\\其他",
+  "officialSummary": "国家发展改革委 国家数据局关于印发《公共数据资源登记管理暂行办法》的通知 发改数据规〔2025〕26号 中央有关部门，国务院各部委、各直属机构，最高人民法院，最高人民检察院，有关人民团体，各省、自治区...",
+  "sourceTextHash": "396e45d6b6ccefed0c3be233a10e07655a5f7eccd88dbc5da6ec2870075f8ea7",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:53:42+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委、国家数据局印发《公共数据资源登记管理暂行办法》（发改数据规〔2025〕26号），旨在规范公共数据资源登记工作，构建全国一体化公共数据资源登记体系，促进公共数据资源合规高效开发利用，要求有关单位遵照执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-39-51-exam_point",
+      "paragraphIndex": 2,
+      "start": 39,
+      "end": 51,
+      "text": "规范公共数据资源登记工作",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-52-69-viewpoint",
+      "paragraphIndex": 2,
+      "start": 52,
+      "end": 69,
+      "text": "构建全国一体化公共数据资源登记体系",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-36-50-figure",
+      "paragraphIndex": 0,
+      "start": 36,
+      "end": 50,
+      "text": "发改数据规〔2025〕26号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

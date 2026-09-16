@@ -1,0 +1,89 @@
+{
+  "id": "28cf59982b",
+  "date": "2026-06-17",
+  "title": "国务院关于浙江、福建、山东等3省国家级自然保护区和国家级风景名胜区整合优化方案的批复_国务院文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202606/content_7072484.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:55:05+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国务院关于浙江、福建、山东等3省国家级自然保护区和国家级风景名胜区整合优化方案的批复",
+    "《自然资源部、生态环境部关于报请批准浙江、福建、山东等3省国家级自然保护区和国家级风景名胜区整合优化方案的请示》（自然资发〔2026〕79号）收悉。现批复如下：",
+    "一、原则同意浙江、福建、山东等3省国家级自然保护区和国家级风景名胜区整合优化方案，请认真组织实施。整合优化后国家级自然保护区和国家级风景名胜区的名称、区域范围、管控分区由国家林草局公布。",
+    "二、方案实施要坚持以习近平新时代中国特色社会主义思想为指导，深入贯彻党的二十大和二十届历次全会精神，全面贯彻习近平生态文明思想，认真落实党中央、国务院决策部署，坚持生态优先、依法依规、因地制宜、突出特色，实现生态保护、绿色发展、民生改善相统一。",
+    "三、有关部门和地方人民政府要严格执行自然保护地建设管理有关规定，切实履行生态环境保护责任，加强组织领导和协调配合，强化对涉及自然保护地各类违法违规行为的监管执法，确保各项管理措施得到落实，不断提高国家级自然保护区、国家级风景名胜区等自然保护地建设管理水平。重大事项及时按程序请示报告。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-06",
+  "archiveLib": "gw",
+  "topic": "城乡建设、环境保护\\环境监测、保护与治理",
+  "officialSummary": "国务院关于浙江、福建、山东等3省 国家级自然保护区和国家级风景名胜区 整合优化方案的批复 国函〔2026〕53号 自然资源部、生态环境部、国家林草局： 《自然资源部、生态环境部关于报请批准浙江、福建、...",
+  "sourceTextHash": "636307fa65bcb2eb80d0448ea36fa99c3c72eaeb2edca3fcb15428f58e3fa6c6",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:10:03+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国务院原则同意浙江、福建、山东3省国家级自然保护区和国家级风景名胜区整合优化方案，要求认真组织实施，并由国家林草局公布名称、范围及管控分区。方案实施须坚持生态优先、依法依规、因地制宜、突出特色，实现生态保护、绿色发展、民生改善相统一，加强监管执法，落实管理责任。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-2-6-viewpoint",
+      "paragraphIndex": 2,
+      "start": 2,
+      "end": 6,
+      "text": "原则同意",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-85-92-exam_point",
+      "paragraphIndex": 2,
+      "start": 85,
+      "end": 92,
+      "text": "国家林草局公布",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-82-101-exam_point",
+      "paragraphIndex": 3,
+      "start": 82,
+      "end": 101,
+      "text": "生态优先、依法依规、因地制宜、突出特色",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-104-121-viewpoint",
+      "paragraphIndex": 3,
+      "start": 104,
+      "end": 121,
+      "text": "生态保护、绿色发展、民生改善相统一",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-76-80-exam_point",
+      "paragraphIndex": 4,
+      "start": 76,
+      "end": 80,
+      "text": "监管执法",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-57-70-figure",
+      "paragraphIndex": 1,
+      "start": 57,
+      "end": 70,
+      "text": "自然资发〔2026〕79号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-0-5-13-figure",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 13,
+      "text": "浙江、福建、山东",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

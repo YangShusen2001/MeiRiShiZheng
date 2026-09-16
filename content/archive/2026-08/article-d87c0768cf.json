@@ -1,0 +1,108 @@
+{
+  "id": "d87c0768cf",
+  "date": "2026-08-11",
+  "title": "国务院办公厅关于重点林区“十五五”期间森林年采伐限额的复函_国务院文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202608/content_7077888.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:44:33+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国务院办公厅关于重点林区“十五五”期间森林年采伐限额的复函",
+    "《自然资源部关于重点林区“十五五”期间森林年采伐限额的请示》（自然资发〔2026〕90号）收悉。经国务院批准，现函复如下：",
+    "一、国务院原则同意国家林草局编制的重点林区“十五五”期间森林年采伐限额，请认真贯彻执行。",
+    "二、重点林区“十五五”期间森林年采伐限额是重点林区每年采伐林地上森林、消耗林木蓄积的最大限量，国家林草局和各有关单位必须严格执行，不得突破。因重大自然灾害等特殊情况需要采伐林木且在采伐限额内无法解决的，应上报国务院批准。",
+    "三、国家林草局要进一步优化完善森林年采伐限额管理方式，全面实施森林可持续经营，科学开展生态保护修复，确保重点林区森林资源总量持续增长、质量不断提高、生态功能稳步提升。",
+    "四、国家林草局要加强指导，督促各省（自治区、直辖市）严格执行限额采伐、凭证采伐制度，对乱砍滥伐等破坏森林资源行为依法依规追究责任，引导节约集约利用森林资源，统筹推进高质量发展和高水平保护，加快推进生态文明和美丽中国建设。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-08",
+  "archiveLib": "gw",
+  "topic": "农业、林业、水利\\林业",
+  "officialSummary": "国务院办公厅关于重点林区 “十五五”期间森林年采伐限额的复函 国办函〔2026〕71号 自然资源部、国家林草局： 《自然资源部关于重点林区“十五五”期间森林年采伐限额的请示》（自然资发〔2026〕90...",
+  "sourceTextHash": "51048f85102b43ebf7f3484bab2fc1ad1dcc47de1e6bcc2b58bfb43d1bec260e",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:07:06+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国务院办公厅复函自然资源部，经国务院批准同意国家林草局编制的重点林区“十五五”期间森林年采伐限额，要求严格执行不得突破，特殊情况需报国务院批准；并明确优化限额管理、推行可持续经营、强化凭证采伐与责任追究，推动森林资源总量增长和生态文明建设。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-8-26-exam_point",
+      "paragraphIndex": 0,
+      "start": 8,
+      "end": 26,
+      "text": "重点林区“十五五”期间森林年采伐限额",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-2-9-viewpoint",
+      "paragraphIndex": 2,
+      "start": 2,
+      "end": 9,
+      "text": "国务院原则同意",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-37-43-exam_point",
+      "paragraphIndex": 2,
+      "start": 37,
+      "end": 43,
+      "text": "认真贯彻执行",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-42-46-term",
+      "paragraphIndex": 3,
+      "start": 42,
+      "end": 46,
+      "text": "最大限量",
+      "type": "term",
+      "explanation": "指重点林区每年采伐林地上森林、消耗林木蓄积所允许的最高限度，任何单位不得突破。"
+    },
+    {
+      "id": "ai-3-65-69-viewpoint",
+      "paragraphIndex": 3,
+      "start": 65,
+      "end": 69,
+      "text": "不得突破",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-27-38-exam_point",
+      "paragraphIndex": 4,
+      "start": 27,
+      "end": 38,
+      "text": "全面实施森林可持续经营",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-43-49-term",
+      "paragraphIndex": 4,
+      "start": 43,
+      "end": 49,
+      "text": "生态保护修复",
+      "type": "term",
+      "explanation": "指对退化、受损的生态系统采取保护与修复措施，恢复其结构和功能，提升生态服务能力。"
+    },
+    {
+      "id": "ai-5-30-41-exam_point",
+      "paragraphIndex": 5,
+      "start": 30,
+      "end": 41,
+      "text": "限额采伐、凭证采伐制度",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-56-64-viewpoint",
+      "paragraphIndex": 5,
+      "start": 56,
+      "end": 64,
+      "text": "依法依规追究责任",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

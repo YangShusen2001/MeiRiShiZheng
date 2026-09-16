@@ -1,0 +1,55 @@
+{
+  "id": "c350db641c",
+  "date": "2025-11-14",
+  "title": "商务部 工业和信息化部 公安部 海关总署关于进一步加强二手车出口管理工作的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202511/content_7048644.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:42+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "商务部 工业和信息化部 公安部 海关总署关于进一步加强二手车出口管理工作的通知商贸函〔2025〕648号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团商务、工业和信息化主管部门，公安厅（局），海关总署广东分署、各直属海关：",
+    "为深入贯彻落实党中央、国务院决策部署，进一步规范汽车产业竞争秩序，促进我国二手车出口健康有序发展，商务部、工业和信息化部、公安部、海关总署决定进一步加强二手车出口管理。现将有关事项通知如下："
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-11",
+  "archiveLib": "bm",
+  "topic": "商贸、海关、旅游\\其他",
+  "officialSummary": "商务部 工业和信息化部 公安部 海关总署关于进一步加强二手车出口管理工作的通知 商贸函〔2025〕648号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团商务、工业和信息化主管部门，公安厅（局），...",
+  "sourceTextHash": "fe04e4f68de35127d304ea393f57580cac50218d40e09093afdc120c5baaa589",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:25:39+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "商务部等四部门发布商贸函〔2025〕648号通知，为贯彻党中央、国务院决策部署、规范汽车产业竞争秩序、促进二手车出口健康有序发展，就进一步加强二手车出口管理作出部署。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-22-32-viewpoint",
+      "paragraphIndex": 2,
+      "start": 22,
+      "end": 32,
+      "text": "规范汽车产业竞争秩序",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-42-48-viewpoint",
+      "paragraphIndex": 2,
+      "start": 42,
+      "end": 48,
+      "text": "健康有序发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-39-52-figure",
+      "paragraphIndex": 0,
+      "start": 39,
+      "end": 52,
+      "text": "商贸函〔2025〕648号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

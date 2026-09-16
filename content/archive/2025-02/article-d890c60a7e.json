@@ -1,0 +1,117 @@
+{
+  "id": "d890c60a7e",
+  "date": "2025-02-18",
+  "title": "中华人民共和国海关进出境行李物品监管办法_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202502/content_7005697.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:42+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "中华人民共和国海关进出境行李物品监管办法（2025年2月17日海关总署令第276号公布 自2025年4月1日起实施）",
+    "第一条 为了规范海关对进出境行李物品的监管，维护国家安全，便利口岸通关，根据《中华人民共和国海关法》、《中华人民共和国关税法》、《中华人民共和国进出境动植物检疫法》、《中华人民共和国国境卫生检疫法》及有关法律、行政法规，制定本办法。",
+    "第三条 进出境行李物品应当通过设立海关的地点进境或者出境。",
+    "在特殊情况下，进出境行李物品需要经过未设立海关的地点临时进境或者出境的，经国务院或者国务院授权的机关批准后，按照本办法规定办理海关手续。",
+    "第四条 进出境人员可以自行向海关办理行李物品进出境手续，也可以委托他人办理。",
+    "第五条 进出境行李物品应当符合合理自用的要求；超过合理自用数量的，按照货物办理海关手续。",
+    "第六条 进出境人员携带进出境的行李物品应当符合法律、行政法规、国务院的规定或者国务院有关部门依据法律、行政法规的授权作出的规定。",
+    "进出境人员不得携带违反国家禁止性管理规定的行李物品进出境。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-02",
+  "archiveLib": "bm",
+  "topic": "商贸、海关、旅游\\海关",
+  "officialSummary": "中华人民共和国海关进出境行李物品监管办法 （2025年2月17日海关总署令第276号公布 自2025年4月1日起实施） 第一章　总则 第一条　为了规范海关对进出境行李物品的监管，维护国家安全，便利口岸...",
+  "sourceTextHash": "dd2e3d83d2abdcae77121512a612b95d2faf2785779440c645c1f4f57857356b",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:52:00+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "《中华人民共和国海关进出境行李物品监管办法》于2025年2月17日公布，自4月1日起实施。办法明确行李物品须经设立海关地点进出境，特殊情况经批准可临时通行，并可自行或委托办理手续；同时要求符合合理自用，超量按货物办理，不得携带国家禁止进出境物品。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-44-57-figure",
+      "paragraphIndex": 0,
+      "start": 44,
+      "end": 57,
+      "text": "自2025年4月1日起实施",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-22-28-viewpoint",
+      "paragraphIndex": 1,
+      "start": 22,
+      "end": 28,
+      "text": "维护国家安全",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-29-35-viewpoint",
+      "paragraphIndex": 1,
+      "start": 29,
+      "end": 35,
+      "text": "便利口岸通关",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-15-22-exam_point",
+      "paragraphIndex": 2,
+      "start": 15,
+      "end": 22,
+      "text": "设立海关的地点",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-36-52-exam_point",
+      "paragraphIndex": 3,
+      "start": 36,
+      "end": 52,
+      "text": "经国务院或者国务院授权的机关批准",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-9-18-exam_point",
+      "paragraphIndex": 4,
+      "start": 9,
+      "end": 18,
+      "text": "可以自行向海关办理",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-15-19-term",
+      "paragraphIndex": 5,
+      "start": 15,
+      "end": 19,
+      "text": "合理自用",
+      "type": "term",
+      "explanation": "指行李物品用于个人或家庭自用，数量、价值等符合常规合理范围，而非用于销售或经营。"
+    },
+    {
+      "id": "ai-5-33-43-exam_point",
+      "paragraphIndex": 5,
+      "start": 33,
+      "end": 43,
+      "text": "按照货物办理海关手续",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-19-30-exam_point",
+      "paragraphIndex": 6,
+      "start": 19,
+      "end": 30,
+      "text": "应当符合法律、行政法规",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-7-5-20-viewpoint",
+      "paragraphIndex": 7,
+      "start": 5,
+      "end": 20,
+      "text": "不得携带违反国家禁止性管理规定",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

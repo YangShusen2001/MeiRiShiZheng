@@ -1,0 +1,65 @@
+{
+  "id": "582d5140b1",
+  "date": "2025-04-09",
+  "title": "工业和信息化部办公厅关于印发2025年工业和信息化标准工作要点的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7017626.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:13+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部办公厅关于印发2025年工业和信息化标准工作要点的通知工信厅科函〔2025〕116号",
+    "各省、自治区、直辖市及新疆生产建设兵团工业和信息化主管部门，有关行业协会、标准化技术组织和专业机构：",
+    "现将《2025年工业和信息化标准工作要点》印发给你们，请结合本行业（领域）、本地区工作实际抓好贯彻实施。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部办公厅关于印发2025年工业和信息化标准工作要点的通知 工信厅科函〔2025〕116号 各省、自治区、直辖市及新疆生产建设兵团工业和信息化主管部门，有关行业协会、标准化技术组织和专业机构...",
+  "sourceTextHash": "ddedbb1eff8b2518604d82644b8c3feeebad1883d9e2add78d2c56655d043257",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:43:39+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部办公厅印发2025年工业和信息化标准工作要点通知，文号工信厅科函〔2025〕116号，主送各省区市及新疆生产建设兵团工信主管部门、有关行业协会、标准化技术组织和专业机构，要求结合本行业领域、本地区工作实际抓好贯彻实施。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-14-31-term",
+      "paragraphIndex": 0,
+      "start": 14,
+      "end": 31,
+      "text": "2025年工业和信息化标准工作要点",
+      "type": "term",
+      "explanation": "指工信部年度部署的标准化工作安排，明确重点任务与方向，指导全行业标准制定实施。"
+    },
+    {
+      "id": "ai-0-34-49-figure",
+      "paragraphIndex": 0,
+      "start": 34,
+      "end": 49,
+      "text": "工信厅科函〔2025〕116号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-11-19-term",
+      "paragraphIndex": 1,
+      "start": 11,
+      "end": 19,
+      "text": "新疆生产建设兵团",
+      "type": "term",
+      "explanation": "新疆维吾尔自治区内的特殊行政建制，承担经济建设与维稳戍边等职能，享有省级经济管理权限。"
+    },
+    {
+      "id": "ai-2-45-51-exam_point",
+      "paragraphIndex": 2,
+      "start": 45,
+      "end": 51,
+      "text": "抓好贯彻实施",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

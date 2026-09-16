@@ -1,0 +1,56 @@
+{
+  "id": "e0fdd7a8e2",
+  "date": "2025-11-07",
+  "title": "交通运输部关于发布《水网地区航道生态护岸建设指南》的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202511/content_7047381.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:44+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "交通运输部关于发布《水网地区航道生态护岸建设指南》的公告交通运输部公告2025年第52号",
+    "现发布《水网地区航道生态护岸建设指南》（以下简称《指南》），为水运工程建设推荐性行业标准，标准代码为JTS/T 332—2025，自2025年12月1日起施行。",
+    "《指南》由交通运输部水运局负责管理和解释，实施过程中具体使用问题的咨询，由主编单位交通运输部水运科学研究院、湖州市港航管理中心答复。《指南》文本可在交通运输部政府网站水路运输建设综合管理信息系统“水运工程行业标准”专栏查询和下载。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-11",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\水运",
+  "officialSummary": "交通运输部关于发布《水网地区航道生态护岸建设指南》的公告 交通运输部公告2025年第52号 现发布《水网地区航道生态护岸建设指南》（以下简称《指南》），为水运工程建设推荐性行业标准，标准代码为JTS/...",
+  "sourceTextHash": "c66b1d24198067189c958768ace8ff7dc02e6a3c8b52b1048ebca2cc67c2ebfd",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:26:06+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "交通运输部发布公告，推出《水网地区航道生态护岸建设指南》作为推荐性行业标准，代码JTS/T 332—2025，自2025年12月1日施行。该指南由水运局管理解释，水运科学研究院和湖州市港航管理中心负责咨询答复，文本可在交通运输部网站下载。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-37-44-term",
+      "paragraphIndex": 1,
+      "start": 37,
+      "end": 44,
+      "text": "推荐性行业标准",
+      "type": "term",
+      "explanation": "指行业自愿采用的推荐性标准，非强制执行，供水运工程建设参考使用。"
+    },
+    {
+      "id": "ai-1-65-79-figure",
+      "paragraphIndex": 1,
+      "start": 65,
+      "end": 79,
+      "text": "自2025年12月1日起施行",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-41-63-term",
+      "paragraphIndex": 2,
+      "start": 41,
+      "end": 63,
+      "text": "交通运输部水运科学研究院、湖州市港航管理中心",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

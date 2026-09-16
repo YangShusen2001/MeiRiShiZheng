@@ -1,0 +1,56 @@
+{
+  "id": "049a41cbf5",
+  "date": "2025-04-30",
+  "title": "关于印发《终端设备直连卫星服务管理规定》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7022079.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:01+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发《终端设备直连卫星服务管理规定》的通知国信办发文〔2025〕1号",
+    "各省、自治区、直辖市互联网信息办公室、发展改革委、工业和信息化主管部门、公安厅（局）、市场监管局（厅、委）、广播电视局，新疆生产建设兵团互联网信息办公室、发展改革委、工业和信息化局、公安局、市场监管局、文化体育广电和旅游局，海关总署广东分署、各直属海关：",
+    "现将《终端设备直连卫星服务管理规定》印发给你们，请认真贯彻执行。",
+    "国家互联网信息办公室国家发展和改革委员会工业和信息化部公安部海关总署国家市场监督管理总局国家广播电视总局2025年4月23日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\信息产业（含电信）",
+  "officialSummary": "关于印发《终端设备直连卫星服务管理规定》的通知 国信办发文〔2025〕1号 各省、自治区、直辖市互联网信息办公室、发展改革委、工业和信息化主管部门、公安厅（局）、市场监管局（厅、委）、广播电视局，新疆...",
+  "sourceTextHash": "ccd920c0416056c883aa243fd984c9c8e94e6b94f8dd4d9e4fe58cdfc405da5d",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:42:21+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家网信办等七部门联合印发《终端设备直连卫星服务管理规定》，通知文号为国信办发文〔2025〕1号，2025年4月23日发布，要求各省区市网信、发展改革、工信、公安、市场监管、广电及海关等单位认真贯彻执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-23-36-figure",
+      "paragraphIndex": 0,
+      "start": 23,
+      "end": 36,
+      "text": "国信办发文〔2025〕1号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-24-31-exam_point",
+      "paragraphIndex": 2,
+      "start": 24,
+      "end": 31,
+      "text": "请认真贯彻执行",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-52-62-figure",
+      "paragraphIndex": 3,
+      "start": 52,
+      "end": 62,
+      "text": "2025年4月23日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

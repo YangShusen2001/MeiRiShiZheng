@@ -1,0 +1,80 @@
+{
+  "id": "a096f4763e",
+  "date": "2025-12-25",
+  "title": "国家药监局关于适用《E6（R3）：药物临床试验质量管理规范技术指导原则》国际人用药品注册技术协调会指导原则的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7052725.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:51+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家药监局关于适用《E6（R3）：药物临床试验质量管理规范技术指导原则》国际人用药品注册技术协调会指导原则的公告2025年第125号",
+    "为持续推动药品注册技术标准与国际接轨，经研究，国家药品监督管理局决定适用《E6（R3）：药物临床试验质量管理规范技术指导原则》国际人用药品注册技术协调会指导原则（以下简称E6（R3）指导原则）。现就有关事项公告如下：",
+    "一、自2026年3月31日后实施的药物临床试验，均适用E6（R3）指导原则。",
+    "二、相关技术指导原则可在国家药品监督管理局药品审评中心网站查询。国家药品监督管理局药品审评中心负责做好本公告实施过程中的相关技术指导工作。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\医药管理",
+  "officialSummary": "国家药监局关于适用《E6（R3）：药物临床试验质量管理规范技术指导原则》国际人用药品注册技术协调会指导原则的公告 2025年第125号 为持续推动药品注册技术标准与国际接轨，经研究，国家药品监督管理局...",
+  "sourceTextHash": "a4b86987e83759fd9f694e29d04567905da529836b54b106e513a75cfe024e8d",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:22:52+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家药监局公告适用《E6（R3）：药物临床试验质量管理规范技术指导原则》ICH指导原则，以推动药品注册技术标准与国际接轨；自2026年3月31日后实施的药物临床试验均适用，相关技术指导原则可在药审中心网站查询，药审中心负责实施中的技术指导工作。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-1-18-viewpoint",
+      "paragraphIndex": 1,
+      "start": 1,
+      "end": 18,
+      "text": "持续推动药品注册技术标准与国际接轨",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-23-36-viewpoint",
+      "paragraphIndex": 1,
+      "start": 23,
+      "end": 36,
+      "text": "国家药品监督管理局决定适用",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-2-14-figure",
+      "paragraphIndex": 2,
+      "start": 2,
+      "end": 14,
+      "text": "自2026年3月31日后",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-24-37-exam_point",
+      "paragraphIndex": 2,
+      "start": 24,
+      "end": 37,
+      "text": "均适用E6（R3）指导原则",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-21-31-exam_point",
+      "paragraphIndex": 3,
+      "start": 21,
+      "end": 31,
+      "text": "药品审评中心网站查询",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-47-68-exam_point",
+      "paragraphIndex": 3,
+      "start": 47,
+      "end": 68,
+      "text": "负责做好本公告实施过程中的相关技术指导工作",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -344,4 +344,111 @@ export interface ContentManifest {
   cardCount: number;
   /** 活跃政策主线总数。 */
   policyLineCount: number;
+  /**
+   * 政策档案规模摘要（供首页「政策档案」入口卡显示，不必额外拉一次 archive/index.json）。
+   *
+   * 这是**清单内唯一与 `days` 无关的语料**：档案是按月成台账的历史存量，
+   * 不随「今天」变化。所以只放三个数（月份数 / 文件数 / 核心考点数），
+   * 完整月份行与条目在 `archive/index.json` 与 `archive/<YYYY-MM>.json`。
+   */
+  archive: ContentArchiveScale;
+}
+
+/** 政策档案规模（三个计数，用于入口卡与列表头）。 */
+export interface ContentArchiveScale {
+  /** 有台账的月份数。 */
+  months: number;
+  /** 全部文件数。 */
+  files: number;
+  /** 核心考点（importance=高）文件数。 */
+  core: number;
+}
+
+/**
+ * 政策档案分级。与 Web 端 `apps/web/src/lib/archive.ts` 的 `ArchiveImportance` 同值。
+ * 「高」= 核心考点（建议优先通读）；「中」「低」= 了解 · 细则。
+ */
+export type ContentArchiveImportance = "高" | "中" | "低";
+
+/**
+ * 政策档案台账里的一份文件。
+ *
+ * 数据源：`content/archive/<YYYY-MM>/archive.json`，
+ * 由 `scripts/fetch-archive.py`（抓取）+ `scripts/curate-archive.py`（AI 分层）产出。
+ */
+export interface ContentArchiveItem {
+  /** 官方原文链接（中国政府网）。同时是台账条目的稳定标识。 */
+  url: string;
+  title: string;
+  /** 发布日期 "2026-09-11"。 */
+  date: string;
+  /** 来源库：「国务院文件」「部门文件」等。取值由数据决定，客户端不得写死枚举。 */
+  lib: string;
+  importance: ContentArchiveImportance;
+  /** 考点分类，如「十五五规划」。 */
+  topic: string;
+  /** AI 概括的要点。 */
+  gist: string;
+  /**
+   * 关键数字，`·` 分隔，如「参保率 95% 以上 · 人均预期寿命 80 岁」。
+   * 可选：2026-09-15 之前产出的档案没有这个字段 → 客户端条件渲染，不补空行。
+   */
+  figures?: string;
+  /** 是否有站内正文。 */
+  hasBody: boolean;
+  /**
+   * 站内阅读页 id（`/read/<id>/`，正文 JSON 在 `/content/articles/<id>.json`）。
+   * **空串 = 无正文**，客户端必须退到 `url` 官方外链，不得指向站内。
+   *
+   * 判据是「正文文件是否存在」而不是 `hasBody`——文件才是路由能否成立的事实源
+   * （实测两者 1175 条一致，但语义上文件优先）。
+   */
+  readId: string;
+}
+
+/** 一个月的政策档案台账。 */
+export interface ContentArchiveMonth {
+  /** "2026-09"。 */
+  month: string;
+  count: number;
+  high: number;
+  medium: number;
+  low: number;
+  items: ContentArchiveItem[];
+}
+
+/**
+ * 月份摘要（索引里的一行，不含条目——侧边栏与入口卡只需"多少份、几份核心"）。
+ *
+ * 刻意**不带** `medium` / `low`：分级只有高/中/低三档，且构建期门禁会拒绝未知分级，
+ * 所以 `了解 · 细则 = count - high` 恒成立。多两个可推导的字段就是多一处会漂移的真相源。
+ */
+export interface ContentArchiveMonthRow {
+  month: string;
+  count: number;
+  /** 核心考点（importance=高）份数。 */
+  high: number;
+}
+
+/** 全馆合计（档案页页头的三个统计）。 */
+export interface ContentArchiveTotals {
+  /** 最早月份 YYYY-MM；无数据时为空串。 */
+  firstMonth: string;
+  /** 最新月份 YYYY-MM；无数据时为空串。 */
+  lastMonth: string;
+  months: number;
+  files: number;
+  core: number;
+}
+
+/**
+ * 档案索引：客户端进入档案页先取它，再按需取某月。
+ * 与 `ContentManifest` 同一设计意图——「发现」与「内容」分开，客户端不硬编码月份。
+ */
+export interface ContentArchiveIndex {
+  /** 生成时间，ISO8601。 */
+  generatedAt: string;
+  /** 月份摘要，按月份倒序（最新在前）。 */
+  months: ContentArchiveMonthRow[];
+  totals: ContentArchiveTotals;
 }

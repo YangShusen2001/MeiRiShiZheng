@@ -1,0 +1,56 @@
+{
+  "id": "bc6c991950",
+  "date": "2025-11-28",
+  "title": "交通运输部关于发布《城镇化地区公路交通安全设施设计规范》的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202511/content_7049763.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:39+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "交通运输部关于发布《城镇化地区公路交通安全设施设计规范》的公告交通运输部公告2025年第65号",
+    "现发布《城镇化地区公路交通安全设施设计规范》(JTG/T3381-04-2025)，作为公路工程推荐性行业标准，自2026年3月1日起施行。《城镇化地区公路交通安全设施设计规范》(JTG/T3381-04-2025)的管理权和解释权归交通运输部，日常管理和解释工作由主编单位交通运输部公路科学研究院负责。",
+    "请各有关单位注意在实践中总结经验，及时将发现的问题和修改建议函告交通运输部公路科学研究院(地址：北京市海淀区西土城路8号；邮政编码：100088)。",
+    "城镇化地区公路交通安全设施设计规范（JTGT 3381-04—2025）.pdf"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-11",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\公路",
+  "officialSummary": "交通运输部关于发布《城镇化地区公路交通安全设施设计规范》的公告 交通运输部公告2025年第65号 现发布《城镇化地区公路交通安全设施设计规范》(JTG/T3381-04-2025)，作为公路工程推荐性...",
+  "sourceTextHash": "ecdeb537c33dba7a190fad1713108114109e6969e8d72f36a83ba650a764ea10",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:57:36+00:00",
+  "aiStatus": "ok",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-0-3-viewpoint",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 3,
+      "text": "现发布",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-42-55-exam_point",
+      "paragraphIndex": 1,
+      "start": 42,
+      "end": 55,
+      "text": "作为公路工程推荐性行业标准",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-0-16-exam_point",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 16,
+      "text": "请各有关单位注意在实践中总结经验",
+      "type": "exam_point"
+    }
+  ],
+  "aiSummary": "交通运输部公告发布《城镇化地区公路交通安全设施设计规范》（JTG/T3381-04-2025），作为公路工程推荐性行业标准，自2026年3月1日起施行。该规范管理权和解释权归交通运输部，日常管理和解释由交通运输部公路科学研究院负责，相关单位需在实践中总结经验并反馈问题建议。",
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

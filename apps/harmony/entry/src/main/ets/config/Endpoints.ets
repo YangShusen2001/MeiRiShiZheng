@@ -42,6 +42,22 @@ export class Endpoints {
   }
 
   /**
+   * 政策档案索引（`content/archive/index.json`）：月份摘要 + 全馆合计。
+   * 进档案页先取它——月份列表不硬编码，新月份上线客户端自动可见。
+   */
+  static archiveIndexUrl(): string {
+    return `${Endpoints.CONTENT_BASE}/content/archive/index.json`;
+  }
+
+  /**
+   * 某月政策台账（`content/archive/<YYYY-MM>.json`）：条目含 `readId`。
+   * `readId` 非空 → 走 `articleUrl(readId)` 站内阅读页；为空 → 退到条目 `url` 官方外链。
+   */
+  static archiveMonthUrl(month: string): string {
+    return `${Endpoints.CONTENT_BASE}/content/archive/${month}.json`;
+  }
+
+  /**
    * AI 解析（Worker 侧 DeepSeek）。
    * 需带 `X-Device-Id` 头；服务端有配额与限流（匿名需邀请码，10 次/分钟）。
    */

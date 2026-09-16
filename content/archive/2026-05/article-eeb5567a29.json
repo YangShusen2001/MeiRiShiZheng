@@ -1,0 +1,78 @@
+{
+  "id": "eeb5567a29",
+  "date": "2026-05-08",
+  "title": "国务院关于同意在上海市暂时调整实施有关行政法规规定的批复_国务院文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202605/content_7068118.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:55:03+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国务院关于同意在上海市暂时调整实施有关行政法规规定的批复",
+    "你们关于在上海市暂时调整实施有关行政法规规定的请示收悉。现批复如下：",
+    "一、同意自即日起在上海市暂时调整实施《外国律师事务所驻华代表机构管理条例》的有关规定（目录附后）。",
+    "二、上海市人民政府、司法部等有关部门要根据上述调整，及时对本市、本部门制定的规章和规范性文件作相应调整，统筹发展和安全，建立相适应的管理制度。",
+    "三、国务院将根据上述调整实施情况，适时对本批复的内容进行调整。",
+    "附件：国务院决定在上海市暂时调整实施的有关行政法规规定目录"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-05",
+  "archiveLib": "gw",
+  "topic": "公安、安全、司法\\司法",
+  "officialSummary": "国务院关于同意在上海市暂时调整实施 有关行政法规规定的批复 国函〔2026〕38号 上海市人民政府、司法部： 你们关于在上海市暂时调整实施有关行政法规规定的请示收悉。现批复如下： 一、同意自即日起在上...",
+  "sourceTextHash": "37b4e636a054be1a0e4f03cc3d919e18294f24b0a4330e4c6fa9e778a4d50756",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:12:40+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国务院批复同意自即日起在上海市暂时调整实施《外国律师事务所驻华代表机构管理条例》有关规定，要求上海市人民政府、司法部等及时调整相关规章和规范性文件，统筹发展和安全，建立相适应的管理制度，并将根据实施情况适时调整本批复内容。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-4-8-figure",
+      "paragraphIndex": 2,
+      "start": 4,
+      "end": 8,
+      "text": "自即日起",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-9-18-exam_point",
+      "paragraphIndex": 2,
+      "start": 9,
+      "end": 18,
+      "text": "上海市暂时调整实施",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-52-59-viewpoint",
+      "paragraphIndex": 3,
+      "start": 52,
+      "end": 59,
+      "text": "统筹发展和安全",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-60-70-exam_point",
+      "paragraphIndex": 3,
+      "start": 60,
+      "end": 70,
+      "text": "建立相适应的管理制度",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-17-30-viewpoint",
+      "paragraphIndex": 4,
+      "start": 17,
+      "end": 30,
+      "text": "适时对本批复的内容进行调整",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 4
+  }
+}

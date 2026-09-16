@@ -1,4 +1,5 @@
 import { KColor } from '../theme/Tokens';
+import { ArchivePage } from '../view/ArchivePage';
 import { HomePage } from '../view/HomePage';
 import { ReadPage, ReadParam } from '../view/ReadPage';
 import { ReviewPage } from '../view/ReviewPage';
@@ -30,6 +31,8 @@ struct Index {
       })
     } else if (name === 'review') {
       ReviewPage()
+    } else if (name === 'archive') {
+      ArchivePage()
     }
   }
 

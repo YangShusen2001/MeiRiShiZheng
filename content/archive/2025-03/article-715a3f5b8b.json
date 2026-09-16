@@ -1,0 +1,59 @@
+{
+  "id": "715a3f5b8b",
+  "date": "2025-03-26",
+  "title": "国家药监局 国家卫生健康委关于颁布2025年版《中华人民共和国药典》的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202503/content_7015682.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:52+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家药监局 国家卫生健康委关于颁布2025年版《中华人民共和国药典》的公告（2025年第29号）",
+    "根据《中华人民共和国药品管理法》，2025年版《中华人民共和国药典》（以下简称《中国药典》）经第十二届药典委员会执行委员会全体会议审议通过，现予颁布，自2025年10月1日起施行。2025年版《中国药典》目录见附件。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-03",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\医药管理",
+  "officialSummary": "国家药监局 国家卫生健康委关于颁布2025年版《中华人民共和国药典》的公告 （2025年第29号） 根据《中华人民共和国药品管理法》，2025年版《中华人民共和国药典》（以下简称《中国药典》）经第十二...",
+  "sourceTextHash": "f952bd801a2d514a821a71c233947ba78a328d5f493301feb5eeccc2ce866bbe",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:47:32+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家药监局与国家卫生健康委联合发布2025年第29号公告，依据《中华人民共和国药品管理法》，2025年版《中华人民共和国药典》经第十二届药典委员会执行委员会全体会议审议通过并颁布，自2025年10月1日起施行，目录见附件。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-2-16-term",
+      "paragraphIndex": 1,
+      "start": 2,
+      "end": 16,
+      "text": "《中华人民共和国药品管理法》",
+      "type": "term",
+      "explanation": "规范药品研制、生产、经营、使用和监督管理的基本法律，是药典颁布的上位法依据。"
+    },
+    {
+      "id": "ai-1-47-65-exam_point",
+      "paragraphIndex": 1,
+      "start": 47,
+      "end": 65,
+      "text": "第十二届药典委员会执行委员会全体会议",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-38-47-figure",
+      "paragraphIndex": 0,
+      "start": 38,
+      "end": 47,
+      "text": "2025年第29号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 0,
+    "to": 1
+  }
+}

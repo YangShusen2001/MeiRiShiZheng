@@ -1,0 +1,73 @@
+{
+  "id": "505a86b6b3",
+  "date": "2025-04-24",
+  "title": "关于印发《中国履行〈关于消耗臭氧层物质的蒙特利尔议定书〉国家方案（2025—2030年）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7021651.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:06+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发《中国履行〈关于消耗臭氧层物质的蒙特利尔议定书〉国家方案（2025—2030年）》的通知环大气〔2025〕27号",
+    "各省、自治区、直辖市人民政府，新疆生产建设兵团，外交部、公安部、财政部、人力资源社会保障部、交通运输部、农业农村部、应急管理部、中国人民银行、市场监管总局、中国气象局、国家消防救援局、国家药品监督管理局：",
+    "《中国履行〈关于消耗臭氧层物质的蒙特利尔议定书〉国家方案（2025—2030年）》已经国务院同意，现印发给你们，请认真贯彻执行。",
+    "生态环境部国家发展改革委工业和信息化部商务部海关总署2025年4月9日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\其他",
+  "officialSummary": "关于印发《中国履行〈关于消耗臭氧层物质的蒙特利尔议定书〉国家方案（2025—2030年）》的通知 环大气〔2025〕27号 各省、自治区、直辖市人民政府，新疆生产建设兵团，外交部、公安部、财政部、人力...",
+  "sourceTextHash": "eee82869365b23d8819ea7dfcfb9790a5541f1c001676ffa136b2fe444c4d71b",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:43:23+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "生态环境部等五部门于2025年4月9日联合印发《中国履行〈关于消耗臭氧层物质的蒙特利尔议定书〉国家方案（2025—2030年）》，经国务院同意，部署未来六年履约工作。方案要求各省区市政府及有关部委、机构认真贯彻执行，涉及外交、财政、交通、农业、市场监管、气象、药监等多部门协同推进。",
+  "aiAnnotations": [
+    {
+      "id": "ai-3-26-35-figure",
+      "paragraphIndex": 3,
+      "start": 26,
+      "end": 35,
+      "text": "2025年4月9日",
+      "type": "figure"
+    },
+    {
+      "id": "ai-0-33-43-figure",
+      "paragraphIndex": 0,
+      "start": 33,
+      "end": 43,
+      "text": "2025—2030年",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-41-48-exam_point",
+      "paragraphIndex": 2,
+      "start": 41,
+      "end": 48,
+      "text": "已经国务院同意",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-0-26-figure",
+      "paragraphIndex": 3,
+      "start": 0,
+      "end": 26,
+      "text": "生态环境部国家发展改革委工业和信息化部商务部海关总署",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-49-55-term",
+      "paragraphIndex": 2,
+      "start": 49,
+      "end": 55,
+      "text": "现印发给你们",
+      "type": "term",
+      "explanation": "指上级机关将文件正式下发给下级单位，属公文办理程序中的印发环节。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  }
+}

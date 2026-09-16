@@ -1,0 +1,55 @@
+{
+  "id": "74f989fe68",
+  "date": "2025-09-23",
+  "title": "两部门关于印发《工业园区高质量发展指引》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202509/content_7041869.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:52+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部 国家发展改革委关于印发《工业园区高质量发展指引》的通知工信部联规〔2025〕189号",
+    "各省、自治区、直辖市及新疆生产建设兵团工业和信息化主管部门、发展改革委：",
+    "现将《工业园区高质量发展指引》印发给你们，请结合实际认真抓好落实。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-09",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部 国家发展改革委关于印发《工业园区高质量发展指引》的通知 工信部联规〔2025〕189号 各省、自治区、直辖市及新疆生产建设兵团工业和信息化主管部门、发展改革委： 现将《工业园区高质量发...",
+  "sourceTextHash": "4199c43e9bfa85ed4fbe5a57464dea3cc2e115ddda463af316f6f1aacd92fecd",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:30:31+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工信部、国家发展改革委联合印发《工业园区高质量发展指引》（工信部联规〔2025〕189号），要求各省区市及新疆生产建设兵团工信主管部门、发展改革委结合实际抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-20-31-term",
+      "paragraphIndex": 0,
+      "start": 20,
+      "end": 31,
+      "text": "工业园区高质量发展指引",
+      "type": "term"
+    },
+    {
+      "id": "ai-0-35-50-figure",
+      "paragraphIndex": 0,
+      "start": 35,
+      "end": 50,
+      "text": "工信部联规〔2025〕189号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-21-32-exam_point",
+      "paragraphIndex": 2,
+      "start": 21,
+      "end": 32,
+      "text": "请结合实际认真抓好落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

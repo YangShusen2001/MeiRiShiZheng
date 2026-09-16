@@ -1,0 +1,56 @@
+{
+  "id": "784f3a6032",
+  "date": "2025-02-09",
+  "title": "国家知识产权局办公室关于印发《产业知识产权运营中心建设管理工作指引（暂行）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202502/content_7003293.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:46+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家知识产权局办公室关于印发《产业知识产权运营中心建设管理工作指引（暂行）》的通知国知办函运字〔2024〕1155号",
+    "各省、自治区、直辖市和新疆生产建设兵团知识产权局，各有关单位：",
+    "现将《产业知识产权运营中心建设管理工作指引（暂行）》印发给你们，请认真贯彻落实。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-02",
+  "archiveLib": "bm",
+  "topic": "科技、教育\\知识产权",
+  "officialSummary": "国家知识产权局办公室关于印发《产业知识产权运营中心建设管理工作指引（暂行）》的通知 国知办函运字〔2024〕1155号 各省、自治区、直辖市和新疆生产建设兵团知识产权局，各有关单位： 现将《产业知识产...",
+  "sourceTextHash": "9a616ebe87c2c591d64cf4137afd8cfbcc8d9ea17b4c9bff6bde919f0cf9454a",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:50:39+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家知识产权局办公室印发《产业知识产权运营中心建设管理工作指引（暂行）》，以国知办函运字〔2024〕1155号文下发各省、自治区、直辖市和新疆生产建设兵团知识产权局及有关单位，要求认真贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-41-58-figure",
+      "paragraphIndex": 0,
+      "start": 41,
+      "end": 58,
+      "text": "国知办函运字〔2024〕1155号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-3-25-term",
+      "paragraphIndex": 2,
+      "start": 3,
+      "end": 25,
+      "text": "产业知识产权运营中心建设管理工作指引（暂行）",
+      "type": "term",
+      "explanation": "国家知识产权局制定的产业知识产权运营中心建设与管理规范性文件，此次以暂行指引形式印发实施。"
+    },
+    {
+      "id": "ai-2-32-39-exam_point",
+      "paragraphIndex": 2,
+      "start": 32,
+      "end": 39,
+      "text": "请认真贯彻落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

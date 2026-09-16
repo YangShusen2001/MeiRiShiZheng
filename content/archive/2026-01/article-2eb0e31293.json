@@ -1,0 +1,64 @@
+{
+  "id": "2eb0e31293",
+  "date": "2026-01-17",
+  "title": "关于印发《重点生态保护修复治理资金管理办法》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202601/content_7055022.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:38+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发《重点生态保护修复治理资金管理办法》的通知财资环〔2026〕7号",
+    "各省、自治区、直辖市财政厅（局），新疆生产建设兵团财政局：",
+    "为加强重点生态保护修复治理资金管理，我们修订了《重点生态保护修复治理资金管理办法》，现予印发，请遵照执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-01",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\财政",
+  "officialSummary": "关于印发《重点生态保护修复治理资金管理办法》的通知 财资环〔2026〕7号 各省、自治区、直辖市财政厅（局），新疆生产建设兵团财政局： 为加强重点生态保护修复治理资金管理，我们修订了《重点生态保护修复...",
+  "sourceTextHash": "b162f56fbb062de274d6c633353be9a36553b2b68cbdc5bce3d9e18a33ee4b13",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:18:28+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "财政部修订印发《重点生态保护修复治理资金管理办法》（财资环〔2026〕7号），要求各省、自治区、直辖市财政厅（局）及新疆生产建设兵团财政局遵照执行，旨在加强重点生态保护修复治理资金管理。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-5-21-term",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 21,
+      "text": "重点生态保护修复治理资金管理办法",
+      "type": "term",
+      "explanation": "规范中央财政重点生态保护修复治理资金分配、使用和监管的部门规范性文件"
+    },
+    {
+      "id": "ai-0-25-36-figure",
+      "paragraphIndex": 0,
+      "start": 25,
+      "end": 36,
+      "text": "财资环〔2026〕7号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-1-17-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 17,
+      "text": "加强重点生态保护修复治理资金管理",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-20-41-exam_point",
+      "paragraphIndex": 2,
+      "start": 20,
+      "end": 41,
+      "text": "修订了《重点生态保护修复治理资金管理办法》",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

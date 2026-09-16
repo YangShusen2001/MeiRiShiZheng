@@ -1,0 +1,46 @@
+{
+  "id": "79ebbad7af",
+  "date": "2025-01-01",
+  "title": "国务院关税税则委员会关于发布《中华人民共和国进出口税则（2025）》的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_7007154.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:38+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国务院关税税则委员会关于发布《中华人民共和国进出口税则（2025）》的公告税委会公告2024年第13号",
+    "根据《中华人民共和国关税法》相关规定，现公布《中华人民共和国进出口税则（2025）》，自2025年1月1日起实施。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\其他",
+  "officialSummary": "国务院关税税则委员会关于发布《中华人民共和国进出口税则（2025）》的公告 税委会公告2024年第13号  根据《中华人民共和国关税法》相关规定，现公布《中华人民共和国进出口税则（2025）》，自20...",
+  "sourceTextHash": "c99d0f0ac0099b1ae7ba877282ccd3afb2b77d31b1b860b04ca677efd1499360",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:53:27+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国务院关税税则委员会发布公告，依据《中华人民共和国关税法》相关规定，公布《中华人民共和国进出口税则（2025）》，并明确该税则自2025年1月1日起正式实施，为进出口关税征管提供最新法律依据。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-0-18-viewpoint",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 18,
+      "text": "根据《中华人民共和国关税法》相关规定",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-43-56-figure",
+      "paragraphIndex": 1,
+      "start": 43,
+      "end": 56,
+      "text": "自2025年1月1日起实施",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

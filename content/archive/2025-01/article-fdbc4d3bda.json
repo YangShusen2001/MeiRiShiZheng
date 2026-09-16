@@ -1,0 +1,68 @@
+{
+  "id": "fdbc4d3bda",
+  "date": "2025-01-07",
+  "title": "关于印发《全国统一大市场建设指引（试行）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_6996676.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委关于印发《全国统一大市场建设指引（试行）》的通知发改体改〔2024〕1742号",
+    "各省、自治区、直辖市人民政府，国务院各部委、各直属机构：",
+    "《全国统一大市场建设指引（试行）》已经国务院同意，现印发给你们，请结合实际认真贯彻落实。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "国民经济管理、国有资产监管\\其他",
+  "officialSummary": "国家发展改革委关于印发《全国统一大市场建设指引（试行）》的通知 发改体改〔2024〕1742号 各省、自治区、直辖市人民政府，国务院各部委、各直属机构： 《全国统一大市场建设指引（试行）》已经国务院同...",
+  "sourceTextHash": "6fca851fb54c3900dee9a73358b106d7b5960975d1ab56bf705eea1b596b219a",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:55:37+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委印发《全国统一大市场建设指引（试行）》，文号发改体改〔2024〕1742号，已经国务院同意，面向各省区市人民政府及国务院各部委、各直属机构，要求结合实际认真贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-0-31-term",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 31,
+      "text": "国家发展改革委关于印发《全国统一大市场建设指引（试行）》的通知",
+      "type": "term",
+      "explanation": "国家发展改革委印发的通知，公布全国统一大市场建设指引，供各地各部门执行"
+    },
+    {
+      "id": "ai-0-31-46-figure",
+      "paragraphIndex": 0,
+      "start": 31,
+      "end": 46,
+      "text": "发改体改〔2024〕1742号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-17-24-viewpoint",
+      "paragraphIndex": 2,
+      "start": 17,
+      "end": 24,
+      "text": "已经国务院同意",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-32-43-exam_point",
+      "paragraphIndex": 2,
+      "start": 32,
+      "end": 43,
+      "text": "请结合实际认真贯彻落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 0,
+    "to": 2
+  }
+}

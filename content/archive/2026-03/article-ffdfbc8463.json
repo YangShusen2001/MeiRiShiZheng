@@ -1,0 +1,68 @@
+{
+  "id": "ffdfbc8463",
+  "date": "2026-03-28",
+  "title": "国家中医药管理局关于印发《三级中医医院评审标准（2026年版）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202603/content_7064072.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:48+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家中医药管理局关于印发《三级中医医院评审标准（2026年版）》的通知国中医药医政函〔2026〕39号",
+    "各省、自治区、直辖市中医药主管部门，新疆生产建设兵团卫生健康委：",
+    "为引导强化中医医院坚持公益性、履行功能定位，全面落实“强基、稳二、控三”工作部署和分级诊疗制度要求，优化完善中医医院评审制度，保障医疗质量安全，提升医疗服务能力、医院管理水平和精细化运营效能，国家中医药管理局组织制定了《三级中医医院评审标准（2026年版）》。现印发给你们，请遵照执行。",
+    "《三级中医医院评审标准（2026年版）》自本通知印发之日起实施，2017年版三级中医医院评审标准、三级中西医结合医院评审标准、三级民族医医院评审标准及其实施细则等评审规定同时废止。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-03",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\医药管理",
+  "officialSummary": "国家中医药管理局关于印发《三级中医医院评审标准（2026年版）》的通知 国中医药医政函〔2026〕39号 各省、自治区、直辖市中医药主管部门，新疆生产建设兵团卫生健康委： 为引导强化中医医院坚持公益性...",
+  "sourceTextHash": "bc710ff799d9cf113204d294cd891c13b370668b4ae97e6b118dfeca0a9990af",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:16:08+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家中医药管理局印发《三级中医医院评审标准（2026年版）》，要求各级中医药主管部门遵照执行。新标准旨在强化中医医院公益性、落实“强基、稳二、控三”部署与分级诊疗，提升医疗质量、服务能力及运营效能，自印发之日起实施，2017年版及相关评审规定同时废止。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-9-14-viewpoint",
+      "paragraphIndex": 2,
+      "start": 9,
+      "end": 14,
+      "text": "坚持公益性",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-26-40-exam_point",
+      "paragraphIndex": 2,
+      "start": 26,
+      "end": 40,
+      "text": "“强基、稳二、控三”工作部署",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-20-31-figure",
+      "paragraphIndex": 3,
+      "start": 20,
+      "end": 31,
+      "text": "自本通知印发之日起实施",
+      "type": "figure"
+    },
+    {
+      "id": "ai-3-32-38-figure",
+      "paragraphIndex": 3,
+      "start": 32,
+      "end": 38,
+      "text": "2017年版",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 3
+  }
+}

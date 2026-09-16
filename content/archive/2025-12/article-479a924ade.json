@@ -1,0 +1,56 @@
+{
+  "id": "479a924ade",
+  "date": "2025-12-24",
+  "title": "《鼓励外商投资产业目录（2025年版）》_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7052666.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:52+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "中华人民共和国国家发展和改革委员会中华人民共和国商务部令第37号",
+    "《鼓励外商投资产业目录（2025年版）》已经国家发展和改革委员会第22次委务会议审议通过和商务部审签，经国务院同意，现予以发布，自2026年2月1日起施行。2022年10月26日国家发展改革委、商务部发布的《鼓励外商投资产业目录（2022年版）》同时废止。",
+    "国家发展和改革委员会主任：郑栅洁商务部部长：王文涛2025年12月15日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "bm",
+  "topic": "国民经济管理、国有资产监管\\其他",
+  "officialSummary": "中华人民共和国国家发展和改革委员会 中华人民共和国商务部 令 第37号 《鼓励外商投资产业目录（2025年版）》已经国家发展和改革委员会第22次委务会议审议通过和商务部审签，经国务院同意，现予以发布，...",
+  "sourceTextHash": "dfc49ba5e8da0fcbbeb04e4a3c9d69ea77fde5c9086cab0c0ab20608eaffad1b",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:21:38+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委、商务部发布第37号令，《鼓励外商投资产业目录（2025年版）》经委务会议审议通过和商务部审签、国务院同意后予以公布，自2026年2月1日起施行，同时废止2022年版目录。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-64-77-figure",
+      "paragraphIndex": 1,
+      "start": 64,
+      "end": 77,
+      "text": "自2026年2月1日起施行",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-0-20-term",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 20,
+      "text": "《鼓励外商投资产业目录（2025年版）》",
+      "type": "term",
+      "explanation": "国家发布的引导和鼓励外商投资的产业清单，列明重点支持领域，是外资享受优惠政策的依据。"
+    },
+    {
+      "id": "ai-2-25-36-figure",
+      "paragraphIndex": 2,
+      "start": 25,
+      "end": 36,
+      "text": "2025年12月15日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "id": "52e57fb7d1",
+  "date": "2026-03-20",
+  "title": "《节能装备高质量发展实施方案（2026—2028年）》_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202603/content_7063339.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:50+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "《节能装备高质量发展实施方案（2026—2028年）》工信部联节〔2026〕44号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、发展改革委、国资委、能源主管部门，有关中央企业：",
+    "现将《节能装备高质量发展实施方案（2026—2028年）》印发给你们，请结合实际认真抓好落实。",
+    "工业和信息化部国家发展改革委国务院国资委国家能源局2026年2月13日",
+    "附件：节能装备高质量发展实施方案（2026—2028年）.pdf"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-03",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "《节能装备高质量发展实施方案（2026—2028年）》 工信部联节〔2026〕44号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、发展改革委、国资委、能源主管部门，有关中央...",
+  "sourceTextHash": "e32fcdfcf602e492d43fdc431c212a0b3e0955b86a7166d789bb3bc0d08fb784",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:15:05+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部等四部门联合印发《节能装备高质量发展实施方案（2026—2028年）》，文号工信部联节〔2026〕44号，要求各地工信、发改、国资、能源主管部门及有关中央企业结合实际抓好落实，方案以附件形式发布。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-27-41-figure",
+      "paragraphIndex": 0,
+      "start": 27,
+      "end": 41,
+      "text": "工信部联节〔2026〕44号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-0-15-25-figure",
+      "paragraphIndex": 0,
+      "start": 15,
+      "end": 25,
+      "text": "2026—2028年",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-35-46-exam_point",
+      "paragraphIndex": 2,
+      "start": 35,
+      "end": 46,
+      "text": "请结合实际认真抓好落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "id": "8e0ec8564a",
+  "date": "2025-04-02",
+  "title": "关于印发《推动热泵行业高质量发展行动方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7016926.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:15+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委等部门关于印发《推动热泵行业高质量发展行动方案》的通知发改环资〔2025〕313号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委、工业和信息化主管部门、生态环境厅（局）、住房城乡建设厅（委、管委、局）、交通运输局、能源局：",
+    "为全面贯彻党的二十大和二十届二中、三中全会精神，认真落实党中央、国务院决策部署，推动热泵行业高质量发展，助力重点领域节能降碳，培育绿色低碳产业增长点，支撑经济社会发展全面绿色转型，国家发展改革委、工业和信息化部、生态环境部、住房城乡建设部、交通运输部、国家能源局等部门制定了《推动热泵行业高质量发展行动方案》。现印发给你们，请认真抓好落实。",
+    "国家发展改革委工业和信息化部生态环境部住房城乡建设部交通运输部国家能源局2025年3月17日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\其他",
+  "officialSummary": "国家发展改革委等部门关于印发《推动热泵行业高质量发展行动方案》的通知 发改环资〔2025〕313号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委、工业和信息化主管部门、生态环境厅（局）...",
+  "sourceTextHash": "9f11fc6f9f2cbc58898ccbf1e85c64f81006a633403f96161fc3deb7a12e9690",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:44:32+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委等六部门联合印发《推动热泵行业高质量发展行动方案》，旨在贯彻党的二十大和二十届二中、三中全会精神，落实党中央、国务院决策部署，推动热泵行业高质量发展，助力重点领域节能降碳，培育绿色低碳产业增长点，支撑经济社会发展全面绿色转型，要求各地抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-40-51-viewpoint",
+      "paragraphIndex": 2,
+      "start": 40,
+      "end": 51,
+      "text": "推动热泵行业高质量发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-52-62-viewpoint",
+      "paragraphIndex": 2,
+      "start": 52,
+      "end": 62,
+      "text": "助力重点领域节能降碳",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-34-48-exam_point",
+      "paragraphIndex": 0,
+      "start": 34,
+      "end": 48,
+      "text": "发改环资〔2025〕313号",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-36-46-figure",
+      "paragraphIndex": 3,
+      "start": 36,
+      "end": 46,
+      "text": "2025年3月17日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

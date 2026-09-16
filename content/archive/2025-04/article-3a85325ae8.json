@@ -1,0 +1,91 @@
+{
+  "id": "3a85325ae8",
+  "date": "2025-04-04",
+  "title": "海关总署公告2025年第43号（关于进出境人员行李物品申报有关事宜的公告）_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7017195.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:14+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "为便利进出境人员办理行李物品申报手续，现就有关事项公告如下：",
+    "一、进出境人员携带应向海关书面申报物品的，应当填写《中华人民共和国海关进出境人员行李物品申报单》（以下称《申报单》，式样见附件），向海关书面申报，选择“红色通道”通关。",
+    "二、进出境人员未携带应向海关书面申报物品的，无需填报《申报单》，选择“绿色通道”通关。",
+    "三、进境人员有下列情形之一的，应当如实填报纸质《申报单》或电子申报数据，并接受海关验核，办理相应手续："
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "商贸、海关、旅游\\海关",
+  "officialSummary": "海关总署公告 2025年第43号 为便利进出境人员办理行李物品申报手续，现就有关事项公告如下： 一、进出境人员携带应向海关书面申报物品的，应当填写《中华人民共和国海关进出境人员行李物品申报单》（以下称...",
+  "sourceTextHash": "c9ba5f704af827436173274c728bd073d1e0cc24d354fb89d8c58132fc293f0f",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:43:08+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "海关总署公告2025年第43号规范进出境人员行李物品申报手续，便利通关。携带应向海关书面申报物品的，须填写申报单并走红色通道；未携带的无需填报，走绿色通道。进境人员有特定情形的，应如实填报纸质申报单或电子数据并接受海关验核办理手续。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-1-18-viewpoint",
+      "paragraphIndex": 0,
+      "start": 1,
+      "end": 18,
+      "text": "便利进出境人员办理行李物品申报手续",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-25-48-term",
+      "paragraphIndex": 1,
+      "start": 25,
+      "end": 48,
+      "text": "《中华人民共和国海关进出境人员行李物品申报单》",
+      "type": "term",
+      "explanation": "进出境人员向海关书面申报所携行李物品时使用的法定单据，式样见公告附件。"
+    },
+    {
+      "id": "ai-1-76-80-term",
+      "paragraphIndex": 1,
+      "start": 76,
+      "end": 80,
+      "text": "红色通道",
+      "type": "term",
+      "explanation": "海关设置的申报通道，供携带应向海关书面申报物品的进出境人员选择通关。"
+    },
+    {
+      "id": "ai-2-22-31-exam_point",
+      "paragraphIndex": 2,
+      "start": 22,
+      "end": 31,
+      "text": "无需填报《申报单》",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-35-39-term",
+      "paragraphIndex": 2,
+      "start": 35,
+      "end": 39,
+      "text": "绿色通道",
+      "type": "term",
+      "explanation": "海关设置的非申报通道，供未携带应向海关书面申报物品的进出境人员选择通关。"
+    },
+    {
+      "id": "ai-3-17-35-exam_point",
+      "paragraphIndex": 3,
+      "start": 17,
+      "end": 35,
+      "text": "如实填报纸质《申报单》或电子申报数据",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-37-50-exam_point",
+      "paragraphIndex": 3,
+      "start": 37,
+      "end": 50,
+      "text": "接受海关验核，办理相应手续",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

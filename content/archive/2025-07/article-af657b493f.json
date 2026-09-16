@@ -1,0 +1,59 @@
+{
+  "id": "af657b493f",
+  "date": "2025-07-18",
+  "title": "住房城乡建设部办公厅关于印发“好房子”建设经验做法（第一批）的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202507/content_7032635.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "住房城乡建设部办公厅关于印发“好房子”建设经验做法（第一批）的通知建办标函〔2025〕171号",
+    "各省、自治区住房城乡建设厅，直辖市住房城乡建设（管）委，新疆生产建设兵团住房城乡建设局：",
+    "为全面贯彻落实党中央、国务院关于“好房子”建设的决策部署，加大“好房子”工作推动力度，我部总结各地“好房子”建设经验做法，形成《“好房子”建设经验做法（第一批）》，现印发给你们，请结合实际学习参考。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-07",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\城乡建设（含住房）",
+  "officialSummary": "住房城乡建设部办公厅关于印发“好房子”建设经验做法（第一批）的通知 建办标函〔2025〕171号 各省、自治区住房城乡建设厅，直辖市住房城乡建设（管）委，新疆生产建设兵团住房城乡建设局： 为全面贯彻落...",
+  "sourceTextHash": "bbb45538b70d0fa6fb51f617f9f1dc50eea33aba583569be30577c99636556c8",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:36:20+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "住房城乡建设部办公厅印发通知，总结各地“好房子”建设经验做法形成第一批清单，要求各省、自治区、直辖市及新疆生产建设兵团住建部门结合实际学习参考，以贯彻落实党中央、国务院决策部署，加大工作推动力度。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-1-28-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 28,
+      "text": "全面贯彻落实党中央、国务院关于“好房子”建设的决策部署",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-29-42-viewpoint",
+      "paragraphIndex": 2,
+      "start": 29,
+      "end": 42,
+      "text": "加大“好房子”工作推动力度",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-38-47-figure",
+      "paragraphIndex": 0,
+      "start": 38,
+      "end": 47,
+      "text": "2025〕171号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

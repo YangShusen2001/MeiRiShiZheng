@@ -1,0 +1,47 @@
+{
+  "id": "82432f2232",
+  "date": "2025-02-18",
+  "title": "国家医疗保障局办公室关于印发《医保领域“高效办成一件事”2025年度第一批重点事项清单》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202502/content_7004192.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:43+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家医疗保障局办公室关于印发《医保领域“高效办成一件事”2025年度第一批重点事项清单》的通知医保办函〔2025〕12号",
+    "文件下载链接：国家医疗保障局办公室关于印发《医保领域“高效办成一件事”2025年度第一批重点事项清单》的通知"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-02",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\其他",
+  "officialSummary": "国家医疗保障局办公室关于印发《医保领域“高效办成一件事” 2025年度第一批重点事项清单》的通知 医保办函〔2025〕12号 文件下载链接：国家医疗保障局办公室关于印发《医保领域“高效办成一件事”20...",
+  "sourceTextHash": "e5824a7e2d0f7ce22a5e62d9d2ff8bd9dfac8a39bf9eb05252b12c891319d716",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:50:47+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家医疗保障局办公室印发《医保领域“高效办成一件事”2025年度第一批重点事项清单》，即医保办函〔2025〕12号文件，通知各相关部门推进落实医保政务服务重点事项。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-47-60-figure",
+      "paragraphIndex": 0,
+      "start": 47,
+      "end": 60,
+      "text": "医保办函〔2025〕12号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-0-20-27-term",
+      "paragraphIndex": 0,
+      "start": 20,
+      "end": 27,
+      "text": "高效办成一件事",
+      "type": "term",
+      "explanation": "指优化政务服务、提升行政效能的改革举措，推动相关事项一次办结"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

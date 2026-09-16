@@ -1,0 +1,60 @@
+{
+  "id": "186abdd31f",
+  "date": "2026-01-24",
+  "title": "国家发展改革委关于印发《国家产业技术工程化中心管理办法》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202601/content_7056040.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委关于印发《国家产业技术工程化中心管理办法》的通知发改高技规〔2025〕1747号",
+    "中央和国家机关有关部委，各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委，有关中央企业：",
+    "为深入实施创新驱动发展战略，推动科技创新和产业创新深度融合，强化重大科技成果工程化放大和产业化应用，培育发展新质生产力，推动建好管好用好国家产业技术工程化中心，我们制定了《国家产业技术工程化中心管理办法》，现印发给你们，请遵照执行。",
+    "附件： 国家产业技术工程化中心管理办法.pdf 国家产业技术工程化中心管理办法.ofd"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-01",
+  "archiveLib": "bm",
+  "topic": "国民经济管理、国有资产监管\\其他",
+  "officialSummary": "国家发展改革委关于印发《国家产业技术工程化中心管理办法》的通知 发改高技规〔2025〕1747号 中央和国家机关有关部委，各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委，有关中央企业： ...",
+  "sourceTextHash": "fb777c24b7caf65283068f150e1c17ce779620e97d295276197bc12c067f3d70",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T21:00:23+00:00",
+  "aiStatus": "ok",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-1-13-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 13,
+      "text": "深入实施创新驱动发展战略",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-16-29-viewpoint",
+      "paragraphIndex": 2,
+      "start": 16,
+      "end": 29,
+      "text": "科技创新和产业创新深度融合",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-31-47-figure",
+      "paragraphIndex": 0,
+      "start": 31,
+      "end": 47,
+      "text": "发改高技规〔2025〕1747号",
+      "type": "figure"
+    }
+  ],
+  "aiSummary": "国家发展改革委印发《国家产业技术工程化中心管理办法》，旨在深入实施创新驱动发展战略，推动科技创新和产业创新深度融合，强化重大科技成果工程化放大和产业化应用，培育发展新质生产力，推动建好管好用好国家产业技术工程化中心，请各有关单位遵照执行。",
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

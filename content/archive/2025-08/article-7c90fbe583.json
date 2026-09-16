@@ -1,0 +1,55 @@
+{
+  "id": "7c90fbe583",
+  "date": "2025-08-13",
+  "title": "农业农村部关于印发《道路运输动物指定通道检查站管理指引》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202508/content_7036262.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:44+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "农业农村部关于印发《道路运输动物指定通道检查站管理指引》的通知农牧发〔2025〕6号",
+    "各省、自治区、直辖市农业农村（农牧）、畜牧兽医厅（局、委），新疆生产建设兵团农业农村局，中国动物疫病预防控制中心：",
+    "为提升动物运输环节的疫病防控能力，降低动物疫病跨区域传播风险，我部制定了《道路运输动物指定通道检查站管理指引》。现予以印发，自2025年9月1日起施行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-08",
+  "archiveLib": "bm",
+  "topic": "农业、林业、水利\\农业、畜牧业、渔业",
+  "officialSummary": "农业农村部关于印发《道路运输动物指定通道检查站管理指引》的通知 农牧发〔2025〕6号 各省、自治区、直辖市农业农村（农牧）、畜牧兽医厅（局、委），新疆生产建设兵团农业农村局，中国动物疫病预防控制中心...",
+  "sourceTextHash": "e32f383650b5a7e26ad6aa3a5c47d03c5b4a86bde761341611efa2bead7310d7",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:33:45+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "农业农村部印发《道路运输动物指定通道检查站管理指引》（农牧发〔2025〕6号），旨在提升动物运输环节疫病防控能力，降低动物疫病跨区域传播风险，自2025年9月1日起施行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-1-16-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 16,
+      "text": "提升动物运输环节的疫病防控能力",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-17-30-viewpoint",
+      "paragraphIndex": 2,
+      "start": 17,
+      "end": 30,
+      "text": "降低动物疫病跨区域传播风险",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-31-42-figure",
+      "paragraphIndex": 0,
+      "start": 31,
+      "end": 42,
+      "text": "农牧发〔2025〕6号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

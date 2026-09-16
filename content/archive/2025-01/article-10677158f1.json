@@ -1,0 +1,46 @@
+{
+  "id": "10677158f1",
+  "date": "2025-01-08",
+  "title": "国家医疗保障局办公室关于进一步加强劳动者医疗保障权益维护工作的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_6996934.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:34+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家医疗保障局办公室关于进一步加强劳动者医疗保障权益维护工作的通知医保办函〔2024〕150号",
+    "文件下载：国家医疗保障局办公室关于进一步加强劳动者医疗保障权益维护工作的通知.txt"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "劳动、人事、监察\\社会保障",
+  "officialSummary": "国家医疗保障局办公室关于进一步加强劳动者医疗保障权益维护工作的通知 医保办函〔2024〕150号 文件下载：国家医疗保障局办公室关于进一步加强劳动者医疗保障权益维护工作的通知.txt",
+  "sourceTextHash": "3fe1218a970adb2f3de0e467eb4f119e702bf0c1246442e9acfe92bedd5cdbc3",
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T19:22:54+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家医疗保障局办公室发布医保办函〔2024〕150号通知，要求进一步加强劳动者医疗保障权益维护工作，明确相关工作要求，并附文件下载渠道，便于各地各部门及时获取政策内容并贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-12-30-exam_point",
+      "paragraphIndex": 0,
+      "start": 12,
+      "end": 30,
+      "text": "进一步加强劳动者医疗保障权益维护工作",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-33-47-figure",
+      "paragraphIndex": 0,
+      "start": 33,
+      "end": 47,
+      "text": "医保办函〔2024〕150号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "id": "8ef50bea85",
+  "date": "2025-02-17",
+  "title": "工业和信息化部等八部门关于印发《新型储能制造业高质量发展行动方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202502/content_7004135.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:43+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部等八部门关于印发《新型储能制造业高质量发展行动方案》的通知工信部联电子〔2025〕7号",
+    "各省、自治区、直辖市、新疆生产建设兵团工业和信息化部门、发展改革委、商务主管部门、教育厅（教委、局）、市场监管局（厅、委）、知识产权局、能源局、消防救援总队：",
+    "现将《新型储能制造业高质量发展行动方案》印发给你们，请结合实际认真抓好落实。",
+    "工业和信息化部国家发展改革委教育部商务部市场监管总局国家知识产权局国家能源局国家消防救援局2025年2月10日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-02",
+  "archiveLib": "bm",
+  "topic": "国土资源、能源\\其他",
+  "officialSummary": "工业和信息化部等八部门关于印发《新型储能制造业高质量发展行动方案》的通知 工信部联电子〔2025〕7号 各省、自治区、直辖市、新疆生产建设兵团工业和信息化部门、发展改革委、商务主管部门、教育厅（教委、...",
+  "sourceTextHash": "085f3750b5cba65de3893fac0bd61a56fee040107a7cac323315e7fc285efbd7",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:51:03+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部等八部门于2025年2月10日联合印发《新型储能制造业高质量发展行动方案》，要求各省区市及新疆生产建设兵团相关部门结合实际认真抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-16-32-term",
+      "paragraphIndex": 0,
+      "start": 16,
+      "end": 32,
+      "text": "新型储能制造业高质量发展行动方案",
+      "type": "term",
+      "explanation": "指推动新型储能制造业提质升级的专项政策文件，聚焦技术创新与产业高质量发展。"
+    },
+    {
+      "id": "ai-2-26-37-exam_point",
+      "paragraphIndex": 2,
+      "start": 26,
+      "end": 37,
+      "text": "请结合实际认真抓好落实",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-45-55-figure",
+      "paragraphIndex": 3,
+      "start": 45,
+      "end": 55,
+      "text": "2025年2月10日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

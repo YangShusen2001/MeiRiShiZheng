@@ -25,8 +25,15 @@ const { it } = Astro.props;
   {it.gist && <p class="arc-card__gist">{it.gist}</p>}
   {it.figures && <p class="arc-card__figures">关键数字：{it.figures}</p>}
   <div class="arc-card__foot">
-    <a class="arc-card__link" href={it.url} target="_blank" rel="noopener">查看官方原文</a>
-    <button class="arc-card__fav" type="button" data-url={it.url} data-title={it.title}>加入收藏</button>
+    {/* 有正文 → 站内阅读页（文案「查看原文」）；没正文 → 官方外链（「查看官方原文」）。
+        两种态文案必须不同：链到站内却写「官方原文」是误导，反过来也一样。
+        readId 由 lib/archive.ts 按同目录 article-*.json 的 url 对齐填入。 */}
+    {it.readId ? (
+      <a class="arc-card__link" href={`/read/${it.readId}/`}>查看原文</a>
+    ) : (
+      <a class="arc-card__link" href={it.url} target="_blank" rel="noopener">查看官方原文</a>
+    )}
+    <button class="arc-card__fav" type="button" data-url={it.url} data-title={it.title} data-article-id={it.readId}>加入收藏</button>
   </div>
   <p class="arc-card__hint" hidden></p>
 </article>
@@ -80,7 +87,15 @@ const { it } = Astro.props;
       if (r.ok) favByUrl.delete(url);
       else say(btn, r.error?.message ?? "取消收藏失败，请重试");
     } else {
-      const r = await api.addFavorite({ url, title, source: "政策档案", kind: "policy" });
+      // articleId 一并存下：收藏页的「政策」格据此直达站内阅读页，
+      // 不必再依赖 favorites.astro 里那张 url→id 的全量映射表（那是历史记录的兜底）。
+      const r = await api.addFavorite({
+        url,
+        title,
+        source: "政策档案",
+        kind: "policy",
+        articleId: btn.dataset.articleId || "",
+      });
       if (r.ok && r.data) favByUrl.set(url, r.data.id);
       else say(btn, r.error?.message ?? "收藏失败，请重试");
     }

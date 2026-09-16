@@ -1,0 +1,65 @@
+{
+  "id": "fdef1dee7f",
+  "date": "2025-05-21",
+  "title": "关于印发《美丽河湖保护与建设行动方案（2025—2027年）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202505/content_7024700.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:18+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发《美丽河湖保护与建设行动方案（2025—2027年）》的通知环水体〔2025〕38号",
+    "各省、自治区、直辖市人民政府，新疆生产建设兵团，科技部、工业和信息化部、交通运输部、应急管理部、市场监管总局：",
+    "《美丽河湖保护与建设行动方案（2025—2027年）》已经国务院同意，现印发给你们，请认真贯彻执行。",
+    "生态环境部国家发展改革委财政部住房城乡建设部水利部农业农村部国家林草局2025年5月16日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-05",
+  "archiveLib": "bm",
+  "topic": "国土资源、能源\\水资源",
+  "officialSummary": "关于印发《美丽河湖保护与建设行动方案（2025—2027年）》的通知 环水体〔2025〕38号 各省、自治区、直辖市人民政府，新疆生产建设兵团，科技部、工业和信息化部、交通运输部、应急管理部、市场监管...",
+  "sourceTextHash": "80d0d7a23704835ee9cde524aab95f574564978008ee906a977d2407d5ebfcdb",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:42:13+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "生态环境部等七部门联合印发《美丽河湖保护与建设行动方案（2025—2027年）》，经国务院同意，面向各省、自治区、直辖市人民政府及新疆生产建设兵团、科技部等单位下发。方案部署未来三年美丽河湖保护与建设行动，要求各地认真贯彻执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-5-30-term",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 30,
+      "text": "美丽河湖保护与建设行动方案（2025—2027年）",
+      "type": "term",
+      "explanation": "生态环境部等七部门联合印发的三年期专项方案，部署全国美丽河湖保护与建设行动任务。"
+    },
+    {
+      "id": "ai-0-19-29-figure",
+      "paragraphIndex": 0,
+      "start": 19,
+      "end": 29,
+      "text": "2025—2027年",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-27-34-viewpoint",
+      "paragraphIndex": 2,
+      "start": 27,
+      "end": 34,
+      "text": "已经国务院同意",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-35-45-figure",
+      "paragraphIndex": 3,
+      "start": 35,
+      "end": 45,
+      "text": "2025年5月16日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

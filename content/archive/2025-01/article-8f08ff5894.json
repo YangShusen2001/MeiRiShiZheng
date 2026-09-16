@@ -1,0 +1,55 @@
+{
+  "id": "8f08ff5894",
+  "date": "2025-01-04",
+  "title": "水利部关于批准发布《水工程建设规划同意书论证报告编制导则》等2项水利行业标准的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_6998468.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:36+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "水利部关于批准发布《水工程建设规划同意书论证报告编制导则》等2项水利行业标准的公告中华人民共和国水利部公告2024年第27号",
+    "中华人民共和国水利部批准发布《水工程建设规划同意书论证报告编制导则》（SL/T 719—2024）等2项水利行业标准，现予以公告。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "农业、林业、水利\\水利",
+  "officialSummary": "水利部关于批准发布《水工程建设规划同意书论证报告编制导则》等2项水利行业标准的公告 中华人民共和国水利部公告2024年第27号 中华人民共和国水利部批准发布《水工程建设规划同意书论证报告编制导则》（S...",
+  "sourceTextHash": "04b2ee3562358a83fa921b1c350b06ddc2fc730fb10a302d707e6617896765f6",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:53:45+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "水利部发布2024年第27号公告，批准《水工程建设规划同意书论证报告编制导则》（SL/T 719—2024）等2项水利行业标准，现予公布施行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-53-62-figure",
+      "paragraphIndex": 0,
+      "start": 53,
+      "end": 62,
+      "text": "2024年第27号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-14-34-term",
+      "paragraphIndex": 1,
+      "start": 14,
+      "end": 34,
+      "text": "《水工程建设规划同意书论证报告编制导则》",
+      "type": "term",
+      "explanation": "规范水工程建设规划同意书论证报告编制内容与深度的水利行业技术标准"
+    },
+    {
+      "id": "ai-1-35-48-figure",
+      "paragraphIndex": 1,
+      "start": 35,
+      "end": 48,
+      "text": "SL/T 719—2024",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

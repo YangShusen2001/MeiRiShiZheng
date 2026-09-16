@@ -1,0 +1,38 @@
+{
+  "id": "9cb19e8c24",
+  "date": "2025-01-15",
+  "title": "国家发展改革委等部门印发《关于完善数据流通安全治理 更好促进数据要素市场化价值化的实施方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_6998668.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:30+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委等部门印发《关于完善数据流通安全治理 更好促进数据要素市场化价值化的实施方案》的通知发改数据〔2025〕18号",
+    "各省、自治区、直辖市、新疆生产建设兵团发展改革委、数据管理部门、党委网信办、工业和信息化主管部门、公安厅（局）、市场监管局（厅、委）："
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\信息产业（含电信）",
+  "officialSummary": "国家发展改革委等部门印发《关于完善数据流通安全治理 更好促进数据要素市场化价值化的实施方案》的通知 发改数据〔2025〕18号 各省、自治区、直辖市、新疆生产建设兵团发展改革委、数据管理部门、党委网信...",
+  "sourceTextHash": "2910dd9fed4ccef75fc02ac4408cfcdee5f0448a8d734ad490ea7faed7230a50",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:54:07+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委等部门印发实施方案，部署完善数据流通安全治理，促进数据要素市场化价值化。方案强调统筹数据发展与安全，明确数据流通各环节安全要求，推动数据合规高效流通，为释放数据要素价值提供制度保障，助力数字经济健康发展。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-25-31-term",
+      "paragraphIndex": 1,
+      "start": 25,
+      "end": 31,
+      "text": "数据管理部门",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

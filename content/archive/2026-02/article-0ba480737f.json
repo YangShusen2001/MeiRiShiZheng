@@ -1,0 +1,56 @@
+{
+  "id": "0ba480737f",
+  "date": "2026-02-28",
+  "title": "自然资源部关于印发《城镇开发边界管理办法（试行）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202602/content_7060084.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:42+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "自然资源部关于印发《城镇开发边界管理办法（试行）》的通知自然资规〔2026〕1号",
+    "各省、自治区、直辖市自然资源主管部门，新疆生产建设兵团自然资源局，上海市海洋局、浙江省海洋经济发展厅、福建省海洋与渔业局、山东省海洋局、广西壮族自治区海洋局、海南省海洋厅，各派出机构，部机关各司局：",
+    "《城镇开发边界管理办法（试行）》已经部审议通过，现印发执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-02",
+  "archiveLib": "bm",
+  "topic": "国土资源、能源\\其他",
+  "officialSummary": "自然资源部关于印发《城镇开发边界管理办法（试行）》的通知 自然资规〔2026〕1号 各省、自治区、直辖市自然资源主管部门，新疆生产建设兵团自然资源局，上海市海洋局、浙江省海洋经济发展厅、福建省海洋与渔...",
+  "sourceTextHash": "e63d21fecb94021578e0e4c1c70cc94be0b2f56de979bc02aeb4de453fe097ad",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:16:12+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "自然资源部印发《城镇开发边界管理办法（试行）》，文号自然资规〔2026〕1号，经部审议通过后印发执行，要求各省、自治区、直辖市自然资源主管部门等单位遵照落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-28-40-figure",
+      "paragraphIndex": 0,
+      "start": 28,
+      "end": 40,
+      "text": "自然资规〔2026〕1号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-0-16-term",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 16,
+      "text": "《城镇开发边界管理办法（试行）》",
+      "type": "term",
+      "explanation": "自然资源部制定的规范城镇开发边界划定、管控与调整的部门规章，属试行文件。"
+    },
+    {
+      "id": "ai-2-16-23-exam_point",
+      "paragraphIndex": 2,
+      "start": 16,
+      "end": 23,
+      "text": "已经部审议通过",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

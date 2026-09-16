@@ -1,0 +1,56 @@
+{
+  "id": "cdac8a5389",
+  "date": "2025-01-26",
+  "title": "市场监管总局关于发布2024年批准新建国家标准物质目录的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_7001255.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:22+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "市场监管总局关于发布2024年批准新建国家标准物质目录的公告2025年第4号",
+    "根据《中华人民共和国行政许可法》《中华人民共和国计量法》《中华人民共和国计量法实施细则》《标准物质管理办法》有关规定，市场监管总局 2024年批准新建国家一级标准物质 83项、国家二级标准物质 1052项，现将2024年批准新建的国家标准物质目录予以发布。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "市场监管、安全生产监管\\标准",
+  "officialSummary": "市场监管总局关于发布2024年批准新建国家标准物质目录的公告 2025年第4号 根据《中华人民共和国行政许可法》《中华人民共和国计量法》《中华人民共和国计量法实施细则》《标准物质管理办法》有关规定，市...",
+  "sourceTextHash": "a5f82e9ffb791440011f9721de28ad15bd430d16ec6fa06d8fa51d2b217f3c60",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:55:10+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "市场监管总局发布2024年批准新建国家标准物质目录公告，依据行政许可法、计量法及实施细则和标准物质管理办法，2024年共批准新建国家一级标准物质83项、国家二级标准物质1052项，并予以公布。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-30-38-figure",
+      "paragraphIndex": 0,
+      "start": 30,
+      "end": 38,
+      "text": "2025年第4号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-2-16-term",
+      "paragraphIndex": 1,
+      "start": 2,
+      "end": 16,
+      "text": "《中华人民共和国行政许可法》",
+      "type": "term",
+      "explanation": "规范行政许可设定与实施的法律，行政机关准予从事特定活动须依法依规办理。"
+    },
+    {
+      "id": "ai-1-16-28-term",
+      "paragraphIndex": 1,
+      "start": 16,
+      "end": 28,
+      "text": "《中华人民共和国计量法》",
+      "type": "term",
+      "explanation": "调整计量单位、计量器具和量值传递等活动的法律，保障全国量值统一准确。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "10b4db3149",
+  "date": "2025-04-29",
+  "title": "国家药监局关于发布医疗器械网络销售质量管理规范的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7021640.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:01+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家药监局关于发布医疗器械网络销售质量管理规范的公告2025年第46号",
+    "为加强医疗器械网络销售监督管理，规范医疗器械网络销售质量管理，保障公众用械安全有效，促进医疗器械产业发展，根据相关法规规章规定，国家药监局制定了《医疗器械网络销售质量管理规范》，现予发布，自2025年10月1日起施行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\医药管理",
+  "officialSummary": "国家药监局关于发布医疗器械网络销售质量管理规范的公告 2025年第46号 为加强医疗器械网络销售监督管理，规范医疗器械网络销售质量管理，保障公众用械安全有效，促进医疗器械产业发展，根据相关法规规章规定...",
+  "sourceTextHash": "0152aa60caa70b8971c84b7da596e4067edf73f1f6f75f986fe8bb2b127ef010",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:42:38+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家药监局发布2025年第46号公告，制定《医疗器械网络销售质量管理规范》，旨在加强医疗器械网络销售监督管理，规范网络销售质量管理，保障公众用械安全有效，促进医疗器械产业发展。该规范依据相关法规规章制定，自2025年10月1日起施行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-31-41-viewpoint",
+      "paragraphIndex": 1,
+      "start": 31,
+      "end": 41,
+      "text": "保障公众用械安全有效",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-42-52-viewpoint",
+      "paragraphIndex": 1,
+      "start": 42,
+      "end": 52,
+      "text": "促进医疗器械产业发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-26-35-figure",
+      "paragraphIndex": 0,
+      "start": 26,
+      "end": 35,
+      "text": "2025年第46号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

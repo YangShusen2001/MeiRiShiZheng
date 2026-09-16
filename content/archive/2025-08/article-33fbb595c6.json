@@ -1,0 +1,55 @@
+{
+  "id": "33fbb595c6",
+  "date": "2025-08-06",
+  "title": "关于规范医疗机构门诊名称管理工作的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202508/content_7035380.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:46+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于规范医疗机构门诊名称管理工作的通知国卫办医政发〔2025〕14号",
+    "各省、自治区、直辖市卫生健康委、中医药局、疾控局，新疆生产建设兵团卫生健康委、疾控局：",
+    "为进一步引导医疗机构聚焦主责主业，规范医疗机构门诊名称管理，便捷患者看病就医，按照《医疗机构管理条例》及其实施细则有关要求，现提出如下要求："
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-08",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\其他",
+  "officialSummary": "关于规范医疗机构门诊名称管理工作的通知 国卫办医政发〔2025〕14号 各省、自治区、直辖市卫生健康委、中医药局、疾控局，新疆生产建设兵团卫生健康委、疾控局： 为进一步引导医疗机构聚焦主责主业，规范医...",
+  "sourceTextHash": "b16b7f6ca1bd48d64f0f24af607be0fe65a2a725f75cfaec8dedeb2cc631accc",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:32:37+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家卫健委等三部门发文规范医疗机构门诊名称管理，要求门诊命名须与诊疗科目对应，不得使用夸大、误导性名称，旨在引导医疗机构聚焦主责主业，方便患者看病就医。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-10-16-viewpoint",
+      "paragraphIndex": 2,
+      "start": 10,
+      "end": 16,
+      "text": "聚焦主责主业",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-17-29-exam_point",
+      "paragraphIndex": 2,
+      "start": 17,
+      "end": 29,
+      "text": "规范医疗机构门诊名称管理",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-26-30-figure",
+      "paragraphIndex": 0,
+      "start": 26,
+      "end": 30,
+      "text": "2025",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

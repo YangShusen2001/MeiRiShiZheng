@@ -1,0 +1,52 @@
+{
+  "id": "408d0ed06f",
+  "date": "2025-07-02",
+  "title": "农业农村部办公厅关于加强动物诊疗管理工作的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202507/content_7030351.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:39+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "农业农村部办公厅关于加强动物诊疗管理工作的通知农办牧〔2025〕20号",
+    "各省、自治区、直辖市农业农村（农牧）、畜牧兽医厅（局、委），新疆生产建设兵团农业农村局，中国动物疫病预防控制中心：",
+    "近年来，我国动物诊疗行业特别是宠物诊疗行业快速发展，有力促进了动物防疫工作和宠物经济发展，但未经许可从事动物诊疗、诊疗活动不规范等情况仍时有发生。为进一步规范动物诊疗秩序，营造健康有序的发展环境，现就加强动物诊疗管理工作通知如下。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-07",
+  "archiveLib": "bm",
+  "topic": "农业、林业、水利\\其他",
+  "officialSummary": "农业农村部办公厅关于加强动物诊疗管理工作的通知 农办牧〔2025〕20号 各省、自治区、直辖市农业农村（农牧）、畜牧兽医厅（局、委），新疆生产建设兵团农业农村局，中国动物疫病预防控制中心： 近年来，我...",
+  "sourceTextHash": "c7eb8362a7dc19afb105150b1410e72a46c4cb2f175ca01125b93140e0db0572",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:58:11+00:00",
+  "aiStatus": "ok",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-15-25-viewpoint",
+      "paragraphIndex": 2,
+      "start": 15,
+      "end": 25,
+      "text": "宠物诊疗行业快速发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-46-56-term",
+      "paragraphIndex": 2,
+      "start": 46,
+      "end": 56,
+      "text": "未经许可从事动物诊疗",
+      "type": "term",
+      "explanation": "指未取得动物诊疗许可证擅自开展动物疾病诊断、治疗等经营性活动的违法行为。"
+    }
+  ],
+  "aiSummary": "农业农村部办公厅发布通知，针对动物诊疗特别是宠物诊疗行业快速发展中未经许可从事诊疗、活动不规范等问题，要求规范动物诊疗秩序、营造健康有序发展环境，加强动物诊疗管理工作。",
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

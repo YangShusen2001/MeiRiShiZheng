@@ -1,0 +1,56 @@
+{
+  "id": "36be7a27bb",
+  "date": "2025-07-20",
+  "title": "住房城乡建设部办公厅关于印发《高海拔地区“五小”设施建设技术指南》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202507/content_7032817.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "住房城乡建设部办公厅关于印发《高海拔地区“五小”设施建设技术指南》的通知建办标函〔2025〕159号",
+    "四川省、云南省、西藏自治区、甘肃省、青海省、新疆维吾尔自治区住房城乡建设厅，新疆生产建设兵团住房城乡建设局：",
+    "现将《高海拔地区“五小”设施建设技术指南》印发给你们，请结合本地区实际情况参考使用。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-07",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\城市规划",
+  "officialSummary": "住房城乡建设部办公厅关于印发《高海拔地区“五小”设施建设技术指南》的通知 建办标函〔2025〕159号 四川省、云南省、西藏自治区、甘肃省、青海省、新疆维吾尔自治区住房城乡建设厅，新疆生产建设兵团住房...",
+  "sourceTextHash": "f7f9e82246532f941010699241396a1992175cbf04cd0efe589229b7c84bbfbc",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:34:57+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "住房城乡建设部办公厅印发《高海拔地区“五小”设施建设技术指南》，以建办标函〔2025〕159号通知下发四川、云南、西藏、甘肃、青海、新疆住建厅及新疆生产建设兵团住建局，要求结合本地区实际参考使用，用于指导高海拔地区相关设施建设。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-36-50-figure",
+      "paragraphIndex": 0,
+      "start": 36,
+      "end": 50,
+      "text": "建办标函〔2025〕159号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-3-20-term",
+      "paragraphIndex": 2,
+      "start": 3,
+      "end": 20,
+      "text": "高海拔地区“五小”设施建设技术指南",
+      "type": "term",
+      "explanation": "指针对高海拔地区基层单位小食堂、小厕所、小澡堂、小图书室、小文体活动室等小型设施建设的技术指导文件。"
+    },
+    {
+      "id": "ai-2-28-41-exam_point",
+      "paragraphIndex": 2,
+      "start": 28,
+      "end": 41,
+      "text": "结合本地区实际情况参考使用",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

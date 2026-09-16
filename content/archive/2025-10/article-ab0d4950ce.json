@@ -1,0 +1,60 @@
+{
+  "id": "ab0d4950ce",
+  "date": "2025-10-14",
+  "title": "国家发展改革委关于印发《节能降碳中央预算内投资专项管理办法》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202510/content_7044251.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:37+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委关于印发《节能降碳中央预算内投资专项管理办法》的通知发改环资规〔2025〕1228号",
+    "中直管理局，国管局，各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委：",
+    "为加强和规范节能降碳专项中央预算内投资管理，高质量推进项目建设，提高资金使用效益，我们制定了《节能降碳中央预算内投资专项管理办法》，现予印发，请遵照执行。",
+    "附件： 节能降碳中央预算内投资专项管理办法.pdf 节能降碳中央预算内投资专项管理办法.ofd"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-10",
+  "archiveLib": "bm",
+  "topic": "国民经济管理、国有资产监管\\其他",
+  "officialSummary": "国家发展改革委关于印发《节能降碳中央预算内投资专项管理办法》的通知 发改环资规〔2025〕1228号 中直管理局，国管局，各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委： 为加强和规范节...",
+  "sourceTextHash": "5f9528a059ce73cf99177834ebe33ef0ec3bac50e39e0d337aa761e64890ab17",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:27:50+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委印发《节能降碳中央预算内投资专项管理办法》，旨在加强和规范专项中央预算内投资管理，高质量推进项目建设，提高资金使用效益。通知明确要求中直管理局、国管局及各省区市发展改革委遵照执行，并随文附送办法全文。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-32-40-viewpoint",
+      "paragraphIndex": 2,
+      "start": 32,
+      "end": 40,
+      "text": "提高资金使用效益",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-1-21-exam_point",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 21,
+      "text": "加强和规范节能降碳专项中央预算内投资管理",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-33-49-figure",
+      "paragraphIndex": 0,
+      "start": 33,
+      "end": 49,
+      "text": "发改环资规〔2025〕1228号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

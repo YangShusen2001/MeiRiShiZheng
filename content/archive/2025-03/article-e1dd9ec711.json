@@ -1,0 +1,59 @@
+{
+  "id": "e1dd9ec711",
+  "date": "2025-03-14",
+  "title": "关于印发《清洁能源发展专项资金管理办法》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202503/content_7013509.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:58+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发《清洁能源发展专项资金管理办法》的通知财建〔2025〕35号",
+    "各省、自治区、直辖市、计划单列市财政厅（局），新疆生产建设兵团财政局：",
+    "为促进清洁能源开发利用，推进能源清洁低碳转型，保障国家能源安全，根据《中华人民共和国预算法》、《中华人民共和国可再生能源法》等有关法律法规规定，我部制定了《清洁能源发展专项资金管理办法》。现予印发，请遵照执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-03",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\财政",
+  "officialSummary": "关于印发《清洁能源发展专项资金管理办法》的通知 财建〔2025〕35号 各省、自治区、直辖市、计划单列市财政厅（局），新疆生产建设兵团财政局：  为促进清洁能源开发利用，推进能源清洁低碳转型，保障国家...",
+  "sourceTextHash": "dd22686a182d8c88c4acace19b91a81f71cd57f7f915e7d4e63e75c9d120f615",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:49:15+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "财政部印发《清洁能源发展专项资金管理办法》（财建〔2025〕35号），要求各省、自治区、直辖市、计划单列市财政厅（局）及新疆生产建设兵团财政局遵照执行。办法旨在促进清洁能源开发利用，推进能源清洁低碳转型，保障国家能源安全，依据预算法和可再生能源法制定。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-23-34-figure",
+      "paragraphIndex": 0,
+      "start": 23,
+      "end": 34,
+      "text": "财建〔2025〕35号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-1-11-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 11,
+      "text": "促进清洁能源开发利用",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-12-22-viewpoint",
+      "paragraphIndex": 2,
+      "start": 12,
+      "end": 22,
+      "text": "推进能源清洁低碳转型",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "2accc55ca1",
+  "date": "2025-02-07",
+  "title": "国家药监局关于发布支持化妆品原料创新若干规定的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202502/content_7002613.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:47+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家药监局关于发布支持化妆品原料创新若干规定的公告2025年第12号",
+    "为贯彻落实党的二十届三中全会精神，进一步鼓励化妆品原料创新，促进化妆品产业高质量发展，根据《化妆品监督管理条例》等相关法规要求，国家药监局组织制定了《支持化妆品原料创新若干规定》，现予以发布，自发布之日起施行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-02",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\医药管理",
+  "officialSummary": "国家药监局关于发布支持化妆品原料创新若干规定的公告 2025年第12号 为贯彻落实党的二十届三中全会精神，进一步鼓励化妆品原料创新，促进化妆品产业高质量发展，根据《化妆品监督管理条例》等相关法规要求，...",
+  "sourceTextHash": "e76eccb7aed39c07efcb0630c99051a56c651137e689c4fecc77defcb9bf7692",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:49:55+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家药监局发布2025年第12号公告，出台《支持化妆品原料创新若干规定》，自发布之日起施行。该规定旨在贯彻落实党的二十届三中全会精神，进一步鼓励化妆品原料创新，促进化妆品产业高质量发展，依据《化妆品监督管理条例》等相关法规要求制定。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-20-29-viewpoint",
+      "paragraphIndex": 1,
+      "start": 20,
+      "end": 29,
+      "text": "鼓励化妆品原料创新",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-30-42-viewpoint",
+      "paragraphIndex": 1,
+      "start": 30,
+      "end": 42,
+      "text": "促进化妆品产业高质量发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-25-34-figure",
+      "paragraphIndex": 0,
+      "start": 25,
+      "end": 34,
+      "text": "2025年第12号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

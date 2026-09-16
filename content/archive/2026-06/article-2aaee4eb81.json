@@ -1,0 +1,48 @@
+{
+  "id": "2aaee4eb81",
+  "date": "2026-06-16",
+  "title": "关于印发《都市圈城际通勤效率提升工程实施方案（2026－2030年）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202606/content_7072250.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:55:06+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "交通运输部 国家发展改革委 自然资源部 住房城乡建设部 国家铁路局 中国民用航空局 国家邮政局 中国国家铁路集团有限公司关于印发《都市圈城际通勤效率提升工程实施方案（2026－2030年）》的通知交规划发〔2026〕49号",
+    "现将《都市圈城际通勤效率提升工程实施方案（2026－2030年）》印发给你们，请结合实际抓好贯彻落实。",
+    "交通运输部 国家发展改革委 自然资源部住房城乡建设部 国家铁路局 中国民用航空局国家邮政局 中国国家铁路集团有限公司2026年5月26日",
+    "附件：都市圈城际通勤效率提升工程实施方案（2026－2030年）"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-06",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "交通运输部 国家发展改革委 自然资源部 住房城乡建设部 国家铁路局 中国民用航空局 国家邮政局 中国国家铁路集团有限公司关于印发《都市圈城际通勤效率提升工程实施方案（2026－2030年）》的通知 交...",
+  "sourceTextHash": "96860b55dcdd3d6a1a5e151c87445ba2fdef3fb2e2e5e137e4d3be875ad169d9",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:10:05+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "交通运输部等八部门于2026年5月26日联合印发《都市圈城际通勤效率提升工程实施方案（2026－2030年）》，要求各地结合实际抓好贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-98-111-figure",
+      "paragraphIndex": 0,
+      "start": 98,
+      "end": 111,
+      "text": "交规划发〔2026〕49号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-58-68-figure",
+      "paragraphIndex": 2,
+      "start": 58,
+      "end": 68,
+      "text": "2026年5月26日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

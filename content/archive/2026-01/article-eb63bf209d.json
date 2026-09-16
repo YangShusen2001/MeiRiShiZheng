@@ -1,0 +1,60 @@
+{
+  "id": "eb63bf209d",
+  "date": "2026-01-24",
+  "title": "国家发展改革委关于印发《中央预算内投资计划管理办法》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202601/content_7056020.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委关于印发《中央预算内投资计划管理办法》的通知发改投资规〔2025〕1728号",
+    "全国人大常委会办公厅，国务院办公厅，全国政协办公厅，最高人民法院，最高人民检察院，中央和国家机关有关部委、有关直属机构，中央军委有关部门，各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委，有关中央企业：",
+    "为进一步规范中央预算内投资计划管理，提高中央预算内投资计划编制执行的质量和效率，我委制定了《中央预算内投资计划管理办法》。现印发你们，请按照执行。",
+    "附件： 中央预算内投资计划管理办法.pdf 中央预算内投资计划管理办法.ofd"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-01",
+  "archiveLib": "bm",
+  "topic": "国民经济管理、国有资产监管\\其他",
+  "officialSummary": "国家发展改革委关于印发《中央预算内投资计划管理办法》的通知 发改投资规〔2025〕1728号 全国人大常委会办公厅，国务院办公厅，全国政协办公厅，最高人民法院，最高人民检察院，中央和国家机关有关部委、...",
+  "sourceTextHash": "52040b3382a05ad3cd40e38fcdcf10712ed8f91f87c45f88fad6842ba7dae338",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:20:28+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委印发《中央预算内投资计划管理办法》，文号发改投资规〔2025〕1728号，要求有关单位执行。办法旨在规范中央预算内投资计划管理，提高计划编制执行的质量和效率，文件以PDF和OFD附件形式发布。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-29-45-figure",
+      "paragraphIndex": 0,
+      "start": 29,
+      "end": 45,
+      "text": "发改投资规〔2025〕1728号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-4-17-viewpoint",
+      "paragraphIndex": 2,
+      "start": 4,
+      "end": 17,
+      "text": "规范中央预算内投资计划管理",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-18-39-exam_point",
+      "paragraphIndex": 2,
+      "start": 18,
+      "end": 39,
+      "text": "提高中央预算内投资计划编制执行的质量和效率",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

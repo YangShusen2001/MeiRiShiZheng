@@ -1,0 +1,69 @@
+{
+  "id": "746d8e0bdc",
+  "date": "2025-01-06",
+  "title": "国家发展改革委 国家数据局 工业和信息化部关于印发《国家数据基础设施建设指引》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_6996487.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:36+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委 国家数据局 工业和信息化部关于印发《国家数据基础设施建设指引》的通知发改数据〔2024〕1853号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委、数据管理部门、工业和信息化主管部门、通信管理局：",
+    "为贯彻落实党的二十届三中全会关于建设和运营国家数据基础设施，促进数据共享的部署要求，国家发展改革委、国家数据局、工业和信息化部组织制定了《国家数据基础设施建设指引》。现印发给你们，请结合实际，因地制宜抓好落实。",
+    "国家发展改革委国家数据局工业和信息化部2024年12月31日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "国家发展改革委 国家数据局 工业和信息化部 关于印发《国家数据基础设施建设指引》的通知 发改数据〔2024〕1853号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委、数据管理部门、工业...",
+  "sourceTextHash": "ada400fb0938860faceba6b26204dc87367025c4d9577c8300c9eb2c95f16902",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:53:18+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委、国家数据局、工业和信息化部联合印发《国家数据基础设施建设指引》，落实党的二十届三中全会关于建设和运营国家数据基础设施、促进数据共享的部署要求，要求各地结合实际、因地制宜抓好落实，通知落款日期为2024年12月31日。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-42-57-figure",
+      "paragraphIndex": 0,
+      "start": 42,
+      "end": 57,
+      "text": "发改数据〔2024〕1853号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-5-14-term",
+      "paragraphIndex": 2,
+      "start": 5,
+      "end": 14,
+      "text": "党的二十届三中全会",
+      "type": "term",
+      "explanation": "2024年7月召开的党的中央全会，对进一步全面深化改革作出系统部署。"
+    },
+    {
+      "id": "ai-2-16-29-exam_point",
+      "paragraphIndex": 2,
+      "start": 16,
+      "end": 29,
+      "text": "建设和运营国家数据基础设施",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-19-30-figure",
+      "paragraphIndex": 3,
+      "start": 19,
+      "end": 30,
+      "text": "2024年12月31日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "617b342a5e",
+  "date": "2025-06-14",
+  "title": "国家文物局关于公布10家国家考古遗址公园名单的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202506/content_7027836.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:27+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家文物局关于公布10家国家考古遗址公园名单的通知文物考函〔2025〕799号",
+    "各省、自治区、直辖市文物局（文化和旅游厅/局），新疆生产建设兵团文物局：",
+    "根据《国家考古遗址公园管理办法》等有关规定，我局组织开展了新一批国家考古遗址公园评定工作。经国家文物局党组会议研究决定，10家单位列入国家考古遗址公园名单，现予公布："
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-06",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\其他",
+  "officialSummary": "国家文物局关于公布10家国家考古遗址公园名单的通知 文物考函〔2025〕799号 各省、自治区、直辖市文物局（文化和旅游厅/局），新疆生产建设兵团文物局： 根据《国家考古遗址公园管理办法》等有关规定，...",
+  "sourceTextHash": "4abdfdd4af0c9aabb0a70926c7a9d7ab867e8bb6ba4c6b610a2ef91e6b103333",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:38:39+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家文物局发布通知，依据《国家考古遗址公园管理办法》等规定，组织开展新一批国家考古遗址公园评定工作，经国家文物局党组会议研究决定，10家单位列入国家考古遗址公园名单并予公布，通知发送各省、自治区、直辖市文物局及新疆生产建设兵团文物局。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-25-39-figure",
+      "paragraphIndex": 0,
+      "start": 25,
+      "end": 39,
+      "text": "文物考函〔2025〕799号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-2-16-term",
+      "paragraphIndex": 2,
+      "start": 2,
+      "end": 16,
+      "text": "《国家考古遗址公园管理办法》",
+      "type": "term",
+      "explanation": "国家文物局制定的规范国家考古遗址公园申报、评定与管理的部门规章，是开展评定工作的主要依据。"
+    },
+    {
+      "id": "ai-2-29-44-exam_point",
+      "paragraphIndex": 2,
+      "start": 29,
+      "end": 44,
+      "text": "新一批国家考古遗址公园评定工作",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

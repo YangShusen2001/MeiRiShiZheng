@@ -1,0 +1,55 @@
+{
+  "id": "8c4c2932c9",
+  "date": "2025-12-29",
+  "title": "国务院关税税则委员会关于2026年关税调整方案的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7053062.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:49+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国务院关税税则委员会关于2026年关税调整方案的公告税委会公告2025年第11号",
+    "为深入贯彻党的二十大和二十届历次全会精神，引领发展新质生产力，不断满足人民对美好生活的需要，助力扩大高水平对外开放，推动高质量发展，根据《中华人民共和国关税法》及相关规定，自2026年1月1日起，对部分商品的进口关税税率和税目进行调整，具体内容见附件。",
+    "附件下载： 附件：2026年关税调整方案 附1 进口商品暂定税率表 附2 关税配额商品税目税率表 附3 出口商品税率表 附4 进出口税则税目调整表 附5 本国子目注释 附6 自由贸易协定和优惠贸易安排实施税率表"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\税务",
+  "officialSummary": "国务院关税税则委员会关于2026年关税调整方案的公告 税委会公告2025年第11号 为深入贯彻党的二十大和二十届历次全会精神，引领发展新质生产力，不断满足人民对美好生活的需要，助力扩大高水平对外开放，...",
+  "sourceTextHash": "63330da3abb0564aafe134636044114e36fe87c5b26adc876d6aee13e19bb14d",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:22:34+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国务院关税税则委员会发布2025年第11号公告，明确自2026年1月1日起对部分商品进口关税税率和税目进行调整，旨在贯彻党的二十大和二十届历次全会精神，发展新质生产力，满足人民美好生活需要，助力高水平对外开放和高质量发展。公告附有进口暂定税率表等六项附件。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-21-30-viewpoint",
+      "paragraphIndex": 1,
+      "start": 21,
+      "end": 30,
+      "text": "引领发展新质生产力",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-46-57-viewpoint",
+      "paragraphIndex": 1,
+      "start": 46,
+      "end": 57,
+      "text": "助力扩大高水平对外开放",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-26-40-figure",
+      "paragraphIndex": 0,
+      "start": 26,
+      "end": 40,
+      "text": "税委会公告2025年第11号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

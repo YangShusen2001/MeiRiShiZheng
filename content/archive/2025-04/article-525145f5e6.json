@@ -1,0 +1,69 @@
+{
+  "id": "525145f5e6",
+  "date": "2025-04-28",
+  "title": "关于印发《会计奖惩信息归集管理办法（试行）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7021442.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:04+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发《会计奖惩信息归集管理办法（试行）》的通知财会〔2025〕3号",
+    "各省、自治区、直辖市、计划单列市财政厅（局），新疆生产建设兵团财政局，有关单位：",
+    "为贯彻落实《中华人民共和国会计法》有关规定，做好会计奖惩信息记录归集，财政部制定了《会计奖惩信息归集管理办法（试行）》（以下简称《管理办法》），现予印发，自2025年7月1日起施行。",
+    "各地财政部门应认真把握《管理办法》提出的要求，结合本地实际，明确内部职责分工，压实工作责任，确保在全国会计人员统一服务管理平台准确记录会计奖惩信息。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\其他",
+  "officialSummary": "关于印发《会计奖惩信息归集管理办法（试行）》的通知 财会〔2025〕3号 各省、自治区、直辖市、计划单列市财政厅（局），新疆生产建设兵团财政局，有关单位： 为贯彻落实《中华人民共和国会计法》有关规定，...",
+  "sourceTextHash": "ddb13906526e2c29a323ef1646db88c9984c3d6c514b9cde668ddc239a9a9adf",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:43:27+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "财政部印发《会计奖惩信息归集管理办法（试行）》，自2025年7月1日起施行。要求各地财政部门明确职责分工，压实责任，在全国会计人员统一服务管理平台准确记录会计奖惩信息，以落实会计法规定。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-77-90-figure",
+      "paragraphIndex": 2,
+      "start": 77,
+      "end": 90,
+      "text": "自2025年7月1日起施行",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-24-34-term",
+      "paragraphIndex": 2,
+      "start": 24,
+      "end": 34,
+      "text": "会计奖惩信息记录归集",
+      "type": "term",
+      "explanation": "指对会计人员的奖励和处罚信息进行系统记录与集中管理，形成统一档案。"
+    },
+    {
+      "id": "ai-3-30-38-exam_point",
+      "paragraphIndex": 3,
+      "start": 30,
+      "end": 38,
+      "text": "明确内部职责分工",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-49-63-term",
+      "paragraphIndex": 3,
+      "start": 49,
+      "end": 63,
+      "text": "全国会计人员统一服务管理平台",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 3
+  }
+}

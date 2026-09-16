@@ -1,0 +1,56 @@
+{
+  "id": "4acca2ff58",
+  "date": "2026-01-26",
+  "title": "国家发展改革委印发《关于推进城际铁路健康可持续发展的意见》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202601/content_7056084.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:34+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委印发《关于推进城际铁路健康可持续发展的意见》的通知发改基础〔2025〕1674号",
+    "各省、自治区、直辖市人民政府，国务院各部委、各直属机构：",
+    "经国务院同意，现将《关于推进城际铁路健康可持续发展的意见》印发给你们，请结合实际抓好贯彻落实。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-01",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\铁路",
+  "officialSummary": "国家发展改革委印发《关于推进城际铁路健康可持续发展的意见》的通知 发改基础〔2025〕1674号 各省、自治区、直辖市人民政府，国务院各部委、各直属机构： 经国务院同意，现将《关于推进城际铁路健康可持...",
+  "sourceTextHash": "1c85c70dd41c0acea7651afef2aebf1a0cb21f7b99bbfebe9f1f068d9489fcee",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:18:40+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委印发《关于推进城际铁路健康可持续发展的意见》的通知，文号为发改基础〔2025〕1674号。通知主送各省、自治区、直辖市人民政府及国务院各部委、各直属机构，明确该意见已经国务院同意，要求各地区各部门结合实际抓好贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-14-25-term",
+      "paragraphIndex": 0,
+      "start": 14,
+      "end": 25,
+      "text": "城际铁路健康可持续发展",
+      "type": "term",
+      "explanation": "指城际铁路在规划建设运营中实现安全、高效、集约、可持续的良性发展"
+    },
+    {
+      "id": "ai-2-0-6-exam_point",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 6,
+      "text": "经国务院同意",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-35-46-exam_point",
+      "paragraphIndex": 2,
+      "start": 35,
+      "end": 46,
+      "text": "请结合实际抓好贯彻落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

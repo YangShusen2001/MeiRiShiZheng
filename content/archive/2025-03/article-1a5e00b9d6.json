@@ -1,0 +1,59 @@
+{
+  "id": "1a5e00b9d6",
+  "date": "2025-03-24",
+  "title": "国家认监委关于发布产品碳足迹标识认证通用实施规则（试行）的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202503/content_7015292.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:53+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家认监委关于发布产品碳足迹标识认证通用实施规则（试行）的公告国家认证认可监督管理委员会公告2025年第8号",
+    "根据《市场监管总局等部门关于开展产品碳足迹标识认证试点工作的通知》（国市监认证发〔2024〕85号），现发布产品碳足迹标识认证通用实施规则（试行），自发布之日起实施。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-03",
+  "archiveLib": "bm",
+  "topic": "国土资源、能源\\其他",
+  "officialSummary": "国家认监委关于发布产品碳足迹标识认证通用实施规则（试行）的公告 国家认证认可监督管理委员会公告2025年第8号 根据《市场监管总局等部门关于开展产品碳足迹标识认证试点工作的通知》（国市监认证发〔202...",
+  "sourceTextHash": "ab65fd1b301892d11989179a4a327f7896e7cd4912a9d6931f18dab7913d23d7",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:46:31+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家认监委发布产品碳足迹标识认证通用实施规则（试行）公告，文号2025年第8号，依据市场监管总局等部门2024年85号试点通知制定，自发布之日起实施，为产品碳足迹标识认证提供通用规则依据，推动碳足迹标识认证试点工作落地。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-46-54-figure",
+      "paragraphIndex": 0,
+      "start": 46,
+      "end": 54,
+      "text": "2025年第8号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-16-29-term",
+      "paragraphIndex": 1,
+      "start": 16,
+      "end": 29,
+      "text": "产品碳足迹标识认证试点工作",
+      "type": "term",
+      "explanation": "指依据统一规则对产品碳足迹进行标识认证的试点，用于验证认证制度与规则可行性。"
+    },
+    {
+      "id": "ai-1-74-82-exam_point",
+      "paragraphIndex": 1,
+      "start": 74,
+      "end": 82,
+      "text": "自发布之日起实施",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 1
+  }
+}

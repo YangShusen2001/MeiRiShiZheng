@@ -1,0 +1,69 @@
+{
+  "id": "15ab90abfa",
+  "date": "2026-02-25",
+  "title": "关于发布国家生态环境质量标准《环境空气质量标准》的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202602/content_7059324.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:43+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于发布国家生态环境质量标准《环境空气质量标准》的公告〔2026〕13号",
+    "为贯彻《中华人民共和国环境保护法》和《中华人民共和国大气污染防治法》，保护和改善生态环境，保障公众健康，现批准《环境空气质量标准》为国家生态环境质量标准，并由生态环境部与市场监管总局联合发布。",
+    "《环境空气质量标准》（GB 3095—2026）。",
+    "以上标准自2026年3月1日起实施。自以上标准实施之日起，《环境空气质量标准》（GB 3095—2012）及其修改单废止。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-02",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\环境监测、保护与治理",
+  "officialSummary": "关于发布国家生态环境质量标准《环境空气质量标准》的公告 〔2026〕13号 为贯彻《中华人民共和国环境保护法》和《中华人民共和国大气污染防治法》，保护和改善生态环境，保障公众健康，现批准《环境空气质量...",
+  "sourceTextHash": "52a53234e3b5b05e8f96377782c60fa528f69138933a03b463e0ceacd5b05aed",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:16:15+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "生态环境部与市场监管总局联合发布国家生态环境质量标准《环境空气质量标准》（GB 3095—2026），旨在贯彻环境保护法和大气污染防治法，保护和改善生态环境，保障公众健康，标准自2026年3月1日起实施，原2012年版标准及其修改单同时废止。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-45-51-viewpoint",
+      "paragraphIndex": 1,
+      "start": 45,
+      "end": 51,
+      "text": "保障公众健康",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-66-76-term",
+      "paragraphIndex": 1,
+      "start": 66,
+      "end": 76,
+      "text": "国家生态环境质量标准",
+      "type": "term",
+      "explanation": "指为保护生态环境和公众健康，对环境中污染物浓度等所作的统一技术规定"
+    },
+    {
+      "id": "ai-3-5-14-figure",
+      "paragraphIndex": 3,
+      "start": 5,
+      "end": 14,
+      "text": "2026年3月1日",
+      "type": "figure"
+    },
+    {
+      "id": "ai-3-40-52-figure",
+      "paragraphIndex": 3,
+      "start": 40,
+      "end": 52,
+      "text": "GB 3095—2012",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 3
+  }
+}

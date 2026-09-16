@@ -1,0 +1,56 @@
+{
+  "id": "c9dd1524e4",
+  "date": "2025-02-13",
+  "title": "国家中医药管理局关于印发《国家中医药管理局重点实验室管理办法》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202502/content_7003583.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:44+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家中医药管理局关于印发《国家中医药管理局重点实验室管理办法》的通知国中医药科技函〔2024〕249号",
+    "各省、自治区、直辖市中医药主管部门，新疆生产建设兵团卫生健康委：",
+    "为落实好《中医药振兴发展重大工程实施方案》有关要求，进一步加强中医药科技创新体系建设，我局制定了《国家中医药管理局重点实验室管理办法》并经局长会议审议通过，现印发给你们，请遵照执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-02",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\医药管理",
+  "officialSummary": "国家中医药管理局关于印发《国家中医药管理局重点实验室管理办法》的通知 国中医药科技函〔2024〕249号 各省、自治区、直辖市中医药主管部门，新疆生产建设兵团卫生健康委： 为落实好《中医药振兴发展重大...",
+  "sourceTextHash": "5db5334bb8ee0f3f0a6055097ec4ab4250b000c0c05764d78076fc1cee08542e",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:51:51+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家中医药管理局印发《国家中医药管理局重点实验室管理办法》（国中医药科技函〔2024〕249号），要求各省、自治区、直辖市中医药主管部门及新疆生产建设兵团卫生健康委遵照执行。该办法旨在落实《中医药振兴发展重大工程实施方案》，加强中医药科技创新体系建设，已经局长会议审议通过。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-4-21-term",
+      "paragraphIndex": 2,
+      "start": 4,
+      "end": 21,
+      "text": "《中医药振兴发展重大工程实施方案》",
+      "type": "term",
+      "explanation": "国家推动中医药传承创新发展的重大工程部署，为中医药振兴发展提供政策依据和行动指南。"
+    },
+    {
+      "id": "ai-2-31-42-exam_point",
+      "paragraphIndex": 2,
+      "start": 31,
+      "end": 42,
+      "text": "中医药科技创新体系建设",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-18-31-exam_point",
+      "paragraphIndex": 1,
+      "start": 18,
+      "end": 31,
+      "text": "新疆生产建设兵团卫生健康委",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

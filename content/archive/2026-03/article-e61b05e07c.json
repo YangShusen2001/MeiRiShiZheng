@@ -1,0 +1,40 @@
+{
+  "id": "e61b05e07c",
+  "date": "2026-03-31",
+  "title": "三部门关于印发《标准引领纺织工业优化升级行动方案（2026—2028年）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202603/content_7064317.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:47+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部 生态环境部 市场监管总局关于印发《标准引领纺织工业优化升级行动方案（2026—2028年）》的通知工信部联消费〔2026〕69号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化、生态环境、市场监管主管部门：",
+    "现将《标准引领纺织工业优化升级行动方案（2026—2028年）》印发给你们，请结合实际，抓好贯彻落实。",
+    "工业和信息化部生态环境部市场监管总局2026年3月13日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-03",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\轻工纺织",
+  "officialSummary": "工业和信息化部 生态环境部 市场监管总局关于印发《标准引领纺织工业优化升级行动方案（2026—2028年）》的通知 工信部联消费〔2026〕69号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工...",
+  "sourceTextHash": "ffa280e5d92a18b385a4b7c0c43b3f626aa859225295a8b8d8465b1248557983",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:16:00+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工信部、生态环境部、市场监管总局联合印发《标准引领纺织工业优化升级行动方案（2026—2028年）》，通知要求各地工信、生态环境、市场监管主管部门结合实际抓好贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-44-50-exam_point",
+      "paragraphIndex": 2,
+      "start": 44,
+      "end": 50,
+      "text": "抓好贯彻落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

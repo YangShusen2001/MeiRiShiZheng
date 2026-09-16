@@ -1,0 +1,61 @@
+{
+  "id": "2ef52d714a",
+  "date": "2025-04-01",
+  "title": "交通运输部关于发布《新能源汽车售后维修服务能力技术要求》等11项交通运输行业标准的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7016709.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:16+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "交通运输部关于发布《新能源汽车售后维修服务能力技术要求》等11项交通运输行业标准的公告交通运输部公告2025年第16号",
+    "《新能源汽车售后维修服务能力技术要求》等11项交通运输行业标准（2025年第4批，见附件）业经审查通过，现予发布。发布的标准均为推荐性标准，由人民交通出版社股份有限公司出版，并在中华人民共和国交通运输部网站公告。",
+    "附件：发布的11项交通运输行业标准编号、名称、主要内容等一览表",
+    "发布的11项交通运输行业标准编号、名称、主要内容等一览表.doc"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "交通运输部关于发布《新能源汽车售后维修服务能力技术要求》等11项交通运输行业标准的公告 交通运输部公告2025年第16号 《新能源汽车售后维修服务能力技术要求》等11项交通运输行业标准（2025年第4...",
+  "sourceTextHash": "cdc813d9e3ee0e6acac8971f5b42759a341ae1a910c83f3db5f8c5c2e1482794",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:42:58+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "交通运输部发布2025年第16号公告，审查通过并发布《新能源汽车售后维修服务能力技术要求》等11项推荐性行业标准。标准由人民交通出版社出版，并在交通运输部网站公告。附件列出标准编号、名称及主要内容等信息。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-50-59-figure",
+      "paragraphIndex": 0,
+      "start": 50,
+      "end": 59,
+      "text": "2025年第16号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-20-31-exam_point",
+      "paragraphIndex": 1,
+      "start": 20,
+      "end": 31,
+      "text": "11项交通运输行业标准",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-64-69-term",
+      "paragraphIndex": 1,
+      "start": 64,
+      "end": 69,
+      "text": "推荐性标准",
+      "type": "term",
+      "explanation": "指国家或行业鼓励自愿采用的标准，不具有强制约束力，由企业自愿执行。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 0,
+    "to": 1
+  }
+}

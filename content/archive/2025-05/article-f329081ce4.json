@@ -1,0 +1,59 @@
+{
+  "id": "f329081ce4",
+  "date": "2025-05-15",
+  "title": "关于印发《国家发展改革委行政处罚裁量规则》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202505/content_7023840.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:19+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委办公厅关于印发《国家发展改革委行政处罚裁量规则》的通知发改办法规规〔2025〕462号",
+    "各厅、司、局、室，国家能源局综合司、国家数据局综合司：",
+    "为规范国家发展改革委行政处罚裁量权行使，保护公民、法人或者其他组织的合法权益，根据《中华人民共和国行政处罚法》《企业投资项目核准和备案管理条例》《企业境外投资管理办法》等法律法规规章，我们制定了《国家发展改革委行政处罚裁量规则》。现印发给你们，请遵照执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-05",
+  "archiveLib": "bm",
+  "topic": "综合政务\\其他",
+  "officialSummary": "国家发展改革委办公厅关于印发《国家发展改革委行政处罚裁量规则》的通知 发改办法规规〔2025〕462号 各厅、司、局、室，国家能源局综合司、国家数据局综合司： 为规范国家发展改革委行政处罚裁量权行使，...",
+  "sourceTextHash": "8bc57b21d7f10ab8d780eeef30f91cc1fc0e9496620639882a49bc07531509e2",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:42:09+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委办公厅印发《行政处罚裁量规则》的通知（发改办法规规〔2025〕462号），发至各厅司局室及国家能源局、国家数据局综合司。规则依据行政处罚法、企业投资项目核准和备案管理条例、企业境外投资管理办法等制定，旨在规范裁量权行使、保护公民法人等合法权益，请遵照执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-34-50-figure",
+      "paragraphIndex": 0,
+      "start": 34,
+      "end": 50,
+      "text": "发改办法规规〔2025〕462号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-1-19-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 19,
+      "text": "规范国家发展改革委行政处罚裁量权行使",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-20-38-viewpoint",
+      "paragraphIndex": 2,
+      "start": 20,
+      "end": 38,
+      "text": "保护公民、法人或者其他组织的合法权益",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

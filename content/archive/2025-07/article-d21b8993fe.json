@@ -1,0 +1,85 @@
+{
+  "id": "d21b8993fe",
+  "date": "2025-07-23",
+  "title": "关于海南自由贸易港进口征税商品目录的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202507/content_7033415.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:33+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于海南自由贸易港进口征税商品目录的通知财关税〔2025〕13号",
+    "海南省人民政府，财政部海南监管局，海口海关，国家税务总局海南省税务局：",
+    "为稳步推进海南自由贸易港建设，经国务院同意，现将《财政部 海关总署 税务总局关于海南自由贸易港货物进出“一线”、“二线”及在岛内流通税收政策的通知》（财关税〔2025〕12号）中进口征税商品目录有关规定通知如下：",
+    "二、在全面评估、具备条件后，财政部、海关总署、税务总局会同有关部门结合相关税制改革、海南省实际需要和监管条件等，及时对进口征税商品目录进行调整。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-07",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\税务",
+  "officialSummary": "关于海南自由贸易港进口征税商品目录的通知 财关税〔2025〕13号 海南省人民政府，财政部海南监管局，海口海关，国家税务总局海南省税务局： 为稳步推进海南自由贸易港建设，经国务院同意，现将《财政部 海...",
+  "sourceTextHash": "86e66d34e5c3bde2632fc4063c9e201ff6ddbfa97fcf53f1bdbc148ca159c7d0",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:36:51+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国务院部门发布财关税〔2025〕13号通知，明确海南自由贸易港进口征税商品目录执行财关税〔2025〕12号有关规定，并确定在全面评估、具备条件后，由财政部、海关总署、税务总局会同有关部门结合税制改革、海南省实际需要和监管条件等，及时对目录进行调整。",
+  "aiAnnotations": [
+    {
+      "id": "ai-3-2-13-viewpoint",
+      "paragraphIndex": 3,
+      "start": 2,
+      "end": 13,
+      "text": "在全面评估、具备条件后",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-56-71-viewpoint",
+      "paragraphIndex": 3,
+      "start": 56,
+      "end": 71,
+      "text": "及时对进口征税商品目录进行调整",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-1-14-exam_point",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 14,
+      "text": "稳步推进海南自由贸易港建设",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-89-97-exam_point",
+      "paragraphIndex": 2,
+      "start": 89,
+      "end": 97,
+      "text": "进口征税商品目录",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-20-32-term",
+      "paragraphIndex": 0,
+      "start": 20,
+      "end": 32,
+      "text": "财关税〔2025〕13号",
+      "type": "term",
+      "explanation": "财政部等国务院部门2025年印发的关税文件编号，用于标识该通知的正式发文字号"
+    },
+    {
+      "id": "ai-0-24-28-figure",
+      "paragraphIndex": 0,
+      "start": 24,
+      "end": 28,
+      "text": "2025",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 3
+  }
+}

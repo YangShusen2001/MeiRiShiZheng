@@ -1,0 +1,72 @@
+{
+  "id": "3d28abacbe",
+  "date": "2026-01-07",
+  "title": "工业和信息化部办公厅关于印发《工业互联网和人工智能融合赋能行动方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202601/content_7054192.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:40+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部办公厅关于印发《工业互联网和人工智能融合赋能行动方案》的通知工信厅信管〔2025〕76号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门，各省、自治区、直辖市通信管理局：",
+    "现将《工业互联网和人工智能融合赋能行动方案》印发给你们，请结合实际认真抓好落实。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-01",
+  "archiveLib": "bm",
+  "topic": "科技、教育\\科技",
+  "officialSummary": "工业和信息化部办公厅关于印发《工业互联网和人工智能融合赋能行动方案》的通知 工信厅信管〔2025〕76号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门，各省、自治区、直辖市通...",
+  "sourceTextHash": "2ed7a6ebbe576aae499e8c3b97a34068f4a56d6025002917fb46b4e27a454545",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:18:39+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工信部办公厅印发《工业互联网和人工智能融合赋能行动方案》的通知，文号工信厅信管〔2025〕76号。通知主送各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门，以及各省、自治区、直辖市通信管理局，要求结合实际认真抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-14-34-term",
+      "paragraphIndex": 0,
+      "start": 14,
+      "end": 34,
+      "text": "《工业互联网和人工智能融合赋能行动方案》",
+      "type": "term",
+      "explanation": "工信部印发的政策文件，推动工业互联网与人工智能深度融合、协同赋能制造业"
+    },
+    {
+      "id": "ai-0-37-51-figure",
+      "paragraphIndex": 0,
+      "start": 37,
+      "end": 51,
+      "text": "工信厅信管〔2025〕76号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-3-17-exam_point",
+      "paragraphIndex": 2,
+      "start": 3,
+      "end": 17,
+      "text": "工业互联网和人工智能融合赋能",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-29-39-viewpoint",
+      "paragraphIndex": 2,
+      "start": 29,
+      "end": 39,
+      "text": "结合实际认真抓好落实",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-36-51-exam_point",
+      "paragraphIndex": 1,
+      "start": 36,
+      "end": 51,
+      "text": "各省、自治区、直辖市通信管理局",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

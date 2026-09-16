@@ -1,0 +1,56 @@
+{
+  "id": "bb75883f9b",
+  "date": "2026-08-13",
+  "title": "两部门关于印发《安全应急装备产业发展“十五五”规划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202608/content_7078001.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:44:33+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部 应急管理部关于印发《安全应急装备产业发展“十五五”规划》的通知工信部联规〔2026〕186号",
+    "国家消防救援局、国家矿山安全监察局、中国地震局，各省、自治区、直辖市、计划单列市及新疆生产建设兵团工业和信息化主管部门，各省、自治区、直辖市及新疆生产建设兵团应急管理厅（局），有关单位：",
+    "现将《安全应急装备产业发展“十五五”规划》印发给你们，请结合实际，认真贯彻实施。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-08",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部 应急管理部关于印发《安全应急装备产业发展“十五五”规划》的通知 工信部联规〔2026〕186号 国家消防救援局、国家矿山安全监察局、中国地震局，各省、自治区、直辖市、计划单列市及新疆生...",
+  "sourceTextHash": "37fefb7be6c384ca3edf7899f94a33cfd0412f862730bb4fdae77853e54f9b5a",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:06:53+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部、应急管理部联合印发《安全应急装备产业发展“十五五”规划》，文号工信部联规〔2026〕186号，要求国家消防救援局、国家矿山安全监察局、中国地震局及各地工业和信息化主管部门、应急管理厅（局）等单位结合实际认真贯彻实施。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-18-35-term",
+      "paragraphIndex": 0,
+      "start": 18,
+      "end": 35,
+      "text": "安全应急装备产业发展“十五五”规划",
+      "type": "term",
+      "explanation": "指2026至2030年国家层面推动安全应急装备产业发展的专项规划"
+    },
+    {
+      "id": "ai-0-39-54-figure",
+      "paragraphIndex": 0,
+      "start": 39,
+      "end": 54,
+      "text": "工信部联规〔2026〕186号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-33-39-exam_point",
+      "paragraphIndex": 2,
+      "start": 33,
+      "end": 39,
+      "text": "认真贯彻实施",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

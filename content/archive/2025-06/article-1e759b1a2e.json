@@ -1,0 +1,76 @@
+{
+  "id": "1e759b1a2e",
+  "date": "2025-06-27",
+  "title": "国家税务总局关于互联网平台企业报送涉税信息有关事项的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202506/content_7029727.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:23+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家税务总局关于互联网平台企业报送涉税信息有关事项的公告国家税务总局公告2025年第15号",
+    "根据《互联网平台企业涉税信息报送规定》（以下简称《规定》），现就互联网平台企业报送涉税信息有关事项公告如下：",
+    "依照《规定》应当报送涉税信息的互联网平台企业，包括运营以下互联网平台的企业：",
+    "（五）提供教育、医疗、旅行、咨询、培训、经纪、设计、演出、广告、翻译、代理、技术服务、视听资讯、游戏休闲、网络文学、视频图文生成、网络贷款等服务的平台；",
+    "（七）为平台内的经营者和从业人员从事网络交易活动提供营利性服务的小程序、快应用等，以及为小程序、快应用等提供基础架构服务的平台；",
+    "（八）其他为平台内的经营者和从业人员开展网络交易活动提供营利性服务的平台。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-06",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\税务",
+  "officialSummary": "国家税务总局关于互联网平台企业报送涉税信息有关事项的公告 国家税务总局公告2025年第15号 根据《互联网平台企业涉税信息报送规定》（以下简称《规定》），现就互联网平台企业报送涉税信息有关事项公告如下...",
+  "sourceTextHash": "6bc19ba9cb869ec88a4852cfe66fa121bee84c02e5c3aaf85c99d844c0928145",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:37:47+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家税务总局发布2025年第15号公告，依据《互联网平台企业涉税信息报送规定》，明确应报送涉税信息的互联网平台企业范围，涵盖提供教育、医疗、旅行、咨询、网络贷款等服务以及小程序、快应用等营利性服务平台，细化报送主体，强化平台涉税信息报送管理。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-0-19-viewpoint",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 19,
+      "text": "根据《互联网平台企业涉税信息报送规定》",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-6-22-exam_point",
+      "paragraphIndex": 2,
+      "start": 6,
+      "end": 22,
+      "text": "应当报送涉税信息的互联网平台企业",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-65-69-term",
+      "paragraphIndex": 3,
+      "start": 65,
+      "end": 69,
+      "text": "网络贷款",
+      "type": "term",
+      "explanation": "指通过互联网平台进行的借贷活动，包括个体网络借贷和网络小额贷款等"
+    },
+    {
+      "id": "ai-4-32-39-term",
+      "paragraphIndex": 4,
+      "start": 32,
+      "end": 39,
+      "text": "小程序、快应用",
+      "type": "term",
+      "explanation": "小程序是嵌入宿主应用运行的轻量级应用，快应用是免安装的移动应用形态"
+    },
+    {
+      "id": "ai-4-54-60-term",
+      "paragraphIndex": 4,
+      "start": 54,
+      "end": 60,
+      "text": "基础架构服务",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

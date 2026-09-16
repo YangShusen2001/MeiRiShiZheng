@@ -9,8 +9,15 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
-import type { ContentManifest, ReviewCard, PolicyLine } from "@kaogong/contracts";
-import { listArticles, listCards, listPolicyLines } from "../src/lib/content";
+import type {
+  ContentArchiveIndex,
+  ContentArchiveMonth,
+  ContentManifest,
+  PolicyLine,
+  ReviewCard,
+} from "@kaogong/contracts";
+import { getArchive, listArchiveSummary, listArchiveTotals } from "../src/lib/archive";
+import { listArchiveArticles, listArticles, listCards, listPolicyLines } from "../src/lib/content";
 
 const SCRIPT = fileURLToPath(new URL("../scripts/build-content-api.mjs", import.meta.url));
 
@@ -136,5 +143,103 @@ describe("内容分发层产物", () => {
   it("不把 .bak 备份等非发布文件带入产物", () => {
     const leaked = allFiles(outDir).filter((p) => p.endsWith(".bak"));
     expect(leaked).toEqual([]);
+  });
+});
+
+/**
+ * 政策档案通道（2026-09-15 新增）。
+ *
+ * 背景：Web 端的 `/policy/` 从 `content/archive/` 构建期读取，而分发层原先**完全没有档案**——
+ * 鸿蒙端物理上取不到，三端在「政策档案」这一屏上是不通的。
+ * 这组断言盯的是"客户端能不能真的把档案页渲染出来"，不是"文件写出来了"。
+ */
+describe("政策档案分发产物", () => {
+  const index = () => readJson<ContentArchiveIndex>(join(outDir, "archive", "index.json"));
+
+  it("产出索引，月份倒序且与逐月合计同源", () => {
+    const idx = index();
+    expect(idx.months.length).toBeGreaterThan(0);
+    const months = idx.months.map((r) => r.month);
+    expect(months).toEqual([...months].sort().reverse());
+    expect(idx.totals.months).toBe(idx.months.length);
+    expect(idx.totals.files).toBe(idx.months.reduce((n, r) => n + r.count, 0));
+    expect(idx.totals.core).toBe(idx.months.reduce((n, r) => n + r.high, 0));
+    expect(idx.totals.firstMonth).toBe(months[months.length - 1]);
+    expect(idx.totals.lastMonth).toBe(months[0]);
+    // 与 Web 端侧边栏读的是同一份数据源，不允许各算一套
+    expect(idx.months).toEqual(listArchiveSummary());
+    expect(idx.totals).toEqual(listArchiveTotals());
+  });
+
+  it("清单里的档案规模与索引一致（首页入口卡不额外发请求）", () => {
+    const idx = index();
+    expect(manifest.archive).toEqual({
+      months: idx.totals.months,
+      files: idx.totals.files,
+      core: idx.totals.core,
+    });
+  });
+
+  it("逐月台账存在，且计数与条目实际分布一致", () => {
+    const idx = index();
+    for (const row of idx.months) {
+      const path = join(outDir, "archive", `${row.month}.json`);
+      expect(existsSync(path), `${row.month} 缺台账文件`).toBe(true);
+      const doc = readJson<ContentArchiveMonth>(path);
+      expect(doc.month).toBe(row.month);
+      const tally = {
+        count: doc.items.length,
+        high: doc.items.filter((i) => i.importance === "高").length,
+        medium: doc.items.filter((i) => i.importance === "中").length,
+        low: doc.items.filter((i) => i.importance === "低").length,
+      };
+      expect({ count: doc.count, high: doc.high, medium: doc.medium, low: doc.low }).toEqual(tally);
+      expect({ count: row.count, high: row.high }).toEqual({ count: tally.count, high: tally.high });
+      // 分级只有三档，出现第四种说明数据脏了（客户端会渲染出一个没有样式的标签）
+      expect(tally.count).toBe(tally.high + tally.medium + tally.low);
+      // 与 Web 端月份页拿到的 doc 完全一致
+      expect(doc).toEqual(getArchive(row.month));
+    }
+  });
+
+  it("每条档案条目的 readId 都指向真实正文文件（客户端点进去不会 404）", () => {
+    const idx = index();
+    let routable = 0;
+    for (const row of idx.months) {
+      const doc = readJson<ContentArchiveMonth>(join(outDir, "archive", `${row.month}.json`));
+      for (const it of doc.items) {
+        expect(it.url).toMatch(/^https?:\/\//);
+        expect(it.title.length).toBeGreaterThan(0);
+        expect(it.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        expect(it.importance === "高" || it.importance === "中" || it.importance === "低").toBe(true);
+        // hasBody 与 readId 必须同进同退：一边为真另一边为空 = 要么被迫跳外链、要么点进 404
+        expect(it.readId !== "").toBe(it.hasBody);
+        if (it.readId !== "") {
+          expect(existsSync(join(outDir, "articles", `${it.readId}.json`))).toBe(true);
+          routable += 1;
+        }
+      }
+      // url 是客户端反查与收藏的键，月内重复会让两条指向同一篇
+      const urls = doc.items.map((i) => i.url);
+      expect(new Set(urls).size).toBe(urls.length);
+    }
+    expect(routable).toBeGreaterThan(0);
+  });
+
+  it("档案正文与日更正文共用 id 空间但不冲突（撞 id 会静默丢内容）", () => {
+    const dailyIds = new Set(listArticles().map((a) => a.id));
+    const archiveIds = listArchiveArticles().map((a) => a.id);
+    expect(archiveIds.filter((id) => dailyIds.has(id))).toEqual([]);
+    expect(new Set(archiveIds).size).toBe(archiveIds.length);
+    for (const id of archiveIds) {
+      expect(existsSync(join(outDir, "articles", `${id}.json`))).toBe(true);
+    }
+  });
+
+  it("档案正文同样按 Web 端逻辑清洗，无 HTML 实体残留", () => {
+    for (const article of listArchiveArticles()) {
+      const raw = readFileSync(join(outDir, "articles", `${article.id}.json`), "utf-8");
+      expect(raw.match(ENTITY_PATTERN), `档案正文 ${article.id} 残留实体`).toBeNull();
+    }
   });
 });

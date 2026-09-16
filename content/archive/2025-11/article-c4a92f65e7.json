@@ -1,0 +1,49 @@
+{
+  "id": "c4a92f65e7",
+  "date": "2025-11-03",
+  "title": "关于印发《节水装备高质量发展实施方案（2025—2030年）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202511/content_7046949.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:46+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发《节水装备高质量发展实施方案（2025—2030年）》的通知工信部联节〔2025〕234号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、水利（水务）厅（局）：",
+    "现将《节水装备高质量发展实施方案（2025—2030年）》印发给你们，请结合实际认真抓好落实。",
+    "附件：关于印发《节水装备高质量发展实施方案（2025—2030年）》的通知"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-11",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\机械制造与重工业",
+  "officialSummary": "关于印发《节水装备高质量发展实施方案（2025—2030年）》的通知 工信部联节〔2025〕234号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、水利（水务）厅（局）： 现...",
+  "sourceTextHash": "6a526dd757e3577dce760e252c80836763447cad43302664c4a0c5dd1571732d",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:25:42+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工信部、水利部联合印发《节水装备高质量发展实施方案（2025—2030年）》，通知各省区市及新疆生产建设兵团工信、水利主管部门结合实际抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-5-30-term",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 30,
+      "text": "节水装备高质量发展实施方案（2025—2030年）",
+      "type": "term",
+      "explanation": "指针对节水装备制定的中长期发展方案，规划期为2025年至2030年。"
+    },
+    {
+      "id": "ai-2-35-46-viewpoint",
+      "paragraphIndex": 2,
+      "start": 35,
+      "end": 46,
+      "text": "请结合实际认真抓好落实",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

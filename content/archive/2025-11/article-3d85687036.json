@@ -1,0 +1,56 @@
+{
+  "id": "3d85687036",
+  "date": "2025-11-24",
+  "title": "国家发展改革委关于印发乡村振兴（和美乡村建设方向）中央预算内投资专项管理办法的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202511/content_7049382.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:40+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委关于印发乡村振兴（和美乡村建设方向）中央预算内投资专项管理办法的通知发改农经规〔2025〕1415号",
+    "农业农村部，各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委：",
+    "为贯彻落实党中央、国务院关于乡村全面振兴的决策部署，加强和规范和美乡村建设项目管理，根据《政府投资条例》及中央预算内投资管理等有关规定，我们制定了《乡村振兴（和美乡村建设方向）中央预算内投资专项管理办法》。现印发给你们，请认真执行。",
+    "附件： 《乡村振兴（和美乡村建设方向）中央预算内投资专项管理办法》.pdf 《乡村振兴（和美乡村建设方向）中央预算内投资专项管理办法》.ofd"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-11",
+  "archiveLib": "bm",
+  "topic": "国民经济管理、国有资产监管\\其他",
+  "officialSummary": "国家发展改革委关于印发乡村振兴（和美乡村建设方向）中央预算内投资专项管理办法的通知 发改农经规〔2025〕1415号 农业农村部，各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委： 为贯彻...",
+  "sourceTextHash": "bee36aec312d525e22f21a39bd98ad9cb5b8a49afa7e5bd8437868997a933e88",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:24:17+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委印发乡村振兴（和美乡村建设方向）中央预算内投资专项管理办法，文号发改农经规〔2025〕1415号，要求农业农村部及各地发展改革委认真执行。办法依据《政府投资条例》及中央预算内投资管理规定制定。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-1-25-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 25,
+      "text": "贯彻落实党中央、国务院关于乡村全面振兴的决策部署",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-26-41-exam_point",
+      "paragraphIndex": 2,
+      "start": 26,
+      "end": 41,
+      "text": "加强和规范和美乡村建设项目管理",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-41-57-figure",
+      "paragraphIndex": 0,
+      "start": 41,
+      "end": 57,
+      "text": "发改农经规〔2025〕1415号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

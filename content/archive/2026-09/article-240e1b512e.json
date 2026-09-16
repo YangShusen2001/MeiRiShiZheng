@@ -1,0 +1,57 @@
+{
+  "id": "240e1b512e",
+  "date": "2026-09-11",
+  "title": "农业农村部关于印发《全国畜牧兽医行业发展“十五五”规划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202609/content_7080776.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:55:09+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "农业农村部关于印发《全国畜牧兽医行业发展“十五五”规划》的通知农牧发〔2026〕9号",
+    "各省、自治区、直辖市及计划单列市农业农村（农牧）、畜牧兽医厅（局、委），新疆生产建设兵团农业农村局：",
+    "现将《全国畜牧兽医行业发展“十五五”规划》印发给你们，请结合实际认真贯彻落实。",
+    "农业农村部关于印发《全国畜牧兽医行业发展“十五五”规划》的通知.pdf"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-09",
+  "archiveLib": "bm",
+  "topic": "农业、林业、水利\\农业、畜牧业、渔业",
+  "officialSummary": "农业农村部关于印发《全国畜牧兽医行业发展“十五五”规划》的通知 农牧发〔2026〕9号 各省、自治区、直辖市及计划单列市农业农村（农牧）、畜牧兽医厅（局、委），新疆生产建设兵团农业农村局： 现将《全国...",
+  "sourceTextHash": "b7af41a8c6641d6214f29ce50882ddb244e8f4dd7fa0750f903f620384f38356",
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T19:18:50+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "农业农村部印发《全国畜牧兽医行业发展“十五五”规划》通知，文号农牧发〔2026〕9号，主送各省、自治区、直辖市及计划单列市农业农村（农牧）、畜牧兽医厅（局、委）和新疆生产建设兵团农业农村局，要求结合实际认真贯彻落实，并附规划全文PDF。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-31-42-figure",
+      "paragraphIndex": 0,
+      "start": 31,
+      "end": 42,
+      "text": "农牧发〔2026〕9号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-36-49-term",
+      "paragraphIndex": 1,
+      "start": 36,
+      "end": 49,
+      "text": "新疆生产建设兵团农业农村局",
+      "type": "term",
+      "explanation": "新疆生产建设兵团所属的农业农村行政管理机构，承担兵团范围内农业、畜牧兽医等管理职责。"
+    },
+    {
+      "id": "ai-2-27-38-exam_point",
+      "paragraphIndex": 2,
+      "start": 27,
+      "end": 38,
+      "text": "请结合实际认真贯彻落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "id": "b2f969c5c9",
+  "date": "2025-12-05",
+  "title": "中国民用航空局关于印发推动“人工智能+民航”高质量发展实施意见的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7050374.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:56+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "中国民用航空局关于印发推动“人工智能+民航”高质量发展实施意见的通知民航发〔2025〕24号",
+    "民航各地区管理局，各运输（通用）航空公司、运输（通用）机场公司、服务保障公司，局属各单位，局机关各部门：",
+    "现将《关于推动“人工智能+民航”高质量发展的实施意见》印发，请结合实际认真贯彻落实。",
+    "中国民用航空局关于印发推动“人工智能+民航”高质量发展实施意见的通知"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "bm",
+  "topic": "其他\\其他",
+  "officialSummary": "中国民用航空局关于印发推动“人工智能+民航”高质量发展实施意见的通知 民航发〔2025〕24号 民航各地区管理局，各运输（通用）航空公司、运输（通用）机场公司、服务保障公司，局属各单位，局机关各部门：...",
+  "sourceTextHash": "f467f68cbcb3e1cada810d8cd58bf4a3c64a11b77265c416f15314fb7e999b60",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:23:10+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "民航局印发《关于推动“人工智能+民航”高质量发展的实施意见》，文号民航发〔2025〕24号，面向各地区管理局、航空公司、机场公司、服务保障公司及局属单位、机关部门发布，要求结合实际认真贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-34-46-figure",
+      "paragraphIndex": 0,
+      "start": 34,
+      "end": 46,
+      "text": "民航发〔2025〕24号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-3-26-term",
+      "paragraphIndex": 2,
+      "start": 3,
+      "end": 26,
+      "text": "关于推动“人工智能+民航”高质量发展的实施意见",
+      "type": "term",
+      "explanation": "民航领域推进人工智能与行业深度融合、促进高质量发展的政策性指导文件"
+    },
+    {
+      "id": "ai-2-31-41-exam_point",
+      "paragraphIndex": 2,
+      "start": 31,
+      "end": 41,
+      "text": "结合实际认真贯彻落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

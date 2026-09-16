@@ -26,7 +26,12 @@ const { it } = Astro.props;
   </summary>
   <div class="arc-line__body">
     {it.gist && <p class="arc-line__gist">{it.gist}</p>}
-    <a class="arc-line__link" href={it.url} target="_blank" rel="noopener">查看官方原文</a>
+    {/* 有正文 → 站内阅读页；没正文 → 官方外链。文案随目标变，避免「官方原文」指向站内。 */}
+    {it.readId ? (
+      <a class="arc-line__link" href={`/read/${it.readId}/`}>查看原文</a>
+    ) : (
+      <a class="arc-line__link" href={it.url} target="_blank" rel="noopener">查看官方原文</a>
+    )}
   </div>
 </details>
 

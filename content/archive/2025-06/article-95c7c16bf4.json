@@ -1,0 +1,56 @@
+{
+  "id": "95c7c16bf4",
+  "date": "2025-06-29",
+  "title": "市场监管总局办公厅关于印发《食品补充检验方法“揭榜挂帅”工作方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202506/content_7029916.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:23+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "市场监管总局办公厅关于印发《食品补充检验方法“揭榜挂帅”工作方案》的通知市监食检发〔2025〕54号",
+    "各省、自治区、直辖市和新疆生产建设兵团市场监管局（厅、委）：",
+    "为规范开展食品补充检验方法“揭榜挂帅”工作，现将《食品补充检验方法“揭榜挂帅”工作方案》印发给你们，请遵照执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-06",
+  "archiveLib": "bm",
+  "topic": "市场监管、安全生产监管\\食品药品监管",
+  "officialSummary": "市场监管总局办公厅关于印发《食品补充检验方法“揭榜挂帅”工作方案》的通知 市监食检发〔2025〕54号 各省、自治区、直辖市和新疆生产建设兵团市场监管局（厅、委）： 为规范开展食品补充检验方法“揭榜挂...",
+  "sourceTextHash": "9b6f93211adb421edb9cbaaa749e1b9d3102ae49b4de34369d7f6ab02e963be5",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:38:57+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "市场监管总局办公厅印发市监食检发〔2025〕54号通知，面向各省、自治区、直辖市及新疆生产建设兵团市场监管局（厅、委），为规范开展食品补充检验方法“揭榜挂帅”工作，将《食品补充检验方法“揭榜挂帅”工作方案》印发并要求遵照执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-36-50-figure",
+      "paragraphIndex": 0,
+      "start": 36,
+      "end": 50,
+      "text": "市监食检发〔2025〕54号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-5-21-term",
+      "paragraphIndex": 2,
+      "start": 5,
+      "end": 21,
+      "text": "食品补充检验方法“揭榜挂帅”工作",
+      "type": "term",
+      "explanation": "指针对食品检验中缺失或不适用的方法，公开张榜征集、择优攻关的机制，以补充完善食品检验方法体系。"
+    },
+    {
+      "id": "ai-2-50-55-exam_point",
+      "paragraphIndex": 2,
+      "start": 50,
+      "end": 55,
+      "text": "请遵照执行",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

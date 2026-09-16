@@ -1,0 +1,109 @@
+{
+  "id": "468b98aa62",
+  "date": "2025-03-10",
+  "title": "国家税务总局关于发布出口退税率文库2025A版的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202503/content_7012521.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:59+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家税务总局关于发布出口退税率文库2025A版的通知税总货劳函〔2025〕24号",
+    "国家税务总局各省、自治区、直辖市和计划单列市税务局，国家税务总局驻各地特派员办事处：",
+    "根据进出口税则及海关编码调整情况，国家税务总局编制了2025A版出口退税率文库（以下简称文库）。现将有关事项通知如下：",
+    "一、文库放置在国家税务总局可控FTP系统“程序发布”目录下。请各地及时下载，对出口退税审核系统进行文库升级，并将文库及时发放给出口企业。",
+    "二、各地要严格执行出口退税率，严禁擅自改变出口退税率，一经发现，要追究相关人员责任。",
+    "三、对执行中发现的问题，请及时报告国家税务总局（货物和劳务税司）。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-03",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\税务",
+  "officialSummary": "国家税务总局关于发布出口退税率文库2025A版的通知 税总货劳函〔2025〕24号 国家税务总局各省、自治区、直辖市和计划单列市税务局，国家税务总局驻各地特派员办事处： 根据进出口税则及海关编码调整情...",
+  "sourceTextHash": "5ea570962e021c0f61227a8306e14beaef8e070d463df0ed786a8cfddf756375",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:46:54+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家税务总局发布出口退税率文库2025A版通知，依据进出口税则及海关编码调整编制，要求各地税务局下载升级出口退税审核系统并发放给出口企业。通知强调严格执行出口退税率，严禁擅自改变，违者追责；执行中发现问题须及时报告货物和劳务税司。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-17-23-figure",
+      "paragraphIndex": 0,
+      "start": 17,
+      "end": 23,
+      "text": "2025A版",
+      "type": "figure"
+    },
+    {
+      "id": "ai-0-26-40-figure",
+      "paragraphIndex": 0,
+      "start": 26,
+      "end": 40,
+      "text": "税总货劳函〔2025〕24号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-2-16-term",
+      "paragraphIndex": 2,
+      "start": 2,
+      "end": 16,
+      "text": "进出口税则及海关编码调整情况",
+      "type": "term",
+      "explanation": "指国家根据进出口商品分类和海关编码变动，对相关税收目录进行的相应修订依据。"
+    },
+    {
+      "id": "ai-2-26-39-term",
+      "paragraphIndex": 2,
+      "start": 26,
+      "end": 39,
+      "text": "2025A版出口退税率文库",
+      "type": "term",
+      "explanation": "国家税务总局编制的用于出口退税审核系统的最新出口退税率数据集合，供各地升级使用。"
+    },
+    {
+      "id": "ai-3-13-20-term",
+      "paragraphIndex": 3,
+      "start": 13,
+      "end": 20,
+      "text": "可控FTP系统",
+      "type": "term",
+      "explanation": "国家税务总局内部使用的文件传输系统，用于安全发布程序和数据文件。"
+    },
+    {
+      "id": "ai-3-33-37-exam_point",
+      "paragraphIndex": 3,
+      "start": 33,
+      "end": 37,
+      "text": "及时下载",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-5-14-viewpoint",
+      "paragraphIndex": 4,
+      "start": 5,
+      "end": 14,
+      "text": "严格执行出口退税率",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-15-26-viewpoint",
+      "paragraphIndex": 4,
+      "start": 15,
+      "end": 26,
+      "text": "严禁擅自改变出口退税率",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-5-24-31-exam_point",
+      "paragraphIndex": 5,
+      "start": 24,
+      "end": 31,
+      "text": "货物和劳务税司",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

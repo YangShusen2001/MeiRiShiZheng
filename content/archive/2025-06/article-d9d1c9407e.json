@@ -1,0 +1,65 @@
+{
+  "id": "d9d1c9407e",
+  "date": "2025-06-19",
+  "title": "工业和信息化部等六部门关于印发《纺织工业数字化转型实施方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202506/content_7028633.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:25+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部等六部门关于印发《纺织工业数字化转型实施方案》的通知工信部联消费〔2025〕139号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、教育厅（教委）、人力资源社会保障厅（局）、市场监管局（厅、委）、数据管理部门，中国人民银行上海总部及各省、自治区、直辖市、计划单列市分行：",
+    "现将《纺织工业数字化转型实施方案》印发给你们，请结合实际认真抓好落实。",
+    "工业和信息化部教育部人力资源社会保障部中国人民银行市场监管总局国家数据局2025年6月17日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-06",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\轻工纺织",
+  "officialSummary": "工业和信息化部等六部门关于印发《纺织工业数字化转型实施方案》的通知 工信部联消费〔2025〕139号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、教育厅（教委）、人力资源社...",
+  "sourceTextHash": "8ef65939d9a2ad80124646ee20f08400b96f81eda3897d8d157de20c6a42f6ab",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:39:32+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部等六部门联合印发《纺织工业数字化转型实施方案》（工信部联消费〔2025〕139号），要求各省区市及相关部门结合实际抓好落实。方案由工信部、教育部、人社部、中国人民银行、市场监管总局、国家数据局于2025年6月17日发布。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-16-29-term",
+      "paragraphIndex": 0,
+      "start": 16,
+      "end": 29,
+      "text": "纺织工业数字化转型实施方案",
+      "type": "term",
+      "explanation": "针对纺织行业数字化升级制定的政策文件，明确转型目标、任务与保障措施"
+    },
+    {
+      "id": "ai-0-33-49-figure",
+      "paragraphIndex": 0,
+      "start": 33,
+      "end": 49,
+      "text": "工信部联消费〔2025〕139号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-23-34-exam_point",
+      "paragraphIndex": 2,
+      "start": 23,
+      "end": 34,
+      "text": "请结合实际认真抓好落实",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-36-46-figure",
+      "paragraphIndex": 3,
+      "start": 36,
+      "end": 46,
+      "text": "2025年6月17日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

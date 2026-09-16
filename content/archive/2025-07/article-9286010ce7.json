@@ -1,0 +1,74 @@
+{
+  "id": "9286010ce7",
+  "date": "2025-07-16",
+  "title": "交通运输部关于发布《港口基础设施维护管理信息系统建设规范》的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202507/content_7032318.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "交通运输部关于发布《港口基础设施维护管理信息系统建设规范》的公告交通运输部公告2025年第29号",
+    "现发布《港口基础设施维护管理信息系统建设规范》（以下简称《规范》），作为水运工程建设推荐性行业标准，标准代码为JTS/T 330—2025，自2025年10月1日起施行。",
+    "《规范》由交通运输部水运局负责管理和解释，实施过程中具体使用问题的咨询，由主编单位交通运输部天津水运工程科学研究院答复。《规范》文本可在交通运输部政府网站水路运输建设综合管理信息系统“水运工程行业标准”专栏查询和下载。",
+    "港口基础设施维护管理信息系统建设规范 JTS-T 330-2025.pdf"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-07",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\水运",
+  "officialSummary": "交通运输部关于发布《港口基础设施维护管理信息系统建设规范》的公告 交通运输部公告2025年第29号 现发布《港口基础设施维护管理信息系统建设规范》（以下简称《规范》），作为水运工程建设推荐性行业标准，...",
+  "sourceTextHash": "621a449fa79339eff7669d234511128178c7fb807144311d8e6ad6a8d247f310",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:36:01+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "交通运输部发布公告，推出《港口基础设施维护管理信息系统建设规范》，作为水运工程建设推荐性行业标准，标准代码为JTS/T 330—2025，自2025年10月1日起施行。规范由水运局管理解释，天津水运工程科学研究院负责具体答复，文本可在交通运输部政府网站查询下载。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-32-48-figure",
+      "paragraphIndex": 0,
+      "start": 32,
+      "end": 48,
+      "text": "交通运输部公告2025年第29号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-36-49-term",
+      "paragraphIndex": 1,
+      "start": 36,
+      "end": 49,
+      "text": "水运工程建设推荐性行业标准",
+      "type": "term",
+      "explanation": "指在水运工程建设领域推荐采用、非强制执行的行业标准，供相关单位参照使用。"
+    },
+    {
+      "id": "ai-1-55-69-figure",
+      "paragraphIndex": 1,
+      "start": 55,
+      "end": 69,
+      "text": "JTS/T 330—2025",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-5-20-viewpoint",
+      "paragraphIndex": 2,
+      "start": 5,
+      "end": 20,
+      "text": "交通运输部水运局负责管理和解释",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-41-57-term",
+      "paragraphIndex": 2,
+      "start": 41,
+      "end": 57,
+      "text": "交通运输部天津水运工程科学研究院",
+      "type": "term",
+      "explanation": "交通运输部直属科研机构，承担水运工程相关标准的主编和解释答复工作。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

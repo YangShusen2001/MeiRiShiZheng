@@ -1,0 +1,51 @@
+{
+  "id": "ba02586dc6",
+  "date": "2025-05-30",
+  "title": "工业和信息化部关于印发《算力互联互通行动计划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202505/content_7025968.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:16+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部关于印发《算力互联互通行动计划》的通知工信部信管〔2025〕119号",
+    "各省、自治区、直辖市通信管理局，各省、自治区、直辖市及新疆生产建设兵团工业和信息化主管部门，中国电信集团有限公司、中国移动通信集团有限公司、中国联合网络通信集团有限公司、中国广播电视网络集团有限公司、中国铁塔股份有限公司，各相关单位：",
+    "现将《算力互联互通行动计划》印发给你们，请结合实际认真抓好落实。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-05",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\信息产业（含电信）",
+  "officialSummary": "工业和信息化部关于印发《算力互联互通行动计划》的通知 工信部信管〔2025〕119号 各省、自治区、直辖市通信管理局，各省、自治区、直辖市及新疆生产建设兵团工业和信息化主管部门，中国电信集团有限公司、...",
+  "sourceTextHash": "f925b268e24b2d48cf8525a1e71e9d4c70f803796ac9c84d1fb6a433050b5d78",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:41:40+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部印发《算力互联互通行动计划》通知，面向各省通信管理局、工信主管部门及电信、移动、联通、广电、铁塔等单位，要求结合实际认真抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-12-22-term",
+      "paragraphIndex": 0,
+      "start": 12,
+      "end": 22,
+      "text": "算力互联互通行动计划",
+      "type": "term"
+    },
+    {
+      "id": "ai-2-20-31-exam_point",
+      "paragraphIndex": 2,
+      "start": 20,
+      "end": 31,
+      "text": "请结合实际认真抓好落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 0,
+    "to": 2
+  }
+}

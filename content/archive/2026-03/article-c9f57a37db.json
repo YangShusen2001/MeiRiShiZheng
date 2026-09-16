@@ -1,0 +1,122 @@
+{
+  "id": "c9f57a37db",
+  "date": "2026-03-28",
+  "title": "国家发展改革委 财政部关于优化完善无线电频率占用费标准的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202603/content_7064069.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:48+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委 财政部关于优化完善无线电频率占用费标准的通知发改价格〔2026〕413号",
+    "工业和信息化部，各省、自治区、直辖市及新疆生产建设兵团发展改革委、财政厅（局）：",
+    "为落实党中央和国务院决策部署，促进无线电频率资源合理配置和新场景新业态应用扩展，经研究，现就部分无线电频率占用费标准有关事项通知如下。",
+    "一、优化空间业务收费标准体系。非对地静止轨道（NGSO)卫星星座系统和网络化运营的对地静止轨道（GSO）卫星系统，由按照空间电台、地球站分别向卫星运营商和网内地球站设台单位收取，调整为根据空间业务实际占用带宽向卫星运营商收取。对星座卫星数量在200颗以下的NGSO卫星星座系统，按照空间电台数量收费；对星座卫星数量在200颗及以上的NGSO卫星星座系统，统一按系统收费。",
+    "二、降低高频段收费标准。对NGSO卫星星座系统、网络化运营的GSO卫星系统、微波站、宽带无线接入系统，按照频率高低细化收费分档，部分高频段频率实行更低的收费标准。",
+    "三、制定新型无线电应用收费标准。明确5G—R铁路专用无线通信系统、工业专网、无人驾驶航空器系统（限获得许可的）、宽带数字集群通信系统等无线电应用收费标准。",
+    "具体收费标准见附件，自印发之日起执行，之前应缴未缴的无线电频率占用费，补缴时应按原标准征收。",
+    "附件： 无线电频率占用费标准.pdf 无线电频率占用费标准.ofd"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-03",
+  "archiveLib": "bm",
+  "topic": "国民经济管理、国有资产监管\\物价",
+  "officialSummary": "国家发展改革委 财政部关于优化完善无线电频率占用费标准的通知 发改价格〔2026〕413号 工业和信息化部，各省、自治区、直辖市及新疆生产建设兵团发展改革委、财政厅（局）： 为落实党中央和国务院决策部...",
+  "sourceTextHash": "7f04e956db80218f1693213e69165103ce32175a7a9d87dcaa797783b1e6047c",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:15:47+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委、财政部发文优化完善无线电频率占用费标准，以促进频谱资源合理配置和新场景应用。通知优化空间业务收费体系，按实际占用带宽向卫星运营商收费；降低部分高频段收费标准；并制定5G—R、工业专网、无人驾驶航空器等新型无线电应用收费标准，具体标准见附件，自印发之日起执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-15-28-viewpoint",
+      "paragraphIndex": 2,
+      "start": 15,
+      "end": 28,
+      "text": "促进无线电频率资源合理配置",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-29-39-viewpoint",
+      "paragraphIndex": 2,
+      "start": 29,
+      "end": 39,
+      "text": "新场景新业态应用扩展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-2-14-exam_point",
+      "paragraphIndex": 3,
+      "start": 2,
+      "end": 14,
+      "text": "优化空间业务收费标准体系",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-98-104-term",
+      "paragraphIndex": 3,
+      "start": 98,
+      "end": 104,
+      "text": "实际占用带宽",
+      "type": "term",
+      "explanation": "指卫星系统实际使用的无线电频谱宽度，是收取频率占用费的计算依据。"
+    },
+    {
+      "id": "ai-4-2-11-exam_point",
+      "paragraphIndex": 4,
+      "start": 2,
+      "end": 11,
+      "text": "降低高频段收费标准",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-53-63-exam_point",
+      "paragraphIndex": 4,
+      "start": 53,
+      "end": 63,
+      "text": "频率高低细化收费分档",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-5-18-32-term",
+      "paragraphIndex": 5,
+      "start": 18,
+      "end": 32,
+      "text": "5G—R铁路专用无线通信系统",
+      "type": "term",
+      "explanation": "指专用于铁路通信的5G技术系统，保障列车运行安全与调度指挥。"
+    },
+    {
+      "id": "ai-5-2-15-exam_point",
+      "paragraphIndex": 5,
+      "start": 2,
+      "end": 15,
+      "text": "制定新型无线电应用收费标准",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-10-18-figure",
+      "paragraphIndex": 6,
+      "start": 10,
+      "end": 18,
+      "text": "自印发之日起执行",
+      "type": "figure"
+    },
+    {
+      "id": "ai-6-35-45-exam_point",
+      "paragraphIndex": 6,
+      "start": 35,
+      "end": 45,
+      "text": "补缴时应按原标准征收",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 6
+  }
+}

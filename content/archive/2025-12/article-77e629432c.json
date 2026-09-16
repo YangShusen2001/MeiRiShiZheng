@@ -1,0 +1,56 @@
+{
+  "id": "77e629432c",
+  "date": "2025-12-12",
+  "title": "国家能源局关于印发《能源行业数据安全管理办法（试行）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7051044.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:55+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家能源局关于印发《能源行业数据安全管理办法（试行）》的通知国能发规划规〔2025〕108号",
+    "为落实《中华人民共和国数据安全法》等法律法规，我局制定了《能源行业数据安全管理办法（试行）》，现予印发，自2026年7月1日起施行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\信息产业（含电信）",
+  "officialSummary": "国家能源局关于印发《能源行业数据安全管理办法（试行）》的通知 国能发规划规〔2025〕108号 各有关单位： 为落实《中华人民共和国数据安全法》等法律法规，我局制定了《能源行业数据安全管理办法（试行）...",
+  "sourceTextHash": "3aa22788ba2094ac374a552706d9738dfd2d408f5779a7bcccb65e9f4b4a22d0",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:22:03+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家能源局印发《能源行业数据安全管理办法（试行）》，旨在落实《中华人民共和国数据安全法》等法律法规，规范能源行业数据安全管理。该办法自2026年7月1日起施行，是能源领域数据安全治理的重要制度依据。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-10-26-term",
+      "paragraphIndex": 0,
+      "start": 10,
+      "end": 26,
+      "text": "能源行业数据安全管理办法（试行）",
+      "type": "term",
+      "explanation": "国家能源局制定的能源领域数据安全专项规章，对数据分类分级、安全保护等作出规定。"
+    },
+    {
+      "id": "ai-1-3-17-term",
+      "paragraphIndex": 1,
+      "start": 3,
+      "end": 17,
+      "text": "《中华人民共和国数据安全法》",
+      "type": "term",
+      "explanation": "我国数据安全领域基础性法律，确立数据分类分级保护、安全审查等基本制度。"
+    },
+    {
+      "id": "ai-1-53-62-figure",
+      "paragraphIndex": 1,
+      "start": 53,
+      "end": 62,
+      "text": "2026年7月1日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

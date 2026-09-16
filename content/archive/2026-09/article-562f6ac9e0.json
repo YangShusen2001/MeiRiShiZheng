@@ -1,0 +1,47 @@
+{
+  "id": "562f6ac9e0",
+  "date": "2026-09-07",
+  "title": "工业和信息化部关于印发《信息通信行业发展“十五五”规划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202609/content_7080376.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:55:10+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部关于印发《信息通信行业发展“十五五”规划》的通知工信部规〔2026〕188号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门，各省、自治区、直辖市通信管理局，部直属单位，有关行业协会，有关企业：",
+    "现将《信息通信行业发展“十五五”规划》印发给你们，请结合实际，认真贯彻实施。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-09",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\信息产业（含电信）",
+  "officialSummary": "工业和信息化部关于印发《信息通信行业发展“十五五”规划》的通知 工信部规〔2026〕188号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门，各省、自治区、直辖市通信管理局，部...",
+  "sourceTextHash": "9dc85bf5e769992c733297412141a712b1cd0ca0dd3fc69a2dcba0b818eeec59",
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T19:19:03+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部印发《信息通信行业发展“十五五”规划》通知，文号工信部规〔2026〕188号，发至各省区市及计划单列市、新疆生产建设兵团工信主管部门、通信管理局、部直属单位、行业协会及有关企业，要求结合实际认真贯彻实施。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-31-45-figure",
+      "paragraphIndex": 0,
+      "start": 31,
+      "end": 45,
+      "text": "工信部规〔2026〕188号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-31-37-exam_point",
+      "paragraphIndex": 2,
+      "start": 31,
+      "end": 37,
+      "text": "认真贯彻实施",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

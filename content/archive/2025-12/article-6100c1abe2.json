@@ -1,0 +1,75 @@
+{
+  "id": "6100c1abe2",
+  "date": "2025-12-30",
+  "title": "关于个人销售住房增值税政策的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7053266.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:48+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于个人销售住房增值税政策的公告财政部 税务总局公告2025年第17号",
+    "个人（不含个体工商户中的一般纳税人，下同）将购买不足2年的住房对外销售的，按照3%的征收率全额缴纳增值税；个人将购买2年以上（含2年）的住房对外销售的，免征增值税。",
+    "本公告自2026年1月1日起施行。《财政部 国家税务总局关于全面推开营业税改征增值税试点的通知》（财税〔2016〕36号）附件3《营业税改征增值税试点过渡政策的规定》第五条第一款同步停止执行。2026年1月1日前，个人销售住房涉及的增值税尚未申报缴纳的，符合本公告规定的可按本公告执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\财政",
+  "officialSummary": "关于个人销售住房增值税政策的公告 财政部 税务总局公告2025年第17号 现将个人销售住房增值税政策公告如下： 个人（不含个体工商户中的一般纳税人，下同）将购买不足2年的住房对外销售的，按照3%的征收...",
+  "sourceTextHash": "21dafcd3d623d65d2ff6e04991a62bc8fa231a881a16584ae593f417eb727878",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:21:59+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "财政部、税务总局发布2025年第17号公告，明确个人销售住房增值税政策：购买不足2年的住房对外销售按3%征收率全额缴纳增值税，购买2年以上（含2年）的住房对外销售免征增值税。公告自2026年1月1日起施行，此前尚未申报缴纳且符合规定的可按本公告执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-16-35-figure",
+      "paragraphIndex": 0,
+      "start": 16,
+      "end": 35,
+      "text": "财政部 税务总局公告2025年第17号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-22-31-figure",
+      "paragraphIndex": 1,
+      "start": 22,
+      "end": 31,
+      "text": "购买不足2年的住房",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-37-52-exam_point",
+      "paragraphIndex": 1,
+      "start": 37,
+      "end": 52,
+      "text": "按照3%的征收率全额缴纳增值税",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-3-16-figure",
+      "paragraphIndex": 2,
+      "start": 3,
+      "end": 16,
+      "text": "自2026年1月1日起施行",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-89-95-term",
+      "paragraphIndex": 2,
+      "start": 89,
+      "end": 95,
+      "text": "同步停止执行",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 2
+  }
+}

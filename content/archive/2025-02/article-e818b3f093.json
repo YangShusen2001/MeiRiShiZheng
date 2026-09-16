@@ -1,0 +1,77 @@
+{
+  "id": "e818b3f093",
+  "date": "2025-02-05",
+  "title": "国务院关于同意《海南自由贸易港自驾游进境游艇管理若干规定》的批复_国务院文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202502/content_7002252.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:48+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国务院关于同意《海南自由贸易港自驾游进境游艇管理若干规定》的批复",
+    "你们关于报请批准《海南自由贸易港自驾游进境游艇管理若干规定》的请示收悉。现批复如下：",
+    "一、依照《中华人民共和国海南自由贸易港法》相关规定，同意《海南自由贸易港自驾游进境游艇管理若干规定》。",
+    "二、海南省人民政府和司法部等有关部门要认真梳理和研究《海南自由贸易港自驾游进境游艇管理若干规定》实施中出现的新情况、新问题，重大事项及时请示报告。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-02",
+  "archiveLib": "gw",
+  "topic": "商贸、海关、旅游\\其他",
+  "officialSummary": "国务院关于同意《海南自由贸易港自驾游 进境游艇管理若干规定》的批复 国函〔2025〕20号   海南省人民政府、司法部： 你们关于报请批准《海南自由贸易港自驾游进境游艇管理若干规定》的请示收悉。现批...",
+  "sourceTextHash": "96b8359be880a7d28727efcfe6484bf31dc39224b80cb4de20c8a1abed99c322",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:52:18+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国务院批复同意《海南自由贸易港自驾游进境游艇管理若干规定》，依据海南自由贸易港法相关规定作出，明确要求海南省人民政府和司法部等有关部门认真梳理研究实施中出现的新情况、新问题，重大事项及时请示报告。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-31-35-term",
+      "paragraphIndex": 1,
+      "start": 31,
+      "end": 35,
+      "text": "请示收悉",
+      "type": "term",
+      "explanation": "指下级机关报送的请示文件已收到并知悉，是公文批复的常用起首语"
+    },
+    {
+      "id": "ai-2-2-25-viewpoint",
+      "paragraphIndex": 2,
+      "start": 2,
+      "end": 25,
+      "text": "依照《中华人民共和国海南自由贸易港法》相关规定",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-26-50-exam_point",
+      "paragraphIndex": 2,
+      "start": 26,
+      "end": 50,
+      "text": "同意《海南自由贸易港自驾游进境游艇管理若干规定》",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-2-18-exam_point",
+      "paragraphIndex": 3,
+      "start": 2,
+      "end": 18,
+      "text": "海南省人民政府和司法部等有关部门",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-54-61-viewpoint",
+      "paragraphIndex": 3,
+      "start": 54,
+      "end": 61,
+      "text": "新情况、新问题",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 3
+  }
+}

@@ -68,9 +68,10 @@ content/2026-08-17/*
 !content/2026-08-17/article-4f3380992f.json
 !content/2026-08-17/article-917eeba614.json
 
-# 政策档案（content/archive/）：清单与 AI 档案入库——站点构建时直接读取（Pages 云端构建需要），
-# 正文 article-*.json 不入库（体量大且站点只用 gist，不渲染正文）。
-content/archive/*/article-*.json
+# 政策档案（content/archive/）：清单、AI 档案与**正文**全部入库。
+# 正文原先被排除，理由是「体量大且站点只用 gist，不渲染正文」——
+# 2026-09-15 该前提被推翻：档案页的「查看原文」已改指站内阅读页 /read/<id>/，
+# 构建必须能读到正文（Pages 云端构建同理）。实测 1137 文件 / 7.8 MB，可接受。
 
 # 商用字体（版权未授权，需自备；缺失时回退系统字体）
 apps/web/public/fonts/*

@@ -1,0 +1,65 @@
+{
+  "id": "0c92b23959",
+  "date": "2025-09-24",
+  "title": "六部门关于印发《建材行业稳增长工作方案（2025—2026年）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202509/content_7042112.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:52+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部 自然资源部 生态环境部 住房城乡建设部 水利部 农业农村部关于印发《建材行业稳增长工作方案（2025—2026年）》的通知工信部联原〔2025〕185号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化、自然资源、生态环境、住房城乡建设、水利、农业农村主管部门，有关中央企业、行业协会：",
+    "现将《建材行业稳增长工作方案（2025—2026年）》印发给你们，请结合实际认真抓好落实。",
+    "工业和信息化部自然资源部生态环境部住房城乡建设部水利部农业农村部2025年8月25日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-09",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部 自然资源部 生态环境部 住房城乡建设部 水利部 农业农村部关于印发《建材行业稳增长工作方案（2025—2026年）》的通知 工信部联原〔2025〕185号 各省、自治区、直辖市及计划单...",
+  "sourceTextHash": "05b70b82ff361aa9a094ecb269c33e534f467ef5bc159a750b121ae1a7d27d53",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:28:53+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工信部等六部门于2025年8月25日联合印发《建材行业稳增长工作方案（2025—2026年）》，要求各省区市及新疆生产建设兵团相关主管部门、有关中央企业和行业协会结合实际认真抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-42-65-term",
+      "paragraphIndex": 0,
+      "start": 42,
+      "end": 65,
+      "text": "建材行业稳增长工作方案（2025—2026年）",
+      "type": "term",
+      "explanation": "针对建材行业制定的两年期稳增长专项行动方案，旨在推动行业平稳健康发展"
+    },
+    {
+      "id": "ai-0-69-84-figure",
+      "paragraphIndex": 0,
+      "start": 69,
+      "end": 84,
+      "text": "工信部联原〔2025〕185号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-33-44-viewpoint",
+      "paragraphIndex": 2,
+      "start": 33,
+      "end": 44,
+      "text": "请结合实际认真抓好落实",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-32-42-figure",
+      "paragraphIndex": 3,
+      "start": 32,
+      "end": 42,
+      "text": "2025年8月25日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

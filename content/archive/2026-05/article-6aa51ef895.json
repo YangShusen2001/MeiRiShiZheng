@@ -1,0 +1,59 @@
+{
+  "id": "6aa51ef895",
+  "date": "2026-05-19",
+  "title": "国家发展改革委关于印发“法治护航民营经济”行动方案的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202605/content_7069512.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:55:00+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委关于印发“法治护航民营经济”行动方案的通知发改民营〔2026〕637号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委：",
+    "为持续推动《中华人民共和国民营经济促进法》实施见效，现将《“法治护航民营经济”行动方案》印发你们，请在前期工作基础上，因地制宜进一步组织深化民营经济促进法贯彻实施工作。相关情况请及时反馈我委（民营经济发展局）。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-05",
+  "archiveLib": "bm",
+  "topic": "国民经济管理、国有资产监管\\其他",
+  "officialSummary": "国家发展改革委关于印发“法治护航民营经济”行动方案的通知 发改民营〔2026〕637号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委： 为持续推动《中华人民共和国民营经济促进法》实施见...",
+  "sourceTextHash": "6033ad703c6ba97fdafa818ea31e0decda8991fd395a061c92a7ae5c1528b67a",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:12:15+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委印发“法治护航民营经济”行动方案，要求各地在前期工作基础上，因地制宜深化《民营经济促进法》贯彻实施，并明确相关情况及时反馈民营经济发展局。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-1-5-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 5,
+      "text": "持续推动",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-59-63-exam_point",
+      "paragraphIndex": 2,
+      "start": 59,
+      "end": 63,
+      "text": "因地制宜",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-28-42-figure",
+      "paragraphIndex": 0,
+      "start": 28,
+      "end": 42,
+      "text": "发改民营〔2026〕637号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

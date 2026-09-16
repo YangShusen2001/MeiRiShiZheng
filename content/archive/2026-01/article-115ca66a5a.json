@@ -1,0 +1,56 @@
+{
+  "id": "115ca66a5a",
+  "date": "2026-01-13",
+  "title": "工业和信息化部关于印发《推动工业互联网平台高质量发展行动方案（2026—2028年）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202601/content_7054660.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:39+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部关于印发《推动工业互联网平台高质量发展行动方案（2026—2028年）》的通知工信部信发〔2025〕276号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门，有关单位：",
+    "为深入贯彻党中央、国务院有关决策部署，加快工业互联网创新发展，工业和信息化部组织编制了《推动工业互联网平台高质量发展行动方案（2026—2028年）》。现印发给你们，请结合实际抓好落实。",
+    "推动工业互联网平台高质量发展行动方案（2026—2028年）"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-01",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\信息产业（含电信）",
+  "officialSummary": "工业和信息化部 关于印发《推动工业互联网平台高质量发展行动方案（2026—2028年）》的通知 工信部信发〔2025〕276号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门，...",
+  "sourceTextHash": "0ce4e66811aac037e4ed2765594038c9825f0ac7ea088f30b38789bb8b8eac7b",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:17:58+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部印发《推动工业互联网平台高质量发展行动方案（2026—2028年）》，要求各省区市及新疆生产建设兵团工信主管部门结合实际抓好落实，加快工业互联网创新发展。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-1-18-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 18,
+      "text": "深入贯彻党中央、国务院有关决策部署",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-19-30-exam_point",
+      "paragraphIndex": 2,
+      "start": 19,
+      "end": 30,
+      "text": "加快工业互联网创新发展",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-46-61-figure",
+      "paragraphIndex": 0,
+      "start": 46,
+      "end": 61,
+      "text": "工信部信发〔2025〕276号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

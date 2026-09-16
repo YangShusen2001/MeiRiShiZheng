@@ -1,0 +1,57 @@
+{
+  "id": "5490b61b7f",
+  "date": "2026-07-24",
+  "title": "交通运输部 国家铁路局 中国民用航空局 国家邮政局关于印发《综合运输服务发展“十五五”规划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202607/content_7076565.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:44:24+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "交通运输部 国家铁路局 中国民用航空局 国家邮政局关于印发《综合运输服务发展“十五五”规划》的通知交运发〔2026〕86号",
+    "各省、自治区、直辖市、新疆生产建设兵团交通运输厅（局、委），各地区铁路监督管理局，民航各地区管理局，各省、自治区、直辖市邮政管理局：",
+    "现将《综合运输服务发展“十五五”规划》印发给你们，请认真贯彻执行。",
+    "交通运输部国家铁路局中国民用航空局国家邮政局2026年7月17日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-07",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "交通运输部 国家铁路局 中国民用航空局 国家邮政局关于印发《综合运输服务发展“十五五”规划》的通知 交运发〔2026〕86号 各省、自治区、直辖市、新疆生产建设兵团交通运输厅（局、委），各地区铁路监督...",
+  "sourceTextHash": "000962ff969d6f6da4e9503f91888670c472700a0ffa85c545c8c31e93079d14",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:08:22+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "交通运输部等四部门于2026年7月17日联合印发《综合运输服务发展“十五五”规划》通知，要求各省区市交通运输、铁路监管、民航管理、邮政管理部门认真贯彻执行，体现多部门协同推进综合运输服务发展的政策部署。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-30-45-term",
+      "paragraphIndex": 0,
+      "start": 30,
+      "end": 45,
+      "text": "综合运输服务发展“十五五”规划",
+      "type": "term",
+      "explanation": "指2026至2030年我国综合运输服务领域的专项发展规划文件"
+    },
+    {
+      "id": "ai-2-25-32-exam_point",
+      "paragraphIndex": 2,
+      "start": 25,
+      "end": 32,
+      "text": "请认真贯彻执行",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-22-32-figure",
+      "paragraphIndex": 3,
+      "start": 22,
+      "end": 32,
+      "text": "2026年7月17日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

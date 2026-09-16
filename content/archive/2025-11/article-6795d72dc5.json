@@ -1,0 +1,72 @@
+{
+  "id": "6795d72dc5",
+  "date": "2025-11-01",
+  "title": "国家知识产权局关于印发《知识产权促进民营经济发展实施办法》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202511/content_7046762.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:46+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家知识产权局关于印发《知识产权促进民营经济发展实施办法》的通知国知发法字〔2025〕33号",
+    "各省、自治区、直辖市和新疆生产建设兵团知识产权局，各地方有关中心；国家知识产权局局机关各部门，专利局各部门，商标局，局其他直属单位、各社会团体：",
+    "现将《知识产权促进民营经济发展实施办法》印发给你们，请结合实际认真贯彻落实。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-11",
+  "archiveLib": "bm",
+  "topic": "科技、教育\\知识产权",
+  "officialSummary": "国家知识产权局关于印发《知识产权促进民营经济发展实施办法》的通知 国知发法字〔2025〕33号 各省、自治区、直辖市和新疆生产建设兵团知识产权局，各地方有关中心；国家知识产权局局机关各部门，专利局各部...",
+  "sourceTextHash": "d8dac7f3eb58afe65191f1426ab6d4d6759c439fbc40bc15b119ecada75a0e32",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:24:45+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家知识产权局印发《知识产权促进民营经济发展实施办法》的通知，文号为国知发法字〔2025〕33号，发往各省、自治区、直辖市和新疆生产建设兵团知识产权局及各地方有关中心，同时发国家知识产权局局机关各部门、专利局各部门、商标局、局其他直属单位及各社会团体，要求结合实际认真贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-12-28-term",
+      "paragraphIndex": 0,
+      "start": 12,
+      "end": 28,
+      "text": "知识产权促进民营经济发展实施办法",
+      "type": "term",
+      "explanation": "国家知识产权局制定的促进民营经济发展、强化知识产权服务的规范性文件"
+    },
+    {
+      "id": "ai-0-32-46-figure",
+      "paragraphIndex": 0,
+      "start": 32,
+      "end": 46,
+      "text": "国知发法字〔2025〕33号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-11-24-exam_point",
+      "paragraphIndex": 1,
+      "start": 11,
+      "end": 24,
+      "text": "新疆生产建设兵团知识产权局",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-33-46-exam_point",
+      "paragraphIndex": 1,
+      "start": 33,
+      "end": 46,
+      "text": "国家知识产权局局机关各部门",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-27-37-viewpoint",
+      "paragraphIndex": 2,
+      "start": 27,
+      "end": 37,
+      "text": "结合实际认真贯彻落实",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

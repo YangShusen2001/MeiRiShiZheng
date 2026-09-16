@@ -1,0 +1,48 @@
+{
+  "id": "f31380b5c9",
+  "date": "2026-05-16",
+  "title": "国家知识产权强国建设工作部际联席会议办公室关于印发《2026年知识产权强国建设推进计划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202605/content_7069081.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:55:01+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家知识产权强国建设工作部际联席会议办公室关于印发《2026年知识产权强国建设推进计划》的通知国知联办〔2026〕3号",
+    "国家知识产权强国建设工作部际联席会议各成员单位，中央网信办，税务总局、金融监管总局、中国证监会、国家邮政局、国家中医药局、中国科协、国家自然科学基金委：",
+    "经国家知识产权强国建设工作部际联席会议同意，现将《2026年知识产权强国建设推进计划》印发，请认真组织实施。",
+    "国家知识产权强国建设工作部际联席会议办公室2026年4月17日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-05",
+  "archiveLib": "bm",
+  "topic": "科技、教育\\知识产权",
+  "officialSummary": "国家知识产权强国建设工作部际联席会议办公室关于印发《2026年知识产权强国建设推进计划》的通知 国知联办〔2026〕3号 国家知识产权强国建设工作部际联席会议各成员单位，中央网信办，税务总局、金融监管...",
+  "sourceTextHash": "fe3ad62fbf61b9ac36e8af527d52c2cfc1bdc76b2859ef45954f8810206f1e42",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:12:42+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家知识产权强国建设工作部际联席会议办公室印发《2026年知识产权强国建设推进计划》的通知，经联席会议同意，请各成员单位及有关部门认真组织实施，落款时间为2026年4月17日。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-46-53-exam_point",
+      "paragraphIndex": 2,
+      "start": 46,
+      "end": 53,
+      "text": "请认真组织实施",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-21-31-figure",
+      "paragraphIndex": 3,
+      "start": 21,
+      "end": 31,
+      "text": "2026年4月17日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

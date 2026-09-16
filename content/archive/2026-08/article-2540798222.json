@@ -1,0 +1,55 @@
+{
+  "id": "2540798222",
+  "date": "2026-08-17",
+  "title": "自然资源部办公厅关于印发《全国地质灾害防治“十五五”实施方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202608/content_7078245.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:44:33+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "自然资源部办公厅关于印发《全国地质灾害防治“十五五”实施方案》的通知自然资办函〔2026〕1198号",
+    "各省、自治区、直辖市自然资源主管部门，新疆生产建设兵团自然资源局，中国地质调查局办公室，部有关直属单位：",
+    "为深入贯彻落实习近平总书记关于防灾减灾救灾工作的重要指示批示精神，全面加强“十五五”时期地质灾害防治工作，部组织编制《全国地质灾害防治“十五五”实施方案》。现印发给你们，请认真抓好贯彻执行和组织实施。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-08",
+  "archiveLib": "bm",
+  "topic": "民政、扶贫、救灾\\减灾救灾",
+  "officialSummary": "自然资源部办公厅关于印发《全国地质灾害防治“十五五”实施方案》的通知 自然资办函〔2026〕1198号 各省、自治区、直辖市自然资源主管部门，新疆生产建设兵团自然资源局，中国地质调查局办公室，部有关直...",
+  "sourceTextHash": "0e0084fe4c8f52c91fec024287e8b725fc288b183bd5ab2612cceb7a03200c8f",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:03:55+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "自然资源部办公厅印发《全国地质灾害防治“十五五”实施方案》通知，要求各地自然资源主管部门及中国地质调查局等有关单位深入贯彻落实习近平总书记关于防灾减灾救灾重要指示批示精神，全面加强“十五五”时期地质灾害防治工作，认真抓好贯彻执行和组织实施。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-15-32-viewpoint",
+      "paragraphIndex": 2,
+      "start": 15,
+      "end": 32,
+      "text": "防灾减灾救灾工作的重要指示批示精神",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-44-52-exam_point",
+      "paragraphIndex": 2,
+      "start": 44,
+      "end": 52,
+      "text": "地质灾害防治工作",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-39-50-figure",
+      "paragraphIndex": 0,
+      "start": 39,
+      "end": 50,
+      "text": "〔2026〕1198号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

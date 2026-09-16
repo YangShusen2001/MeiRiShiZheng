@@ -1,0 +1,38 @@
+{
+  "id": "c8e69cdc1d",
+  "date": "2026-03-25",
+  "title": "国家药监局关于印发药品现代物流规范化建设指导意见的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202603/content_7063751.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:49+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家药监局关于印发药品现代物流规范化建设指导意见的通知国药监药管〔2026〕7号",
+    "各省、自治区、直辖市和新疆生产建设兵团药品监督管理局："
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-03",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\医药管理",
+  "officialSummary": "国家药监局关于印发药品现代物流规范化建设指导意见的通知 国药监药管〔2026〕7号 各省、自治区、直辖市和新疆生产建设兵团药品监督管理局： 为贯彻落实《国务院办公厅关于全面深化药品医疗器械监管改革促进...",
+  "sourceTextHash": "2143c22570602eaafe6e57de0ffb710edf38d14ff4187cc0771d2e87dd1273ba",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:15:45+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家药监局印发药品现代物流规范化建设指导意见，发文对象为各省、自治区、直辖市和新疆生产建设兵团药品监督管理局，文号为国药监药管〔2026〕7号。通知要求推进药品现代物流规范化建设，提升药品流通环节的规范化、现代化水平，保障药品质量安全。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-27-40-figure",
+      "paragraphIndex": 0,
+      "start": 27,
+      "end": 40,
+      "text": "国药监药管〔2026〕7号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "id": "9aa55c082b",
+  "date": "2025-08-20",
+  "title": "关于育儿补贴有关个人所得税政策的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202508/content_7037273.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:42+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于育儿补贴有关个人所得税政策的公告财政部 税务总局公告2025年第6号",
+    "为贯彻落实中央办公厅、国务院办公厅印发的《育儿补贴制度实施方案》有关规定，现就育儿补贴有关个人所得税政策公告如下：",
+    "一、对按照育儿补贴制度规定发放的育儿补贴免征个人所得税。",
+    "二、卫生健康部门与财政部门、税务部门建立信息共享机制。县级卫生健康部门按规定为申领补贴的人员办理个人所得税免税申报。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-08",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\税务",
+  "officialSummary": "关于育儿补贴有关个人所得税政策的公告 财政部 税务总局公告2025年第6号 为贯彻落实中央办公厅、国务院办公厅印发的《育儿补贴制度实施方案》有关规定，现就育儿补贴有关个人所得税政策公告如下： 一、对按...",
+  "sourceTextHash": "80feaf067ebc535059b1d6407436a7a8f038bddac785fb4bd57269627b82eccc",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:33:53+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "财政部、税务总局发布2025年第6号公告，落实《育儿补贴制度实施方案》，明确按制度发放的育儿补贴免征个人所得税，并要求卫生健康与财政、税务部门建立信息共享机制，由县级卫生健康部门为申领人员办理免税申报。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-20-32-term",
+      "paragraphIndex": 1,
+      "start": 20,
+      "end": 32,
+      "text": "《育儿补贴制度实施方案》",
+      "type": "term",
+      "explanation": "中央办公厅、国务院办公厅印发的育儿补贴制度总体方案，是本次免税政策的依据。"
+    },
+    {
+      "id": "ai-1-0-5-viewpoint",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 5,
+      "text": "为贯彻落实",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-20-27-exam_point",
+      "paragraphIndex": 2,
+      "start": 20,
+      "end": 27,
+      "text": "免征个人所得税",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-2-18-exam_point",
+      "paragraphIndex": 3,
+      "start": 2,
+      "end": 18,
+      "text": "卫生健康部门与财政部门、税务部门",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-20-26-term",
+      "paragraphIndex": 3,
+      "start": 20,
+      "end": 26,
+      "text": "信息共享机制",
+      "type": "term",
+      "explanation": "部门间共享育儿补贴发放与申领信息，用于核验身份、办理免税申报的工作机制。"
+    },
+    {
+      "id": "ai-0-28-36-figure",
+      "paragraphIndex": 0,
+      "start": 28,
+      "end": 36,
+      "text": "2025年第6号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

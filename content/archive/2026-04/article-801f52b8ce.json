@@ -1,0 +1,93 @@
+{
+  "id": "801f52b8ce",
+  "date": "2026-04-01",
+  "title": "国务院办公厅关于指定悬挂用国徽制作企业的通知_国务院文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202604/content_7064400.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:58+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "各省、自治区、直辖市人民政府，国务院各部委、各直属机构：",
+    "根据《中华人民共和国国徽法》，国务院办公厅于2006年指定了天津三五二二工厂等6家企业为悬挂用国徽制作企业，对维护国徽尊严、保证悬挂用国徽制作质量起到了重要作用。为进一步贯彻国徽法，严格落实国家标准《国徽》（GB 15093—2025），加强国徽制作和管理，经国务院同意，现就重新指定悬挂用国徽制作企业有关事宜通知如下：",
+    "一、根据国徽法第十六条关于“悬挂的国徽由国家指定的企业统一制作”的规定，经过考查和评审，指定安徽兴皖玻璃钢制品有限公司、天宝物华（合肥）金属工程有限公司、北京工美集团有限责任公司、浙江苍南县金乡徽章厂有限公司、沈阳亚东徽标制造有限责任公司、廊坊天平国徽厂、北京建院科技发展有限公司、浙江华徽铝业有限公司等8家企业为悬挂用国徽制作企业。",
+    "二、指定企业要严格按照国徽法和国家标准《国徽》（GB 15093—2025）制作悬挂用国徽。市场监管总局及企业所在地市场监管部门要加强对悬挂用国徽制作和销售的常态化监督管理，督促指定企业压实质量安全主体责任，切实维护国徽尊严。",
+    "三、未经指定的企业不得制作悬挂用国徽。原指定企业本次未获得指定的，不得再制作悬挂用国徽。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-04",
+  "archiveLib": "gw",
+  "topic": "综合政务\\其他",
+  "officialSummary": "国务院办公厅关于指定 悬挂用国徽制作企业的通知 国办函〔2026〕37号 各省、自治区、直辖市人民政府，国务院各部委、各直属机构： 根据《中华人民共和国国徽法》，国务院办公厅于2006年指定了天津三五...",
+  "sourceTextHash": "34a02cfbbd2a2ba94e5bd3d3cd7ea5c5f30672b0448b81d9a2b3ae11120508df",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:13:28+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国务院办公厅发布通知，重新指定8家企业为悬挂用国徽制作企业。通知要求指定企业严格按国徽法和国家标准制作，市场监管部门加强常态化监督管理。未经指定企业不得制作悬挂用国徽，原未获指定企业亦不得再制作，以维护国徽尊严和制作质量。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-22-27-figure",
+      "paragraphIndex": 1,
+      "start": 22,
+      "end": 27,
+      "text": "2006年",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-39-43-figure",
+      "paragraphIndex": 1,
+      "start": 39,
+      "end": 43,
+      "text": "6家企业",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-4-11-exam_point",
+      "paragraphIndex": 2,
+      "start": 4,
+      "end": 11,
+      "text": "国徽法第十六条",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-152-156-figure",
+      "paragraphIndex": 2,
+      "start": 152,
+      "end": 156,
+      "text": "8家企业",
+      "type": "figure"
+    },
+    {
+      "id": "ai-3-79-86-exam_point",
+      "paragraphIndex": 3,
+      "start": 79,
+      "end": 86,
+      "text": "常态化监督管理",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-106-112-viewpoint",
+      "paragraphIndex": 3,
+      "start": 106,
+      "end": 112,
+      "text": "维护国徽尊严",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-9-18-exam_point",
+      "paragraphIndex": 4,
+      "start": 9,
+      "end": 18,
+      "text": "不得制作悬挂用国徽",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 4
+  }
+}

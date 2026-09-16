@@ -1,0 +1,64 @@
+{
+  "id": "7e907ec99a",
+  "date": "2026-01-20",
+  "title": "工业和信息化部关于印发《优质中小企业梯度培育管理办法》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202601/content_7055453.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:37+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部关于印发《优质中小企业梯度培育管理办法》的通知工信部企业〔2026〕2号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团中小企业主管部门：",
+    "为进一步加强优质中小企业梯度培育工作，促进中小企业专精特新发展，现将《优质中小企业梯度培育管理办法》印发给你们，请认真遵照执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-01",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部关于印发《优质中小企业梯度培育管理办法》的通知 工信部企业〔2026〕2号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团中小企业主管部门： 为进一步加强优质中小企业梯度培育工作，促...",
+  "sourceTextHash": "14a5ec36573d57f2152b74e7d28d57d67f2a3f8aedca51dee147c1939cfbd5ee",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:19:26+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工信部印发《优质中小企业梯度培育管理办法》通知（工信部企业〔2026〕2号），面向各省、自治区、直辖市及计划单列市、新疆生产建设兵团中小企业主管部门，旨在加强优质中小企业梯度培育，促进中小企业专精特新发展，要求认真遵照执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-12-26-term",
+      "paragraphIndex": 0,
+      "start": 12,
+      "end": 26,
+      "text": "优质中小企业梯度培育管理办法",
+      "type": "term",
+      "explanation": "指工信部制定的推动中小企业在创新能力、专业化等方向分层培育与精准扶持的规范性文件。"
+    },
+    {
+      "id": "ai-0-30-43-figure",
+      "paragraphIndex": 0,
+      "start": 30,
+      "end": 43,
+      "text": "工信部企业〔2026〕2号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-4-18-exam_point",
+      "paragraphIndex": 2,
+      "start": 4,
+      "end": 18,
+      "text": "加强优质中小企业梯度培育工作",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-19-31-viewpoint",
+      "paragraphIndex": 2,
+      "start": 19,
+      "end": 31,
+      "text": "促进中小企业专精特新发展",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

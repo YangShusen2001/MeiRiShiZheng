@@ -1,0 +1,54 @@
+{
+  "id": "dd219c0574",
+  "date": "2025-08-12",
+  "title": "国务院关税税则委员会关于调整对原产于美国的进口商品加征关税措施的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202508/content_7036104.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:45+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国务院关税税则委员会关于调整对原产于美国的进口商品加征关税措施的公告税委会公告2025年第8号",
+    "为落实中美经贸会谈共识，根据《中华人民共和国关税法》、《中华人民共和国海关法》、《中华人民共和国对外贸易法》等法律法规和国际法基本原则，经国务院批准，自2025年8月12日12时01分起，调整《国务院关税税则委员会关于对原产于美国的进口商品加征关税的公告》（税委会公告2025年第4号）规定的加征关税措施，在90天内继续暂停实施24%的对美加征关税税率，保留10%的对美加征关税税率。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-08",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\税务",
+  "officialSummary": "国务院关税税则委员会关于调整对原产于美国的进口商品加征关税措施的公告 税委会公告2025年第8号 为落实中美经贸会谈共识，根据《中华人民共和国关税法》、《中华人民共和国海关法》、《中华人民共和国对外贸...",
+  "sourceTextHash": "22e5c48da486b60d0aa74a0aea54b6b174a59e378a66f766594c9eb0b8dfa393",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:34:28+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国务院关税税则委员会发布2025年第8号公告，落实中美经贸会谈共识，依据关税法、海关法、对外贸易法等法律法规，自2025年8月12日12时01分起调整对美加征关税措施，90天内继续暂停24%税率，保留10%税率。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-34-47-figure",
+      "paragraphIndex": 0,
+      "start": 34,
+      "end": 47,
+      "text": "税委会公告2025年第8号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-1-11-viewpoint",
+      "paragraphIndex": 1,
+      "start": 1,
+      "end": 11,
+      "text": "落实中美经贸会谈共识",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-14-26-term",
+      "paragraphIndex": 1,
+      "start": 14,
+      "end": 26,
+      "text": "《中华人民共和国关税法》",
+      "type": "term"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

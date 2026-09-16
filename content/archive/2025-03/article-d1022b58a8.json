@@ -1,0 +1,95 @@
+{
+  "id": "d1022b58a8",
+  "date": "2025-03-28",
+  "title": "关于继续实施离岸贸易印花税优惠政策的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202503/content_7016072.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:50+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于继续实施离岸贸易印花税优惠政策的通知财税〔2025〕10号",
+    "上海市、江苏省、浙江省、福建省、山东省、广东省、海南省财政厅（局），国家税务总局上海市、江苏省、浙江省、广东省、海南省、宁波市、厦门市、青岛市、深圳市税务局：",
+    "为落实党的二十届三中全会精神，进一步支持自由贸易试验区发展离岸贸易，现就继续实施离岸贸易印花税优惠政策通知如下：",
+    "一、对注册登记在中国（上海）自由贸易试验区及临港新片区、中国（江苏）自由贸易试验区苏州片区、中国（浙江）自由贸易试验区、中国（福建）自由贸易试验区厦门片区、中国（山东）自由贸易试验区青岛片区、中国（广东）自由贸易试验区以及海南自由贸易港的企业开展离岸转手买卖业务书立的买卖合同，免征印花税。",
+    "本通知所称离岸转手买卖，是指居民企业从非居民企业购买货物，随后向另一非居民企业转售该货物，且该货物始终未实际进出我国关境的交易。",
+    "二、本通知自2025年4月1日起执行至2027年12月31日。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-03",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\税务",
+  "officialSummary": "关于继续实施离岸贸易印花税优惠政策的通知 财税〔2025〕10号 上海市、江苏省、浙江省、福建省、山东省、广东省、海南省财政厅（局），国家税务总局上海市、江苏省、浙江省、广东省、海南省、宁波市、厦门市...",
+  "sourceTextHash": "182667a9cf2936d2841723ccbd76f0bb911e0868f64131600c138de617e7a265",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:49:02+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "财政部、税务总局发文，继续对上海、江苏、浙江、福建、山东、广东自贸试验区及海南自由贸易港企业开展离岸转手买卖业务书立的买卖合同免征印花税，执行期为2025年4月1日至2027年12月31日，以落实党的二十届三中全会精神，支持自贸试验区发展离岸贸易。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-3-14-viewpoint",
+      "paragraphIndex": 2,
+      "start": 3,
+      "end": 14,
+      "text": "党的二十届三中全会精神",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-18-33-exam_point",
+      "paragraphIndex": 2,
+      "start": 18,
+      "end": 33,
+      "text": "支持自由贸易试验区发展离岸贸易",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-139-144-exam_point",
+      "paragraphIndex": 3,
+      "start": 139,
+      "end": 144,
+      "text": "免征印花税",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-123-138-term",
+      "paragraphIndex": 3,
+      "start": 123,
+      "end": 138,
+      "text": "离岸转手买卖业务书立的买卖合同",
+      "type": "term",
+      "explanation": "指居民企业向非居民企业购买货物后转售另一非居民企业，货物始终未实际进出我国关境的交易合同。"
+    },
+    {
+      "id": "ai-4-49-60-viewpoint",
+      "paragraphIndex": 4,
+      "start": 49,
+      "end": 60,
+      "text": "始终未实际进出我国关境",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-5-6-15-figure",
+      "paragraphIndex": 5,
+      "start": 6,
+      "end": 15,
+      "text": "2025年4月1日",
+      "type": "figure"
+    },
+    {
+      "id": "ai-5-19-30-figure",
+      "paragraphIndex": 5,
+      "start": 19,
+      "end": 30,
+      "text": "2027年12月31日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 5
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "id": "386a886290",
+  "date": "2025-08-26",
+  "title": "国家卫生健康委办公厅关于印发安宁疗护实践指南（2025年版）的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202508/content_7037917.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:41+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家卫生健康委办公厅关于印发安宁疗护实践指南（2025年版）的通知国卫办医政函〔2025〕332号",
+    "各省、自治区、直辖市及新疆生产建设兵团卫生健康委：",
+    "为进一步推动各地安宁疗护发展，规范安宁疗护实践行为，我委组织对2017年印发的《安宁疗护实践指南（试行）》（国卫办医发〔2017〕5号）进行了修订，形成了《安宁疗护实践指南（2025年版）》。现印发给你们，请参照执行。",
+    "本通知自印发之日起施行，《安宁疗护实践指南（试行）》同步废止。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-08",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\卫生",
+  "officialSummary": "国家卫生健康委办公厅关于印发安宁疗护实践指南（2025年版）的通知 国卫办医政函〔2025〕332号 各省、自治区、直辖市及新疆生产建设兵团卫生健康委： 为进一步推动各地安宁疗护发展，规范安宁疗护实践...",
+  "sourceTextHash": "601587e81d7d05c7fd499f97efb871571732f2f39ebdc795d28104bf145dc35f",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:32:46+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家卫生健康委办公厅印发安宁疗护实践指南（2025年版），对2017年试行版进行修订，旨在推动各地安宁疗护发展、规范实践行为。通知要求各地参照执行，自印发之日起施行，试行版同步废止。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-0-25-viewpoint",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 25,
+      "text": "为进一步推动各地安宁疗护发展，规范安宁疗护实践行为",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-74-95-exam_point",
+      "paragraphIndex": 2,
+      "start": 74,
+      "end": 95,
+      "text": "形成了《安宁疗护实践指南（2025年版）》",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-0-11-exam_point",
+      "paragraphIndex": 3,
+      "start": 0,
+      "end": 11,
+      "text": "本通知自印发之日起施行",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-26-30-exam_point",
+      "paragraphIndex": 3,
+      "start": 26,
+      "end": 30,
+      "text": "同步废止",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 3
+  }
+}

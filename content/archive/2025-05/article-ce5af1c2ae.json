@@ -1,0 +1,56 @@
+{
+  "id": "ce5af1c2ae",
+  "date": "2025-05-03",
+  "title": "证券期货业统计指标标准指引（2025年修订）_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202505/content_7022305.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:21+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "证券期货业统计指标标准指引（2025年修订）中国证券监督管理委员会公告〔2025〕9号",
+    "现公布《证券期货业统计指标标准指引（2025年修订）》，自2026年1月1日起施行。",
+    "附件：证券期货业统计指标标准指引（2025年修订）"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-05",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\证券",
+  "officialSummary": "证券期货业统计指标标准指引（2025年修订） 中国证券监督管理委员会公告〔2025〕9号 现公布《证券期货业统计指标标准指引（2025年修订）》，自2026年1月1日起施行。 中国证监会 2025年4...",
+  "sourceTextHash": "4637693ce1ba10663f416c3bd2bcb4cdf7b95a0402470e93b25bd65753fda607",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:41:44+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "中国证监会发布公告〔2025〕9号，公布《证券期货业统计指标标准指引（2025年修订）》，明确自2026年1月1日起施行，并附指引全文。该文件是证券期货业统计指标的标准依据。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-22-43-figure",
+      "paragraphIndex": 0,
+      "start": 22,
+      "end": 43,
+      "text": "中国证券监督管理委员会公告〔2025〕9号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-28-41-figure",
+      "paragraphIndex": 1,
+      "start": 28,
+      "end": 41,
+      "text": "自2026年1月1日起施行",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-4-26-term",
+      "paragraphIndex": 1,
+      "start": 4,
+      "end": 26,
+      "text": "证券期货业统计指标标准指引（2025年修订）",
+      "type": "term",
+      "explanation": "证监会发布的行业统计指标统一规范，明确证券期货业统计口径与标准，为统计工作提供依据。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

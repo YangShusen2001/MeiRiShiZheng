@@ -1,0 +1,46 @@
+{
+  "id": "ef4d401b43",
+  "date": "2025-01-18",
+  "title": "中国证监会行政处罚裁量基本规则_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_7007076.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:27+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "《中国证监会行政处罚裁量基本规则》已经2024年12月31日中国证券监督管理委员会2024年第3次委务会议审议通过，现予公布，自2025年3月1日起施行。",
+    "附件2：《中国证监会行政处罚裁量基本规则》立法说明"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\证券",
+  "officialSummary": "中国证券监督管理委员会令 第225号 《中国证监会行政处罚裁量基本规则》已经2024年12月31日中国证券监督管理委员会2024年第3次委务会议审议通过，现予公布，自2025年3月1日起施行。 主席 ...",
+  "sourceTextHash": "d340fca9ac42958e5ea14d815767d6c5465e763136f1703a3e47f4d27e44a0c2",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:55:33+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "证监会2024年12月31日委务会议审议通过行政处罚裁量基本规则，自2025年3月1日起施行，并附立法说明，规范证券期货领域行政处罚裁量权的行使。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-19-30-figure",
+      "paragraphIndex": 0,
+      "start": 19,
+      "end": 30,
+      "text": "2024年12月31日",
+      "type": "figure"
+    },
+    {
+      "id": "ai-0-64-76-figure",
+      "paragraphIndex": 0,
+      "start": 64,
+      "end": 76,
+      "text": "2025年3月1日起施行",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

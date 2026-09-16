@@ -1,0 +1,59 @@
+{
+  "id": "c9ada6f19a",
+  "date": "2025-06-28",
+  "title": "工业和信息化部办公厅印发《关于深入推进工业和信息化绿色低碳标准化工作的实施方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202506/content_7029842.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:23+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部办公厅印发《关于深入推进工业和信息化绿色低碳标准化工作的实施方案》的通知工信厅科〔2025〕33号",
+    "各省、自治区、直辖市工业和信息化主管部门，有关行业协会、标准化技术组织和专业机构：",
+    "为切实发挥标准对工业和信息化绿色低碳领域的引领和支撑作用，健全完善绿色低碳标准体系，我部组织编制了《关于深入推进工业和信息化绿色低碳标准化工作的实施方案》，现印发给你们。请结合本地区、本行业、本领域实际，在标准化工作中贯彻执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-06",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\信息产业（含电信）",
+  "officialSummary": "工业和信息化部办公厅印发《关于深入推进工业和信息化绿色低碳标准化工作的实施方案》的通知 工信厅科〔2025〕33号 各省、自治区、直辖市工业和信息化主管部门，有关行业协会、标准化技术组织和专业机构： ...",
+  "sourceTextHash": "dc09648dfc882758e9ec5cff1643f6ea5fce42dac3eb340aa158831d7259d2b3",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:39:22+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工信部办公厅印发工信厅科〔2025〕33号通知，向各地工信主管部门、行业协会及标准化机构发布《关于深入推进工业和信息化绿色低碳标准化工作的实施方案》，要求结合实际在标准化工作中贯彻执行，发挥标准对绿色低碳领域的引领支撑作用，健全完善绿色低碳标准体系。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-43-56-figure",
+      "paragraphIndex": 0,
+      "start": 43,
+      "end": 56,
+      "text": "工信厅科〔2025〕33号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-21-28-viewpoint",
+      "paragraphIndex": 2,
+      "start": 21,
+      "end": 28,
+      "text": "引领和支撑作用",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-29-41-exam_point",
+      "paragraphIndex": 2,
+      "start": 29,
+      "end": 41,
+      "text": "健全完善绿色低碳标准体系",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

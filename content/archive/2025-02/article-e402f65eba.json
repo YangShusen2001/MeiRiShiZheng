@@ -1,0 +1,55 @@
+{
+  "id": "e402f65eba",
+  "date": "2025-02-28",
+  "title": "关于印发《促进普惠养老服务高质量发展的若干措施》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202502/content_7008789.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:38+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委等部门关于印发《促进普惠养老服务高质量发展的若干措施》的通知发改体改〔2025〕211号",
+    "《促进普惠养老服务高质量发展的若干措施》已经国务院同意，现印发给你们，请结合实际认真贯彻落实。",
+    "国家发展改革委民政部财政部自然资源部住房城乡建设部农业农村部国家卫生健康委市场监管总局2025年2月20日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-02",
+  "archiveLib": "bm",
+  "topic": "民政、扶贫、救灾\\社会福利",
+  "officialSummary": "国家发展改革委等部门关于印发《促进普惠养老服务高质量发展的若干措施》的通知 发改体改〔2025〕211号 各省、自治区、直辖市人民政府，新疆生产建设兵团： 《促进普惠养老服务高质量发展的若干措施》已经...",
+  "sourceTextHash": "d2cd2c478f941eeb7fde5f61a9fc51c318c6aad9c7e9b0ce6696a4d45c7004c2",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:52:17+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委等八部门经国务院同意，于2025年2月20日联合印发《促进普惠养老服务高质量发展的若干措施》，要求各地结合实际认真贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-0-10-figure",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 10,
+      "text": "国家发展改革委等部门",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-20-27-viewpoint",
+      "paragraphIndex": 1,
+      "start": 20,
+      "end": 27,
+      "text": "已经国务院同意",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-43-53-figure",
+      "paragraphIndex": 2,
+      "start": 43,
+      "end": 53,
+      "text": "2025年2月20日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

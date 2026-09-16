@@ -1,0 +1,57 @@
+{
+  "id": "24d2c8774c",
+  "date": "2025-05-28",
+  "title": "工业和信息化部 国家发展改革委 国家数据局关于印发《电子信息制造业数字化转型实施方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202505/content_7025606.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:17+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部 国家发展改革委 国家数据局关于印发《电子信息制造业数字化转型实施方案》的通知工信部联电子〔2025〕95号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化、发展改革、数据主管部门：",
+    "现将《电子信息制造业数字化转型实施方案》印发给你们，请结合实际，认真贯彻落实。",
+    "工业和信息化部国家发展改革委国家数据局2025年4月22日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-05",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\信息产业（含电信）",
+  "officialSummary": "工业和信息化部 国家发展改革委 国家数据局关于印发《电子信息制造业数字化转型实施方案》的通知 工信部联电子〔2025〕95号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化、发展改革、...",
+  "sourceTextHash": "f5e472c06cff56240a2e5f9a9452294eacbe3f3d6341c901ccd7e03ca54d95c3",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:40:16+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部、国家发展改革委、国家数据局于2025年4月22日联合印发《电子信息制造业数字化转型实施方案》（工信部联电子〔2025〕95号），要求各省、自治区、直辖市及计划单列市、新疆生产建设兵团的相关主管部门结合实际认真贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-26-42-term",
+      "paragraphIndex": 0,
+      "start": 26,
+      "end": 42,
+      "text": "电子信息制造业数字化转型实施方案",
+      "type": "term",
+      "explanation": "针对电子信息制造业数字化改造升级制定的专项政策文件，明确转型目标与路径。"
+    },
+    {
+      "id": "ai-0-46-61-figure",
+      "paragraphIndex": 0,
+      "start": 46,
+      "end": 61,
+      "text": "工信部联电子〔2025〕95号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-3-19-29-figure",
+      "paragraphIndex": 3,
+      "start": 19,
+      "end": 29,
+      "text": "2025年4月22日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

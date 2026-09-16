@@ -1,0 +1,52 @@
+{
+  "id": "c4675ee57a",
+  "date": "2026-01-24",
+  "title": "国家发展改革委关于印发《国家新兴产业创新中心管理办法》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202601/content_7056038.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委关于印发《国家新兴产业创新中心管理办法》的通知发改高技规〔2025〕1748号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委：",
+    "为深入实施创新驱动发展战略，强化企业科技创新主体地位，发挥新型举国体制优势，强化关键核心技术协同攻关，推动科技创新和产业创新深度融合，加快重大科技创新成果高效转化应用，培育发展新质生产力，我们研究制定了《国家新兴产业创新中心管理办法》。现印发给你们，请遵照执行。",
+    "附件： 国家新兴产业创新中心管理办法.pdf 国家新兴产业创新中心管理办法.ofd"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-01",
+  "archiveLib": "bm",
+  "topic": "国民经济管理、国有资产监管\\其他",
+  "officialSummary": "国家发展改革委关于印发《国家新兴产业创新中心管理办法》的通知 发改高技规〔2025〕1748号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团发展改革委： 为深入实施创新驱动发展战略，强化企业科技...",
+  "sourceTextHash": "c4097a0dae6bcdb45e2928734c9232c28db95e565b49e1f0c38d328f602f5d90",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:19:48+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委印发《国家新兴产业创新中心管理办法》，旨在深入实施创新驱动发展战略，强化企业科技创新主体地位，发挥新型举国体制优势，强化关键核心技术协同攻关，推动科技创新和产业创新深度融合，加快重大科技创新成果转化，培育发展新质生产力，请各地遵照执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-1-13-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 13,
+      "text": "深入实施创新驱动发展战略",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-14-26-exam_point",
+      "paragraphIndex": 2,
+      "start": 14,
+      "end": 26,
+      "text": "强化企业科技创新主体地位",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

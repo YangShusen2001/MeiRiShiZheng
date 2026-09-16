@@ -1,0 +1,56 @@
+{
+  "id": "8cb87b3bf0",
+  "date": "2025-02-12",
+  "title": "国家药监局关于发布仿制药参比制剂目录（第九十批）的通告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202502/content_7003447.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:45+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家药监局关于发布仿制药参比制剂目录（第九十批）的通告（2025年第9号）",
+    "经国家药品监督管理局仿制药质量和疗效一致性评价专家委员会审核确定，现发布仿制药参比制剂目录（第九十批）。",
+    "附件：国家药品监督管理局2025年第9号通告附件.docx"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-02",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\医药管理",
+  "officialSummary": "国家药监局关于发布仿制药参比制剂目录（第九十批）的通告 （2025年第9号） 经国家药品监督管理局仿制药质量和疗效一致性评价专家委员会审核确定，现发布仿制药参比制剂目录（第九十批）。 特此通告。 附件...",
+  "sourceTextHash": "c8666ae70ec7256838712f26b1b62a5acf6eddde0dd7339fd5edb46ac6bfdc73",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:51:02+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家药监局发布仿制药参比制剂目录（第九十批）通告，文号为2025年第9号。该目录经国家药监局仿制药质量和疗效一致性评价专家委员会审核确定后予以发布，并以附件形式随通告公布。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-28-36-figure",
+      "paragraphIndex": 0,
+      "start": 28,
+      "end": 36,
+      "text": "2025年第9号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-10-28-term",
+      "paragraphIndex": 1,
+      "start": 10,
+      "end": 28,
+      "text": "仿制药质量和疗效一致性评价专家委员会",
+      "type": "term",
+      "explanation": "国家药监局设立的专门机构，负责审核确定仿制药参比制剂及一致性评价相关技术事项。"
+    },
+    {
+      "id": "ai-1-33-51-exam_point",
+      "paragraphIndex": 1,
+      "start": 33,
+      "end": 51,
+      "text": "现发布仿制药参比制剂目录（第九十批）",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

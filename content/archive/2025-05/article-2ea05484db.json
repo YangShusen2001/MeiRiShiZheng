@@ -1,0 +1,71 @@
+{
+  "id": "2ea05484db",
+  "date": "2025-05-14",
+  "title": "工业和信息化部办公厅关于印发《通信建设工程质量提升和安全生产行动方案（2025-2027年）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202505/content_7023717.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:19+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部办公厅关于印发《通信建设工程质量提升和安全生产行动方案（2025-2027年）》的通知工信厅通信〔2025〕24号",
+    "各省、自治区、直辖市通信管理局，中国电信集团有限公司、中国移动通信集团有限公司、中国联合网络通信集团有限公司、中国广播电视网络集团有限公司、中国铁塔股份有限公司，有关单位：",
+    "现将《通信建设工程质量提升和安全生产行动方案（2025-2027年）》印发给你们，请结合实际遵照执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-05",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\信息产业（含电信）",
+  "officialSummary": "工业和信息化部办公厅关于印发《通信建设工程质量提升和安全生产行动方案（2025-2027年）》的通知 工信厅通信〔2025〕24号 各省、自治区、直辖市通信管理局，中国电信集团有限公司、中国移动通信集...",
+  "sourceTextHash": "f79d2a84ecacffe510d2f08564f6a7a895cb71c0147a951651171ec6945d6763",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:40:21+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工信部办公厅印发《通信建设工程质量提升和安全生产行动方案（2025-2027年）》，以工信厅通信〔2025〕24号文下发各省通信管理局、四大基础电信企业及中国铁塔等单位，要求结合实际遵照执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-15-46-term",
+      "paragraphIndex": 0,
+      "start": 15,
+      "end": 46,
+      "text": "通信建设工程质量提升和安全生产行动方案（2025-2027年）",
+      "type": "term"
+    },
+    {
+      "id": "ai-0-50-64-figure",
+      "paragraphIndex": 0,
+      "start": 50,
+      "end": 64,
+      "text": "工信厅通信〔2025〕24号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-0-15-exam_point",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 15,
+      "text": "各省、自治区、直辖市通信管理局",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-70-80-exam_point",
+      "paragraphIndex": 1,
+      "start": 70,
+      "end": 80,
+      "text": "中国铁塔股份有限公司",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-41-50-viewpoint",
+      "paragraphIndex": 2,
+      "start": 41,
+      "end": 50,
+      "text": "请结合实际遵照执行",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

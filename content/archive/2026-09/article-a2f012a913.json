@@ -1,0 +1,56 @@
+{
+  "id": "a2f012a913",
+  "date": "2026-09-07",
+  "title": "工业和信息化部等六部门关于印发《关于推动历史经典产业高质量发展的意见》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202609/content_7080330.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:55:10+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部等六部门关于印发《关于推动历史经典产业高质量发展的意见》的通知工信部联消费〔2026〕204号",
+    "各省、自治区、直辖市人民政府，国务院各部委、各直属机构：",
+    "《关于推动历史经典产业高质量发展的意见》已经国务院同意，现印发给你们，请结合实际，抓好贯彻落实。",
+    "工业和信息化部人力资源社会保障部农业农村部商务部文化和旅游部市场监管总局2026年8月28日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-09",
+  "archiveLib": "bm",
+  "topic": "商贸、海关、旅游\\其他",
+  "officialSummary": "工业和信息化部等六部门关于印发《关于推动历史经典产业高质量发展的意见》的通知 工信部联消费〔2026〕204号 各省、自治区、直辖市人民政府，国务院各部委、各直属机构： 《关于推动历史经典产业高质量发...",
+  "sourceTextHash": "c43aa390ca7e0c3705237a33f4032d5d15d9e98b943b462e4f50d138f0048bc8",
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T19:19:13+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部等六部门联合印发《关于推动历史经典产业高质量发展的意见》，经国务院同意，要求各省区市及国务院各部门结合实际抓好贯彻落实，通知落款为2026年8月28日。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-20-27-exam_point",
+      "paragraphIndex": 2,
+      "start": 20,
+      "end": 27,
+      "text": "已经国务院同意",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-41-47-exam_point",
+      "paragraphIndex": 2,
+      "start": 41,
+      "end": 47,
+      "text": "抓好贯彻落实",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-36-46-figure",
+      "paragraphIndex": 3,
+      "start": 36,
+      "end": 46,
+      "text": "2026年8月28日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

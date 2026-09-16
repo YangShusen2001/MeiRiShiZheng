@@ -1,0 +1,73 @@
+{
+  "id": "2bd9c8885d",
+  "date": "2026-01-15",
+  "title": "财政部 税务总局关于延续实施境外机构投资境内债券市场企业所得税、增值税政策的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202601/content_7054861.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:38+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "财政部 税务总局关于延续实施境外机构投资境内债券市场企业所得税、增值税政策的公告财政部 税务总局公告2026年第5号",
+    "为进一步推动债券市场对外开放，现将有关税收政策公告如下：",
+    "自2026年1月1日起至2027年12月31日止，对境外机构投资境内债券市场取得的债券利息收入暂免征收企业所得税和增值税。",
+    "上述暂免征收企业所得税的范围不包括境外机构在境内设立的机构、场所取得的与该机构、场所有实际联系的债券利息。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-01",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\税务",
+  "officialSummary": "财政部 税务总局关于延续实施境外机构投资境内债券市场企业所得税、增值税政策的公告 财政部 税务总局公告2026年第5号 为进一步推动债券市场对外开放，现将有关税收政策公告如下： 自2026年1月1日起...",
+  "sourceTextHash": "890721e202e0cfe920350c6947b97a168a34319b80e260eba27fa4cce87759c4",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:18:22+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "财政部、税务总局发布2026年第5号公告，为进一步推动债券市场对外开放，明确自2026年1月1日起至2027年12月31日止，对境外机构投资境内债券市场取得的债券利息收入暂免征收企业所得税和增值税，但境外机构在境内设立的机构、场所取得的与该机构、场所有实际联系的债券利息不在暂免范围内。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-1-14-viewpoint",
+      "paragraphIndex": 1,
+      "start": 1,
+      "end": 14,
+      "text": "进一步推动债券市场对外开放",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-0-24-figure",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 24,
+      "text": "自2026年1月1日起至2027年12月31日止",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-47-60-exam_point",
+      "paragraphIndex": 2,
+      "start": 47,
+      "end": 60,
+      "text": "暂免征收企业所得税和增值税",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-14-32-exam_point",
+      "paragraphIndex": 3,
+      "start": 14,
+      "end": 32,
+      "text": "不包括境外机构在境内设立的机构、场所",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-42-52-term",
+      "paragraphIndex": 3,
+      "start": 42,
+      "end": 52,
+      "text": "有实际联系的债券利息",
+      "type": "term",
+      "explanation": "指境外机构在境内设立的机构、场所取得的与该机构、场所有实际联系的债券利息，不在暂免征收范围内。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

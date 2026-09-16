@@ -1,0 +1,93 @@
+{
+  "id": "9fff397dca",
+  "date": "2025-06-17",
+  "title": "国务院办公厅关于同意湖南省承办2029年第十六届全国运动会的函_国务院文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202506/content_7028410.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:26+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国务院办公厅关于同意湖南省承办2029年第十六届全国运动会的函",
+    "你们《关于湖南承办第十六届全国运动会的请示》（体竞字〔2025〕57号）收悉。经国务院批准，现函复如下：",
+    "一、国务院同意湖南省承办2029年第十六届全国运动会。",
+    "二、体育总局、湖南省人民政府要坚持以习近平新时代中国特色社会主义思想为指导，深入贯彻习近平总书记关于体育工作的重要论述和重要指示批示精神，按照“绿色、共享、开放、廉洁”的办赛理念和“简约、安全、精彩”的办赛要求，严格预算管理，节约办赛成本，控制赛事规模，共同组织好2029年第十六届全国运动会，为以中国式现代化全面推进强国建设、民族复兴伟业贡献体育力量。",
+    "三、筹备和举办2029年第十六届全国运动会的经费主要由湖南省人民政府自筹，中央财政给予一次性定额补助。中央财政定额补助资金主要用于运动会举办和场地维修等，场馆设施建设所需资金由湖南省人民政府自行负担。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-06",
+  "archiveLib": "gw",
+  "topic": "卫生、体育\\体育",
+  "officialSummary": "国务院办公厅关于同意湖南省 承办2029年第十六届全国运动会的函 国办函〔2025〕59号 体育总局、财政部： 你们《关于湖南承办第十六届全国运动会的请示》（体竞字〔2025〕57号）收悉。经国务院批...",
+  "sourceTextHash": "596fcca63029e6970afa991b5aa790ed2d13ed5170f3cbf56e56874124630ae4",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:39:07+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国务院办公厅函复同意湖南省承办2029年第十六届全国运动会，要求坚持相关体育工作精神，按绿色共享开放廉洁理念和简约安全精彩要求，严格预算、节约成本、控制规模。经费由湖南自筹，中央财政给一次性定额补助，用于办赛和场地维修，场馆建设资金由湖南自行负担。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-2-26-exam_point",
+      "paragraphIndex": 2,
+      "start": 2,
+      "end": 26,
+      "text": "国务院同意湖南省承办2029年第十六届全国运动会",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-72-83-viewpoint",
+      "paragraphIndex": 3,
+      "start": 72,
+      "end": 83,
+      "text": "绿色、共享、开放、廉洁",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-3-91-99-viewpoint",
+      "paragraphIndex": 3,
+      "start": 91,
+      "end": 99,
+      "text": "简约、安全、精彩",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-4-24-36-exam_point",
+      "paragraphIndex": 4,
+      "start": 24,
+      "end": 36,
+      "text": "主要由湖南省人民政府自筹",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-4-37-50-exam_point",
+      "paragraphIndex": 4,
+      "start": 37,
+      "end": 50,
+      "text": "中央财政给予一次性定额补助",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-12-17-figure",
+      "paragraphIndex": 2,
+      "start": 12,
+      "end": 17,
+      "text": "2029年",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-23-35-figure",
+      "paragraphIndex": 1,
+      "start": 23,
+      "end": 35,
+      "text": "体竞字〔2025〕57号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 4
+  }
+}

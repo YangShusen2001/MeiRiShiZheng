@@ -1,0 +1,56 @@
+{
+  "id": "8228626c21",
+  "date": "2025-03-18",
+  "title": "工业和信息化部办公厅关于印发《工业企业和园区数字化能碳管理中心建设指南》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202503/content_7014249.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:56+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部办公厅关于印发《工业企业和园区数字化能碳管理中心建设指南》的通知工信厅节〔2025〕13号",
+    "为加强工业节能降碳管理，支撑构建系统完备的碳排放双控制度体系，工业和信息化部组织编制了《工业企业和园区数字化能碳管理中心建设指南》，现印发给你们。请结合实际组织实施，强化宣传解读，因地制宜指导工业企业、工业园区开展数字化能碳管理中心建设运行，提升碳管理水平，加快绿色低碳转型。",
+    "点击下载：工业企业和园区数字化能碳管理中心建设指南"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-03",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部办公厅 关于印发《工业企业和园区数字化能碳管理中心建设指南》的通知 工信厅节〔2025〕13号 为加强工业节能降碳管理，支撑构建系统完备的碳排放双控制度体系，工业和信息化部组织编制了《工...",
+  "sourceTextHash": "637a5e0e5a0bdb0fcbe6630f5fdc2768297f5366554f2689ad84d2cb71c5634d",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:47:44+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部办公厅印发《工业企业和园区数字化能碳管理中心建设指南》，旨在加强工业节能降碳管理，支撑碳排放双控制度体系，指导企业与园区建设运行数字化能碳管理中心，提升碳管理水平，加快绿色低碳转型。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-1-11-exam_point",
+      "paragraphIndex": 1,
+      "start": 1,
+      "end": 11,
+      "text": "加强工业节能降碳管理",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-21-30-term",
+      "paragraphIndex": 1,
+      "start": 21,
+      "end": 30,
+      "text": "碳排放双控制度体系",
+      "type": "term",
+      "explanation": "指对碳排放总量和强度实行双重控制的制度安排，是推动绿色低碳转型的重要政策工具。"
+    },
+    {
+      "id": "ai-0-43-52-figure",
+      "paragraphIndex": 0,
+      "start": 43,
+      "end": 52,
+      "text": "〔2025〕13号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

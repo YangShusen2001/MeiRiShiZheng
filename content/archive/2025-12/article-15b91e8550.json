@@ -1,0 +1,55 @@
+{
+  "id": "15b91e8550",
+  "date": "2025-12-29",
+  "title": "市场监管总局关于发布《食品添加剂生产许可审查细则（2025版）》的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7053057.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:50+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "市场监管总局关于发布《食品添加剂生产许可审查细则（2025版）》的公告2025年第55号",
+    "为规范食品添加剂生产许可工作，加强对食品添加剂生产企业的监督管理，依据《中华人民共和国食品安全法》《中华人民共和国食品安全法实施条例》《食品生产许可管理办法》（市场监管总局令第24号）等法律法规、部门规章和食品安全国家标准，市场监管总局组织制定了《食品添加剂生产许可审查细则（2025版）》，现予公告，自发布之日起施行。",
+    "市场监管总局关于发布《食品添加剂生产许可审查细则（2025版）》的公告.pdf"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "bm",
+  "topic": "市场监管、安全生产监管\\食品药品监管",
+  "officialSummary": "市场监管总局关于发布《食品添加剂生产许可审查细则（2025版）》的公告 2025年第55号 为规范食品添加剂生产许可工作，加强对食品添加剂生产企业的监督管理，依据《中华人民共和国食品安全法》《中华人民...",
+  "sourceTextHash": "18886985be35a5152199d80d6e7944e887c06fcc24ec4f23d360c4b3fe1dc920",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:20:53+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "市场监管总局发布2025年第55号公告，出台《食品添加剂生产许可审查细则（2025版）》。细则依据食品安全法及实施条例、食品生产许可管理办法等制定，旨在规范食品添加剂生产许可工作，加强对生产企业监督管理，自发布之日起施行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-35-44-figure",
+      "paragraphIndex": 0,
+      "start": 35,
+      "end": 44,
+      "text": "2025年第55号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-1-14-viewpoint",
+      "paragraphIndex": 1,
+      "start": 1,
+      "end": 14,
+      "text": "规范食品添加剂生产许可工作",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-15-32-viewpoint",
+      "paragraphIndex": 1,
+      "start": 15,
+      "end": 32,
+      "text": "加强对食品添加剂生产企业的监督管理",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "0269ed227b",
+  "date": "2025-01-07",
+  "title": "关于优化进境动植物特许检疫审批有关事宜的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_7063015.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于优化进境动植物特许检疫审批有关事宜的公告海关总署公告2024年第209号",
+    "为支持种质资源引进，促进种业、生物医药等产业发展，在确保生物安全的前提下，提高进境动植物特许检疫审批效率，根据《中华人民共和国生物安全法》、《中华人民共和国进出境动植物检疫法》及其实施条例，以及《外来入侵物种管理办法》等有关规定，现就优化禁止进境物特许检疫审批（以下简称特许检疫审批）有关事宜公告如下："
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "商贸、海关、旅游\\海关",
+  "officialSummary": "关于优化进境动植物特许检疫审批有关事宜的公告 海关总署公告2024年第209号 为支持种质资源引进，促进种业、生物医药等产业发展，在确保生物安全的前提下，提高进境动植物特许检疫审批效率，根据《中华人民...",
+  "sourceTextHash": "defae923b878de80b49933269e4288014078a082d4dac7e1c40dfb240483c3fd",
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T19:21:53+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "海关总署发布2024年第209号公告，为支持种质资源引进、促进种业和生物医药等产业发展，在确保生物安全前提下优化进境动植物特许检疫审批，依据生物安全法、进出境动植物检疫法及其实施条例、外来入侵物种管理办法等规定，明确相关事宜。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-1-9-viewpoint",
+      "paragraphIndex": 1,
+      "start": 1,
+      "end": 9,
+      "text": "支持种质资源引进",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-10-24-viewpoint",
+      "paragraphIndex": 1,
+      "start": 10,
+      "end": 24,
+      "text": "促进种业、生物医药等产业发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-28-38-figure",
+      "paragraphIndex": 0,
+      "start": 28,
+      "end": 38,
+      "text": "2024年第209号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 1
+  }
+}

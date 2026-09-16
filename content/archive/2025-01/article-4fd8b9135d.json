@@ -1,0 +1,65 @@
+{
+  "id": "4fd8b9135d",
+  "date": "2025-01-03",
+  "title": "工业和信息化部等六部门关于印发《赤泥综合利用行动方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_6996087.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:37+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部等六部门关于印发《赤泥综合利用行动方案》的通知工信部联节﹝2024﹞225号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化、发展改革、财政、生态环境、住房城乡建设、市场监管主管部门，有关中央企业，有关行业协会：",
+    "现将《赤泥综合利用行动方案》印发给你们，请结合实际认真贯彻落实。",
+    "工业和信息化部国家发展改革委财政部生态环境部住房城乡建设部市场监管总局2024年12月31日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\节能与资源综合利用",
+  "officialSummary": "工业和信息化部等六部门关于印发《赤泥综合利用行动方案》的通知 工信部联节﹝2024﹞225号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化、发展改革、财政、生态环境、住房城乡建设、市...",
+  "sourceTextHash": "71c21bc8a626c798f7c1a5b273c8a9205db1d4531a8f3d4366e8bbf328b08885",
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T19:25:09+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部等六部门联合印发《赤泥综合利用行动方案》，以工信部联节﹝2024﹞225号文下发各省区市及新疆生产建设兵团相关部门、中央企业和行业协会，要求结合实际认真贯彻落实，发文时间为2024年12月31日。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-16-26-term",
+      "paragraphIndex": 0,
+      "start": 16,
+      "end": 26,
+      "text": "赤泥综合利用行动方案",
+      "type": "term",
+      "explanation": "针对氧化铝生产排放的强碱性赤泥废渣开展减量化、资源化、无害化利用的专项方案"
+    },
+    {
+      "id": "ai-0-30-45-figure",
+      "paragraphIndex": 0,
+      "start": 30,
+      "end": 45,
+      "text": "工信部联节﹝2024﹞225号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-20-31-exam_point",
+      "paragraphIndex": 2,
+      "start": 20,
+      "end": 31,
+      "text": "请结合实际认真贯彻落实",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-35-46-figure",
+      "paragraphIndex": 3,
+      "start": 35,
+      "end": 46,
+      "text": "2024年12月31日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

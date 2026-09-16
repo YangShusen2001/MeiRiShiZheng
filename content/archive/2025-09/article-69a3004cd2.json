@@ -1,0 +1,121 @@
+{
+  "id": "69a3004cd2",
+  "date": "2025-09-25",
+  "title": "关于发布《职业性急性铀中毒诊断标准》等5项标准的通告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202509/content_7042264.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:51+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于发布《职业性急性铀中毒诊断标准》等5项标准的通告国卫通〔2025〕12号",
+    "现发布《职业性急性铀中毒诊断标准》等5项标准，编号和名称如下：",
+    "GBZ 108—2025 职业性急性铀中毒诊断标准（代替GBZ 108—2002）",
+    "GBZ 215—2025 过量照射人员医学检查与处理标准（代替GBZ 215—2009）",
+    "GBZ 339—2025 非医疗工作场所放射性危害因素检测标准",
+    "WS 674—2025 医用电子直线加速器质量控制检测标准（代替WS 674—2020）",
+    "WST 850—2025 核事故场内医学应急准备与响应标准（代替GBZ/T 171—2006、GBZ/T 234—2010）",
+    "上述4项强制性标准自2026年9月1日起施行，GBZ 108—2002、GBZ 215—2009、WS 674—2020同时废止。",
+    "上述1项推荐性标准自2026年3月1日起施行，GBZ/T 171—2006、GBZ/T 234—2010同时废止。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-09",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\卫生",
+  "officialSummary": "关于发布《职业性急性铀中毒诊断标准》等5项标准的通告 国卫通〔2025〕12号 现发布《职业性急性铀中毒诊断标准》等5项标准，编号和名称如下： 一、强制性国家职业卫生标准 GBZ 108—2025 职...",
+  "sourceTextHash": "e6caf9b02720e600a58173a6f5c0327236c0081b87a1606af03eba6c09171558",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:30:18+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家卫生健康委发布《职业性急性铀中毒诊断标准》等5项标准，含4项强制性标准和1项推荐性标准。强制性标准WST 850—2025 核事故场内医学应急准备与响应标准将于2026年9月1日施行，相关旧标准同时废止；推荐性标准自2026年3月1日施行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-0-3-viewpoint",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 3,
+      "text": "现发布",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-0-12-term",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 12,
+      "text": "GBZ 108—2025",
+      "type": "term"
+    },
+    {
+      "id": "ai-5-0-11-term",
+      "paragraphIndex": 5,
+      "start": 0,
+      "end": 11,
+      "text": "WS 674—2025",
+      "type": "term"
+    },
+    {
+      "id": "ai-5-32-43-exam_point",
+      "paragraphIndex": 5,
+      "start": 32,
+      "end": 43,
+      "text": "WS 674—2020",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-6-0-12-term",
+      "paragraphIndex": 6,
+      "start": 0,
+      "end": 12,
+      "text": "WST 850—2025",
+      "type": "term"
+    },
+    {
+      "id": "ai-6-32-61-exam_point",
+      "paragraphIndex": 6,
+      "start": 32,
+      "end": 61,
+      "text": "GBZ/T 171—2006、GBZ/T 234—2010",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-7-2-9-figure",
+      "paragraphIndex": 7,
+      "start": 2,
+      "end": 9,
+      "text": "4项强制性标准",
+      "type": "figure"
+    },
+    {
+      "id": "ai-7-10-19-figure",
+      "paragraphIndex": 7,
+      "start": 10,
+      "end": 19,
+      "text": "2026年9月1日",
+      "type": "figure"
+    },
+    {
+      "id": "ai-8-2-9-figure",
+      "paragraphIndex": 8,
+      "start": 2,
+      "end": 9,
+      "text": "1项推荐性标准",
+      "type": "figure"
+    },
+    {
+      "id": "ai-8-10-19-figure",
+      "paragraphIndex": 8,
+      "start": 10,
+      "end": 19,
+      "text": "2026年3月1日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 8
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "c24990bea1",
+  "date": "2026-09-11",
+  "title": "工业和信息化部关于印发《“人工智能+软件”专项行动实施方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202609/content_7080773.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:55:09+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部关于印发《“人工智能+软件”专项行动实施方案》的通知工信部信发〔2026〕209号",
+    "各省、自治区、直辖市及新疆生产建设兵团工业和信息化主管部门：",
+    "现将《“人工智能+软件”专项行动实施方案》印发给你们，请结合实际，抓好贯彻落实。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-09",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部关于印发《“人工智能+软件”专项行动实施方案》的通知 工信部信发〔2026〕209号 各省、自治区、直辖市及新疆生产建设兵团工业和信息化主管部门： 现将《“人工智能+软件”专项行动实施方...",
+  "sourceTextHash": "43970e5a403b7b8c1ebfbdb556ba21dd99f5f504052a5733c942545df0fb06e8",
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T19:19:16+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部以工信部信发〔2026〕209号文印发《“人工智能+软件”专项行动实施方案》的通知，要求各省、自治区、直辖市及新疆生产建设兵团工业和信息化主管部门结合实际抓好贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-33-48-figure",
+      "paragraphIndex": 0,
+      "start": 33,
+      "end": 48,
+      "text": "工信部信发〔2026〕209号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-33-39-exam_point",
+      "paragraphIndex": 2,
+      "start": 33,
+      "end": 39,
+      "text": "抓好贯彻落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

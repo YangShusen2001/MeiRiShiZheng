@@ -1,0 +1,70 @@
+{
+  "id": "32d4e25b43",
+  "date": "2025-04-10",
+  "title": "关于实施船舶吨税缴款凭证和吨税执照自主打印改革的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7062944.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:12+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于实施船舶吨税缴款凭证和吨税执照自主打印改革的公告海关总署公告2025年第56号",
+    "为持续优化口岸营商环境，便利进境船舶办理纳税手续，海关总署决定实施船舶吨税缴款凭证和吨税执照自主打印改革。现就有关事宜公告如下：",
+    "自2025年4月21日起，自我国境外港口进入境内港口的船舶（以下称应税船舶），依照《中华人民共和国船舶吨税法》缴纳船舶吨税后，应税船舶负责人可以通过“互联网+海关”一体化网上办事平台或国际贸易“单一窗口”标准版，下载并打印船舶吨税缴款凭证和吨税执照。",
+    "海关总署关于实施船舶吨税缴款凭证和吨税执照自主打印改革的公告.doc",
+    "海关总署关于实施船舶吨税缴款凭证和吨税执照自主打印改革的公告.pdf"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "商贸、海关、旅游\\海关",
+  "officialSummary": "关于实施船舶吨税缴款凭证和吨税执照自主打印改革的公告 海关总署公告2025年第56号 为持续优化口岸营商环境，便利进境船舶办理纳税手续，海关总署决定实施船舶吨税缴款凭证和吨税执照自主打印改革。现就有关...",
+  "sourceTextHash": "ab0217e4d052b4b1af44254930c2506a546a168793bc972fcec44c0c477a17d6",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:43:05+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "海关总署公告2025年第56号，为持续优化口岸营商环境、便利进境船舶办理纳税手续，决定实施船舶吨税缴款凭证和吨税执照自主打印改革。自2025年4月21日起，应税船舶缴纳船舶吨税后，负责人可通过互联网+海关平台或国际贸易单一窗口下载并打印相关凭证和执照。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-1-11-viewpoint",
+      "paragraphIndex": 1,
+      "start": 1,
+      "end": 11,
+      "text": "持续优化口岸营商环境",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-25-52-exam_point",
+      "paragraphIndex": 1,
+      "start": 25,
+      "end": 52,
+      "text": "海关总署决定实施船舶吨税缴款凭证和吨税执照自主打印改革",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-1-11-figure",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 11,
+      "text": "2025年4月21日",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-75-81-term",
+      "paragraphIndex": 2,
+      "start": 75,
+      "end": 81,
+      "text": "互联网+海关",
+      "type": "term",
+      "explanation": "海关总署一体化网上办事平台，企业可在线办理报关、纳税等海关业务。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 2
+  }
+}

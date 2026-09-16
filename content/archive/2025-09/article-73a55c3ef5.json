@@ -1,0 +1,57 @@
+{
+  "id": "73a55c3ef5",
+  "date": "2025-09-04",
+  "title": "两部门关于印发《电子信息制造业2025－2026年稳增长行动方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202509/content_7039199.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:58+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部 市场监督管理总局关于印发《电子信息制造业2025－2026年稳增长行动方案》的通知工信部联电子〔2025〕181号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化、市场监管主管部门：",
+    "现将《电子信息制造业2025－2026年稳增长行动方案》印发给你们，请结合实际，认真贯彻落实。",
+    "工业和信息化部市场监督管理总局2025年8月22日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-09",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\信息产业（含电信）",
+  "officialSummary": "工业和信息化部 市场监督管理总局关于印发《电子信息制造业2025－2026年稳增长行动方案》的通知 工信部联电子〔2025〕181号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化、市...",
+  "sourceTextHash": "959f88f4d53663b63fb3656e6e878a2ff41b0d093ad26471d4bff17208b81b50",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:30:29+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部、市场监督管理总局于2025年8月22日联合印发《电子信息制造业2025－2026年稳增长行动方案》，通知各省、自治区、直辖市及计划单列市、新疆生产建设兵团相关主管部门结合实际认真贯彻落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-21-45-term",
+      "paragraphIndex": 0,
+      "start": 21,
+      "end": 45,
+      "text": "电子信息制造业2025－2026年稳增长行动方案",
+      "type": "term",
+      "explanation": "两部门联合印发的文件，旨在推动电子信息制造业稳增长，为期两年。"
+    },
+    {
+      "id": "ai-0-49-65-figure",
+      "paragraphIndex": 0,
+      "start": 49,
+      "end": 65,
+      "text": "工信部联电子〔2025〕181号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-3-15-25-figure",
+      "paragraphIndex": 3,
+      "start": 15,
+      "end": 25,
+      "text": "2025年8月22日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

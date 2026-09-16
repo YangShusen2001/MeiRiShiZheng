@@ -1,0 +1,73 @@
+{
+  "id": "0f1c0411f1",
+  "date": "2025-12-30",
+  "title": "工业和信息化部等四部门关于印发《汽车行业数字化转型实施方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7053271.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:48+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部等四部门关于印发《汽车行业数字化转型实施方案》的通知工信部联通装〔2025〕278号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化、教育、市场监管、数据主管部门：",
+    "现将《汽车行业数字化转型实施方案》印发给你们，请结合实际认真抓好落实。",
+    "工业和信息化部教育部市场监管总局国家数据局2025年12月29日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\机械制造与重工业",
+  "officialSummary": "工业和信息化部等四部门关于印发《汽车行业数字化转型实施方案》的通知 工信部联通装〔2025〕278号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化、教育、市场监管、数据主管部门： 现...",
+  "sourceTextHash": "addd57c7aff3f607103c568ff2279017e8c0b3109e068f18858a1f4f651cc342",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:20:50+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部等四部门于2025年12月29日联合印发《汽车行业数字化转型实施方案》通知，要求各省区市及计划单列市、新疆生产建设兵团工信、教育、市场监管、数据主管部门结合实际认真抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-16-29-term",
+      "paragraphIndex": 0,
+      "start": 16,
+      "end": 29,
+      "text": "汽车行业数字化转型实施方案",
+      "type": "term",
+      "explanation": "推动汽车产业数字化升级的专项方案，涵盖智能制造、数据应用等内容"
+    },
+    {
+      "id": "ai-0-0-11-figure",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 11,
+      "text": "工业和信息化部等四部门",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-0-16-figure",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 16,
+      "text": "各省、自治区、直辖市及计划单列市",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-25-46-figure",
+      "paragraphIndex": 1,
+      "start": 25,
+      "end": 46,
+      "text": "工业和信息化、教育、市场监管、数据主管部门",
+      "type": "figure"
+    },
+    {
+      "id": "ai-3-21-32-figure",
+      "paragraphIndex": 3,
+      "start": 21,
+      "end": 32,
+      "text": "2025年12月29日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

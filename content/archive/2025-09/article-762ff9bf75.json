@@ -1,0 +1,57 @@
+{
+  "id": "762ff9bf75",
+  "date": "2025-09-14",
+  "title": "农业农村部关于修订《全国农牧渔业丰收奖奖励办法》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202509/content_7040618.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:54+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "农业农村部关于修订《全国农牧渔业丰收奖奖励办法》的通知农科技发〔2025〕6号",
+    "各省、自治区、直辖市及计划单列市农业农村（农牧）、畜牧兽医、农垦、渔业厅（局、委），新疆生产建设兵团农业农村局，有关单位：",
+    "为进一步做好全国农牧渔业丰收奖奖励工作，我部对《全国农牧渔业丰收奖奖励办法》进行了修订。现将新修订的《全国农牧渔业丰收奖奖励办法》印发给你们，请遵照执行。",
+    "农业农村部关于修订《全国农牧渔业丰收奖奖励办法》的通知.zip"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-09",
+  "archiveLib": "bm",
+  "topic": "农业、林业、水利\\农业、畜牧业、渔业",
+  "officialSummary": "农业农村部关于修订《全国农牧渔业丰收奖奖励办法》的通知 农科技发〔2025〕6号 各省、自治区、直辖市及计划单列市农业农村（农牧）、畜牧兽医、农垦、渔业厅（局、委），新疆生产建设兵团农业农村局，有关单...",
+  "sourceTextHash": "0a7e2b768177d8f1157e73469315f9638c1f076427b80ff240d35473e7afa041",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:30:33+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "农业农村部印发农科技发〔2025〕6号通知，对《全国农牧渔业丰收奖奖励办法》进行修订并印发新办法，要求各省、自治区、直辖市及计划单列市农业农村等相关厅局、新疆生产建设兵团农业农村局及有关单位遵照执行，旨在进一步做好全国农牧渔业丰收奖奖励工作。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-27-39-figure",
+      "paragraphIndex": 0,
+      "start": 27,
+      "end": 39,
+      "text": "农科技发〔2025〕6号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-41-43-exam_point",
+      "paragraphIndex": 2,
+      "start": 41,
+      "end": 43,
+      "text": "修订",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-72-76-term",
+      "paragraphIndex": 2,
+      "start": 72,
+      "end": 76,
+      "text": "遵照执行",
+      "type": "term",
+      "explanation": "指下级机关或有关单位按照上级文件要求认真贯彻执行，是公文常用结束语"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

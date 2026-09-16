@@ -1,0 +1,55 @@
+{
+  "id": "d8b17f672c",
+  "date": "2025-10-18",
+  "title": "个人信息出境认证办法_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202510/content_7044914.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "个人信息出境认证办法国家互联网信息办公室 国家市场监督管理总局令 第20号",
+    "《个人信息出境认证办法》已经2025年7月21日国家互联网信息办公室2025年第17次室务会会议审议通过，并经国家市场监督管理总局同意，现予公布，自2026年1月1日起施行。",
+    "国家互联网信息办公室主任 庄荣文国家市场监督管理总局局长 罗文2025年10月14日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-10",
+  "archiveLib": "bm",
+  "topic": "商贸、海关、旅游\\其他",
+  "officialSummary": "个人信息出境认证办法 国家互联网信息办公室 国家市场监督管理总局令 第20号 《个人信息出境认证办法》已经2025年7月21日国家互联网信息办公室2025年第17次室务会会议审议通过，并经国家市场监督...",
+  "sourceTextHash": "81ceb1efc90c67bd875bc7ff470a9bbf865b0e72553586a30ce0105cc016fad7",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:28:15+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "《个人信息出境认证办法》由国家互联网信息办公室与国家市场监督管理总局联合公布，经2025年7月21日网信办室务会审议通过并获市场监管总局同意，自2026年1月1日起施行，为个人信息出境认证提供制度依据。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-14-24-figure",
+      "paragraphIndex": 1,
+      "start": 14,
+      "end": 24,
+      "text": "2025年7月21日",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-73-86-figure",
+      "paragraphIndex": 1,
+      "start": 73,
+      "end": 86,
+      "text": "自2026年1月1日起施行",
+      "type": "figure"
+    },
+    {
+      "id": "ai-0-10-37-exam_point",
+      "paragraphIndex": 0,
+      "start": 10,
+      "end": 37,
+      "text": "国家互联网信息办公室 国家市场监督管理总局令 第20号",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

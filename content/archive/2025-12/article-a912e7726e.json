@@ -1,0 +1,56 @@
+{
+  "id": "a912e7726e",
+  "date": "2025-12-30",
+  "title": "工业和信息化部办公厅关于印发制造业中试标准体系建设指南（2025版）的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7053131.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:49+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部办公厅关于印发制造业中试标准体系建设指南（2025版）的通知工信厅科〔2025〕71号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门，有关行业协会、标准化技术组织和专业机构：",
+    "现将《制造业中试标准体系建设指南（2025版）》印发给你们，请结合实际抓好实施。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部办公厅关于印发制造业中试标准体系建设指南（2025版）的通知 工信厅科〔2025〕71号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门，有关行业协会、标准化技术...",
+  "sourceTextHash": "f72a2a5b6f94aa3d5ca75fb9475850af6251fde1119a79329b2db5a04f72f56b",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:23:04+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部办公厅印发《制造业中试标准体系建设指南（2025版）》，通知文号工信厅科〔2025〕71号，主送各省区市及计划单列市、新疆生产建设兵团工信主管部门，以及有关行业协会、标准化技术组织和专业机构，要求结合实际抓好实施。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-37-50-figure",
+      "paragraphIndex": 0,
+      "start": 37,
+      "end": 50,
+      "text": "工信厅科〔2025〕71号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-3-23-term",
+      "paragraphIndex": 2,
+      "start": 3,
+      "end": 23,
+      "text": "制造业中试标准体系建设指南（2025版）",
+      "type": "term",
+      "explanation": "指面向制造业中试环节的标准体系顶层设计文件，用于指导相关标准制定与实施。"
+    },
+    {
+      "id": "ai-2-30-39-exam_point",
+      "paragraphIndex": 2,
+      "start": 30,
+      "end": 39,
+      "text": "请结合实际抓好实施",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

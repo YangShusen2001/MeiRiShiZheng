@@ -1,0 +1,68 @@
+{
+  "id": "acf392cdd7",
+  "date": "2025-07-10",
+  "title": "国家卫生健康委办公厅关于印发软骨发育不全等86个罕见病病种诊疗指南（2025年版）的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202507/content_7031426.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:37+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家卫生健康委办公厅关于印发软骨发育不全等86个罕见病病种诊疗指南（2025年版）的通知国卫办医政函〔2025〕252号",
+    "各省、自治区、直辖市及新疆生产建设兵团卫生健康委：",
+    "为进一步提高罕见病诊疗规范化水平，保障医疗质量安全，我委组织对《第二批罕见病目录》中软骨发育不全等86个病种分别制定了诊疗指南（见附件，可在国家卫生健康委网站医政司栏目下载）。现印发给你们，请各地卫生健康行政部门做好组织实施工作。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-07",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\卫生",
+  "officialSummary": "国家卫生健康委办公厅关于印发软骨发育不全等86个罕见病病种诊疗指南（2025年版）的通知 国卫办医政函〔2025〕252号 各省、自治区、直辖市及新疆生产建设兵团卫生健康委： 为进一步提高罕见病诊疗规...",
+  "sourceTextHash": "18790d6ba27f3cad588fd6440358bb2f1a1403346a89f7dfe2dccf9bae8bd54f",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:36:16+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家卫生健康委办公厅印发通知，针对《第二批罕见病目录》中软骨发育不全等86个病种制定诊疗指南（2025年版），旨在提高罕见病诊疗规范化水平、保障医疗质量安全，要求各地卫生健康行政部门做好组织实施。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-21-33-term",
+      "paragraphIndex": 0,
+      "start": 21,
+      "end": 33,
+      "text": "86个罕见病病种诊疗指南",
+      "type": "term",
+      "explanation": "指国家卫生健康委为第二批罕见病目录中86个病种统一制定的规范化诊疗指导文件"
+    },
+    {
+      "id": "ai-0-34-40-figure",
+      "paragraphIndex": 0,
+      "start": 34,
+      "end": 40,
+      "text": "2025年版",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-4-16-viewpoint",
+      "paragraphIndex": 2,
+      "start": 4,
+      "end": 16,
+      "text": "提高罕见病诊疗规范化水平",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-17-25-viewpoint",
+      "paragraphIndex": 2,
+      "start": 17,
+      "end": 25,
+      "text": "保障医疗质量安全",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

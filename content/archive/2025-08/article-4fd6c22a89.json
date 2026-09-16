@@ -1,0 +1,59 @@
+{
+  "id": "4fd6c22a89",
+  "date": "2025-08-11",
+  "title": "关于印发《支持学前教育发展资金管理办法》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202508/content_7036030.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:45+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发《支持学前教育发展资金管理办法》的通知财教〔2025〕180号",
+    "各省、自治区、直辖市、计划单列市财政厅（局）、教育厅（教委、教育局），新疆生产建设兵团财政局、教育局：",
+    "为规范和加强支持学前教育发展资金管理，提高资金使用效益，我们对《支持学前教育发展资金管理办法》进行了修订，现印发给你们，请遵照执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-08",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\财政",
+  "officialSummary": "关于印发《支持学前教育发展资金管理办法》的通知 财教〔2025〕180号 各省、自治区、直辖市、计划单列市财政厅（局）、教育厅（教委、教育局），新疆生产建设兵团财政局、教育局： 为规范和加强支持学前教...",
+  "sourceTextHash": "36735d3ae9c56bbd7ee712ec35ef0dbc245db5f37121ae0fcaa8502a36b4d304",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:33:09+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "财政部、教育部修订印发《支持学前教育发展资金管理办法》（财教〔2025〕180号），要求各省、自治区、直辖市、计划单列市及新疆生产建设兵团财政、教育部门遵照执行，旨在规范和加强支持学前教育发展资金管理，提高资金使用效益。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-23-35-figure",
+      "paragraphIndex": 0,
+      "start": 23,
+      "end": 35,
+      "text": "财教〔2025〕180号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-1-18-exam_point",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 18,
+      "text": "规范和加强支持学前教育发展资金管理",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-19-27-viewpoint",
+      "paragraphIndex": 2,
+      "start": 19,
+      "end": 27,
+      "text": "提高资金使用效益",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

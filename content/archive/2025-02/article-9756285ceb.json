@@ -1,0 +1,46 @@
+{
+  "id": "9756285ceb",
+  "date": "2025-02-05",
+  "title": "国务院办公厅关于推动成品油流通高质量发展的意见_国务院文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202502/content_7002337.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:48+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "各省、自治区、直辖市人民政府，国务院各部委、各直属机构：",
+    "成品油是关系国计民生的基础性和战略性资源，与国民经济运行和人民生产生活密切相关。为进一步健全成品油流通管理体系，推动成品油流通高质量发展，经国务院同意，现提出如下意见。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-02",
+  "archiveLib": "gw",
+  "topic": "国土资源、能源\\石油与天然气",
+  "officialSummary": "国务院办公厅关于推动成品油流通 高质量发展的意见 国办发〔2025〕5号 各省、自治区、直辖市人民政府，国务院各部委、各直属机构： 成品油是关系国计民生的基础性和战略性资源，与国民经济运行和人民生产生...",
+  "sourceTextHash": "c993696743e1308f2959b53df0b4422246027e0f28867e136cc3f5125de2afe2",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:51:11+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "成品油是关系国计民生的基础性和战略性资源，与国民经济运行和人民生产生活密切相关。为进一步健全成品油流通管理体系，推动成品油流通高质量发展，经国务院同意，国务院办公厅向各省、自治区、直辖市人民政府及国务院各部委、各直属机构提出本意见。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-11-20-term",
+      "paragraphIndex": 1,
+      "start": 11,
+      "end": 20,
+      "text": "基础性和战略性资源",
+      "type": "term"
+    },
+    {
+      "id": "ai-1-58-68-viewpoint",
+      "paragraphIndex": 1,
+      "start": 58,
+      "end": 68,
+      "text": "成品油流通高质量发展",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

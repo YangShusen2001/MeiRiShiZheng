@@ -36,6 +36,14 @@
       {
         "name": "ohos.permission.INTERNET",
         "reason": "$string:reason_internet"
+      },
+      {
+        // Net.ets 的 connection.getDefaultNet() / createNetConnection() 需要它。
+        // 缺它会**静默失效**：probe() 走 catch 分支把 online 恒置 true，
+        // watch() 只打一条 hilog 警告 —— 表现是「断网了但界面还说在线」，不报错。
+        // 属 system_grant（不弹授权框）。
+        "name": "ohos.permission.GET_NETWORK_INFO",
+        "reason": "$string:reason_network_info"
       }
     ]
   }

@@ -1,0 +1,78 @@
+{
+  "id": "b205efd987",
+  "date": "2025-06-18",
+  "title": "关于合格境外机构投资者和人民币合格境外机构投资者参与股票期权交易的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202506/content_7028596.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:26+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于合格境外机构投资者和人民币合格境外机构投资者参与股票期权交易的公告中国证券监督管理委员会公告〔2025〕13号",
+    "根据《合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法》等有关规定，经商中国人民银行、国家外汇局，中国证监会现就合格境外机构投资者和人民币合格境外机构投资者（以下合称合格境外投资者）参与股票期权交易有关事项公告如下：",
+    "允许合格境外投资者参与在国务院或中国证监会批准设立的交易场所上市交易的交易型开放式指数基金期权（ETF期权）交易。合格境外投资者参与ETF期权交易应当遵守中国证监会以及有关交易场所的交易规则，交易目的限于套期保值交易。自2025年10月9日起施行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-06",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\证券",
+  "officialSummary": "关于合格境外机构投资者和人民币合格境外机构投资者参与股票期权交易的公告 中国证券监督管理委员会公告〔2025〕13号 根据《合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法》等有关...",
+  "sourceTextHash": "e5d7608730abaf98dd899a9982d3e6b677b06a8c97c8627ece6a3613742b6cbd",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:39:08+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "中国证监会公告〔2025〕13号明确，经商中国人民银行、国家外汇局，允许合格境外机构投资者和人民币合格境外机构投资者参与ETF期权交易，须遵守证监会及交易场所规则，交易目的限于套期保值，自2025年10月9日起施行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-59-64-term",
+      "paragraphIndex": 1,
+      "start": 59,
+      "end": 64,
+      "text": "中国证监会",
+      "type": "term",
+      "explanation": "国务院直属正部级事业单位，依法对全国证券期货市场实行集中统一监督管理。"
+    },
+    {
+      "id": "ai-1-46-58-term",
+      "paragraphIndex": 1,
+      "start": 46,
+      "end": 58,
+      "text": "中国人民银行、国家外汇局",
+      "type": "term",
+      "explanation": "中国人民银行是中央银行，国家外汇局负责外汇管理，二者共同参与相关监管协调。"
+    },
+    {
+      "id": "ai-2-2-9-term",
+      "paragraphIndex": 2,
+      "start": 2,
+      "end": 9,
+      "text": "合格境外投资者",
+      "type": "term",
+      "explanation": "指合格境外机构投资者与人民币合格境外机构投资者的合称，可依规投资境内证券期货。"
+    },
+    {
+      "id": "ai-2-35-54-exam_point",
+      "paragraphIndex": 2,
+      "start": 35,
+      "end": 54,
+      "text": "交易型开放式指数基金期权（ETF期权）",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-48-57-figure",
+      "paragraphIndex": 0,
+      "start": 48,
+      "end": 57,
+      "text": "〔2025〕13号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 2
+  }
+}

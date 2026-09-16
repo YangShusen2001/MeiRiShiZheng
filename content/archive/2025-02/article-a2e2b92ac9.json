@@ -1,0 +1,73 @@
+{
+  "id": "a2e2b92ac9",
+  "date": "2025-02-14",
+  "title": "交通运输部关于废止《交通运输行政复议规定》的决定_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202502/content_7003687.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:44+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "交通运输部关于废止《交通运输行政复议规定》的决定（中华人民共和国交通运输部令2025年第1号）",
+    "《交通运输部关于废止〈交通运输行政复议规定〉的决定》已于2025年1月10日经第1次部务会议通过，现予公布，自公布之日起施行。",
+    "交通运输部决定废止《交通运输行政复议规定》（交通部令2000年第5号公布，交通运输部令2015年第18号修正）。",
+    "交通运输部关于废止《交通运输行政复议规定》的决定（中华人民共和国交通运输部令2025年第1号）.doc",
+    "交通运输部关于废止《交通运输行政复议规定》的决定（中华人民共和国交通运输部令2025年第1号）.pdf"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-02",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "交通运输部关于废止《交通运输行政复议规定》的决定 （中华人民共和国交通运输部令2025年第1号） 《交通运输部关于废止〈交通运输行政复议规定〉的决定》已于2025年1月10日经第1次部务会议通过，现予...",
+  "sourceTextHash": "273366494635697e0f90ca1d383d759614eed3e9887b25d404e5f3274a2edf91",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:51:20+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "交通运输部发布2025年第1号令，公布废止《交通运输行政复议规定》的决定。该决定于2025年1月10日经第1次部务会议通过，自公布之日起施行。被废止的规定为交通部令2000年第5号公布、交通运输部令2015年第18号修正的版本。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-38-46-figure",
+      "paragraphIndex": 0,
+      "start": 38,
+      "end": 46,
+      "text": "2025年第1号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-28-38-figure",
+      "paragraphIndex": 1,
+      "start": 28,
+      "end": 38,
+      "text": "2025年1月10日",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-54-62-exam_point",
+      "paragraphIndex": 1,
+      "start": 54,
+      "end": 62,
+      "text": "自公布之日起施行",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-22-34-figure",
+      "paragraphIndex": 2,
+      "start": 22,
+      "end": 34,
+      "text": "交通部令2000年第5号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-37-52-figure",
+      "paragraphIndex": 2,
+      "start": 37,
+      "end": 52,
+      "text": "交通运输部令2015年第18号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

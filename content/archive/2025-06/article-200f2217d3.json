@@ -1,0 +1,57 @@
+{
+  "id": "200f2217d3",
+  "date": "2025-06-10",
+  "title": "工业和信息化部等七部门关于印发《食品工业数字化转型实施方案》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202506/content_7027118.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:28+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部等七部门关于印发《食品工业数字化转型实施方案》的通知工信部联消费〔2025〕129号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、教育厅（教委）、人力资源社会保障厅（局）、市场监管局（厅、委）、粮食和物资储备局（粮食局）、数据管理部门，中国人民银行上海总部及各省、自治区、直辖市、计划单列市分行：",
+    "现将《食品工业数字化转型实施方案》印发给你们，请结合实际认真抓好落实。",
+    "工业和信息化部教育部人力资源社会保障部中国人民银行市场监管总局国家粮食物资储备局国家数据局2025年6月5日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-06",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部等七部门关于印发《食品工业数字化转型实施方案》的通知 工信部联消费〔2025〕129号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、教育厅（教委）、人力资源社...",
+  "sourceTextHash": "0943ba865166d5564dfd996742b3bcff87f95a867fae63503b424b24528ba6cc",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:58:29+00:00",
+  "aiStatus": "ok",
+  "aiAnnotations": [
+    {
+      "id": "ai-3-45-54-figure",
+      "paragraphIndex": 3,
+      "start": 45,
+      "end": 54,
+      "text": "2025年6月5日",
+      "type": "figure"
+    },
+    {
+      "id": "ai-3-0-7-term",
+      "paragraphIndex": 3,
+      "start": 0,
+      "end": 7,
+      "text": "工业和信息化部",
+      "type": "term",
+      "explanation": "国务院组成部门，主管工业与信息化领域，此处为实施方案牵头印发单位。"
+    },
+    {
+      "id": "ai-2-23-34-viewpoint",
+      "paragraphIndex": 2,
+      "start": 23,
+      "end": 34,
+      "text": "请结合实际认真抓好落实",
+      "type": "viewpoint"
+    }
+  ],
+  "aiSummary": "工信部等七部门于2025年6月5日联合印发《食品工业数字化转型实施方案》，通知发往各省、自治区、直辖市及计划单列市、新疆生产建设兵团相关主管部门，要求结合实际认真抓好落实。",
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

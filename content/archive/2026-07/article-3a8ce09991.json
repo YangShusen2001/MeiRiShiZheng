@@ -1,0 +1,64 @@
+{
+  "id": "3a8ce09991",
+  "date": "2026-07-08",
+  "title": "文化和旅游部关于印发《旅游强国建设“十五五”规划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202607/content_7074649.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:44:28+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "文化和旅游部关于印发《旅游强国建设“十五五”规划》的通知文旅资源发〔2026〕42号",
+    "各省、自治区、直辖市人民政府，新疆生产建设兵团，国务院各部委、各直属机构：",
+    "《旅游强国建设“十五五”规划》已经国务院同意，现印发给你们，请认真贯彻实施。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-07",
+  "archiveLib": "bm",
+  "topic": "商贸、海关、旅游\\旅游",
+  "officialSummary": "文化和旅游部关于印发《旅游强国建设“十五五”规划》的通知 文旅资源发〔2026〕42号 各省、自治区、直辖市人民政府，新疆生产建设兵团，国务院各部委、各直属机构：  《旅游强国建设“十五五”规划》已经...",
+  "sourceTextHash": "9fada569488cf29d5708b786ae0d791deb6e05f15fa68e572eb59fde1ecd7137",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:08:13+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "文化和旅游部印发《旅游强国建设“十五五”规划》通知，文号文旅资源发〔2026〕42号，已经国务院同意，要求各省区市及国务院部门认真贯彻实施。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-11-24-term",
+      "paragraphIndex": 0,
+      "start": 11,
+      "end": 24,
+      "text": "旅游强国建设“十五五”规划",
+      "type": "term",
+      "explanation": "指2026至2030年推进旅游业高质量发展、建设旅游强国的五年专项规划"
+    },
+    {
+      "id": "ai-0-28-42-figure",
+      "paragraphIndex": 0,
+      "start": 28,
+      "end": 42,
+      "text": "文旅资源发〔2026〕42号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-15-22-exam_point",
+      "paragraphIndex": 2,
+      "start": 15,
+      "end": 22,
+      "text": "已经国务院同意",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-30-37-viewpoint",
+      "paragraphIndex": 2,
+      "start": 30,
+      "end": 37,
+      "text": "请认真贯彻实施",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

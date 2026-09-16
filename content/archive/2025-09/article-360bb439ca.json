@@ -1,0 +1,58 @@
+{
+  "id": "360bb439ca",
+  "date": "2025-09-09",
+  "title": "国家药监局关于发布中药生产监督管理专门规定的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202509/content_7039746.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:57+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家药监局关于发布中药生产监督管理专门规定的公告2025年第79号",
+    "为全面贯彻落实《国务院办公厅关于全面深化药品医疗器械监管改革促进医药产业高质量发展的意见》（国办发〔2024〕53号）、《国务院办公厅关于提升中药质量促进中医药产业高质量发展的意见》（国办发〔2025〕11号），根据《中华人民共和国药品管理法》等法律法规，国家药监局组织制定了《中药生产监督管理专门规定》，现予发布，自2026年3月1日起施行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-09",
+  "archiveLib": "bm",
+  "topic": "卫生、体育\\医药管理",
+  "officialSummary": "国家药监局关于发布中药生产监督管理专门规定的公告 2025年第79号 为全面贯彻落实《国务院办公厅关于全面深化药品医疗器械监管改革促进医药产业高质量发展的意见》（国办发〔2024〕53号）、《国务院办...",
+  "sourceTextHash": "53a613d24ce57b1442476100659c4f0212b6103f195dd8e8c7b170f48325a8ec",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:29:23+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家药监局发布2025年第79号公告，为贯彻落实国办发〔2024〕53号、国办发〔2025〕11号文件要求，依据药品管理法等法律法规，组织制定《中药生产监督管理专门规定》并予发布，自2026年3月1日起施行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-1-7-viewpoint",
+      "paragraphIndex": 1,
+      "start": 1,
+      "end": 7,
+      "text": "全面贯彻落实",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-71-87-exam_point",
+      "paragraphIndex": 1,
+      "start": 71,
+      "end": 87,
+      "text": "中药质量促进中医药产业高质量发展",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-24-33-figure",
+      "paragraphIndex": 0,
+      "start": 24,
+      "end": 33,
+      "text": "2025年第79号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 0,
+    "to": 1
+  }
+}

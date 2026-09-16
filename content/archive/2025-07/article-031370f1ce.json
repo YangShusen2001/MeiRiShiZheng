@@ -1,0 +1,67 @@
+{
+  "id": "031370f1ce",
+  "date": "2025-07-04",
+  "title": "工业和信息化部关于开展号码保护服务业务试点的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202507/content_7030611.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:39+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部关于开展号码保护服务业务试点的通知工信部信管函〔2025〕130号",
+    "各省、自治区、直辖市通信管理局，中国电信集团有限公司、中国移动通信集团有限公司、中国联合网络通信集团有限公司、中国广播电视网络集团有限公司，移动通信转售企业，相关增值电信企业：",
+    "号码保护服务业务是指受快递、外卖、网约车等互联网平台企业及其他企事业单位委托，为其个人用户分配临时号码（通常称为“中间号”或“隐私号”）代替真实手机号码，利用公用电信网实现和他人之间的话音、短消息等通信功能，减少个人手机号码泄露风险的一种业务。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-07",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\信息产业（含电信）",
+  "officialSummary": "工业和信息化部关于开展号码保护服务业务试点的通知 工信部信管函〔2025〕130号 各省、自治区、直辖市通信管理局，中国电信集团有限公司、中国移动通信集团有限公司、中国联合网络通信集团有限公司、中国广...",
+  "sourceTextHash": "9d5db6fddafba6249eccebc7521fad80ab2e776b0182b02e5cbeca15ed32a313",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:34:36+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部发布工信部信管函〔2025〕130号通知，开展号码保护服务业务试点。该业务受快递、外卖、网约车等平台及企事业单位委托，为个人用户分配临时号码即中间号或隐私号，替代真实手机号码，通过公用电信网实现话音、短消息通信，降低号码泄露风险。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-0-8-term",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 8,
+      "text": "号码保护服务业务",
+      "type": "term"
+    },
+    {
+      "id": "ai-2-11-20-exam_point",
+      "paragraphIndex": 2,
+      "start": 11,
+      "end": 20,
+      "text": "快递、外卖、网约车",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-55-69-exam_point",
+      "paragraphIndex": 1,
+      "start": 55,
+      "end": 69,
+      "text": "中国广播电视网络集团有限公司",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-31-35-figure",
+      "paragraphIndex": 0,
+      "start": 31,
+      "end": 35,
+      "text": "2025",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

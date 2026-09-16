@@ -1,0 +1,114 @@
+{
+  "id": "aebb2c814f",
+  "date": "2025-11-11",
+  "title": "市场监管总局关于进一步推进内外贸产品“同线同标同质”工作的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202511/content_7047730.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:43+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "市场监管总局关于进一步推进内外贸产品“同线同标同质”工作的公告2025年第40号",
+    "为积极落实党中央、国务院关于促进内外贸一体化发展以及新形势下提振消费的战略部署，加快运用内外贸产品“同线同标同质”（以下简称“三同”）手段助力企业高质量发展，现就有关落实举措公告如下：",
+    "企业可依据国内外相关标准，自主评估其产品是否符合“三同”条件。对符合条件的产品，可作“三同”符合性声明（特殊食品除外）。企业应确保其“三同”产品信息真实、准确。",
+    "认证机构要进一步发挥专业优势，开展国内外标准差异分",
+    "析，主动帮助有意愿的企业识别技术指标、检测方法等核心差异，",
+    "通过建立对标改进方案等方式助力“三同”企业降本增效。",
+    "各级市场监管部门要加强对“三同”政策的解读和宣传，提高企业对“三同”工作的认知度；动态掌握本辖区“三同”企业及产品数量，积极协调企业参与有关部门组织的产销对接活动；督促企业落实主体责任，推动行业自律，维护市场秩序。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-11",
+  "archiveLib": "bm",
+  "topic": "商贸、海关、旅游\\其他",
+  "officialSummary": "市场监管总局关于进一步推进内外贸产品“同线同标同质”工作的公告 2025年第40号 为积极落实党中央、国务院关于促进内外贸一体化发展以及新形势下提振消费的战略部署，加快运用内外贸产品“同线同标同质”（...",
+  "sourceTextHash": "7531775569b02b68fcb00660114199a6185f10f473e641eb74dafc9bb8ff74fa",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:25:22+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "市场监管总局发布2025年第40号公告，推进内外贸产品“同线同标同质”工作。企业可自主评估并作符合性声明，认证机构开展标准差异分析助企降本增效，各地市场监管部门加强政策宣传、产销对接与主体监管。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-16-24-term",
+      "paragraphIndex": 1,
+      "start": 16,
+      "end": 24,
+      "text": "内外贸一体化发展",
+      "type": "term",
+      "explanation": "指打破内外贸分割，推动企业在标准、渠道、市场等方面统筹经营、协同发展。"
+    },
+    {
+      "id": "ai-1-30-34-exam_point",
+      "paragraphIndex": 1,
+      "start": 30,
+      "end": 34,
+      "text": "提振消费",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-13-30-exam_point",
+      "paragraphIndex": 2,
+      "start": 13,
+      "end": 30,
+      "text": "自主评估其产品是否符合“三同”条件",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-52-58-exam_point",
+      "paragraphIndex": 2,
+      "start": 52,
+      "end": 58,
+      "text": "特殊食品除外",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-17-25-viewpoint",
+      "paragraphIndex": 3,
+      "start": 17,
+      "end": 25,
+      "text": "国内外标准差异分",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-5-21-25-term",
+      "paragraphIndex": 5,
+      "start": 21,
+      "end": 25,
+      "text": "降本增效",
+      "type": "term",
+      "explanation": "指通过优化流程、对标改进等方式降低企业成本，提升生产经营效率和效益。"
+    },
+    {
+      "id": "ai-6-75-81-term",
+      "paragraphIndex": 6,
+      "start": 75,
+      "end": 81,
+      "text": "产销对接活动",
+      "type": "term",
+      "explanation": "指政府或行业组织搭建平台，促进生产企业与采购销售方直接对接合作的活动。"
+    },
+    {
+      "id": "ai-6-82-92-viewpoint",
+      "paragraphIndex": 6,
+      "start": 82,
+      "end": 92,
+      "text": "督促企业落实主体责任",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-31-40-figure",
+      "paragraphIndex": 0,
+      "start": 31,
+      "end": 40,
+      "text": "2025年第40号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 1
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 6
+  }
+}

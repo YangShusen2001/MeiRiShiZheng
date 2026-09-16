@@ -1,0 +1,64 @@
+{
+  "id": "a947ac9f47",
+  "date": "2025-02-10",
+  "title": "国家移民管理局关于实施东盟国家旅游团入境云南西双版纳免签政策的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202502/content_7003054.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:46+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家移民管理局关于实施东盟国家旅游团入境云南西双版纳免签政策的公告2025年第1号",
+    "经报国务院批准，国家移民管理局决定实施东盟国家旅游团入境云南西双版纳免签政策，现公告如下：",
+    "自即日起，东盟国家（马来西亚、印度尼西亚、泰国、菲律宾、新加坡、文莱、越南、老挝、缅甸、柬埔寨）旅游团（2人及以上），持普通护照经我国境内旅行社组织接待，采取团进团出方式，可由西双版纳嘎洒国际机场口岸、磨憨铁路口岸、磨憨公路口岸免办签证入境出境，活动范围为云南省西双版纳傣族自治州行政区域，停留时间不超过6天（符合与我国签署互免签证协定或我单方面免签政策的，可从其规定），停留时间自入境次日零时起算。",
+    "Announcement on Visa-Free Policy for Tourist Groups from ASEAN Countries to Xishuangbanna, YunnanNo. 1 [2025]",
+    "Approved by the State Council of the People's Republic of China, the National Immigration Administration (NIA) has decided to implement a visa-free policy for tourist groups from ASEAN countries visiting Xishuangbanna in Yunnan, with details as follows:",
+    "As of today, tourist groups of two or more ordinary passport holders from ASEAN countries—including Malaysia, Indonesia, Thailand, the Philippines, Singapore, Brunei, Vietnam, Laos, Myanmar, and Cambodia—can enter and exit China visa-free through Xishuangbanna Gasa International Airport, Mohan Railway Port, and Mohan Highway Port, provided they are organized by travel agencies in China and follow the \"group in, group out\" arrangement. Please note that the travel only limited to the administrative region of Xishuangbanna Dai Autonomous Prefecture in Yunnan Province and the stay shall not exceed six days, with the duration starting at 00:00 on the day following entry. Those eligible under mutual visa exemption agreements with China or China's unilateral visa exemption policy may follow the applicable regulations.",
+    "Announcement is hereby given.",
+    "National Immigration AdministrationFebruary 10, 2025"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-02",
+  "archiveLib": "bm",
+  "topic": "商贸、海关、旅游\\其他",
+  "officialSummary": "国家移民管理局关于实施东盟国家旅游团入境云南西双版纳免签政策的公告 2025年第1号 经报国务院批准，国家移民管理局决定实施东盟国家旅游团入境云南西双版纳免签政策，现公告如下： 自即日起，东盟国家（马...",
+  "sourceTextHash": "aedb284f895f1814bca65763cc00f7c1294ba0ac40344a8851980119b5c51aea",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:51:27+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家移民管理局2025年第1号公告实施东盟国家旅游团入境云南西双版纳免签政策，2人及以上旅游团持普通护照经境内旅行社组织接待、团进团出，可从嘎洒机场及磨憨铁路、公路口岸免签入出境，活动限于西双版纳州，停留不超过6天。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-0-7-viewpoint",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 7,
+      "text": "经报国务院批准",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-0-4-figure",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 4,
+      "text": "自即日起",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-52-57-figure",
+      "paragraphIndex": 2,
+      "start": 52,
+      "end": 57,
+      "text": "2人及以上",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 2
+  }
+}

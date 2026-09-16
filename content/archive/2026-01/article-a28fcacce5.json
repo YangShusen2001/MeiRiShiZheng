@@ -1,0 +1,59 @@
+{
+  "id": "a28fcacce5",
+  "date": "2026-01-04",
+  "title": "市场监管总局关于发布《企业名称申报指引（2025年版）》的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202601/content_7053833.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:54:41+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "市场监管总局关于发布《企业名称申报指引（2025年版）》的公告2025年第59号",
+    "为纵深推进全国统一大市场建设，统一市场基础制度，落实国务院优化营商环境重点工作任务，规范企业名称自主申报行为，保护企业合法权益，提高政务服务水平，市场监管总局依据《中华人民共和国公司法》《企业名称登记管理规定》《企业名称登记管理规定实施办法》等法律法规规章，制定了《企业名称申报指引（2025年版）》，现予以公告。",
+    "市场监管总局关于发布《企业名称申报指引（2025年版）》的公告.pdf"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-01",
+  "archiveLib": "bm",
+  "topic": "市场监管、安全生产监管\\工商",
+  "officialSummary": "市场监管总局关于发布《企业名称申报指引（2025年版）》的公告 2025年第59号 为纵深推进全国统一大市场建设，统一市场基础制度，落实国务院优化营商环境重点工作任务，规范企业名称自主申报行为，保护企...",
+  "sourceTextHash": "d97c79df84d862eaec2626b196252c5c923537b9c47dd5814105cbd8c7c9b7b2",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:19:42+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "市场监管总局发布2025年第59号公告，公布《企业名称申报指引（2025年版）》。制定目的是推进全国统一大市场建设、统一市场基础制度、落实优化营商环境任务、规范企业名称自主申报、保护企业合法权益、提高政务服务水平，依据公司法及企业名称登记管理相关规定制定。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-1-14-viewpoint",
+      "paragraphIndex": 1,
+      "start": 1,
+      "end": 14,
+      "text": "纵深推进全国统一大市场建设",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-15-23-exam_point",
+      "paragraphIndex": 1,
+      "start": 15,
+      "end": 23,
+      "text": "统一市场基础制度",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-31-40-figure",
+      "paragraphIndex": 0,
+      "start": 31,
+      "end": 40,
+      "text": "2025年第59号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 1
+  }
+}

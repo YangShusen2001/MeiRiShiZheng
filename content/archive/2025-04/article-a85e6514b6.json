@@ -1,0 +1,61 @@
+{
+  "id": "a85e6514b6",
+  "date": "2025-04-28",
+  "title": "关于印发《民间非营利组织新旧会计制度有关衔接问题的处理规定》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7021440.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:04+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发《民间非营利组织新旧会计制度有关衔接问题的处理规定》的通知财会〔2025〕6号",
+    "国务院有关部委、有关直属机构，各省、自治区、直辖市、计划单列市财政厅（局），新疆生产建设兵团财政局，有关单位：",
+    "为规范民间非营利组织会计工作，加强民间非营利组织会计核算，我部修订印发了《民间非营利组织会计制度》（财会〔2024〕25号），自2026年1月1日起施行。为了确保新旧会计制度顺利衔接、平稳过渡，促进新制度的有效贯彻实施，我部制定了《民间非营利组织新旧会计制度有关衔接问题的处理规定》，现予印发，请遵照执行。",
+    "附件：民间非营利组织新旧会计制度有关衔接问题的处理规定",
+    "民间非营利组织新旧会计制度有关衔接问题的处理规定.pdf"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\其他",
+  "officialSummary": "关于印发《民间非营利组织新旧会计制度有关衔接问题的处理规定》的通知 财会〔2025〕6号 国务院有关部委、有关直属机构，各省、自治区、直辖市、计划单列市财政厅（局），新疆生产建设兵团财政局，有关单位：...",
+  "sourceTextHash": "b494848bacd6dd3652ac01f94be5b0fae56025123132ed5c7b13f2039ae736d5",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:44:50+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "财政部印发通知，为规范民间非营利组织会计工作，修订发布《民间非营利组织会计制度》，自2026年1月1日起施行。为确保新旧制度顺利衔接、平稳过渡，配套制定衔接问题处理规定，要求有关单位遵照执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-1-14-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 14,
+      "text": "规范民间非营利组织会计工作",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-15-28-viewpoint",
+      "paragraphIndex": 2,
+      "start": 15,
+      "end": 28,
+      "text": "加强民间非营利组织会计核算",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-33-43-figure",
+      "paragraphIndex": 0,
+      "start": 33,
+      "end": 43,
+      "text": "财会〔2025〕6号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

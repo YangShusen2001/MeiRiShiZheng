@@ -1,0 +1,68 @@
+{
+  "id": "cbdb28d43e",
+  "date": "2025-12-04",
+  "title": "国务院关于同意萧山临江高新技术产业开发区更名为杭州钱塘高新技术产业开发区的批复_国务院文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202512/content_7050300.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:57+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国务院关于同意萧山临江高新技术产业开发区更名为杭州钱塘高新技术产业开发区的批复",
+    "你省《关于萧山临江高新技术产业开发区更名为杭州钱塘高新技术产业开发区的请示》（浙政〔2024〕37号）收悉。现批复如下：",
+    "同意萧山临江高新技术产业开发区更名为杭州钱塘高新技术产业开发区。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-12",
+  "archiveLib": "gw",
+  "topic": "科技、教育\\科技",
+  "officialSummary": "国务院关于同意萧山临江高新技术产业开发区 更名为杭州钱塘高新技术产业开发区的批复 国函〔2025〕112号 浙江省人民政府： 你省《关于萧山临江高新技术产业开发区更名为杭州钱塘高新技术产业开发区的请示...",
+  "sourceTextHash": "0758e2b464c51bf474454c6c2789a62d5a96e34878c678490f187341afa294dc",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:23:21+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国务院批复同意萧山临江高新技术产业开发区更名为杭州钱塘高新技术产业开发区，回应浙江省相关请示。该文件属于国务院对地方开发区更名的正式批复，涉及高新技术产业开发区名称调整及地方请示的办理程序，是了解开发区管理与行政区划调整的时政考点。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-39-50-figure",
+      "paragraphIndex": 1,
+      "start": 39,
+      "end": 50,
+      "text": "浙政〔2024〕37号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-0-31-exam_point",
+      "paragraphIndex": 2,
+      "start": 0,
+      "end": 31,
+      "text": "同意萧山临江高新技术产业开发区更名为杭州钱塘高新技术产业开发区",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-0-7-viewpoint",
+      "paragraphIndex": 0,
+      "start": 0,
+      "end": 7,
+      "text": "国务院关于同意",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-2-15-term",
+      "paragraphIndex": 2,
+      "start": 2,
+      "end": 15,
+      "text": "萧山临江高新技术产业开发区",
+      "type": "term",
+      "explanation": "浙江省原有高新技术产业开发区，位于杭州市萧山区，此次经国务院批复同意更名。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 1,
+    "to": 2
+  }
+}

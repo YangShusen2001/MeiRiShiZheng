@@ -1,0 +1,58 @@
+{
+  "id": "334a3e5092",
+  "date": "2025-07-20",
+  "title": "国务院国资委关于组建中国雅江集团有限公司的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202507/content_7032812.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:35+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国务院国有资产监督管理委员会公 告2025年第1号",
+    "经国务院批准，组建中国雅江集团有限公司，由国务院国有资产监督管理委员会代表国务院履行出资人职责，列入国务院国有资产监督管理委员会履行出资人职责的企业名单。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-07",
+  "archiveLib": "bm",
+  "topic": "国民经济管理、国有资产监管\\国有资产监管",
+  "officialSummary": "国务院国有资产监督管理委员会 公　　告 2025年第1号 国务院国资委关于组建中国雅江集团有限公司的公告 经国务院批准，组建中国雅江集团有限公司，由国务院国有资产监督管理委员会代表国务院履行出资人职责...",
+  "sourceTextHash": "8a27ed818ac00b962e4027b95fae94c21d175ce637bc34ec505e136d6436a8bb",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:34:56+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国务院国资委发布2025年第1号公告，宣布经国务院批准组建中国雅江集团有限公司，由国务院国资委代表国务院履行出资人职责，并将其列入国资委履行出资人职责的企业名单。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-0-6-exam_point",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 6,
+      "text": "经国务院批准",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-1-7-19-exam_point",
+      "paragraphIndex": 1,
+      "start": 7,
+      "end": 19,
+      "text": "组建中国雅江集团有限公司",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-0-17-25-figure",
+      "paragraphIndex": 0,
+      "start": 17,
+      "end": 25,
+      "text": "2025年第1号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 0,
+    "to": 1
+  }
+}

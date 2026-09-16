@@ -1,0 +1,59 @@
+{
+  "id": "1ec047f7a8",
+  "date": "2025-01-03",
+  "title": "关于印发《民间非营利组织会计制度》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_6996053.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:37+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发《民间非营利组织会计制度》的通知财会〔2024〕25号",
+    "国务院有关部委、有关直属机构，各省、自治区、直辖市、计划单列市财政厅（局），新疆生产建设兵团财政局，有关单位：",
+    "为规范民间非营利组织的会计核算，提高会计信息质量，根据《中华人民共和国会计法》等有关规定，我们对《民间非营利组织会计制度》（财会〔2004〕7号）进行了修订，现将修订后的《民间非营利组织会计制度》印发，自2026年1月1日起施行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "财政、金融、审计\\其他",
+  "officialSummary": "关于印发《民间非营利组织会计制度》的通知 财会〔2024〕25号 国务院有关部委、有关直属机构，各省、自治区、直辖市、计划单列市财政厅（局），新疆生产建设兵团财政局，有关单位： 为规范民间非营利组织的...",
+  "sourceTextHash": "5f725c5958ad01e87b4add2f263b6953ea69d81bfdad4975e2fa92f360496833",
+  "aiModel": "deepseek-chat",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T19:23:33+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "财政部修订印发《民间非营利组织会计制度》（财会〔2024〕25号），旨在规范民间非营利组织会计核算、提高会计信息质量，依据《中华人民共和国会计法》等规定，新制度自2026年1月1日起施行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-1-15-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 15,
+      "text": "规范民间非营利组织的会计核算",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-16-24-viewpoint",
+      "paragraphIndex": 2,
+      "start": 16,
+      "end": 24,
+      "text": "提高会计信息质量",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-20-31-figure",
+      "paragraphIndex": 0,
+      "start": 20,
+      "end": 31,
+      "text": "财会〔2024〕25号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

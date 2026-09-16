@@ -1,0 +1,46 @@
+{
+  "id": "4dc2c10def",
+  "date": "2025-04-09",
+  "title": "市场监管总局关于发布市场监管行业标准《自然人网店管理规范》的公告_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202504/content_7017700.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:12+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "市场监管总局关于发布市场监管行业标准《自然人网店管理规范》的公告2025年第15号",
+    "《自然人网店管理规范》（MR/T 0001—2025）行业标准已经市场监管总局批准，现予以公告，自2025年6月1日起实施。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-04",
+  "archiveLib": "bm",
+  "topic": "市场监管、安全生产监管\\工商",
+  "officialSummary": "市场监管总局关于发布市场监管行业标准《自然人网店管理规范》的公告 2025年第15号 《自然人网店管理规范》（MR/T 0001—2025）行业标准已经市场监管总局批准，现予以公告，自2025年6月1...",
+  "sourceTextHash": "444bf5d68755958814dd1c4466a63d76fe84b5e8812a04a2eba42aa2f1f05336",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:43:19+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "市场监管总局发布公告，批准《自然人网店管理规范》（MR/T 0001—2025）为市场监管行业标准，并明确该标准自2025年6月1日起正式实施，旨在规范自然人网店经营管理。",
+  "aiAnnotations": [
+    {
+      "id": "ai-1-0-11-term",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 11,
+      "text": "《自然人网店管理规范》",
+      "type": "term"
+    },
+    {
+      "id": "ai-1-12-26-figure",
+      "paragraphIndex": 1,
+      "start": 12,
+      "end": 26,
+      "text": "MR/T 0001—2025",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

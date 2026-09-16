@@ -1,0 +1,56 @@
+{
+  "id": "661cdc872b",
+  "date": "2026-07-31",
+  "title": "工业和信息化部关于印发《工业绿色低碳发展“十五五”规划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202607/content_7077146.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:44:23+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部关于印发《工业绿色低碳发展“十五五”规划》的通知工信部规〔2026〕169号",
+    "各省、自治区、直辖市及计划单列市，新疆生产建设兵团工业和信息化主管部门，各省、自治区、直辖市通信管理局，有关中央企业，部属有关单位，部机关各司局：",
+    "现将《工业绿色低碳发展“十五五”规划》印发给你们，请结合实际，认真贯彻实施。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-07",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部关于印发《工业绿色低碳发展“十五五”规划》的通知 工信部规〔2026〕169号 各省、自治区、直辖市及计划单列市，新疆生产建设兵团工业和信息化主管部门，各省、自治区、直辖市通信管理局，有...",
+  "sourceTextHash": "af3ea2d9e7f3ef7d2d411827c0d1319fc618081fe72cf82580606de9eb24064f",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:08:33+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部以工信部规〔2026〕169号文印发《工业绿色低碳发展“十五五”规划》，发文对象包括各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门，各省通信管理局，有关中央企业及部属有关单位、部机关各司局，要求结合实际认真贯彻实施。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-31-45-figure",
+      "paragraphIndex": 0,
+      "start": 31,
+      "end": 45,
+      "text": "工信部规〔2026〕169号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-2-19-term",
+      "paragraphIndex": 2,
+      "start": 2,
+      "end": 19,
+      "text": "《工业绿色低碳发展“十五五”规划》",
+      "type": "term",
+      "explanation": "工业和信息化部印发的指导未来五年工业领域绿色转型与碳减排的专项规划。"
+    },
+    {
+      "id": "ai-2-31-37-exam_point",
+      "paragraphIndex": 2,
+      "start": 31,
+      "end": 37,
+      "text": "认真贯彻实施",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

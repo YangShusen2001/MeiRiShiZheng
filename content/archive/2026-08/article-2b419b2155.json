@@ -1,0 +1,59 @@
+{
+  "id": "2b419b2155",
+  "date": "2026-08-27",
+  "title": "商务部等9部门关于促进航空保税维修高质量发展的意见_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202608/content_7079335.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:44:31+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "商务部等9部门关于促进航空保税维修高质量发展的意见",
+    "为深入贯彻落实党中央、国务院决策部署，促进航空保税维修高质量发展，现提出以下意见："
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-08",
+  "archiveLib": "bm",
+  "topic": "商贸、海关、旅游\\其他",
+  "officialSummary": "商务部等9部门关于促进航空保税维修高质量发展的意见 为深入贯彻落实党中央、国务院决策部署，促进航空保税维修高质量发展，现提出以下意见： 一、加大航空保税维修支持力度 （一）航空维修企业开展航空保税维修...",
+  "sourceTextHash": "0723a6c56684ffd5894b2592202188980f8416b5823d69cc3f7d49a5cb691ed7",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:05:45+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "商务部等9部门联合出台促进航空保税维修高质量发展的意见，旨在落实党中央、国务院决策部署，推动航空保税维修产业提质升级，明确发展方向与政策举措，为相关领域高质量发展提供制度保障。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-11-22-term",
+      "paragraphIndex": 0,
+      "start": 11,
+      "end": 22,
+      "text": "航空保税维修高质量发展",
+      "type": "term",
+      "explanation": "指依托保税政策开展航空器及部件维修，推动产业向高端化、集群化、国际化方向发展的业务模式"
+    },
+    {
+      "id": "ai-1-7-18-viewpoint",
+      "paragraphIndex": 1,
+      "start": 7,
+      "end": 18,
+      "text": "党中央、国务院决策部署",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-1-21-32-exam_point",
+      "paragraphIndex": 1,
+      "start": 21,
+      "end": 32,
+      "text": "航空保税维修高质量发展",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 0,
+    "to": 1
+  }
+}

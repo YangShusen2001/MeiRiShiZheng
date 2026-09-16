@@ -1,0 +1,66 @@
+{
+  "id": "4a79b78aeb",
+  "date": "2025-09-12",
+  "title": "关于印发《新型储能规模化建设专项行动方案(2025—2027年)》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202509/content_7040296.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:08:56+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委 国家能源局关于印发《新型储能规模化建设专项行动方案（2025—2027年）》的通知发改能源〔2025〕1144号",
+    "各省、自治区、直辖市及新疆生产建设兵团发展改革委、能源局，北京市城市管理委，国家能源局各派出机构，有关中央企业：",
+    "为推动新型储能高质量发展，国家发展改革委、国家能源局研究制定了《新型储能规模化建设专项行动方案（2025—2027年）》。现予印发，请结合实际认真抓好贯彻落实。",
+    "《新型储能规模化建设专项行动方案（2025—2027年）》.pdf",
+    "《新型储能规模化建设专项行动方案（2025—2027年）》.zip"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-09",
+  "archiveLib": "bm",
+  "topic": "国土资源、能源\\其他",
+  "officialSummary": "国家发展改革委 国家能源局关于印发《新型储能规模化建设专项行动方案（2025—2027年）》的通知 发改能源〔2025〕1144号 各省、自治区、直辖市及新疆生产建设兵团发展改革委、能源局，北京市城市...",
+  "sourceTextHash": "ea723ceb8c70438fc1788c6fb944e2a50745c6a1fb40b1a0cad449355d6abb0c",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:29:52+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委、国家能源局联合印发《新型储能规模化建设专项行动方案（2025—2027年）》，要求各省区市及新疆生产建设兵团发展改革委、能源局等单位结合实际抓好贯彻落实，旨在推动新型储能高质量发展，实现规模化建设目标。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-49-64-figure",
+      "paragraphIndex": 0,
+      "start": 49,
+      "end": 64,
+      "text": "发改能源〔2025〕1144号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-1-0-19-exam_point",
+      "paragraphIndex": 1,
+      "start": 0,
+      "end": 19,
+      "text": "各省、自治区、直辖市及新疆生产建设兵团",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-1-12-viewpoint",
+      "paragraphIndex": 2,
+      "start": 1,
+      "end": 12,
+      "text": "推动新型储能高质量发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-13-26-term",
+      "paragraphIndex": 2,
+      "start": 13,
+      "end": 26,
+      "text": "国家发展改革委、国家能源局",
+      "type": "term",
+      "explanation": "国务院组成部门，分别负责宏观政策制定和能源行业管理，共同推进能源领域重大战略实施。"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

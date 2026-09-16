@@ -1,0 +1,56 @@
+{
+  "id": "e07721bd7e",
+  "date": "2025-11-19",
+  "title": "工业和信息化部办公厅关于印发《高标准数字园区建设指南》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202511/content_7049054.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:01:41+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "工业和信息化部办公厅关于印发《高标准数字园区建设指南》的通知工信厅规函〔2025〕466号",
+    "各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门：",
+    "现将《高标准数字园区建设指南》印发给你们，请结合实际认真抓好落实。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-11",
+  "archiveLib": "bm",
+  "topic": "工业、交通\\其他",
+  "officialSummary": "工业和信息化部办公厅关于印发《高标准数字园区建设指南》的通知 工信厅规函〔2025〕466号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门： 现将《高标准数字园区建设指南》印...",
+  "sourceTextHash": "83e4fee3ac52d15e851544334f49ae06de9c2743499d7f068146f676df924631",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:26:04+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "工业和信息化部办公厅印发《高标准数字园区建设指南》通知（工信厅规函〔2025〕466号），要求各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门结合实际认真抓好落实。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-15-26-term",
+      "paragraphIndex": 0,
+      "start": 15,
+      "end": 26,
+      "text": "高标准数字园区建设指南",
+      "type": "term",
+      "explanation": "指工信部出台的指导数字园区高标准建设的规范性文件，明确建设方向与要求。"
+    },
+    {
+      "id": "ai-0-30-45-figure",
+      "paragraphIndex": 0,
+      "start": 30,
+      "end": 45,
+      "text": "工信厅规函〔2025〕466号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-21-32-exam_point",
+      "paragraphIndex": 2,
+      "start": 21,
+      "end": 32,
+      "text": "请结合实际认真抓好落实",
+      "type": "exam_point"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

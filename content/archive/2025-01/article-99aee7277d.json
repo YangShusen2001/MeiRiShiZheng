@@ -1,0 +1,59 @@
+{
+  "id": "99aee7277d",
+  "date": "2025-01-21",
+  "title": "国家发展改革委 国家数据局关于印发《公共数据资源授权运营实施规范（试行）》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202501/content_7000191.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:26+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "国家发展改革委 国家数据局关于印发《公共数据资源授权运营实施规范（试行）》的通知发改数据规〔2025〕27号",
+    "中央有关部门，国务院各部委、各直属机构，最高人民法院，最高人民检察院，有关人民团体，各省、自治区、直辖市、新疆生产建设兵团发展改革委、数据管理部门，有关中央企业：",
+    "为贯彻落实《中共中央办公厅、国务院办公厅关于加快公共数据资源开发利用的意见》，加强数据基础制度建设，规范公共数据资源授权运营，促进一体化数据市场培育，释放数据要素价值，我们制定了《公共数据资源授权运营实施规范（试行）》。现印发给你们，请遵照执行。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-01",
+  "archiveLib": "bm",
+  "topic": "国民经济管理、国有资产监管\\其他",
+  "officialSummary": "国家发展改革委 国家数据局关于印发 《公共数据资源授权运营实施规范（试行）》的通知 发改数据规〔2025〕27号 中央有关部门，国务院各部委、各直属机构，最高人民法院，最高人民检察院，有关人民团体，各...",
+  "sourceTextHash": "64617aa43c8c5f54f6f47aa74c1253b672c8156501be5a195e6ee842982a1827",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:53:54+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "国家发展改革委、国家数据局联合印发《公共数据资源授权运营实施规范（试行）》（发改数据规〔2025〕27号），贯彻落实公共数据资源开发利用意见，加强数据基础制度建设，规范授权运营，促进一体化数据市场培育，释放数据要素价值，要求有关单位遵照执行。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-40-54-figure",
+      "paragraphIndex": 0,
+      "start": 40,
+      "end": 54,
+      "text": "发改数据规〔2025〕27号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-50-62-exam_point",
+      "paragraphIndex": 2,
+      "start": 50,
+      "end": 62,
+      "text": "规范公共数据资源授权运营",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-63-74-viewpoint",
+      "paragraphIndex": 2,
+      "start": 63,
+      "end": 74,
+      "text": "促进一体化数据市场培育",
+      "type": "viewpoint"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

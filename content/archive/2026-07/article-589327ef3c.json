@@ -1,0 +1,73 @@
+{
+  "id": "589327ef3c",
+  "date": "2026-07-14",
+  "title": "关于印发《固体废物污染防治“十五五”规划》的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202607/content_7075414.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T07:44:26+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "关于印发《固体废物污染防治“十五五”规划》的通知环固体〔2026〕39号",
+    "各省、自治区、直辖市及新疆生产建设兵团生态环境厅（局）、发展改革委、工业和信息化主管部门、住房城乡建设厅（委、管委、局）、农业农村厅（局、委）、商务主管部门：",
+    "为贯彻落实党中央、国务院决策部署，全面系统强化固体废物污染防治，生态环境部、国家发展改革委、工业和信息化部、住房城乡建设部、农业农村部、商务部编制了《固体废物污染防治“十五五”规划》。现印发给你们，请结合实际，认真贯彻落实。",
+    "生态环境部国家发展改革委工业和信息化部住房城乡建设部农业农村部商务部2026年7月8日"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2026-07",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\环境监测、保护与治理",
+  "officialSummary": "关于印发《固体废物污染防治“十五五”规划》的通知 环固体〔2026〕39号 各省、自治区、直辖市及新疆生产建设兵团生态环境厅（局）、发展改革委、工业和信息化主管部门、住房城乡建设厅（委、管委、局）、农...",
+  "sourceTextHash": "f9d8f0a22b32d13af66b868fdb69e54573cabbe4ba8728c432418f4eaaeb120b",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:08:27+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "生态环境部等六部门联合印发《固体废物污染防治“十五五”规划》，要求各地结合实际贯彻落实。规划旨在全面系统强化固体废物污染防治，落实党中央、国务院决策部署。",
+  "aiAnnotations": [
+    {
+      "id": "ai-0-5-20-term",
+      "paragraphIndex": 0,
+      "start": 5,
+      "end": 20,
+      "text": "固体废物污染防治“十五五”规划",
+      "type": "term",
+      "explanation": "指2026至2030年期间国家针对工业、生活等固体废物污染制定的专项防治规划文件"
+    },
+    {
+      "id": "ai-0-24-36-figure",
+      "paragraphIndex": 0,
+      "start": 24,
+      "end": 36,
+      "text": "环固体〔2026〕39号",
+      "type": "figure"
+    },
+    {
+      "id": "ai-2-17-31-viewpoint",
+      "paragraphIndex": 2,
+      "start": 17,
+      "end": 31,
+      "text": "全面系统强化固体废物污染防治",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-2-32-71-exam_point",
+      "paragraphIndex": 2,
+      "start": 32,
+      "end": 71,
+      "text": "生态环境部、国家发展改革委、工业和信息化部、住房城乡建设部、农业农村部、商务部",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-3-34-43-figure",
+      "paragraphIndex": 3,
+      "start": 34,
+      "end": 43,
+      "text": "2026年7月8日",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  }
+}

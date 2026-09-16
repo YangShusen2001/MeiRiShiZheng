@@ -1,0 +1,60 @@
+{
+  "id": "f8b117b433",
+  "date": "2025-03-19",
+  "title": "住房城乡建设部办公厅关于印发智能建造技术导则（试行）的通知_国务院部门文件",
+  "source": "中国政府网",
+  "url": "https://www.gov.cn/zhengce/zhengceku/202503/content_7014454.htm",
+  "pubDate": "",
+  "fetchedAt": "2026-09-12T08:07:55+00:00",
+  "status": "ok",
+  "paragraphs": [
+    "住房城乡建设部办公厅关于印发智能建造技术导则（试行）的通知建办市〔2025〕14号",
+    "各省、自治区住房城乡建设厅，直辖市住房城乡建设（管）委，北京市规划和自然资源委，新疆生产建设兵团住房城乡建设局：",
+    "为贯彻落实《中共中央办公厅、国务院办公厅关于推进新型城市基础设施建设打造韧性城市的意见》等文件要求，加快推进智能建造技术在工程建设全生命期应用，推动建筑业高质量发展，住房城乡建设部组织编制了《智能建造技术导则（试行）》。现印发给你们，请结合实际参照执行。",
+    "执行过程中的有关问题和建议，请及时与部建筑市场监管司联系。"
+  ],
+  "keySentences": [],
+  "archiveMonth": "2025-03",
+  "archiveLib": "bm",
+  "topic": "城乡建设、环境保护\\其他",
+  "officialSummary": "住房城乡建设部办公厅关于印发智能建造技术导则（试行）的通知 建办市〔2025〕14号 各省、自治区住房城乡建设厅，直辖市住房城乡建设（管）委，北京市规划和自然资源委，新疆生产建设兵团住房城乡建设局： ...",
+  "sourceTextHash": "a8aff52456a5467f68f3a789259441c1349925dbe1bc791db2e3967a328a8018",
+  "aiModel": "global:deepseek-v4.1-flash",
+  "aiPromptVersion": "article-analysis-v3",
+  "aiGeneratedAt": "2026-09-15T20:49:32+00:00",
+  "aiStatus": "ok",
+  "aiSummary": "住房城乡建设部办公厅印发《智能建造技术导则（试行）》，要求各地住建部门结合实际参照执行，旨在贯彻新型城市基础设施建设意见，加快推进智能建造技术在工程建设全生命期应用，推动建筑业高质量发展，执行问题及时反馈建筑市场监管司。",
+  "aiAnnotations": [
+    {
+      "id": "ai-2-54-71-exam_point",
+      "paragraphIndex": 2,
+      "start": 54,
+      "end": 71,
+      "text": "智能建造技术在工程建设全生命期应用",
+      "type": "exam_point"
+    },
+    {
+      "id": "ai-2-72-82-viewpoint",
+      "paragraphIndex": 2,
+      "start": 72,
+      "end": 82,
+      "text": "推动建筑业高质量发展",
+      "type": "viewpoint"
+    },
+    {
+      "id": "ai-0-29-41-figure",
+      "paragraphIndex": 0,
+      "start": 29,
+      "end": 41,
+      "text": "建办市〔2025〕14号",
+      "type": "figure"
+    }
+  ],
+  "aiQuality": {
+    "locationErrors": 0
+  },
+  "aiFocus": {
+    "from": 2,
+    "to": 2
+  }
+}

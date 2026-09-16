@@ -1,5 +1,13 @@
 import { Endpoints } from '../config/Endpoints';
-import { AiAnnotation, ClippedArticle, ContentManifest, DailyDigest, TodaySummary } from '../model/Content';
+import {
+  AiAnnotation,
+  ClippedArticle,
+  ContentArchiveIndex,
+  ContentArchiveMonth,
+  ContentManifest,
+  DailyDigest,
+  TodaySummary,
+} from '../model/Content';
 import { Cache, CacheEntry } from './Cache';
 import { HttpClient } from './Http';
 
@@ -44,6 +52,16 @@ export class ContentService {
     return ContentService.loadWithCache<ClippedArticle>(Endpoints.articleUrl(articleId));
   }
 
+  /** 政策档案索引（月份列表 + 全馆合计）。 */
+  static loadArchiveIndex(): Promise<Loaded<ContentArchiveIndex>> {
+    return ContentService.loadWithCache<ContentArchiveIndex>(Endpoints.archiveIndexUrl());
+  }
+
+  /** 某月政策台账。 */
+  static loadArchiveMonth(month: string): Promise<Loaded<ContentArchiveMonth>> {
+    return ContentService.loadWithCache<ContentArchiveMonth>(Endpoints.archiveMonthUrl(month));
+  }
+
   // —— 同步缓存读：供冷启动首帧使用 ——
 
   static cachedManifest(): Loaded<ContentManifest> | null {
@@ -60,6 +78,14 @@ export class ContentService {
 
   static cachedArticle(articleId: string): Loaded<ClippedArticle> | null {
     return ContentService.readCached<ClippedArticle>(Endpoints.articleUrl(articleId));
+  }
+
+  static cachedArchiveIndex(): Loaded<ContentArchiveIndex> | null {
+    return ContentService.readCached<ContentArchiveIndex>(Endpoints.archiveIndexUrl());
+  }
+
+  static cachedArchiveMonth(month: string): Loaded<ContentArchiveMonth> | null {
+    return ContentService.readCached<ContentArchiveMonth>(Endpoints.archiveMonthUrl(month));
   }
 
   /** 可用的 AI 标注；`aiStatus !== 'ok'` 时返回空数组（不伪造、不降级猜测）。 */
