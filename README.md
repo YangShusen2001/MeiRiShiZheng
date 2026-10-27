@@ -1,5 +1,7 @@
 # 每日时政 · kaogong-daily
 
+> 此处为公开版本 `public-release`。内部开发 `main`、规格和任务在独立私有仓库维护；公开同步与文件范围见 [双仓库说明](docs/git-branches.md)。
+
 [![Demo](https://img.shields.io/badge/Demo-www.meirishizheng.cn-blue)](https://www.meirishizheng.cn)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-41%20files-brightgreen)](#本地验证)
